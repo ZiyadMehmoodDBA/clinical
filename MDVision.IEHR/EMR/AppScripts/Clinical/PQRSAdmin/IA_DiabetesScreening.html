@@ -1,0 +1,103 @@
+﻿<div class="row" id="pnlDiabtesScreening">
+    <div id="actionPanDiabtesScreening" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="IA_DiabetesScreening.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Diabetes Screening</h4>
+            </div>
+            <div id="modalbody" class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="panel-body NoRadiusT" id="pnlSection_Search">
+                        
+                            <section class="panel panel-featured mb-none">
+                                    <form id="frmClinicalDiabetesLists" method="post" onsubmit="return false">
+
+                                        <div style="height:260px;">
+                                           <div class="row">
+                                              
+                                               <div class="pad-a-labelsize pr-default mb-default ml-default">
+                                                   
+                                                       <div id="chkCC" class="checkbox-custom">
+                                                           <input type="checkbox" id="chkDiabetic" name="IsNonDiabetic">
+                                                           <label class="control-label">Non-Diabetic</label>
+                                                           <button type="submit" class="btn btn-success col-xs-offset-10">Save</button>
+                                                       </div>
+                                                   
+                                                  
+                                               </div>
+                                              
+                                           </div>
+                                            <div id="favSectionDiv" class="toggleHorSmallLeft toggled" data-title="Favorites">
+                                                <section>
+                                                    <h2>Favorites<i class="fa fa-chevron-down"></i></h2>
+                                                </section>
+                                                <div class="toggle-content">
+                                                    <div class="col-xs-12 pb-sm">
+                                                        <div class="clearfix"></div>
+                                                        <select id="ddlFavProblems" name="FavProblemId" class="form-control" ddlist="GetFavProblems" onchange="IA_DiabetesScreening.BindFavProblems()"></select>
+                                                        <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="IA_DiabetesScreening.BindFavProblems()" />
+                                                    </div>
+                                                    <ul class="listPrimary height-max200 overflowY own-scroll" id="ulFavCompliantDisease" name="favCompliantDisease"></ul>
+                                                </div>
+                                            </div>
+                                            <div id="FormDiv" class="col-md-12">
+                                                <div class="col-md-4">
+                                                    <div class="panel">
+                                                        <div class="panel-heading">
+                                                            Diabetes Status
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="col-md-12">
+                                                                <label class="control-label" for="Problems">Problems</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" data-popupunload="false" id="txtProblems" oninput="IA_DiabetesScreening.BindICD9AutoComplete(this)" name="ProblemName" type="text" value="">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnProblems" class="btn btn-primary btn-xs " type="button" onclick="IA_DiabetesScreening.OpenSearchPopup()"><i class="glyphicon glyphicon-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="panel">
+                                                        <div class="panel-heading">
+                                                            Details
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <label class="control-label" for="Comments">Notes</label>
+                                                            <textarea class="form-control" id="txtComments" maxlength="5000" name="Comments" spellcheck="true" rows="10" cols="15"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+
+                                       
+                                        <div class="clearfix"></div>
+
+                                        <input type="hidden" name="PatientId" id="hfPatientId" />
+                                        <input type="hidden" name="hfICDAndDescription" id="txtICDAndDescription" />
+                                        <input type="hidden" name="hfICD9Code" id="txtICD9Code" />
+                                        <input type="hidden" name="hfICD9Description" id="txtICD9Description"/>
+                                        <input type="hidden" name="hfICD10Code" id="txtICD10Code" />
+                                        <input type="hidden" name="hfICD10Description" id="txtICD10Description" />
+                                        <input type="hidden" name="hfSnomedCode" id="txtSnomedCode" />
+                                        <input type="hidden" name="hfnomedDescription" id="txtSnomedDescription" />
+                                        <input type="hidden" name="hffLexiCode" id="hfLexiCode" />
+                                        <ul hidden class="listPrimary height-max200 overflowY own-scroll" id="ulProblemDisease" name="favCompliantDisease"></ul>
+</form>
+
+                            </section>
+                        
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

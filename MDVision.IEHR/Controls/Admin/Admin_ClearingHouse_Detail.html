@@ -1,0 +1,168 @@
+﻿<div id="clearingHouseDetail">
+    <div id="actionPanclearingHouseDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="clearingHouseDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Clearing House</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblclearingHouseDetail" class="col-sm-12">
+                    <form method="post" onsubmit="return false" id="frmClearingHouseDetail">
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Short Name<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="txtShortName" name="ShortName" maxlength="55">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Type<span class="required">*</span></label>
+                                <select id="ddlClearingHouseType" name="Type" class="form-control" ddlist="GetClearingHouseType"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">FTP</label>
+                                <input type="text" class="form-control" name="FTP" id="txtFTP">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">FTP PortNo</label>
+                                <input class="form-control text-uppercase" id="txtFTPPortNo" name="FTPPortNo" type="text" />
+                            </div>
+                            <div class="col-sm-4"  id="FTPHostKeydiv">
+                                <label class="control-label">FTP HostKey</label>
+                                <input class="form-control text-uppercase" id="txtFTPHostKey" name="FTPHostKey" type="text" />
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label class="control-label">Entity<span class="required">*</span></label>
+                                <select id="ddlEntity" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">User Name</label>
+                                <input class="form-control text-uppercase" id="txtClearingHoueUserName" name="ClearingHoueUserName" type="text" maxlength="30" />
+                            </div>
+
+
+                            <div class="col-sm-4">
+                                <label class="control-label">Password</label>
+                                <input class="form-control" id="txtClearingHoueUserPassword" name="ClearingHoueUserPassword" placeholder="Password" type="password" maxlength="30" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">IN Upload</label>
+                                <input class="form-control text-uppercase" id="txtINUpload" name="INUpload" type="text" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">IN Statements</label>
+                                <input class="form-control text-uppercase" id="txtINStatements" name="INStatements" type="text" />
+                            </div>
+
+
+                            <div class="col-sm-4">
+                                <label class="control-label">OUT Reports</label>
+                                <input class="form-control" id="txtOUTReports" name="OUTReports" type="text" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">OUT 277</label>
+                                <input class="form-control" id="txtOUT277" name="OUT277" type="text" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">OUT 271</label>
+                                <input class="form-control text-uppercase" id="txtOUT271" name="OUT271" type="text" />
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label class="control-label">OUT 997</label>
+                                <input class="form-control" id="txtOUT997" name="OUT997" type="text" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">OUT 835</label>
+                                <input class="form-control" id="txtOUT835" name="OUT835" type="text" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Eligibility URL</label>
+                                <input class="form-control" id="txtURL" name="URL" type="text" />
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label class="control-label">Patient Eligibility User Name</label>
+                                <input class="form-control text-uppercase" id="txtPatientEligibilityUserName" name="PatientEligibilityUserName" type="text" maxlength="30" />
+                            </div>
+
+
+                            <div class="col-sm-4">
+                                <label class="control-label">Patient Eligibility Password</label>
+                                <input class="form-control" id="txtPatientEligibilityUserPassword" name="PatientEligibilityUserPassword" placeholder="Password" type="password" maxlength="30" />
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label class="control-label">Professional Claim Extension</label>
+                                <select class="form-control" id="ddlProfessionalClaimExtension" name="ProfessionalClaimExtension">
+                                    <option value=".837">.837</option>
+                                    <option value=".CLP">.CLP</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Institutional Claim Extension</label>
+                                <select class="form-control" id="ddlInstitutionalClaimExtension" name="InstitutionalClaimExtension">
+                                    <option value=".837">.837</option>
+                                    <option value=".CLI">.CLI</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Patient Statement Extension</label>
+                                <select class="form-control" id="ddlPatientStatementExtension" name="PatientStatementExtension">
+                                    <option value=".xml">.xml</option>
+                                    <option value=".PS">.PS</option>
+                                </select>
+                            </div>
+
+                            <span class="spacer15"></span>
+
+                            <div class="col-sm-4">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="ClaimSubmitAllowed" checked="" id="chkClaimSubmitAllowed">
+                                    <label for="chkClaimSubmitAllowed">Claim Submit Allowed</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="EligibilityAllowed" checked="" id="chkEligibilityAllowed">
+                                    <label for="chkEligibilityAllowed">Eligibility Allowed</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="ClaimStatusAllowed" checked="" id="chkClaimStatusAllowed">
+                                    <label for="chkClaimStatusAllowed">Claim Status Allowed</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="ElectronicEOBAllowed" checked="" id="chkElectronicEOBAllowed">
+                                    <label for="chkElectronicEOBAllowed">Electronic EOB Allowed</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="SecondaryAllowed" checked="" id="chkSecondaryAllowed">
+                                    <label for="chkSecondaryAllowed">Secondary Allowed</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mt-xs">
+                                <button type="submit" class="btn btn-primary btn-sm rightbtn">Save & Exit</button>
+                                <!--<button id="btnHistoryclearingHouse" class="btn btn-primary btn-sm rightbtn" type="button" onclick="clearingHouseDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

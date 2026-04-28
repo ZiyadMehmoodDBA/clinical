@@ -1,0 +1,101 @@
+﻿<div id="pnlPatientInformationViewer">
+    <div id="actionPanPatientInformationViewer" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div id="Patient_Search"></div>-->
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_Information_Viewer.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Document Viewer</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblDocumentAssignedTo" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmDocumentViewer">
+                        <!--<style>
+                            .document-viewer-img {
+                                width: 75%;
+                                margin-left: 12.5% !important;
+                            }
+                        </style>-->
+                        <div class="col-sm-3 col-md-2" id="extraContorls">
+                            <section class="panel panel-featured" id="imagesControls" style="display:none;">
+                                <div class="panel-body panel-body-nopadding">
+                                    <div class="spacer10"></div>
+                                    <div class="col-xs-12 center mb-md">
+                                        <a class="btn btn-link btn-xs" title="Zoom In" onclick="Patient_Information_Viewer.ZoomIn();"><i class="fa fa-search-plus fa-lg"></i> Zoom In</a>
+                                        <a class="btn btn-link btn-xs p-none" title="Zoom Out" onclick="Patient_Information_Viewer.ZoomOut();"><i class="fa fa-search-minus fa-lg"></i> Zoom Out</a>
+                                    </div>
+                                    <div class="col-xs-12 center"> <a class="btn btn-link btn-sm" title="Move Up" onclick="Patient_Information_Viewer.navigateCanvas('up')"><i class="fa fa-arrow-circle-o-up fa-2x"></i></a></div>
+                                    <div class="col-xs-12 center">
+                                        <a class="btn btn-link btn-sm" title="Move Left" onclick="Patient_Information_Viewer.navigateCanvas('left')"><i class="fa fa-arrow-circle-o-left fa-2x"></i></a>
+                                        <a class="btn btn-primary btn-sm" title="Reset Image" onclick="Patient_Information_Viewer.navigateCanvas('reset')"><i class="fa fa-refresh fa-lg p-xs"></i></a>
+                                        <a class="btn btn-link btn-sm" title="Move Right" onclick="Patient_Information_Viewer.navigateCanvas('right')"><i class="fa fa-arrow-circle-o-right fa-2x"></i></a>
+                                    </div>
+                                    <div class="col-xs-12 center mb-md">
+                                        <a class="btn btn-link btn-sm" title="Move Down" onclick="Patient_Information_Viewer.navigateCanvas('down')"><i class="fa fa-arrow-circle-o-down fa-2x"></i></a>
+                                    </div>
+                                    <div class="col-xs-12 center mb-md">
+                                        <button id="btnPrint" class="btn btn-primary btn-sm" title="Print Image" type="button" onclick="Patient_Information_Viewer.PrintDocument();">Print</button>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <iframe id="OpenHTMLDocument" class="col-sm-12  panel-body panel-featured" style="display:none;height:450px"></iframe>
+                        <iframe id="OpenDocumentIF1" class="col-sm-12  panel-body panel-featured" style="display:none;<!--height:350px;-->"></iframe>
+                        <input type="hidden" id="helperPDF" />
+                        <object id="OpenDocumentIF" class="col-sm-12  panel-body panel-featured" data="Scripts/js/pdf/web/viewer.html" style="display:none;height:1000px;"></object>
+                        <div class="col-sm-9 col-md-10 panel-body panel-featured" id="canvasContainer" style="overflow-y:auto; max-height:800px; display:none;">
+                            <canvas id="canvas" class="pb-sm"></canvas>
+                        </div>
+                        <div id="printHelper" class="noprint" style="display:none;"></div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <script>
+
+                kendo.pdf.defineFont({
+                    "DejaVu Sans": "../fonts/DejaVuSans.ttf",
+                    "DejaVu Sans|Bold": "../fonts/DejaVuSans-Bold.ttf",
+                    "DejaVu Sans|Bold|Italic": "../fonts/DejaVuSans-Oblique.ttf",
+                    "DejaVu Sans|Italic": "../fonts/DejaVuSans-Oblique.ttf"
+                });
+            </script>
+            <style type="text/css">
+                .blueBgPrint {
+                    background: #005da9 !important;
+                    color: #fff !important;
+                }
+
+                .blueBorderPrint {
+                    border-bottom: 2px solid #005da9;
+                }
+
+                .btn-link-print {
+                    color: #000000 !important;
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+
+                .line-height-fix {
+                    font-size: 14px !important;
+                }
+            </style>
+
+
+
+            <script type="x/kendo-template" id="page-templateLegacy">
+                <div class="page-template" id="legacyViewTemplateDiv">
+                    <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                        <div class="blueBgPrint" style="float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                        <div id="ClinicalReportsFooterTextLegacy" class="blueBgPrint" style="float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                            Generated by:<span id="ClinicalReportsFooterLegacy">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                        </div>
+                    </div>
+
+                </div>
+            </script>
+        </div>
+        <div id="Notedoc"> </div>
+    </div>
+</div>

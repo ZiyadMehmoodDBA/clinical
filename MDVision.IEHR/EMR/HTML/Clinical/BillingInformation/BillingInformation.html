@@ -1,0 +1,219 @@
+﻿<div id="pnlBillingInformation">
+    <div id="actionPanBillingInformation" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full mt-lg mb-xs">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="BillingInformation.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">
+                    eSuperbill | <small id="noteDate" class="sub-heading">Initial Office Visit</small>
+                </h4>
+
+            </div>
+            <div class="modal-body pt-tiny pb-none">
+
+                <div id="tblBillingInformation">
+                    <form id="frmBillingInformation">
+
+                        <div id="tblNoteInformation" class="btn-block mb-tiny">
+                            <button class="btn btn-success btn-xs" type="submit" id="btnSave"><i class="fa fa-save"></i> Save</button>
+                            <button class="btn btn-success btn-xs hidden" type="submit" id="btnSign"><i class="fa fa-pencil"></i> Sign</button>
+                            <button class="btn btn-success btn-xs hidden" type="button" id="btnViewCharges" onclick="BillingInformation.ViewCharges();"><i class="fa fa-pencil"></i> View Charge</button>
+                            <!--<div class="pull-right">
+                                <label for="suggestEMCode" id="txtSuggestEM"><span><a onclick="BillingInformation.OpenSuggestEMCodes();">   Recommend E&M Code </a></span></label>
+                            </div>-->
+                            <div class="pr-default IsNonBilable pull-right hidden" id="IsNonBilableDiv">
+
+                                <div class="checkbox-custom checkboxTiny checkbox-success">
+                                    <input id="ChkBox_IsNonBilable" name="IsNonBilable" type="checkbox" onchange="BillingInformation.changeIsNonBilableForProgressNote(this);">
+                                    <label class="control-label" for="IsNonBilable"><strong>Non-billable visit</strong></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="divOutOfOfficeVisit" class="panel-body hidden">
+                            <div id="tblOOOVisits">
+
+                                <input type="hidden" id="hfProvider" name="ProviderId" />
+                                <input type="hidden" id="hfFacility" name="FacilityId" />
+                                <input type="hidden" id="hfPOS" name="POS" />
+                                <input type="hidden" id="hfResourceProvider" name="ResourceProviderId" />
+                                <input type="hidden" id="hfRefProvider" name="RefProviderId">
+
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">DOS From<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dpStartDate" name="DOSFrom" maxlength="10" data-plugin-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">DOS To<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dpToDate" name="DOSTo" maxlength="10" data-plugin-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-3">
+                                        <!-- Facility input control -->
+                                        <div class="editable-control">
+                                            <label class="control-label" for="Facility">Facility<span class="required">*</span></label>
+                                            <br />
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtFacility" placeholder="Start typing to search" type="text" name="Facility" />
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary btn-xs" type="button" onclick="BillingInformation.OpenFacility();">
+                                                        <i class="glyphicon glyphicon-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-1">
+                                        <label class="control-label">POS</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="txtPOS" name="POS" maxlength="3" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2">
+                                        <!-- Provider input control -->
+                                        <div class="editable-control">
+                                            <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                                            <a id="lnkProviderEdit" style="display:none;" href="#" onclick="BillingInformation.OpenProviderDetail('frmBillingInformation #hfProvider', 'txtProvider');" title="Edit Provider">Provider<span class="required">*</span></a>
+                                            <div class="input-group">
+                                                <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="BillingInformation.OpenProvider('Search Provider', 'frmBillingInformation #txtProvider', 'frmBillingInformation #hfProvider', 'frmBillingInformation #lblProvider', 'frmBillingInformation #lnkProviderEdit');"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label id="lblResourceProvider" for="ResourceProvider" class="control-label">Resource Provider<span class="required">*</span></label>
+                                        <a id="lnkResourceProviderEdit" style="display:none;" href="#" onclick="BillingInformation.OpenProviderDetail('frmBillingInformation #hfResourceProvider', 'txtResourceProvider');" title="Edit Ref Provider">Resource Provider<span class="required">*</span></a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtResourceProvider" name="ResourceProvider" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkResourceProvider" class="btn btn-primary btn-xs " type="button" onclick="BillingInformation.OpenProvider('Search Resource Provider', 'frmBillingInformation #txtResourceProvider', 'frmBillingInformation #hfResourceProvider', 'frmBillingInformation #lblResourceProvider', 'frmBillingInformation #lnkResourceProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Admission Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dpAdmissionDate" name="AdmissionDate" maxlength="10" data-plugin-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Discharge Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dpDischargeDate" name="DischargeDate" maxlength="10" data-plugin-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblRefProvider" for="Ref Provider" class="control-label" style="display: inline;">Referring Provider</label>
+                                        <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="BillingInformation.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtRefProvider" name="RefProvider" customname="Ref Provider" placeholder="Start typing to search" type="text" value="" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="BillingInformation.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="divEvalnMangement" class="col-xs-12 p-none">
+                            <table class="table table-condensed mb-none">
+                                <thead>
+                                    <tr>
+                                        <th class="size20">Type</th>
+                                        <th class="size60">E&M codes</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="tblEvaluation" class="height-max180 own-scroll">
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="tblEMCodes">
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="spacer5"></div>
+                        <div id="divICDCPT" class="panel panel-featured mb-default">
+                            <header class="panel-heading">
+                                <h4 class="panel-title">Codes</h4>
+                            </header>
+                            <div class="panel-body pb-tiny pt-tiny">
+                                <div id="tblDiagnosisCodes">
+                                    <label class="control-label blue">Diagnosis Codes </label>
+
+                                    <div class="pull-right">
+                                        <button class="btn btn-link btn-xs " type="button" onclick="BillingInformation.useSuperbillTemplates();">Use Template</button>
+                                    </div>
+                                    <div class="form-group borderT row borderB">
+                                        <div id="pnlVisitCharge_Result">
+
+                                            <div id="dvDiagnosis">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="spacer5" />
+                                <div id="tblCPTCodes">
+                                    <label class="control-label blue">CPT Codes</label>
+
+                                    <div class="form-group " id="dvCPT">
+                                        <div id="pnlVisitCharge_Result" class="hide-datatable-controls">
+
+                                            <input type="hidden" id="VisitCharge_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvBillVisitCharge">
+                                                <thead>
+                                                    <tr class="bg-gray">
+                                                        <th class="size20" coltype="action" actiontype="CheckBox"><input type="checkbox" id="selectAllCHkBox" onchange="BillingInformation.checkUncheckselectAllCHkBox(this)" class="input-block text-center"></th>
+
+                                                        <th id="ColumnAction" actiontype="Delete,Up,Down,Detail,Copy" coltype="Action" class="size50 size-min50">
+                                                            <a href="#" class="btn-xs on-default  mr-none pr-none pl-none" onclick="BillingInformation.DeleteAllbtnClick();" id="DltAllRecordsBtn" title="Delete All Records"><i class="fa fa-close red"></i></a>
+                                                            Action
+                                                        </th>
+                                                        <th id="thDosFrom" controlid="dtpDOSFrom" controlwidth="size60" class="size-min60 size60 noWordBreak hidden" coltype="datetime" isoptional="0">DOS From</th>
+                                                        <th id="thDosTo" controlid="dtpDOSTo" controlwidth="size60" class="size-min50 size50 noWordBreak hidden" coltype="datetime" isoptional="0">DOS To</th>
+                                                        <th controlid="txtCPT" controlname="CPT" hfcontrolid="hfCPTCode,hfCPTDescription,hfStartDate,hfEndDate,hfIsMain,hfSNOMEDId,hfSNOMEDDescription,hfCPTSNOMEDCodeId,hfCPTSNOMEDDescription,hfFee,hfExpectedFee,hfBillingInfoCPTId" controlwidth="p-tiny" class="size200" coltype="AutoComplete" isoptional="0" autocompletemethod="CPT" parentctrl="BillingInformation" searchmethod="BillingInformation.OpenSearchPopup('CPT');">CPT / HCPCS</th>
+                                                        <th subcols="4" controlid="txtModifier" controlname="ICD" controlwidth="size20 p-none" class="size100 size-min105" coltype="TextBox" autocompletemethod="Modifier">Modifiers</th>
+                                                        <th subcols="4" controlid="txtDxPointer" controlname="DxPointer" controlwidth="size20 p-none" class="size100 size-min105" coltype="TextBox">Dx Pointers</th>
+                                                        <th controlid="txtUnits" class="size20" coltype="TextBox" isoptional="0" hfcontrolid="hfUnitsId" autocompletemethod="Units" controlwidth="p-none size30" controlname="Units">Units</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+
+                                            </table>
+                                            <div class="pull-left">
+                                                <a class="btn btn-link btn-xs p-none" onclick="BillingInformation.AddNewChargeRow(null,'Add',this);">Add Line Item</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tblNoteInformationBottom" class="pull-right">
+                            <button class="btn btn-success btn-xs" type="submit" id="btnSaveBottom"><i class="fa fa-save"></i> Save</button>
+                            <button class="btn btn-success btn-xs hidden" type="submit" id="btnSignBottom"><i class="fa fa-pencil"></i> Sign</button>
+                            <button class="btn btn-success btn-xs hidden" type="button" id="btnViewChargesBottom" onclick="BillingInformation.ViewCharges();"><i class="fa fa-pencil"></i> View Charge</button>
+                        </div>
+                        <div class="spacer10"></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

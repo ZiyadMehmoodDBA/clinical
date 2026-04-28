@@ -1,0 +1,130 @@
+﻿<div id="pnlBillLedgerDetail">
+    <div id="actionPanBillLedgerDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--  -->
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="BillLedgerDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Account Ledger</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblBillLedgerDetail" class="col-sm-12">
+                    <form method="post" onsubmit="return false" id="frmBillLedgerDetail">
+
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <label class="control-label" for="PaymentNum">Payment Number</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="txtPaymentNum" name="PaymentNum" maxlength="10"  disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-2">
+                                <label class="control-label" for="CheckDate">Date Paid</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <input class="form-control datepickerStart" id="dtpPaymentDate" type="text" data-plugin-datepicker disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-2">
+                                <label class="control-label" for="Amount">Amount</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input type="text" onkeypress="utility.ValidateDecimal(event,2)" class="form-control" id="txtAmount" name="Amount" maxlength="10" placeholder="99999.99" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-2">
+                                <label class="control-label" for="Payment Type">Payment Type<span class="required">*</span></label>
+                                <select id="ddlPaymentType" name="PaymentType" onchange="BillLedgerDetail.ShowHidePaymentTypeDiv(this.value);" class="form-control" ddlist="GetPaymentType" disabled></select>
+                            </div>
+                            <div id="PaymentTypeCheck" style="display:none">
+
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label" for="Check Number">Check Number</label>
+                                    <input class="form-control" name="checkNumber" type="text" id="txtCheckNumber" disabled>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Check Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                        <input class="form-control" name="checkDate" id="dtpCheckDate" type="text" data-plugin-datepicker disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="PaymentTypeCreditCard" style="display:none">
+
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Card Type</label>
+                                    <select name="creditCardType" id="ddlCreditCardType" ddlist="GetCreditCardType" class="form-control" disabled></select>
+                                </div>
+
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Card Number</label>
+                                    <input name="cardNumber" id="txtCardNumber" class="form-control" type="text" disabled>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Expiry Date (mm/yyyy)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                        <input name="expiryDate" id="dtpExpiryDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="7" disabled>
+                                        <!--<input name="expiryDate" id="dtpExpiryDate" class="form-control" type="text" data-plugin-datepicker="" disabled>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Account</label>
+                                <input class="form-control" type="text" id="txtAccount" name="Account" disabled>
+                            </div>
+                            <div class="col-sm-4 col-md-2">
+                                <label class="control-label" for="EntryDate">Entry Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <input class="form-control datepickerStart" id="EntryDate" type="text" data-plugin-datepicker disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-2">
+                                <label class="control-label">Entered By</label>
+                                <input class="form-control" type="text" id="txtEnteredBy" name="EnteredBy" disabled>
+                            </div>
+                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                <label class="control-label">Remit Code</label>
+                                <select id="ddlRemitCode" ddlist="GetCRemittanceCode" name="RemittanceCode" class="form-control" disabled></select>
+                            </div>
+                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                <label class="control-label">ICN/DCN</label>
+                                <input class="form-control" type="text" id="txtICN_DCN" name="ICN_DCN" disabled>
+                            </div>
+                            <!--start syed zia 12-02-2016, bug #PMS-3927-->
+                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                <label class="control-label">Payment Batch</label>
+                                <input class="form-control" type="text" id="txtPaymentBatch" name="PaymentBatch" disabled>
+                            </div>
+                            <div class="col-sm-4  col-md-3 col-lg-2 pad-a-labelsize">
+                                <input type="checkbox" name="CrossOver" id="chkCrossOver" disabled>
+                                <label class="control-label" for="CrossOver">Cross Over</label>
+                            </div>
+                            <!--end syed zia 12-02-2016, bug #PMS-3927-->
+                            <div class="col-sm-12 mt-default">
+                                <label class="control-label pull-left" for="Comments">Comments</label>
+                                <div class="checkbox-custom pull-left ml-md">
+                                    <input type="checkbox" name="ShwPatientStmt" id="chkShwPatientStmt">
+                                    <label class="control-label" for="ShwPatientStmt">Print on Patient Statement</label>
+                                </div>
+                                <textarea class="form-control" rows="5" maxlength="2500" id="txtInsuranceComments" name="InsuranceComments" spellcheck="true"></textarea>
+                            </div>
+
+                            <div class="pull-right p-default ">
+                                <button class="btn btn-primary rightbtn btn-sm" type="submit" onclick="BillLedgerDetail.BillLedgerUpdate();"> Save & Exit</button>
+                                <button id="btnHistoryPaymentPosting" class="btn btn-primary btn-sm rightbtn " type="button" onclick="BillLedgerDetail.ShowHistory();">History</button>
+                            </div>
+                        </div>
+                        <div class="spacer20"></div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+</div>

@@ -1,0 +1,581 @@
+﻿<div class="row" id="pnlClinicalRadiologyOrder" style="display:none;">
+    <div id="actionPanClinicalRadiologyOrder" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<form method="post" id="frmClinicalRadiology" onsubmit="return false">-->
+    <div id="modaldialog" class="modal-dialog-full mb-xs">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_RadiologyOrder.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Diagnostic Imaging Orders</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section class="panel" id="RadiologySection">
+                        <ul class="tabs-custom" id="ulRadilogyOrderTabsItems">
+                            <li id="listRadiologyOrder" onclick="" class="active"><a id="orders" class="" href="#RadiologyOrder" data-toggle="tab">Orders</a></li>
+                            <li id="listRadiologyResult" onclick=""><a id="results" class="" href="#RadiologyResult" data-toggle="tab">Results</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body pt-default">
+                            <div id="RadiologyOrder" class="tab-pane active">
+                                <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_RadiologyOrder.RadiologyOrderAddEdit(-1);"><i class="fa fa-plus-circle"></i> Add</button>
+                                <div class="spacer10"></div><div class="clearfix"></div>
+
+                                <section class="panel" id="removeDiv">
+                                    <ul class="tabs-custom" id="ulRadilogyOrderTypeTabsItems">
+                                        <li id="listRadiologyInternalOrder" onclick="Clinical_RadiologyOrder.activeTab('Internal')" class="active"><a id="internalorders" class="" href="" data-toggle="tab">Internal</a></li>
+                                        <li id="listRadiologyExternalOrder" onclick="Clinical_RadiologyOrder.activeTab('External')"><a id="externalorders" class="" href="" data-toggle="tab">External</a></li>
+                                    </ul>
+                                    <div class="tab-content tabs-custom-body pt-default">
+                                        <div id="RadiologyInternalOrder" class="tab-pane active">
+                                            <div class="splitterBody mt-xs" id="splitterBody">
+                                                <section class="panel panel-featured  mb-default">
+                                                    <header class="panel-heading">
+                                                        <div class="panel-actions">
+                                                            <a href="#" class="closebtn pull-right" onclick="Clinical_RadiologyOrder.UnLoadTab()"></a>
+                                                        </div>
+                                                        <h2 class="panel-title">Search Orders </h2>
+                                                    </header>
+                                                    <div class="panel-body" id="pnlRadiologyOrder_Search">
+                                                        <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalRadiologyOrder">
+
+                                                            <div class="form-group">
+                                                                <div class="col-md-6">
+                                                                    <label class="control-label">Imaging Tests</label>                                                                   
+                                                                    <div class="input-group ">
+                                                                        <input class="form-control" id="txtCPTCode" onkeypress="Clinical_RadiologyOrder.validateSpecialCharacters(event);" maxlength="100" placeholder="Search Procedure" type="text" name="CPTCode" oninput="Clinical_RadiologyOrder.bindAutoComplete(this);" />
+                                                                        <div class="input-group-btn">                                                                           
+                                                                            <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="control-label">Order Number</label>
+                                                                    <input class="form-control" onkeypress="Clinical_RadiologyOrder.validateSpecialCharacters(event);" name="OrderNo" id="txtOrderNumber" type="text" maxlength="30" />
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Date From</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dpStartDate" name="OrderFromDate" data-plugin-datepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Date To</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dpToDate" name="OrderToDate" data-plugin-datepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Status </label>
+                                                                    <select id="ddlStatus" class="form-control" name="Status">
+                                                                        <option value="">-All-</option>
+                                                                        <option value="Pending">Pending</option>
+                                                                        <option value="Signed">Signed</option>
+                                                                    </select>
+                                                                </div>                                                       
+                                                                <div class="col-sm-4 col-md-2 ">
+                                                                    <label class="control-label">Provider</label>
+                                                                    <select id="txtProvider" class="form-control" name="Provider"></select>                                                                   
+                                                                </div>
+                                                                <div class="mt-md pr-default pull-right">
+                                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnRadiologySearch" type="button" onclick="Clinical_RadiologyOrder.radiologyOrderSearch('0');">Search</button>
+                                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnProcedureReset" type="button" onclick="Clinical_RadiologyOrder.radiologyOrderReset('pnlRadiologyOrder_Search');">Reset</button>
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" id="hfProvider" name="ProviderId" />
+                                                            <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                                            <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                                        </form>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="splitterBtn mb-none"></div>
+                                            <input type="hidden" id="hfRadiologyOrderId" value="-1" />
+                                            <div id="pnlRadiologyOrder_Result" style="display: inline;">
+
+                                                <div class="panel-body panel-featured">
+                                                    <div class="spacer5"></div>
+                                                    <input type="hidden" id="Provider_SelectedDataKeys" />
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRadiologyOrder">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="display:none">RadiologyOrderId</th>
+                                                                <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                                <th class="size30">Date & Time</th>
+                                                                <th class="size300 size-min400">Imaging</th>                                                               
+                                                                <th class="size30">Order Number</th>
+                                                                <th class="size30">Status</th>
+                                                                <th class="size30">Provider</th>
+                                                                <th class="size30">Assigned To</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div id="dgvRadiologyOrder_Paging"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="pull-right mt-sm">
+                                                <button class="btn btn-success btn-sm" type="button" onclick="Clinical_RadiologyOrder.addOrdersToNotes();" id="btnAddRadiologyOrderToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="RadiologyExternalOrder" class="tab-pane">
+                                            <div class="splitterBody mt-xs" id="splitterBody">
+                                                <section class="panel panel-featured  mb-default">
+                                                    <header class="panel-heading">
+                                                        <div class="panel-actions">
+                                                            <a href="#" class="closebtn pull-right" onclick="Clinical_RadiologyOrder.UnLoadTab()"></a>
+                                                        </div>
+                                                        <h2 class="panel-title">Search Orders</h2>
+                                                    </header>
+                                                    <div class="panel-body" id="pnlExternalRadiologyOrder_Search">
+                                                        <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalRadiologyOrder">
+
+                                                            <div class="form-group">
+                                                                <div class="col-md-6">
+                                                                    <label class="control-label">Imaging Tests</label>
+                                                                    <div class="input-group ">
+                                                                        <input class="form-control" id="txtCPTCode" onkeypress="Clinical_RadiologyOrder.validateSpecialCharacters(event);" maxlength="100" placeholder="Search Procedure" type="text" name="CPTCode" oninput="Clinical_RadiologyOrder.bindAutoComplete(this);" />
+                                                                        <div class="input-group-btn">
+                                                                            <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="control-label">Order Number</label>
+                                                                    <input class="form-control" onkeypress="Clinical_RadiologyOrder.validateSpecialCharacters(event);" name="OrderNo" id="txtOrderNumber" type="text" maxlength="30" />
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Date From</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dpStartDate" name="OrderFromDate" data-plugin-datepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Date To</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dpToDate" name="OrderToDate" data-plugin-datepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Status </label>
+                                                                    <select id="ddlStatus" class="form-control" name="Status">
+                                                                        <option value="">-All-</option>
+                                                                        <option value="Pending">Pending</option>
+                                                                        <option value="Signed">Signed</option>
+                                                                    </select>
+                                                                </div>                                                             
+                                                                <div class="col-sm-4 col-md-2 ">
+                                                                    <label class="control-label">Provider</label>
+                                                                    <select id="txtProvider" class="form-control" name="Provider"></select>
+                                                                </div>
+                                                                <div class="mt-md pr-default pull-right">
+                                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnRadiologySearch" type="button" onclick="Clinical_RadiologyOrder.externalRadiologyOrderSearch('0');">Search</button>
+                                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnProcedureReset" type="button" onclick="Clinical_RadiologyOrder.radiologyOrderReset('pnlExternalRadiologyOrder_Search');">Reset</button>
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" id="hfProvider" name="ProviderId" />
+                                                            <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                                            <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                                        </form>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="splitterBtn mb-none"></div>
+                                            <input type="hidden" id="hfRadiologyOrderId" value="-1" />
+                                            <div id="pnlExternalRadiologyOrder_Result" style="display: inline;">
+
+                                                <div class="panel-body panel-featured">
+                                                    <div class="spacer5"></div>
+                                                    <input type="hidden" id="Provider_SelectedDataKeys" />
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvExternalRadiologyOrder">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="display:none">RadiologyOrderId</th>
+                                                                <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                                <th class="size30">Date & Time</th>
+                                                                <th class="size300 size-min400">Imaging</th>                                                                
+                                                                <th class="size30">Order Number</th>
+                                                                <th class="size30">Status</th>
+                                                                <th class="size30">Provider</th>
+                                                                <th class="size30">Assigned To</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div id="dgvExternalRadiologyOrder_Paging"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="pull-right mt-sm">
+                                                <button class="btn btn-success btn-sm" type="button" onclick="Clinical_RadiologyOrder.addOrdersToNotes();" id="btnAddRadiologyOrderToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!--<ul class="tabs-custom" id="ulRadilogyOrderTypeTabsItems">
+                                    <li id="listRadiologyInternalOrder" onclick="" class="active"><a id="internalorders" class="" href="#RadiologyInternalOrder" data-toggle="tab">Internal</a></li>
+                                    <li id="listRadiologyExternalOrder" onclick=""><a id="externalorders" class="" href="#RadiologyExternalOrder" data-toggle="tab">External</a></li>
+                                </ul>
+                                <div class="splitterBody mt-xs" id="splitterBody">
+                                    <section class="panel panel-featured  mb-default">
+                                        <header class="panel-heading">
+                                            <div class="panel-actions">
+                                                <a href="#" class="closebtn pull-right" onclick="Clinical_RadiologyOrder.UnLoadTab()"></a>
+                                            </div>
+                                            <h2 class="panel-title">Search Radiology Order </h2>
+                                        </header>
+                                        <div class="panel-body" id="pnlRadiologyOrder_Search">
+                                            <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalRadiologyOrder">
+
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Imaging Tests</label>
+                                                       
+                                                        <div class="input-group ">
+                                                            <input class="form-control" id="txtCPTCode" onkeypress="Clinical_RadiologyOrder.validateSpecialCharacters(event);" maxlength="100" placeholder="Search Procedure" type="text" name="CPTCode" oninput="Clinical_RadiologyOrder.bindAutoComplete(this);" />
+                                                            <div class="input-group-btn">
+                                                                
+                                                                <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Order Number</label>
+                                                        <input class="form-control" onkeypress="Clinical_RadiologyOrder.validateSpecialCharacters(event);" name="OrderNo" id="txtOrderNumber" type="text" maxlength="30" />
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Date From</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" id="dpStartDate" name="OrderFromDate" data-plugin-datepicker>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Date To</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" id="dpToDate" name="OrderToDate" data-plugin-datepicker>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Status </label>
+                                                        <select id="ddlStatus" class="form-control" name="Status">
+                                                            <option value="">-All-</option>
+                                                            <option value="Pending">Pending</option>
+                                                            <option value="Signed">Signed</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Radiology Type </label>
+                                                        <select id="ddlLaboratory" class="form-control" name="LabId" ddlist="">
+                                                            <option>All</option>
+                                                            <option value="1">lab 1</option>
+                                                            <option value="2">lab 2</option>
+                                                            <option value="3">lab 3</option>
+                                                            <option value="4">lab 4</option>
+                                                            <option value="5">lab 5</option>
+                                                            <option value="6">lab 6</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2 ">
+                                                        <label class="control-label">Provider</label>
+                                                        <select id="txtProvider" class="form-control" name="Provider"></select>
+                                                       
+                                                    </div>
+                                                    <div class="mt-md pr-default pull-right">
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnRadiologySearch" type="button" onclick="Clinical_RadiologyOrder.radiologyOrderSearch('0');">Search</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnProcedureReset" type="button" onclick="Clinical_RadiologyOrder.radiologyOrderReset();">Reset</button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfProvider" name="ProviderId" />
+                                                <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                                <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                            </form>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="splitterBtn mb-none"></div>
+                                    <input type="hidden" id="hfRadiologyOrderId" value="-1" />
+                                    <div id="pnlRadiologyOrder_Result" style="display: inline;">
+
+                                        <div class="panel-body panel-featured">
+                                            <div class="spacer5"></div>
+                                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRadiologyOrder">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display:none">RadiologyOrderId</th>
+                                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                        <th class="size30">Date & Time</th>
+                                                        <th class="size300 size-min400">Imaging</th>
+                                                        <th class="size30">Radiology Type</th>
+                                                        <th class="size30">Order Number</th>
+                                                        <th class="size30">Status</th>
+                                                        <th class="size30">Provider</th>
+                                                        <th class="size30">Assigned To</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="dgvRadiologyOrder_Paging"></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="pull-right mt-sm">
+                                        <button class="btn btn-success btn-sm" type="button" onclick="Clinical_RadiologyOrder.addOrdersToNotes();" id="btnAddRadiologyOrderToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                    </div>
+                                    <div class="clearfix"></div>-->
+                                </div>
+                            <div id="RadiologyResult" class="tab-pane">
+                                <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_RadiologyOrder.radiologyResultAddEdit(-1);"><i class="fa fa-plus-circle"></i> Add</button>
+                                <div class="spacer10"></div><div class="clearfix"></div>
+
+
+                                <section class="panel" id="removeDiv">
+                                    <ul class="tabs-custom" id="ulRadilogyResultTypeTabsItems">
+                                        <li id="listRadiologyInternalResult" onclick="Clinical_RadiologyOrder.activeTabResult('Internal');" class="active"><a id="internalresults" class="" href="#RadiologyInternalResult" data-toggle="tab">Internal</a></li>
+                                        <li id="listRadiologyExternalResult" onclick="Clinical_RadiologyOrder.activeTabResult('External');"><a id="externalresults" class="" href="#RadiologyExternalResult" data-toggle="tab">External</a></li>
+                                    </ul>
+                                    <div class="tab-content tabs-custom-body pt-default">
+                                        <div id="RadiologyInternalResult" class="tab-pane active">
+                                            <div class="splitterBody mt-xs" id="splitterBody">
+                                                <section class="panel panel-featured">
+                                                    <header class="panel-heading">
+                                                        <div class="panel-actions">
+                                                            <a href="#" class="closebtn pull-right" onclick="Clinical_RadiologyOrder.UnLoadTab()"></a>
+                                                        </div>
+                                                        <h2 class="panel-title">Search Results </h2>
+                                                    </header>
+                                                    <div class="panel-body" id="pnlRadiologyResult_Search">
+                                                        <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalRadiologyResult">
+
+                                                            <div class="form-group">
+                                                                <div class="col-md-6">
+                                                                    <label class="control-label">Imaging</label>
+
+                                                                    <div class="input-group ">
+                                                                        <input class="form-control" id="txtResultCPTCode" maxlength="100" placeholder="Search Procedure" type="text" name="ResultCPTCode" oninput="Clinical_RadiologyOrder.bindAutoComplete(this, 'txtResultCPTCode');" />
+                                                                        <div class="input-group-btn">
+
+                                                                            <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="control-label">Order Number</label>
+                                                                    <input class="form-control" name="OrderNo" id="txtOrderNumber" type="text" maxlength="30" />
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Date From</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dpStartDate" name="ResultFromDate" data-plugin-datepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Date To</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dpToDate" name="ResultToDate" data-plugin-datepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Status </label>
+                                                                    <select id="ddlStatus" class="form-control" name="Status">
+                                                                        <option value="">-All-</option>
+                                                                        <option value="Open">Open</option>
+                                                                        <option value="Reviewed">Reviewed</option>
+                                                                    </select>
+                                                                </div>
+                                                                <!--<div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Radiology Type </label>
+                                                                    <select id="ddlLaboratory" class="form-control" name="LabId" ddlist="">
+                                                                        <option>All</option>
+                                                                        <option value="1">lab 1</option>
+                                                                        <option value="2">lab 2</option>
+                                                                        <option value="3">lab 3</option>
+                                                                        <option value="4">lab 4</option>
+                                                                        <option value="5">lab 5</option>
+                                                                        <option value="6">lab 6</option>
+                                                                    </select>
+                                                                </div>-->
+                                                                <div class="col-sm-4 col-md-2 ">
+                                                                    <label class="control-label">Provider</label>
+                                                                    <select id="txtProvider" class="form-control" name="Provider"></select>
+                                                                </div>
+                                                                <div class="mt-md pr-default pull-right">
+                                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnRadiologyResultSearch" type="button" onclick="Clinical_RadiologyOrder.radiologyResultsSearch('0');">Search</button>
+                                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnResultReset" type="button" onclick="Clinical_RadiologyOrder.radiologyResultReset();">Reset</button>
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" id="hfProvider" name="ProviderId" />
+                                                            <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                                            <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                                        </form>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="splitterBtn mb-none"></div>
+                                            <input type="hidden" id="hfRadiologyResultId" value="-1" />
+                                            <div id="pnlRadiologyResult_Result" style="display: inline;">
+
+                                                <div class="panel-body panel-featured">
+                                                    <div class="spacer5"></div>
+                                                    <input type="hidden" id="Provider_SelectedDataKeys" />
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRadiologyResult">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="display:none">RadiologyOrderId</th>
+                                                                <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                                <th class="size30">Date & Time</th>
+                                                                <th class="size300 size-min400">Imaging</th>                                                                
+                                                                <th class="size30">Order Number</th>
+                                                                
+                                                                <th class="size30">Status</th>
+                                                                
+                                                                <th class="size30">Provider</th>
+                                                                <th class="size30">Assigned To</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div id="dgvRadiologyResult_Paging"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="pull-right mt-sm">
+                                                <button class="btn btn-success btn-sm" type="button" onclick="Clinical_RadiologyOrder.addResultsToNotes();" id="btnAddRadiologyResultToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="RadiologyExternalResult" class="tab-pane">
+                                            <div class="splitterBody mt-xs" id="splitterBody">
+                                                <section class="panel panel-featured">
+                                                    <header class="panel-heading">
+                                                        <div class="panel-actions">
+                                                            <a href="#" class="closebtn pull-right" onclick="Clinical_RadiologyOrder.UnLoadTab()"></a>
+                                                        </div>
+                                                        <h2 class="panel-title">Search Results </h2>
+                                                    </header>
+                                                    <div class="panel-body" id="pnlExternalRadiologyResult_Search">
+                                                        <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalRadiologyResult">
+
+                                                            <div class="form-group">
+                                                                <div class="col-md-6">
+                                                                    <label class="control-label">Imaging</label>
+
+                                                                    <div class="input-group ">
+                                                                        <input class="form-control" id="txtResultCPTCode" maxlength="100" placeholder="Search Procedure" type="text" name="ResultCPTCode" oninput="Clinical_RadiologyOrder.bindAutoComplete(this, 'txtResultCPTCode');" />
+                                                                        <div class="input-group-btn">
+
+                                                                            <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="control-label">Order Number</label>
+                                                                    <input class="form-control" name="OrderNo" id="txtOrderNumber" type="text" maxlength="30" />
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Date From</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dpStartDate" name="ResultFromDate" data-plugin-datepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Date To</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dpToDate" name="ResultToDate" data-plugin-datepicker>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Status </label>
+                                                                    <select id="ddlStatus" class="form-control" name="Status">
+                                                                        <option value="">-All-</option>
+                                                                        <option value="Open">Open</option>
+                                                                        <option value="Reviewed">Reviewed</option>
+                                                                    </select>
+                                                                </div>
+                                                                <!--<div class="col-sm-4 col-md-2">
+                                                                    <label class="control-label">Radiology Type </label>
+                                                                    <select id="ddlLaboratory" class="form-control" name="LabId" ddlist="">
+                                                                        <option>All</option>
+                                                                        <option value="1">lab 1</option>
+                                                                        <option value="2">lab 2</option>
+                                                                        <option value="3">lab 3</option>
+                                                                        <option value="4">lab 4</option>
+                                                                        <option value="5">lab 5</option>
+                                                                        <option value="6">lab 6</option>
+                                                                    </select>
+                                                                </div>-->
+                                                                <div class="col-sm-4 col-md-2 ">
+                                                                    <label class="control-label">Provider</label>
+                                                                    <select id="txtProvider" class="form-control" name="Provider"></select>
+                                                                </div>
+                                                                <div class="mt-md pr-default pull-right">
+                                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnRadiologyResultSearch" type="button" onclick="Clinical_RadiologyOrder.externalRadiologyResultsSearch('0');">Search</button>
+                                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnResultReset" type="button" onclick="Clinical_RadiologyOrder.radiologyResultReset();">Reset</button>
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" id="hfProvider" name="ProviderId" />
+                                                            <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                                            <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                                        </form>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="splitterBtn mb-none"></div>
+                                            <input type="hidden" id="hfRadiologyResultId" value="-1" />
+                                            <div id="pnlExternalRadiologyResult_Result" style="display: inline;">
+
+                                                <div class="panel-body panel-featured">
+                                                    <div class="spacer5"></div>
+                                                    <input type="hidden" id="Provider_SelectedDataKeys" />
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvExternalRadiologyResult">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="display:none">RadiologyOrderId</th>
+                                                                <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                                <th class="size30">Date & Time</th>
+                                                                <th class="size300 size-min400">Imaging</th>                                                                
+                                                                <th class="size30">Order Number</th>
+                                                                <th class="size30">Status</th>
+                                                                <th class="size30">Provider</th>
+                                                                <th class="size30">Assigned To</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div id="dgvExternalRadiologyResult_Paging"></div>
+                                                </div>
+
+                                            </div>
+                                            <div class="pull-right mt-sm">
+                                                <button class="btn btn-success btn-sm" type="button" onclick="Clinical_RadiologyOrder.addResultsToNotes();" id="btnAddRadiologyResultToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                        </div>
+                        </div>
+                    </section>
+                </div>
+
+
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div class="modal-footer hidden"></div>
+        </div>
+
+    </div>
+    <!--</form>-->
+</div>

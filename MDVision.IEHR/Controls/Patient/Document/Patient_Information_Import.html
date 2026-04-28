@@ -1,0 +1,110 @@
+﻿<div id="pnlPatientInformationImport">
+    <div id="actionPanPatientInformationImport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg" id="modaldocument">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_Information_Import.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titleDocument">Import Document</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblDocumentAssignedTo" class="col-md-12 pl-xxs pr-xxs">
+                    <form method="post" onsubmit="return false" id="frmDocumentImport">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-8 pl-md pr-sm">
+                                    <label class="control-label" for="uploadFilePH">File</label>
+                                    <input type="text" class="form-control size100per ellipses disableAll" name="fileupload" id="txtFileName" placeholder="No File Selected" />
+                                </div>
+                            </div>
+                            <div>
+                                <div id="divClaimNumber" class="col-sm-3">
+                                    <label class="control-label" for="txtClaimNumber">Claim Number</label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text" onkeyup="Patient_Information_Import.BindClaimNumber();">
+                                        <div id="divSearchClaim" class="input-group-btn">
+                                            <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="utility.OpenPatientCharges('Patient_Information_Import', true);"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="divCaseNumber" class="col-sm-3">
+                                    <label for="txtCaseNumber" id="lblCaseNumber" class="control-label">Case Number</label>
+                                    <a id="lnkCaseNumberEdit" style="display:none;" href="#" onclick="Patient_Information_Import.OpenCaseDetail('hfCaseId');" title="Edit Case">Case Number</a>
+                                    <div class="input-group">
+                                        <input class="form-control " id="txtCaseNumber" type="text" placeholder="Start typing to search" name="CaseNumber" onblur="utility.ValidateAutoComplete(this, 'hfCaseId', false);" maxlength="35" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkCaseNumber" class="btn btn-primary btn-xs " type="button" onclick="Patient_Information_Import.OpenCase('Search Case', 'txtCaseNumber', 'hfCaseId', 'lblCaseNumber', 'lnkCaseNumberEdit');"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="divDocumentProvider" class="col-sm-3">
+                                    <label for="ddlDocumentProvider" class="control-label">Document Provided By <span class="required">*</span></label>
+                                    <select class="form-control" id="ddlDocumentProvider" name="DocumentProvider" ddlist="GetDocumentProvider"></select>
+                                </div>
+                                <div id="divDateOfService" class="col-sm-3">
+                                    <label for="dtpDOS" class="control-label">Date of Service</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        <input class="form-control" id="dtpDOS" name="DOS" type="text" data-plugin-datepicker="">
+                                    </div>
+                                </div>
+                                <div id="divFolder" class="col-sm-3">
+                                    <label for="ddlFolder" class="control-label">Folder <span class="required">*</span></label>
+                                    <select class="form-control" id="ddlFolder" name="Folder" ddlist="GetDocument"></select>
+                                </div>
+                                <div id="divAssignUserto" class="col-sm-3">
+                                    <label for="ddlAssignUserto" class="control-label">Assign User to Review </label>
+                                    <select class="form-control" id="ddlAssignUserto" name="AssignedUserTo" ddlist="GetCoWorkerGroupUsersFullName"></select>
+                                </div>
+                                <div id="divDocumentSource" class="col-sm-3">
+                                    <label for="ddlDocumentSource" class="control-label">Source <span class="required">*</span></label>
+                                    <select class="form-control" id="ddlDocumentSource" name="DocumentSource" ddlist="GetDocumentSource"></select>
+                                </div>
+                                <div id="divReceivedOn" class="col-sm-3">
+                                    <label for="dtpReceivedOn" class="control-label">Received On <span class="required">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        <input class="form-control" id="dtpReceivedOn" name="ReceivedOn" type="text" data-plugin-datepicker="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="txtComments" class="control-label ">Comments</label>
+                                <textarea id="txtComments" name="Comments" maxlength="256" class="form-control" rows="2" spellcheck="true"></textarea>
+                            </div>
+                            <div id="divOtherDocumentSource" class="col-sm-3 hidden">
+                                <label for="txtOtherDocumentSource" class="control-label ">Other Document Source</label>
+                                <input id="txtOtherDocumentSource" name="OtherDocumentSource" maxlength="255" class="form-control" type="text" />
+                            </div>
+                            <div class="spacer20"></div>
+                            <div class="splitter m-none">Document Reference Details</div>
+                            <div class="panel-body NoRadiusT">
+                                <div class="col-sm-6">
+                                    <label for="txtNarrativeReference" class="control-label">Narrative Reference</label>
+                                    <textarea class="form-control" id="txtNarrativeReference" type="text" name="NarrativeReference" rows="2" maxlength="255" spellcheck="true"></textarea>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="txtReferenceLink" class="control-label">Reference Link</label>
+                                    <textarea class="form-control" id="txtReferenceLink" type="text" name="ReferenceLink" rows="2" maxlength="255" spellcheck="true"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 conditional pull-right pad-a-labelsize-btn">
+                                <button id="btnDocumentImport" type="submit" class="btn btn-primary btn-sm rightbtn">Upload</button>
+                            </div>
+                            <div class="spacer10"></div>
+                        </div>
+                        <input type="hidden" id="hfPatientId" value="-1" />
+                        <input type="hidden" id="hfVisitId" value="-1" />
+                        <input type="hidden" id="hfCaseId" value="-1" />
+                        <input type="hidden" id="txtFileType" value="-1" />
+                        <input type="hidden" id="txtUrl" value="-1" />
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

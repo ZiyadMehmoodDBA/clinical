@@ -1,0 +1,478 @@
+﻿<div class="row" id="pnlClinicalOrderSetDetails">
+    <div id="actionPanClinicalOrderSetDetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_OrderSetDetails.UnLoadTab();"></button>
+                <h4 class="modal-title">Add Order Set</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form method="post" id="frmOrderSetDetails" onsubmit="return false">
+                        <div class="form-group">
+                            <div class="col-sm-4 col-lg-3">
+                                <label class="control-label" for="Name">Name<span class="required">*</span></label>
+                                <input class="form-control" name="OrderSetName" maxlength="50" id="txtOrderSetName" type="text">
+                            </div>
+                            <div class="col-sm-4 col-lg-3" id="divSpecialty">
+                                <label class="control-label" for="Specialty">Specialty<span class="required">*</span></label>
+                                <select class="form-control" name="Specialty" multiple="multiple" id="ddlSpecialty"></select>
+                            </div>
+                            <div class="col-sm-4 col-lg-3" id="divProvider">
+                                <select class="form-control" style="display:none;" name="hiddenPhysicalExamTemplateProvider" id="ddlHiddenProvider"></select>
+                                <label class="control-label" for="Provider">Provider</label>
+                                <select class="form-control" name="Provider" multiple="multiple" id="ddlProvider"></select>
+                            </div>
+                            <div class="col-sm-4 col-lg-1 p-none">
+                                <div class="col-xs-5 pad-a-labelsize">
+                                    <div class="checkbox-custom checkbox-default ">
+                                        <input type="checkbox" id="chkActive" name="IsActive" checked>
+                                        <label class="control-label" for="Active">Active</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 mt-sm">
+                                <button class="btn btn-primary btn-sm rightbtn" type="button" onclick="Clinical_OrderSetDetails.OpenSaveAsWindow();">Save As</button>
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                            </div>
+
+
+                        </div>
+                        <input type="hidden" name="EntityId" id="hfEntityId" />
+                        <div class="clearfix"></div>
+                        <div id="LabOrderTemplate" class="hidden">
+
+                            <div class="panel-body pl-none pr-none">
+                                <div class="col-sm-12 col-md-2">
+                                    <strong class="control-label">Order Details</strong>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label id="orderNo" class="control-label">Order Number</label>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <label id="laboratory" class="control-label">Lab</label>
+                                </div>
+                                <div class="spacer10"></div>
+                                <div class="col-sm-12">
+                                    <div class="clearfix"></div>
+
+                                    <div id="pnlLabOrderTemplate" class="table-responsive">
+                                        <input type="hidden" id="Lab_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvLabOrderTemplate">
+                                            <thead>
+                                                <tr class="">
+                                                    <th colspan="2" controlid="txtObservation" iscontroldisabled="1" controlname="Observation" class="noWordBreak size300 size-min400">Observation</th>
+                                                    <th controlid="txtResult" iscontroldisabled="1" controlname="Result" class="noWordBreak size300"></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="dvProblemList" class="col-sm-12 col-md-6 pt-sm comList">
+                            <section id="sectionProblemList" class="panel panel-featured">
+                                <header class="panel-heading">
+
+                                    <h2 class="panel-title pull-left">Associated Problems</h2>
+                                    <div class="clearfix"></div>
+                                </header>
+                                <div class="panel-body pl-none pr-none">
+                                    <div class="col-xs-12 pb-xs">
+                                        <div class="input-group">
+                                            <input class="form-control" data-popupunload="false" id="txtOrderSetProblemList" oninput="Clinical_OrderSetDetails.bindICD9AutoComplete(this)" name="OrderSetProblemList" type="text" value="">
+                                            <div class="input-group-btn">
+                                                <button id="btnOrderSetProblemList" class="btn btn-primary btn-xs" type="button" onclick="Clinical_OrderSetDetails.OpenSearchPopup('ICD', 'txtOrderSetProblemList', 'hfCPTCode,hfCPTDescription')">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul id="ulOrderSetProblemList" name="OrderSetProblemList" class="listPrimary"></ul>
+                                </div>
+                            </section>
+                        </div>
+                    </form>
+                    <div id="AssociatedProblems" class="col-sm-12 col-md-6 pt-sm comList hidden">
+                        <section id="sectionAssociatedProblems" class="panel panel-featured">
+                            <header class="panel-heading">
+                                <h2 class="panel-title pull-left">Associated Problems</h2>
+                                <div class="clearfix"></div>
+                            </header> <div class="panel-body pl-none pr-none">
+                                <ul id="ulOrderSetAssociatedProblems" name="OrderSetAssociatedProblems" class="listPrimary"></ul>
+                            </div>
+                        </section>
+                    </div>
+                    <!--For PopUp window to update Submit Status-->
+                    <div style="display:none">
+                        <div class="form-group" id="divSaveAs">
+                            <div class="col-sm-2 col-lg-8">
+                                <label class="control-label" for="Name">Name<span class="required">*</span></label>
+                                <input class="form-control" name="OrderSetName_SA " id="txtOrderSetName_SA" maxlength="50" type="text">
+                            </div>
+                            <div class="col-sm-2 mt-sm">
+                                <button class="btn btn-primary btn-sm rightbtn" type="button" onclick="Clinical_OrderSetDetails.saveConfirmDialog();">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer15"></div>
+                    <div id="orderSetCompunents" class="form-group p-default ">
+                        <div class="rowlink disableAll">
+                            <div onclick="Clinical_OrderSetDetails.uncheckMedications()" class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer">
+                                    <!--'disbleCustom' is dummy class-->
+                                    <label>Medications <a class="font-sm disbleCustom" data-title="Medications" href="javascript:void(0);" onclick="Clinical_OrderSets.addComponent('Medications', event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_Problems" name="Problems" checked="checked" class="notesOrderSets hidden" />-->
+                                    <div class="toggle-content panel-body NoRadius" id="pnlMedications_ResultOS">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvMedicationsOS">
+                                            <thead>
+                                                <tr>
+                                                    <th id="ColumnAction" actiontype="Edit,Delete" coltype="Action" class="size60 size-min60 notesActions">Action</th>
+                                                    <th controlid="txtMedication" iscontroldisabled="1" controlname="Medication" class="size60 size-min105 sorting">Medication</th>
+                                                    <th controlid="txtDosage" iscontroldisabled="1" controlname="Dosage" class="size60 size-min105 sorting">Dosage</th>
+                                                    <th controlid="txtRefills" iscontroldisabled="1" controlname="Refills" class="size60 size-min105 sorting">Refills</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvMedications_PagingOS"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll">
+                            <div onclick="Clinical_OrderSetDetails.uncheckProblems()" class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer">
+                                    <!--'disbleCustom' is dummy class-->
+                                    <label>Problems <a class="font-sm disbleCustom" data-title="Problems" href="javascript:void(0);" onclick="Clinical_OrderSets.addComponent('Problems', event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_Problems" name="Problems" checked="checked" class="notesOrderSets hidden" />-->
+                                    <div class="toggle-content panel-body NoRadius" id="pnlProblemLists_ResultOS">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvProblemListsOS">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size60 size-min60 notesActions">Action</th>
+                                                    <th controlid="txtProblem" iscontroldisabled="1" controlname="ProblemName" class="noWordBreak size30">Problem</th>
+                                                    <th controlid="ddlDiagnosis" controlname="Description" class="noWordBreak size200" coltype="dropdown">ICD (Diagnosis)</th>
+                                                    <th controlid="ddlChronicityLevel" controlname="ChronicityLevel" class="noWordBreak size30" coltype="dropdown">Chronicity Level</th>
+                                                    <th controlid="ddlSeverity" controlname="Severity" class="noWordBreak size30" coltype="dropdown">Severity</th>
+                                                    <th controlid="dtpFromProblemDate" controlname="StartDate" class="noWordBreak size30" coltype="datetime">Start Date</th>
+                                                    <th controlid="dtpToProblemDate" controlname="EndDate" class="noWordBreak size30" coltype="datetime">End Date</th>
+                                                    <th controlid="txtLastUpdated" iscontroldisabled="1" controlname="LastUpdated" class="noWordBreak size30">Last Updated</th>
+                                                    <th controlid="txtComments" controlname="Comments" class="noWordBreak size30" coltype="btnproblemcommentsos">Comments</th>
+                                                    <th style="display:none" controlid="txtComments" controlname="hfComments" class="noWordBreak size30" coltype="textbox">Comments</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvProblemLists_PagingOS"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll">
+                            <div onclick="Clinical_OrderSetDetails.uncheckImmunizationOrders()" class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer">
+                                    <label>Immunization <a id="ImmunizationAddButton" class="font-sm disbleCustom" data-title="Immunization" href="javascript:void(0);" onclick="Clinical_OrderSets.addComponent('ImmunizationDetail',event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <div class="spacer5"></div>
+                                    <div class="toggle-content" id="pnlImunization_ResultOS">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvImunizationOS">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                                    <th id="ColumnAction" actiontype="Delete,Edit" coltype="Action" class="size60 size-min60">Action</th>
+                                                    <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Vaccine</th>
+                                                    <th controlid="txtDose" iscontroldisabled="1" controlname="Dose" class="size20 sorting">Dose</th>
+                                                    <th controlid="txtLocation" iscontroldisabled="1" controlname="Location" class="size60 size-min105 sorting">Location</th>
+                                                    <th controlid="txtLotNo" iscontroldisabled="1" controlname="LotNo" class="size60 size-min105 sorting">Lot No</th>
+                                                    <th controlid="txtStatus" iscontroldisabled="1" controlname="Type" class="size60 size-min105 sorting">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvImunization_PagingOS"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="rowlink disableAll">
+                            <div onclick="Clinical_OrderSetDetails.uncheckTherapeuticOrders()" class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer">
+                                    <label>Therapeutic <a id="TherapeuticAddButton" class="font-sm disbleCustom" data-title="Therapeutic" href="javascript:void(0);" onclick="Clinical_OrderSets.addComponent('TherapeuticDetail', event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <div class="spacer5"></div>
+                                    <div class="toggle-content" id="pnlImunization_ResultOS">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvTherapeuticOS">
+                                            <thead>
+                                                <tr>
+                                                    <th id="ColumnAction" actiontype="Delete,Edit" coltype="Action" class="size60 size-min60">Action</th>
+                                                    <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Therapeutic Injection</th>
+                                                    <th controlid="txtDose" iscontroldisabled="1" controlname="Dose" class="size20 sorting">Dose</th>
+                                                    <th controlid="txtLotNo" iscontroldisabled="1" controlname="LotNo" class="size60 size-min105 sorting">Lot No</th>
+                                                    <th controlid="txtStatus" iscontroldisabled="1" controlname="Type" class="size60 size-min105 sorting">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvTherapeutic_PagingOS"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll" id="OrderSetProcedureDiv">
+                            <div onclick="Clinical_OrderSetDetails.uncheckProcedures()" class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer" id="pnlProcedures_ResultOS">
+                                    <label>Procedure <a class="font-sm disbleCustom" data-title="Procedure" href="javascript:void(0);" onclick="Clinical_OrderSets.addComponent('Procedures', event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_Procedure" name="Procedure" checked="checked" class="notesOrderSets hidden" />-->
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvProceduresOS">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size60 size-min60 notesActions">Action</th>
+                                                    <th controlid="txtProcedures" iscontroldisabled="1" controlname="Procedures" class="noWordBreak size30">Procedures</th>
+                                                    <th id="txtUnit" controlname="Unit" coltype="TextBox" class="noWordBreak size50">Unit</th>
+                                                    <th controlid="txtModifier" controlname="Modifier" controlwidth="size20 p-none" class="size60 size-min105" coltype="TextBox" autocompletemethod="Modifier">Modifiers</th>
+                                                    <th controlid="LookupProblemLists" controlname="Procedure_DiagnosisOS" class="noWordBreak size200" coltype="dropdown" ddlist="LookupProblemLists">ICD (Diagnosis)</th>
+                                                    <th controlid="dtpFromProcedureDate" controlname="StartDate" class="noWordBreak size30" coltype="datetime">Start Date</th>
+                                                    <th controlid="dtpToProcedureDate" controlname="EndDate" class="noWordBreak size30" coltype="datetime">End Date</th>
+                                                    <th controlid="txtLastUpdated" iscontroldisabled="1" controlname="LastUpdatedDate" coltype="LastModifyDate" class="noWordBreak size30">Last Updated</th>
+                                                    <th controlid="txtComments" controlname="Comments" class="noWordBreak size30" coltype="btncommentsproceduresgridOS">Comments</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvProcedures_PagingOS"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="Diagnosis hidden" id="DiagnosisDiv">
+                                <select id="ddlDiagnosis" name="ProblemListId" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="rowlink disableAll">
+                            <div class="toggle" data-plugin-toggle>
+                                <section onclick="Clinical_OrderSetDetails.uncheckLabOrders()" class="toggle checkBoxContainer">
+                                    <label>Lab Orders <a class="font-sm disbleCustom" data-title="Lab Orders" href="javascript:void(0);" onclick="Clinical_OrderSetDetails.LabOrderAddEdit(-1,null,event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_LabOrders" name="LabOrders" class="notesOrderSets hidden" checked="checked" />-->
+                                    
+
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <button id="btnLabOrderDelete" type="button" class="btn btn-sm btn-danger ml-xs" title="Delete" onclick="Clinical_OrderSetDetails.LabOrderDelete(event)"><span class="glyphicon glyphicon-trash"></span></button>
+                                        <div id="pnlLabOrder_Result" style="display: inline;">
+                                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLabOrder">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display:none">LabOrderId</th>
+                                                        
+                                                        <th class="noWordBreak size30">Date & Time</th>
+                                                        <th class="size300 size-min400">Test</th>
+                                                        <th class="size30">Laboratory</th>
+                                                        <th class="size30">Order Number</th>
+                                                        <th class="size30">Status</th>
+                                                        <th class="size30">Assigned To</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="dgvLabOrder_Paging"></div>
+
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll">
+                            <div class="toggle" data-plugin-toggle>
+                                <section onclick="Clinical_OrderSetDetails.uncheckRadiologyOrders()" class="toggle checkBoxContainer">
+                                    <label>Diagnostic Imaging <a class="font-sm disbleCustom" data-title="Radiology Orders" href="javascript:void(0);" onclick="Clinical_OrderSetDetails.RadiologyOrderAddEdit(-1, event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_RadiologyOrders" name="RadiologyOrders" class="notesOrderSets hidden" checked="checked" />-->
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <div id="pnlRadiologyOrder_Result" style="display: inline;">
+                                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRadiologyOrder">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display:none">RadiologyOrderId</th>
+                                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size60 size-min60 notesActions">Action</th>
+                                                        <th class="noWordBreak size30">Date & Time</th>
+                                                        <th class="size300 size-min400">Imaging</th>
+                                                        <th class="size30">Radiology Type</th>
+                                                        <th class="size30">Order Number</th>
+                                                        <th class="size30">Status</th>
+                                                        <th class="size30">Assigned To</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="dgvRadiologyOrder_Paging"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll">
+                            <div class="toggle" data-plugin-toggle>
+                                <section onclick="Clinical_OrderSetDetails.uncheckProcedureOrders()" class="toggle checkBoxContainer">
+                                    <label>Procedure Orders <a class="font-sm disbleCustom" data-title="Procedure Orders" href="javascript:void(0);" onclick="Clinical_OrderSetDetails.ProcedureOrderAddEdit(-1, event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_ProcedureOrders" name="ProcedureOrders" class="notesOrderSets hidden" checked="checked" />-->
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <div id="pnlProcedureOrder_Result" style="display: inline;">
+                                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvProcedureOrder">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display:none">ProcedureOrderId</th>
+                                                        <th id="ColumnAction" actiontype="Delete,Edit" coltype="Action" class="size60 size-min60 notesActions">Action</th>
+                                                        <th class="size300 size-min400">Procedure</th>
+                                                        <th class="size30">Status</th>
+                                                        <th class="size30">Assigned To</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="dgvProcedureOrder_Paging"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll">
+                            <div class="toggle" data-plugin-toggle>
+                                <section onclick="Clinical_OrderSetDetails.uncheckFollowUp()" class="toggle checkBoxContainer">
+                                    <label>Follow Up <a class="font-sm disbleCustom" data-title="Follow Up" href="javascript:void(0);" onclick="Clinical_OrderSetDetails.OpenOrderSetFollowUp(event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_FollowUp" name="FollowUp" class="notesOrderSets hidden" checked="checked" />-->
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOrderSetFollowUp">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size120" style="display:none;"></th>
+                                                    <th title="Action" class="size95 notesActions">Action</th>
+                                                    <th title="FollowUpDetail" class="size240 size-min240 noWordBreak">Follow Up Detail</th>
+                                                    <th title="Appointment Created" class="size20 size-min20 noWordBreak">Appointment Created</th>
+                                                    <th title="Entry Date & Entered By" class="size170 size-min170 noWordBreak">Entry Date &amp;  Entered By </th>
+                                                    <th title="Comments" class="size200 size-min200 noWordBreak">Comments</th>
+                                                    <th title="Default" class="size20 size-min20 noWordBreak">Default</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvFollowUpPagination"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll">
+                            <div class="toggle PatientEducation" data-plugin-toggle>
+                                <section onclick="Clinical_OrderSetDetails.uncheckPatientEducation()" class="toggle checkBoxContainer">
+                                    <label>Patient Education <a class="font-sm disbleCustom" data-title="Patient Education" href="javascript:void(0);" onclick="Clinical_OrderSetDetails.OpenOrderSetPatientEducation(event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_PatientEducation" name="PatientEducation" class="notesOrderSets hidden" checked="checked" />-->
+                                    <div class="toggle-content panel-body NoRadius ">
+                                        <ul class="tabs-custom">
+                                            <li class="active"><a class="custom-made-tabs" href="#OSInfo" data-toggle="tab">Info Button</a></li>
+                                            <li class=""><a class="custom-made-tabs" href="#OSNonInfo" data-toggle="tab">Non Info Button</a></li>
+                                        </ul>
+                                        <div class="tab-content tabs-custom-body active">
+                                            <div id="OSInfo" class="tab-pane active custom-made-tabs">
+                                                <span class="spacer10"></span>
+                                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOrderSetInfoDocument">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="size120" style="display:none;"></th>
+                                                            <th title="Action" class="size95 notesActions">Action</th>
+                                                            <th title="Document Name" class="size120 noWordBreak">Document Name</th>
+                                                            <th title="Entry Date" class="size120 noWordBreak">Entry Date</th>
+                                                            <th title="Entered By" class="size220 noWordBreak">Entered By</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                            <div id="OSNonInfo" class="tab-pane custom-made-tabs">
+                                                <span class="spacer10"></span>
+                                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOrderSetNonInfoDocument">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="size120" style="display:none;"></th>
+                                                            <th title="Action" class="size95 notesActions">Action</th>
+                                                            <th title="Document Name" class="size120 noWordBreak">Document Name</th>
+                                                            <th title="Entry Date" class="size120 noWordBreak">Entry Date</th>
+                                                            <th title="Entered By" class="size220 noWordBreak">Entered By</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll">
+                            <div class="toggle" data-plugin-toggle>
+                                <section onclick="Clinical_OrderSetDetails.uncheckReferrals()" class="toggle checkBoxContainer">
+                                    <label>Referrals <a class="font-sm disbleCustom" data-title="Referrals" href="javascript:void(0);" onclick="Clinical_OrderSetDetails.OpenOrderSetReferrals(event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_Referrals" name="Referrals" class="notesOrderSets hidden" checked="checked" />-->
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOrderSetReferrals">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size120" style="display:none;"></th>
+                                                    <th title="Action" class="size95 notesActions">Action</th>
+                                                    <th title="Date & Time" class="noWordBreak size95">Date & Time</th>
+                                                    <th title="Date & Time" class="noWordBreak size95">Procedure</th>
+                                                    <th title="Referral To" class="size120 noWordBreak">Referral To</th>
+                                                    <th title="ReferralToSpecialty" class="noWordBreak size90 size-min120">Referral To Specialty</th>
+                                                    <th title="Referral From" class="size120">Referral From</th>
+                                                    <th title="Visit Type" class="size120">Visit Type</th>
+                                                    <th title="Assigned To" class="size140">Assigned To</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-lg-2 pull-right pad-a-labelsize-btn">
+                            <button class="btn btn-success btn-xs rightbtn notesOrderSets hidden" type="button" onclick="Clinical_OrderSetDetails.AddOrderSetToNote();">Add on Note</button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-xs-12">
+                        <label class="control-label" for="Comments">Comments</label>
+                        <textarea class="form-control" rows="5" maxlength="1000" id="txtComments" name="OrderSetComments" spellcheck="true"></textarea>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        $($("#pnlClinicalOrderSetDetails").find($('[data-plugin-toggle]'))).each(function () {
+            var $this = $(this),
+				opts = {};
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+            $this.themePluginToggle(opts);
+        });
+    });
+</script>

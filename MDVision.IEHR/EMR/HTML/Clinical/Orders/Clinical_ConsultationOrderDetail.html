@@ -1,0 +1,163 @@
+﻿<div id="pnlClinicalConsultationOrderDetail">
+    <div id="actionPanClinicalConsultationOrderDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ClinicalConsultationOrderDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Consultation Order Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false;" id="frmClinicalConsultationOrderDetail">
+                    <div id="divConsultationOrderInformation" class="col-md-12 disableAll">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Order Information</h2>
+                        </header>
+                        <div class="panel-body">
+
+                            <div class="col-sm-3 ">
+                                <label class="control-label" for="Date">Provider<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="ClinicalConsultationOrderDetail.OpenProvider();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label" for="Date">Assignee</label>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtAssignee" type="text" placeholder="Start typing to search" name="Assignee" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkAssignee" class="btn btn-primary btn-xs " type="button" onclick="ClinicalConsultationOrderDetail.OpenAssignee();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="col-xs-6">
+                                    <label class="control-label" for="Date">Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" data-plugin-datepicker name="OrderDate" id="dtOrderDate">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="control-label" for="">Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 5 }' id="tmOrderTime" name="OrderTime">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="" class="control-label">Order Number</label>
+                                <input id="txtOrderNumber" type="text" placeholder="QD000174" class="form-control" name="OrderNumber" disabled />
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="visible-sm visible-xs"><div class="spacer15"></div></div>
+
+
+                    <div class="spacer15"></div>
+                    <div id="tblClinicalConsultationOrderDetail">
+
+
+
+                        <div class="spacer15"></div>
+
+                        <input type="hidden" name="PatientId" id="hfPatientId" />
+                        <input type="hidden" name="ConsultationOrderId" id="hfConsultationOrderID" value="-1" />
+                        <input type="hidden" id="hfProvider" name="ProviderId" />
+                        <input type="hidden" id="hfFacility" name="FacilityId" />
+                        <input type="hidden" id="hfAssignee" name="AssigneeId" />
+                        <!-- Start Irfan Code for Editable Grid portion  -->
+                        <div id="divConsultationTestInformation" class="col-sm-12 disableAll">
+                            <header class="panel-heading panel-blue">
+                                <h2 class="panel-title white">Procedure Information</h2>
+                            </header>
+                            <div class="panel-body pl-none">
+                                <div id="favSectionDiv" class="toggleHorSmallLeft toggled">
+                                    <section>
+                                        <h2>Favorites<i class="fa fa-chevron-down"></i></h2>
+                                    </section>
+                                    <div class="toggle-content">
+                                        <div class="col-xs-12 pb-sm">
+                                            <span class="pull-left">Favorites List</span>
+                                            <div id="divSelectAllConsultationOrderFavorites" class="disableAll">
+                                                <a href="#" onclick="ClinicalConsultationOrderDetail.selectAllFavoriteListContent()" class="btn btn-link btn-xs pull-right">Select All</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <select id="ddlFavoriteListConsultationOrder" onchange="ClinicalConsultationOrderDetail.loadfavoriteListContent(this)" name="FavoriteListConsultationOrder" class="form-control"></select>
+                                            <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="ClinicalConsultationOrderDetail.AutoSearchFavConsultationOrder()" />
+                                        </div>
+                                        <ul id="ulFavoriteListConsultationOrderContent" name="FavoriteListConsultationOrderContent" class="listPrimary height-max200 overflowY"></ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 toggleHorSmContainer overflowY" style="position:sticky;">
+                                    <div class="col-sm-12 col-md-4 pl-none">
+                                        <label class="control-label">Procedure</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtConsultationCPTCode" placeholder="search Procedure" type="text" name="ConsultationCPTCode" oninput="ClinicalConsultationOrderDetail.bindAutoComplete(this)" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="ClinicalConsultationOrderDetail.openCPTCode();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div id="pnlConsultation_Result" class="table-responsive">
+                                        <input type="hidden" id="Consultation_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvConsultation">
+                                            <thead>
+                                                <tr class="">
+                                                    <th id="ColumnAction" actiontype="Delete" coltype="Action" class="size90 size-min90">Action</th>
+                                                    <th id="thConsultationDate" controlid="dtpConsultationDate" iscontroldisabled="0" controlname="ConsultationDate" controlwidth="size80" class="size-min130 size130  text-center va-middle" coltype="datetime">Date</th>
+                                                    <th id="thConsultationTime" controlid="tpConsultationTime" iscontroldisabled="0" controlname="ConsultationTime" controlwidth="size80" class="size-min130 size130  text-center va-middle" coltype="time">Time</th>
+                                                    <th hfcontrolid="ConsultationOrderTestId" hfcontrolname="ConsultationOrderTestId" controlid="ConsultationProcedure" iscontroldisabled="1" controlname="ConsultationProcedure" coltype="TextBox" isoptional="0">Procedure</th>
+                                                    <th controlid="Urgency" class="size-min130 size130 noWordBreak" controlname="Urgency" coltype="dropdown" ddlist="GetUrgency">Urgency</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <input type="hidden" name="ConsultationTestIdsa" id="hfConsultationTestIds" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                            <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                        </div>
+                        <!-- End Irfan Code for Editable Grid portion -->
+                    </div>
+                    <div class="spacer15"></div>
+                    <div id="divConsultationAssociatedProblems" class="disableAll">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white pull-left">Associated Problems</h2>
+                            <a href="#" onclick="ClinicalConsultationOrderDetail.addProblem()" class="btn btn-xs"><i class="fa fa-plus-circle white"></i></a>
+                        </header>
+                        <div class="panel-body">
+                            <div class="col-xs-12">
+                                <div class="table-responsive Of-a">
+                                    <table class="table table-bordered table-condensed table-striped table-hover" id="ulProblemLists">
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <!--<ul id="ulProblemLists"></ul>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right pt-md pr-default">
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveOrder">Save</button>
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSignPrintOrder">Sign Order & Print Requisition</button>
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSignOrder">Sign Order</button>
+                        <!--<button type="button" id="btnConsultationReset" class="btn btn-sm">Reset</button>-->
+                        <button type="submit" class="btn btn-sm btn-primary hidden" id="btnPrintOrder">Print Requisition</button>
+                    </div>
+                    <!--<input type="hidden" id="hfCPTSNOMEDCode" name="CPTSNOMEDCodeId" value="" />
+                    <input type="hidden" id="hfCPTSNOMEDDescription" name="CPTSNOMEDDescription" />-->
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

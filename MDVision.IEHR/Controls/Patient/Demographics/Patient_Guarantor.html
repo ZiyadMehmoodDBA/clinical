@@ -1,0 +1,75 @@
+﻿<div id="pnlGuarantor" style="display:none;">
+    <div id="actionPanGuarantor" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_Guarantor.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Guarantor</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Patient_Guarantor.GuarantorAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div>
+                    <section class="panel panel-featured">
+                        <div class="panel-body" id="pnlGuarantor_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Last Name</label>
+                                        <input class="form-control ValidateCriteria" id="txtLastName" type="text" maxlength="20" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">First Name</label>
+                                        <input class="form-control ValidateCriteria" id="txtFirstName" type="text" maxlength="55" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Relation</label>
+                                        <select class="form-control ValidateCriteria" id="ddlRelation" name="Relation" ddlist="GetRelationship"></select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Active?</label>
+                                        <select id="chkIsActice" class="form-control ValidateCriteria">
+                                            <option value="" selected="selected">- All -</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mt-md pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnGuarantorSearch" type="button" onclick="Patient_Guarantor.ValidateSearchCriteria();">Search</button>
+                                    </div>
+                                </div> 
+                                <input type="hidden" id="hfPatientId" name="hfPatient" class="ValidateCriteria" />
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <div id="pnlGuarantor_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <input type="hidden" id="Guarantor_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvGuarantor">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">GuarantorId</th>
+                                        <th class="size-min120 size120">Action</th>
+                                        <th class="size-min110 noWordBreak">Last Name</th>
+                                        <th class="size-min110 noWordBreak">First Name</th>
+                                        <th class="size160 size-min150">Relationship</th>
+                                        <th>Telephone</th>
+                                        <th>Address</th>
+                                        <th class="size100">City</th>
+                                        <th>State</th>
+                                        <th>Zip</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divGuarantorPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

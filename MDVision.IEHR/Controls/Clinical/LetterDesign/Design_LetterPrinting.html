@@ -1,0 +1,78 @@
+﻿<div id="designLetterPrinting">
+    <div id="actionPanDesignLetterPrinting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="designLetterPrinting.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Letter Printing</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmLetterPrinting">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="control-label">Letter</label>
+                            <select id="ddlLetters" name="Letters" class="form-control " ddlist="GetLetters"></select>
+                        </div>
+                        <div class="col-sm-6" style="display:none">
+                            <label class="control-label">Printer</label>
+                            <select id="lstPrinters" name="Printer" class="form-control "></select>
+                        </div>
+                        <div class="col-sm-4 col-xs-6 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" checked="" name="CreateXML" id="chCreateXML" disabled="disabled">
+                                <label for="chCreateXML">Create XML File</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer5"></div>
+                    <button class="btn btn-primary btn-sm rightbtn" type="submit">Print Letter</button>
+                    <div class="clearfix"></div>
+
+                </form>
+            </div>
+          
+            <div id="pnlLetterFields_Result" style="display: none;">
+                <section class="panel">
+                    <div class="panel-body">
+                       
+                        <input type="hidden" id="LetterFields_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLetterFields">
+                            <thead>
+                                <tr>
+                                    <th style="display:none;">LtrFieldId</th>
+                                    <th>Fields</th>
+                                    <th>Text</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <div id="printHTMlDiv" style="display:none"></div>
+        </div>
+    </div>
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#designLetterPrinting #ddlLetters').on('change', function () {
+
+            designLetterPrinting.LetterFieldsSearch(this.value);
+
+        });
+
+        $('#designLetterPrinting #lstPrinters').on('change', function () {
+
+            printerName = $("#designLetterPrinting #lstPrinters option:selected").text();
+            designLetterPrinting.SetPrinter(printerName);
+
+
+        });
+
+    });
+
+</script>

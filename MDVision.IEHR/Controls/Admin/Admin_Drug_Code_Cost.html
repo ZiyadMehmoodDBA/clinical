@@ -1,0 +1,77 @@
+﻿<div class="row" id="pnlAdminDrugCodeCost" style="display:none;">
+    <div id="actionPanAdminDrugCodeCost" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_Specialty.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Drug Code Costs</h4>
+            </div>
+            <div class="clearfix"></div>
+            <div id="modalbody">
+                <button type="button" class=" btn btn-success btn-sm" id="btnDurgCodeCostAdd" onclick="Admin_Drug_Code_Cost.DrugCodeCostAdd();" onblur="Admin_Drug_Code_Cost.DrugCodeCostValidateCode(this);" ><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div><div class="clearfix"></div>
+                <section class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="closebtn pull-right" onclick="Admin_Drug_Code_Cost.UnLoadTab();"></a>
+                        </div>
+                        <h2 class="panel-title">Search Drug Code Costs</h2>
+                    </header>
+                    <div class="panel-body" id="pnlDrugCodeCost_Search">
+                        <form class="form-bordered" method="post" onsubmit="return false">
+                            <!--start - CONTENTS-->
+                            <div class="form-group">
+                                <div class="col-sm-3 col-lg-2">
+                                    
+                                    <label class="control-label">HCPCS / Drug Code</label>
+                                    <input class="form-control" id="txtCode"  oninput="Admin_Drug_Code_Cost.BindAutoComplete(this)" name="ShortName" type="text" maxlength="30" />
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label" for="Drug Cost">Drug Cost</label>
+                                    <div class=" input-group">
+                                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                        <input class="form-control"  maxlength="10" placeholder="99999.99" id="txtDrugCost" name="DrugCost" type="text" maxlength="55" />
+                                        </div>
+                                    </div>
+                               
+                                <div class="col-sm-2">
+                                    <label class="control-label">Active?</label>
+                                    <select id="chkActive" name="Active" class="form-control">
+                                        <option value="">- All -</option>
+                                        <option value="1" selected="selected">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-1 mt-md pull-right">
+                                    <button class="btn btn-primary btn-sm pull-right" id="btnSpecialtySearch" type="button" onclick="Admin_Drug_Code_Cost.DrugCodeCostSearch();">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <div id="pnlDrugCodeCost_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="Specialty_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvDrugCodeCost">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">CPTCodeCostID</th>
+                                        <th class="size120">Action</th>
+                                        <th class="size150">HCPCS / Drug Code</th>
+                                        <th class="size150">Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divDurgCodeCostPaging"></div>
+                            <div class="clearfix"></div>
+                            <input type="hidden" id="hfCPTCode" />
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

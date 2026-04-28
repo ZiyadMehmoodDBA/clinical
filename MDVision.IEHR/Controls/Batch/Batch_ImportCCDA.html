@@ -1,0 +1,294 @@
+﻿<div class="row" id="pnlBatchImportCCDA" style="display:none;">
+    <div id="actionPanBatchImportCCDA" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Batch_ImportCCDA.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Import CCDA</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section class="panel">
+
+                        <ul class="tabs-custom" id="ulReferralTabs">
+                            <li class="active" onclick="Batch_ImportCCDA.SelectTab('ImportCCDA');"><a class="" href="#ImportCCDA" data-toggle="tab">Import CCDA</a></li>
+                            <li onclick="Batch_ImportCCDA.SelectTab('ImportCypress');"><a class="" href="#ImportCypress" data-toggle="tab">Import Cypress Data</a></li>
+                            <li id="liImportPrivacySegmentedDocument" onclick="Batch_ImportCCDA.SelectTab('ImportPrivacySegmentedDocument');"><a class="" href="#ImportPrivacySegmentedDocument" data-toggle="tab">Import Privacy Segmented Document</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body pt-default">
+                            <div id="ImportCCDA" class="tab-pane active">
+                                <div class="col-sm-4 col-lg-3">
+                                    <label class="control-label">Type of Record</label>
+                                    <select class="form-control" id="ddlImportTypeCCDA" onchange="Batch_ImportCCDA.resetValues()">
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 pad-a-labelsize">
+                                    <span>File to import (.xml)</span>
+                                    <span class="btn btn-default btn-xs ml-xxs mr-sm btn-file">
+                                        <i class="fa fa-folder-open"></i>
+                                        <span>Choose File</span>
+                                        <input type="file" name="Upload_Import_file" id="Upload_Import_file" accept="text/xml" onchange="Batch_ImportCCDA.ImportFileSelect(this)">
+                                    </span>
+
+                                    <label class="control-label" id="totalFiles">0 file(s) selected</label>
+                                </div>
+                                <div class="spacer20 pt-xlg"></div>
+                                <div class="col-sm-4 col-lg-3" id="divValidationObjective">
+                                    <label class="control-label">Validation Objective:</label>
+                                    <select class="form-control" id="ddlImportFileTypeCCDA" onchange="Batch_ImportCCDA.SetDropdownListForValidation(this)">
+                                        <option value="0">Select</option>
+                                        <option value="170.315_b1_ToC_Amb">170.315_b1_ToC_Amb</option>
+                                        <option value="170.315_b4_CCDS_Amb">170.315_b4_CCDS_Amb</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-lg-3" id="divReferenceFileName">
+                                    <label class="control-label">Reference Filename:</label>
+                                    <select class="form-control" id="ddlImportFileNameTypeCCDA">
+                                        <option value="0">Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-lg-2">
+                                    <label class="control-label">Import for Provider</label>
+                                    <select id="ddlprovider" name="provider" class="form-control " ddlist="GetProvider"></select>
+                                </div>
+                                <div class="col-sm-4 col-lg-2">
+                                    <label class="control-label">Import for Facility</label>
+                                    <select id="ddlfacility" name="facility" class="form-control " ddlist="GetFacility"></select>
+                                </div>
+                                <div class="col-sm-4 col-lg-3" id="divCCDAValidate">
+                                    <div class="col-sm-12 col-lg-12">
+                                        <label class="text-danger hoverpointer" onclick="Batch_ImportCCDA.ValidateCCDA();">  Validate</label>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-12">
+                                        <label class="text-danger hoverpointer" onclick="Batch_ImportCCDA.DisplayErrorMessages();"> Error Report</label>
+                                        <label class="text-info hoverpointer" onclick="Batch_ImportCCDA.DisplayReadableData();"> &nbsp;&nbsp;&nbsp;&nbsp; CCD Data</label>
+                                    </div>
+                                </div>
+                                <div class="spacer20 pt-xlg"></div>
+                                <div class="col-md-6">
+                                    <strong>Available Patient List</strong>
+                                    <button class="btn btn-success btn-sm rightbtn" id="btnCreatePatient" type="button" disabled="disabled" onclick="Batch_ImportCCDA.CreatePatient()">Create Patient</button>
+                                    <div class="clearfix"></div>
+                                    <div class="table-responsive Of-a">
+                                        <table class="table table-bordered table-striped table-condensed table-hover" id="tblPatient">
+                                            <thead>
+                                                <tr>
+                                                    <th nowrap="nowrap">Select</th>
+                                                    <th nowrap="nowrap">Patient Name</th>
+                                                    <th nowrap="nowrap">DOB</th>
+                                                    <th nowrap="nowrap">Gender</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="4">
+                                                        No Available Record
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="spacer15"></div>
+                                    <strong class="liCCDAImport">Select section to Import/ Reconcile</strong>
+                                    <ul class="list-unstyled disableAll" id="ulCheckBoxes">
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="Medication" name="Medication">
+                                                <label class="control-label" for="Medication">Medication</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="Allergies" name="Allergies">
+                                                <label class="control-label">Allergies</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="Problems" name="Problems">
+                                                <label class="control-label">Problems</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="SmokingStatus" name="SmokingStatus">
+                                                <label class="control-label">Smoking Status</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="LaboratoryTest" name="LaboratoryTest">
+                                                <label class="control-label">Laboratory Test</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="LaboratoryResult" name="LaboratoryResult">
+                                                <label class="control-label">Laboratory Result</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="VitalSigns" name="VitalSigns">
+                                                <label class="control-label">Vital Signs</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="Procedures" name="Procedures">
+                                                <label class="control-label">Procedures</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="Immunizations" name="Immunizations">
+                                                <label class="control-label">Immunizations</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="UDI" name="UDI">
+                                                <label class="control-label">UDI</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="Goals" name="Goals">
+                                                <label class="control-label">Goals</label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="HealthConcerns" name="HealthConcerns">
+                                                <label class="control-label">Health concerns </label>
+                                            </div>
+                                        </li>
+                                        <li class="liCCDAImport">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="PlanOfTreatment" name="PlanOfTreatment">
+                                                <label class="control-label">Assessment and Plan Of Treatment </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul id="ccdaImportSectionList"></ul>
+                                    <div class="spacer20"></div>
+                                    <button class="btn btn-primary btn-sm rightbtn" id="btnNextReconcilation" type="button" onclick="Batch_ImportCCDA.NextImport(this);">Reconcile <i class="fa fa-angle-double-right"></i></button>
+                                    <button class="btn btn-primary btn-sm rightbtn" id="btnImportCCDA" type="button" onclick="Batch_ImportCCDA.ImportCCDA(this);">Import</button>
+                                    <!--<button class="btn btn-primary btn-sm rightbtn" id="btnShowCCDA" type="button" onclick="Batch_ImportCCDA.ShowCCDA(this);">Show </button>-->
+                                    <button class="btn btn-primary btn-sm rightbtn" id="btnSavePreference" type="button" onclick="Batch_ImportCCDA.SavePreference(this);">Save Preference </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-lg-12 hide maxheight-400" id="BatchImportCCDAXMLContainer">
+                                        <div class="col-lg-12" id="BatchImportCCDAXMLContainerDocType">
+
+                                        </div>
+                                    </div>
+                                    <iframe height="400" width="100%" src="" id="IframXML"></iframe>
+                                </div>
+                                <div class="spacer20 pt-xlg"></div>
+                                <div class="col-lg-12 hide maxheight-500 list-group-item" id="BatchImportCCDAXMLContainerErrorList">
+
+                                </div>
+                            </div>
+                            <div id="ImportCypress" class="tab-pane">
+                                <div class="col-sm-4 col-lg-3">
+                                    <label class="control-label">Type of Record</label>
+                                    <select class="form-control">
+                                        <option value="CCDA" selected="selected" disabled="disabled">CCDA</option>
+                                        <!--<option value="CCR ">CCR </option>
+                                <option value="CCD ">CCD </option>-->
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 pad-a-labelsize">
+                                    <span>File to import (.xml)</span>
+                                    <span class="btn btn-default btn-xs ml-xxs mr-sm btn-file">
+                                        <i class="fa fa-folder-open"></i>
+                                        <span>Choose File</span>
+                                        <input type="file" name="Upload_Import_file" multiple="multiple" id="Upload_Import_file1" accept="text/xml" onchange="Batch_ImportCCDA.ImportCypressFileSelect(this)">
+                                    </span>
+
+                                    <label class="control-label" id="totalFiles">0 file(s) selected</label>
+                                    <button class="btn btn-success btn-sm rightbtn hidden" id="btnCreatePatient1" type="button" onclick="Batch_ImportCCDA.ImportCypressData()">Import Cypress Data</button>
+                                </div>
+                                <div class="spacer20 pt-xlg"></div>
+                                <div class="col-md-12">
+                                    <iframe height="400" width="100%" src="" id="IframXMLHTML"></iframe>
+                                </div>
+                            </div>
+                            <div id="ImportPrivacySegmentedDocument" class="tab-pane">
+                                <div class="col-sm-6 pad-a-labelsize">
+                                    <span>File to import (.xml)</span>
+                                    <span class="btn btn-default btn-xs ml-xxs mr-sm btn-file">
+                                        <i class="fa fa-folder-open"></i>
+                                        <span>Choose File</span>
+                                        <input type="file" name="Import_Privacy_file" id="Import_Privacy_file" accept="text/xml" onchange="Batch_ImportCCDA.ImportPrivacyFileSelect(this)">
+                                    </span>
+
+                                    <label class="control-label" id="totalPrivacyFiles">0 file(s) selected</label>
+                                    <button class="btn btn-success btn-sm ml-lg" id="btnImportPrivacySegmentedDocument" type="button" onclick="Batch_ImportCCDA.ImportPrivacySegmentedDocument()">Import</button>
+                                </div>
+                                <div class="spacer20 pt-xlg"></div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="clearfix"></div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-condensed table-hover" id="dgvPrivacySegmentedDocument" style="display:none;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none">Id</th>
+                                                    <th nowrap="nowrap">Patient Name</th>
+                                                    <th nowrap="nowrap">DOB</th>
+                                                    <th nowrap="nowrap">Restriction Level</th>
+                                                    <th nowrap="nowrap">View CCDA</th>
+                                                    <th nowrap="nowrap">Import Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvPrivacySegmentedDocument_Paging"></div>
+                                    </div>
+
+                                    <div class="spacer20"></div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <iframe height="623" width="100%" src="" id="IframeXMLPrivacySegmentedDocument"></iframe>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </section>
+                </div>
+                <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+</script>

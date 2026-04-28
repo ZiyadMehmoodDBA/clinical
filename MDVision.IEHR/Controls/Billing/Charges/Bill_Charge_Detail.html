@@ -1,0 +1,369 @@
+﻿<div id="chargeSearchDetail">
+    <div id="actionPanChargeSearchDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="">
+                <button type="button" class="close" onclick="chargeSearchDetail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Charge Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmChargeSearchDetail" onsubmit="return false">
+                    <div class="btn-block mb-xs">
+                        <button class="btn btn-success btn-xs disabled" id="btnResubmit" type="button" onclick="chargeSearchDetail.ResubmitCharge();">Resubmit</button>
+                        <button class="btn btn-success btn-xs" onclick="chargeSearchDetail.ShowHistory('chargeSearchDetail');" type="button">History</button>
+                        <button class="btn btn-success btn-xs disabled" id="aEOB" onclick="chargeSearchDetail.OpenElectronicEOB();" type="button">Electronic EOB</button>
+                        <button class="btn btn-success btn-xs disabled" type="button">Recalculate Fee</button>
+                    </div>
+                    <div id="divAllControls" class="form-group tab-content-featured panel-body">
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Charge Number">Charge Number</label>
+                            <input class="form-control" id="txtChargeNumber" name="Charge Number" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label">DOS From</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="DatePaid" data-plugin-datepicker="" class="form-control" id="dtpDOSFrom" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label">DOS To</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="DatePaid" data-plugin-datepicker="" class="form-control" id="dtpDOSTo" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <!--<label id="lblFacility" for="Facility" class="control-label">Facility</label>-->
+                            <a id="lnkFacilityEdit" href="#" onclick="chargeSearchDetail.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                            <!--<div class="input-group">
+                                <input class="form-control" id="txtFacility" disabled name="Facility" placeholder="Start typing to search" type="text" onfocusout="utility.ValidateAutoComplete(this, 'frmChargeSearchDetail #hfFacility', false); chargeSearchDetail.FillChargePOS('hfFacility', 'txtPOS')">
+                                <div class="input-group-btn">
+                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="chargeSearchDetail.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>-->
+                            <input class="form-control" id="txtFacility" disabled name="Facility" type="text" />
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <!--<label id="lblProvider" class="control-label">Provider</label>-->
+                            <a id="lnkProviderEdit" href="#" onclick="chargeSearchDetail.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                            <!--<div class="input-group">
+                                <input type="text" class="form-control" id="txtProvider" disabled name="Provider" placeholder="Start typing to search" onfocusout="utility.ValidateAutoComplete(this, 'frmChargeSearchDetail #hfProvider', false);">
+                                <div class="input-group-btn">
+                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="chargeSearchDetail.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>-->
+                            <input type="text" class="form-control" id="txtProvider" disabled name="Provider" />
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label id="lblInsurancePlan" class="control-label">Insurance Plan</label>
+                            <!--<a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="chargeSearchDetail.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance Plan<span class="required">*</span></a>
+                            <div class="input-group">
+                                <input class="form-control" id="txtInsurancePlan" disabled name="InsurancePlan" placeholder="Start typing to search" onfocusout="utility.ValidateAutoComplete(this, 'frmChargeSearchDetail #hfInsurancePlan', false);" type="text">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary btn-xs " type="button" onclick="chargeSearchDetail.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>-->
+                            <input class="form-control" id="txtInsurancePlan" disabled name="InsurancePlan" type="text" />
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="EOD">EOD</label>
+                            <input class="form-control" id="dtpEOD" name="EOD" type="text" disabled />
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Status">Status</label>
+                            <input class="form-control" id="txtStatus" name="Status" type="text" disabled>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <label class="control-label" for="Comments">Comments</label>
+                            <textarea class="form-control" id="txtComments" name="Comments" rows="2" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <label class="control-label" for="Service Description">Service Description</label>
+                            <textarea class="form-control" id="txtServiceDescription" name="Service Description" rows="2" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <label class="control-label" for="CPT/HCPCS">CPT/HCPCS</label>
+                            <!--<input class="form-control" id="txtCPT" oninput="chargeSearchDetail.AutoCompleteCPT(this);" onfocusout="chargeSearchDetail.FillCPTData(this)" name="CPTHCPCS" type="text">-->
+                            <input class="form-control" id="txtCPT" oninput="chargeSearchDetail.AutoCompleteCPT(this);" name="CPTHCPCS" onfocusout="chargeSearchDetail.FillCPTData(this)" type="text">
+                            <input type="hidden" id="hfCPTDescription" value="">
+                        </div>
+
+                        <!--<div class="col-sm-3 col-md-2 col-lg-2">
+                            <label id="lblModifier" class="control-label">Modifier</label>
+                            <a id="lnkModifierEdit" style="display:none;" href="#" onclick="chargeSearchDetail.OpenModiferDetail();" title="Edit Modifier">Modifier</a>
+                            <input class="form-control" id="txtModifier" name="Modifier" placeholder="Start typing to search" type="text" onkeyup="chargeSearchDetail.HideModiferLink();">
+
+                        </div>-->
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="Modifier">Modifier 1</label>
+                            <input class="form-control" id="txtModifier1" name="Modifier1" type="text" onfocusout="utility.ValidateCode(this, 'MODIFIER',null);">
+                        </div>
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="Modifier">Modifier 2</label>
+                            <input class="form-control" id="txtModifier2" name="Modifier2" type="text" onfocusout="utility.ValidateCode(this, 'MODIFIER',null);">
+                        </div>
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="Modifier">Modifier 3</label>
+                            <input class="form-control" id="txtModifier3" name="Modifier3" type="text" onfocusout="utility.ValidateCode(this, 'MODIFIER',null);">
+                        </div>
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="Modifier">Modifier 4</label>
+                            <input class="form-control" id="txtModifier4" name="Modifier4" type="text" onfocusout="utility.ValidateCode(this, 'MODIFIER',null);">
+                        </div>
+
+
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="ICD 1">ICD 1</label>
+                            <!--<input class="form-control" id="txtICD1" name="ICD 1" type="text" onfocusout="utility.ValidateCode(this, 'ICD',null);">-->
+                            <input class="form-control" id="txtICD1" name="ICD 1" type="text" oninput="chargeSearchDetail.AutoCompleteICD(this);" disabled>
+                            <input type="hidden" id="hfICD1" value="">
+                            <input type="hidden" id="hfICDDescription1" value="">
+                            <input type="hidden" id="hfICD101" value="">
+                            <input type="hidden" id="hfICD10Description1" value="">
+                            <input type="hidden" id="hfSNOMED1" value="">
+                            <input type="hidden" id="hfSNOMEDDescription1" value="">
+                        </div>
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="ICD 2">ICD 2</label>
+                            <!--<input class="form-control" id="txtICD2" name="ICD 2" type="text" onfocusout="utility.ValidateCode(this, 'ICD', null);">-->
+                            <input class="form-control" id="txtICD2" name="ICD 2" type="text" oninput="chargeSearchDetail.AutoCompleteICD(this);" disabled>
+                            <input type="hidden" id="hfICD2" value="">
+                            <input type="hidden" id="hfICDDescription2" value="">
+                            <input type="hidden" id="hfICD102" value="">
+                            <input type="hidden" id="hfICD10Description2" value="">
+                            <input type="hidden" id="hfSNOMED2" value="">
+                            <input type="hidden" id="hfSNOMEDDescription2" value="">
+                        </div>
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="ICD 3">ICD 3</label>
+                            <!--<input class="form-control" id="txtICD3" name="ICD 3" type="text" onfocusout="utility.ValidateCode(this, 'ICD', null );">-->
+                            <input class="form-control" id="txtICD3" name="ICD 3" type="text" oninput="chargeSearchDetail.AutoCompleteICD(this);" disabled>
+                            <input type="hidden" id="hfICD3" value="">
+                            <input type="hidden" id="hfICDDescription3" value="">
+                            <input type="hidden" id="hfICD103" value="">
+                            <input type="hidden" id="hfICD10Description3" value="">
+                            <input type="hidden" id="hfSNOMED3" value="">
+                            <input type="hidden" id="hfSNOMEDDescription3" value="">
+                        </div>
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="ICD 4">ICD 4</label>
+                            <!--<input class="form-control" id="txtICD4" name="ICD 4" type="text" onfocusout="utility.ValidateCode(this, 'ICD', null );">-->
+                            <input class="form-control" id="txtICD4" name="ICD 4" type="text" oninput="chargeSearchDetail.AutoCompleteICD(this);" disabled>
+                            <input type="hidden" id="hfICD4" value="">
+                            <input type="hidden" id="hfICDDescription4" value="">
+                            <input type="hidden" id="hfICD104" value="">
+                            <input type="hidden" id="hfICD10Description4" value="">
+                            <input type="hidden" id="hfSNOMED4" value="">
+                            <input type="hidden" id="hfSNOMEDDescription4" value="">
+                        </div>
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="POS">POS</label>
+                            <input class="form-control" id="txtPOS" name="POS" type="text" oninput="utility.POSAutoComplete(this, $('#frmChargeSearchDetail #hfPOSId'));" onfocusout="utility.ValidateAutoComplete(this, 'frmChargeSearchDetail #hfPOSId', false,'1');">
+                        </div>
+                        <div class="col-sm-2 col-lg-1">
+                            <label class="control-label" for="TOS">TOS</label>
+                            <input class="form-control" id="txtTOS" name="TOS" type="text" onfocusout="chargeSearchDetail.ValidateTOS(this);">
+                        </div>
+                        <div class="col-sm-1 col-lg-1">
+                            <label class="control-label" for="Units">Units</label>
+                            <input class="form-control" id="txtUnits" name="Units" type="text" onblur="utility.ValidateDecimal(event, 2); chargeSearchDetail.CalculateUnitFee(this);">
+                        </div>
+                        <div class="col-sm-1 col-lg-1">
+                            <label class="control-label" for="TotalUnits">Total Units</label>
+                            <input class="form-control" id="txtTotalUnits" name="TotalUnits" type="text" disabled>
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <label class="control-label">Primary Fee</label>
+                            <input class="form-control" id="txtPrimaryFEE" name="PrimaryFEE" type="text" readonly="readonly" />
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <label class="control-label" for="Fee">Fee</label>
+                            <input class="form-control" id="txtFEE" name="FEE" type="text" onblur="chargeSearchDetail.CalculateUnitFee($('#txtUnits'));" onkeypress="    utility.ValidateDecimal(event, 2)" />
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <label class="control-label">Tot Fee</label>
+                            <input class="form-control" id="txtTotalFEE" name="TotalFEE" type="text" readonly="readonly" />
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <label class="control-label" for="ExpectedFee">Expected Fee</label>
+                            <input class="form-control" id="txtExpectedFee" name="ExpectedFee" type="text" readonly="readonly" />
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <label class="control-label" for="INS CHARGES">Ins Charges</label>
+                            <input class="form-control" id="txtINSCharges" name="INSCHARGES" type="text" onkeypress="utility.ValidateDecimal(event,2)">
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <label class="control-label" for="Pat CHARGES ">Pat Charges </label>
+                            <input class="form-control" id="txtPATCharges" name="PATCHARGES " type="text" onkeypress="utility.ValidateDecimal(event,2)">
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <label class="control-label" for="COPAY">Copay</label>
+                            <input class="form-control" id="txtCOPAY" name="COPAY" type="text" onkeypress="utility.ValidateDecimal(event,2)">
+                        </div>
+                        <div class="col-sm-4 col-md-2 col-lg-2">
+                            <label class="control-label" for="INS Balance ">Ins Balance</label>
+                            <input class="form-control" id="txtInsBalance" name="INSBalance" type="text" disabled onkeypress="utility.ValidateDecimal(event,2)">
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Pat Balance">Pat Balance</label>
+                            <input class="form-control" id="txtPatBalance" name="PATBalance" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Copay Balance">Copay Balance</label>
+                            <input class="form-control" id="txtCopayBalance" name="CopayBalance" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Ins Paid">Ins Paid</label>
+                            <input class="form-control" id="txtInsPaid" name="InsPaid" type="text" disabled onkeypress="utility.ValidateDecimal(event,2)">
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Write off">Write Off</label>
+                            <input class="form-control" id="txtWriteoff" name="Writeoff" type="text" disabled onkeypress="utility.ValidateDecimal(event,2)">
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Patient Paid">Patient Paid</label>
+                            <input class="form-control" id="txtPatientPaid" name="PatientPaid" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Discount">Patient Discount</label>
+                            <input class="form-control" id="txtPatientDiscount" name="Discount" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Copay Paid">Copay Paid</label>
+                            <input class="form-control" id="txtCopayPaid" name="CopayPaid" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <div class="size100">
+                                <label class="control-label" for="Discount">Copay Discount</label>
+                            </div>
+                            <input class="form-control" id="txtCopayDiscount" name="CopayDiscount" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2 pad-a-labelsize-btn">
+                            <div class="checkbox checkbox-custom pt-tiny">
+                                <input id="chkEMG" name="EMG" type="checkbox">
+                                <label class="control-label pl-none" for="EMG">EMG</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="NDC">NDC</label>
+                            <input class="form-control" id="txtNDC" name="NDC" type="text" onfocusout="chargeSearchDetail.NDCvalidation(this);">
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="NDC Unit">NDC Unit</label>
+                            <input class="form-control" id="txtNDCUnit" name="NDCUnit" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="NDC Unit Price">NDC Unit Price</label>
+                            <input class="form-control" id="txtNDCUnitPrice" name="NDCUnitPrice" type="text" onkeypress="utility.ValidateDecimal(event,2)">
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label">Measurement</label>
+                            <select id="ddlNDCMeasurement" class="form-control" ddlist='GetNDCMeasurementCode'></select>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Total Balance">Total Balance</label>
+                            <input class="form-control" id="txtTotalBalance" name="TotalBalance" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Measurement ">Is Primary</label>
+                            <select id="chkPrimary" class="form-control" disabled>
+                                <option value="True">Yes</option>
+                                <option value="False">No</option>
+                            </select>
+                            <!--<label class="control-label" for="Charge Type">Charge Type</label>
+                                <input class="form-control" id="txtChargeType" name="ChargeType" type="text" disabled>-->
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Batch No">Batch No</label>
+                            <input class="form-control" id="txtBatchNo" name="BatchNo" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Submit Date">Submit Date</label>
+                            <input class="form-control" id="txtSubmitDate" name="SubmitDate" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Submitted By">Submitted By</label>
+                            <input class="form-control" id="txtSubmittedBy" name="SubmittedBy" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Entry Date">Entry Date</label>
+                            <input class="form-control" id="txtEntryDate" name="EntryDate" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <label class="control-label" for="Entered By">Entered By</label>
+                            <input class="form-control" id="txtEnteredBy" name="EnteredBy" type="text" disabled>
+                        </div>
+                        <!--
+                        <div class="col-sm-3 col-md-2 col-lg-2">
+                            <div class="size60per pull-left">
+                                <label class="control-label" for="Hold Days">Hold Days</label>
+                                <input class="form-control" id="txtHoldDays" name="HoldDays" type="text">
+                            </div>
+                            <div class="size40per pull-left pad-a-labelsize-btn pl-xxs">
+                                <div class="checkbox checkbox-custom pt-tiny">
+                                    <input id="chkHold" name="Hold" type="checkbox">
+                                    <label class="control-label pl-none" for="Hold">Hold</label>
+                                </div>
+                            </div>
+                        </div>
+                            -->
+                        <div class="col-sm-1 pull-right mt-sm mb-sm">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnSave" type="submit">Save</button>
+                        </div>
+
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12">
+                            <div class="splitter p-xs">Transfer Charges</div>
+                        </div>
+                        <section class="panel">
+                            <div class="panel-body pb-none noBorder">
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvTransferCharges">
+                                    <thead>
+                                        <tr>
+                                            <th class="size100">Claim #</th>
+                                            <th class="size150">Insurance Plan</th>
+                                            <th class="size70">Fee</th>
+                                            <th class="size130">Plan Amount</th>
+                                            <th class="size130">Plan Balance</th>
+                                            <th class="size130">Patient Amt</th>
+                                            <th class="size130">Patient Balance</th>
+                                            <th class="size80">Copay</th>
+                                            <th class="size80">Balance</th>
+                                            <th class="size120">Submit Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                    </div>
+                    <input type="hidden" id="hfProvider" />
+                    <input type="hidden" id="hfFacility" />
+                    <input type="hidden" id="hfInsurancePlan" />
+                    <input type="hidden" id="hfModifier" />
+                    <input type="hidden" id="hfPOSId" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#chargeSearchDetail #dtpDOSFrom').datepicker({
+        }).on('changeDate', function (e) {
+            $(this).datepicker('hide');
+
+
+        });
+        $('#chargeSearchDetail #dtpDOSTo').datepicker({
+        }).on('changeDate', function (e) {
+            $(this).datepicker('hide');
+
+
+        });
+    });
+</script>-->

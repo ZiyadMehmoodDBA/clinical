@@ -1,0 +1,127 @@
+﻿<div id="pnlBillPatientResponsibilityPayment">
+    <div id="actionPanBillPatientResponsibilityPayment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Bill_PatientResponsibilityPayment.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Patient Responsibility Payments</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmBillPatientResponsibilityPayment" method="post" onsubmit="return false">
+                    <div class="pull-right pl-sm" id="divTotalBalance">
+                        <span>Total Balance: </span>
+                        <span class="" id="lblTotalBalance">$00.00</span>
+                    </div>
+                    <div class="spacer10"></div>
+                    <div id="StatementCharges" class="tab-pane active custom-made-tabs">
+                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvStatementCharges">
+                            <thead>
+                                <tr>
+                                    <th style="display: none;">Charge Id</th>
+                                    <th><input type="checkbox" title="Select all" name="checkbox" id="chkAllCharges" onclick="Bill_PatientResponsibilityPayment.checkUncheckAll(this);"></th>
+                                    <th class="size-max50">Account</th>
+                                    <th>DOS</th>
+                                    <th>Claim #</th>
+                                    <th>CPT</th>
+                                    <th>Units</th>
+                                    <th>Charges</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div id="paymentContainer" class="disableAll">
+                        <div class="pull-right pl-sm" id="divAdvanceBalance" style="display:none;">
+                            <span>Advance Balance: </span>
+                            <span class="" id="lblAdvanceBalance">00.00</span>
+                        </div>
+                        <div class="col-sm-4  col-md-3 col-lg-2">
+                            <label class="control-label">Date Paid<span class="required">*</span></label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input class="form-control" name="DatePaid" id="dtpDatePaid" type="text" data-plugin-datepicker="">
+                            </div>
+                        </div>
+                        <div class="col-sm-4  col-md-3 col-lg-2">
+                            <label class="control-label" for="Payment Type">Payment Type<span class="required">*</span></label>
+                            <select id="ddlPaymentType" name="PaymentType" onchange="Bill_PatientResponsibilityPayment.ShowHidePaymentTypeDiv(this.value);" class="form-control" ddlist="GetPaymentType"></select>
+                        </div>
+                        <div id="PaymentTypeCheck">
+                            <!--in case of check select set display to inline-->
+                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                <label class="control-label" for="Check Number">Check Number</label>
+                                <input class="form-control" name="checkNumber" type="text" id="txtCheckNumber">
+                            </div>
+                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                <label class="control-label">Check Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <input class="form-control" name="checkDate" id="dtpCheckDate" type="text" data-plugin-datepicker="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="PaymentTypeCreditCard">
+                            <!--in case of Credit Card select set display to inline-->
+                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                <label class="control-label">Card Type</label>
+                                <select name="creditCardType" id="ddlCreditCardType" ddlist="GetCreditCardType" class="form-control"></select>
+                            </div>
+
+                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                <label class="control-label">Card Number</label>
+                                <input name="cardNumber" id="txtCardNumber" class="form-control" type="text">
+                            </div>
+                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                <label class="control-label">Expiry Date (mm/yyyy)</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <input name="expiryDate" id="dtpExpiryDate" class="form-control" type="text" data-plugin-datepicker="">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="divAdvancePayment" class="col-sm-4  col-md-3 col-lg-2">
+                            <label id="lblAdvancePayment" for="AdvancePayment" class="control-label">Advance Payment<span class="required">*</span></label>
+                            <!--<a id="lnkAdvancePaymentEdit" style="display:none;" href="#" onclick="" title="Edit Advance Payment">Advance Payment<span class="required">*</span></a>-->
+                            <div class="input-group">
+                                <input class="form-control" id="txtAdvancePayment" name="AdvancePayment" placeholder="" type="text" onblur="utility.ValidateAutoComplete(this, 'hfAdvancePaymentId', false); ">
+                                <div class="input-group-btn">
+                                    <button id="lnkAdvancePayment" class="btn btn-primary btn-xs " type="button" onclick="Bill_PatientResponsibilityPayment.OpenAdvancePayment();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-sm-4  col-md-3 col-lg-2">
+                            <label class="control-label">Paid</label>
+
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                <input class="form-control" type="text" id="txtPatientPaid" name="PatientPaid" onblur="Bill_PatientResponsibilityPayment.validateTotalAmount(this);" onkeypress="    utility.ValidateDecimal(event, 2)" onkeyup="    utility.ValidateDecimal(event, 2);">
+                            </div>
+
+
+                        </div>
+                        <div class="col-sm-4  col-md-3 col-lg-2">
+                            <label class="control-label">Paid A/C<span class="required">*</span></label>
+                            <select id="ddlPatientPaid" name="PatientPaidAccount" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 pull-right mt-sm">
+                        <button id="btnSavePaymentPosting" disabled class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+
+                    </div>
+                    <input type="hidden" id="hfAdvancePaymentId" value="" />
+                    <input type="hidden" id="hfAdvanceBalance" value="" />
+
+                </form>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,146 @@
+﻿<div id="iTrack_MIPSPrintPreview">
+    <div id="actionPanMIPSPrintPreview" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="mt-xs mb-none">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="iTrack_MIPSPrintPreview.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Notes</h4>
+            </div>
+            <div id="modalbody" class="modal-body pt-xs">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section class="panel">
+                        <form method="post" id="frmNotesView" onsubmit="return false">
+                            <div id="pnlNotes_Search">
+                                <div class="form-group">
+                                    <div class="btn-block">
+                                        <div class="pull-left">
+                                            <button id="noteButtonPrint" type="button" class="btn btn-success btn-xs ml-xs" onclick="iTrack_MIPSPrintPreview.PrintReports();"><i class="fa fa-print"></i> Print</button>
+                                            <button id="noteButtonFax" type="button" class="btn btn-success btn-xs ml-xs" onclick="iTrack_MIPSPrintPreview.sendAsFax();"><i class="fa fa-fax"></i> Fax</button>
+                                        </div>
+                                    </div>
+                                    <div class="spacer5"></div>
+                                    <div class="col-xs-12 p-none" id="PrintPdfControlDiv" style="display:block;">
+                                        <input type="hidden" id="helperPDF" />
+                                        <iframe id="PreviewReportPrint" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12 noBorder p-none" style="height:1066px;">
+
+                                        </iframe>
+                                    </div>
+
+                                    <script>
+
+                                        kendo.pdf.defineFont({
+                                            "DejaVu Sans": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans.ttf",
+                                            "DejaVu Sans|Bold": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+                                            "DejaVu Sans|Bold|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+                                            "DejaVu Sans|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+                                        });
+                                    </script>
+                                    <style type="text/css">
+                                        .blueBgPrint {
+                                            background: #005da9 !important;
+                                            color: #fff !important;
+                                        }
+
+                                        .blueBorderPrint {
+                                            border-bottom: 2px solid #005da9;
+                                        }
+
+                                        .btn-link-print {
+                                            color: #000000 !important;
+                                            font-size: 16px;
+                                            font-weight: 700;
+                                        }
+
+                                        .line-height-fix {
+                                            font-size: 14px !important;
+                                        }
+
+                                        .bluefgColor {
+                                            color: #005da9 !important;
+                                        }
+
+                                        .blackfgColor {
+                                            color: black !important;
+                                        }
+                                    </style>
+
+
+
+                                    <script type="x/kendo-template" id="page-templateLegacy">
+
+                                        <div class="page-template" id="legacyViewTemplateDiv">
+                                            #if(pageNum != 1) {#
+                                            <div id="patientHeaderInfo" style="position: absolute;left: 50px;right: 50px;font-size: 90%;top: 7px;font-size: 110%;" ul class="bluefgColor">
+                                                Patient Name: <span id="patientname" class="blackfgColor"></span><span class="whiteColorPrint" style="float:right;">Provider Name: <span id="providerName" class="blackfgColor"></span></span>
+                                            </div>
+                                            <div id="patientHeaderInfo" style="position: absolute;left: 50px;right: 50px;font-size: 90%;top: 28px;font-size: 110%;" ul class="bluefgColor">
+                                                DOB: <span id="patientDOB" class="blackfgColor"></span><span class="whiteColorPrint" style="float:right;">DOS: <span id="patientDOS" class="blackfgColor"></span></span>
+                                            </div>
+                                            #}#
+                                            <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                                                <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                                                <div id="ClinicalReportsFooterTextLegacy" class="blueBgPrint" style="float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                                                    Generated by:<span id="ClinicalReportsFooterLegacy">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </script>
+                                    <div id="printcall">
+                                        <div id="PatientInfo" class="">
+                                            <div class="col-sm-4 col-lg-2 pull-left">
+                                                <img src="content/images/SHS-nav-logo-small-100.png" class="img-responsive">
+                                            </div>
+                                        
+                                            <ul class="list-unstyled pull-right line-height-fix" id="PracticeList">
+                                                <li id="PracticeName" class="text-right">practice name </li>
+                                                <li id="PracticeAddress" class="text-right">practice address</li>
+                                                <li id="PracticeCity" class="text-right">practice city</li>
+                                                <li id="PracticePhone" class="text-right">practice phone</li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                            <div class="splitter m-none mt-xs"><div class="spacer3"></div></div>
+
+                                            <div class="spacer3"></div>
+                                            <ul class="list-unstyled pull-left line-height-fix" id="PatientList">
+                                              
+                                                <li id="PatientAddress">test patient address</li>
+                                            </ul>
+
+                                            <ul class="list-unstyled pull-right line-height-fix" id="ProviderList">
+                                                <li id="ProviderName" class="text-right">provider name</li>
+                                                <li id="Specialty" class="text-right">specialty</li>
+                                                <li id="Address" class="text-right">address</li>
+                                                
+                                            </ul>
+                                        </div>
+                                        <div class="spacer5"></div>
+                                       
+                                        <section class="panel panel-featured mt-lg">
+                                            <div class="panel-body bg-white" id="ulContent">
+                                                <div id="MeasureTitle">
+                                                    <span style="margin-left:40%" id="MeasureName"></span>
+                                                    <div class="clearfix"></div>
+                                                    <span style="margin-left:40%" id="ReportTitle">Non-Compliant Patient List</span>
+                                                </div>
+                                            </div>
+
+                                        </section>
+                                    </div>
+
+                                    <div id="printcallClone" style="display:none">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

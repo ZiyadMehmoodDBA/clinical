@@ -1,0 +1,207 @@
+﻿<div class="row" id="pnlClinicalProblemDetails">
+    <div id="actionPanClinicalProblemDetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-md">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_ProblemDetails.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Problem Details</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div id="pnlSection_Search">
+                        <form id="frmClinicalProblemDetails" method="post" onsubmit="return false">
+
+                            <div id="FormDiv" class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h5 class="text-primary">Diagnosis Information</h5>
+                                    </div>
+                                    <div class="col-sm-12 mb-default">
+                                        <label class="control-label pull-left mr-sm" for="Problems">Status</label>
+                                        <div id="chkStatus" class="checkbox-custom pull-left">
+                                            <input type="checkbox" id="chkStatus" name="IsActive">
+                                            <label class="control-label">Active</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label" for="Diagnosis">Diagnosis<span class="required">*</span></label>
+                                        <input class="form-control" id="txtDiagnosis" name="Diagnosis" type="text" disabled>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label" for="Start Date">Diagnosis Date<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dpStartDate"  name="DiagnosisDate"  data-plugin-datepicker>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">Diagnosis Confirmation<span class="required">*</span></label>
+                                        <select id="ddlDiagnosisConfirmation" name="DiagnosisConfirmation" class="form-control"></select>
+
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label" for="PimarySite">Primary Site<span class="required">*</span></label>
+                                        <input class="form-control" data-popupunload="false" id="txtPrimarySite" oninput="Clinical_ProblemDetails.bindPrimarySite()" name="PrimarySite" type="text">
+
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">Laterality<span class="required">*</span></label>
+                                        <select id="ddlLaterality" name="Laterality" class="form-control"></select>
+
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label" for="HistologicType">Histologic Type<span class="required">*</span></label>
+                                        <input class="form-control" data-popupunload="false" id="txtHistologicType" oninput="Clinical_ProblemDetails.bindHistologicType()" name="HistologicType" type="text">
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">Behavior<span class="required">*</span></label>
+                                        <select id="ddlBehavior" name="Behavior" class="form-control" ddlist=""></select>
+
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">Grade<span class="required">*</span></label>
+                                        <select id="ddlGrade" name="Grade" class="form-control" ddlist=""></select>
+
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <h5 class="text-primary pull-left mr-default">TNM Clinical Stage Information</h5>
+                                        <div id="chkStatus" class="checkbox-custom pull-left mt-default">
+                                            <input type="checkbox" id="chkClinicalStatus" name="NKOClinical" onchange="Clinical_ProblemDetails.enableDisableClinicalSection(this);">
+                                            <label class="control-label">No Known Observation</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label" for="ClinicalDiagnosisDate">Diagnosis Date<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dpClinicalDiagnosisDate" name="ClinicalDiagnosisDate" data-plugin-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">TNM Stage Group<span class="required">*</span></label>
+                                        <select id="ddlStageGroup" name="ClinicalStageGroup" class="form-control" ddlist=""></select>
+
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">TNM Stage Descriptor<span class="required">*</span></label>
+                                        <select id="ddlStageDescriptor" name="ClinicalStageDescriptor" class="form-control" ddlist=""></select>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">Primary Clinical Tumor<span class="required">*</span></label>
+                                        <select id="ddlPrimaryClinicalTumor" name="PrimaryClinicalTumor" class="form-control" ddlist="GetPrimaryClinicalTumor"></select>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">Regional Lymph Nodes Clinical<span class="required">*</span></label>
+                                        <select id="ddlRLNC" name="RLNC" class="form-control" ddlist=""></select>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">Distance Metastasis<span class="required">*</span></label>
+                                        <select id="ddlDistanceMestastatases" name="DistanceMestastatases" class="form-control" ddlist="GetDistanceMestastatases"></select>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">Stager Clinical Cancer<span class="required">*</span></label>
+                                        <select id="ddStagerClinicalCancer" name="StagerClinicalCancer" class="form-control" ddlist="GetStagerClinicalCancer"></select>
+
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <h5 class="text-primary pull-left mr-default">TNM Pathologic Stage Information</h5>
+                                        <div id="chkStatus" class="checkbox-custom pull-left mt-default">
+                                            <input type="checkbox" id="chkPathologicStatus" name="NKOPathologic" onchange="Clinical_ProblemDetails.enableDisablePathologicSection(this);">
+                                            <label class="control-label">No Known Observation</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label" for="EffectiveDate">Effective Date<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dpEffectiveDate" name="EffectiveDate" data-plugin-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">TNM Pathologic Stage Group<span class="required">*</span></label>
+                                        <select id="ddlPathologicStageGroup" name="PathologicStageGroup" class="form-control" ddlist="GetPathologicStageGroup"></select>
+
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">TNM Pathologic Stage Descriptor<span class="required">*</span></label>
+                                        <select id="ddlPathologicStageDescriptor" name="PathologicStageDescriptor" class="form-control" ddlist="GetPathologicStageDescriptor"></select>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <label class="control-label">Primary Tumor Pathologic<span class="required">*</span></label>
+                                        <select id="ddlPrimaryTumorPathologic" name="PrimaryTumorPathologic" class="form-control" ddlist=""></select>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3 noWordBreak">
+                                        <label class="control-label">Regional Lymph Nodes Pathologic<span class="required">*</span></label>
+                                        <select id="ddlRLNP" name="RLNP" class="form-control" ddlist=""></select>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3 noWordBreak">
+                                        <label class="control-label">Distance Metastasis Pathologic<span class="required">*</span></label>
+                                        <select id="ddlDistanceMestastatasesPathologic" name="DistanceMestastatasesPathologic" class="form-control" ddlist="GetDistanceMestastatasesPathologic"></select>
+
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-3 noWordBreak">
+                                        <label class="control-label">Stager Pathologic Cancer<span class="required">*</span></label>
+                                        <select id="ddStagerPathologicCancer" name="StagerPathologicCancer" class="form-control" ddlist="GetStagerPathologicCancer"></select>
+
+                                    </div>
+
+
+                                    <div class="pull-right mr-default mt-sm">
+                                        <button class="btn btn-primary btn-sm" type="submit" id="btnsave">Save</button>
+                                    </div>
+                                    <div class="spacer20"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="clearfix"></div>
+
+                            <input type="hidden" name="PatientId" id="hfPatientId" />
+                            <input type="hidden" name="gridComments" id="hfGridComments" />
+                            <input type="hidden" id="hfPrimarySiteId" name="PrimarySiteId" value="">
+                            <input type="hidden" id="hfHistologicTypeId" name="HistologicTypeId" value="">
+                            <input type="hidden" name="IMOProblem" id="hfIMOProblem" />
+                        </form>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div>
+                <input type="hidden" id="hfICD1-1" value="">
+
+                <input type="hidden" id="hfICDDescription1-1" value="">
+                <input type="hidden" id="hfICD101-1" value="">
+                <input type="hidden" id="hfICD10Description1-1" value="">
+                <input type="hidden" id="hfSNOMED1-1" value="">
+                <input type="hidden" id="hfSNOMEDDescription1-1" value="">
+            </div>
+        </div>
+    </div>
+</div>

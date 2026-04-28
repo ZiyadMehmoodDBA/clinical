@@ -1,0 +1,548 @@
+﻿<div class="row" id="pnlBillClaimSubmission" style="display:none;">
+    <div id="actionPanBillClaimSubmission" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Bill_ClaimSubmission.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Claim</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Bill_ClaimSubmission.UnLoadTab();"></a>
+
+                                </div>
+                                <h2 class="panel-title">Search Claim </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlClaimSubmission_Search">
+                            <div>
+                                <ul class="tabs-custom">
+                                    <li class="active"><a href="#tbSubmission" data-toggle="tab">Submission</a></li>
+                                    <li onclick="Bill_ClaimSubmission.SubmitedBatch_Search();"><a href="#tbSubmittedBatch" data-toggle="tab">Submitted Batch</a></li>
+                                    <li onclick="Bill_ClaimSubmission.ClaimSubmitHistory_Search();"><a href="#tbClaimSubmitHistory" data-toggle="tab">Claim Submit History</a></li>
+                                </ul>
+                                <div id="tab_Container" class="tab-content tabs-custom-body">
+                                    <div id="tbSubmission" class="tab-pane active">
+
+                                        <div id="pnlClaim_Action">
+
+                                            <div class="radio-custom radio-small  mt-xxs ml-md mr-default pull-left">
+                                                <input type="radio" onchange="Bill_ClaimSubmission.SetSubmissionActions('ElectronicClaim');" checked="checked" id="ElectronicClaim" name="submissionmod" />
+                                                <label for="ElectronicClaim">&nbsp; Electronic </label>
+                                            </div>
+                                            <div class="radio-custom radio-small  mt-xxs ml-default mr-default pull-left">
+                                                <input type="radio" onchange="Bill_ClaimSubmission.SetSubmissionActions('PaperClaim');" id="PaperClaim" name="submissionmod" />
+                                                <label for="PaperClaim">&nbsp; Paper </label>
+                                            </div>
+
+                                            <div id="pnlElectronicClaim_Action">
+
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.Scrub_Claims();"><i class="glyphicon glyphicon-filter"></i> Scrub Claim</a>
+                                                </div>
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.Claim_Transmit(false);"><i class="glyphicon glyphicon-export"></i> Transmit Claim</a>
+                                                </div>
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs hidden" onclick="Bill_ClaimSubmission.Claim_Transmit(false);"><i class="glyphicon glyphicon-export"></i> Transmit Claim with Attachment</a>
+                                                </div>
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.Claim_Transmit(true);"><i class="glyphicon glyphicon-ok-circle"></i> Mark as Transmitted</a>
+                                                </div>
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.Create_EDIFile();"><i class="fa fa-eye"></i> View EDI File</a>
+                                                </div>
+
+                                            </div>
+                                            <div id="pnlPaperClaim_Action" style="display:none;">
+
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.Scrub_Claims();"><i class="glyphicon glyphicon-filter"></i> Scrub Claim</a>
+                                                </div>
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.Claim_Print(false,false);"><i class="fa fa-print"></i> Print Claim</a>
+                                                </div>
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.Claim_Print(true,false);"><i class="fa fa-print"></i> Print and Submit Claim</a>
+                                                </div>
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.Claim_Print(true,false);"><i class="fa fa-print"></i> Print Claim with Attachment</a>
+                                                </div>
+                                                <div class="pl-xs pr-xs pull-left">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.Claim_MarkSubmitted();"><i class="glyphicon glyphicon-ok-circle"></i> Mark as Submitted</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+
+                                        <div id="pnlClaim_Search">
+                                            <form id="frmClaimSubmission" class="form-bordered" method="post" onsubmit="return false">
+                                                <!--start - CONTENTS-->
+                                                <div class="form-group">
+                                                    <div class="ClaimformControls_div">
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Account</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtAccountNo" type="text" name="AccountNumber" customname="Account Number" />
+                                                                <div class="input-group-btn">
+                                                                    <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Bill_ClaimSubmission.OpenPatientAccount(true);"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--bug #PMS-3426-->
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Last Name</label>
+                                                            <input class="form-control" id="txtLastName" name="LastName" type="text">
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">First Name</label>
+                                                            <input class="form-control" id="txtFirstName" name="FirstName" type="text">
+                                                        </div>
+                                                        <!--bug#PMS-3426-->
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Provider</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" id="txtProvider" name="ProviderName" placeholder="Start typing to search" />
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Bill_ClaimSubmission.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="visible-sm">
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Charge Batch Number</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtChargeBatchNumber" name="ChargeBatchNumber" type="text" />
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Bill_ClaimSubmission.OpenChargeBatchNumber();"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Facility</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtFacility" name="FacilityName" placeholder="Start typing to search" type="text" />
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Bill_ClaimSubmission.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="hidden-sm">
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Practice</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtPractice" name="PracticeName" placeholder="Start typing to search" type="text" />
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Bill_ClaimSubmission.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Insurance Plan</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtInsurancePlan" name="InsurancePlanName" placeholder="Start typing to search" type="text" />
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Bill_ClaimSubmission.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">DOS From</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                <input type="text" name="DOSFrom" data-plugin-datepicker="" class="form-control" id="dpDOSfrm" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">DOS To</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                <input type="text" name="DOSTo" data-plugin-datepicker="" class="form-control" id="dpDOSto" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Clearinghouse<span id="sp_required" style="display:none" class="required">*</span></label>
+                                                            <select id="ddlClearinghouse" ddlist="GetClearingHouse" name="ClearingHouse" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Biller</label>
+                                                            <select id="ddlBiller" ddlist="GetUsersFullName" name="BillerId" class="form-control"></select>
+                                                        </div>
+                                                        <div class="hidden-sm">
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <!--<div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Secondary Visits</label>
+                                                            <select id="ddlSecondaryVisits" class="form-control">
+                                                                <option value="">All</option>
+                                                                <option value="Yes">Yes</option>
+                                                                <option value="No">No</option>
+                                                            </select>
+                                                        </div>-->
+                                                        <!--<div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Resubmitted Visits</label>
+                                                            <select id="ddlResubmittedVisits" class="form-control">
+                                                                <option value="All">All</option>
+                                                                <option value="Yes">Yes</option>
+                                                                <option value="No">No</option>
+                                                            </select>
+                                                        </div>-->
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Errored Claims</label>
+                                                            <select id="ddlClaimErrored" name="ClaimErroredId" class="form-control">
+                                                                <option value="">All</option>
+                                                                <option selected="selected" value="0">Clean Claims</option>
+                                                                <option value="1">Errored Claims</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Status</label>
+                                                            <select id="ddlStatus" name="StatusId" class="form-control">
+                                                                <option value="0">All</option>
+                                                                <option value="1">Regular</option>
+                                                                <option value="3">Resubmit</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label">Submission Mode</label>
+                                                            <select id="ddlSubmitionMod" name="SubmissionMode" class="form-control">
+                                                                <option value="0">All</option>
+                                                                <option value="Paper">Paper</option>
+                                                                <option value="Electronic">Electronic</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label" for="Case Number">Claim Number</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text" placeholder="Start typing to search" />
+                                                                <div id="divsearchclaim" class="input-group-btn">
+                                                                    <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="utility.OpenPatientCharges('billTabClaimSubmission', true);"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label" for="ClaimTypeId">Claim Type</label>
+                                                            <select id="ddlClaimType" name="ClaimTypeId" class="form-control">
+                                                                <option value="" selected="selected">All</option>
+                                                                <option value="1">Primary</option>
+                                                                <option value="2">Secondary</option>
+                                                                <option value="3">Tertiary</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label" for="BillerTypeId">Bill Type</label>
+                                                            <select id="ddlBillType" class="form-control" name="BillerTypeId" ddlist="GetClaimType"></select>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label" for="BillerTypeId">Submission Errors</label>
+                                                            <select id="ddlSubmissionErrors" class="form-control" name="SubmissionErrorId">
+                                                                <option value="" selected="selected">All</option>
+                                                                <option value="1">Clean Claims</option>
+                                                                <option value="0">Errored Claims</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-2">
+                                                            <label class="control-label" for="ddlUsers">User</label>
+                                                            <select id="ddlSubmitUsers" ddlist="GetUsersFullName" name="submitUserId" class="form-control"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-lg-2 pull-right mt-md mb-md">
+
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnBillChargeSearch" type="submit">Search</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnSearchReset" type="button" onclick="Bill_ClaimSubmission.BillClaimSubmissionReset();">Reset</button>
+                                                    </div>
+                                                </div>
+                                                <div class="ClaimformControls_div">
+                                                    <input type="hidden" name="InsurancePlanId" id="hfInsurancePlan" />
+                                                    <input type="hidden" name="FacilityId" id="hfFacility" />
+                                                    <input type="hidden" name="ProviderId" id="hfProvider" />
+                                                    <input type="hidden" name="PracticeId" id="hfPractice" />
+                                                    <input type="hidden" name="ChargeBatchId" id="hfChargeBatchNumber" />
+                                                    <input type="hidden" name="PatientId" id="hfAccount" />
+                                                    <input type="hidden" name="VisitId" id="hfVisitId" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        <div id="pnlSubmission_Result">
+                                            <h5 id="pnlSubmission_Count">Showing 0 Patient Claims</h5>
+                                            <section class="panel">
+                                                <div class="panel-body panel-featured">
+
+                                                    <!--<div class="col-xs-2 pl-xxs pr-none">
+
+                                                        <span class="color-reference-box bg-info"></span>
+                                                        <label class="control-label " for="color-reference-box">Primary Claim</label>
+
+                                                    </div>-->
+
+                                                    <table class="table table-bordered table-hover mb-none table-condensed" id="dgvSubmission">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="display: none;">VisiId</th>
+                                                                <th class="size-max20"><input type="checkbox" title="Select all" name="checkbox" id="chkAllVisits"></th>
+                                                                <th class="size-min70 size70">DOS</th>
+
+                                                                <th class="size95 size-max95 noWordBreak">Claim Number</th>
+                                                                <th class="size60 size-max75">Account</th>
+                                                                <th class="noWordBreak size140">Patient Name</th>
+                                                                <th>Plan</th>
+                                                                <th class="noWordBreak">Subscriber ID</th>
+                                                                <th>Referring Provider</th>
+                                                                <th>Provider</th>
+                                                                <th>Facility</th>
+                                                                <th class="noWordBreak">Total Fee</th>
+                                                                <th class="noWordBreak">Ins Charges</th>
+                                                                <th class="noWordBreak">Ins Balance</th>
+                                                                <th class="noWordBreak">Bill Type</th>
+                                                                <th class="noWordBreak">Ready To Submit On</th>
+                                                                <th class="size95 size-max95 noWordBreak">Batch Number</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div id="divSubmissionPaging" class="hidden"></div>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+
+
+                                    </div>
+                                    <div id="tbSubmittedBatch" class="tab-pane">
+
+                                        <div id="pnlSubmittedBatch_Search">
+                                            <form id="frmSubmittedBatch" class="form-bordered" method="post" onsubmit="return false">
+                                                <div class="btn-block mb-sm" id="SubmittedBatchToolbar" style="display:none;">
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.View_Claims(); return false;"><i class="fa fa-save"></i> Claims</a>
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.View_EDIFile(); return false;"><i class="fa fa-file-text"></i> View EDI File</a>
+                                                    <a class="btn btn-success btn-xs" onclick="Bill_ClaimSubmission.View_BatchDetail(); return false;"><i class="fa fa-money"></i> Attach EDI Reports</a>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Batch Number</label>
+
+                                                        <input class="form-control" id="txtBatchNo" type="text" name="batchNumber">
+
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Clearinghouse</label>
+                                                        <select id="ddlSubmitClearinghouse" ddlist="GetClearingHouse" name="ClearingHouse" class="form-control"></select>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Submit Date</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input type="text" data-plugin-datepicker="" class="form-control" name="SubmittedDate" id="dpSubmit" autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Submitted By</label>
+                                                        <select id="ddlSubmittedBy" ddlist="GetUsersFullName" name="SubmittedBy" class="form-control"></select>
+                                                    </div>
+                                                    <div class="visible-sm">
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Submission Mode</label>
+                                                        <select id="ddlSubmitType" name="SubmissionMode" class="form-control">
+                                                            <option value="">All</option>
+                                                            <option value="0">Paper</option>
+                                                            <option value="1">Electronic</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Batch Status</label>
+                                                        <select id="ddlBatchStatus" name="BatchStatus" class="form-control">
+                                                            <option value="">All</option>
+                                                            <option selected="selected" value="Submitted">Submitted</option>
+                                                            <option value="Resubmitted">Resubmitted</option>
+                                                            <!--<option value="Not Submitted">Not Submitted</option>-->
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2 hidden">
+                                                        <label class="control-label">Completed</label>
+                                                        <select id="ddlCompleted" name="Completed" class="form-control">
+                                                            <option selected="selected" value="">All</option>
+                                                            <option value="0">No</option>
+                                                            <option value="1">Yes</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="hidden-sm">
+                                                        <div class="clearfix"></div>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-md-2 pull-right mt-md mb-md">
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnSubmitBatchSearch" type="submit">Search</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnSubmitBatchReset" type="button" onclick="Bill_ClaimSubmission.SubmitBatchReset();">Reset</button>
+                                                    </div>
+                                                </div>
+
+
+                                            </form>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="pnlSubmittedBatch_Result" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body">
+                                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvSubmittedBatch">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display: none;">BatchId</th>
+                                                                    <!--<th><input type="checkbox" title="Select all" name="checkbox" id="chkAllBatch"></th>-->
+                                                                    <th class="size95">Action</th>
+                                                                    <th>Submit Batch</th>
+                                                                    <th>Submit Date</th>
+                                                                    <th>Submitted By</th>
+                                                                    <th>Submission Mode</th>
+                                                                    <th>Clearinghouse</th>
+                                                                    <th>Total Claims</th>
+                                                                    <!--<th>Completed</th>-->
+                                                                    <th>Batch Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                        <div id="divSubmittedBatchPaging"></div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                    </div>
+                                    <div id="tbClaimSubmitHistory" class="tab-pane">
+                                        <div id="pnlClaimSubmitHistory_Search">
+                                            <form id="frmClaimSubmitHistory" class="form-bordered" method="post" onsubmit="return false">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Account</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" id="txtAccountNumber" type="text" name="AccountNumber" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Bill_ClaimSubmission.OpenPatientAccount(false);"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Clearinghouse</label>
+                                                        <select id="ddlClaimClearinghouse" name="ClearingHouse" ddlist="GetClearingHouse" class="form-control"></select>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Batch Number</label>
+                                                        <input type="text" class="form-control" name="batchNumber" id="txtBatchNumber">
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label" for="ClaimNo">Claim Number</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" id="txtClaimNo" name="ClaimNumber" type="text" placeholder="Start typing to search" />
+                                                            <div id="divsearchclaim" class="input-group-btn">
+                                                                <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="utility.OpenPatientCharges('billTabClaimSubmission', false);"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Submission Mode</label>
+                                                        <select id="ddlSubmitionMode" name="SubmissionMode" class="form-control">
+                                                            <option value="">All</option>
+                                                            <option value="0">Paper</option>
+                                                            <option value="1">Electronic</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Submited Date</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input type="text" data-plugin-datepicker="" name="SubmittedDate" class="form-control" id="dpSubmited" autocomplete="off">
+                                                        </div>
+                                                        <div class="hidden-sm">
+                                                            <div class="clearfix"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-4 pull-right mt-md mb-md">
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnClaimSubmitHistorySearch" onclick="Bill_ClaimSubmission.ClaimSubmitHistory_Search(true)" type="button">Search</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnClaimSubmitHistoryReset" type="button" onclick="Bill_ClaimSubmission.ClaimSubmitHistoryReset();">Reset</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnClaimSubmitHistoryPrint" onclick="Bill_ClaimSubmission.ClaimSubmitHistory_Print(true)" type="button">Print</button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfAccountNo" name="PatientId" />
+                                                <input type="hidden" id="hfVisitsId" name="VisitId" />
+                                            </form>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="pnlClaimSubmitHistory_Result" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body">
+                                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvClaimSubmitHistory">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="noWordBreak">Account Number</th>
+                                                                    <th class="noWordBreak">Patient Name</th>
+                                                                    <th class="noWordBreak">Insurance Plan</th>
+                                                                    <th class="noWordBreak">Claim Number</th>
+                                                                    <th class="noWordBreak">Batch Number</th>
+                                                                    <th class="noWordBreak">Submission Mode</th>
+                                                                    <th class="noWordBreak">Submitted By</th>
+                                                                    <th class="noWordBreak">Submitted To</th>
+                                                                    <th class="noWordBreak">Submitted On</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                        <div id="divClaimSubmitHistoryPaging"></div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="viewEDIFileData" style="display:none">
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Bill_ClaimSubmission.UnLoadEdiFileViewer();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">View EDI</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmViewEDIFile" class="form-bordered" method="post" onsubmit="return false">
+                    <div id="ediTextView" class="tab-pane">
+                        <div class="col-xs-12">
+                            <textarea class="form-control" rows="25" cols="50" id="txtTextView" readonly="readonly" name="textViewedi" spellcheck="true"></textarea>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

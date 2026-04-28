@@ -1,0 +1,535 @@
+﻿<div id="pnldemographicDetail" style="display:none;">
+    <div id="actionPandemographicDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog modal-dialog-full mb-none mt-xxs mb-none">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header">
+                <button type="button" class="close" onclick="demographicDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="lblHeading">Patient Demographics</h4>
+            </div>
+            <div id="modalbody" class="pt-none pb-none">
+
+                <div class="btn-block pt-default pb-default" id="divPatBannerDemo">
+                    <button id="btnPatDemo" class="btn btn-default btn-sm active" type="button">Demographics</button>
+                    <button id="lnkInsurance" class="btn btn-default btn-sm" type="button" onclick="demographicDetail.OpenInsurance();">Insurance</button>
+                    <button id="lnkDocuments" class="btn btn-default btn-sm" type="button" onclick="demographicDetail.OpenDocuments();">Documents</button>
+                    <button id="lnkFacesheet" class="btn btn-default btn-sm" type="button" onclick="demographicDetail.OpenClinicalSummary();">Clinical Summary</button>
+                </div>
+
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form method="post" id="frmdemographicDetail" onsubmit="return false">
+
+                        <section class="mb-xxs panel panel-featured">
+                            <div class="panel-body">
+                                <div id="divdemographicDetailPicture" class="col-md-3 col-xs-12 center  pull-right pl-xs pr-xs">
+                                    <div class="patientImageWrapper img-thumbnail">
+                                        <a class="removeIconHover" onclick="demographicDetail.RemoveUploadImage();" id="btnRemoveUploadedImage"><i class="fa fa-times"></i></a>
+                                        <img id="imgPatient" class="img-responsive img-center" src="Content/Images/default_male_profile.gif" alt="Scaned image...!" />
+                                        <a href="#" class="" data-toggle="modal" data-target="#myModal" onclick="demographicDetail.OpenUploadImage();" id="btnAddImage">
+                                            <span>
+                                                <i class="fa fa-camera "></i>
+                                                <span>Upload Picture</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="spacer5"></div>
+                                    <div id="divdemographicDetailActionButton">
+                                        <!--<a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Upload Picture" id="btnAddImage" onclick="demographicDetail.OpenUploadImage();"> <i class="fa fa-folder-open "></i></a>-->
+                                        <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Emergency Contact" onclick="demographicDetail.OpenEmergencyContact();"> <i class="fa fa-phone-square "></i></a>
+                                        <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Family" onclick="demographicDetail.OpenFamily();"> <i class="fa fa-users "></i></a>
+                                        <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Preferences" onclick="demographicDetail.OpenPreferences();"> <i class="fa fa-star "></i></a>
+                                        <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Advance Payment" onclick="demographicDetail.OpenAdvancePayment();"> <i class="fa fa-dollar "></i></a>
+                                        <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Patient Portal Account Manager" style="display:none" id="btnPatientPortal" onclick="demographicDetail.PatientPortal();"> <i class="fa fa-stethoscope"></i></a>
+                                        <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Restrict User" onclick="demographicDetail.OpenRestrictUser();"> <i class="fa fa-lock "></i></a>
+                                    </div>
+                                    <div class="spacer5"></div>
+                                    <button id="btnDemographic" class="btn btn-primary btn-sm center " type="submit">Save & Exit</button>
+                                    <button id="btnPrintDemographic" class="btn btn-primary btn-sm" type="button" onclick="Patient_Demographic.PrintDemographic('PatDemographicDetail');">Print</button>
+                                    <!--<button id="btnScanDemographic" type="button" onclick="demographicDetail.OpenDocumentScan();" class="btn btn-primary btn-sm center">Scan</button>-->
+                                    <a href="#" class="btn btn-primary btn-sm center" data-toggle="tooltip" title="Scan Card" data-placement="top" id="btnScanDemographic" onclick="demographicDetail.OpenDocumentScan();"><img class="scan-icon" src="Content/images/scan.svg"> </a>
+
+                                </div>
+
+                                <div class="visible-sm visible-xs"><div class="clearfix"></div><span class="spacer10"></span></div>
+                                <div class="col-xs-12 col-md-9 pl-xs pr-xs">
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label for="Account" class="control-label">Account #</label>
+                                            <input class="form-control" id="txtAccountNo" name="AccountNo" type="text" maxlength="10" readonly />
+                                        </div>
+                                        <div class="col-sm-3 ">
+                                            <label for="MRN" class="control-label">MRN</label>
+                                            <input class="form-control" id="txtMRN" name="MRN" type="text" maxlength="10" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="SSN" class="control-label">SSN</label>
+                                            <input class="form-control" id="txtSSN" name="SSN" maxlength="15" type="text" placeholder="999-99-9999" data-mask="999-99-9999" onblur="utility.validateMasking(this);" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Prefix</label>
+                                            <select id="ddlPrefix" name="Prefix" class="form-control" ddlist="GetPrefix"></select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="Last Name" class="control-label">Last Name<span class="required">*</span></label>
+                                            <!--Not increase the Length bcz DrFirst Not except LastName more then 35 length-->
+                                            <input type="text" class="form-control" id="txtLastName" oninput="utility.ValidateSpecialCharacters(this)" onblur="utility.ChangeNameCase(this);" name="LastName" maxlength="35">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Suffix</label>
+                                            <select id="ddlSuffix" name="Suffix" class="form-control" ddlist="GetSuffix"></select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">First Name<span class="required">*</span></label>
+                                            <!--Not increase the Length bcz DrFirst Not except FirstName more then 35 length-->
+                                            <input type="text" class="form-control" id="txtFirstName" onblur="utility.ChangeNameCase(this);" name="FirstName" maxlength="35">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Middle Initial/Name</label>
+                                            <!--<input type="text" class="form-control" name="MiddleInitial" placeholder="a" data-mask="a" id="txtMiddleInitial" >-->
+                                            <input type="text" class="form-control" name="MiddleInitial" placeholder="" id="txtMiddleInitial" onblur="utility.ChangeNameCase(this);" maxlength="25">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="Previous Name" class="control-label">Previous Name</label>
+                                            <input type="text" class="form-control" id="txtPreviousName" name="PreviousName" maxlength="100">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="MotherMaidenName" class="control-label">Mother's Maiden</label>
+                                            <input type="text" class="form-control " id="txtMotherMaidenName" onkeypress="return utility.checkSpecialChar(event)" name="MotherMaidenName" maxlength="50">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label" for="Date of Birth">Date of Birth<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input class="form-control" type="text" id="dtpDOB" name="DOB" data-plugin-datepicker="" autocomplete="off" onchange="demographicDetail.CalculateAge(this);" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label" for="Age">Age</label>
+                                            <input type="text" class="form-control" id="txtAge" name="Age" disabled>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="Sex" class="control-label">Sex<span class="required">*</span></label>
+                                            <select id="ddlSex" class="form-control" name="Sex" ddlist="GetGender" onchange="demographicDetail.changeGender(this)"></select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="Marital Status" class="control-label">Marital Status<span class="required">*</span></label>
+                                            <select id="ddlMaritalStatus" name="MaritalStatus" class="form-control" ddlist="GetMaritalStatus"></select>
+                                        </div>
+
+                                        <div class="col-sm-3" id="divPatientEthnicity">
+                                            <label for="Ethnicity" class="control-label">Ethnicity<span class="required">*</span></label>
+                                            <select id="ddlEthnicity" name="Ethnicity" multiple="multiple" class="form-control "></select>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3" id="divPatientRace">
+                                            <!--<select class="form-control" style="display:none;" name="hiddenPatientRace" id="ddlHiddenPatientRace" ddlist="GetRace"></select>-->
+                                            <label class="control-label">Race<span class="required">*</span></label>
+                                            <select class="form-control" multiple="multiple" name="PatientRaceIds" id="ddlPatientRace"></select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="Preferred Language" class="control-label">Preferred Language<span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="ddlPrefLanguage" name="PrefLanguage" customname="Preferred Language" placeholder="Start typing to search" />
+                                        </div>
+                                        <div class="col-sm-3" id="divGenderIdentity">
+                                            <label for="GenderIdentityId" class="control-label">Gender Identity</label>
+                                            <select class="form-control" name="GenderIdentityId" id="ddlGenderIdentity" ddlist="GetGenderIdentity">
+                                                <option value="1">Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3" id="divSexualOrientation">
+                                            <label for="SexualOrientationId" class="control-label">Sexual Orientation</label>
+                                            <select class="form-control" name="SexualOrientationId" id="ddlSexualOrientation" ddlist="GetSexualOrientation">
+                                                <option value="1">Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3" id="divBirthSex">
+                                            <label for="BirthSex" class="control-label">BirthSex</label>
+                                            <select id="ddlBirthSex" class="form-control " name="BirthSex" ddlist="GetBirthSex"></select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="Patient Status" class="control-label">Patient Status</label>
+                                            <select id="ddlPatientStatus" name="Active" class="form-control" onchange="demographicDetail.IsDeathSelected(this)">
+                                                <option value="1">Active</option>
+                                                <option value="0">InActive</option>
+                                                <option value="2">Deceased </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3" id="div_CCDAAvailable">
+                                            <label for="IsCCDAAvailable" class="control-label">Summary of Care Available ?</label>
+                                            <select id="ddlCCDAAvailable" class="form-control " name="IsCCDAAvailable" onchange="utility.CCDANoteDisplayOnYes('#pnldemographicDetail #frmdemographicDetail', this);">
+                                                <option value="1">Yes</option>
+                                                <option value="0" selected="selected">No</option>
+                                            </select>
+                                            <span id="txtYesCCDA" class="text-danger hidden">* Add patient by importing CCDA otherwise this patient won't be able to qualify for measure "Request/Accept Summary of Care".</span>
+                                        </div>
+                                        <div id="divDateOfDeath">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Date of Death</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input class="form-control" id="dtpDateOfDeath" name="DateOfDeath" type="text" data-plugin-datepicker="" autocomplete="off" onchange='demographicDetail.DeathDateChange()'>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Cause of Death</label>
+                                                <textarea class="form-control" name="CauseOfDeath" id="txtCauseOfDeath" maxlength="350" rows="2" spellcheck="true"></textarea>
+                                            </div>
+                                        </div>
+                                        <div id="dvresion" style="display:none" class="col-sm-3">
+                                            <label class="control-label" for="Inactive Reason">Inactive Reason</label>
+                                            <textarea class="form-control" rows="2" id="txtInactiveReason" name="InactiveReason" maxlength="350" spellcheck="true"></textarea>
+                                        </div>
+                                        <div id="DivComments" class="col-sm-6">
+                                            <label class="control-label" for="Comments">Comments</label>
+                                            <textarea class="form-control" id="txtComments" name="Comments" rows="2" maxlength="3000" spellcheck="true"></textarea>
+                                        </div>
+                                        <div class="col-sm-3 pad-a-labelsize">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" name="SelfPay" id="chkSelfPay">
+                                                <label class="control-label" for="chkSelfPay">Self Pay</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="mb-xxs panel panel-featured">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Address 1">Address 1<span class="required">*</span></label>
+                                        <input type="text" class="form-control" id="txtAddress1" oninput="utility.ValidateSpecialCharacters(this)" name="Address1" onblur="utility.ChangeNameCase(this);" maxlength="55">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Address 2">Address 2</label>
+                                        <input type="text" class="form-control" id="txtAddress2" oninput="utility.ValidateSpecialCharacters(this)" name="Address2" onblur="utility.ChangeNameCase(this);" maxlength="55">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 p-none">
+                                        <div class="col-xs-8">
+                                            <label class="control-label" for="City">City<span class="required">*</span></label>
+                                            <input class="form-control" id="txtCity" name="City" type="text" maxlength="35" placeholder="Start typing to search">
+                                        </div>                                     
+                                        <div class="col-xs-4">
+                                            <label class="control-label" for="State">State<span class="required">*</span></label>
+                                            <input class="form-control" id="txtState" name="State" type="text" maxlength="25" placeholder="aa" data-mask="aa" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 p-none">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label pull-left" for="Zip"> Zip <span class="required">*</span></label>
+                                                <input id="txtZip" name="Zip" class="form-control" type="text" placeholder="99999" maxlength="10" data-mask-selectonfocus="true" data-mask="99999" onblur="utility.FillDemographicCityState('#pnldemographicDetail #frmdemographicDetail', '#txtZip', '#txtCity', '#hfCity', '#txtState', '#ddlCountry', '#hfCountry', 'zip'); demographicDetail.RevalidatedCityZipCode()" />
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md pad-a-labelsize">
+                                                <input id="txtZipExt" name="ZipExt" class="form-control" type="text" placeholder="9999" maxlength="9" data-mask-selectonfocus="true" data-mask="9999" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2" id="divPatientCountry">
+                                        <label for="Country" class="control-label">Country</label>
+                                        <input type="text" class="form-control" id="ddlCountry" name="Country" customname="Country" placeholder="Start typing to search" />
+                                    </div>
+                                    <div class="col-sm-3 col-md-2" id="divPatientPreferredAddress">
+                                        <label for="Preferred Address" class="control-label">Preferred Address</label>
+                                        <select id="ddlPrefAddress" class="form-control " name="PreferredAddressID" ddlist="GetPreferredAddress"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Home Tel">Home Tel<span class="required">*</span></label>
+                                        <input type="text" class="form-control" id="txtHomeTel" name="HomeTel" maxlength="15" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 p-none">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label" for="Work Tel">Work Tel</label>
+                                                <input class="form-control" id="txtWorkTel" name="WorkTel" type="text" maxlength="15" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md">
+                                                <label class="control-label" for="Ext">Ext</label>
+                                                <input class="form-control" id="txtExt" name="Ext" type="text" maxlength="5" placeholder="99999" data-mask="99999">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Cell">Cell</label>
+                                        <input type="text" class="form-control" id="txtCell" maxlength="15" name="Cell" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Fax">Fax</label>
+                                        <input type="text" class="form-control" id="txtFax" maxlength="15" name="Fax" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Email</label>
+                                        <input type="text" class="form-control" id="txtEmail" name="Email" maxlength="55">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2" id="divPatientPreferredPhone">
+                                        <label for="Preferred Phone" class="control-label">Preferred Phone</label>
+                                        <select id="ddlPreferredPhone" class="form-control " name="PreferredPhoneID" ddlist="GetPreferredPhone"></select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="demographicDetail.OpenProviderDetail();" title="Edit Provider">Provider<span class="required">*</span></a>
+                                        <div class="input-group">
+
+                                            <input class="form-control" id="txtProvider" type="text" name="Provider" placeholder="Start typing to search" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="demographicDetail.OpenProvider();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="demographicDetail.OpenFacilityDetail();" title="Edit Facility">Facility<span class="required">*</span></a>
+                                        <div class="input-group">
+
+                                            <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="demographicDetail.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="Practice" class="control-label">Practice<span class="required">*</span></label>
+                                        <input class="form-control" id="txtPractice" name="Practice" type="text" disabled>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label id="lblRefProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                                        <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="demographicDetail.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                                        <div class="input-group">
+
+                                            <!--<input class="form-control" id="txtRefProvider" name="RefProvider" placeholder="Start typing to search" type="text" onblur="utility.ValidateAutoComplete(this, 'hfRefProvider',true);">-->
+                                            <input class="form-control" id="txtRefProvider" name="RefProvider" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="demographicDetail.OpenRefProvider();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label id="lblPCP" for="PCP" class="control-label">PCP</label>
+                                            <a id="lnkPCPEdit" style="display:none;" href="#" onclick="demographicDetail.OpenPCPDetail();" title="Edit PCP">PCP</a>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtPCP" name="PCP" placeholder="Start typing to search" type="text" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkPCP" class="btn btn-primary btn-xs " type="button" onclick="demographicDetail.OpenPCP();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label id="lblGuarantor" for="Guarantor" class="control-label">Guarantor</label>
+                                            <a id="lnkGuarantorEdit" style="display:none;" href="#" onclick="demographicDetail.OpenGuarantorDetail();" title="Edit Guarantor">Guarantor</a>
+                                            <div class="input-group">
+
+                                                <input class="form-control" id="txtGuarantor" name="Guarantor" placeholder="Start typing to search" type="text" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkGurantor" class="btn btn-primary btn-xs " type="button" onclick="demographicDetail.OpenGuarantor();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 pad-a-labelsize">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" name="BadAddress" id="chkBadAddress">
+                                                <label class="control-label" for="chkBadAddress">Bad Address</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <input type="hidden" id="hfProvider" name="ProviderID" />
+                                    <input type="hidden" id="hfFacility" name="FacilityID" />
+                                    <input type="hidden" id="hfPractice" name="PracticeID" />
+                                    <input type="hidden" id="hfRefProvider" name="RefProviderID" />
+                                    <input type="hidden" id="hfPCP" name="PCPID" />
+                                    <input type="hidden" id="hfGuarantor" name="GuarantorID" />
+                                    <input type="hidden" id="hfPatientPortalStatus" name="PatientPortalStatus" />
+                                    <input type="hidden" id="hfLanguages" name="LanguageID" />
+                                    <input type="hidden" id="hfPatientSSN" />
+                                    <input type="hidden" id="hfCountry" name="CountryID" />
+                                    <input type="hidden" id="hfRaceIds" name="RaceIds" />
+                                    <input type="hidden" id="hfCity" name="CityId" />
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="mb-xxs panel panel-featured" id="incomingReferralSection">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <label for="ddlHearFrom" class="control-label">How did the patient hear about us?</label>
+                                        <select id="ddlHearFrom" name="HearFromId" class="form-control" onchange="demographicDetail.hideShowTextbox();">
+                                            <option value="">Select</option>
+                                            <option value="3">Advertisement/ Mailer</option>
+                                            <option value="6">Family Member/ Friend</option>
+                                            <option value="8">Healow</option>
+                                            <option value="2">Hospital/ Emergency Room</option>
+                                            <option value="4">Location</option>
+                                            <option value="5">Online Search</option>
+                                            <option value="10">Other</option>
+                                            <option value="9">Referred by Insurance</option>
+                                            <option value="1">Referring Provider / Physician</option>
+                                            <option value="7">ZocDoc</option>
+                                        </select>
+                                    </div>
+                                    <div id="divOtherText" class="col-sm-3 hidden">
+                                        <label for="txtOtherText" class="control-label">Specify Resource</label>
+                                        <input type="text" class="form-control" id="txtOtherText" name="HearFromOther" maxlength="50">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="spacer20"></div>
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="TransitionalCareManagement" id="chkTransitionalCareManagement" onchange="demographicDetail.populateDODischarge(this);">
+                                            <label class="control-label" for="chkTransitionalCareManagement">Transitional Care Management</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 has-feedback">
+                                        <label class="control-label" for="Date of Discharge">Date of Discharge</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control" type="text" id="dtpDischargeDate" name="DischargeDate" data-plugin-datepicker="" autocomplete="off" data-bv-field="DischargeDate" maxlength="10" value="">
+                                        </div><i class="form-control-feedback bv-icon-input-group" data-bv-icon-for="DischargeDate" style="display: none;"></i>
+                                        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="DischargeDate" data-bv-result="NOT_VALIDATED" style="display: none;"></small><small class="help-block" data-bv-validator="date" data-bv-for="DOB" data-bv-result="NOT_VALIDATED" style="display: none;"> </small>
+                                    </div>
+                                </div>
+                                <div id="incomingReferral" class="hidden">
+                                    <div id="divIncomingReferralInfo">
+                                        <div class="col-sm-3 p-none hidden">
+                                            <div class="col-xs-6">
+                                                <label class="control-label" for="Date">Date</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                    <input type="text" class="form-control" data-plugin-datepicker name="Date" id="dtDate" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label class="control-label" for="">Time</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                    <input type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 5 }' id="tmTime" name="Time">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <label id="lblRefProviderReferral" for="Ref Provider" class="control-label">Referral From<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtRefProviderReferral" name="RefProviderReferral" placeholder="Search Ref Provider" type="text" customname="Referral From" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkRefProviderReferral" class="btn btn-primary btn-xs " type="button" onclick="demographicDetail.OpenRefProviderReferral();"><i class="glyphicon glyphicon-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <label class="control-label" for="Date" id="lblRefferingProviderReferral">Referral To</label>
+                                            <div class="input-group">
+                                                <input class="form-control " id="txtProviderReferral" type="text" placeholder="Start typing to search" name="ProviderReferral" maxlength="35" customname="Referral To" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkProviderReferral" class="btn btn-primary btn-xs " type="button" onclick="demographicDetail.OpenProviderReferral();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="" class="control-label">Reason</label>
+                                            <input id="txtReason" type="text" class="form-control" name="Reason" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Visit Type</label>
+                                            <select id="ddlVisits" name="Visits" class="form-control">
+                                                <option value="">Select</option>
+                                                <option value="1">Follow Up</option>
+                                                <option value="2">New Patient</option>
+                                                <option value="3">Physical</option>
+                                                <option value="4">Surgical Clearance</option>
+                                                <option value="5">Consult</option>
+                                                <option value="6">Office Visit</option>
+                                                <option value="7">Immunization</option>
+                                                <option value="8">Injection</option>
+                                                <option value="9">Bloodwork</option>
+                                                <option value="10">Ultrasound</option>
+                                                <option value="11">Procedure</option>
+                                                <option value="12">Surgery</option>
+                                                <option value="13">Infusion</option>
+                                                <option value="14">Test</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Insurance Plan</label>
+                                            <select class="form-control" id="ddlInsurance" name="PatientInsurance">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label id="lblStatus" class="control-label" for="Status">Status<span class="required">*</span></label>
+                                            <select id="ddlReferralStatus" name="Status" class="form-control">
+                                                <option value="">Select</option>
+                                                <option value="1">Not started</option>
+                                                <option value="2">In progress</option>
+                                                <option value="3">Completed</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <label class="control-label" name="lblAssignee">Assignee</label>
+                                            <input class="form-control" id="txtAssignee" name="Assignee" placeholder="Start typing to search" type="text" />
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="dropdown" id="attachDiv">
+                                                <a id="btnScanResult" href="#" class="dropdown-toggle btn btn-link btn-xs p-none" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attach</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="dropdown" id="attachmentDiv">
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+
+                                    </div>
+                                    <input type="hidden" name="ReferralId" id="hfReferralID" value="-1" />
+                                    <input type="hidden" id="hfRefProviderReferral" name="RefProviderIdReferral" />
+                                    <input type="hidden" id="hfProviderReferral" name="ProviderIdReferral" />
+                                    <input type="hidden" id="hfAssignee" name="AssigneeId" value="-1">
+                                    <input type="hidden" id="hfRaceIds" name="RaceIds" />
+                                    <button id="btn_set_imagedata" type="button" style="display:none" class="close" onclick="demographicDetail.setImageData();"><span class="red">&nbsp;</span><span class="sr-only">SetKey</span></button>
+                                    <input id="imagedatabase64" type="hidden" />
+                                    <div class="spacer15"></div>
+                                    <div id="commentsReferral">
+                                        <div id="" class="col-xs-12">
+                                            <label class="control-label">Comments</label>
+                                            <textarea id="txtCommentsReferral" name="CommentsReferral" rows="3" class="form-control" spellcheck="true"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    (function ($) {
+
+        'use strict';
+
+        if ($.isFunction($.fn['tooltip'])) {
+            $('[data-toggle=tooltip],[rel=tooltip]').tooltip({ container: 'body' });
+        }
+
+    }).apply(this, [jQuery]);
+
+    $(document).ready(function () {
+
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            },
+        });
+    });
+</script>
+

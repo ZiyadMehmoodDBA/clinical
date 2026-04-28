@@ -1,0 +1,240 @@
+﻿<div class="row" id="pnlRemindersSettingDetail">
+    <div id="actionPanRemindersSettingDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="remindersSettingsDetail.UnLoadTab();"></button>
+                <h4 class="modal-title" id="headerId">Settings</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmRemindersSettingDetail" method="post" onsubmit="return false">
+                    <section class="panel panel-featured">
+                        <div class="panel-body">
+
+                            <div class="col-md-4 col-lg-3" id="divDDLReminderType">
+                                <label class="control-label" for="Type">Type</label>
+                                <select id="ddlType" name="Type" class="form-control" onchange="remindersSettingsDetail.ShowHideSettings(this);">
+                                    <option value="text" selected>Text</option>
+                                    <option value="email">Email</option>
+                                    <option value="voice">Voice</option>
+                                </select>
+                            </div>
+
+                            <div id="divTextSetting" class="tab-pane active custom-made-tabs">
+                                <div class="form-group">
+
+                                    <div class="col-sm-4 col-lg-2 hide">
+                                        <label class="control-label" for="Patient Account">Caller ID<span class="required">*</span></label>
+                                        <input type="text" id="txtSMSCallerName" name="SMSCallerName" class="form-control" disabled >
+                                    </div>
+
+                                    <div id="providerdiv" class="col-md-4 col-lg-2">
+                                        <label for="Provider" class="control-label" id="lblProvider">Provider<span class="required">*</span></label>
+                                        <select id="TextSettingsProvider" name="TextSettingsProvider" class="form-control" ddlist="GetProvider" onchange=""></select>
+                                    </div>
+                                    <div id="facilityTextdiv" class="col-md-2 col-sm-4">
+                                        <label for="Provider" class="control-label" id="lblFcality">Facility<span class="required">*</span></label>
+                                        <select id="TextSettingsFacility" name="FacilityTextSetting" multiple="multiple" class="form-control" onchange=""></select>
+                                    </div>
+                                    <div id="" class="col-md-4 col-lg-2">
+                                        <div class="col-md-6 col-lg-5">
+                                            <label for="Delivery" class="control-label" id="lblDelivery">Delivery<span class="required">*</span></label>
+                                            <input type="text" id="TextDurationType" name="TextDurationType" class="form-control ">
+                                        </div>
+                                        <div id="" class="col-md-6 col-lg-7 pad-a-labelsize">
+
+                                            <select id="ddlTextDelivery" name="TextDelivery" class="form-control" ddlist="" onchange="">
+                                                <option value="" selected>-Select-</option>
+                                                <option value="Minute(s)">Minute(s)</option>
+                                                <option value="Hour(s)">Hour(s)</option>
+                                                <option value="Day(s)">Day(s)</option>
+                                                <option value="Week(s)">Week(s)</option>
+                                            </select>
+                                        </div>                                 
+                                    </div>
+                                        <!--<div class="col-sm-4 col-lg-2">
+            <label class="control-label">Time Zone<span class="required">*</span></label>
+            <select class="form-control" id="ddlTextTimeZone" name="TextTimeZone" ddlist="GetTimeZones"></select>
+        </div>-->
+                                        <div class="col-md-3 pad-a-labelsize  col-sm-4">
+                                            <!--<label class="control-label">Disable Voice Reminder Failover</label>
+            <div class="clearfix"></div>
+            <div class="size60 pull-left radio-custom radio-small">
+                <input type="radio" id="rdFailoverTrue" name="DisableVoiceReminderFailover1">
+                <label id="" class="control-label" for="True">True</label>
+            </div>
+            <div class="size60 pull-left radio-custom radio-small">
+                <input type="radio" id="rdFailoverFalse" name="DisableVoiceReminderFailover1" checked>
+                <label id="" class="control-label" for="False">False</label>
+            </div>
+            <div class="clearfix"></div>-->
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" name="ChkVoiceReminderFailover" id="chkVoiceReminderFailover" checked>
+                                                <label class="control-label" for="chkBadAddress">Voice Reminder Failover</label>
+                                            </div>
+                                            <!--<div class="col-md-3 col-sm-4">
+                <label class="control-label" for="Patient Account">Select Template</label>
+                <select id="ddlTextTemplate" name="TextTemplate" class="form-control " onchange="remindersSettingsDetail.fillTextTemplate('text');"></select>
+            </div>-->
+
+                                        </div>
+
+                                    </div>
+                            </div>
+                            <div id="divVoiceSetting" class="tab-pane custom-made-tabs" style="display:none">
+
+                                <!--<div class="col-md-3 col-sm-4">
+                                    <label class="control-label" for="Patient Account">Dial-in PIN</label>
+                                    <input type="text" id="txtCallIDNumber" name="PIN" class="form-control ">
+                                </div>-->
+                                <div id="providerdiv" class="col-md-2 col-sm-4">
+                                    <label for="Provider" class="control-label" id="lblProvider">Provider<span class="required">*</span></label>
+                                    <select id="VoiceSettingsProvider" name="ProviderVoiceSetting" class="form-control" ddlist="GetProvider" onchange=""></select>
+                                </div>
+                                <div id="facilityVoicediv" class="col-md-2 col-sm-4">
+                                    <label for="Provider" class="control-label" id="lblFcality">Facility<span class="required">*</span></label>
+                                    <select id="VoiceSettingsFacility" name="FacilityVoiceSetting" multiple="multiple" class="form-control" onchange=""></select>
+                                </div>
+                                <div class="col-md-3 col-sm-4 hide">
+                                    <label class="control-label" for="Patient Account">Caller ID<span class="required">*</span></label>
+                                    <input type="text" id="txtCallIDNumber" name="CallIDNumberforVoice" class="form-control " disabled >
+                                </div>
+                                <div id="" class="col-md-3 col-sm-4">
+                                    <div class="col-md-6 col-lg-3">
+                                        <label for="Delivery" class="control-label" id="lblDelivery">Delivery<span class="required">*</span></label>
+                                        <input type="text" id="VoiceDurationType" name="VoiceDurationType" class="form-control ">
+                                    </div>
+                                    <div id="" class="col-md-6 col-lg-5 pad-a-labelsize">
+
+                                        <select id="ddlVoiceDelivery" name="VoiceDelivery" class="form-control" ddlist="" onchange="">
+                                            <option value="" selected>-Select-</option>
+                                            <option value="Minute(s)">Minute(s)</option>
+                                            <option value="Hour(s)">Hour(s)</option>
+                                            <option value="Day(s)">Day(s)</option>
+                                            <option value="Week(s)">Week(s)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--<div class="col-sm-4 col-lg-3">
+                                    <label class="control-label">Time Zone<span class="required">*</span></label>
+                                    <select class="form-control" id="ddlVoiceTimeZone" name="VoiceTimeZone" ddlist="GetTimeZones"></select>
+                                </div>-->
+                                <div class="col-md-3 col-sm-4">
+                                    <label class="control-label" for="Patient Account">Select Template</label>
+                                    <select id="ddlVoiceTemplate" name="Template" class="form-control " ddlist="" onchange="remindersSettingsDetail.fillTextTemplate('voice');"></select>
+                                </div>
+                                <div class="col-md-3 pad-a-labelsize  col-sm-4">
+                                    <div class="checkbox-custom checkbox-default ">
+                                        <input id="IsRepeatMessage" name="RepeatMessage" checked type="checkbox">
+                                        <label class="control-label" for="Active">Repeat Message</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divEmailSetting" class="tab-pane custom-made-tabs" style="display:none">
+                               
+                                    <div class="col-md-3 col-sm-4">
+                                        <label class="control-label" for="Patient Account">Sender Email<span class="required">*</span></label>
+                                        <input type="text" id="txtCallIDNumber" name="CallIDNumber" class="form-control ">
+                                    </div>
+
+                                    <div id="providerdiv" class="col-md-4 col-lg-3">
+                                        <label for="Provider" class="control-label" id="lblProvider">Provider<span class="required">*</span></label>
+                                        <select id="Provider" class="form-control" name="Provider" ddlist="GetProvider" onchange=""></select>
+                                    </div>
+
+                                <div id="facilityEmaildiv" class="col-md-2 col-sm-4">
+                                    <label for="Provider" class="control-label" id="lblFcality">Facility<span class="required">*</span></label>
+                                    <select id="EmailSettingsFacility" name="FacilityEmailSetting" multiple="multiple" class="form-control" onchange=""></select>
+                                </div>
+
+                                <div id="" class="col-sm-12 col-lg-3" style="padding-left:0px !important">
+                                    <div class="col-md-6 col-lg-3">
+                                        <label for="Delivery" class="control-label" id="lblDelivery">Delivery<span class="required">*</span></label>
+                                        <input type="text" id="EmailDurationType" name="EmailDurationType" class="form-control ">
+                                    </div>
+                                    <div id="" class="col-md-6 col-lg-6 pad-a-labelsize">
+
+                                        <select id="ddlEmailDelivery" name="EmailDelivery" class="form-control" ddlist="" onchange="">
+                                            <option value="" selected>-Select-</option>
+                                            <option value="Minute(s)">Minute(s)</option>
+                                            <option value="Hour(s)">Hour(s)</option>
+                                            <option value="Day(s)">Day(s)</option>
+                                            <option value="Week(s)">Week(s)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4">
+                                    <label class="control-label" for="Patient Account">Select Template</label>
+                                    <select id="ddlEmailTemplate" name="EmailTemplate" class="form-control " onchange="remindersSettingsDetail.fillTextTemplate('email');"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 pad-a-labelsize  col-sm-4">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkActive" checked>
+                                    <label class="control-label" for="chkActive">Active</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                    <div class="pl-none pr-none" id="divHTMLTemplate" style="display:none">
+                        <div class="col-sm-12 mt-sm">
+                            <label class="control-label" for="">Message<span class="required">*</span></label>
+                            <textarea id="txtTemplate" name="HTMLTemplate" class="form-control" rows="15" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-sm-6 mt-sm">
+                            <label class="control-label">Characters Allowed:</label>
+                            <span id="spnvoiceMsg">160</span>
+                        </div>
+                    </div>
+                    <div class="pl-none pr-none" id="divTextSettingsDDLs">
+                        <div class="col-sm-6 mt-sm">
+                            <label class="control-label" for="Patient Account">Select Template</label>
+                            <select id="DDLAppReminderMessage" name="DDLAppReminderMessage" class="form-control " onchange="remindersSettingsDetail.fillTextTemplateTextMessage('appointment');"></select>
+                        </div>
+                        <div class="col-sm-6 mt-sm">
+                            <label class="control-label" for="Patient Account">Select Template</label>
+                            <select id="DDLAppConfirmationMessage" name="DDLAppConfirmationMessage" class="form-control " onchange="remindersSettingsDetail.fillTextTemplateTextMessage('confirmation');"></select>
+                        </div>
+                        <!--<div class="col-sm-4 mt-sm">
+                            <label class="control-label" for="Patient Account">Select Template</label>
+                            <select id="DDLAppCancellationMessage" name="DDLAppCancellationMessage" class="form-control " onchange="remindersSettingsDetail.fillTextTemplateTextMessage('cancellation');"></select>
+                        </div>-->
+                    </div>
+                    <div class="pl-none pr-none" id="divTextSettingsMessage">
+                        <div class="col-sm-6 mt-sm">
+                            <label class="control-label" for="">Appointment Reminder Message<span class="required">*</span></label>
+                            <textarea maxlength="160" id="txtAppReminderMessage" name="AppReminderMessage" oninput="remindersSettingsDetail.msgLengthSet();" class="form-control" rows="15" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-sm-6 mt-sm">
+                            <label class="control-label" for="">Confirmation Message<span class="required">*</span></label>
+                            <textarea maxlength="160" id="txtAppConfirmationMessage" name="AppConfirmationMessage" oninput="remindersSettingsDetail.cancelMsgLengthSet();" class="form-control" rows="15" spellcheck="true"></textarea>
+                        </div>
+                        <!--<div class="col-sm-4 mt-sm">
+                            <label class="control-label" for="">Cancellation Message<span class="required">*</span></label>
+                            <textarea maxlength="105" id="txtAppCancellationMessage" name="AppCancellationMessage" oninput="remindersSettingsDetail.confirmationMsgLengthSet()" class="form-control" rows="15" spellcheck="true"></textarea>
+                        </div>-->
+                        <div class="col-sm-6 mt-sm">
+                            <label class="control-label">Characters Remaining:</label>
+                            <span id="spnTxtMsg">160</span>
+                        </div>
+                        <div class="col-sm-6 mt-sm">
+                            <label class="control-label" for="">Characters Remaining:</label>
+                            <span id="spnConfirmationMsg">160</span>
+                        </div>
+                        <!--<div class="col-sm-4 mt-sm">
+                            <label class="control-label" for="">Characters Remaining:</label>
+                            <span id="spnCancelMsg">105</span>
+                        </div>-->
+
+
+                    </div>
+                    <div class="spacer10"></div>
+                    <button class="btn btn-primary" id="btnsaveProviderSch" type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

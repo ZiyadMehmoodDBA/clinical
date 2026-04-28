@@ -1,0 +1,147 @@
+﻿<div class="row" id="pnlBillPaymentBatchSearch" style="display:none;">
+    <div id="actionPanBillPaymentBatchSearch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Bill_PaymentBatchSearch.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Payment Batch</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Bill_PaymentBatchSearch.OpenPaymentBatch();"><i class="fa fa-plus-circle"></i>  Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Bill_PaymentBatchSearch.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search Payment Batch </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlBillCharge_Search">
+                            <form class="form-bordered" method="post" id="frmPaymentBatchSearch" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Batch Number</label>
+                                        <input class="form-control" id="txtBatchNumber" name="Batch Number" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Bill_PaymentBatchSearch.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Bill_PaymentBatchSearch.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                        <a id="lnkPracticeEdit" style="display:none;" href="#" onclick="Bill_PaymentBatchSearch.OpenPracticeDetail();" title="Edit Practice">Practice</a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtPractice" name="Practice" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="Bill_PaymentBatchSearch.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Biller">Biller</label>
+                                        <select id="ddlBiller" ddlist="GetUsersFullName" class="form-control"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Batch Status">Batch Status</label>
+                                        <select id="ddlBatchStatus" class="form-control" ddlist="GetChargeBatchStatus"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Deposit Date">Deposit Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input class="form-control" id="dtpDepositDate" name="DepositDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Entry Date From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="EntryDateFrom" data-plugin-datepicker="" class="form-control" id="dpEntryDatefrm">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Entry Date To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="EntryDateTo" data-plugin-datepicker="" class="form-control" id="dpEntryDateTo">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Entered By</label>
+                                        <input class="form-control" id="txtEnteredBy" name="EnteredBy" type="text">
+                                    </div>
+
+                                        <div class="col-sm-4 col-md-2">
+                                            <label class="control-label mb-none" for="Description">Description</label>
+                                            <textarea class="form-control" id="txtDescription" rows="1" spellcheck="true"></textarea>
+                                        </div>
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="control-label mb-none" for="Description">Check#</label>
+                                        <input class="form-control" id="txtCheck" name="Checkno" type="text">
+                                    </div>
+                                        <div class="col-sm-3 col-md-2 pull-right mt-md mb-md">
+                                            <button class="btn btn-primary btn-sm rightbtn" id="btnPaymentBatchSearch" type="button" onclick="Bill_PaymentBatchSearch.PaymentBatchSearch();">Search</button>
+                                            <button class="btn btn-primary btn-sm rightbtn" id="btnSearchReset" type="button" onclick="Bill_PaymentBatchSearch.BillPaymentBatchReset();">Reset</button>
+                                            
+                                        </div>
+                                    </div>
+                                <input type="hidden" id="hfFacility" value="-1" />
+                                <input type="hidden" id="hfPractice" value="-1" />
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlPaymentBatch_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body panel-featured">
+                                <input type="hidden" id="BillCharge_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPaymentBatch">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">PaymentBatchId</th>
+                                            <th class="size-min100">Action</th>
+                                            <th class="noWordBreak">Batch Number</th>
+                                            <th class="size120">Description</th>
+                                            <th class="size120">Practice</th>
+                                            <th class="size120">Facility</th>
+                                            <th class="noWordBreak">Deposit Date</th>
+                                            <th class="noWordBreak">Check#</th>
+                                            <th class="noWordBreak">Check Date</th>
+                                            <th class="noWordBreak">Plan Amt</th>
+                                            <th class="noWordBreak">Plan Posted</th>
+                                            <th class="noWordBreak">Pat Amt</th>
+                                            <th class="noWordBreak">Pat Posted</th>
+                                            <th class="size120">Copay</th>
+                                            <th class="size120">Biller</th>
+                                            <th class="size120">Status</th>
+                                            <th class="noWordBreak">DOE From</th>
+                                            <th class="noWordBreak">DOE To</th>
+                                            <th class="noWordBreak">User</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                                <div id="divPaymentBatchPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+   
+</script>

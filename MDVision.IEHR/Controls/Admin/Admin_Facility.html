@@ -1,0 +1,87 @@
+﻿<div class="row" id="pnlAdminFacility" style="display:none;">
+    <div id="actionPanAdminFacility" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_Facility.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Facility</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Admin_Facility.FacilityAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_Facility.UnLoadTab()"></a>
+                                </div>
+                                <h2 class="panel-title max">Search Facility </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlFacility_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Short Name</label>
+                                        <input class="form-control" id="txtShortName" type="text" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Description</label>
+                                        <input class="form-control" id="txtDiscription" type="text" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Practice</label>
+                                        <select id="lstPractice" class="form-control" ddlist="GetPractice"></select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Place Of Service</label>
+                                        <select id="lstPos" class="form-control" ddlist="GetPlaceOfService"></select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Active?</label>
+                                        <select id="chkActive" name="Active" class="form-control">
+                                            <option value="">- All -</option>
+                                            <option value="1" selected="selected">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 mt-sm pull-right">
+                                        <button class="btn btn-primary rightbtn btn-sm" id="btnFacilitySearch" type="button" onclick="Admin_Facility.FacilitySearch();">Search</button>
+                                    </div>                                    
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="pnlFacility_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="Facility_SelectedDataKeys" />
+                            <table class="table table-bordered table-condensed table-striped table-hover mb-none" id="dgvFacility">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">FacilityId</th>
+                                        <th class="size-min120">Action</th>
+                                        <th class="noWordBreak">Short Name</th>
+                                        <th class="noWordBreak">Location</th>
+                                        <th class="size200">Description</th>
+                                        <th>Practice</th>
+                                        <th class="size100">Phone</th>
+                                        <th class="size130">City</th>
+                                        <th class="size80">POS</th>
+                                        <th class="size100">NPI</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divFacilityPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

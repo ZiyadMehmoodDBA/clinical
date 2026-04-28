@@ -1,0 +1,106 @@
+﻿<div class="row" id="pnlAdminReferringProvider" style="display:none;">
+    <div id="actionPanAdminReferringProvider" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_ReferringProvider.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Referring Provider</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Admin_ReferringProvider.ReferringProviderAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_ReferringProvider.UnLoadTab()"></a>
+                                </div>
+                                <h2 class="panel-title">Search Referring Provider </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlReferringProvider_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Last Name</label>
+                                        <input class="form-control" name="LastName" id="txtLastName" type="text" maxlength="10" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">First Name</label>
+                                        <input class="form-control" name="FirstName" id="txtFirstName" type="text" maxlength="10" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">NPI</label>
+                                        <input class="form-control" name="NPI" id="txtNPI" type="text" maxlength="10" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Telephone</label>
+                                        <input class="form-control" name="Phone" id="txtPhone" type="text" placeholder="(999)999-9999" data-mask="(999)999-9999" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Fax</label>
+                                        <input class="form-control" name="Fax" id="txtFax" type="text"  placeholder="(999)999-9999" data-mask="(999)999-9999"/>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Active?</label>
+                                        <select id="chkActive" name="Active" class="form-control">
+                                            <option value="">- All -</option>
+                                            <option value="1" selected="selected">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div id="divReferringProvider_Entity" class="col-sm-2">
+                                        <label class="control-label">Entity</label>
+                                        <select id="ddlEntity" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Specialty </label>
+                                        <select id="ddlSpecialty" name="speciality" class="form-control" ddlist="GetSpecialty"></select>
+                                    </div>
+                                    <div class="col-sm-3  pad-a-labelsize">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsSovereign" id="chkIsSovereign">
+                                            <label class="control-label" for="chkIsSovereign">Is Sovereign</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 pad-a-labelsize-btn pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnReferringProviderSearch" type="submit" onclick="Admin_ReferringProvider.ReferringProviderSearch('0', null, null, true);">Search</button>
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="pnlReferringProvider_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="ReferringProvider_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvReferringProvider">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">ReferringProviderId</th>
+                                        <th class="size80 size-max80">Action</th>
+                                        <th class="size150">Last Name</th>
+                                        <th class="size150">First Name</th>
+                                        <th class="size150">Specialty</th>
+                                        <th class="size80 size-max80">Telephone</th>
+                                        <th class="size80 size-max80 text-center">Fax</th>
+                                        <th class="size80 size-max80 text-center">NPI</th>
+                                       
+                                        <th class="size-max40 size40 text-center">Entity</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divReferringProviderPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

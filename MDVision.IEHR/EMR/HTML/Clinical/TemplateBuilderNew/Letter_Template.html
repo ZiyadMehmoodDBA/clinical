@@ -1,0 +1,103 @@
+﻿<div id="pnlLetterTemplate">
+    <div id="actionPanLetterTemplate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div class="mainScrollPan" id="mainScrollPan">
+                <button type="button" class="btn btn-success btn-sm" onclick="Letter_Template.AddTemplate()"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div>
+                <div class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions"><a class="closebtn pull-right" onclick="Letter_Template.UnLoadTab()"></a></div>
+                        <h2 class="panel-title">Search Letter Template</h2>
+                    </header>
+                    <div class="panel-body">
+                        <form id="frmLetterTemplate" method="post" onsubmit="return false">
+                            <div class="col-sm-4 col-lg-4">
+                                <label class="control-label">Name</label>
+                                <input type="text" id="Name" name="Name" class="form-control" maxlength="500" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Description</label>
+                                <input type="text" id="Description" name="Description" class="form-control" maxlength="500" />
+                            </div>
+                            <!--<div class="col-sm-4 col-lg-2" style="display:none">
+                                <label class="control-label">Folder Type</label>
+                                <select class="form-control">
+                                    <option selected="selected">-select-</option>
+                                    <option value="op">op</option>
+                                    <option value="op">op</option>
+                                </select>
+                            </div>-->
+                            <div class="col-sm-4 col-lg-3">
+                                <label class="control-label">Category</label>
+                                <select id="ddlCategory" name="CategoryId" class="form-control" ddlist="GetLetterCategory" maxlength="100"></select>
+                            </div>
+                            <div class="pull-right mt-md pr-default"><button class="btn btn-primary btn-sm" onclick="Letter_Template.letterTemplatesSearch();">Search</button></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="spacer10"></div>
+                <!--<div class="panel-body panel-featured">
+                </div>-->
+            </div>
+
+        </div>
+    </div>
+    <div id="pnlLetterTemplate_Result" style="display: inline;">
+        <form>
+            <div class="panel-body">
+                <!--<input type="hidden" id="LetterTemplate_SelectedDataKeys" />-->
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvLetterTemplate">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">LetterId</th>
+                            <th class="size-min70">Action</th>
+                            <th style="width:400px">Name</th>
+                            <th style="width:400px">Description</th>
+                            <th style="width:100px">Category</th>
+                            <th style="width:150px">Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divLetterTemplatelistPaging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

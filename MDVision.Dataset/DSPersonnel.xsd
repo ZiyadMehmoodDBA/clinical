@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Personnel" targetNamespace="http://tempuri.org/Personnel.xsd" xmlns:mstns="http://tempuri.org/Personnel.xsd" xmlns="http://tempuri.org/Personnel.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TestdbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TestdbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.MDVision.Datasets.Properties.Settings.GlobalReference.Default.TestdbConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Personnel" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Personnel" msprop:Generator_UserDSName="Personnel">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="tblPersonnel" msprop:Generator_TableClassName="tblPersonnelDataTable" msprop:Generator_TableVarName="tabletblPersonnel" msprop:Generator_RowChangedName="tblPersonnelRowChanged" msprop:Generator_TablePropName="tblPersonnel" msprop:Generator_RowDeletingName="tblPersonnelRowDeleting" msprop:Generator_RowChangingName="tblPersonnelRowChanging" msprop:Generator_RowEvHandlerName="tblPersonnelRowChangeEventHandler" msprop:Generator_RowDeletedName="tblPersonnelRowDeleted" msprop:Generator_RowClassName="tblPersonnelRow" msprop:Generator_UserTableName="tblPersonnel" msprop:Generator_RowEvArgName="tblPersonnelRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="FName" msprop:Generator_ColumnVarNameInTable="columnFName" msprop:Generator_ColumnPropNameInRow="FName" msprop:Generator_ColumnPropNameInTable="FNameColumn" msprop:Generator_UserColumnName="FName" type="xs:string" minOccurs="0" />
+              <xs:element name="LName" msprop:Generator_ColumnVarNameInTable="columnLName" msprop:Generator_ColumnPropNameInRow="LName" msprop:Generator_ColumnPropNameInTable="LNameColumn" msprop:Generator_UserColumnName="LName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="tblPersonnelAddress" msprop:Generator_TableClassName="tblPersonnelAddressDataTable" msprop:Generator_TableVarName="tabletblPersonnelAddress" msprop:Generator_TablePropName="tblPersonnelAddress" msprop:Generator_RowDeletingName="tblPersonnelAddressRowDeleting" msprop:Generator_RowChangingName="tblPersonnelAddressRowChanging" msprop:Generator_RowEvHandlerName="tblPersonnelAddressRowChangeEventHandler" msprop:Generator_RowDeletedName="tblPersonnelAddressRowDeleted" msprop:Generator_UserTableName="tblPersonnelAddress" msprop:Generator_RowChangedName="tblPersonnelAddressRowChanged" msprop:Generator_RowEvArgName="tblPersonnelAddressRowChangeEvent" msprop:Generator_RowClassName="tblPersonnelAddressRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PersonnelID" msprop:Generator_ColumnVarNameInTable="columnPersonnelID" msprop:Generator_ColumnPropNameInRow="PersonnelID" msprop:Generator_ColumnPropNameInTable="PersonnelIDColumn" msprop:Generator_UserColumnName="PersonnelID" type="xs:int" minOccurs="0" />
+              <xs:element name="Address" msprop:Generator_ColumnVarNameInTable="columnAddress" msprop:Generator_ColumnPropNameInRow="Address" msprop:Generator_ColumnPropNameInTable="AddressColumn" msprop:Generator_UserColumnName="Address" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="tblPersonnelKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:tblPersonnel" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:tblPersonnelAddress" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

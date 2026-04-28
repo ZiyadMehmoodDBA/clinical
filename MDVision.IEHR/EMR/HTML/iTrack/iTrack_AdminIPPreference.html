@@ -1,0 +1,485 @@
+﻿<div id="pnlIndividualProvider">
+    <div id="actionPanIndividualProvider" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <div class="modal-dialog modal-dialog-full mb-none mt-xlg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="iTrack_AdminIPPreference.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">MIPS Preference</h4>
+            </div>
+            <div class="modal-body pt-default pb-default" id="tblproviderDetail">
+                <form method="post" onsubmit="return false;" id="frmIndividualProvider">
+                    <div class="form-group">
+
+                        <div class="panel-body panel-featured pb-xs pt-none pl-none pr-none">
+                            <div class="col-sm-2">
+                                <label class="control-label ">Last Name</label>
+                                <input id="txtLastName" name="lastname" class="form-control " disabled="disabled" type="text" maxlength="60" />
+                            </div>
+                            <div class="col-sm-2 pl-none">
+                                <label class="control-label ">First Name</label>
+                                <input id="txtFirstName" name="firstname" class="form-control " disabled="disabled" type="text" maxlength="35" />
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Specialty </label>
+                                <select id="ddlSpecialty" name="speciality" class="form-control " disabled="disabled" ddlist="GetSpecialty"></select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label ">NPI</label>
+                                <input id="txtNPI" name="npi" class="form-control " disabled="disabled" type="text" placeholder="9999999999" maxlength="10" />
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label ">TIN</label>
+                                <input id="txtProviderTIN" name="ProviderTIN" class="form-control " disabled="disabled" type="text" placeholder="9999999999" maxlength="10" />
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label">Entity </label>
+                                <select id="IstEntityId" class="form-control" disabled="disabled">
+                                    <option selected="selected" value="100">SHS</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="toggle1" id="divMIPSPreferencesPnl" data-plugin-toggle>
+                            <div class="spacer10"></div>
+                            <div class="col-md-12">
+                                <div class="col-md-5">
+                                    <h5 class="text-capitalize pull-left m-none"><strong class="text-uppercase">mips</strong> (merit-based incentive payment system)</h5>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-2 p-none">
+                                    <a id="lnkVerifyTIN" target="_blank" style="display: inline;" href="https://npiregistry.cms.hhs.gov" onclick="" title="Verify TIN / NPI">Verify TIN / NPI <i class="fa fa-external-link" aria-hidden="true"></i><span></span></a>
+                                </div>
+                                <div class="col-md-2">
+                                    <a id="lnkVerifyTIN" target="_blank" class="pull-right" style="display: inline;" href="https://qpp.cms.gov/participation-lookup" onclick="" title="Check MIPS Eligibility Status">       Check MIPS Eligibility Status <i class="fa fa-external-link" aria-hidden="true"></i><span></span></a>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="panel-featured panel-body">
+
+                                <div class="col-md-2">
+
+                                    <label class="control-label"><b>ELIGIBILITY STATUS</b> </label>
+                                </div>
+                                <div class="radio-custom col-md-1">
+                                    <input id="rdoEligibile" type="radio" name="rdoEligibile" checked="checked" onchange="iTrack_AdminIPPreference.CheckEligibility('rdoEligibile',this);" value="1">
+                                    <label for="rdFreeText">Eligible</label>
+                                </div>
+                                <div class="radio-custom col-md-1">
+                                    <input id="rdoIneligibile" type="radio" name="rdoEligibile" onchange="iTrack_AdminIPPreference.CheckEligibility('Ineligibile',this);" value="2">
+                                    <label for="rdFreeText">Ineligible</label>
+                                </div>
+                               
+                                <div class="col-md-4 col-lg-3 pull-right">
+                                    <label for="rdFreeText" class="col-xs-6 text-right text-bold">Performance Year</label>
+                                    <div class="input-group col-xs-6 ">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" id="dtpPerformanceYear" name="PerformanceYear" maxlength="10" data-plugin-datepicker="">
+                                    </div>
+
+                                </div>
+
+                                <div id="divIneligibile" class="col-md-12 hidden">
+                                    <div class="p-none borderB mb-default">
+                                        <label for="rdIneligibileReason"><b>Reason</b></label>
+                                    </div>
+                                    <div class="checkbox-custom col-md-4">
+                                        <input type="checkbox" name="IneligibleReason"  id="chkIneligibileReason1">
+                                        <label for="chkIneligibileReason1">Does Not meet low-volume threshold for 2018</label>
+                                    </div>
+                                    <div class="checkbox-custom col-md-4">
+                                        <input type="checkbox" name="IneligibleReason" id="chkIneligibileReason2">
+                                        <label for="chkIneligibileReason2">Qualifying APM Participant (QP)</label>
+                                    </div>
+                                    <div class="checkbox-custom col-md-4">
+                                        <input type="checkbox" name="IneligibleReason" onclick="iTrack_AdminIPPreference.displayCheckBox();" id="chkIneligibileReason3">
+                                        <label for="chkIneligibileReason3">Other</label>
+                                    </div>
+                                    <div class="checkbox-custom col-md-4">
+                                        <input type="checkbox" name="IneligibleReason" id="chkIneligibileReason5">
+                                        <label for="chkIneligibileReason5">Newly enrolled in Medicare</label>
+                                    </div>
+                                    <div class="checkbox-custom col-md-4">
+                                        <input type="checkbox" name="IneligibleReason" id="chkIneligibileReason6">
+                                        <label for="chkIneligibileReason6">Partially Qualifying APM Participant (Partial QP)</label>
+                                    </div>
+                                    <div class="checkbox-custom col-md-4 p-none">
+                                        <input id="txtIneligibileReason" name="IneligibileReason" class="form-control" type="text" />
+                                    </div>
+                                </div>
+
+                                <div class="spacer10"></div>
+                                <fieldset class="fieldset-primary mt-sm">
+                                    <legend>
+                                        <label class="text-uppercase">reporting </label>
+                                        <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                            <input id="switchReporting" isactive="1" type="checkbox" name="Reporting" data-plugin-ios-switch="" style="display: inline;" onchange="iTrack_AdminIPPreference.SelectReportingDiv(this);">
+                                        </span>
+                                        <label class="text-uppercase">not reporting</label>
+                                    </legend>
+
+
+
+
+
+                                    <div class="col-xs-12 p-none" id="Reporting">
+                                        <div class="col-xs-12 p-none borderB-primary pb-default">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                                <h5 class="bold text-uppercase pull-left m-none mb-default">reporting type</h5>
+                                                <div class="clearfix"></div>
+
+                                                <div class="radio-custom">
+                                                    <input id="rdoIndividual" type="radio" name="rdoReportingType" checked="checked" onchange="iTrack_AdminIPPreference.SelectIndiualOrGroup(this,'Individual');" value="1">
+                                                    <label for="rdFreeText">Individual</label>
+                                                </div>
+                                                <div class="radio-custom ">
+                                                    <input id="rdoGroup" type="radio" name="rdoReportingType" onchange="iTrack_AdminIPPreference.SelectIndiualOrGroup(this, 'Group');" value="2">
+                                                    <label for="rdFreeText">Group</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                                <h5 class="bold text-uppercase pull-left m-none pr-sm mb-default">practice type</h5>
+                                                <div class="pull-left">
+
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="radio-custom">
+                                                    <input type="radio" id="rdoLarge" name="rdoPractice" checked="checked" value="1" />
+                                                    <label class="control-label" for="lgp">Large Practice</label>
+                                                </div>
+                                                <div class="radio-custom">
+                                                    <input type="radio" id="rdoSmall" name="rdoPractice" value="2" />
+                                                    <label class="control-label" for="smp">Small Practice (15 or fewer clinicians)</label>
+                                                </div>
+                                                <div class="radio-custom">
+                                                    <input type="radio" id="rdoRural" name="rdoPractice" value="3" />
+                                                    <label class="control-label" for="rup">Rural Practice</label>
+                                                </div>
+                                            </div>
+                                            <div class="visible-sm">
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                                <h5 class="bold text-uppercase mb-default pull-left m-none pr-sm ">reporting method</h5>
+                                                <div class="pull-left">
+
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="radio-custom">
+                                                    <input type="radio" id="rdoMDVision" name="reportingmethod" checked="checked" value="1" />
+                                                    <label class="control-label" for="mdve">MD Vision EHR</label>
+                                                </div>
+                                                <div class="radio-custom">
+                                                    <input type="radio" id="rdoSHS" name="reportingmethod" value="2" />
+                                                    <label class="control-label" for="shr">Sovereign Health Registry</label>
+                                                </div>
+                                                <div class="radio-custom">
+                                                    <input type="radio" id="rdoQCDR" name="reportingmethod" value="3" />
+                                                    <label class="control-label" for="soq">Sovereign QCDR</label>
+                                                </div>
+                                                <div class="radio-custom">
+                                                    <input type="radio" id="rdoOther" name="reportingmethod" value="4" />
+                                                    <label class="control-label" for="soo">Other</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div id="divReportingForInd">
+                                            <table class="table table-col-4 table-up30 table-va-middle mb-none m-none table-border-middle table-condensed">
+
+                                                <tr>
+
+                                                    <td><h5 class="bold text-uppercase  mt-default mb-default">mips reporting categories</h5></td>
+                                                    <td class="borderY-primary"><h5 class="bold text-uppercase  mt-default mb-default">performance period</h5></td>
+                                                    <td><h5 class="bold text-uppercase  mt-default mb-default">select period</h5></td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+                                                        <div class="checkbox-custom m-none">
+                                                            <input id="chkQuality" type="checkbox" checked class="disableAll">
+                                                            <label class="control-label" for="Quality">Quality</label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="borderY-primary">
+                                                        <label class="text-capitalize">full year </label>
+                                                        <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                            <input id="switchActiveQuality" isactive="1" type="checkbox" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="iTrack_AdminIPPreference.SelectPerriod(this,'Quality');">
+                                                        </span>
+                                                        <label class="text-capitalize">90 days</label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-xs-6 mb-tiny" id="divYearQuality">
+
+                                                                <select id="ddlQualityYeaR" name="QualityYeaR" class="form-control">
+                                                                    <option selected="selected" value="">-Select-</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2018">2018</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xs-12 hidden mb-tiny p-none" id="divPeriodQuality">
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label" for="Date of Birth">Date From</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input class="form-control " type="text" id="dtpDateFromQuality" name="DateFromQuality" data-plugin-datepicker="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label" for="Date of Birth">Date To</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input class="form-control " type="text" id="dtpDateToQuality" name="DateToQuality" data-plugin-datepicker="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+                                                        <div class="checkbox-custom m-none">
+                                                            <input id="chkACI" type="checkbox" checked class="disableAll">
+                                                            <label class="control-label" for="Promoting Interoperability">Promoting Interoperability (Formerly ACI)</label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="borderY-primary">
+                                                        <label class="text-capitalize">full year </label>
+                                                        <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                            <input id="switchActiveACI" isactive="1" type="checkbox" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="iTrack_AdminIPPreference.SelectPerriod(this, 'ACI');">
+                                                        </span>
+                                                        <label class="text-capitalize">90 days</label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-xs-6 hidden mb-tiny" id="divYearACI">
+
+                                                                <select id="ddlACIYeaR" name="ACIYeaR" class="form-control ">
+                                                                    <option selected="selected" value="">-Select-</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2018">2018</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xs-12  p-none mb-tiny" id="divPeriodACI">
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label" for="Date of Birth">Date From</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input class="form-control " type="text" id="dtpDateFromACI" name="DateFromACI" data-plugin-datepicker="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label" for="Date of Birth">Date To</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input class="form-control " type="text" id="dtpDateToACI" name="DateToACI" data-plugin-datepicker="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+                                                        <div class="checkbox-custom m-none">
+                                                            <input id="chkIA" type="checkbox" checked class="disableAll">
+                                                            <label class="control-label" for="IA">IA (Improvement Activities)</label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="borderY-primary">
+                                                        <label class="text-capitalize">full year </label>
+                                                        <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                            <input id="switchActiveIA" isactive="1" type="checkbox" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="iTrack_AdminIPPreference.SelectPerriod(this, 'IA');">
+                                                        </span>
+                                                        <label class="text-capitalize">90 days</label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-xs-6 mb-tiny hidden" id="divYearIA">
+
+                                                                <select id="ddlIAYeaR" name="IAYeaR" class="form-control ">
+                                                                    <option selected="selected" value="">-Select-</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2018">2018</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xs-12 mb-tiny p-none" id="divPeriodIA">
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label" for="Date of Birth">Date From</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input class="form-control " type="text" id="dtpDateFromIA" name="DateFromIA" data-plugin-datepicker="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label" for="Date of Birth">Date To</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input class="form-control " type="text" id="dtpDateToIA" name="DateToIA" data-plugin-datepicker="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td>
+
+                                                        <div class="checkbox-custom m-none">
+                                                            <input id="chkCost" type="checkbox" checked class="disableAll">
+                                                            <label class="control-label" for="Cost">Cost</label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="borderY-primary">
+                                                        <label class="text-capitalize">full year </label>
+                                                        <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                            <input id="switchActiveCost" isactive="1" type="checkbox" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="iTrack_AdminIPPreference.SelectPerriod(this, 'Cost');">
+                                                        </span>
+                                                        <label class="text-capitalize">90 days</label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-xs-6 mb-tiny" id="divYearCost">
+
+                                                                <select id="ddlCostYeaR" name="CostYeaR" class="form-control">
+                                                                    <option selected="selected" value="">-Select-</option>
+                                                                    <option value="2017">2017</option>
+                                                                    <option value="2018">2018</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xs-12 hidden mb-tiny p-none" id="divPeriodCost">
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label" for="Date of Birth">Date From</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input class="form-control " type="text" id="dtpDateFromCost" name="DateFromCost" data-plugin-datepicker="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label" for="Date of Birth">Date To</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input class="form-control " type="text" id="dtpDateToCost" name="DateToCost" data-plugin-datepicker="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div id="divReportingForGroup" class="hidden">
+
+                                            <div class="col-sm-12 p-none">
+                                                <div class="col-sm-12">
+                                                    <label class="control-label"><b>GROUP DETAILS</b> </label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="control-label">Practice</label>
+                                                    <select id="lstPractice" class="form-control disableAll" ddlist="GetPractice"></select>
+                                                </div>
+                                                <div class="col-sm-2 p-none">
+                                                    <label class="control-label">Entity </label>
+                                                    <select id="lstEntityIdGroup" class="form-control disableAll">
+                                                        <option selected="selected" value="100">SHS</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-2 " id="DivGroupName">
+                                                    <label class="control-label" for="Group Name">Group Name <span class="required">*</span></label>
+                                                    <select class="form-control" id="ddlGroupName" name="GroupName" onchange="iTrack_AdminIPPreference.loadGroupData();">
+                                                        <option selected="selected" value="">-Select-</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="control-label">TIN</label>
+                                                    <input id="txtTIN" name="TIN" class="form-control" type="text" placeholder="999999999" maxlength="9" onkeypress="return utility.ValidateZero(event, this);" onblur="utility.ValidateCtrlMask('frmProviderDetail', this); providerDetail.validateLength(this)" />
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <label class="control-label">Member Providers</label>
+                                                    <select id="ddlMemberProvider" multiple="multiple" ddlmultilist="GetProvider" name="MemberProvider" class="form-control">
+                                                        <!--<option selected="selected" value="">-Select-</option>
+                                                        <option value="0">MD Vision EHR</option>
+                                                        <option value="1">Sovereign Health Registry</option>
+                                                        <option value="2">Sovereign QCDR</option>-->
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-2 p-none pr-tiny">
+                                                    <label class="control-label noWordBreak">Reason for participating as group<span class="required">*</span></label>
+                                                    <select id="ddlJoiningReason" name="JoiningReason" class="form-control">
+                                                        <!--<option selected="selected" value="">-Select-</option>
+                                                        <option value="0">Meets low-volume threshold for 2018 but reporting as group</option>
+                                                        <option value="1">Does Not meet low-volume threshold for 2018</option>
+                                                        <option value="2">Newly-enrolled in Medicare</option>-->
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-sm-2">
+                                                    <label class="control-label" for="Joining Date">Group Joining Date<span class="required">*</span></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input class="form-control " type="text" id="dtpJoiningDate" name="JoiningDate" data-plugin-datepicker="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 p-none">
+                                                    <label class="control-label" for="Leaving Date">Group Leaving Date</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input class="form-control " type="text" id="dtpLeavingDate" name="LeavingDate" data-plugin-datepicker="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6 pb-sm">
+                                                    <label class="control-label">Comments</label>
+                                                    <textarea id="txtReasonComments" name="ReasonComments" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="NotReporting" class="hidden">
+                                        <div class="col-sm-12 pb-sm">
+                                            <label class="control-label">Reason (Please Specify)<span class="required">*</span></label>
+                                            <textarea id="txtReason" name="Reason" rows="3" class="form-control" spellcheck="true"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                            <div class="col-xs-12 p-none pt-sm">
+
+                                <div class="pull-right">
+                                    <button class="btn btn-default btn-sm">Save & Exit</button>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+                        <div class="visible-xs"><div class="clearfix"></div></div>
+
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

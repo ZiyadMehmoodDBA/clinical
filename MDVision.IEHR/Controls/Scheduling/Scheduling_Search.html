@@ -1,0 +1,451 @@
+﻿<div class="row" id="pnlScheduleSearch" style="display:none;">
+    <div id="actionPanScheduleSearch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <!--<button type="button" class=" btn btn-success btn-sm" id="btnScheduleSearchAdd" onclick="Admin_ScheduleSearch.ScheduleSearchAdd();"><i class="fa fa-plus-circle"></i> Add</button>-->
+
+    <button class="btn btn-success btn-xs" type="button" id="btnChangeFacility" onclick="Scheduling_Search.OpenChangeFacility();"><i class="fa fa-edit"></i> Change Facility</button>
+    <button class="btn btn-success btn-xs" type="button" id="btnBlock" onclick="Scheduling_Search.BlockSlot();"><i class="fa fa-lock"></i> Block Slot</button>
+    <button class="btn btn-success btn-xs" type="button" id="btnUnblock" onclick="Scheduling_Search.UnBlockSlot();"><i class="fa fa-unlock"></i> Unblock Slot</button>
+
+
+    <div class="spacer10"></div>
+    <section class="panel panel-featured">
+
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="fa fa-caret-down collapse-adjust "></a>
+            </div>
+            <h2 class="panel-title">Schedule Search</h2>
+        </header>
+        <div class="panel-body" id="pnlSchedule_Search">
+
+
+            <form method="post" id="frmSchedulingSearch" onsubmit="return false">
+                <div class="form-bordered">
+                    <div class="form-group">
+
+                        <div class="clearfix"></div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Fee">Patient Account</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtAccountNo" name="PatientAccount" oninput="Scheduling_Search.BindPatientAccount();" onblur="    utility.ValidateAutoComplete(this, 'frmSchedulingSearch #hfPatientid', false);">
+                                <div class="input-group-btn">
+                                    <button id="lnkPatientAccount" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Search.OpenPatientAccount();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <!--<label id="lblFacility" class="control-label" name="facility" for="Facility">Facility<span class="required">*</span></label>-->
+                            <label id="lblFacility" class="control-label" name="facility" for="Facility">Facility</label>
+                            <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Scheduling_Search.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                            <div class="input-group custom-validation">
+                                <input class="form-control" id="txtFacility" type="text" name="Facility" onblur="    utility.ValidateAutoComplete(this, 'frmSchedulingSearch #hfFacilityId', false);">
+                                <div class="input-group-btn">
+                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Search.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Practice">Practice</label>
+                            <input class="form-control" id="txtPractice" type="text" disabled="disabled">
+                            <!--<div class="input-group-btn">
+                                <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Search.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>-->
+
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+
+
+                            <div class="size70 pull-left">
+                                <input type="radio" id="rdProvider" name="03" checked="checked">
+                                <label for="rdProvider" id="lblProvider">Provider</label>
+                                <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Scheduling_Search.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                            </div>
+                            <div class="size70 pull-left">
+                                <input type="radio" id="rdResource" name="03">
+                                <label for="rdResource" id="lblResource">Resource</label>
+                                <a id="lnkResourceEdit" style="display:none;" href="#" onclick="Scheduling_Search.OpenResourceDetail();" title="Edit Resource">Resource</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div id="divProvider">
+                                <div class="input-group">
+                                    <input class="form-control" id="txtProvider" type="text" name="Provider" onblur="    utility.ValidateAutoComplete(this, 'frmSchedulingSearch #hfProvider', false); Scheduling_Search.ResetLink();">
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Search.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divResource">
+                                <div class="input-group">
+                                    <input class="form-control" id="txtResource" type="text" name="Resource" onblur="    utility.ValidateAutoComplete(this, 'frmSchedulingSearch #hfResource', false); Scheduling_Search.ResetLink();">
+                                    <div class="input-group-btn">
+                                        <button id="lnkResource" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Search.OpenResource();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <!--<div class="col-sm-3 col-md-2" id="divProvider">
+                            <label class="control-label" for="Provider">Provider</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtProvider" type="text" onkeyup="Scheduling_Search.ResetProviderValue();">
+                                <div class="input-group-btn">
+                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Search.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2" id="divResource">
+                            <label class="control-label" for="Resource">Resource</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtResource" type="text" onkeyup="Scheduling_Search.ResetResourceValue();">
+                                <div class="input-group-btn">
+                                    <button id="lnkResource" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Search.OpenResource();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">From Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" data-plugin-datepicker="" maxlength="10" class="form-control" name="fromDate" id="dpfromDate">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">To Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" data-plugin-datepicker="" maxlength="10" class="form-control" name="toDate" id="dptoDate">
+                            </div>
+                        </div>
+                        <div class="hidden-sm hidden-xs"><div class="clearfix"></div></div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">From Time</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                <input type="text" maxlength="8" data-plugin-timepicker class="form-control  " data-plugin-options='{ "minuteStep": 5 }' name="fromTime" id="tpFromTime" onchange="Scheduling_Search.ResetTimeDropDown();">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">To Time</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                <input type="text" maxlength="8" data-plugin-timepicker class="form-control  " data-plugin-options='{ "minuteStep": 5 }' name="toTime" id="tpToTime" onchange="Scheduling_Search.ResetTimeDropDown();">
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-md-2 hide">
+                            <label class="control-label">Time</label>
+                            <select id="time1" class="form-control size75">
+                                <option value="ALL" selected="selected">- All -</option>
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-sm-10 col-md-6 pad-a-labelsize ">
+                            <div class="size50 pull-left">
+                                <label class="control-label"><strong>Status</strong></label>
+                            </div>
+                            <div class="pull-left">
+                                <div class="size90 pull-left">
+                                    <div class="checkbox-custom checkbox-block">
+                                        <input id="chkBlocked" type="checkbox">
+                                        <label class="control-label" for="chkBlocked">Blocked</label>
+                                    </div>
+                                </div>
+                                <div class="size90 pull-left">
+                                    <div class="checkbox-custom checkbox-booked">
+                                        <input id="chkBooked" type="checkbox">
+                                        <label class="control-label" for="chkBooked">Booked</label>
+                                    </div>
+                                </div>
+                                <div class="size90 pull-left">
+                                    <div class="checkbox-custom checkbox-over-booked">
+                                        <input id="chkOverBook" type="checkbox">
+                                        <label class="control-label" for="chkOverBook">Over Book</label>
+                                    </div>
+                                </div>
+                                <div class="size60 pull-left">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input id="chkOpen" type="checkbox">
+                                        <label class="control-label" for="chkOpen">Open</label>
+                                    </div>
+                                </div>
+                                <div class="size55 pull-left">
+                                    <div class="checkbox-custom checkbox-full">
+                                        <input id="chkFull" type="checkbox">
+                                        <label class="control-label" for="chkFull">Full</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-md-6 mt-md">
+                        <div class="size55 pull-left">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkSunday" type="checkbox">
+                                <label class="control-label" for="chkSunday">Sun</label>
+                            </div>
+                        </div>
+                        <div class="size55 pull-left">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkMonday" type="checkbox">
+                                <label class="control-label" for="chkMonday">Mon</label>
+                            </div>
+                        </div>
+                        <div class="size55 pull-left">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkTuesday" type="checkbox">
+                                <label class="control-label" for="chkTuesday">Tue</label>
+                            </div>
+                        </div>
+                        <div class="size55 pull-left">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkWednesday" type="checkbox">
+                                <label class="control-label" for="chkWednesday">Wed</label>
+                            </div>
+                        </div>
+                        <div class="size55 pull-left">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkThursday" type="checkbox">
+                                <label class="control-label" for="chkThursday">Thu</label>
+                            </div>
+                        </div>
+                        <div class="size55 pull-left">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkFriday" type="checkbox">
+                                <label class="control-label" for="chkFriday">Fri</label>
+                            </div>
+                        </div>
+                        <div class="size55 pull-left">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkSaturday" type="checkbox">
+                                <label class="control-label" for="chkSaturday">Sat</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 pull-right mt-sm">
+                        <button class="btn btn-primary btn-sm rightbtn" onclick="Scheduling_Search.ResetAllControls();" id="btnReset" type="button"> Reset  <i class="fa fa-refresh"></i> </button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="" type="submit">Search</button>
+                    </div>
+
+                    <!--<div class="size100 pull-left">
+                        <div class="checkbox-custom checkbox-default">
+                            <input id="chkAll"  type="checkbox">
+                            <label class="control-label" for="Check All">Check All</label>
+                        </div>
+                    </div>-->
+
+
+                    <input type="hidden" id="hfFacilityId" />
+                    <input type="hidden" id="hfProvider" />
+                    <input type="hidden" id="hfResource" />
+                    <input type="hidden" id="hfPractice" />
+                    <input type="hidden" id="hfPatientid" />
+                </div>
+            </form>
+
+        </div>
+    </section>
+    <div id="pnlScheduleSearch_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="ScheduleSearch_SelectedDataKeys" />
+                <table class="table table-bordered  table-condensed table-hover mb-none" id="dgvScheduleSearch">
+                    <thead>
+                        <tr>
+
+                            <th style="display:none;">Action</th>
+                            <th style="padding-right:0px!important;"><input id="chkAll" type="checkbox"></th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Day</th>
+                            <th>Minutes</th>
+                            <th>BookedPatients</th>
+                            <th>Provider</th>
+                            <th>Resources</th>
+                            <th>Reasons</th>
+                            <th>OverBooked</th>
+                            <th>Facility</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divSchedulingPaging"></div>
+            </div>
+        </section>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+    // ------ start of collapse .panel js " by shehzd "
+
+    $('.panel')
+.on('click', '.panel-actions a.fa-caret-up', function (e) {
+    e.preventDefault();
+
+    var $this,
+        $panel;
+
+    $this = $(this);
+    $panel = $this.closest('.panel');
+
+    $this
+        .removeClass('fa-caret-up')
+        .addClass('fa-caret-down');
+
+    $panel.find('.panel-body, .panel-footer').slideDown(400);
+})
+.on('click', '.panel-actions a.fa-caret-down', function (e) {
+    e.preventDefault();
+
+    var $this,
+        $panel;
+
+    $this = $(this);
+    $panel = $this.closest('.panel');
+
+    $this
+        .removeClass('fa-caret-down')
+        .addClass('fa-caret-up');
+
+    $panel.find('.panel-body, .panel-footer').slideUp(200);
+})
+
+    // --------  end of collapse .panel js " by shehzd "
+
+
+    $('#pnlScheduleSearch #rdResource').click(function () {
+        if ($(this).is(':checked')) {
+
+            $("#pnlScheduleSearch #lblResource").css("display", "inline");
+            $("#pnlScheduleSearch #lnkResourceEdit").css("display", "none");
+
+            $('#pnlScheduleSearch #divResource').show();
+            $('#pnlScheduleSearch #divProvider').hide();
+
+            $('#pnlScheduleSearch #txtProvider').val("");
+
+            $('#pnlScheduleSearch #txtResource').val("");
+            $('#pnlScheduleSearch #hfProvider').val(null);
+
+        }
+        else {
+            //$('#rdprovider').attr('checked', true);
+            //$('#Provider').attr('disabled', true);
+        }
+    });
+    $('#pnlScheduleSearch #rdProvider').click(function () {
+        if ($(this).is(':checked')) {
+
+            $("#pnlScheduleSearch #lblProvider").css("display", "inline");
+            $("#pnlScheduleSearch #lnkProviderEdit").css("display", "none");
+
+            $('#pnlScheduleSearch #divResource').hide();
+            $('#pnlScheduleSearch #divProvider').show();
+
+            $('#pnlScheduleSearch #txtResource').val("");
+
+            $('#pnlScheduleSearch #txtResource').val("");
+            $('#pnlScheduleSearch #hfResource').val(null);
+        }
+        else {
+            //$('#rdresource').attr('checked', true);
+            //$('#Resource').attr('disabled', true);
+        }
+    });
+    //---------------------------------------------------------------------------------
+
+    $(document).ready(function () {
+
+        $('#pnlScheduleSearch #divResource').hide();
+
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            }
+        });
+
+        //Scheduling_Search.BindPatientAccount();
+
+        $('#pnlScheduleSearch #chkAll').change(function () {
+
+            if ($('#pnlScheduleSearch #chkAll').is(':checked')) {
+
+                $('#dgvScheduleSearch input[type="checkbox"]').prop('checked', this.checked);
+            }
+
+            else
+                Scheduling_Search.UnSelectAllChkBoxes();
+
+        });
+
+        $('#pnlScheduleSearch #tpFromTime').timepicker({
+            //defaultTime: '12:00 AM'
+            defaultTime: false
+        }).on('changeTime.timepicker', function (e) {
+            //console.log('The time is ' + e.time.value);
+            //console.log('The hour is ' + e.time.hours);
+            if (e.time.hours < 0) {
+                $('#pnlScheduleSearch #tpFromTime').val('');
+            }
+        });
+
+        $('#pnlScheduleSearch #tpToTime').timepicker({
+            // defaultTime: '12:00 PM'
+            defaultTime: false
+        }).on('changeTime.timepicker', function (e) {
+            //console.log('The time is ' + e.time.value);
+            //console.log('The hour is ' + e.time.hours);
+            if (e.time.hours < 0) {
+                $('#pnlScheduleSearch #tpToTime').val('');
+            }
+        });
+       
+        ////Azam Aftab Dated Jan 15,2015 PMS-3340
+        ////::this functionality is available in Scheduling_Search.js with name validateSearchDate
+        //$('#pnlScheduleSearch #dptoDate').attr('disabled', true);
+
+        //$('#pnlScheduleSearch #dpfromDate').datepicker({
+        //    todayHighlight: true
+        //}).on('changeDate', function (e) {
+        //    $('#pnlScheduleSearch #dptoDate').attr('disabled', false);
+        //    //$('#pnlScheduleSearch #dptoDate').val("").datepicker('update');
+        //    //$('#pnlScheduleSearch #dptoDate').datepicker('remove');
+
+
+        //    $(this).datepicker('hide');
+
+
+        //    var inputDate = $('#pnlScheduleSearch #dpfromDate').datepicker('getDate');
+        //    $('#pnlScheduleSearch #dptoDate').datepicker({
+        //        todayHighlight: true,
+        //        startDate: inputDate,
+        //    }).on('changeDate', function (e) {
+
+        //        $(this).datepicker('hide');
+
+        //    });
+        //});
+        // //end Dated Jan 15,2015 PMS-3340
+
+    });
+
+</script>
+

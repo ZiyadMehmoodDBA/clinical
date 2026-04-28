@@ -1,0 +1,315 @@
+﻿<div id="pnlDocumentViewer">
+    <div id="actionPanDocumentViewer" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div id="Patient_Search"></div>-->
+
+    <div class="modal-dialog mt-none size99per mb-none">
+        <div class="modal-content" style="height:99vh;overflow:hidden;">
+
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Document_Viewer.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Document Viewer  <small class="sub-heading" id="pHeaderPatientInfo"></small> <small class="sub-heading" id="smDocumentInfo"></small></h4>            
+            </div>
+
+           
+            <div class="modal-body pr-none pl-none pt-none">
+                <div id="tblDocumentAssignedTo" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmDocumentViewer">
+
+                        <section class="control-strip-top mb-default">
+                            <div class="controls-left">
+                                <a class="btn btn-link btn-xs btn-next-prev pr-none" id="lnkPreviousDocument" onclick="Document_Viewer.previousDocument();" title="Previous Document"><i class="fa fa-angle-left text-success"></i> Prev Doc <span class="pipe">|</span></a>
+                                <a class="btn btn-link btn-xs btn-next-prev pl-none" id="lnkNextDocument" onclick="Document_Viewer.nextDocument();" title="Next Document">Next Doc <i class="fa fa-angle-right text-success"></i> </a>
+                            </div>
+                            <div class="controls" id="imagesControls" style="margin-left:0">
+
+                                <a class="btn btn-link btn-xs" title="Zoom In" onclick="Document_Viewer.ZoomIn();"><i class="fa fa-search-plus text-success"></i></a>
+                                <a class="btn btn-link btn-xs p-none" title="Zoom Out" onclick="Document_Viewer.ZoomOut();"><i class="fa fa-search-minus text-danger"></i> </a>
+
+                                <a class="btn btn-link btn-xs" title="Reset Image" onclick="Document_Viewer.navigateCanvas('reset')"><i class="fa fa-refresh text-default"></i></a>
+
+                                <!--<a class="btn btn-link btn-xs" title="Move Up" onclick="Document_Viewer.navigateCanvas('up')"><i class="fa fa-arrow-circle-o-up"></i></a>
+                                <a class="btn btn-link btn-xs" title="Move Down" onclick="Document_Viewer.navigateCanvas('down')"><i class="fa fa-arrow-circle-o-down"></i></a>
+
+                                <a class="btn btn-link btn-xs" title="Move Left" onclick="Document_Viewer.navigateCanvas('left')"><i class="fa fa-arrow-circle-o-left"></i></a>
+                                <a class="btn btn-link btn-xs" title="Move Right" onclick="Document_Viewer.navigateCanvas('right')"><i class="fa fa-arrow-circle-o-right"></i></a>-->
+
+
+
+                            </div>
+                            <div id="rightpanel" class="controls-right" style="margin-left:auto">
+                                <button id="btnFaxDocument" class="btn btn-link btn-xs" type="button" onclick="Document_Viewer.sendAsFax();"><i class="fa fa-fax black"></i> Fax</button>
+                                <button id="btnReviewDocument"  class="btn btn-link btn-xs"  type="button" onclick="Document_Viewer.ReviewDocument(1, 1);"><i class="fa fa-check-square-o text-warning"></i> Review &amp; Sign</button>
+                                <!--<button id="btnSignDocument" class="btn btn-primary btn-sm rightbtn" type="button" onclick="Document_Viewer.ReviewDocument(0, 1);">Sign</button>-->
+                                <button id="btnSave" class="btn btn-link btn-xs"  type="submit"><i class="fa fa-save text-success"></i> Save</button>
+
+                                <button id="btnPrint" class="btn btn-link btn-xs" type="button" onclick="Document_Viewer.PrintDocument();"><i class="fa fa-print text-default"></i> Print</button>
+
+                                <button type="button" id="btnDocumentDelete" class="btn btn-link btn-xs"  onclick="Document_Viewer.DocumentDelete();"><i class="fa fa-trash text-danger"></i> Delete</button>
+                            </div>
+
+                            <input type="hidden" id="hfPatientId" value="-1" />
+                            <input type="hidden" id="hfVisitId" value="-1" />
+                            <input type="hidden" id="hfCaseId" value="-1" />
+                            <input type="hidden" id="hfDocumentTagId" />
+                            <input type="hidden" id="reviewed" />
+                            <input type="hidden" id="hfXddlAssignedUserto" />
+                            <input type="hidden" id="hfddlAssignedUserto" />
+                            <input type="hidden" id="hfEOBManualPostingId" />
+                        </section>
+
+                        <div class="col-xs-12 col-lg-3 pull-right pl28 doc-sidebar-container pr-none" id="formcontrols">
+                            <div id="CtrDocumentViewer">
+                                <div class="splitterbodyLeft col-xs-12 pr-none" id="splitterbodyLeft">
+                                    <div class="col-xs-12">
+                                        <!--<label class="control-label">Patient Name</label>-->
+                                        <label id="lblPatientName" class="control-label">Patient Name</label>
+                                        <a id="lnkPatientNameEdit" style="display:none;" href="#" onclick="utility.PatientDemographics(($('#' + Document_Viewer.params.PanelID + ' #hfPatientId').val()), 'Document_Viewer');" title="Edit Patient">Patient Name</a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtPatientName" name="PatientName" type="text" />
+                                            <div id="divSearchPatient" class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Document_Viewer.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12" id="divPatientDocFolder">
+                                        <label class="control-label" for="Folder">Folder<span class="required">*</span></label>
+                                        <select class="form-control" multiple="multiple" name="Folder" id="ddlFolder" ddlist="GetDocument"></select>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <!--<label id="lblClaimNumber" class="control-label" for="Claim Number">Claim Number</label>-->
+                                        <label id="lblFileName" class="control-label">File Name<span class="required">*</span></label>
+                                        <!--<input class="form-control" id="txtFileName" name="FileName" type="text" />-->
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtFileName" name="FileName" type="text" />
+                                            <div class="input-group-btn">
+                                                <input class="form-control" id="lnkFileNameExt" name="FileNameExt" type="text" style="width: 40px;" readonly="readonly" />
+                                                <!--<button id="lnkFileName" type="button" class="btn btn-primary btn-xs"><i class="fa"></i></button>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="divdptDOS" class="col-xs-12">
+                                        <label class="control-label" for="DOS">DOS</label>
+                                        <label class="radio-inline"><input id="rdCalendar" type="radio" name="DOSDate" value="Calendar" onchange="Document_Viewer.SelectedDOSControl(this)" /> Calendar</label>
+                                        <label class="radio-inline"><input id="rdDropdown" type="radio" name="DOSDate" value="Dropdown" onchange="Document_Viewer.SelectedDOSControl(this)" /> Visits</label>
+                                        <div class="clearfix"></div>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control" name="DOS" id="dtpDOS" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div id="divddlDOS" class="col-xs-6">
+                                        <label class="control-label" for="ddlDOS"> Visit Date(s)</label>
+                                        <div class="input-group col-sm-12">
+                                            <select id="ddlDOS" class="form-control"></select>
+
+                                        </div>
+                                    </div>
+                                    <div id="divExpirtyDate" class="col-xs-6">
+                                        <label for="dtpExpirtyDate" class="control-label">Expiry Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" id="dtpExpirtyDate" name="ExpirtyDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div id="divReceivedOn" class="col-xs-6">
+                                        <label for="dtpReceivedOn" class="control-label">Received On</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" id="dtpReceivedOn" name="ReceivedOn" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div id="divDocumentProvider" class="col-xs-6">
+                                        <label for="ddlDocumentProvider" class="control-label">Doc Provided By</label>
+                                        <select class="form-control" id="ddlDocumentProvider" name="DocumentProvider" ddlist="GetDocumentProvider"></select>
+                                    </div>
+                                    <div id="divDocumentSource" class="col-xs-6">
+                                        <label for="ddlDocumentSource" class="control-label">Source</label>
+                                        <select class="form-control" id="ddlDocumentSource" name="DocumentSource" ddlist="GetDocumentSource"></select>
+                                    </div>
+                                    <div id="divDocumentPriority" class="col-xs-6">
+                                        <label for="ddlDocumentPriority" class="control-label">Priority</label>
+                                        <select class="form-control" id="ddlDocumentPriority" name="Priority" ddlist="GetDocumentPriority"></select>
+                                    </div>
+                                    <div id="divDocumentUserReview" class="col-xs-6">
+                                        <label for="ddlAssignUserto" class="control-label">Assign User</label>
+                                        <select class="form-control" id="ddlAssignUserto" name="Review" ddlist="GetCoWorkerGroupUsersFullName"></select>
+                                    </div>
+                                    <div id="divDocumentTag" class="col-xs-6">
+                                        <label id="lblDocumentTag" class="control-label">Tags</label>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtTagName" type="text" placeholder="Start typing to search" name="Document Tag" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkDocumentTag" class="btn btn-primary btn-xs " type="button" onclick="Document_Viewer.AddTags();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label id="lblCaseNumber" class="control-label">Case Number</label>
+                                        <a id="lnkCaseNumberEdit" style="display:none;" href="#" onclick="Document_Viewer.OpenCaseDetail('hfCaseId');" title="Edit Case">Case Number</a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtCaseNumber" type="text" placeholder="Start typing to search" name="CaseNumber" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkCaseNumber" class="btn btn-primary btn-xs " type="button" onclick="Document_Viewer.OpenCase('Search Case', 'txtCaseNumber', 'hfCaseId', 'lblCaseNumber', 'lnkCaseNumberEdit');"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <!--<label id="lblClaimNumber" class="control-label" for="Claim Number">Claim Number</label>-->
+                                        <label id="lblClaimNumber" class="control-label">Claim Number</label>
+                                        <a id="lnkClaimNumberEdit" style="display:none;" href="#" onclick="utility.LoadVisitDetail(($('#' + Document_Viewer.params.PanelID + ' #hfVisitId').val()), ($('#' + Document_Viewer.params.PanelID + ' #hfPatientId').val()), 'Document_Viewer');" title="Edit Claim">Claim Number</a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text" />
+                                            <div id="divSearchClaim" class="input-group-btn">
+                                                <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="Document_Viewer.OpenEncounter();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="divOtherDocumentSource" class="col-xs-6 hidden">
+                                        <label for="txtOtherDocumentSource" class="control-label ">Other Document Source</label>
+                                        <input id="txtOtherDocumentSource" name="OtherDocumentSource" maxlength="255" class="form-control" type="text" />
+                                    </div>
+                                    <div class="col-xs-12 p-none">
+                                        <div class="pull-left pl-default pr-default pt-xs">
+                                            <div class="checkbox-custom checkboxTiny">
+                                                <input id="claimAttach" type="checkbox">
+                                                <label class="control-label" for="claimAttach">Claim Attachment</label>
+                                            </div>
+                                        </div>
+                                        <div class="pull-left pl-default pr-default pt-xs">
+                                            <div class="checkbox-custom checkboxTiny">
+                                                <input id="ChkPrivate" type="checkbox" onclick="Document_Viewer.OpenChangePassword(this);">
+                                                <label class="control-label" for="ChkPrivate">Private</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6 pl-none"><label class="control-label">Comments</label></div>
+                                        <div id="lnkDocumentNote" class="col-xs-6 text-right pr-none" style="display:none;">
+                                            <a href="#" onclick="Document_Viewer.LoadDocumentNote()"> Progress Note</a>
+                                        </div>
+                                        <textarea class="form-control" maxlength="256" rows="2" id="txtComments" spellcheck="true"></textarea>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label for="txtNarrativeReference" class="control-label"> Narrative Ref.</label>
+                                        <textarea class="form-control" id="txtNarrativeReference" type="text" name="NarrativeReference" rows="2" maxlength="255" spellcheck="true"></textarea>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label for="txtReferenceLink" class="control-label">Ref. Link</label>
+                                        <textarea class="form-control" id="txtReferenceLink" type="text" name="ReferenceLink" rows="2" maxlength="255" spellcheck="true"></textarea>
+                                    </div>
+
+                                    <!--<div class="col-xs-6 pt-xs">
+            <div class="checkbox-custom checkbox-default" id="divReviewedDoc">
+                <input id="reviewed" name="reviewed" type="checkbox">
+                <label class="control-label" for="reviewed">Reviewed</label>
+            </div>
+        </div>-->
+                                    <!--<div class="splitter m-none">Document Reference Details</div>-->
+
+                                </div>
+                            </div>
+                            
+                            <!--<div class="splitterBtn mb-none" style="height:1px;"><a><i class="fa fa-angle-up"></i></a></div>-->
+
+                        </div>
+                        <a href="#" class="asideBtn btn lf" id="collaspe-left"><i class="fa fa-bars"></i></a>
+                        <!--<div class="col-xs-12 col-lg-9 p-none toggledCont" id="formcontrols">
+
+
+
+                                            <style>
+                            .document-viewer-img {
+                                width: 75%;
+                                margin-left: 12.5% !important;
+                            }
+                        </style>
+                                        </div>-->
+                        <div class="col-sm-3 col-md-2 hidden" id="extraContorls">
+                            <!--<section class="panel panel-featured" id="pdfControls" style="display:block;">
+                                <div class="panel-body panel-body-nopadding">
+                                    <div class="spacer10"></div>
+                                    <ul class="nav nav-pills nav-stacked navSidebar-stacked-NoRadius pre-scrollable">
+                                        <li class="document-viewer-img"><img class="img-center img-thumbnail" src="images/patient.jpg"><div class="clearfix text-center">asdasd1</div></li>
+                                        <li class="document-viewer-img"><img class="img-center img-thumbnail" src="images/patient.jpg"><div class="clearfix text-center">1aasasd</div></li>
+                                        <li class="document-viewer-img"><img class="img-center img-thumbnail" src="images/patient.jpg"><div class="clearfix text-center">2asdasd</div></li>
+                                        <li class="document-viewer-img"><img class="img-center img-thumbnail" src="images/patient.jpg"><div class="clearfix text-center">3asdasd</div></li>
+                                    </ul>
+                                </div>
+                            </section>-->
+
+                        </div>
+                            <iframe id="OpenHTMLDocument" class="col-sm-12 panel-body panel-featured" style="display:none;height:450px"></iframe>
+                            <iframe id="OpenDocumentIF1" class="col-sm-12 panel-body panel-featured" style="display:none;"></iframe>
+                            <input type="hidden" id="helperPDF" />
+                        <input type="button" style="display:none" id="btnCallBack" onclick="Document_Viewer.SaveAnnotatedDocument()" />
+                            <object id="OpenDocumentIF" editRequired="true" class="col-sm-12 p-none pdf-view-lg" data="Scripts/js/pdf/web/viewer.html" style="display:none;height:1000px;"></object>
+                            <div class="col-xs-12 panel-body panel-featured NoRadius" id="canvasContainer" style="overflow-y:auto; max-height:800px; display:none;">
+                                <canvas id="canvas" class="pb-sm"></canvas>
+                            </div>
+                        <div id="printHelper" class="noprint" style="display:none;"></div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <script>
+
+                kendo.pdf.defineFont({
+                    "DejaVu Sans": "../fonts/DejaVuSans.ttf",
+                    "DejaVu Sans|Bold": "../fonts/DejaVuSans-Bold.ttf",
+                    "DejaVu Sans|Bold|Italic": "../fonts/DejaVuSans-Oblique.ttf",
+                    "DejaVu Sans|Italic": "../fonts/DejaVuSans-Oblique.ttf"
+                });
+            </script>
+            <style type="text/css">
+                .blueBgPrint {
+                    background: #005da9 !important;
+                    color: #fff !important;
+                }
+
+                .blueBorderPrint {
+                    border-bottom: 2px solid #005da9;
+                }
+
+                .btn-link-print {
+                    color: #000000 !important;
+                    font-size: 16px;
+                    font-weight: 700;
+                }
+
+                .line-height-fix {
+                    font-size: 14px !important;
+                }
+            </style>
+
+            <script>
+                $("#collaspe-left").on('click', function () {
+                    if ($('.pl28').hasClass('toggled1')) {
+                        $('.pl28').removeClass('toggled1')
+                    } else {
+                        $('.pl28').addClass('toggled1')
+                    }
+                })
+            </script>
+
+            <script type="x/kendo-template" id="page-templateLegacy">
+                <div class="page-template" id="legacyViewTemplateDiv">
+                    <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                        <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                        <div id="ClinicalReportsFooterTextLegacy" class="blueBgPrint" style="float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                            Generated by:<span id="ClinicalReportsFooterLegacy">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                        </div>
+                    </div>
+
+                </div>
+            </script>
+        </div>
+        <div id="Notedoc"> </div>
+    </div>
+</div>

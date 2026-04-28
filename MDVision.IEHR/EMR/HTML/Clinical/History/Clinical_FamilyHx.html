@@ -1,0 +1,266 @@
+﻿<div class="row" id="pnlClinicalFamilyHx">
+    <div id="actionPanClinicalFamilyHx" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_FamilyHx.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Family Hx</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer5"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_FamilyHx.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Add Family Hx</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body pl-none NoRadiusT" id="pnlSection_Search" style="height:345px">
+
+                            <div id="favSectionDiv" data-title="Favorites" class="toggleHorDefault">
+                                <div class="col-xs-12 pb-sm">
+                                    <span class="pull-left">Favorites List</span>
+                                    <a id="favSelectAllLink" href="#" onclick="Clinical_FamilyHx.selectAllFavoriteListContent()" class="btn btn-link btn-xs pull-right disableAll">Select All</a>
+                                    <div class="clearfix"></div>
+                                    <select id="ddlFavoriteListFamilyHx" name="FavoriteListFamilyHx" onchange="Clinical_FamilyHx.loadfavoriteListContent(this)" class="form-control"></select>
+                                    <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="Clinical_FamilyHx.AutoSearchFavFamilyHx()" />
+                                </div>
+                                <ul id="ulFavoriteListFamilyHxContent" name="FavoriteListFamilyHxContent" class="listPrimary height-max200 overflowY"></ul>
+                            </div>
+                            <div id="FormDiv" class="col-xs-12">
+
+                                <form id="frmClinicalFamilyHx" method="post" name="frmClinicalFamilyHx" onsubmit="return false">
+
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label" for="Date">Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input type="text" class="form-control" id="dtFamilyHxDate" name="FamilyHxDate" data-plugin-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="chkFamilyHxUnremarkable" onclick="Clinical_FamilyHx.unRemarkableFamilyHx(this);" name="FamilyHxUnremarkable">
+                                                <label class="control-label" for="chkFamilyHxUnremarkable">Unremarkable</label>
+                                            </div>
+                                        </div>
+                                        <div class="spacer5"></div>
+                                        <section class="panel">
+                                            <div id="FamilyDisease" class="tab-pane">
+                                                <input id="hfFamilyDiseaseHxId" name="FamilyDiseaseHxId" type="hidden" value="-1" />
+                                                <div class="col-sm-6 col-md-2">
+                                                    <section class="panel panel-featured mb-xs" id="sectionMembers">
+                                                        <header class="panel-heading">
+                                                            <h2 id="headingFamilyMember" class="panel-title">Family Members</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none" id="memberList">
+                                                            <div class="col-xs-12 mb-sm">
+                                                                <div class="input-group">
+                                                                    <input class="form-control" id="txtSearchMember" oninput="Clinical_FamilyHx.filterFamilyMember(this)" name="SearchMember" placeholder="Search" type="text" value="">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnDisease" class="btn btn-primary btn-xs" type="button" onclick=""><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <ul id="ulFamilyMember" name="FamilyMember" class="listPrimary own-scroll overflowY" style="height:206px;max-height:206px;">
+                                                                <!--<li id="1" class="active" onclick="Clinical_FamilyHx.markStatusActive('ulFamilyMember', '1');"><a href="#Occupation">Occupation</a></li>
+                                        <li id="2" onclick="Clinical_FamilyHx.markStatusActive('ulFamilyMember', '2');"><a href="#Sleep">Sleep</a></li>
+                                        <li id="3" onclick="Clinical_FamilyHx.markStatusActive('ulFamilyMember', '3');"><a href="#Exercises">Exercises</a></li>
+                                        <li id="4" onclick="Clinical_FamilyHx.markStatusActive('ulFamilyMember', '4');"><a href="#Housing">Housing</a></li>
+                                        <li id="5" onclick="Clinical_FamilyHx.markStatusActive('ulFamilyMember', '5');"><a href="#CaffeineIntak">Caffeine Intake</a></li>-->
+                                                            </ul>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-6 col-md-2">
+                                                    <section class="panel panel-featured mb-xs" id="sectionDiagnosis">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">History</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none disableAll" id="DiagnosisList">
+                                                            <div class="col-xs-12 mb-sm">
+                                                                <div class="radio-custom col-sm-6">
+                                                                    <input id="rdodiagnose" type="radio" name="rdodiagnose" checked="checked" onchange="Clinical_FamilyHx.changeDiagnoseField();" value="2">
+                                                                    <label for="rdFreeText">ICD</label>
+                                                                </div>
+                                                                <div class="radio-custom col-sm-6">
+                                                                    <input id="rdofreetext" type="radio" name="rdodiagnose" onchange="Clinical_FamilyHx.changeDiagnoseField();" value="1">
+                                                                    <label for="rdFreeText">Custom</label>
+                                                                </div>
+
+                                                                <div class="input-group" id="DivICDAutoComplete">
+                                                                    <input class="form-control" id="txtDisease" placeholder="Search Disease" oninput="Clinical_FamilyHx.bindICD9AutoComplete(this)" onkeypress="Clinical_FamilyHx.disableEnterKey(event)" type="text" value="">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnDisease" class="btn btn-primary btn-xs" type="button" onclick="Clinical_FamilyHx.openSearchPopup('ICD', 'txtDisease', 'hfCPTCode,hfCPTDescription')"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-group col-xs-12 hidden" id="DivFreeText">
+                                                                    <input class="form-control" placeholder="Enter text" maxlength="500" type="text" id="txtFreeText" name="Disease" onblur="Clinical_FamilyHx.createFreeTextLi();" />
+                                                                </div>
+                                                            </div>
+                                                            <div id="FamilyHxDisease">
+                                                                <ul id="ulFamilyHxDisease" name="FamilyHxDisease" class="listPrimary own-scroll scroll-2x overflowY" style="height:177px;max-height:177px;"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-12 col-md-8">
+                                                    <section id="sectionFamilyMemberDetails" class="panel panel-featured mb-xs">
+                                                        <header class="panel-heading">
+                                                            <h2 id="headingFamilyMemberDetail" class="panel-title">Details</h2>
+                                                        </header>
+                                                        <div id="FamilyMemberDetails" class="panel-body disableAll">
+                                                          
+                                                            <div class="col-sm-4">
+                                                                <label class="control-label">Health Status</label>
+                                                                <select id="ddlHealthStatus" name="HealthStatus" ddlist="GetFamilyHxHealthStatus" class="form-control"></select>
+                                                            </div>
+
+                                                            <div class="col-sm-4">
+                                                                <label class="control-label">Year of Birth</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                    <input id="dtpYearofBirth" name="YearofBirth" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-sm-4">
+                                                                <label class="control-label">Death occurred due to specified Problem?</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="pull-left pr-default">
+                                                                    <div class="checkbox-custom">
+                                                                        <input type="checkbox" id="RadYesRelativeDied" name="RadRelativeDied"><label class="control-label" for="RadYesRelativeDied">Yes</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="pull-left pl-default pr-default">
+                                                                    <div class="checkbox-custom">
+                                                                        <input type="checkbox" id="RadNoRelativeDied" name="RadRelativeDied"><label class="control-label" for="RadNoRelativeDied">No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <div class="col-sm-6" style="padding-left:0 !important">
+                                                                    <label class="control-label">Age at Death</label>
+                                                                    <div style="position:relative;">
+                                                                        <input type="text" id="txtAgeAtDeath" class="form-control" name="AgeAtDeath" onblur="Clinical_FamilyHx.calculateAgeInYearsTillNow(this, '#dtpYearofBirth')" data-plugin-keyboard-numpad>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-sm-6" style="padding-right:0 !important">
+                                                                    <label class="control-label">Age at Diagnosis (Approx)</label>
+                                                                    <div style="position:relative;">
+                                                                        <input type="text" id="txtAgeAtDiagnosis" class="form-control" name="AgeAtDiagnosis" onblur="Clinical_FamilyHx.calculateAgeInYearsTillNow(this, '#dtpYearofBirth')" data-plugin-keyboard-numpad>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="clearfix"></div>
+                                                                    <label class="control-label">Comments</label>
+                                                                    <textarea id="txtFamilyMemberComments" name="FamilyMemberComments" maxlength="500" rows="4" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+
+                                                                <div class="pull-right pad-a-labelsize">
+                                                                    <button id="aHistory" class="btn btn-sm hidden" onclick="" type="button"><i class="fa fa-history"></i> History</button>
+                                                                    <button id="btnFamilySave" type="button" onclick="Clinical_FamilyHx.familyHxSave('');" class="btn btn-sm btn-success">Save</button>
+                                                                </div>
+                                                            </div>
+                                                    </section>
+                                                </div>
+
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <input type="hidden" name="PatientId" id="hfPatientId" />
+                                    <input type="hidden" name="FamilyHxType" id="hfFamilyHxType" value="tobacco" />
+                                    <input type="hidden" name="FamilyHxSoapText" id="hfFamilyHxSoapText" value="" />
+                                    <input type="hidden" name="gridComments" id="hfGridComments" />
+                                    <input type="hidden" name="diseaseId" id="hfDiseaseId" />
+                                    <input type="hidden" name="diseaseId" id="hfMemberdetailid" />
+
+
+                                    <input type="hidden" name="PreviousSelectedDisease" id="hfPreviousSelectedDisease" />
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label">Overall Comments</label>
+                            <textarea id="txtFamilyOverallComments" name="FamilyOverallComments" maxlength="5000" rows="3" class="form-control" spellcheck="true"></textarea>
+                        </div>
+                        <div class="pull-right pad-a-labelsize-btn pr-default">
+                            <button class="btn btn-success btn-sm pull-right mr-sm" style="display:none;" type="button" onclick="Clinical_FamilyHx.addFamilyHxToNotes();" id="btnAddVitalsOnNote">Add on Note</button>
+                            <button class="btn btn-success btn-sm pull-right mr-sm" type="button" onclick="Clinical_FamilyHx.familyHxSave('');" id="btnFamilyHxSave">Save</button>
+                        </div>
+                    </section>
+
+                    <input type="hidden" name="FamilyHxId" id="hfFamilyHxId" value="-1" />
+                    <div class="clearfix"></div>
+                    <!-- /Family Hx -->
+                </div>
+            </div>
+
+            <div id="pnlFamilyHx_Result" style="display: inline;">
+                <div class="spacer10"></div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="spacer10"></div>
+                    <div class="col-sm-6" id="divSwitch">
+                        <span class="pr-xs">All</span>
+                        <div class="btnWidgetSwitch switch switch-xs switch-success">
+                            <input id="switchVisit" type="checkbox" status="1" checked="" name="Switch" data-plugin-ios-switch="" style="display: inline;" onchange="Clinical_FamilyHx.ChangeCurrentPast(this);">
+                        </div>
+                        <span class="pl-xs">Current</span>
+                    </div>
+                </div>
+                <section class="panel" id="pnlCurrent">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvFamilyHx">
+                            <thead>
+                                <tr>
+
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvFamilyHx_Paging"></div>
+                    </div>
+                </section>
+
+                <section class="panel hidden" id="pnlPast">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPastFamilyHx">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">HxId</th>
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvPastFamilyHx_Paging"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+
+</div>

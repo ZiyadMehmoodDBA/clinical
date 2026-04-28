@@ -1,0 +1,534 @@
+﻿<div class="row" id="pnlClinicalLabOrder" style="display:none;">
+    <div id="actionPanClinicalLabOrder" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<form method="post" id="frmClinicalLab" onsubmit="return false">-->
+    <div id="modaldialog" class="modal-dialog-full mb-none">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_LabOrder.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Lab Orders</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section id="removeDiv">
+
+                        <ul class="tabs-custom" id="ulSocialHxTabsItems">
+                            <li id="PatientlistLabOrderPending" onclick="Clinical_LabOrder.LabOrderSearch(null, null, null, null);" class="active"><a id="ordersPending" class="" href="#PatientLabOrderPending" data-toggle="tab">Pending Orders</a></li>
+                            <li id="PatientlistLabOrderSent" onclick="Clinical_LabOrder.LabOrderSearch('0', '', '', null, 'Transmitted');"><a id="ordersSent" class="" href="#PatientLabOrderSent" data-toggle="tab">Sent Orders</a></li>
+                            <li id="PatientlistLabResult" onclick="Clinical_LabOrder.LabResultsSearch(null, null, null, null);"><a id="results" class="" href="#PatientLabResult" data-toggle="tab">Results</a></li>
+                        </ul>
+
+                        <div class="tab-content tabs-custom-body pt-default">
+                            <div id="PatientLabOrderPending" class="tab-pane active">
+                                <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_LabOrder.LabOrderAddEdit(-1);"><i class="fa fa-plus-circle"></i> Add</button>
+                                <div class="spacer10"></div><div class="clearfix"></div>
+                                <div class="splitterBody mt-xs" id="splitterBody">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <div class="panel-actions">
+                                                <a href="#" class="closebtn pull-right" onclick="Clinical_LabOrder.UnLoadTab()"></a>
+                                            </div>
+                                            <h2 class="panel-title">Search Lab Order </h2>
+                                        </header>
+                                        <div class="panel-body" id="pnlLabOrder_Search">
+                                            <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalLabOrder">
+
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Test</label>
+                                                        <!--<input class="form-control" name="test" id="txtTest" type="text" maxlength="30" />-->
+                                                        <div class="input-group ">
+                                                            <input class="form-control" id="txtCPTCode" onkeypress="Clinical_LabOrder.validateSpecialCharacters(event);" maxlength="100" placeholder="Search test" type="text" name="CPTCode" oninput=" Clinical_LabOrder.bindAutoComplete(this,null,'PatientLabOrderPending');" />
+                                                            <div class="input-group-btn">
+                                                                <!--Clinical_LabOrder.openCPTCode('txtCPTCode');-->
+                                                                <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Order Number</label>
+                                                        <input class="form-control" onkeypress="Clinical_LabOrder.validateSpecialCharacters(event);" name="OrderNo" id="txtOrderNumber" type="text" maxlength="30" />
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Date From</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" id="dpStartDate" name="OrderFromDate" data-plugin-datepicker autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Date To</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" id="dpToDate" name="OrderToDate" data-plugin-datepicker autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2 hidden">
+                                                        <label class="control-label">Status </label>
+                                                        <select id="ddlStatus" class="form-control" name="Status">
+                                                            <option value="">-All-</option>
+                                                            <option value="Pending">Pending</option>
+                                                            <option value="Signed">Signed</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Laboratory </label>
+                                                        <select id="ddlLaboratory" class="form-control" name="LabId" ddlist=""></select>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2 ">
+                                                        <label class="control-label">Provider</label>
+                                                        <select id="ddlProvider" class="form-control" name="Provider"></select>
+                                                    </div>
+                                                    <div class="mt-md pr-default pull-right">
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnLabSearch" type="button" onclick="Clinical_LabOrder.LabOrderSearch('0');">Search</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnProcedureReset" type="button" onclick="Clinical_LabOrder.LabOrderReset();">Reset</button>
+                                                        <button type="button" class="btn btn-sm btn-danger rightbtn" title="Delete" onclick="Clinical_LabOrder.PendingLabOrderDelete();"><span class="glyphicon glyphicon-trash"></span></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfProvider" name="ProviderId" />
+                                                <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                                <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                            </form>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="splitterBtn mb-none"></div>
+                                <input type="hidden" id="hfLabOrderId" value="-1" />
+
+                                <div id="pnlLabOrder_Result" style="display: inline;">
+                                    <div class="panel-body panel-featured">
+                                        <div class="spacer5"></div>
+                                        <input type="hidden" id="Provider_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLabOrder">
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th style="display:none">LabOrderId</th>
+
+                                                    <th class="noWordBreak size30">Order Date & Time</th>
+                                                    <th class="size300 size-min400">Test</th>
+                                                    <th class="size30">Laboratory</th>
+                                                    <th class="size30">Order Number</th>
+                                                    <th class="size30">Status</th>
+                                                    <th class="size30">Provider</th>
+                                                    <th class="size30">Assigned To</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvLabOrder_Paging"></div>
+                                    </div>
+                                    <div class="pull-right mt-sm">
+                                        <button class="btn btn-success btn-sm" type="button" onclick="Clinical_LabOrder.addOrdersToNotes();" id="btnAddLabOrderToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div id="PatientLabOrderSent" class="tab-pane">
+                                <button type="button" class="btn btn-success btn-sm hidden" id="btn-add" onclick="Clinical_LabOrder.LabOrderAddEdit(-1);"><i class="fa fa-plus-circle"></i> Add</button>
+                                <div class="spacer10"></div><div class="clearfix"></div>
+                                <section class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="panel-actions">
+                                            <a href="#" class="closebtn pull-right" onclick="Clinical_LabOrder.UnLoadTab()"></a>
+                                        </div>
+                                        <h2 class="panel-title">Search Lab Order </h2>
+                                    </header>
+                                    <div class="panel-body" id="pnlLabOrder_Search">
+                                        <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalLabOrder">
+
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <label class="control-label">Test</label>
+                                                    <!--<input class="form-control" name="test" id="txtTest" type="text" maxlength="30" />-->
+                                                    <div class="input-group ">
+                                                        <input class="form-control" id="txtCPTCode" onkeypress="Clinical_LabOrder.validateSpecialCharacters(event);" maxlength="100" placeholder="Search test" type="text" name="CPTCode" oninput=" Clinical_LabOrder.bindAutoComplete(this,null,'PatientLabOrderSent');" />
+                                                        <div class="input-group-btn">
+                                                            <!--Clinical_LabOrder.openCPTCode('txtCPTCode');-->
+                                                            <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="control-label">Order Number</label>
+                                                    <input class="form-control" onkeypress="Clinical_LabOrder.validateSpecialCharacters(event);" name="OrderNo" id="txtOrderNumber" type="text" maxlength="30" />
+                                                </div>
+                                                <div class="col-sm-4 col-md-2">
+                                                    <label class="control-label">Date From</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input type="text" class="form-control" id="dpStartDate" name="OrderFromDate" data-plugin-datepicker autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-md-2">
+                                                    <label class="control-label">Date To</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input type="text" class="form-control" id="dpToDate" name="OrderToDate" data-plugin-datepicker autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-md-2">
+                                                    <label class="control-label">Laboratory </label>
+                                                    <select id="ddlLaboratory" class="form-control" name="LabId" ddlist=""></select>
+                                                </div>
+                                                <div class="col-sm-4 col-md-2 ">
+                                                    <label class="control-label">Provider</label>
+                                                    <select id="ddlProvider" class="form-control" name="Provider"></select>
+                                                </div>
+                                                <div class="mt-md pr-default pull-right">
+                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnLabSearch" type="button" onclick="Clinical_LabOrder.LabOrderSearch('0', '', '', null, 'Transmitted');">Search</button>
+                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnProcedureReset" type="button" onclick="Clinical_LabOrder.LabOrderReset();">Reset</button>
+                                                    <button type="button" class="btn btn-sm btn-danger rightbtn" title="Delete" onclick="Clinical_LabOrder.LabOrderDelete();"><span class="glyphicon glyphicon-trash"></span></button>
+
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="hfProvider" name="ProviderId" />
+                                            <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                            <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                        </form>
+                                    </div>
+                                </section>
+                                <input type="hidden" id="hfLabOrderId" value="-1" />
+
+                                <div id="pnlLabOrder_ResultSent" style="display: inline;">
+                                    <div class="panel-body panel-featured">
+                                        <div class="spacer5"></div>
+                                        <input type="hidden" id="Provider_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLabOrdertSent">
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th style="display:none">LabOrderId</th>
+
+                                                    <th class="noWordBreak size30">Order Date & Time</th>
+                                                    <th class="size300 size-min400">Test</th>
+                                                    <th class="size30">Laboratory</th>
+                                                    <th class="size30">Order Number</th>
+                                                    <th class="size30">Status</th>
+                                                    <th class="size30">Provider</th>
+                                                    <th class="size30">Assigned To</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvLabOrderSent_Paging"></div>
+                                    </div>
+                                    <div class="pull-right mt-sm">
+                                        <button class="btn btn-success btn-sm" type="button" onclick="Clinical_LabOrder.addOrdersToNotes();" id="btnAddLabOrderToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div id="PatientLabResult" class="tab-pane">
+                                <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_LabOrder.LabResultAddEdit(-1,-1,false);"><i class="fa fa-plus-circle"></i> Add</button>
+                                <div class="spacer10"></div><div class="clearfix"></div>
+                                <div class="splitterBody mt-xs" id="splitterBody">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <div class="panel-actions">
+                                                <a href="#" class="closebtn pull-right" onclick="Clinical_LabOrder.UnLoadTab()"></a>
+                                            </div>
+                                            <h2 class="panel-title">Search Lab Result </h2>
+                                        </header>
+                                        <div class="panel-body" id="pnlLabResult_Search">
+                                            <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalLabResult">
+
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Test</label>
+                                                        <!--<input class="form-control" name="test" id="txtTest" type="text" maxlength="30" />-->
+                                                        <div class="input-group ">
+                                                            <input class="form-control" id="txtResultCPTCode" maxlength="100" placeholder="Search test" type="text" name="ResultCPTCode" oninput="Clinical_LabOrder.bindAutoComplete(this, 'txtResultCPTCode');" />
+                                                            <div class="input-group-btn">
+                                                                <!--Clinical_LabOrder.openCPTCode('txtResultCPTCode');-->
+                                                                <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">Order Number</label>
+                                                        <input class="form-control" name="OrderNo" id="txtOrderNumber" type="text" maxlength="30" />
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label class="control-label">Flag</label>
+                                                        <select class="form-control" name="flag" id="ddlflag">
+                                                            <option value=""> -Select- </option>
+                                                            <option value="Abnormally High">Abnormally High</option>
+                                                            <option value="High">High</option>
+                                                            <option value="Negative">Negative</option>
+                                                            <option value="Positive">Positive</option>
+                                                            <option value="Normal">Normal</option>
+                                                            <option value="Low">Low</option>
+                                                            <option value="Abnormally Low">Abnormally Low</option>
+                                                            <option value="S= Susceptible/Synergistic">S= Susceptible/Synergistic</option>
+                                                            <option value="R= Resistant/Non Synergistic">R= Resistant/Non Synergistic</option>
+                                                            <option value="S=Susceptible">S=Susceptible</option>
+                                                            <option value="S-DD=Susceptible-Dose Dependent">S-DD=Susceptible-Dose Dependent</option>
+                                                            <option value="I=Intermediate">I=Intermediate</option>
+                                                            <option value="R=Resistant">R=Resistant</option>
+                                                            <option value="NS=Non-Susceptible">NS=Non-Susceptible</option>
+                                                            <option value="N=Not Tested">N=Not Tested</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Date From</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" id="dpStartDate" name="ResultFromDate" data-plugin-datepicker autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Date To</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" id="dpToDate" name="ResultToDate" data-plugin-datepicker autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Status </label>
+                                                        <select id="ddlStatus" class="form-control" name="Status">
+                                                            <option value="">-All-</option>
+                                                            <option value="Final">Final</option>
+                                                            <option value="Partial">Partial</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Laboratory </label>
+                                                        <select id="ddlLaboratory" class="form-control" name="LabId" ddlist=""></select>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2 ">
+                                                        <label class="control-label">Provider</label>
+                                                        <select id="ddlProvider" class="form-control" name="Provider"></select>
+                                                    </div>
+                                                    <div class="mt-md pr-default pull-right">
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnLabSearch" type="button" onclick="Clinical_LabOrder.LabResultsSearch('0');">Search</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" id="btnProcedureReset" type="button" onclick="Clinical_LabOrder.LabResultReset();">Reset</button>
+                                                        <button class="btn btn-sm btn-danger rightbtn" title="Delete" onclick="Clinical_LabOrder.LabResultDelete()"><span class="glyphicon glyphicon-trash"></span></button>
+
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfProvider" name="ProviderId" />
+                                                <input type="hidden" id="hfResultCPTCode" name="ResultCPTCodeId" />
+                                                <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                            </form>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="splitterBtn mb-none"></div>
+                                <input type="hidden" id="hfLabResultId" value="-1" />
+
+                                <div id="pnlLabResult_Result">
+                                    <div class="panel-body panel-featured">
+                                        <div class="spacer5"></div>
+                                        <input type="hidden" id="Provider_SelectedDataKeys" />
+                                        <table class="table table-bordered table-bResulted table-striped table-condensed table-hover mb-none" id="dgvLabResult">
+                                            <thead>
+                                                <tr>
+
+                                                    <th style="display:none">LabResultId</th>
+
+                                                    <th class="noWordBreak size30">Result Date & Time</th>
+                                                    <th class="noWordBreak size30">Collection Date & Time</th>
+                                                    <th class="size300 size-min300">Test</th>
+                                                    <th class="size30">Laboratory</th>
+                                                    <th class="noWordBreak size50">Result Number</th>
+                                                    <th class="size30">Status</th>
+                                                    <th class="size70">Provider</th>
+                                                    <th class="size30 noWordBreak">Assigned To</th>
+                                                    <th class="hidden">DateSorting</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvLabResult_Paging"></div>
+
+                                    </div>
+                                    <div class="pull-right mt-sm">
+                                        <button class="btn btn-success btn-sm" type="button" onclick="Clinical_LabOrder.addResultsToNotes();" id="btnAddLabResultToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </section>
+
+                </div>
+
+
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div class="modal-footer hidden"></div>
+
+        </div>
+    </div>
+    <!--</form>-->
+    <!-- For Templates Purpose -->
+    <div id="LabResultTemplate" class="hidden">
+
+        <div class="panel-body pl-none pr-none">
+            <div class="col-sm-12 col-md-3">
+                <label class="control-label bold">Result Details</label>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <label id="orderNo" class="control-label">Order Number</label>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <label id="laboratory" class="control-label">Lab</label>
+            </div>
+            <div class="spacer10"></div>
+            <div class="col-sm-12">
+                <div class="clearfix"></div>
+                <div id="pnlLabResultTemplate" class="table-responsive">
+                    <input type="hidden" id="Lab_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvLabResultTemplate">
+                        <thead>
+                            <tr class="">
+                                <th controlid="txtObservation" iscontroldisabled="1" controlname="Observation" class="noWordBreak size300 size-min400">Observation</th>
+                                <th controlid="txtResult" iscontroldisabled="1" controlname="Result" class="noWordBreak size100">Result</th>
+                                <th controlid="txtUoM" iscontroldisabled="1" controlname="UoM" class="noWordBreak size100">UoM</th>
+                                <th controlid="txtRange" iscontroldisabled="1" controlname="Range" class="noWordBreak size100">Range</th>
+                                <th controlid="txtFlag" iscontroldisabled="1" controlname="Flag" class="noWordBreak size100">Flag</th>
+                                <th controlid="txtRange" iscontroldisabled="1" controlname="Range" class="noWordBreak size100">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="spacer5"></div>
+
+            <div id="comments-remarks">
+                <div class="col-xs-6">
+                    <label class="control-label bold">Remarks</label>
+                    <div class="pull-right col-sm-12 col-md-8">
+                        <span class="control-label pull-left tab_space">Patient Portal:</span>
+                        <label id="lblPatientPortalStatus" class="control-label pull-left tab_space bold" name="PatientPortalStatus" style="line-height:1.5;"></label>
+                        <div class="checkbox-custom pull-right">
+                            <input type="checkbox" id="chkSentToPortal" name="SentToPortal">
+                            <label class="control-label">Patient Portal Notification</label>
+                            <div class="spacer5"></div>
+                        </div>
+                    </div>
+                    <textarea id="txtRemarks" name="Remarks" rows="3" class="form-control" spellcheck="true"></textarea>
+                </div>
+                <div class="col-xs-6">
+                    <label class="control-label bold">Comments</label>
+                    <div class="spacer5"></div>
+                    <!--<textarea id="txtComments" onkeypress="ClinicalLabResultDetail.validateSpecialCharacters(event);" name="Comments" rows="3" class="form-control" spellcheck="true"></textarea>-->
+                    <div class="form-control editable" style="height:60px; font-size: 12px; overflow-y:auto" maxlength="3000" id="txtComment" name="Comments" contenteditable="true" spellcheck="true" onkeypress="ClinicalLabResultDetail.validateSpecialCharacters(event);"></div>
+                </div>
+            </div>
+            <div class="spacer5"></div>
+
+            <div class="col-sm-3">
+
+                <div class="editable-control">
+                    <label class="control-label bold" name="lblStatus">Status</label>
+                    <br />
+                    <select id="ddlLabId" name="Status" class="form-control" ddlist="">
+                        <option value="">Select</option>
+                        <option value="Final">Final</option>
+                        <option value="Partial">Partial</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <!--class="editable-control hidden"-->
+            <div class="col-sm-3">
+                <div class="editable-control">
+                    <label class="control-label bold" name="lblReviedBy">Reviewed By</label>
+                    <div class="checkbox-custom pull-right">
+                        <input type="checkbox" id="chkMarkAsReviewed" name="MarkAsReviewed">
+                        <label class="control-label">Mark as Reviewed</label>
+                        <div class="spacer5"></div>
+                    </div>
+                    <select id="ddlReviewedById" name="ReviewedById" class="form-control" onchange="Clinical_LabOrder.SetMarkAsReviewed(this);" ddlist=""></select>
+                </div>
+            </div>
+            <!-- Assignee ddl -->
+            <div class="col-sm-3">
+
+                <div class="editable-control">
+                    <label class="control-label bold" name="lblAssignee">Assigned To</label>
+                    <br />
+                    <select id="ddlAssigneeId" name="AssigneeId" class="form-control" ddlist="" />
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="spacer20"></div>
+                <a id="btnSaveResult" href="#" class="btn-link btn btn-lg p-tiny" title="Save Record" onclick="Clinical_LabOrder.SaveLabResult(this)"><i class="fa fa-save green font-lg"></i></a>
+
+                <a id="btnShowHL7" onclick="" href="#" class="" title="View HL7"><i class="fa fa-eye"></i></a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="spacer5"></div>
+                <div class="dropdown">
+                    <a id="btnScanResult" href="#" class="dropdown-toggle btn btn-link btn-xs p-none" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attach</a>
+                    <ul id="menuAttach" class="dropdown-menu" aria-labelledby="btnScanResult">
+                        <li><a id="anchorDocumentScan" href="#" onclick="">Scan</a></li>
+                        <li><a id="anchorDocumentUpload" href="#" onclick="">Upload</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <div class="dropdown">
+                    <a id="btnViewAttachment" href="#" class="dropdown-toggle btn btn-link btn-xs p-none" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="ClinicalRadiologyResultDetail.loadAttachments()">View Attachment</a>
+                    <ul id="menuViewAttachment" class="dropdown-menu" aria-labelledby="btnViewAttachment"></ul>
+                </div>
+                <div class="clearfix"></div>
+                <a class="btn btn-link btn-xs p-none" id="btnViewPDF" href="#" onclick="">View Result PDF</a>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="LabOrderTemplate" class="hidden">
+
+        <div class="panel-body pl-none pr-none">
+            <div class="col-sm-12 col-md-2">
+                <strong class="control-label">Order Details</strong>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <label id="orderNo" class="control-label">Order Number</label>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <label id="laboratory" class="control-label">Lab</label>
+            </div>
+            <div class="spacer10"></div>
+            <div class="col-sm-12">
+                <div class="clearfix"></div>
+
+                <div id="pnlLabOrderTemplate" class="table-responsive">
+                    <input type="hidden" id="Lab_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvLabOrderTemplate">
+                        <thead>
+                            <tr class="">
+                                <th colspan="2" controlid="txtObservation" iscontroldisabled="1" controlname="Observation" class="noWordBreak size300 size-min400">Observation</th>
+                                <th controlid="txtResult" iscontroldisabled="1" controlname="Result" class="noWordBreak size300"></th>
+
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <select id="ddlAssigneeTemplate" name="AssigneeId" class="form-control hidden" ddlist="" />
+
+</div>

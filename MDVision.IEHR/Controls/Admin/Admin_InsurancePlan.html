@@ -1,0 +1,116 @@
+﻿<div class="row" id="pnlAdminInsurancePlan" style="display:none;">
+    <div id="actionPanAdminInsurancePlan" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog" class="modal-dialog modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_InsurancePlan.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Insurance Plan</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Admin_InsurancePlan.InsurancePlanAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_InsurancePlan.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search Insurance Plan </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlInsurancePlan_Search">
+                            <form id="frmAdminInsurancePlan" class="form-bordered" onsubmit="return false" method="post">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Short Name</label>
+                                        <input class="form-control" id="txtShortName" type="text" maxlength="10" />
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Description</label>
+                                        <input class="form-control" id="txtDescription" type="text" maxlength="55" />
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblInsurancePlan" class="control-label">Insurance<span class="required">*</span></label>
+                                        <a id="lnkInsuranceDetail" style="display:none;" href="#" onclick="Admin_InsurancePlan.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance<span class="required">*</span></a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtAdminInsurancePlan" name="InsurancePlan" customname="Insurance Plan" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Admin_InsurancePlan.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Plan Category</label>
+                                        <select id="ddlPlanCategory" class="form-control" ddlist="GetPlanCategory"></select>
+                                    </div>
+                                    <div class="visible-sm"><div class="clearfix"></div></div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Plan Type</label>
+                                        <select id="ddlPlanType" class="form-control" ddlist="GetPlanType"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Claim Flag</label>
+                                        <select id="ddlClaimFlag" class="form-control" ddlist="GetClaimFlag"></select>
+                                    </div>
+                                    <div class="hidden-sm"><div class="clearfix"></div></div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Claim Type</label>
+                                        <select id="ddlClaimType" class="form-control" ddlist="GetClaimType"></select>
+                                    </div>
+                                    <div id="divInsurance_Entity" class="col-sm-3 col-md-2">
+                                        <label class="control-label">Entity</label>
+                                        <select id="ddlEntity" class="form-control" ddlist="GetEntity"></select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Active?</label>
+                                        <select id="chkActive" name="Active" class="form-control">
+                                            <option value="">- All -</option>
+                                            <option value="1" selected="selected">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Address</label>
+                                        <input class="form-control" id="txtAddress" type="text" />
+                                    </div>
+                                    <div class="col-sm-2 pad-a-labelsize-btn pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnInsurancePlanSearch" type="submit" onclick="Admin_InsurancePlan.InsurancePlanSearch();">Search</button>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="hfAdminInsurancePlan" />
+                            </form>
+
+                        </div>
+                    </section>
+                </div>
+
+                <div id="pnlInsurancePlan_Result" style="display: none;">
+                    <div class="panel-body panel-featured">
+                        <input type="hidden" id="InsurancePlan_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvInsurancePlan">
+                            <thead>
+                                <tr>
+                                    <th style="display:none;">InsurancePlanId</th>
+                                    <th class="size70 size-min70">Action</th>
+                                    <th class="size80 noWordBreak size-max120">Short Name</th>
+                                    <th class="size150">Description</th>
+                                    <th class="size60 noWordBreak ">Plan Type</th>
+                                    <th class="size250">Claim Flag</th>
+                                    <th class="size100 noWordBreak">Claim Type</th>
+                                    <th class="size60 noWordBreak">Outstanding Days</th>
+                                    <th class="size100 noWordBreak">Search Pattern</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="divInsurancePlanPaging"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

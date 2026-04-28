@@ -1,0 +1,548 @@
+﻿
+<div class="row" id="pnlAdminFaxSettingsDetail" style="display:none;">
+    <div id="actionPanAdminFaxSettingsDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_FaxSettingsDetail.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Electronic Fax Setup</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_FaxSettingsDetail.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search Provider  </h2>
+                            </header>
+                        </div>
+
+
+                        <div class="panel-body" id="pnlProvider_FaxSetting" style="display:none;">
+                            <form class="form-bordered" id="frmProviderId" onsubmit="return false" method="post">
+                                <!--start - CONTENTS-->
+                                
+                                    <div class="form-group">
+
+                                        <div class="col-sm-2" id="providerDropdown">
+                                            <label class="control-label">Provider<span class="required">*</span></label>
+                                            <select id="chkProvider" name="Active" ddlist="GetProvider" class="form-control"></select>
+                                        </div>
+
+                                    </div>
+                             
+                            </form>
+                            <br />
+                            
+                                <ul class="tabs-custom" id="ulSocialHxTabsItems">
+                                    <li id="ProfileTab" onclick="" class="active"><a id="ordersPending" class="" href="#Profile" data-toggle="tab">Profile</a></li>
+                                    <li id="faxUsersTab" onclick=""><a id="ordersSent" class="" href="#faxUsers" data-toggle="tab">Fax Users</a></li>
+                                </ul>
+
+
+
+
+
+
+                                <div class="tab-content tabs-custom-body pt-default">
+
+                                    <div id="Profile" class="tab-pane active">
+
+
+                                        <form class="form-bordered" id="frmProviderDetails" onsubmit="return false" method="post">
+
+                                            <span class="text-primary ">  General</span>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Display Name<span class="required">*</span></label>
+                                                    <input class="form-control" id="txtDisplayName" name="displayname" type="text" maxlength="50" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">First Name<span class="required">*</span></label>
+                                                    <input class="form-control" id="txtFirstName" name="firstname" type="text" maxlength="50" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Middle Name </label>
+                                                    <input class="form-control" id="txtMiddleName" name="middlename" type="text" maxlength="50" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Last Name<span class="required">*</span></label>
+                                                    <input class="form-control" id="txtLastName" name="lastname" type="text" maxlength="50" />
+                                                </div>
+
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Company Name<span class="required">*</span></label>
+                                                    <input class="form-control" id="txtCompanyName" name="companyname" type="text" maxlength="50" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Phone Number</label>
+                                                    <input class="form-control" id="txtPhoneNo" name="phoneno" type="text" placeholder="(999)-999-9999" maxlength="50" data-mask="(999) 999-9999" onblur="utility.ValidateCtrlMask('frmProviderDetails', this);" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Fax Number<span class="required">*</span></label>
+                                                    <input class="form-control" id="txtFaxNo" name="faxno" type="text" placeholder="(999)-999-9999" maxlength="50" data-mask="(999) 999-9999" onblur="utility.ValidateCtrlMask('frmProviderDetails', this);" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Time Zone<span class="required">*</span></label>
+                                                    <select id="txtTimeZone" name="timezone" class="form-control">
+                                                        <option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00) International Date Line West</option>
+                                                        <option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00) Midway Island, Samoa</option>
+                                                        <option timeZoneId="3" gmtAdjustment="GMT-10:00" useDaylightTime="0" value="-10">(GMT-10:00) Hawaii</option>
+                                                        <option timeZoneId="4" gmtAdjustment="GMT-09:00" useDaylightTime="1" value="-9">(GMT-09:00) Alaska</option>
+                                                        <option timeZoneId="5" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00) Pacific Time (US & Canada)</option>
+                                                        <option timeZoneId="6" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00) Tijuana, Baja California</option>
+                                                        <option timeZoneId="7" gmtAdjustment="GMT-07:00" useDaylightTime="0" value="-7">(GMT-07:00) Arizona</option>
+                                                        <option timeZoneId="8" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+                                                        <option timeZoneId="9" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00) Mountain Time (US & Canada)</option>
+                                                        <option timeZoneId="10" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00) Central America</option>
+                                                        <option timeZoneId="11" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00) Central Time (US & Canada)</option>
+                                                        <option timeZoneId="12" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
+                                                        <option timeZoneId="13" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00) Saskatchewan</option>
+                                                        <option timeZoneId="14" gmtAdjustment="GMT-05:00" useDaylightTime="0" value="-5">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
+                                                        <option timeZoneId="15" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00) Eastern Time (US & Canada)</option>
+                                                        <option timeZoneId="16" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00) Indiana (East)</option>
+                                                        <option timeZoneId="17" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00) Atlantic Time (Canada)</option>
+                                                        <option timeZoneId="18" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00) Caracas, La Paz</option>
+                                                        <option timeZoneId="19" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00) Manaus</option>
+                                                        <option timeZoneId="20" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00) Santiago</option>
+                                                        <option timeZoneId="21" gmtAdjustment="GMT-03:30" useDaylightTime="1" value="-3.5">(GMT-03:30) Newfoundland</option>
+                                                        <option timeZoneId="22" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Brasilia</option>
+                                                        <option timeZoneId="23" gmtAdjustment="GMT-03:00" useDaylightTime="0" value="-3">(GMT-03:00) Buenos Aires, Georgetown</option>
+                                                        <option timeZoneId="24" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Greenland</option>
+                                                        <option timeZoneId="25" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Montevideo</option>
+                                                        <option timeZoneId="26" gmtAdjustment="GMT-02:00" useDaylightTime="1" value="-2">(GMT-02:00) Mid-Atlantic</option>
+                                                        <option timeZoneId="27" gmtAdjustment="GMT-01:00" useDaylightTime="0" value="-1">(GMT-01:00) Cape Verde Is.</option>
+                                                        <option timeZoneId="28" gmtAdjustment="GMT-01:00" useDaylightTime="1" value="-1">(GMT-01:00) Azores</option>
+                                                        <option timeZoneId="29" gmtAdjustment="GMT+00:00" useDaylightTime="0" value="0">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
+                                                        <option timeZoneId="30" gmtAdjustment="GMT+00:00" useDaylightTime="1" value="0">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
+                                                        <option timeZoneId="31" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+                                                        <option timeZoneId="32" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+                                                        <option timeZoneId="33" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
+                                                        <option timeZoneId="34" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+                                                        <option timeZoneId="35" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) West Central Africa</option>
+                                                        <option timeZoneId="36" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Amman</option>
+                                                        <option timeZoneId="37" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Athens, Bucharest, Istanbul</option>
+                                                        <option timeZoneId="38" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Beirut</option>
+                                                        <option timeZoneId="39" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Cairo</option>
+                                                        <option timeZoneId="40" gmtAdjustment="GMT+02:00" useDaylightTime="0" value="2">(GMT+02:00) Harare, Pretoria</option>
+                                                        <option timeZoneId="41" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+                                                        <option timeZoneId="42" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Jerusalem</option>
+                                                        <option timeZoneId="43" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Minsk</option>
+                                                        <option timeZoneId="44" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Windhoek</option>
+                                                        <option timeZoneId="45" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
+                                                        <option timeZoneId="46" gmtAdjustment="GMT+03:00" useDaylightTime="1" value="3">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
+                                                        <option timeZoneId="47" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Nairobi</option>
+                                                        <option timeZoneId="48" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Tbilisi</option>
+                                                        <option timeZoneId="49" gmtAdjustment="GMT+03:30" useDaylightTime="1" value="3.5">(GMT+03:30) Tehran</option>
+                                                        <option timeZoneId="50" gmtAdjustment="GMT+04:00" useDaylightTime="0" value="4">(GMT+04:00) Abu Dhabi, Muscat</option>
+                                                        <option timeZoneId="51" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00) Baku</option>
+                                                        <option timeZoneId="52" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00) Yerevan</option>
+                                                        <option timeZoneId="53" gmtAdjustment="GMT+04:30" useDaylightTime="0" value="4.5">(GMT+04:30) Kabul</option>
+                                                        <option timeZoneId="54" gmtAdjustment="GMT+05:00" useDaylightTime="1" value="5">(GMT+05:00) Yekaterinburg</option>
+                                                        <option timeZoneId="55" gmtAdjustment="GMT+05:00" useDaylightTime="0" value="5">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
+                                                        <option timeZoneId="56" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30) Sri Jayawardenapura</option>
+                                                        <option timeZoneId="57" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+                                                        <option timeZoneId="58" gmtAdjustment="GMT+05:45" useDaylightTime="0" value="5.75">(GMT+05:45) Kathmandu</option>
+                                                        <option timeZoneId="59" gmtAdjustment="GMT+06:00" useDaylightTime="1" value="6">(GMT+06:00) Almaty, Novosibirsk</option>
+                                                        <option timeZoneId="60" gmtAdjustment="GMT+06:00" useDaylightTime="0" value="6">(GMT+06:00) Astana, Dhaka</option>
+                                                        <option timeZoneId="61" gmtAdjustment="GMT+06:30" useDaylightTime="0" value="6.5">(GMT+06:30) Yangon (Rangoon)</option>
+                                                        <option timeZoneId="62" gmtAdjustment="GMT+07:00" useDaylightTime="0" value="7">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+                                                        <option timeZoneId="63" gmtAdjustment="GMT+07:00" useDaylightTime="1" value="7">(GMT+07:00) Krasnoyarsk</option>
+                                                        <option timeZoneId="64" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+                                                        <option timeZoneId="65" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Kuala Lumpur, Singapore</option>
+                                                        <option timeZoneId="66" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
+                                                        <option timeZoneId="67" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Perth</option>
+                                                        <option timeZoneId="68" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Taipei</option>
+                                                        <option timeZoneId="69" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
+                                                        <option timeZoneId="70" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00) Seoul</option>
+                                                        <option timeZoneId="71" gmtAdjustment="GMT+09:00" useDaylightTime="1" value="9">(GMT+09:00) Yakutsk</option>
+                                                        <option timeZoneId="72" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30) Adelaide</option>
+                                                        <option timeZoneId="73" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30) Darwin</option>
+                                                        <option timeZoneId="74" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00) Brisbane</option>
+                                                        <option timeZoneId="75" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Canberra, Melbourne, Sydney</option>
+                                                        <option timeZoneId="76" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Hobart</option>
+                                                        <option timeZoneId="77" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00) Guam, Port Moresby</option>
+                                                        <option timeZoneId="78" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Vladivostok</option>
+                                                        <option timeZoneId="79" gmtAdjustment="GMT+11:00" useDaylightTime="1" value="11">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
+                                                        <option timeZoneId="80" gmtAdjustment="GMT+12:00" useDaylightTime="1" value="12">(GMT+12:00) Auckland, Wellington</option>
+                                                        <option timeZoneId="81" gmtAdjustment="GMT+12:00" useDaylightTime="0" value="12">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
+                                                        <option timeZoneId="82" gmtAdjustment="GMT+13:00" useDaylightTime="0" value="13">(GMT+13:00) Nuku'alofa</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <span class="text-primary">  Cover Page</span> <div id="txtCover" style="display:none;"></div>
+                                            <br />
+                                            <div id="divSwitch"><span class="pr-xs">Custom</span><div class="btnWidgetSwitch switch switch-xs switch-success success-off"><input id="switchActiveProvider" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: none;" onchange="Admin_FaxSettingsDetail.changeSwitch(this);"></div><span class="pl-xs">Default</span> </div>
+
+                                            <div id="uploadButton">
+                                                <p>To add a custom cover page, browse your desired file.</p> <span class="btn btn-primary btn-sm btn-file"> <i class="fa fa-folder-open"></i>Browse<input type="file" class="form-control" name="file" id="fileToUpload" onchange=""> </span>  <div id="FileProviderMessage"><span>No files selected</span></div>
+                                            </div>
+
+                                            <br />
+                                            <span class="text-primary">  Signature </span>
+                                            <br />
+                                            <div id="pnlSection_eSignature">
+
+                                                <div class="pull-left mb-sm">
+                                                    <button id="btn_Create_eSignatureImage_via_Device" type="button" class="btn btn-primary btn-sm"
+                                                            onclick=" Admin_FaxSettingsDetail.Create_eSignatureImage_via_Device(); ">
+                                                        <i class="fa fa-pencil"></i> Create
+                                                    </button>
+
+                                                    <button class="btn btn-primary btn-sm btn-file ">
+                                                        <i class="fa fa-folder-open"></i>
+                                                        Browse
+                                                        <input type="file" accept="image/*" class="txtInput" id="Upload_Image_file" name="fileupload" onchange="Admin_Provider_eSignature.BufferFile(this);">
+                                                    </button>
+                                                    <button id="eSignatureUndoButton" class="btn btn-primary btn-sm" type="button"
+                                                            onclick="Admin_FaxSettingsDetail.Undo_eSignature(); ">
+                                                        Undo
+                                                    </button>
+
+                                                </div>
+
+
+                                                <div class="spacer10"></div>
+                                                <label style="color: red;font-weight: 600">Instructions for uploading e-signature:</label>
+                                                <div>
+                                                    1) The signature should be on a white paper with Black Ink pen.<br />
+                                                    2) The signature must be signed only by the applicant and not by any other person.<br />
+                                                    3) Dimensions should not be more than 315 x 125 pixels.
+                                                </div>
+                                                <div class=" text-center" id="uploadContainer" style="">
+                                                    <div>
+                                                        <div id="eSignatureMousepad" class="m-signature-pad">
+                                                            <div class="m-signature-pad--body" style="width:317px;height:127px;">
+                                                                <canvas id="eSignatureMousepadCanvas"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="col-sm-6">
+                                                    <div id="imageBox" class="boxed" style="visibility: hidden; height:0px;width:0px;">
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="pull-right pad-a-labelsize-btn pr-default">
+
+
+                                                    <button id="eSignatureSaveButton" class="btn btn-success btn-sm pull-right mr-sm" type="submit"
+                                                            onclick="">
+                                                        Save
+                                                    </button>
+                                                    <!--<button id="btnHistoryFaxSetting" class="btn btn-success btn-sm rightbtn" type="button" onclick="Admin_FaxSettingsDetail.ShowHistory();">History</button>-->
+                                                </div>
+                                        </form>
+                                    </div>
+                                    <div id="faxUsers" class="tab-pane">
+                                        <section class="panel panel-featured">
+                                            <header class="panel-heading">
+                                                <div class="panel-actions">
+                                                    <a href="#" class="closebtn pull-right" onclick="Admin_FaxSettingsDetail.UnLoadTab();"></a>
+                                                </div>
+                                                <h2 class="panel-title">Add Users to Provider Fax Access </h2>
+                                            </header>
+
+                                            <div class="panel-body">
+
+                                                <form class="form-bordered" id="frmUserId" onsubmit="return false" method="post">
+                                                    <!--start - CONTENTS-->
+
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-4" id="providerUserDropdown">
+                                                            <label class="control-label">Username<span class="required">*</span></label>
+                                                            <select id="chkUser" name="Active" ddlist="GetUsers" class="form-control"></select>
+                                                        </div>
+
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </section>
+                                        <div id="pnlUser_Result">
+                                            <section class="panel">
+                                                <div class="panel-body panel-featured">
+                                                    <input type="hidden" id="User_SelectedDataKeys" />
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvUserFaxSettings">
+                                                        <thead>
+                                                            <tr>
+                                                                <td style="display:none;">User Id</td>
+                                                                <th>Action</th>
+                                                                <th>User</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div id="divUserPaging"></div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                              
+
+                        </div>
+
+
+
+
+
+                    </section>
+                </div>
+
+
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_FaxSettingsDetail.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search Provider  </h2>
+                            </header>
+                        </div>
+
+                        <div class="panel-body" id="pnlFacility_FaxSetting" style="display:none;">
+                            <form class="form-bordered" id="frmFacilityId" onsubmit="return false" method="post">
+                                <!--start - CONTENTS-->
+                                
+                                    <div class="form-group">
+
+                                        <div class="col-sm-2" id="facilityDropdown">
+                                            <label class="control-label">Facility<span class="required">*</span></label>
+                                            <select id="chkFacility" name="Active" ddlist="GetFacility" class="form-control"></select>
+                                        </div>
+
+                                    </div>
+                                
+                            </form>
+                            <br />
+                            
+                                <ul class="tabs-custom" id="ulSocialHxTabsItems">
+                                    <li id="ProfileTab" onclick="" class="active"><a id="ordersPending" class="" href="#FacilityProfile" data-toggle="tab">Profile</a></li>
+                                    <li id="faxUsersTab" onclick=""><a id="ordersSent" class="" href="#faxFacilityUsers" data-toggle="tab">Fax Users</a></li>
+                                </ul>
+                             <div class="tab-content tabs-custom-body pt-default">
+
+                                    <div id="FacilityProfile" class="tab-pane active">
+
+
+                                        <form class="form-bordered" id="frmFacilityDetails" onsubmit="return false" method="post">
+
+                                            <span class="text-primary ">General</span>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Display Name<span class="required">*</span></label>
+                                                    <input class="form-control" id="txtDisplayName" name="displayname" type="text" maxlength="50" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Short Name<span class="required">*</span></label>
+                                                    <input class="form-control" id="txtShortName" name="shortname" type="text" maxlength="50" />
+                                                </div>
+                                               
+
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Phone Number</label>
+                                                    <input class="form-control" id="txtPhoneNo" name="phoneno" type="text" placeholder="(999)-999-9999" maxlength="50" data-mask="(999) 999-9999" onblur="utility.ValidateCtrlMask('frmFacilityDetails', this);" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Fax Number<span class="required">*</span></label>
+                                                    <input class="form-control" id="txtFaxNo" name="faxno" type="text" placeholder="(999)-999-9999" maxlength="50" data-mask="(999) 999-9999" onblur="utility.ValidateCtrlMask('frmFacilityDetails', this);" />
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Time Zone<span class="required">*</span></label>
+                                                    <select id="txtTimeZoneFacility" name="timezone" class="form-control">
+                                                        <option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00) International Date Line West</option>
+                                                        <option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00) Midway Island, Samoa</option>
+                                                        <option timeZoneId="3" gmtAdjustment="GMT-10:00" useDaylightTime="0" value="-10">(GMT-10:00) Hawaii</option>
+                                                        <option timeZoneId="4" gmtAdjustment="GMT-09:00" useDaylightTime="1" value="-9">(GMT-09:00) Alaska</option>
+                                                        <option timeZoneId="5" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00) Pacific Time (US & Canada)</option>
+                                                        <option timeZoneId="6" gmtAdjustment="GMT-08:00" useDaylightTime="1" value="-8">(GMT-08:00) Tijuana, Baja California</option>
+                                                        <option timeZoneId="7" gmtAdjustment="GMT-07:00" useDaylightTime="0" value="-7">(GMT-07:00) Arizona</option>
+                                                        <option timeZoneId="8" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+                                                        <option timeZoneId="9" gmtAdjustment="GMT-07:00" useDaylightTime="1" value="-7">(GMT-07:00) Mountain Time (US & Canada)</option>
+                                                        <option timeZoneId="10" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00) Central America</option>
+                                                        <option timeZoneId="11" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00) Central Time (US & Canada)</option>
+                                                        <option timeZoneId="12" gmtAdjustment="GMT-06:00" useDaylightTime="1" value="-6">(GMT-06:00) Guadalajara, Mexico City, Monterrey</option>
+                                                        <option timeZoneId="13" gmtAdjustment="GMT-06:00" useDaylightTime="0" value="-6">(GMT-06:00) Saskatchewan</option>
+                                                        <option timeZoneId="14" gmtAdjustment="GMT-05:00" useDaylightTime="0" value="-5">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
+                                                        <option timeZoneId="15" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00) Eastern Time (US & Canada)</option>
+                                                        <option timeZoneId="16" gmtAdjustment="GMT-05:00" useDaylightTime="1" value="-5">(GMT-05:00) Indiana (East)</option>
+                                                        <option timeZoneId="17" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00) Atlantic Time (Canada)</option>
+                                                        <option timeZoneId="18" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00) Caracas, La Paz</option>
+                                                        <option timeZoneId="19" gmtAdjustment="GMT-04:00" useDaylightTime="0" value="-4">(GMT-04:00) Manaus</option>
+                                                        <option timeZoneId="20" gmtAdjustment="GMT-04:00" useDaylightTime="1" value="-4">(GMT-04:00) Santiago</option>
+                                                        <option timeZoneId="21" gmtAdjustment="GMT-03:30" useDaylightTime="1" value="-3.5">(GMT-03:30) Newfoundland</option>
+                                                        <option timeZoneId="22" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Brasilia</option>
+                                                        <option timeZoneId="23" gmtAdjustment="GMT-03:00" useDaylightTime="0" value="-3">(GMT-03:00) Buenos Aires, Georgetown</option>
+                                                        <option timeZoneId="24" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Greenland</option>
+                                                        <option timeZoneId="25" gmtAdjustment="GMT-03:00" useDaylightTime="1" value="-3">(GMT-03:00) Montevideo</option>
+                                                        <option timeZoneId="26" gmtAdjustment="GMT-02:00" useDaylightTime="1" value="-2">(GMT-02:00) Mid-Atlantic</option>
+                                                        <option timeZoneId="27" gmtAdjustment="GMT-01:00" useDaylightTime="0" value="-1">(GMT-01:00) Cape Verde Is.</option>
+                                                        <option timeZoneId="28" gmtAdjustment="GMT-01:00" useDaylightTime="1" value="-1">(GMT-01:00) Azores</option>
+                                                        <option timeZoneId="29" gmtAdjustment="GMT+00:00" useDaylightTime="0" value="0">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
+                                                        <option timeZoneId="30" gmtAdjustment="GMT+00:00" useDaylightTime="1" value="0">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
+                                                        <option timeZoneId="31" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+                                                        <option timeZoneId="32" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+                                                        <option timeZoneId="33" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
+                                                        <option timeZoneId="34" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+                                                        <option timeZoneId="35" gmtAdjustment="GMT+01:00" useDaylightTime="1" value="1">(GMT+01:00) West Central Africa</option>
+                                                        <option timeZoneId="36" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Amman</option>
+                                                        <option timeZoneId="37" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Athens, Bucharest, Istanbul</option>
+                                                        <option timeZoneId="38" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Beirut</option>
+                                                        <option timeZoneId="39" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Cairo</option>
+                                                        <option timeZoneId="40" gmtAdjustment="GMT+02:00" useDaylightTime="0" value="2">(GMT+02:00) Harare, Pretoria</option>
+                                                        <option timeZoneId="41" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+                                                        <option timeZoneId="42" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Jerusalem</option>
+                                                        <option timeZoneId="43" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Minsk</option>
+                                                        <option timeZoneId="44" gmtAdjustment="GMT+02:00" useDaylightTime="1" value="2">(GMT+02:00) Windhoek</option>
+                                                        <option timeZoneId="45" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
+                                                        <option timeZoneId="46" gmtAdjustment="GMT+03:00" useDaylightTime="1" value="3">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
+                                                        <option timeZoneId="47" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Nairobi</option>
+                                                        <option timeZoneId="48" gmtAdjustment="GMT+03:00" useDaylightTime="0" value="3">(GMT+03:00) Tbilisi</option>
+                                                        <option timeZoneId="49" gmtAdjustment="GMT+03:30" useDaylightTime="1" value="3.5">(GMT+03:30) Tehran</option>
+                                                        <option timeZoneId="50" gmtAdjustment="GMT+04:00" useDaylightTime="0" value="4">(GMT+04:00) Abu Dhabi, Muscat</option>
+                                                        <option timeZoneId="51" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00) Baku</option>
+                                                        <option timeZoneId="52" gmtAdjustment="GMT+04:00" useDaylightTime="1" value="4">(GMT+04:00) Yerevan</option>
+                                                        <option timeZoneId="53" gmtAdjustment="GMT+04:30" useDaylightTime="0" value="4.5">(GMT+04:30) Kabul</option>
+                                                        <option timeZoneId="54" gmtAdjustment="GMT+05:00" useDaylightTime="1" value="5">(GMT+05:00) Yekaterinburg</option>
+                                                        <option timeZoneId="55" gmtAdjustment="GMT+05:00" useDaylightTime="0" value="5">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
+                                                        <option timeZoneId="56" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30) Sri Jayawardenapura</option>
+                                                        <option timeZoneId="57" gmtAdjustment="GMT+05:30" useDaylightTime="0" value="5.5">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+                                                        <option timeZoneId="58" gmtAdjustment="GMT+05:45" useDaylightTime="0" value="5.75">(GMT+05:45) Kathmandu</option>
+                                                        <option timeZoneId="59" gmtAdjustment="GMT+06:00" useDaylightTime="1" value="6">(GMT+06:00) Almaty, Novosibirsk</option>
+                                                        <option timeZoneId="60" gmtAdjustment="GMT+06:00" useDaylightTime="0" value="6">(GMT+06:00) Astana, Dhaka</option>
+                                                        <option timeZoneId="61" gmtAdjustment="GMT+06:30" useDaylightTime="0" value="6.5">(GMT+06:30) Yangon (Rangoon)</option>
+                                                        <option timeZoneId="62" gmtAdjustment="GMT+07:00" useDaylightTime="0" value="7">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+                                                        <option timeZoneId="63" gmtAdjustment="GMT+07:00" useDaylightTime="1" value="7">(GMT+07:00) Krasnoyarsk</option>
+                                                        <option timeZoneId="64" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+                                                        <option timeZoneId="65" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Kuala Lumpur, Singapore</option>
+                                                        <option timeZoneId="66" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
+                                                        <option timeZoneId="67" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Perth</option>
+                                                        <option timeZoneId="68" gmtAdjustment="GMT+08:00" useDaylightTime="0" value="8">(GMT+08:00) Taipei</option>
+                                                        <option timeZoneId="69" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
+                                                        <option timeZoneId="70" gmtAdjustment="GMT+09:00" useDaylightTime="0" value="9">(GMT+09:00) Seoul</option>
+                                                        <option timeZoneId="71" gmtAdjustment="GMT+09:00" useDaylightTime="1" value="9">(GMT+09:00) Yakutsk</option>
+                                                        <option timeZoneId="72" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30) Adelaide</option>
+                                                        <option timeZoneId="73" gmtAdjustment="GMT+09:30" useDaylightTime="0" value="9.5">(GMT+09:30) Darwin</option>
+                                                        <option timeZoneId="74" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00) Brisbane</option>
+                                                        <option timeZoneId="75" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Canberra, Melbourne, Sydney</option>
+                                                        <option timeZoneId="76" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Hobart</option>
+                                                        <option timeZoneId="77" gmtAdjustment="GMT+10:00" useDaylightTime="0" value="10">(GMT+10:00) Guam, Port Moresby</option>
+                                                        <option timeZoneId="78" gmtAdjustment="GMT+10:00" useDaylightTime="1" value="10">(GMT+10:00) Vladivostok</option>
+                                                        <option timeZoneId="79" gmtAdjustment="GMT+11:00" useDaylightTime="1" value="11">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
+                                                        <option timeZoneId="80" gmtAdjustment="GMT+12:00" useDaylightTime="1" value="12">(GMT+12:00) Auckland, Wellington</option>
+                                                        <option timeZoneId="81" gmtAdjustment="GMT+12:00" useDaylightTime="0" value="12">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
+                                                        <option timeZoneId="82" gmtAdjustment="GMT+13:00" useDaylightTime="0" value="13">(GMT+13:00) Nuku'alofa</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <span class="text-primary">Cover Page</span><div id="txtCoverFacility" style="display:none;"></div>
+                                            <br />
+                                            <div id="divSwitch"><span class="pr-xs">Custom</span><div class="btnWidgetSwitch switch switch-xs switch-success success-off"><input id="switchActiveFacility" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: none;" onchange="Admin_FaxSettingsDetail.changeSwitch(this);"></div><span class="pl-xs">Default</span> </div>
+
+                                            <div id="uploadFacilityButton">
+                                                <p>To add a custom cover page, browse your desired file.</p> <span class="btn btn-primary btn-sm btn-file"> <i class="fa fa-folder-open"></i>Browse<input type="file" accept="application/pdf" class="form-control" name="file" id="fileToUploadFacility" onchange=""> </span> <div id="FileMessage"></div>
+                                            </div>
+
+                                           
+                                                <div class="pull-right pad-a-labelsize-btn pr-default">
+
+
+                                                    <button id="eSignatureSaveButtonFacility" class="btn btn-success btn-sm pull-right mr-sm" type="submit"
+                                                            onclick="">
+                                                        Save
+                                                    </button>
+                                                    <!--<button id="btnHistoryFaxSettingFacility" class="btn btn-success btn-sm rightbtn" type="button" onclick="Admin_FaxSettingsDetail.ShowHistoryFacility();">History</button>-->
+                                                </div>
+                                        </form>
+                                    </div>
+                                    <div id="faxFacilityUsers" class="tab-pane">
+                                        
+
+                                        <section class="panel panel-featured">
+                                            <header class="panel-heading">
+                                                <div class="panel-actions">
+                                                    <a href="#" class="closebtn pull-right" onclick="Admin_FaxSettingsDetail.UnLoadTab();"></a>
+                                                </div>
+                                                <h2 class="panel-title">Add Users to Provide Fax Access </h2>
+                                            </header>
+
+                                            <div class="panel-body">
+
+                                                <form class="form-bordered" id="frmFacilityUserId" onsubmit="return false" method="post">
+                                                    <!--start - CONTENTS-->
+
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-4" id="facilityUserDropdown">
+                                                            <label class="control-label">Username<span class="required">*</span></label>
+                                                            <select id="chkFacilityUser" name="Active" ddlist="GetUsers" class="form-control"></select>
+                                                        </div>
+
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </section>
+                                        <div id="pnlUser_FacilityResult">
+                                            <section class="panel">
+                                                <div class="panel-body panel-featured">
+                                                    <input type="hidden" id="User_SelectedDataKeys" />
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvUserFacilityFaxSettings">
+                                                        <thead>
+                                                            <tr>
+                                                                <td style="display:none;">User Id</td>
+                                                                <th>Action</th>
+                                                                <th>User</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div id="divUserPaging"></div>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                
+
+
+
+                        </div>
+
+                    </section>
+                </div>
+
+
+
+            </div>
+
+               
+
+
+
+                <div class="clearfix"></div>
+
+
+
+            </div>
+            </div>
+        </div>
+
+

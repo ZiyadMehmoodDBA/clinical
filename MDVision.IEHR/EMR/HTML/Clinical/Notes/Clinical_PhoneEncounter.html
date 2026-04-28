@@ -1,0 +1,286 @@
+﻿<!--
+    Author: Muhammad Azhar Shahzad
+    Creation Date: November 18,2015
+    OverView:This File Is created for Clinical Notes
+-->
+<div class="row" id="pnlClinicalPhoneEncounter" style="display:none;">
+    <div id="actionPanClinicalPhoneEncounter" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <form method="post" id="frmClinicalPhoneEncounter" onsubmit="return false">
+        <section class="panel panel-featured ">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <!--<a href="#" class="closebtn pull-right" onclick="Clinical_PhoneEncounter.UnLoad();"></a>-->
+                </div>
+                <h2 class="panel-title">Phone Encounter</h2>
+            </header>
+            <div class="panel-body ">
+                <div class="form-group">
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label" for="VisitDate">Encounter Date<span class="required">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                            <input type="text" class="form-control" id="dtpVisitDate" name="VisitDate" data-plugin-datepicker autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label" for="VisitTime">Encounter Time<span class="required">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                            <input type="text" class="form-control" id="VisitTime" name="VisitTime" data-plugin-timepicker>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 GetDDLOnLoad" id="divVisitReason">
+                        <label class="control-label" for="VisitReason">Reason<span class="required">*</span></label>
+                        <input class="form-control" id="txtVisitReason" name="VisitReason" customname="Visit Reason" type="text">
+                        <!--<select class="form-control" id="VisitReason" name="VisitReason" ddlist="GetBlockReasons">
+                            <option selected="selected" value="">-Select-</option>
+                        </select>-->
+                        <!--<div class="input-group">
+                            <input class="form-control" id="txtVisitReason" name="VisitReason" customname="Visit Reason" placeholder="Start typing to search" type="text" onblur="utility.ValidateAutoComplete(this, 'frmClinicalNotes #hfVisitReason', true);" oninput="Clinical_PhoneEncounter.BindBlockReason();">
+                            <div class="input-group-btn">
+                                <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>-->
+                    </div>
+                    <!--<div class="col-sm-4 col-lg-2">
+                        <label class="control-label" for="ddlDuration">Duration<span class="required">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                            <input type="text" class="form-control" id="ddlDuration" name="Duration" onchange="Clinical_PhoneEncounter.validateDuration();" data-plugin-timepicker>
+                        </div>
+                    </div>-->
+                    <!--<div class="col-sm-4 col-lg-2">
+                        <label class="control-label" for="ddlDuration">Duration<span class="required">*</span></label>
+                        <select class="form-control" id="ddlDuration" name="Duration" ddlist="GetPhoneEncounterDuration"></select>
+                    </div>-->
+
+                    <div class="col-sm-4 col-lg-2 NoteTemplate">
+                        <label class="control-label" for="NoteTemplate">Note Template </label>
+                        <select class="form-control" id="NoteTemplate" name="NoteTemplate" ddlist="">
+                            <option selected="selected" value="">-Select-</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 NoteType disableAll" id="NoteTypeDiv">
+                        <label class="control-label" for="ddlNoteType">Note Type<span class="required">*</span></label>
+                        <select class="form-control" id="ddlNoteType" name="NoteType" disabled ddlist="GetNoteTemplateType" onchange="Clinical_PhoneEncounter.GetNotesTemplates();">
+                            <option selected="selected" value="">-Select-</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-4 col-md-2" id="providerDiv">
+                        <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Clinical_PhoneEncounter.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                        <div class="input-group">
+                            <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" onblur="utility.ValidateAutoComplete(this, 'pnlClinical_Notes #hfSearchProvider', false); Clinical_PhoneEncounter.GetNotesTemplates();" maxlength="100" />
+                            <div class="input-group-btn">
+                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Clinical_PhoneEncounter.OpenProvider();"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+              <div class="clearfix"></div>
+
+                    <div class="col-sm-4 col-lg-2">
+                        <label id="lblRefProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                        <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="Clinical_PhoneEncounter.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                        <div class="input-group">
+
+                            <input class="form-control" id="txtRefProvider" name="RefProvider" customname="Ref Provider" placeholder="Start typing to search" type="text" onblur="utility.ValidateAutoComplete(this, 'frmClinicalNotes #hfRefProvider', true);">
+                            <div class="input-group-btn">
+                                <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="Clinical_PhoneEncounter.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-md-2">
+                        <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Clinical_PhoneEncounter.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                        <div class="input-group">
+                            <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" onblur="utility.ValidateAutoComplete(this, 'pnlClinical_Notes #hfSearchFacility', false);" maxlength="100" />
+                            <div class="input-group-btn">
+                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Clinical_PhoneEncounter.OpenFacility();"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 col-md-2" id="divUser">
+                        <label id="lblUser" for="User" class="control-label">User<span class="required">*</span></label>
+                        <!--<a id="lnkUserEdit" style="display:none;" href="#" onclick="" title="Edit Facility">User</a>-->
+                        <div class="input-group">
+                            <input class="form-control " id="txtUser" type="text" placeholder="Start typing to search" name="User" oninput="Clinical_PhoneEncounter.BindUserName();" disabled />
+                            <div class="input-group-btn">
+                                <button id="lnkUser" class="btn btn-primary btn-xs " disabled type="button" onclick=""><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 col-lg-2" id="EncounterTypeDiv">
+                        <label class="control-label" for="ddlEncounterType">Encounter Type</label>
+                        <select class="form-control" id="ddlEncounterType" name="EncounterType">
+                            <option selected="selected" value="">-Blank-</option>
+                            <option selected="" value="1">Incoming</option>
+                            <option selected="" value="2">Outgoing</option>
+                            <option selected="" value="3">CCM</option>
+                            <option selected="" value="4">TCM</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2" id="divCaller">
+                        <label class="control-label" for="Caller">Caller</label>
+                        <input class="form-control" id="txtCaller" name="Caller" type="text">
+                    </div>
+
+                    <div class="col-sm-4 col-lg-2" id="divReceiver">
+                        <label class="control-label" for="Receiver">Receiver</label>
+                        <input class="form-control" id="txtReceiver" name="Receiver" type="text">
+                    </div>
+                    <div class="col-sm-4 col-lg-2" id="DivDuration">
+                        <label class="control-label" for="ddlDuration">Duration<span id="EitherCCM" class="required hidden">*</span></label>
+                        <div class="col-xs-12 recording-time small">
+                            <div id="divTaskHours" class="col-xs-4"><input type="number" value="0" id="txtTaskHours" name="TaskHours" min="0" max="24" placeholder="H"></div>
+                            <div id="divTaskMinutes" class="col-xs-4 dot"><input type="number" value="0" id="txtTaskMinutes" name="TaskMinutes" min="0" max="59" placeholder="M"></div>
+                            <div id="divTaskSeconds" class="col-xs-4"><input type="number" value="0" id="txtTaskSeconds" name="TaskSeconds" min="0" max="59" placeholder="S"></div>
+                            <input type="hidden" id="ddlDuration" name="Duration" />
+                            <!--<div id="divTaskMiliSeconds" class="col-xs-4"><input type="number" value="0" id="txtTaskMiliSeconds" name="TaskMiliSeconds" min="0" max="1000" placeholder="S"></div>-->
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2" id="PreviousNotediv" hidden>
+                        <label id="lblPreviousNote" for="PreviousNote" style="display:none" class="control-label">Copy Previous Note</label>
+                        <a id="lnkPreviousNote" class="disableAll" href="javascript:void(0);" onclick="Clinical_PhoneEncounter.GetPreviousNotePatient();">Copy Previous Note</a>
+                        <div class="clearfix"></div>
+                        <div class="pull-left size15per">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkCopayPreviousNote" name="IsCopayPreviousNote" type="checkbox" onchange="Clinical_PhoneEncounter.UnLinkPreviousNotePatient(this, 'pnlClinicalNotes');" disabled>
+                                <label class="control-label"></label>
+                            </div>
+                        </div>
+                        <div class="pull-left size85per pl-xxs">
+                            <input class="form-control disableAll" id="txtCopayPreviousNote" name="CopayPreviousNote" type="text">
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pull-right pad-a-labelsize-btn">
+                        <button class="btn btn-success btn-xs rightbtn" type="submit">Create Note</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- div to used hidden change of html in Progress note-->
+        <div id="ProgressnoteHTML" style="display:none"></div>
+        <input type="hidden" id="hfProvider" name="ProviderId" />
+        <input type="hidden" id="hfFacility" name="FacilityId" />
+        <input type="hidden" id="hfRefProvider" name="RefProviderId" />
+        <input type="hidden" id="hfVisitReason" name="VisitReasonId" />
+        <input type="hidden" id="hfVisitId" name="VisitId" />
+        <input type="hidden" id="hfPatientId" name="PatientId" />
+        <input type="hidden" id="hfAppointmentId" name="AppointmentId" />
+        <input type="hidden" id="hfNoteId" name="NoteId" />
+        <input type="hidden" id="hfNoteText" name="NoteText" />
+        <input type="hidden" id="hfPrevNotesId" name="PrevNotesId" />
+        <input type="hidden" id="hfROSDataTemptId" name="ROSDataTemptId" />
+        <input type="hidden" id="hfUserId" name="UserId" />
+        <div id="CopyNoteText" hidden></div>
+    </form>
+
+    <div id="pnlNotes_Result" style="display: inline;">
+        <div class="panel-body panel-featured">
+            <ul id="ulTabs" class="tabs-custom">
+                <li class="liDraftNotes custom-made-tabs" id="liDraftNotes" onclick="Clinical_PhoneEncounter.NoteGridTabChange('Draft');"><a href=".DraftPhoneEncounter" data-toggle="tab">Draft <span id="draftPhoneEncounterCount" class="badge"></span></a></li>
+                <li class="liSignedNotes custom-made-tabs active" id="liSignedNotes" onclick="Clinical_PhoneEncounter.NoteGridTabChange('Signed');"><a href=".SignedPhoneEncounter" data-toggle="tab">Signed <span id="signedPhoneEncounterCount" class="badge"></span></a></li>
+            </ul>
+            <div class="tab-content tabs-custom-body">
+                <div class="DraftPhoneEncounter tab-pane ">
+                    <span class="spacer10"></span>
+                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvClinicalDraftPhoneEncounter">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">NotesId</th>
+                                <th class="size140">Action</th>
+                                <!-- <th>Short Name</th>
+                                <th>Description</th>-->
+                                <th class="size60"> Date</th>
+                                <th class="size70">Time</th>
+                                <th class="size70">Duration</th>
+                                <th>Provider</th>
+                                <th>Facility</th>
+                                <th class="size110">Encounter Type</th>
+                                <th>User</th>
+                                <!--<th>Provider</th>
+                                <th>Signed By</th>-->
+                                <!--<th>Facility</th>
+                                <th>Room</th>
+                                <th style="display:none;">Comments</th>-->
+                                <th>Visit Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <!--This div is used for pagination purpose-->
+                    <div id="divClinicalDraftNotesPaging"></div>
+                    <span class="spacer10"></span>
+                </div>
+                <div class="SignedPhoneEncounter tab-pane active">
+                    <span class="spacer10"></span>
+                    <input type="hidden" id="Notes_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvClinicalSignedPhoneEncounter">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">NotesId</th>
+                                <th class="size140">Action</th>
+                                <!-- <th>Short Name</th>
+                                <th>Description</th>-->
+                                <th class="size60"> Date</th>
+                                <th class="size70">Time</th>
+                                <th class="size70">Duration</th>
+                                <th class="size90">Note Type</th>                                
+                                <th>Provider</th>
+                                <th>Signed By</th>
+                                <!--<th>Facility</th>
+                                <th>Room</th>
+                                <th style="display:none;">Comments</th>-->
+                                <th>Visit Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <!--This div is used for pagination purpose-->
+                    <div id="divClinicalSignedNotesPaging"></div>
+                    <span class="spacer10"></span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<!--Panel to show linked appointment in Notes Forum-->
+<div id="pnlLinekdAppointment_Result" style="display: none;">
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" id="unload_LinkAppointment_btn" class="close" onclick="Clinical_PhoneEncounter.UnLoadLinkedAppointmentList();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Appointment List</h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvLinekdAppointment">
+                    <thead>
+                        <tr>
+                            <th style="display: none;">AppointmentId</th>
+                            <th class="size100">Action</th>
+                            <th>Appointment</th>
+                            <th>DOS</th>
+                            <th>Provider</th>
+                            <th>Facility</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divLinekdAppointmentPaging"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

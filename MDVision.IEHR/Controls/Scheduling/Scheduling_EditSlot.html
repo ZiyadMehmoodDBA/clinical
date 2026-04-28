@@ -1,0 +1,118 @@
+﻿<div class="row" id="schEditSlot" style="display:none;">
+    <div id="actionPanSchEditSlot" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="schEditSlot.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Slot Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmSchSlotEdit" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Date">Date</label>
+                            <input type="text" id="dpDate" name="Date" class="form-control" data-plugin-datepicker="" disabled="disabled">
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <div class="col-xs-7 pl-md pr-none">
+                                    <label class="control-label" for="Time">Time</label>
+                                    <input type="text" class="form-control" id="txtTime" name="Time" disabled="disabled">
+                                </div>
+                                <div class="col-xs-5 pl-xs pr-md">
+                                    <label class="control-label" for="Minutes">Minutes</label>
+                                    <input type="text" class="form-control" id="txtMinutes" name="Minutes" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Provider">Provider</label>
+                            <input type="text" class="form-control" id="txtProvider" name="Provider" disabled="disabled">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Resource">Resource</label>
+                            <input type="text" class="form-control" id="txtResource" name="Resource" disabled="disabled">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Patient Allowed">Patient Allowed<span class="required">*</span></label>
+                            <input type="text" class="form-control" id="txtPatientAllowed" name="patientAllowed" data-mask="9?9" placeholder="9?9">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Facility">Facility</label>
+                            <input type="text" class="form-control" id="txtFacility" name="Facility" disabled="disabled">
+                        </div>
+                        <div class="col-sm-2 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default size130 pl-lg">
+                                <input id="chkOverbookAllowed" name="OverbookAllowed" type="checkbox">
+                                <label for="chkOverbookAllowed">Overbook Allowed</label>
+                            </div>
+                        </div>
+                        <!--<div class="col-sm-2">
+                            <label class="control-label">Reason</label>
+                            <select id="ddlReason" name="Reason" class="form-control" ddlist="GetBlockReasons" onchange="appointmentDetail.FillDuration('#frmappointmentDetail #ddlReason', '#frmappointmentDetail #Duration');"></select>
+                        </div>-->
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Reason">Reason</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtSchReason" name="schreason" customname="Reason" type="text" oninput="schEditSlot.BindScheduleReasons();">
+                                <div id="divSchReason" class="input-group-btn">
+                                    <button id="lnkSchReason" type="button" class="btn btn-primary btn-xs" onclick="schEditSlot.OpenScheduleReason();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Booked">Booked</label>
+                            <input type="text" class="form-control" name="Booked" id="txtBooked" disabled="disabled">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label" for="Comments">Comments</label>
+                            <textarea class="form-control" name="Comments" id="txtComments" rows="2" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-sm-4 pull-right mt-sm">
+                            <div class="btn-block">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit" id="btnsave">Save&Exit</button>
+                                <button class="btn btn-primary btn-sm rightbtn" type="button" id="btnBlockUnblock" onclick="schEditSlot.BlockUnblockSlot();"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <h4>Booked Appointments</h4>
+                    <!--<div class="form-group">
+                <div class="col-xs-12"> <a href="#" class="btn btn-primary btn-xs">Check In</a> <a href="#" class="btn btn-primary btn-xs">Check Out</a> <a href="#" class="btn btn-primary btn-xs">Cancel</a> <a href="#" class="btn btn-primary btn-xs">Delete</a> <a href="#" class="btn btn-primary btn-xs">Copayment</a> </div>
+            </div>-->
+                    <input type="hidden" id="hfSchReasonId" />
+                </form>
+
+                <div class="clearfix"></div>
+
+
+                <div id="pnlSlotEdit_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <input type="hidden" id="SlotEdit_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-hover mb-none" id="dgvSlotEdit">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">Block Hour ID</th>
+                                        <th class="size-min140 size140">Action</th>
+                                        <th>Account</th>
+                                        <th class="noWordBreak">First Name</th>
+                                        <th class="noWordBreak">Last Name</th>
+                                        <th>DOB</th>
+                                        <th>Patient Type</th>
+                                        <th>Visit Type</th>
+                                        <th>Reason</th>
+                                        <th>Comments</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

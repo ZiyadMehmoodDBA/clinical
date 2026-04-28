@@ -1,0 +1,118 @@
+﻿<div id="EDIServiceHandleDetail">
+    <div id="actionPanEDIServiceHandleDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="EDIServiceHandleDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">EDI Service</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblEDIServiceHandleDetail" class=" col-sm-12">
+                    <form method="post" onsubmit="return false" id="frmEDIServiceHandleDetail">
+                        <div class="form-group">
+                            <!--<div class=" col-sm-4">
+                                <label class="control-label">Short Name<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="txtShortName" name="ShortName" maxlength="55">
+                            </div>--> 
+                            <div class=" col-sm-4">
+                                <label class="control-label">Clearing House<span class="required">*</span></label>
+                                <select id="ddlClearingHouse" name="ClearingHouse" class="form-control" ddlist="GetClearingHouse"></select>
+                            </div>
+                            <div class=" col-sm-4">
+                                <label class="control-label">Entity<span class="required">*</span></label>
+                                <select id="ddlEntity" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Case<span class="required">*</span></label>
+                                <select id="ddlCase" class="form-control" name="Case">
+                                    <option value="" selected="selected">- Select -</option>
+                                    <option value="Downlaod">Downlaod</option>
+                                    <option value="Upload">Upload</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Mode<span class="required">*</span></label>
+                                <select id="ddlInterval" class="form-control" onchange="EDIServiceHandleDetail.ModeChanged();" name="Mode">
+                                    <option value="" selected="selected">- Select -</option>
+                                    <option value="Daily">Daily</option>
+                                    <option value="Interval">Interval</option>
+                                </select>
+                            </div>
+                            <!--<div class=" col-sm-4">
+                                <label class="control-label">Start Time<span class="required">*</span></label>
+                                <input type="text" class="form-control" id="txtTime" name="Time" maxlength="55">
+                            </div>--> 
+                            <div class="col-sm-4">
+                                <label class="control-label">Start Time<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                    <input type="text" maxlength="8" data-plugin-timepicker class="form-control  " data-plugin-options='{ "minuteStep": 5 }' name="Time" id="txtTime" onchange="EDIServiceHandleDetail.ResetTimeDropDown();">
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-md-2 hide">
+                                <label class="control-label">Time</label>
+                                <select id="time1" class="form-control size75">
+                                    <option value="ALL" selected="selected">- All -</option>
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <span class="spacer15"></span>
+                            <div id="divInterval">
+                                <!--<div class=" col-sm-4">
+                                    <label class="control-label">Hour(s)</label>
+                                    <input type="text" class="form-control" id="txtHours" name="Hours" maxlength="55">
+                                </div>-->
+                                <div class="col-sm-4">
+                                    <label class="control-label">Hour(s)<span class="required">*</span></label>
+                                    <select id="txtHours" class="form-control" name="Case">
+                                        <option value="" selected="selected">- Select -</option>
+                                        <option value="0">0</option>
+                                        <option value="6">6</option>
+                                        <option value="12">12</option>
+                                        <option value="18">18</option>
+                                        <option value="24">24</option>
+                                    </select>
+                                </div>
+                                <!--<div class=" col-sm-4">
+                                    <label class="control-label">Minute(s)</label>
+                                    <input type="text" class="form-control" id="txtMinutes" name="Minutes" maxlength="55">
+                                </div>-->
+                                <div class="col-sm-4">
+                                    <label class="control-label">Minute(s)<span class="required">*</span></label>
+                                    <select id="txtMinutes" class="form-control" name="Case">
+                                        <option value="" selected="selected">- Select -</option>
+                                        <option value="0">0</option>
+                                        <option value="15">15</option>
+                                        <option value="30">30</option>
+                                        <option value="45">45</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12 mt-xs">
+                                <button type="submit" class="btn btn-primary btn-sm rightbtn">Save & Exit</button>
+                                <!--<button id="btnHistoryEDIServiceHandle" class="btn btn-primary btn-sm rightbtn" type="button" onclick="EDIServiceHandleDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#EDIServiceHandleDetail #txtTime').timepicker({
+        defaultTime: '12:00 AM'
+        //defaultTime: false
+    });
+</script>

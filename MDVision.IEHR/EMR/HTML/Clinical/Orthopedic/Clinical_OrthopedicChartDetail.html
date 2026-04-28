@@ -1,0 +1,121 @@
+﻿<div class="row" id="pnlOrthopedicChartDetail">
+    <div id="actionPanOrthopedicChartDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_OrthopedicChartDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Orthopedic Chart Documentation</h4>
+            </div>
+            <form method="post" id="frmOrthopedicChartDetail" onsubmit="return false">
+                <div id="modalbody" class="modal-body bg-white">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="left-panel col-md-4">
+
+                            <div class="col-md-4">
+
+                                <div class="or-circle ortho-next">
+                                    <div class="or-triangle or-up"></div>
+                                    <div class="or-bar"></div>
+                                </div>
+
+                                <div id="ortho_slider" style="height: 570px">
+                                    <div class="ortho-content">
+                                        <div>1</div>
+                                    </div>
+                                    <div class="ortho-content">
+                                        <div>
+                                            2
+                                        </div>
+                                    </div>
+                                    <div class="ortho-content">
+                                        <div>
+                                            3
+                                        </div>
+                                    </div>
+                                    <div class="ortho-content">
+                                        <div>
+                                            4
+                                        </div>
+                                    </div>
+                                    <div class="ortho-content">
+                                        <div>
+                                            5
+                                        </div>
+                                    </div>
+                                    <div class="ortho-content">
+                                        <div>
+                                            6
+                                        </div>
+                                    </div>
+                                    <div class="ortho-content">
+                                        <div>
+                                            7
+                                        </div>
+                                    </div>
+                                    <div class="ortho-content">
+                                        <div>
+                                            8
+                                        </div>
+                                    </div>
+                                    <div class="ortho-content">
+                                        <div>
+                                            9
+                                        </div>
+                                    </div>
+                                    <div class="ortho-content">
+                                        <div>
+                                            10
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                                <div class="or-circle ortho-prev">
+                                    <div class="or-bar"></div>
+                                    <div class="or-triangle or-down"></div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8" style="text-align:center">
+                                <canvas id="ChartCanvas" width="200" height="600" style="margin-left: 20px;"></canvas>
+                            </div>
+
+
+                            <div class="clearfix"></div>
+
+                            <div class="panel panel-featured">
+                                <header class="panel-heading">
+                                    <h2 class="panel-title">Affected Joints Complaints</h2>
+                                    <div class="clearfix"></div>
+                                </header>
+                                <section class="ortho-section panel-body">
+                                    <ul id="list_Complaints" class="joints-list height-max150 own-scroll">
+                                        <li style='text-align:center'>No Complaint is added.</li>
+                                    </ul>
+                                </section>
+                            </div>
+
+                        </div>
+                        <div class="right-panel col-md-8 tab-content ortho-tab">
+                            <div class="tab-pane" id="mstrDivOrthoDetail" style="display: block;">
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="Problems" id="btnOrthoProblems" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoProblemList', 'btnOrthoProblems')">Problems</button></span>
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="Medications" id="btnOrthoMedications" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoMedications', 'btnOrthoMedications')">Medications</button></span>
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="Procedures" id="btnOrthoProcedures" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoProcedureList', 'btnOrthoProcedures')">Procedures</button></span>
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="Imaging" id="btnOrthoImaging" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoImaging', 'btnOrthoImaging')">Imaging</button></span>
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="Education" id="btnOrthoEducation" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoEducation', 'btnOrthoEducation')">Education</button></span>
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="Follow Up" id="btnOrthoFollowUp" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoFollowUp', 'btnOrthoFollowUp')">Follow Up</button></span>
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="Physical Exam" id="btnOrthoPhysicalExam" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoPhysicalExam', 'btnOrthoPhysicalExam')">Physical Exam</button></span>
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="ROS" id="btnOrthoROS" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoROS', 'btnOrthoROS')">ROS</button></span>
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="Custom Forms" id="btnOrthoCustomForms" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoCustomForms', 'btnOrthoCustomForms')">Custom Forms</button></span>
+                                <span class="btn btn-default btn-sm tab_space"><button type="button" title="Complaints" id="btnOrthoComplaints" onclick="Clinical_OrthopedicChartDetail.SelectOrthoTab('Clinical_OrthoComplaints', 'btnOrthoComplaints')">Complaints</button></span>
+                            </div>
+                            <div id="ctrlPanOrthoDetail"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

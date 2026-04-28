@@ -1,0 +1,255 @@
+﻿<div class="row" id="pnlClinicalHospitalizationHx">
+    <div id="actionPanClinicalHospitalizationHx" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_HospitalizationHx.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Hospitalization Hx</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_HospitalizationHx.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Add Hospitalization Hx</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body NoRadiusT" id="pnlSection_Search" style="height:345px">
+
+                            <div id="favSectionDiv" data-title="Favorites" class="toggleHorDefault">
+
+                                <div class="col-xs-12 pb-sm">
+                                    <span class="pull-left">Favorites List</span>
+                                    <a id="favSelectAllLink" href="#" onclick="Clinical_HospitalizationHx.selectAllFavoriteListContent()" class="btn btn-link btn-xs pull-right disableAll">Select All</a>
+                                    <div class="clearfix"></div>
+                                    <select id="ddlFavoriteListHospitalizationHx" name="FavoriteListHospitalizationHx" onchange="Clinical_HospitalizationHx.loadfavoriteListContent(this)" class="form-control"></select>
+                                    <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="Clinical_HospitalizationHx.AutoSearchFavHospitalizationHx()" />
+                                </div>
+                                <ul id="ulFavoriteListHospitalizationHxContent" name="FavoriteListHospitalizationHxContent" class="listPrimary height-max200 overflowY"></ul>
+
+                            </div>
+                            <div id="FormDiv" class="col-xs-12">
+                                <form id="frmClinicalHospitalizationHx" method="post" name="frmClinicalHospitalizationHx" onsubmit="return false">
+                                    <div class="spacer10"></div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label" for="Date">Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input type="text" class="form-control" id="dtHospitalizationHxDate" name="HospitalizationHxDate" data-plugin-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="chkHospitalizationHxUnremarkable" onclick="Clinical_HospitalizationHx.unRemarkableHospitalizationHx(this);" name="HospitalizationHxUnremarkable">
+                                                <label class="control-label">Unremarkable</label>
+                                            </div>
+                                        </div>
+                                        <div class="spacer20"></div>
+                                        <section class="panel">
+                                            <div id="HospitalizationHxDisease" class="tab-pane">
+
+                                                <div class="col-sm-4 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">History</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none">
+                                                            <div class="col-xs-12 mb-xs">
+                                                                <div class="radio-custom col-sm-6">
+                                                                    <input type="radio" id="rdSearchICD" name="HospitalizationHxSearchType" value="2" onchange="Clinical_HospitalizationHx.SearchTypeChange()">
+                                                                    <label for="rdSearchICD">ICD</label>
+                                                                </div>
+                                                                <div class="radio-custom col-sm-6">
+                                                                    <input type="radio" id="rdSearchFreeText" name="HospitalizationHxSearchType" value="1" onchange="Clinical_HospitalizationHx.SearchTypeChange()">
+                                                                    <label for="rdSearchFreeText">Custom</label>
+                                                                </div>
+                                                                <div class="input-group" id="diseaseAutoComplete">
+                                                                    <input class="form-control" id="txtDisease" data-popupunload="false" placeholder="Search Disease" oninput="Clinical_HospitalizationHx.bindICD9AutoComplete(this)" onkeypress="Clinical_HospitalizationHx.disableEnterKey(event)" name="Disease" type="text" value="">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnDisease" class="btn btn-primary btn-xs" type="button" onclick="Clinical_HospitalizationHx.OpenSearchPopup('ICD', 'txtDisease', 'hfCPTCode,hfCPTDescription')"><i class="glyphicon glyphicon-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-group col-xs-12 mb-xs hidden" id="diseaseFreeText">
+                                                                    <input class="form-control" id="txtDiseaseFreeText" placeholder="Enter text" onblur="Clinical_HospitalizationHx.bindFreeText()"  name="DiseaseFreeText" type="text" value="" maxlength="500">
+                                                                </div>
+                                                            </div>
+
+                                                            <ul id="ulHospitalizationDisease" name="HospitalizationDisease" class="listPrimary own-scroll overflowY" style="height:130px;max-height:130px;"></ul>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-8 col-md-9">
+                                                    <section id="sectionHospitalizationDetails" class="panel panel-featured disableAll">
+                                                        <header class="panel-heading">
+
+                                                            <h2 id="headingChildDetailMiscStatus" class="panel-title">Details</h2>
+                                                        </header>
+                                                        <div id="HospitalizationDetails" class="panel-body">
+                                                            <input type="hidden" id="hfCPTSNOMEDCode" name="CPTSNOMEDCodeId" />
+                                                            <input type="hidden" id="hfCPTSNOMEDDescription" name="CPTSNOMEDDescription" />
+                                                            <input type="hidden" id="hfCPTCode" name="CPTCode" value="">
+                                                            <input type="hidden" id="hfCPTDescription" name="CPTDescription" value="">
+                                                            <input type="hidden" id="hfSNOMEDCode" name="SNOMEDCode" value="">
+                                                            <input type="hidden" id="hfSNOMEDDescription" name="SNOMEDDescription" value="">
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Procedure</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" id="txtHospitalizationCPTCode" onblur="Clinical_HospitalizationHx.validateProcedure()" placeholder="search procedure" type="text" name="CPT" oninput="Clinical_HospitalizationHx.bindAutoComplete(this)" />
+                                                                    <div class="input-group-btn">
+                                                                        <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_HospitalizationHx.OpenSearchPopup('CPT', 'txtHospitalizationCPTCode','hfCPT','hfCPTDescription')"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--<div class="col-sm-3 col-md-3 col-lg-3">
+                                            <label class="control-label">Diagnosis </label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtDiagnosis" maxlength="5" placeholder="99999" type="text" name="Diagnosis"
+                                                       oninput="Clinical_HospitalizationHx.bindAutoCompleteICD(this)"
+                                                       onblur="utility.ValidateIsEmpty(this, 'ICD', 'hfICDCode,hfICDDescription', 'Clinical_HospitalizationHx'); Clinical_HospitalizationHx.ValidateICDCode(this);" />
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary btn-xs " type="button"
+                                                            onclick="Clinical_HospitalizationHx.OpenSearchPopup('ICD', 'txtDiagnosis', 'hfICDCode,hfICDDescription');"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Status</label>
+                                                                <select id="ddlHospitalizationStatus" name="HospitalizationDiseaseStatus" ddlist="GetHospitalizationHxStatus" class="form-control"><option value="" refvalue="" refname="">- Select -</option><option value="3" refvalue="" refname="">Both Men and Women</option><option value="1" refvalue="" refname="">Men only</option><option value="2" refvalue="" refname="">Women only</option></select>
+                                                            </div>
+
+                                                            <div class="col-sm-6 col-lg-3 p-none">
+                                                                <div class="col-xs-12">
+                                                                    <label class="control-label" id="lblDuration">Length of Stay</label>
+                                                                </div>
+                                                                <div class="col-xs-5">
+                                                                    <input class="form-control" type="text" id="txtHospitalizationStayLength" name="HospitalizationDiseaseStayDuration" maxlength="2" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onblur="Clinical_HospitalizationHx.enableDurationValidation()">
+                                                                </div>
+                                                                <div class="col-xs-7">
+                                                                    <select id="ddlHospitalizationDiseaseStayId" name="HospitalizationDiseaseStayId" class="form-control" ddlist="GetHospitalizationHxStay" onchange="Clinical_HospitalizationHx.enableDurationValidation()"></select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Admission Date</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                    <input id="dtpHospitalizationAdmissionDate" name="HospitalizationDiseaseAdmissionDate" class="form-control" type="text" data-plugin-datepicker="" onblur="Clinical_HospitalizationHx.enableDischargeDate();" maxlength="10" onchange="Clinical_HospitalizationHx.enableDurationValidation();">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Discharge Date</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                    <input id="dtpHospitalizationDischargeDate" name="HospitalizationDiseaseDischargeDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" onchange="Clinical_HospitalizationHx.enableDurationValidation();">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Name of Hospital</label>
+                                                                <input class="form-control" id="txtHospitalizationHospitalName" type="text" name="HospitalizationDiseaseHospital" />
+                                                                <!--<input class="form-control" id="txtHospitalizationHospitalName" maxlength="5" placeholder="99999" type="text" name="HospitalizationHospitalName" oninput="Patient_PreAuthorization_Detail.BindAutoComplete(this)" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Patient_PreAuthorization_Detail.OpenCPTCode();"><i class="fa fa-search"></i></button>
+                                            </div>-->
+
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtHospitalizationComments" name="HospitalizationDiseaseComments" maxlength="500" rows="4" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+
+                                                            <div class="pull-right pad-a-labelsize pr-default">
+                                                                <button type="button" id="aHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                                <button id="btnHospitalizationDiseaseSave" type="submit" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="col-md-12">
+                        <label class="control-label">Overall Comments</label>
+                        <textarea id="txtHospitalizationOverallComments" name="HospitalizationOverallComments" maxlength="5000" rows="3" class="form-control" spellcheck="true"></textarea>
+                    </div>
+                    <div class="pull-right pad-a-labelsize-btn pr-default">
+                        <button class="btn btn-success btn-sm pull-right mr-sm" style="display:none;" type="button" onclick="Clinical_HospitalizationHx.addHospitalizationHxToNotes();" id="btnAddVitalsOnNote">Add on Note</button>
+                        <button class="btn btn-success btn-sm pull-right mr-sm" type="button" style="display:none" onclick="Clinical_HospitalizationHx.HospitalizationHxSave('');" id="btnHospitalizationHxSave">Save</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- /Hospitalization Hx -->
+                </div>
+                <input type="hidden" name="PatientId" id="hfPatientId" />
+                <input type="hidden" name="HospitalizationHxId" id="hfHospitalizationHxId" value="-1" />
+                <input type="hidden" name="HospitalizationHxType" id="hfHospitalizationHxType" value="tobacco" />
+                <input type="hidden" name="HospitalizationHxSoapText" id="hfHospitalizationHxSoapText" value="" />
+                <input type="hidden" name="gridComments" id="hfGridComments" />
+                <input type="hidden" name="selectedDisease" id="hfSelectedDisease" />
+            </div>
+            <div id="pnlHospitalizationHx_Result" style="display: inline;">
+                <div class="spacer10"></div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="spacer10"></div>
+                    <div class="col-sm-6" id="divSwitch">
+                        <span class="pr-xs">All</span>
+                        <div id="tglHospitalizationHx" class="btnWidgetSwitch switch switch-xs switch-success">
+                            <input id="switchVisit" type="checkbox" status="1" checked="" name="Switch" data-plugin-ios-switch="" style="display: inline;" onchange="Clinical_HospitalizationHx.ChangeCurrentPast(this);">
+                        </div>
+                        <span class="pl-xs">Current</span>
+                    </div>
+                </div>
+                <section class="panel" id="pnlCurrent">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvHospitalizationHx">
+                            <thead>
+                                <tr>
+
+                                    <th>Action</th>
+                                    <th>Soap Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvHospitalizationHx_Paging"></div>
+                    </div>
+                </section>
+
+                <section class="panel hidden" id="pnlPast">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPastHospitalizationHx">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">HxId</th>
+
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvPastHospitalizationHx_Paging"></div>
+                    </div>
+                </section>
+
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+
+</div>

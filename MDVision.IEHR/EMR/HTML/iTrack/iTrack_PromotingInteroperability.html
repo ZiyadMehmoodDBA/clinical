@@ -1,0 +1,226 @@
+﻿
+<div class="col-xs-12 pl-none" id="pnliTrackPromotingInteroperability">
+    <div id="actionPaniTrackPromotingInteroperability" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <form id="frmiTrackPromotingInteroperability" method="post" name="frmiTrackPromotingInteroperability" onsubmit="return false">
+        <div class="col-xs-12 p-none">
+            <div class="pull-left"><h4 class="m-none font-xs bold">PROMOTING INTEROPERABILITY (Formerly ACI) - <span id="SpanScoreNow">20</span>%</h4></div>
+            <div class="pull-right"><button onclick="iTrack_PromotingInteroperability.viewGraph();" class="btn btn-xs btn-link">View Graph <i class="fa fa-bar-chart"></i></button></div>
+            <div class="clearfix"></div>
+            <div class="progress mb-default">
+                <div id="divScore" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                     aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                    <span class="sr-only">20% Complete</span>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <button class="btn btn-link btn-xs tab_space" onclick="iTrack_PromotingInteroperability.viewIndividualReporting();"><i class="fa fa-user"></i> Individual Reporting</button>
+        <button class="btn btn-link btn-xs tab_space" onclick="iTrack_PromotingInteroperability.viewGroup();"><i class="fa fa-users"></i> Group Reporting</button>
+        <div class="panel panel-featured" id="pnlPromotingInteroperabilityMeasure_Search">
+            <header class="panel-heading">
+                <h2 class="panel-title"> Promoting Interoperability (Formerly ACI) </h2>
+            </header>
+            <div class="panel-body" id="IndividualReporting">
+                <div class="col-sm-2 col-lg-2">
+
+                    <label id="lblProvider" class="control-label" style="display: inline;">Provider</label>
+                    <a href="#" title="Edit Provider" style="display: none;" onclick="iTrack_PromotingInteroperability.OpenProviderDetail();" id="lnkProviderEdit">Provider</a>
+                    <div class="input-group">
+                        <input class="form-control" onblur="iTrack_PromotingInteroperability.HideProviderLink(this.value);" id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" customname="Provider" maxlength="35" oninput="iTrack_PromotingInteroperability.ResetNPI();" data-bv-field="Provider" />
+                        <div class="input-group-btn">
+                            <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="iTrack_PromotingInteroperability.OpenProvider();"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-3 col-lg-2">
+                    <label class="control-label">NPI</label>
+                    <input id="NPItxt" name="NPI" class="form-control" type="text" placeholder="9999999999" maxlength="10" onchange="iTrack_PromotingInteroperability.ResetProvider();" onkeypress=" return utility.ValidateZero(event, this);" onblur="utility.FillProviderNPI('#pnlBatchClinicalQualityMeasure #frmBatchClinicalQualityMeasure', '#hfProviderId' , '#NPItxt' )" data-bv-field="NPI" />
+                </div>
+                <div class="col-sm-3 col-lg-2 ">
+                    <label class="control-label">From Date</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" id="dtpFromDate" name="DateFrom" class="form-control" data-plugin-datepicker="">
+                    </div>
+                </div>
+                <div class="col-sm-3 col-lg-2 ">
+                    <label class="control-label">To Date</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" id="dtpToDate" name="DateTo" class="form-control" data-plugin-datepicker="">
+                    </div>
+                </div>
+                <div class="col-xs-3 col-lg-2">
+                    <label class="control-label">Performance Year</label>
+                    <select id="ddlPerformanceYear" class="form-control">
+                        <option>-select-</option>
+                        <option value="1">2017</option>
+                        <option selected="selected" value="2">2018</option>
+                    </select>
+                </div>
+                <div class="pull-right pr-default mt-md">
+
+                    <button id="btnSearch" class="btn btn-primary btn-sm tab_space " onclick="iTrack_PromotingInteroperability.QualityMeasureSearch();" type="button">Search</button>
+                    <div class="dropdown pull-right" id="divExport">
+                        <a id="btnExport" href="#" class="dropdown-toggle btn btn-primary btn-sm pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Export <span class="caret"></span></a>
+                        <ul id="menuExport" class="dropdown-menu" aria-labelledby="btnExport">
+
+                            <li><a href="#" onclick="iTrack_PromotingInteroperability.printPreview();">PDF</a></li>
+                            <li><a href="#" onclick="iTrack_PromotingInteroperability.ExportData();">Excel</a></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="GroupReporting" class="panel-body hidden">
+
+                    <div id="gp" class="row black">
+                        <div class="col-xs-12 col-sm-6 col-lg-2">
+                            <label id="lblGroupName" class="control-label" style="display: inline;">Group Name</label>
+                            <a href="#" title="Edit Group" style="display: none;" onclick="iTrack_PromotingInteroperability.GroupPreferencesEdit();" id="lnkGroupEdit">Group Name</a>
+
+                            <input class="form-control" onblur="iTrack_PromotingInteroperability.HideGroupNameLink(this.value);" id="txtGroupName" name="GroupName" placeholder="Start typing to search" type="text" data-bv-field="GroupName">
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-lg-2">
+                            <label class="control-label">Group TIN</label>
+                            <input class="form-control" name="GroupTIN" id="txtGroupTIN" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-6 col-lg-2">
+                            <label class="control-label">Member Provider</label>
+                            <select id="ddlMemberProviders" multiple="multiple" name="MemberProvider" class="form-control"></select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6 p-none">
+                            <div class="col-xs-3">
+                                <label class="control-label" for="Date">From Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input id="dtpGroupFromDate" type="text" class="form-control" data-plugin-datepicker="">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-3">
+                                <label class="control-label" for="Date">To Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input id="dtpGroupToDate" type="text" class="form-control" data-plugin-datepicker="">
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <label class="control-label">Performance Year</label>
+                                <select id="ddlPerformanceYearGroup" class="form-control">
+                                    <option>-select-</option>
+                                    <option value="1">2017</option>
+                                    <option selected="selected" value="2">2018</option>
+                                </select>
+                            </div>
+                            <div class="pull-right pr-default pr-xs pt-md">
+                                <button id="btnGroupProviderSearch" onclick="iTrack_PromotingInteroperability.QualityMeasureSearchGroup();" class="btn btn-default btn-sm tab_space">Search</button>
+                                <div class="dropdown pull-right" id="divExport">
+                                    <a id="btnExport" href="#" class="dropdown-toggle btn btn-primary btn-sm pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Export <span class="caret"></span></a>
+                                    <ul id="menuExport" class="dropdown-menu" aria-labelledby="btnExport">
+
+                                        <li><a href="#" onclick="iTrack_PromotingInteroperability.printPreview();">PDF</a></li>
+                                        <li><a href="#" onclick="iTrack_PromotingInteroperability.ExportData();">Excel</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+        <input type="hidden" id="hfProviderId" />
+        <input type="hidden" id="hfGroupId" />
+    </form>
+    <!--<div class="panel-featured-light panel-body text-primary mb-default">
+        <strong id="lblProviderName"> | </strong><span>Performance Year:</span><span id="spnYear"></span><strong>|</strong> <span id="isIndividual">Individual Clinician</span> <strong>|</strong> <span id="spnReportingVia">Reporting via EHR</span>
+    </div>-->
+    <div id="pnliTrackPromotingInteroperability_Result" style="display: none;">
+        <a class="font-xss" id="btnExpandAll" href="#" onclick="iTrack_PromotingInteroperability.rowExpandCollapseAll();">Expand/Collapse All Measures <i class="fa fa-caret-right"></i></a>
+        <div class="pull-right pr-default">
+            <label class="tab_space"><span style="background-color:#d2322d" class="chip-notifi"></span> No Performance</label>
+            <label class="tab_space"><span style="background-color:#5bc0de" class="chip-notifi"></span> Performance In Progress</label>
+            <label class="tab_space"><span style="background-color:#47a447" class="bg-success chip-notifi"></span> Performance Met</label>
+        </div>
+        <section class="panel-body panel-featured">
+            <div id="divInformation" class="panel-heading">
+                <strong id="IsGroupSearched"> Group: </strong><strong id="IsProviderSearched"> Provider: </strong><span id="lblProviderName"></span> | <strong id="NpiText"> NPI: </strong><span id="lblNPI"></span> | <strong> Performance Period:  </strong><span id="lblPerformanceyear"></span>
+            </div>
+            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgviTrackPromotingInteroperability">
+                <thead>
+                    <tr>
+                        <th style="display:none;">CQMId</th>
+                        <th class="size30">Measure ID</th>
+                        <th class="size300">Measure</th>
+                        <th class="size30">Num/Den</th>
+                        <th class="size30">Target</th>
+                        <th class="size250 size-min250">Performance Rate</th>
+                        <th class="size30">Performance Score Weight</th>
+                        <th class="size30">Non Compliance</th>
+                        <th style="display:none;">Measuse Type</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div id="diviTrackPromotingInteroperabilityPaging"></div>
+        </section>
+    </div>
+
+    <script type="x/kendo-template" id="page-templateLegacy">
+
+        <div class="page-template" id="legacyViewTemplateDiv">
+            #if(pageNum != 1) {#
+            <div id="patientHeaderInfo" style="position: absolute;left: 50px;right: 50px;font-size: 90%;top: 7px;font-size: 110%;" ul class="bluefgColor">
+                Patient Name: <span id="patientname" class="blackfgColor"></span><span class="whiteColorPrint" style="float:right;">Provider Name: <span id="providerName" class="blackfgColor"></span></span>
+            </div>
+            <div id="patientHeaderInfo" style="position: absolute;left: 50px;right: 50px;font-size: 90%;top: 28px;font-size: 110%;" ul class="bluefgColor">
+                DOB: <span id="patientDOB" class="blackfgColor"></span><span class="whiteColorPrint" style="float:right;">DOS: <span id="patientDOS" class="blackfgColor"></span></span>
+            </div>
+            #}#
+            <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                <div id="ClinicalReportsFooterTextLegacy" class="blueBgPrint" style="float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                    Generated by:<span id="ClinicalReportsFooterLegacy">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                </div>
+            </div>
+
+        </div>
+    </script>
+    <div id="printcall" class="hidden">
+        <div id="PatientInfo" class="">
+            <div class="col-sm-4 col-lg-2 pull-left">
+                <img src="content/images/SHS-nav-logo-small-100.png" class="img-responsive">
+            </div>
+
+            <ul class="list-unstyled pull-right line-height-fix" id="PracticeList"></ul>
+            <div class="clearfix"></div>
+            <div class="splitter m-none mt-xs"><div class="spacer3"></div></div>
+
+            <div class="spacer3"></div>
+            <ul class="list-unstyled pull-right line-height-fix" id="CurrentDate">
+
+                <li id="liCurrentDate"></li>
+            </ul>
+
+            <ul class="list-unstyled pull-left line-height-fix" id="ProviderList"></ul>
+        </div>
+        <div class="spacer5"></div>
+
+        <section class="panel panel-featured mt-lg">
+            <div class="panel-body bg-white" id="ulContent">
+                <div id="MeasureTitle">
+                    <span style="margin-left:40%" id="MeasureName"></span>
+                    <div class="clearfix"></div>
+                    <span style="margin-left:40%" id="ReportTitle"></span>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+

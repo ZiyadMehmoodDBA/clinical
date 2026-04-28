@@ -1,0 +1,164 @@
+﻿<div id="pnlPatientMessageCompose" style="display:none;" class="row">
+    <div id="actionPanPatientMessageCompose" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Patient_MessageCompose.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="titleMessage">Message</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="frmPatientMessageCompose" onsubmit="return false">
+
+                        <!--   -->
+                        <div class="col-sm-6" id="divSwitch">
+                            <span class="pr-xs">Patient</span>
+                            <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                <input id="switchVisit" type="checkbox" status="1" checked="" name="Switch" data-plugin-ios-switch="" style="display: inline;" onchange="Patient_MessageCompose.ChangeStatus(this);">
+                            </div>
+                            <span class="pl-xs">Provider</span>
+                        </div>
+                        <div>
+
+                            <div class="clearfix"></div>
+                            <div id="divProvider" class="provider">
+                                <div class="col-xs-12">
+                                    <label for="" class="control-label" id="lblMessageToProv">To<span class="required">*</span></label>
+                                    <input id="txtTo" type="text" name="MessageTo" customname="To" class="form-control green bold" onblur="utility.ValidateAutoComplete(this, 'frmPatientMessageCompose #hftxtFrom', false);" />
+                                </div>
+                            </div>
+                            <div id="divPatient" class="patient">
+                                <div class="col-xs-12">
+                                    <label for="" class="control-label" id="lblMessageToPat">To<span class="required">*</span></label>
+                                    <div class="input-group">
+                                        <input id="txtAttatchPatient" customname="Patient" name="AttatchPatient" type="text" oninput="Patient_MessageCompose.BindPatientAccount();" class="form-control blue bold" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick=" Patient_MessageCompose.OpenPatientAccount(); "><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="divphiMailAddress" class="phiMail">
+                                <div class="col-xs-12">
+                                    <label for="" class="control-label" id="lblMessageToProv">To<span class="required">*</span></label>
+                                    <input id="phiMAilAddress" type="text" name="phiMAilAddress" customname="From" class="form-control green bold" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--  -->
+
+                        <div class="col-sm-12">
+                            <label for="" class="control-label">Subject<span class="required">*</span></label>
+                            <input id="txtSubject" name="Subject" type="text" class="form-control" />
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label">Priority</label>
+                            <select class="form-control" name="Priority" id="ddlPriority" ddlist="GetMessagesPriority"></select>
+                        </div>
+                        <div class="col-sm-8 p-none" id="divAttatchFile">
+                            <div class="col-sm-10">
+                                <label class="control-label" for="uploadFilePH">Attach File</label>
+                                <input type="text" class="form-control size100per ellipses" disabled name="fileupload" id="uploadFilePH" placeholder="No File Selected" />
+                            </div>
+                            <div class="col-sm-2 pt-lg">
+                                <span class="btn btn-default btn-xs ml-xxs mr-sm btn-file">
+                                    <i class="fa fa-folder-open"></i>
+                                    <span>Browse</span>
+                                    <input type="file" id="Upload_Import_file" name="Upload_Import_file" accept="application/pdf,image/jpg,image/bmp,image/png,image/jpeg,image/gif" id="Upload_Import_file" multiple onchange="Patient_MessageCompose.BufferFile(this);" />
+                                </span>
+                                <!--<label class="control-label" id="totalFiles">0 file(s) selected</label>-->
+                            </div>
+                        </div>
+
+                        <div class="col-lg-9 pt-lg" id="divfilesicons">
+
+                        </div>
+                        <div id="divDownloadLink" class="col-sm-2 pt-lg" style="display:none">
+                            <a class="btn btn-success btn-xs" id="linkDownload" download="" href="" title="Download File"><i class="fa fa-download"></i> Download</a>
+                        </div>
+
+                        <div id="divDownloadLinkHTML" class="col-sm-2 pt-lg" style="display:none">
+                            <a class="btn btn-success btn-xs" id="linkDownloadHTML" download="" href="" title="Download File"><i class="fa fa-download" style="display:none"></i> Download</a>
+                        </div>
+
+                        <div id="divPrintLink" class="col-sm-1 pt-lg">
+                            <a class="btn btn-success btn-xs" id="linkPrint" href="#" title="Print Mesage" onclick="Patient_MessageCompose.PrintMessage();"><i class="fa fa-print"></i>Print</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-12 mt-sm">
+                            <label class="control-label" for="comments">Message<span class="required">*</span></label>
+                            <textarea id="txtMessageDtl" name="MessageDtl" class="form-control" rows="15" spellcheck="true"></textarea>
+                        </div>
+
+                        <div class="pull-left col-sm-6 mt-md " id="divButtons">
+                            <button type="button" id="btnReply" class="btn btn-sm btn-success" onclick="Patient_MessageCompose.ReplyMessage();">Reply</button>
+                            <button type="button" id="btnForward" class="btn btn-sm btn-warning" onclick="Patient_MessageCompose.ForwardMessage();">Forward</button>
+                            <button type="button" id="btnTask" class="btn btn-sm btn-primary" onclick="Patient_MessageCompose.AddTask();">Add Task</button>
+                            <button type="submit" id="btnSend" class="btn btn-sm btn-success">Send</button>
+                        </div>
+
+                        <input type="hidden" id="hftxtTo" name="hfMessageTo" />
+                        <input type="hidden" id="hfPatientId" name="AttatchedPatientId" />
+
+                        <input type="hidden" id="hfFileType" name="FileTypeName" />
+                        <input type="hidden" id="hfFileStream" name="FileStreamName" />
+                        <input type="hidden" id="hfFileName" name="FilePathName" />
+                        <input type="hidden" id="isPatSelected" />
+                        <!--<div id="divPrintMessage" style="display:none"></div>-->
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#txtTo').keyup(function () {
+                if ($('txtTo').val()) {
+                    // $('#pnlPatientMessageCompose #btnSend').prop("disabled", false);
+                } else {
+                    $('#pnlPatientMessageCompose #btnSend').prop("disabled", true);
+                }
+            });
+
+
+            //$('#pnlPatientMessageCompose #divPatient').hide();
+
+            //$('#pnlPatientMessageCompose #rdProvider').click(function () {
+            //    if ($(this).is(':checked')) {
+
+            //        $('#pnlPatientMessageCompose #divPatient').hide();
+            //        $('#pnlPatientMessageCompose #divProvider').show();
+            //        //$('#frmPatientMessageCompose').data('bootstrapValidator').enableFieldValidators('AttatchPatient', false);
+            //        //$('#frmPatientMessageCompose').data('bootstrapValidator').enableFieldValidators('MessageTo', true);
+            //    }
+            //    else {
+
+            //    }
+            //});
+
+            //$('#pnlPatientMessageCompose #rdPatient').click(function () {
+            //    if ($(this).is(':checked')) {
+
+            //        $('#pnlPatientMessageCompose #divPatient').show();
+            //        $('#pnlPatientMessageCompose #divProvider').hide();
+
+            //        //$('#frmPatientMessageCompose').data('bootstrapValidator').enableFieldValidators('AttatchPatient', true);
+            //        //$('#frmPatientMessageCompose').data('bootstrapValidator').enableFieldValidators('MessageTo', false);
+            //    }
+            //    else {
+
+            //    }
+            //});
+
+
+
+        });
+    </script>
+</div>

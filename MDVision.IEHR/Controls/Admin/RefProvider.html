@@ -1,0 +1,466 @@
+﻿<div id="refprovider" align="center">
+
+
+    <div class="fadeoutPatch1" id="fadeoutPatch1_refprovider"></div>
+    <div class="fadeoutBackground" id="fbrefprovider"></div>
+
+    <div width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" style="position: relative;" class="rightdiv" id="tblrefprovider">
+
+        <div class="panelContainer" id="RefProvider_Detail" style="display:inline;">
+
+            <div align="left" class="pWinBarN">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="pWinBarTitle">
+                                    Referring Provider Detail
+                                </div>
+                            </td>
+
+                            <td style="text-align: left; width: 100%">
+                                <a class="pWinBarHotLink" id="RefProvider_lnkDelete" onclick="refprovider.Click_RefProvider_lnkDelete();">Delete</a>
+
+                            </td>
+
+                            <td width="150" valign="middle" height="100%" align="right" class="iconWindowsPan">
+                                <a href="javascript:void(0);" onclick="refprovider.Click_RefProvider_btnCancel();">
+                                    <img src="images/sp.gif" class="iconWindowsClose">
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panCont">
+                <div align="center" style="padding: 10px;">
+                    <!--start - CONTENTS-->
+                    <div id="DivReffProDet" >
+                    <table id="frmRefProvider" onkeydown="return FireDefaultButton(event, this, 'RefProvider_btnSave')">
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align: top;">
+                                    <table class="InputTable">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 80px;">Short Name<img class="redBox" src="images/sp.gif"></th>
+                                                <td>
+                                                    <input type="text" requiredFld vid="rfvShortName" onkeydown="Validators.ValidateRequired(this);" style="width: 130px;" id="txtShortName" maxlength="10"  name="txtShortName">
+                                                    <span class="Validator" id="rfvShortName">
+                                                        <br>
+                                                        Required</span>
+                                                </td>
+                                                <th style="width: 90px;">Priority </th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" vid="revPriority" onfocus="Validators.ValidateNumericData(this);" id="txtPriority" maxlength="3" name="txtPriority" onkeypress="return keyRestrict(event,'0123456789');">
+                                                    <span class="Validator" id="revPriority">
+                                                        <br>
+                                                        Invalid Value</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Last Name<img class="redBox" src="images/sp.gif"></th>
+                                                <td>
+                                                    <input  type="text" requiredFld vid="rfvLastName" onkeydown="Validators.ValidateRequired(this);" style="width: 130px;" id="txtLastName" maxlength="30"  name="txtLastName">
+                                                    <span class="Validator" id="rfvLastName">
+                                                        <br>
+                                                        Required</span>
+                                                </td>
+                                                <th style="width: 80px;">Priority Comments</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" id="txtPriorityComments" maxlength="50" name="txtPriorityComments"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">First Name<img class="redBox" src="images/sp.gif"></th>
+                                                <td>
+                                                    <input  type="text" requiredFld vid="rfvFirstName" onkeydown="Validators.ValidateRequired(this);" style="width: 130px;" id="txtFirstName" maxlength="30" name="txtFirstName">
+                                                    <span class="Validator" id="rfvFirstName">
+                                                        <br>
+                                                        Required</span>
+                                                </td>
+                                                <th style="width: 80px;">Affiliation</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" id="txtAffiliation" maxlength="50" name="txtAffiliation"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">NPI</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" id="txtNPI" maxlength="10"  name="txtNPI"></td>
+                                                <th style="width: 80px;">Hospital</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" id="txtHosplital" maxlength="50" name="txtHosplital"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">UPIN</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" id="txtUPIN" maxlength="30" name="txtUPIN"></td>
+
+
+                                                <th style="width: 80px;">Provider Tel</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" vid="revProviderTel" onmouseover="Validators.ValidateTelNo(this);" onkeypress="return keyRestrict(event,'0123456789');" id="txtProviderTel" maxlength="14" name="txtProviderTel">
+
+                                                    <span class="Validator" id="revProviderTel">
+                                                        <br>
+                                                        Invalid Tel No</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Qualification</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" id="txtQualification" maxlength="50" name="txtQualification"></td>
+                                                <th style="width: 80px;">Contact</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" id="txtContact" maxlength="30" name="txtContact"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Office Tel, Ext</th>
+                                                <td>
+                                                    <input  type="text" style="width: 88px;" vid="revPhone" onmouseover="Validators.ValidateTelNo(this);" onkeypress="return keyRestrict(event,'0123456789');" id="txtPhone" maxlength="14" name="txtPhone">
+                                                    <input  type="text" style="width: 30px;" onkeypress="return keyRestrict(event,'0123456789');" id="txtPhoneExt" maxlength="6" name="txtPhoneExt">
+
+                                                    <span class="Validator" id="revPhone">
+                                                        <br>
+                                                        Invalid Tel No</span>
+
+                                                </td>
+                                                <th style="width: 80px;">Entity Type</th>
+                                                <td>
+                                                    <select  style="width: 138px;" id="ddlEntityType" ulist="GetEntityType" name="ddlEntityType">
+                                                       
+                                                    </select></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Fax</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" vid="revFax" onmouseover="Validators.ValidateTelNo(this);" onkeypress="return keyRestrict(event,'0123456789');" id="txtFax" maxlength="14" name="txtFax">
+
+                                                    <span class="Validator" id="revFax">
+                                                        <br>
+                                                        Invalid Fax No</span>
+                                                </td>
+                                                <th style="width: 80px;">Sub Specialty</th>
+                                                <td>
+                                                    <select  style="width: 138px;" id="ddlSubSpecialty" ulist="GetSpeciality" name="ddlSubSpecialty">
+                                                        
+
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Specialty</th>
+                                                <td>
+                                                    <select  style="width: 138px;" id="ddlSpecialty" ulist="GetSpeciality" name="ddlSpecialty">
+                                                        
+                                                    </select></td>
+                                                <th style="width: 80px;">Medicaid #</th>
+                                                <td>
+                                                    <input  type="text" style="width: 130px;" id="txtMedicaid" maxlength="30" name="txtMedicaid"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="InputTable">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width: 80px;">License #</th>
+                                                <td>
+                                                    <input  type="text" style="width: 100px;" id="txtLicense" maxlength="15" name="txtLicense"></td>
+                                                <th style="width: 80px;">Medicaid Provider Type</th>
+                                                <td>
+                                                    <input  type="text" style="width: 100px;" id="txtMedicaidProType" maxlength="10" name="txtMedicaidProType"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Tax ID</th>
+                                                <td>
+                                                    <input  type="text" style="width: 100px;" id="txtTaxID" maxlength="9" name="txtTaxID">
+                                                    <span class="Validator" id="revTaxID">
+                                                        <br>
+                                                        Invalid Tax ID</span>
+                                                </td>
+                                                <th style="width: 80px;">Taxonomy Code</th>
+                                                <td>
+                                                    <input  type="text" style="width: 100px;" id="txtTaxonomyCode" maxlength="30" name="txtTaxonomyCode"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Email</th>
+                                                <td colspan="3">
+                                                    <input  type="text" style="width: 323px;" vid="revEmail" onmouseover="Validators.ValidateEmail(this);" id="txtEmail" maxlength="50" name="txtEmail">
+                                                    <span class="Validator" id="revEmail">
+                                                        <br>
+                                                        Invalid Email</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Website</th>
+                                                <td colspan="3">
+                                                    <input  type="text" style="width: 323px;" id="txtWebsite" maxlength="50" name="txtWebsite"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Address 1</th>
+                                                <td colspan="3">
+                                                    <input  type="text" style="width: 323px;" id="txtAddress1" maxlength="50"  name="txtAddress1"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Address 2</th>
+                                                <td colspan="3">
+                                                    <input  type="text" style="width: 323px;" id="txtAddress2" maxlength="50" name="txtAddress2"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">City</th>
+                                                <td colspan="3">
+                                                    <input  type="text" style="width: 100px;" id="txtCityRP" maxlength="35"  name="txtCityRP">
+                                                    <span class="fTitle">State,Zip,Ext.</span>
+                                                    <input  type="text" style="width: 30px;" class="UpperCase" id="txtStateRP" maxlength="2"  name="txtStateRP" vid="revState" onfocus="Validators.ValidateState(this);">
+                                                    <input  type="text" style="width: 50px;" onkeypress="return keyRestrict(event,'0123456789');" vid="revZip" onblur="Validators.ValidateZip(this,GetCityState('txtZipRP','txtCityRP','txtStateRP'));" id="txtZipRP" maxlength="5"  name="txtZipRP">
+                                                    <input  type="text" style="width: 47px;" onkeypress="return keyRestrict(event,'0123456789');" vid="revZipExt" onmouseover="Validators.ValidateZipExt(this);" id="txtZipExt" maxlength="4" name="txtZipExt">
+
+                                                    <span class="Validator" id="revState">
+                                                        <br>
+                                                        Invalid State</span>
+
+                                                    <span class="Validator" id="revZip">
+                                                        <br>
+                                                        Invalid Zip Code</span>
+
+                                                    <span class="Validator" id="revZipExt">
+                                                        <br>
+                                                        Ext requires 4 digits</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Country</th>
+                                                <td colspan="3">
+                                                    <input  type="text" style="width: 323px;" id="txtCountry" maxlength="20" name="txtCountry"></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 80px;">Comments</th>
+                                                <td colspan="3">
+                                                    <textarea  maxlength="250" style="height: 20px; max-width: 323px; min-width: 323px" id="txtComments" cols="20" rows="2" name="txtComments"></textarea></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;" colspan="2">
+                                    <input type="button" class="btnLinkGreen" id="RefProvider_btnSave" value="Save" onclick="refprovider.Click_RefProvider_btnSave();" />
+                                    <!--<input type="button" class="btnLink" id="RefProvider_btnReset" value="Reset" onclick="refprovider.Click_RefProvider_btnReset();" />-->
+                                    <input type="button" class="btnLinkGray" id="RefProvider_btnCancel" value="Cancel" onclick="refprovider.Click_RefProvider_btnCancel();" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        </div>
+                    <div id="RefProvider_ProvInsurance" style="display:none;">
+
+                        <fieldset style="min-height: 60px; width: 800px;" id="frmRefProviderSearch" onkeydown="return FireDefaultButton(event, this, 'RefProvider_btnInsurance_Save');">
+                            <legend id="Legent_ins">Add New Insurance</legend>
+                            <table class="InputTable">
+                                <tbody>
+                                    <tr>
+                                        <th>Insurance<img class="redBox" src="images/sp.gif"></th>
+                                        <td>
+                                            <select style="width: 138px;" id="ddlInsurance" ulist="GetInsuranceProf" name="ddlInsurance" requiredFld onfocus="Validators.ValidateRequired(this);" vid="rfvInsurance">
+                                               
+
+                                            </select>
+                                            <span style="display: none;" class="Validator" id="rfvInsurance">
+                                                <br>
+                                                Required</span>
+                                        </td>
+                                        <th style="width: 60px;">PIN</th>
+                                        <td>
+                                            <input type="text" id="txtPIN" maxlength="30" name="txtPIN"></td>
+                                        <th style="width: 60px;">Qualifier</th>
+                                        <td>
+                                            <select style="width: 138px;" id="ddlQualifier" ulist="GetPinQualifier" name="ddlQualifier">
+
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;" colspan="6">
+                                            <input type="button" class="btnLinkGreen" id="RefProvider_btnInsurance_Save" value="Save" onclick="refprovider.Click_RefProvider_btnInsurance_Save();" />
+                                            <!--<input type="button" class="btnLink" id="RefProvider_btnInsurance_Reset" value="Reset" onclick="refprovider.Click_RefProvider_btnInsurance_Reset();" />-->
+                                            <input type="button" class="btnLinkGray" id="RefProvider_btnInsurance_Cancel" value="Cancel" onclick="refprovider.Click_RefProvider_btnInsurance_Cancel();" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+
+                    </div>
+                    <br />
+                    <div style="width: 800px;" class="panel" id="RefProvider_ProvInsuranceList">
+
+                        <div align="left" class="pWinBarN">
+                            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="pWinBarTitle">
+                                                Insurance Relation
+                                               
+                                            </div>
+                                        </td>
+                                        <td width="100%" align="left">
+                                            
+                                            <a href="javascript:void(0);" class="pWinBarHotLink" id="RefProvider_lnkInsurance_AddNew" onclick="refprovider.Click_lnkInsurance_AddNew();">Add New</a>
+                                            <img src="images/sp.gif" class="btnBarLinkSeperator" />
+                                            <a href="javascript:void(0);" class="pWinBarHotLink" id="RefProvider_lnkInsurance_ViewDetail" onclick="refprovider.Click_lnkInsurance_Edit();">Edit</a>
+                                            <img src="images/sp.gif" class="btnBarLinkSeperator" />                
+                                            <a href="javascript:void(0);" class="pWinBarHotLink" id="RefProvider_lnkInsurance_Delete" onclick="refprovider.Click_lnkInsurance_Delete();">Delete</a>
+
+                                        </td>
+                                        <td>
+                                            <img src="images/sp.gif" class="iconEmpty" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panCont">
+
+                            <div>
+                                <input type="hidden" ID="REFPROINS_SELECTEDDATAKEYS"/>
+                                 <table  id="RefProvidersInsSearchGrid" style="display: none"> </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--end - CONTENTS-->
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panelContainer" id="RefProvider_Search" >
+
+            <div align="left" class="pWinBarN" >
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="pWinBarTitle" >
+                                    Search Referring Provider
+                               
+                                </div>
+                            </td>
+                            <td style="text-align: left; width: 100%;">
+                                <a class="pWinBarHotLink" id="RefProvider_lnkAddNew" onclick="refprovider.Click_RefProvider_lnkAddNew();">Add New</a>
+                            </td>
+                            <td width="50" valign="middle" height="100%" align="right" class="iconWindowsPan">
+                                <a href="javascript:void(0);" onclick="UnloadActionPan();">
+                                    <img src="images/sp.gif" class="iconWindowsClose">
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div  class="panCont" >
+
+                <div align="center" style="padding: 10px;">
+                    <!--start - CONTENTS-->
+
+
+                    <table class="InputTable" id="frmSearchRefProvider" onkeydown="return FireDefaultButton(event, this, 'RefProvider_btnSearch');">
+                        <tbody>
+                            <tr>
+                                <th style="width: 80px;">Ref. Provider</th>
+                                <td>
+                                    <input type="text" id="txt_RefProvider" name="txt_RefProvider"></td>
+                                <th style="width: 80px;">UPIN</th>
+                                <td>
+                                    <input type="text" id="txtSearch_UPIN" name="txtSearch_UPIN"></td>
+                                <th style="width: 80px;">Specialty</th>
+                                <td>
+                                    <input type="text" id="txtSearch_Specialty" name="txtSearch_Specialty"></td>
+                            </tr>
+                            <tr>
+                                <th>Last Name</th>
+                                <td>
+                                    <input type="text" id="txtSearch_LastName" name="txtSearch_LastName"></td>
+                                <th>City</th>
+                                <td>
+                                    <input type="text" id="txtSearch_City" name="txtSearch_City"></td>
+                                <th>NPI</th>
+                                <td>
+                                    <input type="text" id="txtSearch_NPI" name="txtSearch_NPI"></td>
+                            </tr>
+                            <tr>
+                                <th>First Name</th>
+                                <td>
+                                    <input type="text" id="txtSearch_FirstName" name="txtSearch_FirstName"></td>
+                                <th>Zip</th>
+                                <td>
+                                    <input type="text" onkeypress="return keyRestrict(event,'0123456789');" id="txtSearch_Zip" name="txtSearch_Zip"></td>
+                                <th>Taxonomy Code</th>
+                                <td>
+                                    <input type="text" id="txtSearch_TaxonomyCode" name="txtSearch_TaxonomyCode"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;" colspan="6">
+                                    <input type="button" class="btnLinkGreen" id="RefProvider_btnSearch" value="Search" onclick="refprovider.Click_RefProvider_btnSearch();" />
+                                    <input type="button" class="btnLinkGray" id="btnClose" value="Close" onclick="UnloadActionPan();" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p>&nbsp;</p>
+                    <div class="panel" id="RefProvider_SearchResult" style="display:inline;">
+
+                        <div align="left" class="pWinBarN">
+                            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="pWinBarTitle" >
+                                                Search Result
+                                               
+                                            </div>
+                                        </td>
+                                        <td style="text-align: left; width: 100%">
+                                            <a class="pWinBarHotLink" id="RefProvider_lnkSelect" onclick="refprovider.Click_RefProvider_lnkSelect();">Select</a>
+
+                                        </td>
+                                        <td width="150" valign="middle" height="100%" align="right">
+
+                                            <img src="images/sp.gif" class="iconEmpty">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panCont">
+                            <input type="hidden" ID="REFPRO_SELECTEDDATAKEYS"/>
+                            <div>
+                                 <div id="REF_PRO_NAME_LINK" style="display: none;">
+                            <a href="javascript:void(0);" onclick="refprovider.Click_RefProvider_lnkDetail('{$SEQ_NUM}');" >{$SHORT_NAME}</a>
+                        </div>
+                                 <div id="REF_PRO_FLNAME_LINK" style="display: none;">{$FIRST_NAME} {$LAST_NAME}</div>
+                                <table  id="RefProvidersSearchGrid" style="display: none">
+                                  
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--end - CONTENTS-->
+                    <div id="custom-attribute_RefProvider" parentcontrol="{@parentcontrol}"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

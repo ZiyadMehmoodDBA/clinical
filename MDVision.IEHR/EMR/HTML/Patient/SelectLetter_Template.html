@@ -1,0 +1,58 @@
+﻿<div class="row" id="pnlSelectLetter_Template">
+    <div id="actionPanSelectLetter_Template" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="SelectLetter_Template.UnLoadTab();"></button>
+                <h4 class="modal-title">Select Letter Template</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmSelectLetter_Template" method="post" onsubmit="return false">
+
+                    <div class="col-sm-10">
+                        <label class="control-label">Template <span class="required">*</span></label>
+                        <select id="ddlTemplateLetter" name="TemplateLetterId" class="form-control" ddlist="GetLetterTemplatesName"></select>
+                    </div>
+
+                    <div class="pull-right mt-md pr-default"><button type="submit" class="btn btn-primary btn-sm">Create</button></div>
+                    <div class="spacer10"></div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

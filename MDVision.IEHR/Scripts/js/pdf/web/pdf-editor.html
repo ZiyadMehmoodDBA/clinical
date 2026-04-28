@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0046)https://instructure.github.io/pdf-annotate.js/ -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>PDF Editor</title>
+    <link href="pdf-annotate/toolbar.css" rel="stylesheet" />
+    <link href="pdf-annotate/pdf_viewer.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            background-color: #eee;
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        .pdfViewer .canvasWrapper {
+            box-shadow: 0 0 3px #bbb;
+        }
+
+        .pdfViewer .page {
+            margin-bottom: 10px;
+        }
+
+        .annotationLayer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        #content-wrapper {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+            background-color: #404040;
+            background-image: url(images/texture.png);
+        }
+
+        #comment-wrapper {
+            position: absolute;
+            top: 35px;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+            width: 250px;
+            background: #eaeaea;
+            border-left: 1px solid #d0d0d0;
+            width: 100%;
+        }
+
+            #comment-wrapper h4 {
+                margin: 10px;
+            }
+
+            #comment-wrapper .comment-list {
+                font-size: 12px;
+                position: absolute;
+                top: 38px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+
+            #comment-wrapper .comment-list-item {
+                border-bottom: 1px solid #d0d0d0;
+                padding: 10px;
+            }
+
+            #comment-wrapper .comment-list-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 47px;
+                overflow: auto;
+            }
+
+            #comment-wrapper .comment-list-form {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 10px;
+            }
+
+                #comment-wrapper .comment-list-form input {
+                    padding: 5px;
+                    width: 100%;
+                }
+
+        .pdfViewer .page {
+            border-image: none;
+        }
+
+
+        /*.toolbar {
+            text-align: center;
+            margin-right: 250px;
+        }*/
+
+        .pdf-editor-toolbar-c {
+            position: relative;
+            height: 32px;
+            background-color: #474747;
+            background-image: url(images/texture.png), linear-gradient(hsla(0,0%,32%,.99), hsla(0,0%,27%,.95));
+        }
+
+        .splitToolbarButtonSeparator {
+            padding: 8px 0;
+            width: 1px;
+            background-color: hsla(0,0%,0%,.5);
+            z-index: 99;
+            box-shadow: 0 0 0 1px hsla(0,0%,100%,.08);
+            display: inline-block;
+            margin: 8px 0;
+            display: inline-block;
+            float: left;
+        }
+
+        .pdf-editor-toolbar-c button, .pdf-editor-toolbar-c a {
+            padding: 2px 6px 0;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            color: hsla(0,0%,100%,.8);
+            font-size: 12px;
+            line-height: 14px;
+            height: 24px;
+            min-width: 27px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            cursor: default;
+            -webkit-transition-property: background-color, border-color, box-shadow;
+            -webkit-transition-duration: 150ms;
+            -webkit-transition-timing-function: ease;
+            transition-property: background-color, border-color, box-shadow;
+            transition-duration: 150ms;
+            transition-timing-function: ease;
+            background: none;
+            display: inline-block;
+            position: relative;
+            float: left;
+            margin: 4px 5px 0 5px;
+        }
+
+            .toolbar button.active, .pdf-editor-toolbar-c button:hover, .pdf-editor-toolbar-c button:focus, .pdf-editor-toolbar-c a:hover, .pdf-editor-toolbar-c a:focus {
+                background-color: hsla(0,0%,0%,.12);
+                background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
+                background-clip: padding-box;
+                border: 1px solid hsla(0,0%,0%,.35);
+                border-color: hsla(0,0%,0%,.32) hsla(0,0%,0%,.38) hsla(0,0%,0%,.42);
+                box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset, 0 0 1px hsla(0,0%,100%,.15) inset, 0 1px 0 hsla(0,0%,100%,.05);
+            }
+
+            .pdf-editor-toolbar-c button::before, .pdf-editor-toolbar-c a::before {
+                position: absolute;
+                display: inline-block;
+                top: 3px;
+                left: 4px;
+            }
+
+            .pdf-editor-toolbar-c a.save::before {
+                content: url(images/save.png);
+            }
+            .pdf-editor-toolbar-c a.clear::before {
+                content: url(images/erase-lines.png);
+            }
+            .pdf-editor-toolbar-c a.close::before {
+                content: url(images/close.png);
+            }
+
+            .pdf-editor-toolbar-c button.cursor::before {
+                content: url(images/cursor.png);
+            }
+
+        .text-size, .text-color {
+            float: left;
+            margin: 3px 5px 0 5px;
+        }
+
+        .color {
+            min-width: 20px !important;
+            height: 20px !important;
+            width: 20px !important;
+        }
+
+        .text-size {
+            margin-top: 7px;
+            border-radius: 3px;
+        }
+
+        .text-color > div {
+            z-index: 22;
+            top: 25px;
+            width: 102px !important;
+        }
+
+        .text, .rectangle, .highlight, .cursor, .strikeout {
+            min-height: 24px !important;
+        }
+
+        .toolbar button.rectangle:after, .toolbar button.highlight:after {
+            height: 14px;
+            width: 14px;
+            left: 6px;
+        }
+
+        .toolbar {
+            text-align: center;
+            border-bottom: none;
+            box-shadow: inset 1px 0 0 hsla(0,0%,100%,.08), inset 0 1px 1px hsla(0,0%,0%,.15), inset 0 -1px 0 hsla(0,0%,100%,.05), 0 1px 0 hsla(0,0%,0%,.15), 0 1px 1px hsla(0,0%,0%,.1);
+        }
+
+        .center-block {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar pdf-editor-toolbar-c">
+        <div class="center-block">
+            <button class="cursor" type="button" title="Cursor" data-tooltype="cursor"></button>
+            <div class="splitToolbarButtonSeparator"></div>
+            <button class="rectangle" type="button" title="Rectangle" data-tooltype="area"></button>
+            <button class="highlight" type="button" title="Highlight" data-tooltype="highlight"></button>
+            <button class="strikeout" type="button" title="Strikeout" data-tooltype="strikeout"></button>
+            <div class="splitToolbarButtonSeparator"></div>
+            <button class="text active" type="button" title="Text Tool" data-tooltype="text"></button>
+            <select class="text-size"></select>
+            <div title="Color" class="text-color"></div>
+            <!--<div class="splitToolbarButtonSeparator"></div>-->
+            <button class="pen" type="button" title="Pen Tool" style="display:none" data-tooltype="draw">✎</button>
+            <select style="display:none" class="pen-size"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option></select>
+            <div style="display:none" class="pen-color">
+            </div>
+            <!--<div class="splitToolbarButtonSeparator"></div>-->
+            <button class="comment" type="button" title="Comment" data-tooltype="point" style="display:none">🗨</button>
+            <!--<div class="splitToolbarButtonSeparator"></div>-->
+            <select class="scale" style="display:none">
+                <option value=".5">50%</option>
+                <option value="1">100%</option>
+                <option value="1.33">133%</option>
+                <option value="1.5">150%</option>
+                <option value="2">200%</option>
+            </select>
+            <a href="javascript://" class="rotate-ccw" style="display:none" title="Rotate Counter Clockwise">⟲</a>
+            <a href="javascript://" class="rotate-cw" style="display:none" title="Rotate Clockwise">⟳</a>
+            <div class="splitToolbarButtonSeparator"></div>
+            <a href="javascript://" class="save" title="Save"></a>
+            <a href="javascript://" class="clear" title="Clear"></a>
+            <a href="javascript://" class="close" title="Close"></a>
+        </div>
+    </div>
+    <div id="content-wrapper">
+        <div id="viewer" class="pdfViewer">
+
+        </div>
+    </div>
+    <div id="comment-wrapper" style="display:none">
+        <h4>Comments</h4>
+        <div class="comment-list">
+            <div class="comment-list-container">
+                <div class="comment-list-item">No comments</div>
+            </div>
+            <form class="comment-list-form" style="display:none;">
+                <input type="text" placeholder="Add a Comment">
+            </form>
+        </div>
+    </div>
+    <script src="../../jquery-2.1.1.js"></script>
+    <script type="text/javascript">
+        (function () {
+            document.write("<script src='pdf-annotate/pdf-annotate.js?v=" + Date() + "'><\/script>"
+                + "<script src='pdf-annotate/pdf-annotate-viewer.js?v=" + Date() + "'><\/script>"
+                + "<script src='pdf-annotate/index-annotate.js?v=" + Date() + "'><\/script>");
+
+        })();
+    </script>
+    <!--<script src="pdf-annotate/pdf-annotate.js"></script>
+    <script src="pdf-annotate/pdf-annotate-viewer.js"></script>
+    <script src="pdf-annotate/index-annotate.js"></script>-->
+</body>
+</html>

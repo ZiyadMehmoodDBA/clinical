@@ -1,0 +1,177 @@
+﻿<div id="pnlPaymentBatchDetail">
+    <div id="actionPanPaymentBatchDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="alternateActionPanPaymentBatchDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="paymentBatchDetail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Payment Batch</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmPaymentBatchDetail" method="post" onsubmit="return false">
+                    <div class="btn-block mb-sm" id="toolBar">
+                        <a class="btn btn-success btn-xs" onclick="paymentBatchDetail.PaymentPosting(); return false;"><i class="fa fa-money"></i> Payment Posting</a>
+                        <a class="btn btn-success btn-xs" onclick="paymentBatchDetail.ReCalculate(); return false;"><i class="fa fa-calculator"></i> Re Calculate</a>
+                        <a class="btn btn-success btn-xs" onclick="paymentBatchDetail.OpenImportDocument('ImportDoc'); return false;"><i class="glyphicon glyphicon-import"></i>Import Document</a>
+                        <a class="btn btn-success btn-xs" onclick="paymentBatchDetail.OpenImportDocument('ImportFolder'); return false;"><i class="glyphicon glyphicon-import"></i>Import Folder</a>
+                        <a class="btn btn-success btn-xs" onclick="paymentBatchDetail.OpenScanDocument();"><img class="scan-icon" src="Content/images/scan.svg"> Scan</a>
+                        <a class="btn btn-success btn-xs" onclick="paymentBatchDetail.LoadPaymentByBatch();"><i class="fa fa-dollar"></i> Payment Entries</a>
+                        <a class="btn btn-success btn-xs" onclick="paymentBatchDetail.LoadInsurancePaymentByBatch();"><i class="fa fa-dollar"></i> Insurance Paid</a>
+                    </div>
+                    <div class="panel-body panel-featured pl-none pr-none pb-none">
+                        <div class="form-group">
+
+                            <div class="col-sm-3 col-lg-2">
+                                <label class="control-label mb-none" for="Batch Number">Batch Number</label>
+                                <input class="form-control" id="txtBatchNumber" type="text" disabled>
+                            </div>
+                            <div class="col-sm-6 col-lg-4">
+                                <label class="control-label mb-none" for="Description">Description</label>
+                                <input class="form-control" name="Description" id="txtDescription" type="text">
+                            </div>
+                            <div class="col-sm-3 col-lg-2">
+                                <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="paymentBatchDetail.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="paymentBatchDetail.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-2">
+                                <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                <a id="lnkPracticeEdit" style="display:none;" href="#" onclick="paymentBatchDetail.OpenPracticeDetail();" title="Edit Practice">Practice</a>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtPractice" name="Practice" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="paymentBatchDetail.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-2">
+                                <label class="control-label" for="Deposit Date">Deposit Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <input class="form-control" id="dtpDepositDate" name="DepositDate" type="text" data-plugin-datepicker="">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-2">
+                                <label class="control-label" for="Biller">Biller</label>
+                                <select id="ddlBiller" ddlist="GetUsersFullName" name="Biller" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-3 col-lg-2">
+                                <label class="control-label" for="CheckDate Number">Check Number</label>
+                                <input class="form-control" name="Check Number" maxlength="50" id="txtCheckNumber" type="text" />
+                            </div>
+                            <div class="col-sm-3 col-lg-2">
+                                <label class="control-label" for="Check Date">Check Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <input class="form-control" id="dtpCheckDate" name="Check date" type="text" data-plugin-datepicker="">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-2">
+                                <label class="control-label" for="Plan Amount">Plan Amount</label>
+                                <input class="form-control" name="Plan Amount" maxlength="10" id="txtPlanAmount" type="text" onkeypress="utility.ValidateBatchDecimal(event, 2)">
+                            </div>
+                            <div class="col-sm-3 col-lg-2">
+                                <label class="control-label" for="Patient Amount">Patient Amount</label>
+                                <input class="form-control" name="Patient Amount" maxlength="10" id="txtPatientAmount" type="text" onkeypress="utility.ValidateDecimal(event,2)">
+                            </div>
+                            <div class="col-sm-3 col-lg-2">
+                                <label class="control-label" for="Copayment">Copayment</label>
+                                <input type="text" class="form-control" name="Copayment" maxlength="10" id="txtCopayment" onkeypress="utility.ValidateDecimal(event,2)">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                <label class="control-label" for="Note">Comments</label>
+                                <textarea class="form-control" rows="4" maxlength="3000" id="txtComments" name="Comments" spellcheck="true"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="form-group" id="ContainerBatchStatus">
+                            <h5 class="white blue-bg p-xs mb-none">Batch Status</h5>
+                            <div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="Plan Amount Posted">Plan Amount Posted</label>
+                                <input class="form-control" id="txtPlanAmountPosted" type="text">
+                            </div>
+                            <div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="Patient Amount Posted">Patient Amount Posted</label>
+                                <input class="form-control" id="txtPatientAmountPosted" type="text">
+                            </div>
+                            <div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="Copay Amount Posted">Copay Amount Posted</label>
+                                <input class="form-control" id="txtCopayAmountPosted" type="text">
+                            </div>
+                            <div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="Adjustments">Adjustments</label>
+                                <input class="form-control" id="txtAdjustments" type="text">
+                            </div>
+                            <div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="Batch Status">Batch Status</label>
+                                <select id="ddlBatchStatus" class="form-control" ddlist="GetChargeBatchStatus"></select>
+                            </div><div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="Start Date">Start Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input class="form-control" id="dtpStarDate" name="startDate" type="text" data-plugin-datepicker="">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="End Date">End Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input class="form-control" id="dtpEndDate" type="text" data-plugin-datepicker="">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="# Hours Spent"># Hours Spent</label>
+                                <input class="form-control" id="txtHoursSpent" type="text">
+                            </div>
+                            <div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="Batch Entered By">Batch Entered By</label>
+                                <input class="form-control" id="txtBatchEnteredBy" type="text">
+                            </div>
+                            <div class="col-sm-4 col-md-3  col-lg-2">
+                                <label class="control-label" for="Batch Created on">Batch Created on</label>
+                                <input class="form-control" id="txtBatchCreatedon" type="text">
+                            </div>
+                        </div>
+
+                        <div id="ContainerBatchDocuments" style="display: inline;">
+                            <h5 class="white blue-bg p-xs mb-none">Documents</h5>
+                            <section class="panel">
+                                <div class="panel-body noBorder pb-none">
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvChargeBatchDocument">
+                                        <thead>
+                                            <tr>
+                                                <th id="ColumnAction" class="size40">Action</th>
+                                                <th class="size70">Check #</th>
+                                                <th class="size70">Check Date</th>
+                                                <th class="size70">File Name</th>
+                                                <th class="size70">File Type</th>
+                                                <th class="size70">Pages</th>
+                                                <th class="size85">Action</th>
+                                                <th class="size85">Reason</th>
+                                                <th class="size180">Comments</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 pull-right mt-md">
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnSave" onclick="paymentBatchDetail.paymentBatchSave(); return false;">Save</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="BtnUpdate" style="display:none;" onclick="paymentBatchDetail.BatchChargeUpdate();">Update</button>
+                    </div>
+                    <div class="spacer10"></div>
+                    <input type="hidden" id="hfBatchId" value="-1" />
+                    <input type="hidden" id="hfFacility" value="-1" />
+                    <input type="hidden" id="hfPractice" value="-1" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

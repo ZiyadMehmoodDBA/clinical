@@ -1,0 +1,119 @@
+﻿<div class="row" id="pnlAdminRemindersTemplates" style="display:none;">
+    <div id="actionPanAdminRemindersTemplates" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <!--<ul class="tabs-custom" id="ulTemplateTypeTabs">
+        <li class="active" id="liTypeText"><a class="custom-made-tabs" href="#" onclick="Admin_RemindersTemplates.RemindersTemplatesSearch();" data-toggle="tab">Text</a></li>
+        <li class="" id="liTypeVoice"><a class="custom-made-tabs" href="#" onclick="Admin_RemindersTemplates.RemindersTemplatesSearch();" data-toggle="tab">Voice</a></li>
+        <li class="" id="liTypeEmail"><a class="custom-made-tabs" href="#" onclick="Admin_RemindersTemplates.RemindersTemplatesSearch();" data-toggle="tab">Email</a></li>
+    </ul>-->
+    <button type="button" class=" btn btn-success btn-sm" id="btnProviderScheduleAdd" onclick="Admin_RemindersTemplates.RemindersTemplateAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>
+    <section class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Admin_RemindersTemplates.UnLoadTab();"></a>
+            </div>
+            <h2 class="panel-title">Search Templates </h2>
+        </header>
+        <div class="panel-body" id="pnlRemindersTemplates_Search">
+            <form class="form-bordered" method="post" onsubmit="return false">
+                <!--start - CONTENTS-->
+                <div class="form-group">
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Name</label>
+                        <input class="form-control" id="txtName" name="Name" type="text" />
+                    </div>
+                    <!--<div class="col-sm-4 col-lg-2" id="divNotesTemplateProvider">
+                        <select class="form-control" style="display:none;" name="hiddenPhysicalExamTemplateProvider" id="ddlHiddenNotesTemplateProvider"></select>
+                        <label class="control-label">Provider</label>
+                        <select class="form-control" multiple="multiple" name="ProviderIds" id="ddlNotesTemplateProvider" ddlist="GetProvider"></select>
+                    </div>-->
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Template Type</label>
+                        <select id="ddlType" name="TemplateTypeId" class="form-control " ddlist="GetRemindersType"></select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Reminder Type</label>
+                        <select id="ddlReminderType" name="ReminderTemplateType" class="form-control">
+                            <option value="">- Select -</option>
+                            <option value="text">Text</option>
+                            <option value="email">Email</option>
+                            <option value="voice">Voice</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize-btn">
+                        <button class="btn btn-primary btn-sm pull-right" id="btnRemindersTemplatesSearch" type="button" onclick="Admin_RemindersTemplates.RemindersTemplatesSearch();">Search</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id="pnlRemindersTemplates_Result" style="display: inline;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="RemindersTemplates_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRemindersTemplates">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">ScheduleId</th>
+                            <th class="size120">Action</th>
+                            <th class="size150">Name</th>
+                            <!--<th class="size150">Provider</th>-->
+                            <th class="size150">Type</th>
+                            <th class="size150">Last Updated</th>
+                            <!--<th style="display:none;">ScheduleId</th>
+                            <th class="size120">Action</th>
+                            <th class="size150">Provider</th>
+                            <th class="size150">Facility</th>
+                            <th class="size150 noWordBreak">From Date</th>
+                            <th class="size150 noWordBreak">To Date</th>
+                            <th class="size150 noWordBreak">From Time</th>
+                            <th class="size150 noWordBreak">To Time</th>
+                            <th class="size100 noWordBreak">Slot Minutes</th>
+                            <th>Reason</th>
+                            <th class="size100 noWordBreak">Created Date</th>
+                            <th class="noWordBreak">Created By</th>
+                            <th class="noWordBreak">Total Slots</th>-->
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divRemindersTemplatesPaging"></div>
+            </div>
+        </section>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

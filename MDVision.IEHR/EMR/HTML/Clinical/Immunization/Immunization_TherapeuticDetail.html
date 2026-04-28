@@ -1,0 +1,64 @@
+﻿<div id="pnlImmunization_TherapeuticDetail">
+    <div id="actionPanImmunization_TherapeuticDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-lg">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Immunization_TherapeuticDetail.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Add Therapeutic Injection</h4>
+            </div>
+            <div id="modalbody" class="panel-body">
+                <form id="frmAddTherapeutic">
+                    <div class="col-md-9">
+                        <label class="control-label">Therapeutic Injection Name<span class="required">*</span></label>
+                        <input class="form-control" id="txtTherInjName" type="text" name="TherInjName" maxlength="500">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">NDC Code</label>
+                        <input class="form-control" id="txtNDCCode" type="text" name="NDCCode" maxlength="110">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="control-label">CPT Code</label>
+                        <div class="input-group">
+                            <input class="form-control" description="" code="" id="txtCPTCode" placeholder="search" type="text" name="CPTCode" oninput="Immunization_TherapeuticDetail.bindAutoComplete(this, 'CPT')" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary btn-xs " type="button" onclick="Immunization_TherapeuticDetail.openCPTCode('CPT');"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="control-label">Admin Code</label>
+                        <div class="input-group">
+                            <input class="form-control" description="" code="" id="txtAdminCode" placeholder="search" type="text" name="AdminCode" oninput="Immunization_TherapeuticDetail.bindAutoComplete(this, 'AdminCPT')" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary btn-xs " type="button" onclick="Immunization_TherapeuticDetail.openCPTCode('AdminCPT');"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Dose</label>
+                        <input class="form-control" id="txtDose" type="number" name="Dose">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label" for="ddlAmount">Amount</label>
+                        <select id="ddlAmount" name="Amount" class="form-control" ddlist="GetVaccineAmount"></select>
+
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label" for="ddlManufacture">Manufacture</label>
+                        <select id="ddlManufacture" name="ManufactureIds" multiple="multiple" ddlmultilist="GetVaccineManufacturer" class="form-control"></select>
+                    </div>
+                    <div class="col-md-3 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="IsActive" name="IsActive" checked>
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 pull-right mt-md">
+                        <button class="btn btn-success btn-sm rightbtn" type="submit" id="btnAdd">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

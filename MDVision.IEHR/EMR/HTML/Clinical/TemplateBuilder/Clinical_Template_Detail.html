@@ -1,0 +1,187 @@
+﻿<div id="pnlClinicalTemplateDetail">
+    <div class="modal-dialog modal-dialog-full">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header" style="">
+                <button type="button" class="close" onclick="Clinical_Template_Detail.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Template Details</h4>
+            </div>
+            <div class="modal-body pt-xs" id="aaa">
+                <form method="post" onsubmit="return false" id="frmClinicalTemplateDetail">
+                    <input type="hidden" name="ClinicalTemplateId" id="ClinicalTemplateId" value="-1" />
+                    <div class="form-group">
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Short Name<span class="required">*</span></label>
+                            <input class="form-control" id="ShortName" type="text" name="ShortName" maxlength="20" />
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Type<span class="required">*</span></label>
+                            <select class="form-control" name="TemplateTypeId" ddlist="GetTemplateType" id="TemplateTypeId">
+                                <option selected="selected" value="">-Select-</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-5 col-md-4">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" id="Description" type="text" maxlength="100" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Specilty</label>
+                            <select class="form-control" ddlist="GetSpecialty" id="SpecialityId">
+                                SpecialityID: "190"
+                                <option selected="selected" value="">-Select-</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-2" id="divICDCode_Entity">
+                            <label class="control-label">Provider</label>
+                            <select class="form-control" ddlist="GetProvider" id="ProviderId">
+                                <option selected="selected" value="">-Select-</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-2" id="divICDCode_Entity">
+                            <label class="control-label">Letter Head</label>
+                            <select class="form-control" id="LetterId">
+                                <option selected="selected" value="">-Select-</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-2" id="divICDCode_Entity">
+                            <label class="control-label">Folder</label>
+                            <select class="form-control" ddlist="GetDocument" id="FolderId">
+                                <option selected="selected" value="">-Select-</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-1 size-max70 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default ">
+                                <input type="checkbox" id="Active" checked="checked" type="text">
+                                <label class="control-label" for="Active">Active</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 pull-right pad-a-labelsize-btn">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div id="pnlSectioninfo">
+                        <div class="col-md-3 mt-md pull-right">
+                            <div class="panel-blue NoRadiusT">
+                                <h4 class="panel-title white text-center">Section Properties</h4>
+                            </div>
+                            <div class="panel-body p-xs">
+                                <!--<a class="btn btn-success btn-xs"><i class="fa fa-plus-circle"></i> Heading</a>-->
+                                <div class="col-xs-12 p-none mt-sm">
+                                    <div class="col-xs-5 size-min80 p-none pull-left">
+                                        <!--<input type="radio" id="Search Section" name="rq" checked="checked">-->
+                                        <label class="control-label" for="Search Section">Section<span class="required">*</span></label>
+                                    </div>
+                            
+                                    <div class="col-xs-12 input-group">
+                                        <input class="form-control" id="SearchSectiontxt" type="text" placeholder="Searh Section ">                                   
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 p-none mt-sm">
+                                    <!--Section paging-->
+                                    <div class="col-xs-12 pl-none pr-none pull-left">
+                                        <div class="sortable" id="lstSectionGroup">
+
+                                        </div>
+                                    </div>
+                                    <input class="form-control" id="txtRowspPageHF" type="hidden" style="display:none;" />
+                                    <input class="form-control" id="txtPageNoHF" type="hidden" style="display:none;" />
+                                    <input class="form-control" id="txtTotalSections" type="hidden" style="display:none;" />
+                                    <div id="divSectionlistPaging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                                        <div class="col-sm-6 pl-none" id="divShowingEntries">Showing 10 to 6 of 24</div>
+                                        <div id="pagerParent" class="col-sm-6 pr-none">
+                                            <ul class="pagination pull-right m-none">
+                                                <li id="preLink"><a id="lnkPrevPages" class="p-xs pt-none pb-none" href="#null" title="Previous Pages"><i class="fa fa-angle-double-left"></i></a></li>
+                                                <li id="preLink"><a id="lnkPrev" class="p-xs pt-none pb-none" href="#null" title="Previous Page"><i class="fa fa-angle-left"></i></a></li>
+                                                <li class="active"><a class="p-xs pt-none pb-none" href="#">1</a></li>
+                                                <li><a class="p-xs pt-none pb-none" href="#">2</a></li>
+                                                <li id="nextLink"><a class="p-xs pt-none pb-none" id="lnkNext" href="#null" title="Next Page"><i class="fa fa-angle-right"></i></a></li>
+                                                <li id="nextLink"><a class="p-xs pt-none pb-none" id="lnkNextPages" href="#null" title="Next Pages"><i class="fa fa-angle-double-right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/Section paging-->
+                                <div class="col-xs-12 p-none mt-md">
+                                    <div class="tabs">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#AddedSections" data-toggle="tab">Added Sections</a></li>
+                                           
+                                        </ul>
+                                        <div class="tab-content tab-content-featured">
+                                            <div id="AddedSections" class="tab-pane active">
+                                                <!--<h4 class="panel-title pt-none pb-none NoRadius">Heading 2</h4-->
+                                                <div class="row">
+                                                    <div class="col-xs-1 pr-none pl-xs pull-left">
+                                                        <ul class="list-unstyled sortCount " id="SelectedSectionDivList"></ul>
+                                                    </div>
+                                                    <div class="col-xs-11 pl-none pr-none pull-left">
+                                                        <ul class="sortable ui-sortable" id="SelectedSectionDiv"></ul>
+                                                    </div>
+                                                </div>
+                                                <div class="spacer10"></div>
+                                                <div class="clearfix"></div>
+
+
+                                            </div>
+                                            
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-9">
+                            <div class="clearfix"></div>
+                            <div class="panel-blue NoRadiusT  mt-md">
+                                <h4 class="panel-title white text-center">Canvas</h4>
+                            </div>
+                            <div class="panel-body NoRadiusT SectionDropInTemplate" id="HTMLTempalteClinical_Template">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--</div>-->
+                </form>
+                <div class="clearfix"></div>
+            </div>
+
+        </div><div class="clearfix"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#sectionDetail input[id^="dpQuestion"]').datepicker({
+        //}).on('changeDate', function (e) {
+        //    $(this).datepicker('hide');
+        //    $('#frmsectionDetail').bootstrapValidator('revalidateField', 'DOS');
+        //});
+
+        utility.CreateDatePicker('sectionDetail input[id^="dpQuestion"]', function () {
+            //on-change callback method
+        }, true);
+        $('#sectionDetail input[id^="tpQuestion"]').timepicker({
+            defaultTime: '12:00 PM'
+            //defaultTime: false
+        });
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+    });
+</script>

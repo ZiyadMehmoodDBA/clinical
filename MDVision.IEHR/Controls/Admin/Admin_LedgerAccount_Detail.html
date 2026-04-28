@@ -1,0 +1,58 @@
+﻿<div id="ledgeraccountDetail">
+    <div id="actionPanledgeraccountDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ledgeraccountDetail.UnLoad();"><span class=" red" >&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Ledger Account</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblledgeraccountDetail" class="col-sm-12">
+                    <form method="post" onsubmit="return false" id="frmLedgerAccountDetail">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Short Name<span class="required">*</span></label>
+                                <input class="form-control" name="ShortName" id="txtShortName" type="text" placeholder="eg.: Paul Hug" maxlength="10" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="control-label">Description</label>
+                                <input class="form-control" id="txtDescription" name="Description" type="text" placeholder="eg.: Some Description" maxlength="100" />
+                            </div>
+                            <div id="divLedgerAccount_Entity" class="col-sm-3">
+                                <label class="control-label">Entity<span class="required">*</span></label>
+                                <select id="ddlEntity" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Type<span class="required">*</span></label>
+                                <select id="lstType" name="Type" class="form-control" ddlist="GetLedgerType"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Apply To<span class="required">*</span></label>
+                                <select id="lstApplyTo" name="ApplyTo" class="form-control" ddlist="GetLedgerApplyTo"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">System Category</label>
+                                <select id="lstSystemCategory" name="SystemCategory" class="form-control" ddlist="GetLedgerSystemCategory"></select>
+                            </div>
+                            <div class="col-sm-3 col-xs-6 pad-a-labelsize" id="pnlIsActive">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 pull-right pad-a-labelsize-btn">
+                                <button id="btnLedgerSave" class="btn btn-primary btn-sm rightbtn " type="submit">Save & Exit</button>
+                                <!--<button id="btnHistoryledgeraccount" class="btn btn-primary btn-sm rightbtn" type="button" onclick="ledgeraccountDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                        
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

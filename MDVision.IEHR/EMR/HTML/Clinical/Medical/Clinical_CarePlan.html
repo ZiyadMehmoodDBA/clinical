@@ -1,0 +1,536 @@
+﻿<div class="row" id="pnlClinicalCarePlan">
+    <div id="actionPanClinicalCarePlan" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_CarePlan.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Care Plan</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section id="sectionCarePlan" class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_CarePlan.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Care Plan</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body NoRadiusT" id="pnlSection_Search">
+                            <form id="frmClinicalCarePlan" method="post" name="frmClinicalCarePlan" onsubmit="return false">
+                                <div class="form-group">
+                                    <div class="pull-right"><button id="btnExportXML" type="button" class="btn btn-success btn-xs mr-xs pull-right" onclick="Clinical_CarePlan.downloadXML();">Export XML</button></div>
+                                    <div class="clearfix"></div>
+                                    <section class="panel" id="removeDiv">
+                                        <ul class="tabs-custom" id="ulCarePlanTabsItems">
+                                            <li id="listGoals" onclick="Clinical_CarePlan.LoadCarePlan('Goals');" class="active"><a class="" href="#Goals" data-toggle="tab">Goals</a></li>
+                                            <li id="listConcerns" onclick="Clinical_CarePlan.LoadCarePlan('Concern');"><a class="" href="#Concerns" data-toggle="tab">Health Concerns</a></li>
+                                            <li id="listInterventions" onclick="Clinical_CarePlan.LoadCarePlan('Intervention');"><a class="" href="#Interventions" data-toggle="tab">Interventions</a></li>
+                                            <li id="listOutcomes" onclick="Clinical_CarePlan.LoadCarePlan('Outcome');"><a class="" href="#Outcomes" data-toggle="tab">Health status evaluations/outcomes</a></li>
+                                            <li id="listCareTeam" onclick="Clinical_CarePlan.LoadCarePlan('CareTeam');"><a class="" href="#CareTeam" data-toggle="tab">Care team</a></li>
+                                        </ul>
+                                        <div class="tab-content tabs-custom-body pt-default pl-none pr-none">
+                                            <!--Goals-->
+                                            <div id="Goals" class="tab-pane active">
+                                                <input id="hfGoalId" name="GoalId" type="hidden" value="-1" />
+                                                <input type="hidden" id="hfCPTSNOMEDCode" name="CPTSNOMEDCodeId" />
+                                                <input type="hidden" id="hfCPTSNOMEDDescription" name="CPTSNOMEDDescription" />
+                                                <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                                <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                                <div class="col-sm-4 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Goals</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none" id="GoalsList">
+                                                            <div class="col-xs-12 mb-sm">
+                                                                <div class="radio-custom col-sm-6">
+                                                                    <input id="rdoProblems" type="radio" name="rdogoals" checked="checked" onchange="Clinical_CarePlan.changeGoalsField();" value="1">
+                                                                    <label for="rdFreeText">Problems</label>
+                                                                </div>
+                                                                <div class="radio-custom col-sm-6">
+                                                                    <input id="rdoProcedures" type="radio" name="rdogoals" onchange="Clinical_CarePlan.changeGoalsField();" value="2">
+                                                                    <label for="rdFreeText">Procedures</label>
+                                                                </div>
+
+                                                                <div class="input-group" id="DivICDAutoComplete">
+                                                                    <input class="form-control" id="txtDisease" placeholder="Search Disease" oninput="Clinical_CarePlan.bindICD9AutoComplete(this, 'Goals')" onkeypress="Clinical_CarePlan.disableEnterKey(event)" type="text" value="">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnDisease" class="btn btn-primary btn-xs" type="button" onclick="Clinical_CarePlan.openSearchPopup('ICD', 'txtDisease', 'Goals')"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-group hidden" id="DivCPTAutoComplete">
+                                                                    <input class="form-control" id="txtProcedure" placeholder="search procedure" type="text" name="" oninput="Clinical_CarePlan.bindAutoComplete(this)" value="" />
+                                                                    <div id="btnsearchcpt" class="input-group-btn">
+                                                                        <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_CarePlan.openCPTCode();"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="CarePlanGoals">
+                                                                <ul id="ulCarePlanGoals" name="CarePlanGoals" class="listPrimary scroll-2x overflowY" style="height:177px;max-height:177px;"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-8 col-md-9">
+                                                    <section id="sectionGoals" class="panel panel-featured disableAll">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Detail</h2>
+                                                        </header>
+                                                        <div class="panel-body  height-min180">
+                                                            <div class="col-md-5">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtGoalComments" name="GoalComments" maxlength="500" rows="1" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <label class="control-label">Value</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" id="txtGoalValue" name="GoalValue" maxlength="3" data-plugin-keyboard-numpad class="form-control" oninput="EMRUtility.setPercentage(event,this);" onblur="utility.ValidateDecimal(event, 2);">
+                                                                    <div class="input-group-addon text-xs p-xxs">%</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <label class="control-label" for="Date">Date</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                    <input type="text" class="form-control" id="dtCarePlanDate" name="GoalDate" data-plugin-datepicker autocomplete="off">
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-3 p-none">
+                                                                <label class="control-label pl-default">Status</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-xs-10">
+                                                                    <select id="ddlGoalStatus" name="GoalStatus" class="form-control" ddlist="GetCarePlanStatus">                                                                       
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="col-md-3 p-none">
+                                                                <label class="control-label pl-default" id="">Patient Priority</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-xs-8">
+                                                                    <select id="ddlPatientPriority" name="PatientPriority" class="form-control" ddlist="GetCarePlanPatientPriority">                                                                       
+                                                                    </select>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            <div class="col-md-3 p-none">
+                                                                <label class="control-label pl-default" id="">Provider Priority</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-xs-8">
+                                                                    <select id="ddlProviderPriority" name="ProviderPriority" class="form-control" ddlist="GetCarePlanProviderPriority">                                                                        
+                                                                    </select>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="btnClear" class="btn btn-sm" onclick="Clinical_CarePlan.ResetControls('Goals','Clearbtn');">Clear</button>
+                                                                <button id="btnGoalSave" type="button" onclick="Clinical_CarePlan.CarePlanSave('Goals');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <!--/Goals-->
+                                            <!--Concerns-->
+                                            <div id="Concerns" class="tab-pane">
+                                                <input id="hfConcernsId" name="ConcernsId" type="hidden" value="-1" />
+                                                <div class="col-sm-12">
+                                                    <section id="sectionConcerns" class="panel panel-featured">
+                                                        <div class="panel-body height290">
+                                                            <div class="col-md-3" id="DivICDAutoComplete">
+                                                                <label class="control-label">Concern</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" id="txtConcern" placeholder="Search Disease" oninput="Clinical_CarePlan.bindICD9AutoComplete(this, 'Concern')" onkeypress="Clinical_CarePlan.disableEnterKey(event)" type="text" value="" onblur="Clinical_CarePlan.EnableDisableControls(this,'Concern');">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnConcern" class="btn btn-primary btn-xs" type="button" onclick="Clinical_CarePlan.openSearchPopup('ICD', 'txtConcern', 'Concern')"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="concernInfoDiv" class="disableAll">
+                                                                <div class="col-md-3">
+                                                                    <label class="control-label">Comments</label>
+                                                                    <textarea id="txtConcernComments" name="ConcernsComments" maxlength="500" rows="1" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label class="control-label" for="Date">Date</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dtConcenDate" name="ConcernsDate" data-plugin-datepicker autocomplete="off">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 p-none">
+                                                                    <label class="control-label pl-default">Status</label>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="col-xs-6">
+                                                                        <select id="ddlConcernStatus" name="ConcernsStatus" class="form-control" ddlist="GetCarePlanConcernStatus"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="col-md-3" id="DivICDAutoComplete">
+                                                                <label class="control-label">Observation</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" id="txtObservation" placeholder="Search Disease" oninput="Clinical_CarePlan.bindICD9AutoComplete(this, 'Observation')" onkeypress="Clinical_CarePlan.disableEnterKey(event)" type="text" value="" onblur="Clinical_CarePlan.EnableDisableControls(this,'Observation');">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnObservation" class="btn btn-primary btn-xs" type="button" onclick="Clinical_CarePlan.openSearchPopup('ICD', 'txtObservation', 'Observation')"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="observationInfoDiv" class="disableAll">
+                                                                <div class="col-md-3">
+                                                                    <label class="control-label">Comments</label>
+                                                                    <textarea id="txtObservationComments" name="ObservationComments" maxlength="500" rows="1" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label class="control-label" for="Date">Date</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dtObservationDate" name="ObservationDate" data-plugin-datepicker autocomplete="off">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-md-3 p-none">
+                                                                    <label class="control-label pl-default" id="">Patient Priority</label>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="col-xs-8">
+                                                                        <select id="ddlObservationPatientPriority" name="ObservationPatientPriority" class="form-control" ddlist="GetCarePlanPatientPriority"></select>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                                <div class="col-md-3 p-none">
+                                                                    <label class="control-label pl-default" id="">Provider Priority</label>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="col-xs-8">
+                                                                        <select id="ddlObservationProviderPriority" name="ObservationProviderPriority" class="form-control" ddlist="GetCarePlanProviderPriority"></select>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="col-md-3" id="DivICDAutoComplete">
+                                                                <label class="control-label">Risk</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" id="txtRisk" placeholder="Search Disease" oninput="Clinical_CarePlan.bindICD9AutoComplete(this, 'Risk')" onkeypress="Clinical_CarePlan.disableEnterKey(event)" type="text" value="" onblur="Clinical_CarePlan.EnableDisableControls(this,'Risk');">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnRisk" class="btn btn-primary btn-xs" type="button" onclick="Clinical_CarePlan.openSearchPopup('ICD', 'txtRisk', 'Risk')"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="riskInfoDiv" class="disableAll">
+                                                                <div class="col-md-3">
+                                                                    <label class="control-label">Comments</label>
+                                                                    <textarea id="txtRiskComments" name="RiskComments" maxlength="500" rows="1" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label class="control-label" for="Date">Date</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" id="dtRiskDate" name="RiskDate" data-plugin-datepicker autocomplete="off">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-3 p-none">
+                                                                    <label class="control-label pl-default">Status</label>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="col-xs-6">
+                                                                        <select id="ddlRiskStatus" name="RiskStatus" class="form-control" ddlist="GetCarePlanRiskStatus"></select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-md-3 p-none">
+                                                                    <label class="control-label pl-default" id="">Patient Priority</label>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="col-xs-8">
+                                                                        <select id="ddlRiskPatientPriority" name="RiskPatientPriority" class="form-control" ddlist="GetCarePlanPatientPriority"></select>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                                <div class="col-md-3 p-none">
+                                                                    <label class="control-label pl-default" id="">Provider Priority</label>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="col-xs-8">
+                                                                        <select id="ddlRiskProviderPriority" name="RiskProviderPriority" class="form-control" ddlist="GetCarePlanProviderPriority"></select>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="btnConcernClear" class="btn btn-sm" onclick="Clinical_CarePlan.ResetControls('Concern');">Clear</button>
+
+                                                                <button id="btnConcernSave" type="button" onclick="Clinical_CarePlan.CarePlanSave('Concern');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <!--Interventions-->
+                                            <div id="Interventions" class="tab-pane">
+                                                <input id="hfInterventionId" name="InterventionId" type="hidden" value="-1" />
+                                                <div class="col-sm-4 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Interventions</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none" id="InterventionsList">
+                                                            <div class="col-xs-12 mb-sm">
+                                                                <div class="input-group" id="DivICDAutoComplete">
+                                                                    <input class="form-control" id="txtInterventions" placeholder="Search Disease" oninput="Clinical_CarePlan.bindICD9AutoComplete(this, 'Intervention')" onkeypress="Clinical_CarePlan.disableEnterKey(event)" type="text" value="">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnInterventions" class="btn btn-primary btn-xs" type="button" onclick="Clinical_CarePlan.openSearchPopup('ICD', 'txtInterventions', 'Intervention')"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                          
+                                                            <div id="CarePlanInterventions">
+                                                                <ul id="ulCarePlanInterventions" name="CarePlanInterventions" class="listPrimary scroll-2x overflowY" style="height:177px;max-height:177px;"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-8 col-md-9">
+                                                    <section id="sectionInterventions" class="panel panel-featured disableAll">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Detail</h2>
+                                                        </header>
+                                                        <div class="panel-body  height180">
+                                                            <div class="col-md-6 col-lg-3" id="GoalsDiv">
+                                                                <a id="lnkGoals" href="javascript:void(0);" onclick="Clinical_CarePlan.ShowCarePlanGoals();">Goals</a>
+                                                                <select id="ddlInterventionGoals" name="InterventionGoals" multiple="multiple" ddlmultilist="GetCarePlanGoals" class="form-control"></select>
+                                                            </div>
+                                                            <div class="col-md-6 col-lg-3" id="MedicationsDiv">
+                                                                <a id="lnkMedication" href="javascript:void(0);" onclick="Clinical_CarePlan.ShowMedications();">Medications</a>                                                               
+                                                                <select id="ddlInterventionsMedications" name="InterventionsMedications" multiple="multiple" ddlmultilist="GetMedicationsLookup" class="form-control"></select>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="col-sm-6">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtInterventionComments" name="InterventionComments" maxlength="500" rows="1" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <label class="control-label" for="Date">Date</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                    <input type="text" class="form-control" id="dtInterventionDate" name="InterventionDate" data-plugin-datepicker autocomplete="off">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 p-none">
+                                                                <label class="control-label pl-default">Status</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-xs-8">
+                                                                    <select id="ddlInterventionStatus" name="InterventionStatus" class="form-control" ddlist="GetInterventionStatus">                                                                       
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="btnInterventionClear" class="btn btn-sm" onclick="Clinical_CarePlan.ResetControls('Intervention','Clearbtn');"><i class="fa fa-history"></i> Clear</button>
+                                                                <button id="btnInterventionSave" type="button" onclick="Clinical_CarePlan.CarePlanSave('Intervention');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <!--Outcomes-->
+                                            <div id="Outcomes" class="tab-pane">
+                                                <input id="hfOutcomesId" name="OutcomesId" type="hidden" value="-1" />
+                                                <div class="col-sm-4 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Health status evaluations/outcomes</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none" id="OutcomesList">
+                                                            <div class="col-xs-12 mb-sm">
+                                                                <div class="input-group" id="DivOutcomesAutoComplete">
+                                                                    <input class="form-control" id="txtOutcomes" placeholder="Search Disease" oninput="Clinical_CarePlan.bindICD9AutoComplete(this, 'Outcome')"onkeypress="Clinical_CarePlan.disableEnterKey(event)" type="text" value="">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnOutcomes" class="btn btn-primary btn-xs" type="button" onclick="Clinical_CarePlan.openSearchPopup('ICD', 'txtOutcomes', 'Outcome')"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="CarePlanOutcomes">
+                                                                <ul id="ulCarePlanOutcomes" name="CarePlanOutcomes" class="listPrimary scroll-2x overflowY" style="height:177px;max-height:177px;"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-8 col-md-9">
+                                                    <section id="sectionOutcomes" class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Detail</h2>
+                                                        </header>
+                                                        <div class="panel-body height-max200 height200">
+                                                            <div class="col-md-12 col-lg-3" id="OutcomeGoalsDiv">
+                                                                <a id="lnkGoals" href="javascript:void(0);" onclick="Clinical_CarePlan.ShowCarePlanGoals();">Goals</a>
+                                                                <select id="ddlOutcomeGoals" name="OutcomeGoals" class="form-control" multiple="multiple" ddlmultilist="GetCarePlanGoals"></select>
+                                                            </div>
+                                                            <div class="col-lg-9 p-none" id="OutcomeInteventionsDiv">
+                                                                <div class="col-xs-12">
+                                                                    <a id="lnkInterventions" href="javascript:void(0);" onclick="Clinical_CarePlan.ShowInterventions();">Interventions</a>
+                                                                </div>
+                                                                <div class="col-xs-4">
+                                                                    <select id="ddlOutcomeInterventions" ddlist="" name="OutcomeInterventions" class="form-control" multiple="multiple" ddlmultilist="GetCarePlanInterventions"></select>
+                                                                </div>
+                                                            </div>                                                            
+                                                            <div class="clearfix"></div>
+                                                            <div class="col-sm-6">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtOutcomeComments" name="OutcomeComments" maxlength="500" rows="1" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label class="control-label">Outcome</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" id="txtOutcomeValue" name="OutcomeValue" maxlength="3" data-plugin-keyboard-numpad class="form-control" oninput="EMRUtility.setPercentage(event,this);" onblur="utility.ValidateDecimal(event, 2);">
+                                                                    <div class="input-group-addon text-xs p-xxs">%</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <label class="control-label" for="Date">Date</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                    <input type="text" class="form-control" id="dtOutcomeDate" name="OutcomeDate" data-plugin-datepicker autocomplete="off">
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="pull-right pt-sm pr-default">
+                                                                <button id="btnOutcomeClear" class="btn btn-sm" onclick="Clinical_CarePlan.ResetControls('Outcome', 'Clearbtn');">Clear</button>
+                                                                <button id="btnOutcomeSave" type="button" onclick="Clinical_CarePlan.CarePlanSave('Outcome');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <!--Care Team-->
+                                            <div id="CareTeam" class="tab-pane">
+                                                <input id="hfCareTeamId" name="CareTeamId" type="hidden" value="-1" />
+                                                <div class="col-sm-12">
+                                                    <header class="panel-heading">
+                                                        <h2 class="panel-title">Detail</h2>
+                                                    </header>
+                                                    <div class="panel-body height290">
+                                                        <div class="col-md-6 col-lg-3">
+                                                            <label class="control-label">Provider</label>
+                                                            <select id="ddlProvider" name="Provider" ddlist="GetProvider" class="form-control"></select>
+                                                        </div>
+                                                        <div class="panel-body panel-featured">
+                                                            <div class="spacer5"></div>
+                                                            <table class="table table-bordered table-striped table-condensed table-hover" id="dgvCareTeam">
+                                                                <thead>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+                                                            <!--<table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvCareTeam">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="display:none">CareTeamId</th>
+                                                                        <th>Name</th>
+                                                                        <th>Role</th>
+                                                                        <th>Specialty</th>
+                                                                        <th>Contact Number</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+                                                            <div id="dgvCareTeam_Paging"></div>-->
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                            <button id="btnConcernSave" type="button" onclick="Clinical_CarePlan.CarePlanSave('CareTeam');" class="btn btn-sm btn-success">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="col-md-12">
+                                        <label class="control-label">Overall Comments</label>
+                                        <textarea id="txtCarePlanComments" name="CarePlanComments" maxlength="5000" rows="3" class="form-control" spellcheck="true"></textarea>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <input type="hidden" name="PatientId" id="hfPatientId" />
+                                <input type="hidden" name="CarePlanId" id="hfCarePlanId" value="-1" />
+                                <input type="hidden" id="hfXMLData" />
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div id="pnlCarePlan_Result" style="display: inline;">
+                <div class="spacer10"></div>
+                <section class="panel" id="pnlCurrent">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none hidden" id="dgvCarePlan">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">CarePlanId</th>
+                                    <th class="size80">Action</th>
+                                    <th class="size300">Goal</th>
+                                    <th class="size80">Value</th>
+                                    <th class="size80">Status</th>
+                                    <th class="size100">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table> 
+                        
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none hidden" id="dgvHealthConcern">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">CarePlanId</th>
+                                    <th>Action</th>
+                                    <th>Type</th>                                   
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table> 
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none hidden" id="dgvInterventions">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">CarePlanId</th>
+                                    <th class="size80">Action</th>
+                                    <th class="size300">Intervention</th>                                  
+                                    <th class="size80">Status</th>
+                                    <th class="size100">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table> 
+                        
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none hidden" id="dgvOutcomes">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">CarePlanId</th>
+                                    <th class="size80">Action</th>
+                                    <th class="size300">Item</th>
+                                    <th class="size80">Outcome</th>
+                                    <th class="size100">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>                                              
+                    </div>
+                    <div class="pull-right mt-sm">
+                        <button class="btn btn-success btn-sm mr-md hidden" type="button" onclick="Clinical_CarePlan.addCarePlanToNote(true);" id="btnAddCarePlanToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </section>
+            </div>
+            <div class="modal-footer hidden"></div>
+        </div>
+    </div>
+</div>
+

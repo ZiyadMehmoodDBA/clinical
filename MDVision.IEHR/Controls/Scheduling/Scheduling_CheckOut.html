@@ -1,0 +1,213 @@
+﻿<div id="schcheckout">
+    <div id="actionPanCheckOut" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="schcheckout.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Check Out</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmcheckout" onsubmit="return false">
+
+                    <div class="clearfix"></div>
+                    <div class="spacer20"></div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label for="Patient Name" class="control-label">Patient Name</label>
+                            <input class="form-control" id="txtPatientName" name="PatientName" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">DOB</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" data-plugin-datepicker="" name="DOB" id="txtDOB" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Provider</label>
+                            <input class="form-control" id="txtProvider" name="Provider" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="Facility" class="control-label">Facility</label>
+                            <input class="form-control" id="txtFacility" name="Facility" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="Insurance Plan" class="control-label">Plan</label>
+                            <select id="ddlInsurancePlan" disabled name="InsurancePlan" class="form-control" onchange="schcheckout.FillInsuranceData('#frmcheckout #ddlInsurancePlan', '#frmcheckout #txtCopayment');"></select>
+
+
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="size70 pull-left">
+                                <label for="Copayment" class="control-label">Copayment</label>
+                                <!--<input class="form-control" id="txtCopayment" name="Copayment" type="text">-->
+                            </div>
+                            <div class="size125 pull-left">
+                                <div class="radio-custom radio-small mb-none pull-left">
+                                    <input type="radio" id="rdPCP" name="SpecialistPCP" disabled>
+                                    <label class="control-label" for="PCP">PCP</label>
+                                </div>
+                                <div class="radio-custom radio-small mb-none pull-left ml-sm">
+                                    <input type="radio" id="rdSpecialist" name="SpecialistPCP" disabled>
+                                    <label class="control-label" for="Specialist">Specialist</label>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="size70per pull-left">
+                                <input class="form-control" id="txtCopayment" name="Copayment" type="text">
+                            </div>
+                            <div class="size30per pull-left pl-xs">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input id="chkPaid" name="Paid" type="checkbox" disabled="disabled">
+                                    <label class="control-label" for="Paid">Paid</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="Patient Balance" class="control-label">Patient Balance</label>
+                            <input class="form-control" id="txtPatientBalance" name="PatientBalance" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="Plan Balance" class="control-label">Plan Balance</label>
+                            <input class="form-control" id="txtPlanBalance" name="PlanBalance" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="Reason" class="control-label">Reason</label>
+                            <input class="form-control" id="txtReason" name="Reason" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3">
+                            <label id="lblRefProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                            <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="schcheckout.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                            <div class="input-group">
+                                <input class="form-control" id="txtRefProvider" name="RefProvider" placeholder="Search Ref Provider" type="text" onblur="utility.ValidateAutoComplete(this, 'frmcheckout #hfRefProvider', true);">
+                                <div class="input-group-btn">
+                                    <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="schcheckout.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">DOS</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input disabled type="text" data-plugin-datepicker="" maxlength="10" class="form-control" name="DOS" id="dpDOS">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="Walkaway Bill" type="checkbox">
+                                <label class="control-label" for="Walkaway Bill">Walkaway Bill</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer20"></div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6" id="FollowUpText">
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit" id="btnCheckOutSave">Check Out</button>
+                                <button class="btn btn-primary btn-sm rightbtn" type="button" id="btnPrintLetter" onclick="schcheckout.PrintLetter();">Print Letter</button>
+                                <button class="btn btn-primary btn-sm rightbtn" id="btnAddReferral" type="button" onclick="schcheckout.addReferral();">Add Referral</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="hidden" id="divAppointmentsAvailableSlots">
+                        <div class="col-sm-3 hidden">
+                            <label class="control-label">Time</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                <input type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 5 }' id="fromTime" name="Time">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 hidden">
+                            <label class="control-label">Date<span class="required conditional-required">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="Date" data-plugin-datepicker="" class="form-control ValidateCriteria" id="fromDate">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 hidden">
+                            <label for="Provider" class="control-label" id="lblProvider">Provider</label>
+                            <select id="Provider" name="Provider" class="form-control" ddlist="GetProvider"></select>
+                        </div>
+                        <div class="col-sm-3 hidden">
+                            <label for="Facility" class="control-label" id="lblFacility">Facility</label>
+                            <select id="Facility" name="Facility" class="form-control" ddlist="GetFacility"></select>
+                        </div>
+                        <div class="col-sm-3 hidden">
+                            <label class="control-label">Duration<span class="required">*</span></label>
+                            <div class="">
+                                <select id="appointmentDurationselectResch" class="form-control pl-none"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="Provider" class="control-label" id="lblProvider">Provider</label>
+                            <select id="chkOutProvider" name="Provider" class="form-control"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="Facility" class="control-label" id="lblFacility">Facility</label>
+                            <select id="chkOutFacility" name="Facility" class="form-control"></select>
+                        </div>
+                        <div class="TCM-Section">
+                            <div class="spacer10"></div>
+                            <div class="col-sm-4">
+                                <label class="control-label"></label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label id="ChooseSchedule" class="control-label red hidden">PLEASE CHOOSE A SLOT TO SCHEDULE</label>
+                            </div>
+                            <div class="spacer5"></div>
+                            <div id="dvSlotsDetail" class="panel-body">
+                                <!--<label id="lblError" style="padding: inherit;margin-left: 38%;color: red; display:none">SCHEDULER NOT AVAILABLE</label>-->
+                                <div id="dvisPatientScheduled" class="hidden">
+                                </div>
+                                <div class="col-xs-12">
+                                    <div id="dvSlots">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spacer5"></div>
+                        <div class="pr-default mt-sm pull-right">
+                            <button class="btn btn-primary btn-sm submitbtns hidden" id="btnSchedule" type="button" onclick="schcheckout.FollowUpAppointmentSchedule();">Schedule</button>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <input type="hidden" id="hfProviderId" />
+                    <input type="hidden" id="hfFacilityId" />
+                    <input type="hidden" id="hfResourceId" />
+                    <input type="hidden" id="hfSchStatusId" />
+                    <input type="hidden" id="hfSchReasonId" />
+                    <input type="hidden" id="hfRefProvider" />
+                    <input type="hidden" id="hfpatientid" />
+                    <input type="hidden" id="hfpatientaccount" />
+                    <input type="hidden" id="hfpatientname" />
+                    <input type="hidden" id="hfInsurancePlanId" />
+                    <input type="hidden" id="hfAppointmentId" />
+                    <input type="hidden" id="hfReferralId" />
+
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#frmcheckout input:radio[name=SpecialistPCP]').change(function () {
+
+            schcheckout.FillInsuranceData('#frmcheckout #ddlInsurancePlan', '#frmcheckout #txtCopayment');
+
+        });
+
+    });
+
+
+</script>
+

@@ -1,0 +1,205 @@
+﻿<div id="pnlChargeBatchDetail">
+    <div id="actionPanChargeBatchDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="alternateActionPanChargeBatchDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="">
+                <button type="button" id="btnCloseChargeBatchDetail" class="close" onclick="chargeBatchDetail.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Charge Batch</h4>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" id="frmChargeBatchDetail" onsubmit="return false">
+                    <div class="btn-block mb-sm" id="chageBatchToolbar">
+                        <a class="btn btn-success btn-xs" style="display:none;"><i class="fa fa-save"></i> Save</a>
+                        <a class="btn btn-success btn-xs" onclick="chargeBatchDetail.LoadChargeView(); return false;"><i class="fa fa-file-text"></i> Charges</a>
+                        <a class="btn btn-success btn-xs" onclick="chargeBatchDetail.LoadClaimView(); return false;"><i class="fa fa-money"></i> Claims</a>
+                        <a class="btn btn-success btn-xs" onclick="chargeBatchDetail.ReCalculate(); return false;"><i class="fa fa-calculator"></i> Re Calculate</a>
+                        <a class="btn btn-success btn-xs" onclick="chargeBatchDetail.OpenImportDocument('ImportDoc'); return false;"><i class="fa fa-reply"></i> Import Doc</a>
+                        <a class="btn btn-success btn-xs" id="btnImportFolder" onclick="chargeBatchDetail.OpenImportDocument('ImportFolder'); return false;"><i class="fa fa-folder-open"></i> Import Folder</a>
+                        <a class="btn btn-success btn-xs" id="btnScanDoc" onclick="chargeBatchDetail.OpenScanDocument();"><img class="scan-icon" src="Content/images/scan.svg"> Scan</a>
+                    </div>
+                    <div class="panel-body panel-featured pl-none pr-none pb-none">
+                        <div class="form-group">
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label" for="Batch Number">Batch Number</label>
+                                <input class="form-control" id="txtBatchNumber" name="Batch Number" type="text" readonly>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <label class="control-label" for="Description">Description</label>
+                                <input class="form-control" id="txtDescription" name="Description" type="text">
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="chargeBatchDetail.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="chargeBatchDetail.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                <label id="lnkPracticeEdit" style="display:none;" for="Practice" class="control-label">Practice</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtPractice" name="Practice" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="chargeBatchDetail.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label id="lblProvider" class="control-label">Provider</label>
+                                <a id="lnkProviderEdit" style="display:none;" href="#" onclick="chargeBatchDetail.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="chargeBatchDetail.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden-sm"><div class="clearfix"></div></div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label" for="Biller">Biller</label>
+                                <select class="form-control" id="ddlBiller" name="Biller" ddlist="GetUsersFullName"></select>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">DOS From</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <input type="text" id="dtpFromDOS" name="DOSFrom" class="form-control" onfocusout="chargeBatchDetail.toDateRequired();" data-plugin-datepicker="" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">DOS To</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <input type="text" id="dtpToDOS" name="DOSTo" class="form-control" data-plugin-datepicker="" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label" for="#Claims"># Claims</label>
+                                <input class="form-control" data-mask="9?99999999" id="txtClaims" name="Claims" type="text">
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label" for="#Charges"># Charges</label>
+                                <input class="form-control" data-mask="9?99999999" id="txtCharges" name="Charges" type="text">
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <div class="size140">
+                                    <label class="control-label" for="Copayment Collected">Copayment Collected</label>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                    <input class="form-control" id="txtCopaymentCollected" name="Copayment Collected" type="text" maxlength="7" onkeypress="utility.ValidateDecimal(event,2)">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="spacer10"></div>
+                        <div id="ContainerBatchStatus">
+                            <div class="splitter m-none mb-sm">Batch Status</div>
+                            <div class="form-group">
+                                <div class="col-sm-3 col-md-2">
+                                    <label class="control-label" for="#Claims Entered"># Claims Entered</label>
+                                    <input class="form-control" id="txtClaimsEntered" name="Claims Entered" type="text">
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label class="control-label" for="#Charges Entered"># Charges Entered</label>
+                                    <input class="form-control" id="txtChargesEntered" name="Charges Entered" type="text">
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label class="control-label" for="Copayment Posted">Copayment Posted</label>
+                                    <input class="form-control" id="txtCopaymentPosted" name="Copayment Posted" type="text">
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <div class="size140">
+                                        <label class="control-label" for="Total Charges Amount">Total Charges Amount</label>
+                                    </div>
+                                    <input class="form-control" id="txtTotalCharges" name="Total Charges Amount" type="text">
+                                </div>
+                                <div class="visible-sm">
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label class="control-label" for="Batch Status">Batch Status</label>
+                                    <select id="ddlBatchStatus" class="form-control" ddlist="GetChargeBatchStatus"></select>
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label class="control-label" for="Start Date">Start Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input id="dtpStarDate" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label class="control-label" for="End Date">End Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input id="dtpEndDate" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label class="control-label" for="#Hours Spent"># Hours Spent</label>
+                                    <input class="form-control" id="txtHoursSpent" name="Hours Spent" type="text">
+                                </div>
+                                <div class="visible-sm">
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label class="control-label" for="Batch Entered By">Batch Entered By</label>
+                                    <input class="form-control" id="txtBatchEnteredBy" name="Batch Entered By " type="text">
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label class="control-label" for="Batch Entry Date">Batch Entry Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input id="dtpBatchEntryDate" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                        <div id="ContainerBatchDocuments" style="display: inline;">
+                            <div class="splitter m-none">Documents</div>
+                            <section class="panel">
+                                <div class="panel-body pb-none noBorder">
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvChargeBatchDocument">
+                                        <thead>
+                                            <tr>
+                                                <th id="ColumnAction" class="size40">Action</th>
+                                                <th class="size70">Account #</th>
+                                                <th class="size70">Claim #</th>
+                                                <th class="size70">DOS From</th>
+                                                <th class="size70">File Name</th>
+                                                <th class="size70">File Type</th>
+                                                <th class="size70">Pages</th>
+                                                <th class="size85">Action</th>
+                                                <th class="size85">Reason</th>
+                                                <th class="size180">Comments</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-md-1 pull-right mt-md">
+                        <input type="submit" class="btn btn-primary btn-sm rightbtn" id="BtnSave" value="Save" />
+                        <button class="btn btn-primary btn-sm rightbtn" id="BtnUpdate" style="display:none;" onclick="chargeBatchDetail.BatchChargeUpdate(); return false;">Update</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <input type="hidden" id="hfFacility" value="-1" />
+                    <input type="hidden" id="hfPractice" value="-1" />
+                    <input type="hidden" id="hfProvider" value="-1" />
+                    <input type="hidden" id="hfBatchID" value="0" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

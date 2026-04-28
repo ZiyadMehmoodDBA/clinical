@@ -1,0 +1,103 @@
+﻿<div class="row" id="pnlPatientPayments" style="display:none;">
+    <div id="actionPanPatientPayments" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Bill_PatientPayments.UnLoadTab()"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Patient Payment Details</h4>
+            </div>
+            <div class="clearfix"></div>
+            <div id="modalbody">
+
+                <a id="aPatientPaymentPrint" class="btn btn-success btn-xs" onclick="Bill_PatientPayments.PrintPatientPayments();"><i class="fa"></i> Print </a>
+                <div class="spacer10"></div><div class="clearfix"></div>
+                <div id="pnlPatientPayment_Result">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="PatientPayment_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientPayment">
+                                <thead>
+                                    <tr>
+                                        <th class="size-max20"><input type="checkbox" title="Select all" name="checkboxAll" id="chkAllPayments" onclick="Bill_PatientPayments.CheckMarkPayments(this);"></th>
+                                        <th class="size70 sorting">Action</th>
+                                        <th class="size150">Payment Date</th>
+                                        <th class="size150">DOS</th>
+                                        <th class="size150">Claim #</th>
+                                        <th class="size150">Payment Type</th>
+                                        <th class="size150">Check / Credit Card #</th>
+                                        <th class="size150">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <div class="col-sm-12 col-md-7 pt-xs pull-right">
+                                <div class="row">
+                                    <label class="control-label bold col-xs-4" for="Amount">Total Payment(s) : <span id="totalPayment"></span></label>
+                                    <label class="control-label bold col-xs-4" for="Amount">Total Refund(s) : <span id="totalRefund"></span></label>
+                                    <label class="control-label bold col-xs-4" for="Amount">Total Amount : <span id="totalAmount"></span></label>
+                                </div>
+                            </div>
+                            <div id="divPatientPaymentsPaging"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </section>
+                </div>
+                <div id="PrintPatientPayments" class="hidden">
+                    <div class="modal-body bg-white" id="popDiv">
+                        <!--<script>
+                                    kendo.pdf.defineFont({
+                                        "DejaVu Sans": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans.ttf",
+                                        "DejaVu Sans|Bold": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+                                        "DejaVu Sans|Bold|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+                                        "DejaVu Sans|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+                                    });
+                        </script>-->
+                        <div id="PrintDiv">
+                        <div class="col-sm-8 col-lg-2 pull-left">
+                            <img src="content/images/SHS-final-logo.png" class="img-responsive">
+                        </div>
+                            <div class="pull-right col-sm-4">
+                        <ul class="list-unstyled pull-right" style="font-size: 12px !important;" id="PracticeList">
+                            <li id="PracticeName" class="bold"></li>
+                            <li id="PracticeAddress"></li>
+                            <li id="PracticeCity"></li>
+                            <li id="PracticeContact"></li>
+                            <li id="DivPrintDate"></li>
+                        </ul>
+                            <!--<div id="DivPrintDate" class="pull-right col-sm-6" style="font-size: 10px !important;">
+                                </div>-->
+                                </div>
+                        <div class="clearfix"></div><div class="spacer20"></div>
+                        <div class="row">
+                            <label class="control-label col-xs-4" for="Amount"><b>Account Number : </b><span id="SpnAccNum"></span></label>
+                            <label class="control-label col-xs-4" for="Amount"><b>Patient Name : </b><span id="SpnPatName"></span></label>
+                        </div>
+                        <div class="clearfix"></div><div class="spacer20"></div>
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientPaymentPrint">
+                            <thead>
+                                <tr>
+                                    <th class="size150" style="background-color: grey;">Payment Date</th>
+                                    <th class="size150" style="background-color: grey;">DOS</th>
+                                    <th class="size150" style="background-color: grey;">Claim #</th>
+                                    <th class="size150" style="background-color: grey;">Payment Type</th>
+                                    <th class="size150" style="background-color: grey;">Check / Credit Card #</th>
+                                    <th class="size150" style="background-color: grey;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                            <div class="spacer10"></div>
+                            <div id="DivPrintFooter" class="col-sm-6 pull-right">
+                                <label class="control-label bold col-xs-4" for="Amount">Total Payments : <span id="SpnttlPymnt">0</span></label>
+                                <label class="control-label bold col-xs-4" for="Amount">Total Refunds : <span id="SpnttlRefunds">0</span></label>
+                                <label class="control-label bold col-xs-4" for="Amount">Total Amount : $<span id="SpnttlAmt">0</span></label>
+                            </div>
+                            <div class="spacer10"></div>
+                            <hr>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

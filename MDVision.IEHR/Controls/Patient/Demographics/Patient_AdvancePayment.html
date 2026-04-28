@@ -1,0 +1,120 @@
+﻿<div id="pnlAdvancePayment">
+    <div id="actionPanAdvancePayment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_AdvancePayment.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Advance Payment Search</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" id="btnAdvancePaymentAdd" class="btn btn-success btn-sm" onclick="Patient_AdvancePayment.AdvancePaymentAddEdit('','Add');"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <form method="post" id="frmAdvancePayment" onsubmit="return false">
+                        <section class="panel panel-featured">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <!--<div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Case Type </label>
+                                        <select class="form-control" id="ddlType" ddlist="GetCaseType"></select>
+                                    </div>-->
+
+                                    <div id="divPatientId" class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Patient Account">Patient Account</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtPatientName" name="PatientName" placeholder="Start typing to search" type="text" oninput="Patient_AdvancePayment.BindPatientAccount();" disabled>
+                                            <div id="divSearchPatient" class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs disableAll" onclick="Patient_AdvancePayment.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="divPatientName" class="col-sm-3 col-md-2">
+                                        <label class="control-label">Patient Name</label>
+                                        <input class="form-control" id="txtFullName" name="FullName" type="text" disabled="disabled">
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Patient_AdvancePayment.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Patient_AdvancePayment.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+
+                                        <label class="control-label" for="Date Paid">Paid From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" id="dtpPaidFrom" name="DatePaidFrom" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="visible-sm"><div class="clearfix"></div></div>
+                                    <div class="col-sm-3 col-md-2">
+
+                                        <label class="control-label" for="Date Paid">Paid To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" id="dtpPaidTo" name="DatePaidTo" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Payment Type</label>
+                                        <select id="ddlPaymentType" class="form-control" name="PaymentType" ddlist="GetPaymentType" />
+
+                                    </div>
+
+                                    <!--<div class="col-sm-2 pad-a-labelsize-btn">-->
+                                    <div class="col-sm-1 pull-right mt-sm">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnPatientCaseSearch" type="button" onclick="Patient_AdvancePayment.SearchAdvancePayment();">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <input type="hidden" id="hfFacility" value="-1" />
+                        <input type="hidden" id="hfPatientId" value="-1" />
+                    </form>
+                </div>
+
+                <div class="pull-right pl-sm" id="divAdvanceBalance">
+                    <label class="control-label" for="Advance Balance">Total Advance Balance: $</label>
+                    <label class="control-label" id="lblAdvanceBalance" for="00.00">00.00</label>
+                </div>
+
+
+                <div class="spacer10"></div>
+
+
+                <div id="pnlAdvancePayment_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvAdvancePayment">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">AdvancePaymentId</th>
+                                        <th id="ColumnAction" class="size25">Action</th>
+                                        <th class="size150">Patient Name</th>
+                                        <th class="size150">Facility</th>
+                                        <th class="size150">Amount</th>
+                                        <th class="size150">Balance</th>
+                                        <th class="size150">Payment Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="dgvAdvancePayment_Paging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

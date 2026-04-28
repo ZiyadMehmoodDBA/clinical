@@ -1,0 +1,107 @@
+﻿<div id="pnlPreAuthorizationDetail">
+    <div id="actionPanPreAuthorization_Detail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_PreAuthorization_Detail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Authorization Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div class="panel-body">
+                            <form method="post" id="frmPreAuthorizationDetail" onsubmit="return false">
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-9 pl-md pr-xs">
+                                                <label class="control-label pull-left ">Plan<span class="required">*</span> </label>
+                                                <select class="form-control" id="ddlPlan" name="InsurancePlan" onchange="Patient_PreAuthorization_Detail.FillInsuranceData()" ></select>
+                                            </div>
+                                            <div class="col-xs-3 pl-none pr-md pad-a-labelsize">
+                                                <input id="txtProirity" name="Proirity" class="form-control" type="text" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">CPT Code<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtCPTCode" maxlength="5" placeholder="99999" type="text" name="CPTCode" oninput="Patient_PreAuthorization_Detail.BindAutoComplete(this)" />
+                                            <!--onblur="utility.ValidateAutoComplete(this, 'pnlPreAuthorizationDetail #hfcptcode', true, 1)"-->
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Patient_PreAuthorization_Detail.OpenCPTCode();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="Subscriber ID" class="control-label">Prior Authorization Number<span class="required">*</span></label>
+                                        <input class="form-control" id="txtPAN" type="text" name="PAN" maxlength="30" />
+                                    </div>
+                                    <div class="col-sm-2 pad-a-labelsize">
+                                        <div class="checkbox-custom checkbox-default ">
+                                            <input type="checkbox" name="Active" id="chkActive">
+                                            <label class="control-label" for="Active">Active</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label class="control-label" for="Coverage Date From">From Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control col-xs-9" name="FromDate" id="dtpFromDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" for="Coverage Date From">To Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control col-xs-9" name="ToDate" id="dtpToDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="Subscriber ID" class="control-label">Visits Allowed</label>
+                                        <input class="form-control" id="txtVisitsAllowed" name="VisitsAllowed" type="text" maxlength="9" onkeypress="return isNumberKey(event)"  />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="Subscriber ID" class="control-label">Visits Used</label>
+                                        <input class="form-control" id="txtVisitsUsed" name="VisitsUsed" type="text" disabled="disabled" maxlength="10"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-9">
+                                        <label class="control-label" for="Comments">Comments</label>
+                                        <textarea class="form-control" id="txtComments" name="Comments" rows="2" maxlength="500" spellcheck="true"></textarea>
+                                    </div>
+
+                                    <div class="col-sm-3 pad-a-labelsize">
+                                        <button id="btnAuthorization" class="btn btn-primary btn-sm" type="submit">Save & Exit</button>
+                                        <input type="hidden" id="hfInsurancePlan" />
+                                        <input type="hidden" id="hfcptcode" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        utility.ValidateFromToDate('frmPreAuthorizationDetail', 'dtpFromDate', 'dtpToDate', true);
+    });
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>

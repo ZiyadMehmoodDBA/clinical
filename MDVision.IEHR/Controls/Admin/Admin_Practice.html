@@ -1,0 +1,84 @@
+﻿<div class="row" id="pnlAdminPractice" style="display:none;">
+    <div id="actionPanAdminPractice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_Practice.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Practices</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Admin_Practice.PracticeAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" id="ClosePractice" class="closebtn pull-right" onclick="Admin_Practice.UnLoadTab()"></a>
+                                </div>
+                                <h2 class="panel-title">Search Practice </h2>
+                            </header>
+                            </div>
+                            <div class="panel-body" id="pnlPractice_Search">
+                                <form class="form-bordered" method="post" onsubmit="return false">
+                                    <!--start - CONTENTS-->
+                                    <div class="form-group">
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Short Name</label>
+                                            <input class="form-control" id="txtShortName" type="text" maxlength="10" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label class="control-label">Description</label>
+                                            <input class="form-control" id="txtDiscription" type="text" maxlength="55" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Entity</label>
+                                            <select id="ddlEntity" class="form-control" ddlist="GetEntity"></select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label"> EIN</label>
+                                            <input class="form-control" id="txtEIN" type="text" placeholder="999999999" data-mask="999999999" onblur="utility.validateMasking(this);" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Active?</label>
+                                            <select id="chkActive" name="Active" class="form-control">
+                                                <option value="">- All -</option>
+                                                <option value="1" selected="selected">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-1 mt-sm pull-right">
+                                            <button class="btn btn-primary btn-sm pull-right" id="btnPracticeSearch" type="button" onclick="Admin_Practice.PracticeSearch('0');">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                </div>
+
+                <div id="pnlPractice_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="Practice_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvPractice">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">PracticeId</th>
+                                        <th id="ColumnAction" class="size95 size-min120">Action</th>
+                                        <th>Short Name</th>
+                                        <th>Description</th>
+                                        <th>EIN</th>
+                                        <th>Entity</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divPracticePaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

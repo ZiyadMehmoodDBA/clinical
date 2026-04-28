@@ -1,0 +1,102 @@
+﻿
+<div id="pnlClinicalCustomFormsPreview">
+    <div id="actionPanClinicalCustomFormsPreview" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_CustomFormsPreview.UnLoadTab();"></button>
+                <h4 id="customFormTitle" class="modal-title">Add Custom Form</h4>
+            </div>
+
+            <div class="modal-body">
+                <div id="frmCustomFormPreview">
+                    <form id="frmPreview" onsubmit="Clinical_CustomFormsPreview.addCustomFormToNote(event);">
+                        <div id="containerCustomFormPreview" class="NoRadiusT">
+                            <ul id="customFormDetails" class="list-unstyled dragableGrid" style="width:100% !important; min-height:500px;"></ul>
+                        </div>
+                        <div class="pull-right pad-a-labelsize-btn pr-default" id="actionButtons">
+                            <button style="display:none;" class="btn btn-success btn-sm pull-right mr-sm" type="submit" onclick="" id="btnCustomFormAddToNote">Add on Note</button>
+                        </div>
+                        <div style="display:none;" class="pull-right pad-a-labelsize-btn pr-default" id="actionButtonsPatient">
+                            <button type="button" class="btn btn-xs btn-success" id="btnSavePatientLetter" onclick="Patient_CustomForm.SaveCustomForm()"><i class="fa fa-save"></i> Save</button>
+                            <button type="button" class="btn btn-xs btn-success" id="btnPrintPatientLetter" onclick="Patient_CustomForm.printcustomForm('0')"><i class="fa fa-print"></i> Save & Print</button>
+                            <button type="button" class="btn btn-xs btn-success" id="btnPrintPatientLetter" onclick="Patient_CustomForm.printcustomForm('1')"><i class="fa fa-print"></i> Sign & Print</button>
+                        </div>
+
+                        <div id="sendHtml"></div>
+
+                        <div class="col-sm-12 col-md-6 pt-xs pl-none problemsListDiv" style="display:none;width:100%">
+                            <div id="divLabTestGrid" class="panel panel-featured">
+                                <div class="panel-body p-none">
+                                    <ul id="customFormProblemsList" class="listPrimary own-scroll height-max180"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 pt-xs pl-none proceduresListDiv" style="display:none;width:100%">
+                            <div id="" class="panel panel-featured">
+                                <div class="panel-body p-none">
+                                    <ul id="customFormProceduresList" class="listPrimary own-scroll height-max180"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div>
+                <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+            </div>
+        </div>
+        <div class="panel-body hidden" id="PrintPdfControlDiv">
+            <input type="hidden" id="helperPDF" />
+            <iframe id="PreviewReportPrint" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12" style="height:1066px;"></iframe>
+        </div>
+
+        <script>
+
+            kendo.pdf.defineFont({
+                "DejaVu Sans": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans.ttf",
+                "DejaVu Sans|Bold": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+                "DejaVu Sans|Bold|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+                "DejaVu Sans|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            });
+        </script>
+        <style type="text/css">
+            .blueBgPrint {
+                background: #005da9 !important;
+                color: #fff !important;
+            }
+
+            .blueBorderPrint {
+                border-bottom: 2px solid #005da9;
+            }
+
+            .btn-link-print {
+                color: #000000 !important;
+                font-size: 16px;
+                font-weight: 700;
+            }
+
+            .line-height-fix {
+                font-size: 14px !important;
+            }
+        </style>
+
+
+
+        <script type="x/kendo-template" id="page-templateLegacy">
+            <div class="page-template" id="legacyViewTemplateDiv">
+                <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                    <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                    <div id="ClinicalReportsFooterTextLegacy" class="blueBgPrint" style="float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                        Generated by:<span id="ClinicalReportsFooterLegacy">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                    </div>
+                </div>
+
+            </div>
+        </script>
+
+
+    </div>
+</div>

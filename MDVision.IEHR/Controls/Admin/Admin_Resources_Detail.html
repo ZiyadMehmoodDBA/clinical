@@ -1,0 +1,70 @@
+﻿<div id="resourcesDetail">    
+    <div id="actionPanAdminResourcesDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="resourcesDetail.UnLoad();"><span class="red" >&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Resource</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblresourcesDetail" class="col-md-12 p-none">
+                    <form method="post" onsubmit="return false" id="frmResourcesDetail">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Short Name</label><span class="required">*</span>
+                                <input class="form-control" name="shortName" id="txtShortName" type="text" maxlength="10" />
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label">Description</label>
+                                <input class="form-control " id="txtDescription" name="Description" type="text" maxlength="55" />
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Facility </label><span class="required">*</span>
+                                <select id="ddlFacility" class="form-control" ddlist="GetFacility" name="Facility">
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Duration (Min)</label>
+                                <input class="form-control" id="txtDuration" name="Duration" type="text" placeholder="99999" data-mask="9?999" />
+                            </div>
+                            <div class="col-sm-4">
+                                <label id="lblResourceProvider" for="ResourceProvider" class="control-label">Resource Provider</label>
+                                <a id="lnkResourceProviderEdit" style="display:none;" href="#" onclick="resourcesDetail.OpenProviderDetail('frmResourcesDetail #hfResourceProvider', 'txtResourceProvider');" title="Edit Ref Provider">Resource Provider</a>
+                                <div class="input-group">
+                                    <input class="form-control ValidateCriteria" id="txtResourceProvider" name="ResourceProvider" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkResourceProvider" class="btn btn-primary btn-xs " type="button" onclick="resourcesDetail.OpenProvider('Search Resource Provider', 'frmResourcesDetail #txtResourceProvider', 'frmResourcesDetail #hfResourceProvider', 'frmResourcesDetail #lblResourceProvider', 'frmResourcesDetail #lnkResourceProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="col-sm-2 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-xs-6">
+                                <div class="visible-xs"><div class="mt-xs"></div></div>
+                                <div class="hidden-xs"><div class="pad-a-labelsize"></div></div>
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="ProviderRequired" id="chkProviderRequired">
+                                    <label for="chkProviderRequired">Provider Appointment Required</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-6 pull-right mt-xs">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit"> Save & Exit</button>
+                                <!--<button id="btnHistoryResource" class="btn btn-primary btn-sm rightbtn" type="button" onclick="resourcesDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                        <input type="hidden" id="hfResourceProvider"  name="ResourceProviderId" />
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

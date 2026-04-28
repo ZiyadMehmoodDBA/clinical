@@ -1,0 +1,121 @@
+﻿<div id="pnlLetter">
+    <div id="actionPanLetter" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_Letter.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Letters</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section>
+                        <div class="spacer10"></div><div class="clearfix"></div>
+                        <button type="button" class="btn btn-success btn-sm" onclick="Patient_Letter.AddLetter()"><i class="fa fa-plus-circle"></i> Add</button>
+                        <div class="spacer10"></div><div class="clearfix"></div>
+                        <section class="panel panel-featured mb-default">
+                            <div id="formpanelheading">
+                                <header class="panel-heading">
+                                    <div class="panel-actions"><a class="closebtn pull-right" onclick="Patient_Letter.UnLoadTab()"></a></div>
+                                    <h2 class="panel-title">Search Letter</h2>
+                                </header>
+                            </div>
+                            <div class="panel-body NoRadiusT pt-xxs">
+                                <form id="frmLetter" method="post" onsubmit="return false">
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Name</label>
+                                        <input type="text" id="Name" name="Name" class="form-control" maxlength="100" />
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Description</label>
+                                        <input type="text" id="Description" name="Description" class="form-control" maxlength="100" />
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Category</label>
+                                        <select id="ddlCategory" name="CategoryId" class="form-control" ddlist="GetLetterCategory"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Date From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dpDateFrom" name="VisitDate" data-plugin-datepicker autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Date To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dpDateTo" name="VisitDateTo" data-plugin-datepicker autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="pull-left mt-md pt-xxs pl-default"><button class="btn btn-primary btn-sm" onclick="Patient_Letter.patientTemplateLetterSearch();">Search</button></div>
+                                </form>
+                            </div>
+
+                            <div class="spacer10"></div>
+                        </section>
+                        <div id="pnlPatientTemplateLetter_Result" style="display: inline;">
+                            <div class="panel-body">
+                                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvPatientTemplateLetter">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">LetterId</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Visit Date</th>
+                                            <th>Visit Time</th>
+                                            <th>Category</th>
+                                            <th>Status</th>
+                                            <th>Last Updated</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divPatientTemplateLetterlistPaging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                                </div>
+                            </div>
+                            <div class="pull-right mt-sm" id="divPatLetterTempAddNote">
+                                <button class="btn btn-success btn-sm pull-right mr-default hidden" type="button" onclick="Create_Letter.addPatLetterToNotes();" id="btnAddPatLetterToNotes">Add on Note</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

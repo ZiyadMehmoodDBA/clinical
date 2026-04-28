@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DCA2D6D8-4A90-444F-A09A-C17DB5400E51}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MDVision.DataAccess</RootNamespace>
+    <AssemblyName>MDVision.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'debug web|AnyCPU'">
+    <OutputPath>bin\debug web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'web|AnyCPU'">
+    <OutputPath>bin\web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MDVision.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MDVision.Model\bin\Debug\MDVision.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartThreadPool">
+      <HintPath>..\MDVision.Business\DLL\SmartThreadPool.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\Admin\CCM\DALCCM.cs" />
+    <Compile Include="DAL\Admin\DALDrugCodeCost.cs" />
+    <Compile Include="DAL\Admin\DALEDIServiceHandle.cs" />
+    <Compile Include="DAL\Admin\DALLoginMobile.cs" />
+    <Compile Include="DAL\Admin\DALOccupationStatus.cs" />
+    <Compile Include="DAL\Admin\DALParticipantProvider.cs" />
+    <Compile Include="DAL\Admin\DALPatientEligibilityService.cs" />
+    <Compile Include="DAL\Admin\DALHL7.cs" />
+    <Compile Include="DAL\Admin\DALHL7ADT.cs" />
+    <Compile Include="DAL\Admin\DALHL7DFT.cs" />
+    <Compile Include="DAL\Admin\DALHL7SIU.cs" />
+    <Compile Include="DAL\Admin\DALReminders.cs" />
+    <Compile Include="DAL\Admin\DALTestType.cs" />
+    <Compile Include="DAL\Admin\MobileApp\DALMobileApp.cs" />
+    <Compile Include="DAL\Appointment\SharedVariable.cs" />
+    <Compile Include="DAL\AuditableEvents\DALAuditbleEventsActivityLog.cs" />
+    <Compile Include="DAL\BatchFax\DALBatchFax.cs" />
+    <Compile Include="DAL\Batch\DALExportCCDA.cs" />
+    <Compile Include="DAL\Batch\DALBatch.cs" />
+    <Compile Include="DAL\Case\DALCaseAdjuster.cs" />
+    <Compile Include="DAL\Case\DALCaseWCNF.cs" />
+    <Compile Include="DAL\CCM\DALCCMProgramUpdate.cs" />
+    <Compile Include="DAL\CCM\DALCCMEnrollmentInfo.cs" />
+    <Compile Include="DAL\CCM\DALCCM.cs" />
+    <Compile Include="DAL\CCM\DALCarePlan.cs" />
+    <Compile Include="DAL\CCM\DALHealthRiskAssessment.cs" />
+    <Compile Include="DAL\CCM\DALPatientHub.cs" />
+    <Compile Include="DAL\Clinical\Batch\DALBatchPatientList.cs" />
+    <Compile Include="DAL\Clinical\DALAOETemplate.cs" />
+    <Compile Include="DAL\Clinical\DALBillingInformation.cs" />
+    <Compile Include="DAL\Clinical\DALCaseReports.cs" />
+    <Compile Include="DAL\Clinical\DALCCDA.cs" />
+    <Compile Include="DAL\Clinical\DALClinicalLab.cs" />
+    <Compile Include="DAL\Clinical\DALClinicalSummary.cs" />
+    <Compile Include="DAL\Clinical\DALConsultationOrder.cs" />
+    <Compile Include="DAL\Clinical\DALEMCodeGenerator.cs" />
+    <Compile Include="DAL\Clinical\DALHPI.cs" />
+    <Compile Include="DAL\Clinical\DALImplantable.cs" />
+    <Compile Include="DAL\Clinical\DALLabTrends.cs" />
+    <Compile Include="DAL\Clinical\DALMacro.cs" />
+    <Compile Include="DAL\Clinical\DALOrderSet.cs" />
+    <Compile Include="DAL\Clinical\DALCustomForm.cs" />
+    <Compile Include="DAL\Clinical\DALLab.cs" />
+    <Compile Include="DAL\Clinical\DALLabOrder.cs" />
+    <Compile Include="DAL\Clinical\DALLabResult.cs" />
+    <Compile Include="DAL\Clinical\DALPatientEducation.cs" />
+    <Compile Include="DAL\Clinical\DALFavoriteList.cs" />
+    <Compile Include="DAL\Clinical\DALImmunization.cs" />
+    <Compile Include="DAL\Clinical\DALPhysicalExamDataTemplate.cs" />
+    <Compile Include="DAL\Clinical\DALPhysicalExamECW.cs" />
+    <Compile Include="DAL\Clinical\DALProcedureOrder.cs" />
+    <Compile Include="DAL\Clinical\DALProcedures.cs" />
+    <Compile Include="DAL\Clinical\DALProcedureTemplate.cs" />
+    <Compile Include="DAL\Clinical\DALProviderNoteTemplate.cs" />
+    <Compile Include="DAL\Admin\DALSupperBill.cs" />
+    <Compile Include="DAL\Admin\DALUsersActivity.cs" />
+    <Compile Include="DAL\Admin\ERA\DALERAActions.cs" />
+    <Compile Include="DAL\Admin\ERA\DALERAAdjustmentCode.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpAction.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpAdjustmentReasonCode.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpARFacilityGroup.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpARPlanCategoryGroup.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpARPlanTypeGroup.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpARPOSGroup.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpARProviderGroup.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpClaimStatusCategoryCode.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpClaimStatusCode.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpCodesMapping.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpARGroup.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpReason.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpARType.cs" />
+    <Compile Include="DAL\Admin\FollowUp\DALFollowUpRemittanceCode.cs" />
+    <Compile Include="DAL\Admin\PatientStatement\DALPatientStatementGroup.cs" />
+    <Compile Include="DAL\Admin\PatientStatement\DALPatientStatementMessage.cs" />
+    <Compile Include="DAL\Appointment\DALAppointment.cs" />
+    <Compile Include="DAL\Charges\DALBatchCharge.cs" />
+    <Compile Include="DAL\Charges\DALCharge.cs" />
+    <Compile Include="DAL\Case\DALCase.cs" />
+    <Compile Include="DAL\Claim\DAL835.cs" />
+    <Compile Include="DAL\Claim\DAL837.cs" />
+    <Compile Include="DAL\Claim\DALClaim.cs" />
+    <Compile Include="DAL\Claim\DALEDIEligibility.cs" />
+    <Compile Include="DAL\Claim\DALEDIReports.cs" />
+    <Compile Include="DAL\Clinical\DALAllergies.cs" />
+    <Compile Include="DAL\Clinical\DALBirthHistory.cs" />
+    <Compile Include="DAL\Clinical\DALCDS.cs" />
+    <Compile Include="DAL\Clinical\DALClinicalMenuSettings.cs" />
+    <Compile Include="DAL\Clinical\DALComplaint.cs" />
+    <Compile Include="DAL\Clinical\DALFaceSheet.cs" />
+    <Compile Include="DAL\Clinical\DALFamilyHx.cs" />
+    <Compile Include="DAL\Clinical\DALFields.cs" />
+    <Compile Include="DAL\Clinical\DALHistorySummary.cs" />
+    <Compile Include="DAL\Clinical\DALHospitalizationHx.cs" />
+    <Compile Include="DAL\Clinical\DALLetter.cs" />
+    <Compile Include="DAL\Clinical\DALLetterFields.cs" />
+    <Compile Include="DAL\Clinical\DALMedicalHx.cs" />
+    <Compile Include="DAL\Clinical\DALMedications.cs" />
+    <Compile Include="DAL\Clinical\DALNotes.cs" />
+    <Compile Include="DAL\Clinical\DALRadiologyOrder.cs" />
+    <Compile Include="DAL\Clinical\DALRadiologyResult.cs" />
+    <Compile Include="DAL\Clinical\DALReviewofSystems.cs" />
+    <Compile Include="DAL\Clinical\DALrosDataTemplate.cs" />
+    <Compile Include="DAL\Clinical\DALSocPsyandBehaviorHx.cs" />
+    <Compile Include="DAL\Clinical\OrderSet\DALOS_LabOrder.cs" />
+    <Compile Include="DAL\Clinical\OrderSet\DALOS_Immunization.cs" />
+    <Compile Include="DAL\Clinical\OrderSet\DALOS_Medication.cs" />
+    <Compile Include="DAL\Clinical\OrderSet\DALOS_ProblemLists.cs" />
+    <Compile Include="DAL\Clinical\OrderSet\DALOS_ProcedureOrder.cs" />
+    <Compile Include="DAL\Clinical\OrderSet\DALOS_Procedures.cs" />
+    <Compile Include="DAL\Clinical\OrderSet\DALOS_RadiologyOrder.cs" />
+    <Compile Include="DAL\Clinical\Patient\DALPatientBreakGlass.cs" />
+    <Compile Include="DAL\CQM\DALCQM.cs" />
+    <Compile Include="DAL\CQM\DALCQMTest.cs" />
+    <Compile Include="DAL\Clinical\DALLOrthopedic.cs" />
+    <Compile Include="DAL\ERA\EOBManualPostingDAL.cs" />
+    <Compile Include="DAL\iTrack\DALiTrack.cs" />
+    <Compile Include="DAL\MU\DALMUAlerts.cs" />
+    <Compile Include="DAL\Patient\DALPatientCustomForm.cs" />
+    <Compile Include="DAL\Patient\DALPatientReferral.cs" />
+    <Compile Include="DAL\Patient\DALPatientTemplateLetter.cs" />
+    <Compile Include="DAL\Clinical\DALPhysicalExam.cs" />
+    <Compile Include="DAL\Clinical\DALPhysicalExamTemplate.cs" />
+    <Compile Include="DAL\Clinical\DALPogressNote.cs" />
+    <Compile Include="DAL\Clinical\DALProblemLists.cs" />
+    <Compile Include="DAL\Clinical\DALQuestionGroup.cs" />
+    <Compile Include="DAL\Clinical\DALQuestions.cs" />
+    <Compile Include="DAL\Clinical\DALReviewofSystem.cs" />
+    <Compile Include="DAL\Clinical\DALReviewofSystemTemplate.cs" />
+    <Compile Include="DAL\Clinical\DALSection.cs" />
+    <Compile Include="DAL\Clinical\DALSocialHistory.cs" />
+    <Compile Include="DAL\Clinical\DALSurgicalHx.cs" />
+    <Compile Include="DAL\Clinical\DALTemplate.cs" />
+    <Compile Include="DAL\Admin\DALTemplateLetter.cs" />
+    <Compile Include="DAL\Clinical\DALVitals.cs" />
+    <Compile Include="DAL\Document\DALDocument.cs" />
+    <Compile Include="DAL\Document\DALMedicalDocument.cs" />
+    <Compile Include="DAL\ERA\DALERA.cs" />
+    <Compile Include="DAL\FollowUp\DALFollowUpSplitClaim.cs" />
+    <Compile Include="DAL\FollowUp\DALInsuranceAR.cs" />
+    <Compile Include="DAL\FollowUp\DALFollowUpARCall.cs" />
+    <Compile Include="DAL\FollowUp\DALPatientAR.cs" />
+    <Compile Include="DAL\PatientPortal\DALPatientPortal.cs" />
+    <Compile Include="DAL\PatientStatement\DALPatientStatement.cs" />
+    <Compile Include="DAL\Patient\DALActivityLog.cs" />
+    <Compile Include="DAL\Patient\DALAdvanceDirective.cs" />
+    <Compile Include="DAL\Patient\DALEmployer.cs" />
+    <Compile Include="DAL\Patient\DALGuarantor.cs" />
+    <Compile Include="DAL\Patient\DALLawyer.cs" />
+    <Compile Include="DAL\Message\DALMessage.cs" />
+    <Compile Include="DAL\Patient\DALPatient.cs" />
+    <Compile Include="DAL\Patient\DALPatientAuthorization.cs" />
+    <Compile Include="DAL\Patient\DALPatientDocument.cs" />
+    <Compile Include="DAL\Patient\DALPatientEmergencyContact.cs" />
+    <Compile Include="DAL\Patient\DALPatientFamily.cs" />
+    <Compile Include="DAL\Patient\DALPatientInsurance.cs" />
+    <Compile Include="DAL\Patient\DALPatientLedger.cs" />
+    <Compile Include="DAL\Patient\DALPatientReferrals.cs" />
+    <Compile Include="DAL\Patient\DALSchool.cs" />
+    <Compile Include="DAL\Payment\DALAdvancePayment.cs" />
+    <Compile Include="DAL\Payment\DALPayment.cs" />
+    <Compile Include="DAL\Payment\DALPaymentBatch.cs" />
+    <Compile Include="DAL\PQRS\DALMeasureIndividual.cs" />
+    <Compile Include="DAL\PQRS\DALMeasureGroup.cs" />
+    <Compile Include="DAL\PQRS\DALPQRSexport.cs" />
+    <Compile Include="DAL\PQRS\DALPQRSReports.cs" />
+    <Compile Include="DAL\Rcopia\DLLRcopia.cs" />
+    <Compile Include="DAL\ReportHeader\DALReportHeader.cs" />
+    <Compile Include="DAL\Reports\DALReports.cs" />
+    <Compile Include="DAL\Schedule\DALAppointmentStatus.cs" />
+    <Compile Include="DAL\Schedule\DALBlockHours.cs" />
+    <Compile Include="DAL\Schedule\DALHolidays.cs" />
+    <Compile Include="DAL\Admin\DALBasicFeeGroup.cs" />
+    <Compile Include="DAL\Admin\DALBasicFeeSchedule.cs" />
+    <Compile Include="DAL\Admin\DALCityStateZip.cs" />
+    <Compile Include="DAL\Admin\DALClearingHouse.cs" />
+    <Compile Include="DAL\Admin\DALCPTCode.cs" />
+    <Compile Include="DAL\Admin\DALEDIClaimStatusInsurance.cs" />
+    <Compile Include="DAL\Admin\DALEDIEligibilityInsurance.cs" />
+    <Compile Include="DAL\Admin\DALEDIReceiverSetup.cs" />
+    <Compile Include="DAL\Admin\DALEDIReceiverX12Setup.cs" />
+    <Compile Include="DAL\Admin\DALEDISubmitInsurance.cs" />
+    <Compile Include="DAL\Admin\DALEDITaxIDSetup.cs" />
+    <Compile Include="DAL\Admin\DALFeeGroup.cs" />
+    <Compile Include="DAL\Admin\DALFeeGroupPOSSchedule.cs" />
+    <Compile Include="DAL\Admin\DALFeeGroupProceduralSchedule.cs" />
+    <Compile Include="DAL\Admin\DALICD.cs" />
+    <Compile Include="DAL\Admin\DALInsurance.cs" />
+    <Compile Include="DAL\Admin\DALInsurancePlan.cs" />
+    <Compile Include="DAL\Admin\DALLedgerAccount.cs" />
+    <Compile Include="DAL\Admin\DALMiscellaneousLookups.cs" />
+    <Compile Include="DAL\Admin\DALModifier.cs" />
+    <Compile Include="DAL\Admin\DALModulesForms.cs" />
+    <Compile Include="DAL\Admin\DALPLaceOfService.cs" />
+    <Compile Include="DAL\Admin\DALPlanCategory.cs" />
+    <Compile Include="DAL\Admin\DALPlanFeeLink.cs" />
+    <Compile Include="DAL\Admin\DALPrivilegeGroup.cs" />
+    <Compile Include="DAL\Admin\DALProcedureCategory.cs" />
+    <Compile Include="DAL\Admin\DALReferringProvider.cs" />
+    <Compile Include="DAL\Admin\DALRevenueCode.cs" />
+    <Compile Include="DAL\Admin\DALSubmitterSetup.cs" />
+    <Compile Include="DAL\Admin\DALTypeOfService.cs" />
+    <Compile Include="DAL\Schedule\DALProviderSchedule.cs" />
+    <Compile Include="DAL\Schedule\DALReasons.cs" />
+    <Compile Include="DAL\Schedule\DALResourceSchedule.cs" />
+    <Compile Include="DAL\Schedule\DALScheduleGroups.cs" />
+    <Compile Include="DAL\Schedule\DALVisitTypeDurationGroup.cs" />
+    <Compile Include="DAL\Settings\DALDashBoard.cs" />
+    <Compile Include="DAL\Treatment\DAL_Treatment.cs" />
+    <Compile Include="DAL\Visits\DALVisits.cs" />
+    <Compile Include="DCommon\ClientConfiguration.cs" />
+    <Compile Include="DCommon\Common.cs" />
+    <Compile Include="DCommon\DALUsersActivity.cs" />
+    <Compile Include="DCommon\DataProvider.cs" />
+    <Compile Include="DCommon\DBActivityAudit.cs" />
+    <Compile Include="DCommon\DBManager.cs" />
+    <Compile Include="DCommon\IDBManager.cs" />
+    <Compile Include="DCommon\ParamDirection.cs" />
+    <Compile Include="DAL\Admin\DALModuleFormUsers.cs" />
+    <Compile Include="DAL\Admin\DALModuleFormUsersPrivileges.cs" />
+    <Compile Include="DAL\Admin\DALSecurityRolesAdmin.cs" />
+    <Compile Include="DAL\Admin\DALBillingProviderSettings.cs" />
+    <Compile Include="DAL\Admin\DALCodes.cs" />
+    <Compile Include="DAL\Admin\DALCustomers.cs" />
+    <Compile Include="DAL\Admin\DALEntity.cs" />
+    <Compile Include="DAL\Admin\DALLogin.cs" />
+    <Compile Include="DAL\Admin\DALpersonnel.cs" />
+    <Compile Include="DAL\Admin\DALpersonnelAddress..cs" />
+    <Compile Include="DAL\Admin\DALFacility.cs" />
+    <Compile Include="DAL\Admin\DALPractice.cs" />
+    <Compile Include="DAL\Admin\DALProvider.cs" />
+    <Compile Include="DAL\Admin\DALResources.cs" />
+    <Compile Include="DAL\Admin\DALRoles.cs" />
+    <Compile Include="DAL\Admin\DALSpecialty.cs" />
+    <Compile Include="DAL\Admin\DALUser.cs" />
+    <Compile Include="DAL\Admin\example.cs" />
+    <Compile Include="Helpers\DALHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MDVision.Common\MDVision.Common.csproj">
+      <Project>{4c43925d-c035-4657-974b-9d0bc50e884e}</Project>
+      <Name>MDVision.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.Dataset\MDVision.Datasets.csproj">
+      <Project>{915677DB-0C5D-4DAD-9A1E-82A20712B4AF}</Project>
+      <Name>MDVision.Datasets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.EDIParser\EDIParser.csproj">
+      <Project>{483d8955-caeb-4838-acd5-67e90834461c}</Project>
+      <Name>EDIParser</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

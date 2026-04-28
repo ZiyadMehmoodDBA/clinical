@@ -1,0 +1,102 @@
+﻿<div id="POSFeeScheduleDetail">
+    <div id="actionPanPOSFeeScheduleDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="POSFeeScheduleDetail.UnLoad();"><span class=" red" >&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Fee Group Plan CPT POS</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblPOSFeeScheduleDetail" class="col-sm-12">
+                    <form method="post" onsubmit="return false" id="frmPOSFeeScheduleDetail">
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Fee Group<span class="required">*</span></label>
+                                <select id="ddlFeeGroup" class="form-control" onchange="POSFeeScheduleDetail.LoadEntityBasedData()" ddlist="GetFeeGroup" name="FeeGroup"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Plan Fee Link<span class="required">*</span></label>
+                                <select id="ddlPlanFeeLink" class="form-control" ddlist="GetPlanFeeLink" name="PlanFeeLink"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label" for="Fee">Fee<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input type="text" class="form-control" onkeypress="utility.ValidateDecimal(event,2)" id="txtFee" name="Fee" maxlength="8" placeholder="99999.99">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label" for="Fee">Expected Fee</label>
+                                <div class=" input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input type="text" class="form-control" onkeypress="utility.ValidateDecimal(event,2)" id="txtExpectedFee" name="ExpectedFee" maxlength="8" placeholder="99999.9">
+                                </div>
+                            </div>
+                            
+                           
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Place Of Service<span class="required">*</span></label>
+                                <select id="ddlPOSCode" class="form-control" ddlist="GetPlaceOfService" name="PlaceOfService"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">CPT Code<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtCPTCode" type="text" placeholder="99999" maxlength="5" name="CPTCode" oninput="POSFeeScheduleDetail.BindAutoComplete(this)" onblur="POSFeeScheduleDetail.POSFeeScheduleValidateCode(this);" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-xs " type="button" onclick="POSFeeScheduleDetail.OpenCPTCode();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="AuthorizationRequired" id="chkAuthorizationRequired">
+                                    <label class="control-label" for="chkAuthorizationRequired">Prior Authorization Number Required</label>
+                                </div>
+                            </div>
+                            <div class=" col-xs-1 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 pad-a-labelsize-btn pull-right">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                                <!--<button id="btnHistoryPOSFeeSchedule" class="btn btn-primary btn-sm rightbtn" type="button" onclick="POSFeeScheduleDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="hfCPTCode" />
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+                <div id="pnlBFSPlanInfo">
+                    <section>
+                        <form>
+                        <div class="panel-body">
+                            <table id="dgvBFSPlanInfo" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size100">Action</th>
+                                        <th controlid="txtModifier" controlwidth="" isoptional="0" iscode="1" hfcontrolid="hfModifier" coltype="AutoComplete" autocompletemethod="Modifier" searchmethod="POSFeeScheduleDetail.OpenModifierDetail(null)">Modifier</th>
+                                        <th controlid="txtModifierFee" onkeypress="utility.ValidateNegativeDecimal(event, 2)" controlwidth="custom-width-auto" isoptional="0" coltype="textbox">Fee ($)</th>
+                                        <th controlid="txtModifierExpectedFee" onkeypress="utility.ValidateNegativeDecimal(event, 2)" controlwidth="custom-width-auto" isoptional="1" coltype="textbox">Expected Fee($)</th>
+                                        <th controlid="chkRequired" coltype="checkbox">Required</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <a href="javascript:POSFeeScheduleDetail.rowAdd()">Add Line Item</a>
+                        </div>
+                            </form>
+                    </section>
+                </div>
+
+            </div><div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+

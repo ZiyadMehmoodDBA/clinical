@@ -1,0 +1,43 @@
+﻿<div id="NoteTemplatePreview">
+    <div id="actionPanNotesTemplateView" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="NoteTemplatePreview.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Note Template Preview</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section class="panel">
+                        <form method="post" id="frmPreviewNoteTempPrint" onsubmit="return false">
+                            <div id="pnlNotes_Search">
+                                <div class="col-sm-12 col-lg-12">
+                                    <div class="col-sm-4 col-lg-2 NoteTemplate">
+                                        <label id="lblNoteTemplateView" class="control-label" for="NoteTemplate">Note Preview </label>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4 NoteTemplate">
+                                        <select class="form-control" id="NoteTemplate" name="NoteTemplate" ddlist="GetNoteTemplate" onchange="NoteTemplatePreview.LoadTemplateData(this);">
+                                            <option selected="selected" value="">-Select-</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="spacer15"></div>
+                                    <div class="panel-body" id="PrintPdfPreviewNoteTempPrint" style="display:block;">
+                                        <input type="hidden" id="helperPDF" />
+                                        <iframe id="PreviewNoteTempPrint" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12" style="height:1066px;"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+                </div>
+            </div>
+            <div id="NoteHTMLBody" style="font-size:14px !important;"></div>
+        </div>
+    </div>
+
+</div>
+
+

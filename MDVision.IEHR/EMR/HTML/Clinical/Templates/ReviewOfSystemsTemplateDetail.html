@@ -1,0 +1,103 @@
+﻿<div class="row" id="ReviewOfSystemsTemplateDetail">
+    <div id="actionPanClinicalReviewofSystems" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ReviewOfSystemsTemplateDetail.unloadReviewOfSystemsTemplateDetail();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>                <h4 class="modal-title">Add ROS Template</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmROSTemplate" onsubmit="return false;">
+                    <div id="rosTempNameSpecProvDiv">
+                        <div class="col-sm-4 col-lg-3">
+                            <label class="control-label">Template Name <span class="required">*</span></label>
+                            <input class="form-control" type="text" name="TemplateName" id="txtTemplateName">
+                        </div>
+                        <div id="entityDDL" class="col-sm-4 col-lg-3">
+                            <label class="control-label">Entity <span class="required">*</span></label>
+                            <select class="form-control" ddlist="GetEntity" id="ddlEntity" name="Entity" onchange="ReviewOfSystemsTemplateDetail.isEntitySelected();">
+                                <option selected>-Select-</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3 col-md-3" id="divNotesTemplateSpecialty">
+                            <label class="control-label">Specialty </label>
+                            <select id="ddlSpecialty" multiple="multiple" name="Specialty" class="form-control"></select>
+                        </div>
+                        <div class="col-sm-3 col-md-3" id="divNotesTemplateProvider">
+                            <select class="form-control" style="display:none;" name="hiddenPhysicalExamTemplateProvider" id="ddlHiddenNotesTemplateProvider"></select>
+                            <label class="control-label">Provider</label>
+                            <select class="form-control" multiple="multiple" name="Provider" id="ddlProvider"></select>
+                        </div>
+                       
+                    <div class="spacer10"></div>
+
+                    <div class="tab-content-featured panel-body">
+                        <div class="col-sm-12 col-md-4">
+                            <div id="divReviewofSystemsSystems" class="panel panel-featured">
+                                <header class="panel-heading">
+                                <h2 class="panel-title pull-left">System</h2>
+                                 <button class="pull-right btn btn-success btn-xs" id="btn-addSys" type="button" onclick="ReviewOfSystemsTemplateDetail.renameSystem(false, this)"><i class="fa fa-plus-circle"></i></button>
+                                <div class="clearfix"></div>
+                                </header>
+                                <div class="panel-body pl-none pr-none" id="divROSSystemsUL">
+                                    <ul id="ROSSystemsUL" class="listPrimaryPad listTwoColumn height-max330 height330 own-scroll"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-8">
+                            <div class="panel panel-featured">
+                                <header class="panel-heading">
+                                    <h2 class="panel-title pull-left">Characteristics </h2>
+                                    <button class="btn btn-success btn-xs pull-right" id="btn-addChac" type="button" onclick="ReviewOfSystemsTemplateDetail.renameCharacteristics(false, this)"><i class="fa fa-plus-circle"></i></button>
+                                    <div class="clearfix"></div>
+                                </header>
+                                <div id="divROSSystemsCharacteristics" class="panel-body pl-xxs pr-xxs">
+                                    <ul id="ROSSystemsCharacteristicsUL" class="listPrimary height-max330 height330 own-scroll"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/end of tab-featured-->
+
+                    <div class="pull-right pt-md pr-default">
+                        <!--<button class="btn btn-sm" type="button" id="btnReset" onclick="ReviewOfSystemsTemplateDetail.resetRosTemplate();"><i class="fa fa-refresh"></i> Reset</button>-->
+                        <button class="btn btn-success btn-sm" type="button" id="btnSaveAs" onclick="ReviewOfSystemsTemplateDetail.showRosTemplateSaveAs('#ReviewOfSystemsTemplateDetail #actionPanClinicalReviewofSystems');">Save As</button>
+                        <button class="btn btn-success btn-sm" type="submit" id="btnSave">Save</button>
+                    </div>
+
+                    <input type="hidden" id="hfIsFormHasChange" value=""/>
+                </form>
+                <div class="spacer15"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/Add ROS Template-->
+
+<!--Panel to show linked appointment in Notes Forum-->
+<div id="ReviewOfSystemsTemplateDetail_SaveAs" style="display: none;">
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" id="unload_LinkAppointment_btn" class="close" onclick="ReviewOfSystemsTemplateDetail.unloadReviewOfSystemsTemplateDetailSaveAs();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Enter Template Name</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmROSTemplateSaveAs" onsubmit="return false;">
+                    
+                    <div class="col-sm-12 col-lg-10">
+                        <label class="control-label">Template Name <span class="required">*</span></label>
+                        <input class="form-control" type="text" name="TemplateNameSaveAs" id="txtTemplateNameSaveAs" placeholder="-Template name is required-">
+                    </div>
+                        <div class="pull-right pt-md pr-default">
+                           <button class="btn btn-success btn-sm" type="submit" id="btnSaveAS" >Save</button>
+                        </div>
+                        
+                </form>
+                <div class="spacer15"></div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

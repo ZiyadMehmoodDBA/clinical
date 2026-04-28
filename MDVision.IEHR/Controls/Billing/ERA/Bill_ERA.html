@@ -1,0 +1,182 @@
+﻿<div class="row" id="pnlBillERA" style="display:none;">
+    <div id="actionPanBillERA" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display: none;">
+                <button type="button" class="close" onclick="Bill_ERA.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">ERA Charge</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Bill_ERA.Download_ERA();"><i class="fa fa-download"></i> Download ERA</button>
+                    <div class="spacer10"></div>
+                    <div class="clearfix"></div>
+
+                    <section class="panel panel-featured">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="closebtn pull-right" onclick="Bill_ERA.UnLoadTab();"></a>
+                            </div>
+                            <h2 class="panel-title">ERA Search</h2>
+                        </header>
+                        <div class="panel-body" id="pnlBillERA_Search">
+                            <form id="frmBillERA" method="post" onsubmit="return false">
+                                <div id="divSearchERA" class="form-group">
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Clearinghouse">Clearinghouse</label>
+                                        <select id="ddlClearingHouse" name="ClearingHouse" class="form-control" ddlist="GetClearingHouse"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="PayerName">Payer Name</label>
+                                        <input class="form-control" id="txtPayerName" name="PayerName" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="CheckNumber">Check Number</label>
+                                        <input class="form-control" id="txtCheckNumber" name="CheckNumber" type="text">
+                                    </div>
+                                    <!--<div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Facility">Facility</label>
+                                        <select id="ddlFacility" class="form-control" ddlist="GetFacility"></select>
+                                    </div>-->
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display: none;" href="#" onclick="Bill_ERA.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Bill_ERA.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Practice">Practice</label>
+                                        <select id="ddlPractice" class="form-control" ddlist="GetPractice"></select>
+                                    </div>-->
+
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="PayeeName">Payee Name</label>
+                                        <select class="form-control" id="ddlPayeeName" name="PayeeName" ddlist="GetERAPayee"></select>
+                                    </div>
+
+                                    <!--<div class="col-sm-3 col-lg-2">
+                                        <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                        <a id="lnkPracticeEdit" style="display: none;" href="#" onclick="Bill_ERA.OpenPracticeDetail();" title="Edit Practice">Practice</a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtPractice" type="text" placeholder="Start typing to search" name="Practice" onblur="utility.ValidateAutoComplete(this, 'pnlBillERA #hfPractice', true);" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="Bill_ERA.OpenPractice();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <!--<div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Plan">Plan</label>
+                                        <select id="Plan" class="form-control">
+                                            <option value="" selected="selected">-Select-</option>
+                                            <option value="P1">Practice 1</option>
+                                            <option value="P2">Practice 2</option>
+                                        </select>
+                                    </div>-->
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Status">Status</label>
+                                        <select id="ddlStatus" class="form-control" name="Status" ddlist="GetERAStatus"></select>
+                                    </div>
+                                    <div class="hidden-sm hidden-md"><div class="clearfix"></div></div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="From Entry Date">From Entry Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="dpFrmEntryDate" name="FromEntryDate" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="To Entry Date">To Entry Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="dpToEntryDate" name="ToEntryDate" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <!--//PRD-281 by:MAHMAD-->
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Check Amount">Check Amount</label>
+                                        <input class="form-control" id="txtCheckAmount" name="CheckAmount" type="number">
+                                    </div>
+                                    <!--//PRD-281 by:MAHMAD-->
+                                    <div class="col-sm-3 col-md-2 pull-right mt-md">                                        
+                                        <button id="btnSearchERA" class="btn btn-primary btn-sm rightbtn" onclick="Bill_ERA.ERASearch();" type="button">Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnResetERA" type="button" onclick="Bill_ERA.Bill_ERAReset();">Reset</button>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="spacer10"></div>
+                                <input type="hidden" name="FacilityID" id="hfFacility" />
+                                <input type="hidden" name="PracticeID" id="hfPractice" />
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlBillERA_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body panel-featured">
+                                <input type="hidden" id="BillERA_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvBillERA">
+                                    <thead>
+                                        <tr>
+                                            <th style="display: none;">AppointmentId</th>
+                                            <th class="size-min90">Action</th>
+                                            <th class="size-min140">Payer Name</th>
+                                            <th>Check #</th>
+                                            <th class="noWordBreak">Check Amount</th>
+                                            <th class="noWordBreak">Applied Amount</th>
+                                            <th class="noWordBreak">Posted Amount</th>
+                                            <th>Status</th>
+                                            <th class="noWordBreak">Payee Name</th>
+                                            <th class="noWordBreak">Clearing House</th>
+                                            <th class="size90">Not Linked Charges</th>
+                                            <th class="size90">Linked Recoupment Charges</th>
+                                            <th class="noWordBreak">Entry Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divERAPaging">
+                                 </div>                               
+
+                                <div id="divERATotalAmount" class="col-sm-8" style="margin-top:-31px;padding-left: 442px;display:none;">
+
+
+                                  <label class="control-label bold " for="Amount">Total Check Amount : <span id="totalAmt"></span></label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                  <label class="control-label bold " for="Amount">Total Posted Amount : <span id="totalPostedAmt"></span></label>
+
+
+                                </div>
+
+                            </div>
+                            
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+    });
+</script>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSFamilyHxLookup" targetNamespace="http://tempuri.org/DSFamilyHxLookup.xsd" xmlns:mstns="http://tempuri.org/DSFamilyHxLookup.xsd" xmlns="http://tempuri.org/DSFamilyHxLookup.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="MDVisionConnectionString3" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="MDVisionConnectionString3 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.MDVision.Datasets.Properties.Settings.GlobalReference.Default.MDVisionConnectionString3" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSFamilyHxLookup" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSFamilyHxLookup" msprop:Generator_UserDSName="DSFamilyHxLookup">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FamilyHx_FamilyMember" msprop:Generator_TableClassName="FamilyHx_FamilyMemberDataTable" msprop:Generator_TableVarName="tableFamilyHx_FamilyMember" msprop:Generator_RowChangedName="FamilyHx_FamilyMemberRowChanged" msprop:Generator_TablePropName="FamilyHx_FamilyMember" msprop:Generator_RowDeletingName="FamilyHx_FamilyMemberRowDeleting" msprop:Generator_RowChangingName="FamilyHx_FamilyMemberRowChanging" msprop:Generator_RowEvHandlerName="FamilyHx_FamilyMemberRowChangeEventHandler" msprop:Generator_RowDeletedName="FamilyHx_FamilyMemberRowDeleted" msprop:Generator_RowClassName="FamilyHx_FamilyMemberRow" msprop:Generator_UserTableName="FamilyHx_FamilyMember" msprop:Generator_RowEvArgName="FamilyHx_FamilyMemberRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FamilyMemberId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnFamilyMemberId" msprop:Generator_ColumnPropNameInRow="FamilyMemberId" msprop:Generator_ColumnPropNameInTable="FamilyMemberIdColumn" msprop:Generator_UserColumnName="FamilyMemberId" type="xs:int" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SNOMEDId" msprop:Generator_ColumnVarNameInTable="columnSNOMEDId" msprop:Generator_ColumnPropNameInRow="SNOMEDId" msprop:Generator_ColumnPropNameInTable="SNOMEDIdColumn" msprop:Generator_UserColumnName="SNOMEDId" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FamilyHx_HealthStatus" msprop:Generator_TableClassName="FamilyHx_HealthStatusDataTable" msprop:Generator_TableVarName="tableFamilyHx_HealthStatus" msprop:Generator_RowChangedName="FamilyHx_HealthStatusRowChanged" msprop:Generator_TablePropName="FamilyHx_HealthStatus" msprop:Generator_RowDeletingName="FamilyHx_HealthStatusRowDeleting" msprop:Generator_RowChangingName="FamilyHx_HealthStatusRowChanging" msprop:Generator_RowEvHandlerName="FamilyHx_HealthStatusRowChangeEventHandler" msprop:Generator_RowDeletedName="FamilyHx_HealthStatusRowDeleted" msprop:Generator_RowClassName="FamilyHx_HealthStatusRow" msprop:Generator_UserTableName="FamilyHx_HealthStatus" msprop:Generator_RowEvArgName="FamilyHx_HealthStatusRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HealthStatusId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnHealthStatusId" msprop:Generator_ColumnPropNameInRow="HealthStatusId" msprop:Generator_ColumnPropNameInTable="HealthStatusIdColumn" msprop:Generator_UserColumnName="HealthStatusId" type="xs:int" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:FamilyHx_FamilyMember" />
+      <xs:field xpath="mstns:FamilyMemberId" />
+    </xs:unique>
+    <xs:unique name="FamilyHx_HealthStatus_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:FamilyHx_HealthStatus" />
+      <xs:field xpath="mstns:HealthStatusId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

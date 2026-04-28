@@ -1,0 +1,101 @@
+﻿<div id="pnlClinicalProviderNoteTemplate">
+    <div id="actionPanClinicalProviderNoteTemplate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div class="mainScrollPan" id="mainScrollPan">
+                <button type="button" class="btn btn-success btn-sm" onclick="Clinical_Provider_Note_Template.AddProviderNoteTemplate()"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div>
+                <div class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions"><a class="closebtn pull-right" onclick="Clinical_Provider_Note_Template.UnLoadTab()"></a></div>
+                        <h2 class="panel-title">Search Provider Note Template</h2>
+                    </header>
+                    <div class="panel-body">
+                        <form id="frmClinicalProviderNote" method="post" onsubmit="return false">
+                            <div class="col-sm-4 col-lg-4">
+                                <label class="control-label">Name</label>
+                                <input type="text" id="Name" name="Name" class="form-control" maxlength="100" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Specialty</label>
+                                <select id="ddlSpecialty" name="SpecialtyIds[]" multiple="multiple" ddlmultilist="GetSpecialty" class="form-control"></select>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <label class="control-label">Provider</label>
+                                <select id="ddlProvider" name="ProviderIds[]" multiple="multiple" ddlmultilist="GetProvider" class="form-control"></select>
+                            </div>
+
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label">Note Type</label>
+                                <select id="ddlCategory" name="CategoryId" class="form-control" ddlist="GetTemplateType"></select>
+                            </div>
+                            <div class="pull-right mt-md pr-default"><button class="btn btn-primary btn-sm" onclick="Clinical_Provider_Note_Template.ProviderNoteTemplatesSearch();">Search</button></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="spacer10"></div>
+                <!--<div class="panel-body panel-featured">
+                </div>-->
+            </div>
+
+        </div>
+    </div>
+    <div id="pnlClinicalProviderNoteTemplate_Result" style="display: inline;">
+        <form>
+            <div class="panel-body">
+                <!--<input type="hidden" id="LetterTemplate_SelectedDataKeys" />-->
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvLetterTemplate">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">LetterId</th>
+                            <th>Action</th>
+                            <th>Name</th>
+                            <th>Speciality</th>
+                            <th>Note Type</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divLetterTemplatelistPaging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

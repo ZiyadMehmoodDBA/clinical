@@ -1,0 +1,166 @@
+﻿<div class="row" id="pnlBillERAChargeSearch" style="display:none;">
+    <div id="actionPanBillERAChargeSearch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header">
+                <button class="close" type="button" onclick="ERA_ChargeSearch.UnLoad();"></button>
+                <h4 class="modal-title">Charge Search</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmERAChargeSearch" onsubmit="return false;">
+                    <div class="clearfix"></div>
+                    <div class="spacer10"></div>
+                    <div class="form-group ERAChargeformControls_div">
+
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="ClaimNumber">Claim Number</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text" />
+                                <div id="divSearchClaim" class="input-group-btn">
+                                    <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="ERA_ChargeSearch.OpenEncounter();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="CPT Code">CPT Code</label>
+                            <input id="txtCPT" class="form-control" isoptional="1" name="CPTCode" placeholder="Search Code" type="text" oninput="ERA_ChargeSearch.BindAutoComplete(this);" onblur="utility.ValidateAutoComplete(this, 'frmERAChargeSearch #hfCPT', true, 1);">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label id="lblInsurancePlan" class="control-label">Insurance Plan</label>
+                            <a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="ERA_ChargeSearch.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance Plan</a>
+                            <div class="input-group">
+                                <input class="form-control" id="txtInsurancePlan" name="InsurancePlan" placeholder="Start typing to search" type="text" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary btn-xs " type="button" onclick="ERA_ChargeSearch.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                            <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="ERA_ChargeSearch.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                            <div class="input-group">
+                                <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                <div class="input-group-btn">
+                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="ERA_ChargeSearch.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Patient Account">Patient Account</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtPatientName" name="PatientAccount" type="text" />
+                                <div id="divSearchPatient" class="input-group-btn">
+                                    <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="ERA_ChargeSearch.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Last Name</label>
+                            <input class="form-control" id="txtLastName" name="LastName" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">First Name</label>
+                            <input class="form-control" id="txtFirstName" name="FirstName" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="DOSFrom">DOS From</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input class="form-control" type="text" name="DOSFrom" id="dpDOSfrm" data-plugin-datepicker="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="DOSTo">DOS To</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input class="form-control" type="text" name="DOSTo" id="dpDOSto" data-plugin-datepicker="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label id="lblProvider" class="control-label">Provider</label>
+                            <a id="lnkProviderEdit" style="display:none;" href="#" onclick="ERA_ChargeSearch.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" />
+                                <div class="input-group-btn">
+                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="ERA_ChargeSearch.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Amount Received">Claim Type</label>
+                            <select id="ddlClaimType" name="ClaimType" class="form-control">
+                                <option value="" selected="selected">All</option>
+                                <option value="0">Primary</option>
+                                <option value="1">Secondary</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 col-lg-2 pad-a-labelsize">
+                            <div class="checkbox-custom">
+                                <input type="checkbox" id="chkIncludeVoidedClaims" name="IncludeVoidedClaims">
+                                <label for="IncludeVoidedClaims" class="control-label">Include Voided Claims</label>
+                            </div>
+                        </div>
+                        <!--<div class="col-sm-3 col-lg-2 pull-right mt-md mb-md">
+
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnBillChargeSearch" type="submit">Search</button>
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnSearchReset" type="button" onclick="Bill_ClaimSubmission.BillClaimSubmissionReset();">Reset</button>
+                        </div>-->
+                        <div class="col-xs-2 col-sm-2 pull-right pad-a-labelsize-btn">
+                            <button class="btn btn-primary btn-sm rightbtn" onclick="ERA_ChargeSearch.Bill_ERAChargeSearch();">Search</button>
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnSearchReset" type="button" onclick="ERA_ChargeSearch.ERAChargeReset();">Reset</button>
+                        </div>
+                    </div>
+                    <div class="spacer10"></div>
+                    <div class="ERAChargeformControls_div">
+                        <input type="hidden" name="PatientID" id="hfPatientId" value="-1" />
+                        <input type="hidden" name="VisitID" id="hfVisitId" value="-1" />
+                        <input type="hidden" name="InsurancePlanID" id="hfInsurancePlan" />
+                        <input type="hidden" name="FacilityID" id="hfFacility" value="-1" />
+                        <input type="hidden" name="ProviderID" id="hfProvider" value="-1" />
+                        <input type="hidden" name="CPTID" id="hfCPT" value="-1" />
+                    </div>
+                </form>
+
+                <div id="pnlERACharge_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+
+                            <div class="col-xs-2 pl-xxs pr-none">
+                                <span class="color-reference-box bg-info"></span>
+                                <label class="control-label " for="color-reference-box">Primary Charge</label>
+                            </div>
+                            <div class="col-xs-2 pl-xxs pr-none">
+                                <span class="color-reference-box" style="background: #FF6A6A"></span>
+                                <label class="control-label " for="color-reference-box">Negative Charge</label>
+                            </div>
+                            <div class="col-xs-2 pl-xxs pr-none">
+                                <span class="color-reference-box" style="background: #ffff8c"></span>
+                                <label class="control-label " for="color-reference-box">Voided Charge</label>
+                            </div>
+                            <input type="hidden" id="BillCharge_SelectedDataKeys" />
+                            <!--<div class="table-responsive">-->
+                            <table class="table table-bordered table-condensed table-hover mb-none" id="dgvERACharge">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">BillChargeId</th>
+                                        <th class="size-max50">Action </th>
+                                        <th class="noWordBreak">Account</th>
+                                        <th class="noWordBreak size-min120">Patient Name</th>
+                                        <th class="noWordBreak">Insurance Plan</th>
+                                        <th class="noWordBreak">CPT</th>
+                                        <th class="noWordBreak">Plan Balance</th>
+                                        <th class="noWordBreak">Claim Number</th>
+                                        <th class="noWordBreak">Submit Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <!--</div>-->
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿<div id="pnlPatientMessageAlert">
+    <div id="actionPanPatientMessageAlert" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_MessageAlert.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Patient Alerts</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <form method="post" onsubmit="return false" id="frmPatientMessageAlert">
+                        <div id="divPatientAlerts" class="col-md-12">
+                            <div  class="toggle" data-plugin-toggle data-plugin-options='{ "isAccordion": true }'>
+                                <div id="divAlertClinical" style="display:none">
+                                    <section class="toggle active">
+                                        <label id="lblClinicalAlert">Patient has clinical alert(s)</label>
+                                        <div class="toggle-content">
+                                            <div id="pnlClinicalAlert_Result" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body">
+                                                        <input type="hidden" id="ClinicalAlert_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvClinicalAlert">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">AlertId</th>
+                                                                    <th class="size100">Action</th>
+                                                                    <th>Message</th>
+                                                                    <th>Status</th>
+                                                                    <th class="size100">Entry Date</th>
+                                                                    <th>User</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                           
+                                <div id="divAlertFinancial" style="display:none">
+                                    <section class="toggle">
+                                        <label id="lblFinancialAlert">Patient has financial alert(s)</label>
+                                        <div class="toggle-content">
+                                            <div id="pnlFinancialAlert_Result" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body">
+                                                        <input type="hidden" id="FinancialAlert_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvFinancialAlert">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">AlertId</th>
+                                                                    <th class="size100">Action</th>
+                                                                    <th>Message</th>
+                                                                    <th>Status</th>
+                                                                    <th class="size100">Entry Date</th>
+                                                                    <th>User</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spacer20"></div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="ddlType" />
+                        <input type="hidden" id="ddlStatus" />
+                        <input type="hidden" id="dtpCalledDate" />
+                        <input type="hidden" id="dtpEntryDate"/>
+                        <input type="hidden" id="hfPatientId" value="" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+    });
+</script>

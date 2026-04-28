@@ -1,0 +1,362 @@
+﻿<div class="row" id="pnlBillChargeSearch" style="display:none;">
+    <div id="actionPanBillChargeSearch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog" id="containerModalDialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Bill_ChargeSearch.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Charge</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Bill_ChargeSearch.OpenPatientSearchForClaim();"><i class="fa fa-plus-circle"></i> Create New Claim</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Bill_ChargeSearch.UnLoadTab();"></a>
+
+                                </div>
+                                <h2 class="panel-title">Search Charge </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlBillCharge_Search">
+                            <form class="form-bordered" id="frmChargeSearch" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <!--    //Begin Added by Azeem Raza Tayyab on 29-Apr-2016 for the changes related to Bug#:PMS-4685-->
+                                    <div class="pl-xs pr-xs pull-left">
+                                        <a class="btn btn-success btn-xs" onclick="Bill_ChargeSearch.Scrub_Claims();"><i class="glyphicon glyphicon-filter"></i> Scrub Claims</a>
+                                        <a class="btn btn-success btn-xs" onclick="Bill_ChargeSearch.OpenSubmitStatusWindow();"><i class="glyphicon"></i> Update Status</a>
+                                        <a class="btn btn-success btn-xs" onclick="Bill_ChargeSearch.OpenAddNoteCommentsWindow();"><i class="fa fa-plus-square glyphicon"></i> Note</a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <!--    //End Added by Azeem Raza Tayyab on 29-Apr-2016 for the changes related to Bug#:PMS-4685-->
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Patient Account">Patient Account</label>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtPatientName" name="PatientAccount" type="text" />
+                                            <div id="divSearchPatient" class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Bill_ChargeSearch.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Last Name</label>
+                                        <input class="form-control ValidateCriteria" id="txtLastName" name="LastName" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">First Name</label>
+                                        <input class="form-control ValidateCriteria" id="txtFirstName" name="FirstName" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Bill_ChargeSearch.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Bill_ChargeSearch.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblProvider" class="control-label">Provider</label>
+                                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Bill_ChargeSearch.OpenProviderDetail('frmChargeSearch #hfProvider', 'txtProvider');" title="Edit Provider">Provider</a>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control ValidateCriteria" id="txtProvider" name="Provider" placeholder="Start typing to search" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Bill_ChargeSearch.OpenProvider('Search Provider', 'frmChargeSearch #txtProvider', 'frmChargeSearch #hfProvider', 'frmChargeSearch #lblProvider', 'frmChargeSearch #lnkProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--<div class="visible-sm">
+                                        <div class="clearfix"></div>
+                                    </div>-->
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Case Number">Claim Number</label>
+                                        <input class="form-control ValidateCriteria" id="txtClaimno" name="ClaimNumber" type="text">
+                                    </div>
+
+                                    <!--<div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Case Number">Claim Number</label>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtClaimno" name="ClaimNumber" type="text" onblur="utility.ValidateAutoComplete(this, null, true);" oninput="Bill_ChargeSearch.BindClaimNumber();">
+                                            <div id="divSearchClaim" class="input-group-btn">
+                                                <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="Bill_ChargeSearch.OpenEncounter();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <!--<div class="hidden-sm">
+                                        <div class="clearfix"></div>
+                                    </div>-->
+
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">DOS From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="DOSFrom" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dpDOSfrm" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">DOS To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="DOSTo" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dpDOSto" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2 User" id="CreatedbyDiv">
+                                        <label class="control-label">Created By</label>
+                                        <select class="form-control ValidateCriteria" id="ddlCreatedBy" name="CreatedBy" ddlist="GetUsersFullName"></select>
+                                    </div>
+                                    <!--<div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Insurance Plan</label>
+                                        <select id="ddlInsurancePlan" class="form-control" ddlist="GetInsurancePlan"></select>
+                                    </div>-->
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblInsurancePlan" class="control-label">Insurance Plan</label>
+                                        <a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="Bill_ChargeSearch.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance Plan</a>
+                                        <div class="input-group">
+
+                                            <input class="form-control ValidateCriteria" id="txtInsurancePlan" name="InsurancePlan" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Bill_ChargeSearch.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblResourceProvider" for="ResourceProvider" class="control-label">Resource Provider</label>
+                                        <a id="lnkResourceProviderEdit" style="display:none;" href="#" onclick="Bill_ChargeSearch.OpenProviderDetail('frmChargeSearch #hfResourceProvider', 'txtResourceProvider');" title="Edit Ref Provider">Resource Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtResourceProvider" name="ResourceProvider" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkResourceProvider" class="btn btn-primary btn-xs " type="button" onclick="Bill_ChargeSearch.OpenProvider('Search Resource Provider', 'frmChargeSearch #txtResourceProvider', 'frmChargeSearch #hfResourceProvider', 'frmChargeSearch #lblResourceProvider', 'frmChargeSearch #lnkResourceProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2 LoadZero">
+                                        <label class="control-label">Paid</label>
+                                        <select id="ddlPaid" class="form-control ValidateCriteria" name="Paid">
+                                            <option value="All" selected="selected">All</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 size-min120">
+                                        <label class="control-label" for="ClaimType">Claim Type</label>
+                                        <select id="ddlClaimType" class="form-control ValidateCriteria" name="ClaimType">
+                                            <option value="" selected="selected">All</option>
+                                            <option value="1">Professional Medical</option>
+                                            <option value="2">Institutional</option>
+                                            <option value="4">Professional Anesthesia</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="ClaimErroredId">Errored Claims</label>
+                                        <select id="ddlClaimErrored" class="form-control ValidateCriteria" name="ClaimErroredId">
+                                            <option selected="selected" value="">All</option>
+                                            <option value="0">Clean Claims</option>
+                                            <option value="1">Errored Claims</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2 LoadZero">
+                                        <label class="control-label">Status</label>
+                                        <select id="ddlSubmitStatus" class="form-control ValidateCriteria" name="SubmitStatus"></select>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2 LoadZero">
+                                        <label class="control-label">Charge Status</label>
+                                        <select id="ddlChargeStatus" class="form-control ValidateCriteria" name="ChargeStatus">
+                                            <option value="" selected="selected">- Select -</option>
+                                            <option value="Regular">Regular</option>
+                                            <option value="Submitted">Submitted</option>
+                                            <option value="ReSubmit">ReSubmit</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Claim Created From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="DateClaimCreatedFrom" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dtpClaimCreatedFrom" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Claim Created To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="DateClaimCreatedTo" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dtpClaimCreatedTo" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Encounter Sign Off Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="EncounterSignOffDate" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dtpEncounterSignOffDate" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Imported Date From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="ImportedOnFrom" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dtpImportedDateFrom" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Imported Date To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="ImportedOnTo" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dtpImportedDateTo" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Submitted Date From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="SubmittedDateFrom" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dtpSubmittedDateFrom" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Submitted Date To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="SubmittedDateTo" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dtpSubmittedDateTo" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Voided Claim</label>
+                                        <select id="ddlVoidedClaim" class="form-control">
+                                            <option value="All" selected="selected">All</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>-->
+                                    <div class="col-sm-1 col-lg-2 LoadZero">
+                                        <label class="control-label">Hold</label>
+                                        <select id="ddlHold" class="form-control ValidateCriteria" name="Hold">
+                                            <option value="All" selected="selected">All</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                    <!-- include secondary claims -->
+                                    <!--<div class="col-sm-2 col-lg-2 pad-a-labelsize">
+                                        <div class="checkbox-custom">
+                                            <input type="checkbox" id="chkIncludeSecondaryClaim" name="IncludeSecondaryClaim">
+                                            <label for="IncludeSecondaryClaim" class="control-label">Include Secondary Claim</label>
+                                        </div>
+                                    </div>-->
+                                    <!--  -->
+                                    <!-- Include Voided Claims -->
+                                    <div class="col-sm-2 col-lg-2 pad-a-labelsize">
+                                        <div class="checkbox-custom">
+                                            <input type="checkbox" id="chkIncludeVoidedClaims" name="IncludeVoidedClaims">
+                                            <label for="IncludeVoidedClaims" class="control-label">Include Voided Claims</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-2" id="EncounterTypeDiv">
+                                        <label class="control-label" for="ddlEncounterType">Encounter Type</label>
+                                        <select class="form-control ValidateCriteria" id="ddlEncounterType" name="EncounterType" ddlist="GetEncounterType"></select>
+                                    </div>
+                                    <!--  -->
+                                    <div class="col-sm-3 col-md-2 pull-right mt-md mb-md">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnBillChargeSearch" type="button" onclick="Bill_ChargeSearch.ValidateSearchCriteria();">Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnBillChargeReset" type="button" onclick="Bill_ChargeSearch.BillChargeReset();">Reset</button>
+                                    </div>
+
+                                    <input type="hidden" id="hfInsurancePlan" name="InsurancePlanId" />
+                                    <input type="hidden" id="hfFacility" value="-1" name="FacilityId" />
+                                    <input type="hidden" id="hfProvider" value="-1" name="ProviderId" />
+                                    <input type="hidden" id="hfPatientId" value="-1" name="PatientId" />
+                                    <input type="hidden" id="hfResourceProvider" value="-1" name="ResourceProviderId" />
+                                </div>
+                                <!--    //Begin Added by Azeem Raza Tayyab on 29-Apr-2016 for the changes related to Bug#:PMS-4685-->
+                                <!--For PopUp window to update Submit Status-->
+                                <div style="display:none">
+                                    <div class="form-group" id="divSubmitStatus">
+                                        <div class="col-sm-5">
+                                            <label class="control-label">Status</label>
+                                            <select id="ddlSubmitStatusPopUp" class="form-control" name="SubmitStatusPopUp"></select>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <!--    //Begin Added by Azeem Raza Tayyab on 29-Apr-2016 for the changes related to Bug#:PMS-4685-->
+                            </form>
+                        </div>
+
+                    </section>
+                </div>
+                <div id="pnlBillCharge_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+
+                            <!--<div class="col-xs-2 pl-xxs pr-none">
+
+                                <span class="color-reference-box bg-info"></span>
+                                <label class="control-label " for="color-reference-box">Primary Claim</label>
+
+                            </div>-->
+
+                            <input type="hidden" id="BillCharge_SelectedDataKeys" />
+                            <!--<div class="table-responsive">-->
+                            <table class="table table-bordered table-condensed table-hover mb-none" id="dgvBillCharge">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" style="display:none;">BillChargeId</th>
+                                        <th rowspan="2" class="size-max20"><input type="checkbox" title="Select all" name="checkbox" id="chkAllVisits"></th>
+                                        <th rowspan="2" class="va-middle size75 size-min100">Action </th>
+                                        <th rowspan="2" class="va-middle">Account</th>
+                                        <th rowspan="2" class="va-middle size-min130">Patient</th>
+                                        <th rowspan="2" class="va-middle">DOS</th>
+                                        <th rowspan="2" class="va-middle noWordBreak">Claim No</th>
+                                        <th rowspan="2" class="va-middle noWordBreak">Insurance Plan</th>
+                                        <th rowspan="2" class="va-middle noWordBreak">Billed Amount</th>
+                                        <th rowspan="2" class="size-min70 va-middle">Expected Fee</th>
+                                        <th colspan="2" class="text-center noWordBreak">Insurance</th>
+                                        <th colspan="2" class="text-center noWordBreak">Patient</th>
+                                        <th rowspan="2" class="va-middle size-min100">Facility</th>
+                                        <th rowspan="2" class="va-middle size-min90">Provider</th>
+                                        <th rowspan="2" class="va-middle size-min90">Resource Provider</th>
+                                        <th rowspan="2" class="va-middle">Charge Status</th>
+
+                                        <th rowspan="2" class="va-middle">Status</th>
+                                        <th rowspan="2" class="va-middle">Created By</th>
+                                        <th rowspan="2" class="va-middle">Claim Created</th>
+                                        <th rowspan="2" class="va-middle">Encounter Sign Off Date</th>
+                                        <th rowspan="2" class="va-middle">Imported Date</th>
+                                        <th rowspan="2" class="va-middle">Submitted Date</th>
+                                        <th rowspan="2" class="va-middle">Encounter Type</th>
+                                    </tr>
+                                    <tr>
+
+
+                                        <th class="noWordBreak">Charge</th>
+                                        <th class="noWordBreak">Balance</th>
+
+                                        <th class="noWordBreak">Charge</th>
+                                        <!--<th class="noWordBreak">Copay</th>-->
+                                        <th class="noWordBreak">Balance</th>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <!--</div>-->
+                            <div id="divBillChargeSearch"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

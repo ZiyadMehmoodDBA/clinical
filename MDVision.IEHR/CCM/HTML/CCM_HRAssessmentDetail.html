@@ -1,0 +1,475 @@
+﻿<div class="row" id="pnlCCM_HRAssessmentDetail">
+    <div id="actionPanCCM_HRAssessmentDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-full" id="ccm_HRAmodal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="CCM_HRAssessmentDetail.Unload();"></button>
+                <h4 class="modal-title" id="headerId">Add a New Assessment</h4>
+            </div>
+            <div class="modal-body pt-default">
+
+                <ul class="tabBtn" role="tablist">
+                    <li id="LiAddHRA" class="active">
+                        <a onclick="CCM_HRAssessmentDetail.switchTab('LiAddHRA');" data-target="#addHRA" role="tab" data-toggle="tab" class="btn btn-default btn-sm">New Assessment</a>
+                    </li>
+                    <li id="LiAddVitals" class="disableAll">
+                        <a data-target="#addVitals" role="tab" data-toggle="tab" class="btn btn-default btn-sm" onclick="CCM_HRAssessmentDetail.switchTab('LiAddVitals');">Vitals</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="spacer5"></div>
+
+                    <div role="tabpanel" class="tab-pane active" id="addHRA">
+                        <form id="frmCCM_HRAssessmentDetail" method="post" onsubmit="return false">
+                            <div class="form-group" id="divSelectTemplate">
+                                <div class="col-sm-6 col-lg-6">
+                                    <label class="control-label">Template </label>
+                                    <select class="form-control" ddlist="GetHRAssessmentTempt" name="TemplateHRAssessment" id="ddlTemplateHRAssessment"></select>
+                                </div>
+                                <div class="col-sm-6 col-lg-6 mt-md">
+                                    <button class="btn btn-primary  btn-sm" type="button" onclick="CCM_HRAssessmentDetail.loadHRAssessmentTemplate();" id="btnCreate">Create</button>
+                                </div>
+                            </div>
+                            <div class="spacer20"></div>
+                            <div class="form-group" id="divHRAssessmentDetail" style="display:none">
+                                <div class="panel Of-a height-max400" id="divHRAssessmentHTML" name="HRAssessmentHTML">
+
+                                </div>
+                                <div class="row pull-right mr-md">
+                                    <button class="btn btn-primary mr-xxs btn-sm" type="button" onclick="CCM_HRAssessmentDetail.saveHRAssessment();" id="btnSave">Save</button>
+                                    <button class="btn btn-primary mr-xxs btn-sm" type="button" onclick="CCM_HRAssessmentDetail.printHRAssessment(true);" id="btnPrint">Print</button>
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" id="btnExport">Export to <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:void(0);" onclick="CCM_HRAssessmentDetail.exportToPdf();">PDF</a></li>
+                                            <li class="disabled"><a href="javascript:void(0);">Patient Portal</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="addVitals">
+                        <form id="frmClinicalVitals" method="post" onsubmit="return false">
+                            <div class="panel-featured panel-body">
+                                <div class="btn-block">
+                                    <!--<a class="btn btn-success btn-xs " onclick="CCM_Vitals.ImportToProgressNote();"><i class="glyphicon glyphicon-import"></i> Import To Progress Note</a>-->
+                                    <!--<a id="btnCopyVitals" class="btn btn-success btn-xs " style="display:none;" onclick="CCM_Vitals.CopyVitals();"> Copy</a>-->
+                                </div>
+                                <div class="col-sm-4 col-lg-2">
+                                    <label class="control-label" for="Date">Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" id="dpVitalsDate" name="VitalSignDate" data-plugin-datepicker autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-lg-2">
+                                    <label class="control-label" for="Time">Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input type="text" class="form-control" id="tpVitalsTime" name="VitalsTime" data-plugin-timepicker>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <section id="Structure">
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Weight</label>
+                                        <div class="input-group">
+                                            <input class="form-control" onkeypress="EMRUtility.ValidateLength(this, event,4);" name="Weight" id="txtWeight" type="text" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" oninput="EMRUtility.ValidateLength(this, event,4); CCM_Vitals.calculateBMI2(null, null, null); CCM_Vitals.calculateBSA2(null, null, null);" onblur=" EMRUtility.ValidateWeight(event, this);" />
+                                            <div class="input-group-addon text-xs p-xxs">lbs</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Height</label>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <div class="input-group">
+                                                    <input class="form-control" name="HeightFeet" id="txtHeightFeet" type="text" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onkeyup="CCM_Vitals.ValidateHeightFeet(event, this);" oninput="CCM_Vitals.calculateBMI2(null, null, null); CCM_Vitals.calculateBSA2(null, null, null);">
+                                                    <div class="input-group-addon text-xs p-xxs">ft</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <div class="input-group">
+                                                    <input class="form-control" name="HeightInches" id="txtHeightInches" type="text" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onkeyup="CCM_Vitals.ValidateHeightInches(event, this);" oninput="CCM_Vitals.calculateBMI2(null, null, null); CCM_Vitals.calculateBSA2(null, null, null);">
+                                                    <div class="input-group-addon text-xs p-xxs">in</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">BMI</label>
+                                        <div class="input-group">
+                                            <input class="form-control" disabled name="BMI" id="txtBMI" type="text">
+                                            <div class="input-group-addon text-xs p-xxs">kg/m<sup>2</sup></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">BSA</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="BSA" disabled id="txtBSA" type="text">
+                                            <div class="input-group-addon text-xs p-xxs">m<sup>2</sup></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Head Cir.</label>
+                                        <div class="input-group">
+                                            <input class="form-control" name="HeadCir" id="txtHeadCir" type="text" onkeypress="EMRUtility.ValidateLength(this, event, 3);" oninput="EMRUtility.ValidateLength(this, event, 3);" data-plugin-keyboard-numpad onkeydown=" utility.ValidateDecimal(event, 2);">
+                                            <div class="input-group-addon text-xs p-xxs">cm</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Blood Group</label>
+                                        <select id="ddlBloodType" name="BloodType" class="form-control">
+                                            <option value="" selected="selected">- Select -</option>
+                                            <option value="52"> A +</option>
+                                            <option value="53"> A -</option>
+                                            <option value="54"> B +</option>
+                                            <option value="55"> B -</option>
+                                            <option value="56"> O +</option>
+                                            <option value="57"> O -</option>
+                                            <option value="58"> AB +</option>
+                                            <option value="59"> AB -</option>
+
+                                        </select>
+                                    </div>
+                                </section>
+                                    <section id="BloodPressure">
+                                        <input id="BloodPressureIds" name="BloodPressureIds" type="hidden" value="-1" />
+                                        <div class="col-xs-12">
+                                            <div class="heading-line">
+                                                <div class="heading-content"><span class="text-primary text-bold">Blood Pressure</span><a href="#/" onclick="CCM_Vitals.AddNewRow('BloodPressure', 'divTemplateBloodPressure', '-1', null, event); return false;" class="btn btn-link btn-xs"><i class="fa fa-plus-square"></i></a></div>
+                                            </div>
+                                        </div>
+                                        <div id="divTemplateBloodPressure" style="display:none">
+                                            <input id="BPIdTemplate" name="BPIdTemplate" type="hidden" value="" />
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label">Systolic</label>
+                                                <div class="input-group">
+                                                    <input type="text" id="txtSystolicTemplate" max="255" name="SystolicTemplate" data-plugin-keyboard-numpad maxlength="3" class="form-control" onblur="utility.ValidateDecimal(event, 0); CCM_Vitals.ValidateBP(this, null);">
+                                                    <div class="input-group-addon text-xs p-xxs">mmHg</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label">Diastolic</label>
+                                                <div class="input-group">
+                                                    <input type="text" id="txtDiastolicTemplate" max="255" name="DiastolicTemplate" data-plugin-keyboard-numpad maxlength="3" class="form-control" onblur="utility.ValidateDecimal(event, 0); CCM_Vitals.ValidateBP(null, this);">
+                                                    <div class="input-group-addon text-xs p-xxs">mmHg</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label" for="Time">Time</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                    <input type="text" class="form-control" id="tpBloodPressureTimeTemplate" name="BloodPressureTimeTemplate" data-plugin-timepicker>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label">Position</label>
+                                                <select id="ddlPositionTemplate" name="PositionTemplate" class="form-control">
+                                                    <option value="" selected="selected">- Select -</option>
+                                                    <option value="1">Standing</option>
+                                                    <option value="2">Sitting</option>
+                                                    <option value="3">Laying Down</option>
+                                                    <option value="4">Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label">Cuff Location</label>
+                                                <select id="ddlCuffLocationTemplate" name="CuffLocationTemplate" class="form-control">
+                                                    <option value="" selected="selected">- Select -</option>
+                                                    <option value="5">Right Side</option>
+                                                    <option value="6">Left Side</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label">Cuff Size</label>
+                                                <select id="ddlCuffSizeTemplate" name="CuffSizeTemplate" class="form-control">
+                                                    <option value="" selected="selected">- Select -</option>
+                                                    <option value="7">Small</option>
+                                                    <option value="8">Standard</option>
+                                                    <option value="9">Large</option>
+                                                    <option value="10">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <section id="Pulse" class="col-md-6 p-none">
+                                        <input id="PulseIds" name="PulseIds" type="hidden" value="-1" />
+                                        <div class="col-xs-12">
+                                            <div class="heading-line">
+                                                <div class="heading-content">
+                                                    <span class="text-primary text-bold">Pulse</span><a onclick="CCM_Vitals.AddNewRow('Pulse', 'divTemplatePulse', '-1', null, event); return false;" class="btn btn-link btn-xs"><i class="fa fa-plus-square"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="divTemplatePulse" style="display:none">
+                                            <input id="PulsIdTemplate" name="PulsIdTemplate" data-plugin-keyboard-numpad type="hidden" value="" />
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Result</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" name="PulseResultTemplate" data-plugin-keyboard-numpad id="txtPulseResultTemplate" type="text" onkeypress="EMRUtility.ValidateLength(this, event, 3);" oninput=" EMRUtility.ValidateLength(this, event, 3);" onblur=" utility.ValidateDecimal(event, 0);">
+                                                    <div class="input-group-addon text-xs p-xxs">bpm</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Rhythm</label>
+                                                <select id="ddlRythmTemplate" name="RythmTemplate" class="form-control">
+                                                    <option value="" selected="selected">- Select -</option>
+                                                    <option value="11">Regular Sinus Rhythm</option>
+                                                    <option value="12">Regularly Irregular</option>
+                                                    <option value="13">Irregularly Regular</option>
+                                                    <option value="14">Irregularly Irregular</option>
+                                                    <option value="15">Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="Time">Time</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                    <input type="text" class="form-control" id="tpPulseTimeTemplate" name="PulseTimeTemplate" data-plugin-timepicker>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </section>
+                                    <section id="Temprature" class="col-md-6 p-none">
+                                        <input id="TempratureIds" name="TempratureIds" type="hidden" value="-1" />
+                                        <div class="col-xs-12">
+                                            <div class="heading-line">
+                                                <div class="heading-content">
+                                                    <span class="text-primary text-bold">Temperature</span><a onclick="CCM_Vitals.AddNewRow('Temprature', 'divTemplateTemprature', '-1', null, event); return false;" class="btn btn-link btn-xs"><i class="fa fa-plus-square"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="divTemplateTemprature" style="display:none">
+                                            <input id="TempIdTemplate" name="TempIdTemplate" type="hidden" value="" />
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Result</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" name="TemperatureResultTemplate" data-plugin-keyboard-numpad id="txtTemperatureResultTemplate" type="text" onkeypress="EMRUtility.ValidateLength(this, event, 5);" oninput=" EMRUtility.ValidateLength(this, event, 5);" onblur=" utility.ValidateDecimal(event, 2, 0, 9999999, '' );">
+                                                    <div class="input-group-addon text-xs p-xxs">F</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Method</label>
+                                                <select id="ddlMethodTemplate" name="MethodTemplate" class="form-control">
+                                                    <option value="" selected="selected">- Select -</option>
+                                                    <!-- 26/11/2015 Muhammad Irfan Bug # EMR-71 -->
+                                                    <option value="16">Axillary</option>
+                                                    <option value="17">Ear</option>
+                                                    <option value="18">Oral</option>
+                                                    <option value="19">Rectal</option>
+                                                    <option value="20">Temporal</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="Time">Time</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                    <input type="text" class="form-control" id="tpTempratureTimeTemplate" name="TemperatureTimeTemplate" data-plugin-timepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section id="Respiration" class="col-md-6 p-none">
+                                        <input id="RespirationIds" name="RespirationIds" type="hidden" value="-1" />
+                                        <div class="col-xs-12">
+                                            <div class="heading-line">
+                                                <div class="heading-content">
+                                                    <span class="text-primary text-bold">Respiration</span><a onclick="CCM_Vitals.AddNewRow('Respiration', 'divTemplateRespiration', '-1', null, event); return false;" class="btn btn-link btn-xs"><i class="fa fa-plus-square"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="divTemplateRespiration" style="display:none">
+                                            <input id="RespIdTemplate" name="RespIdTemplate" type="hidden" value="" />
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Result</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" name="RespirationResultTemplate" data-plugin-keyboard-numpad type="text" id="txtRespirationResultTemplate" onkeypress="EMRUtility.ValidateLength(this, event, 3);" oninput="EMRUtility.ValidateLength(this, event, 3);" onblur=" utility.ValidateDecimal(event, 0);">
+                                                    <div class="input-group-addon text-xs p-xxs">rpm</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Pattern</label>
+                                                <select id="ddlPatternTemplate" name="PatternTemplate" class="form-control">
+                                                    <option value="" selected="selected">- Select -</option>
+                                                    <option value="21">Normal</option>
+                                                    <option value="22">Labored</option>
+                                                    <option value="23">Wheezing</option>
+                                                    <option value="24">Tachypnea</option>
+                                                    <option value="25">Hyperventilation</option>
+                                                    <option value="26">Bradypnea</option>
+                                                    <option value="27">Cheyne Strokes</option>
+                                                    <option value="28">Ataxic</option>
+                                                    <option value="29">Sighing</option>
+                                                    <!-- 26/11/2015 Muhammad Irfan Bug # EMR-72 -->
+                                                    <option value="51">Obstructive</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="Time">Time</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                    <input type="text" class="form-control" id="tpRespirationTimeTemplate" name="RespirationTimeTemplate" data-plugin-timepicker>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </section>
+                                    <section id="Oxygen" class="col-md-6 p-none">
+
+                                        <div class="col-xs-12">
+                                            <div class="heading-line">
+                                                <div class="heading-content">
+                                                    <span class="text-primary text-bold">Oxygen Saturation</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="divTemplateOxygen">
+
+                                            <div class="col-sm-4">
+                                                <label class="control-label">SPO2</label>
+                                                <div class="input-group">
+                                                    <input type="text" id="txtSPO2" name="SPO2" maxlength="3" data-plugin-keyboard-numpad class="form-control" oninput="EMRUtility.setPercentage(event,this);" onblur="utility.ValidateDecimal(event, 2);">
+                                                    <div class="input-group-addon text-xs p-xxs">%</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Oxygen Source</label>
+                                                <input type="text" id="txtOxygenSource" name="OxygenSource" maxlength="10" class="form-control">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="peakFlow">Peak Flow</label>
+                                                <div class="input-group">
+                                                    <input type="text" id="txtPeakFlow" name="PeakFlow" maxlength="5" data-plugin-keyboard-numpad class="form-control" onblur="utility.ValidateDecimal(event, 2);">
+                                                    <div class="input-group-addon text-xs p-xxs">L/min</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <section id="General">
+
+                                        <div class="col-sm-12 col-lg-8">
+                                            <label class="control-label">Comments</label>
+                                            <textarea id="txtComments" name="Comments" maxlength="5000" class="form-control" spellcheck="true"></textarea>
+                                        </div>
+                                    </section>
+                                    <div class="col-xs-12 mt-sm">
+                                        <button class="btn btn-primary btn-sm rightbtn" type="submit" id="btnsave">Save</button>
+                                    </div>
+</div>
+
+
+                            <input type="hidden" id="hfNoteId" name="NotesId" />
+                            <input type="hidden" name="PatientId" id="hfPatientId" />
+                            <div id="ProgressnoteHTML" style="display:none"></div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" id="hfHRAssessmentTemplateId" name="HRAssessmentTemplateId" value="" />
+                </div>
+
+                <div class="panel-body" id="PrintPdfControlDiv" style="display:none;">
+                    <input type="hidden" id="helperPDF" />
+                    <iframe id="PreviewReportPrint" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12" style="height:1066px;"></iframe>
+                </div>
+                <script>
+
+                    kendo.pdf.defineFont({
+                        "DejaVu Sans": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans.ttf",
+                        "DejaVu Sans|Bold": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+                        "DejaVu Sans|Bold|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+                        "DejaVu Sans|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+                    });
+                </script>
+                <style type="text/css">
+                    .blueBgPrint {
+                        background: #005da9 !important;
+                        color: #fff !important;
+                    }
+
+                    .blueBorderPrint {
+                        border-bottom: 2px solid #005da9;
+                    }
+                </style>
+
+                <script type="x/kendo-template" id="page-template">
+                    <div class="page-template">
+                        <div class="blueBorderPrint" style="position:absolute;left:20px; right: 20px;font-size: 90%;height: 100%;top: 15px; padding:2px 5px 0 5px;">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="col-sm-5 col-lg-5 pull-left">
+                                    <img id="ClinicalReportsHeaderLogo" src="content/images/SHS-nav-logo-small-100.png" class="img-responsive" style="max-width: 350px;max-height:140px;" />
+                                </div>
+
+                                <div class="pull-right col-sm-5 col-lg-5" id="PracticeDiv"></div>
+                            </div>
+                            <div class='clearfix'></div><div class='splitter m-none mt-xs'>
+                                <div class='spacer3'></div>
+                            </div>
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="pull-left col-sm-5 col-lg-5" id="PatientDiv"></div>
+                                <div class="pull-right col-sm-5 col-lg-5" id="ProviderDiv"></div>
+                            </div>
+                            <div class='clearfix'></div><div class='splitter m-none mt-xs'>
+                                <div class='spacer3'></div>
+                            </div>
+                        </div>
+                        <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                            <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                            <div id="ClinicalReportsFooterText" class="blueBgPrint" style=" float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                                Generated by:<span id="ClinicalReportsFooter">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </script>
+
+                <div id="printcall" style="display:none;">
+                    <div id="PatientInfo" class="panel-body panel-featured">
+
+                        <div class="col-sm-5 col-lg-5 pull-left">
+                            <img src="content/images/SHS-nav-logo-small-100.png" class="img-responsive" style="max-width: 350px;max-height:140px;" />
+                        </div>
+                        <ul class="list-unstyled pull-right line-height-fix" id="PracticeList">
+                            <li id="PracticeName"> </li>
+                            <li id="PracticeAddress"></li>
+                            <li id="PracticeCity"></li>
+                            <li id="PracticePhone"></li>
+                        </ul>
+
+                        <div class="clearfix"></div>
+                        <div class="splitter m-none mt-xs"><div class="spacer3"></div></div>
+
+
+                        <ul class="list-unstyled pull-left line-height-fix" id="PatientList">
+                            <li id="PatientName"></li>
+                            <li id="PatientAge"></li>
+                            <li id="PatientAccount"></li>
+                            <li id="PatientPhone"></li>
+                            <li id="PatientAddress"></li>
+                        </ul>
+
+                        <ul class="list-unstyled pull-right line-height-fix" id="ProviderList">
+                            <li id="ProviderName"></li>
+                            <li id="Specialty"></li>
+                            <li id="NoteDateTime"></li>
+                            <li id="VisitReason"></li>
+                        </ul>
+
+                    </div>
+                    <div class="spacer5"></div>
+                    <section class="panel panel-featured">
+                        <div class="panel-body" id="ulContent">
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

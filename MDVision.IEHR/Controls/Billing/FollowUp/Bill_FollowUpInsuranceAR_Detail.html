@@ -1,0 +1,351 @@
+﻿<div class="row" id="pnlBillFollowUpInsuranceARDetail" style="display:none;">
+    <div id="actionPanBillFollowUpInsuranceARDetail" class=" modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" onclick="Bill_FollowUpInsuranceAR_Detail.UnLoad();"></button>
+                <h4 class="modal-title">Insurance AR Detail Screen</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmFollowUpInsuranceARDetail" onsubmit="return false">
+                    <div class="btn-block  mb-xs">
+                        <a class="btn btn-success btn-xs" style="display:none" onclick="">Delete</a>
+                        <a class="btn btn-success btn-xs" onclick="Bill_FollowUpInsuranceAR_Detail.PrintPatientLetter();">Letter</a>
+                        <a class="btn btn-success btn-xs" onclick="Bill_FollowUpInsuranceAR_Detail.LoadPaymentPosting('-1', '-1');">Payment Posting</a>
+                        <a class="btn btn-success btn-xs disableAll" id="aClaimSplit" onclick="Bill_FollowUpInsuranceAR_Detail.OpenInsuranceARSplitClaim();">Split Claim</a>
+                        <a class="btn btn-success btn-xs" onclick="Bill_FollowUpInsuranceAR_Detail.OpenPatientEligibility();">Eligibility</a>
+                        <a class="btn btn-success btn-xs disableAll" onclick="">Claim Status</a>
+                        <a class="btn btn-success btn-xs" onclick="Bill_FollowUpInsuranceAR_Detail.OpenInsuranceARHistory();">History</a>
+                        <a class="btn btn-success btn-xs" onclick="Bill_FollowUpInsuranceAR_Detail.OpenInsuranceARCall();">Call</a>
+                    </div>
+                    <div class="panel panel-featured">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label" for="Entity">Action<span class="required">*</span></label>
+                                    <select id="ddlAction" name="ActionID" class="form-control" ddlist="GetFollowUpAction"></select>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label" for="Entity">Group</label>
+                                    <select id="ddlGroup" name="GroupID" class="form-control" ddlist="GetFollowUpARGroup"></select>
+                                </div>
+                                
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label" for="Entity">Reason</label>
+                                    <select id="ddlReason" name="Reason" class="form-control" ddlist="GetFollowUpReasons"></select>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label" for="Entity">Remit Code</label>
+                                    <select id="ddlRemitanceCode" name="RemitanceCode" class="form-control" ddlist="GetCRemittanceCode"></select>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label" for="Appointment Date">Suspend till</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input id="dtpSuspendedDate" name="SuspendedDate" class="form-control" type="text" data-plugin-datepicker="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-10">
+                                    <label class="control-label pull-left" for="Comments">Comments</label>  
+                                    <!--prd-273-->                                 
+                                    <div class="form-control editable" name="Comments" id="txtComments" style="height:50px; font-size: 12px; overflow-y:auto" maxlength="3000"  contenteditable="true" spellcheck="true"></div>
+                                </div>
+                                <div class="col-sm-2 col-lg-2">
+                                    <div class="clearfix"></div> 
+                                    <div class="spacer10"></div>
+                                    <div class="spacer10"></div>
+                                    <button class="btn btn-primary btn-sm rightbtn">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="followUpComments" class="toggle" data-plugin-toggle>
+                        <section class="toggle">
+                            <label> Follow Up Comments</label>
+                            <div class="toggle-content panel-body NoRadiusT" style="display:none;">
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvClaimFollowUpComment">
+                                    <thead>
+                                        <tr>
+                                            <th class="size70">Action</th>
+                                            <th class="size-max300">Follow Up Comments</th>
+                                            <th class="size130">Date - Time</th>
+                                            <th class="size90">User</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                        <div id="PatientInformationDiv" class="toggle" data-plugin-toggle>
+                            <section class="toggle">
+                                <label> Patient Information</label>
+                                <div class="toggle-content panel-body NoRadiusT">
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblPatient" class="control-label" for="Patient Account">Patient Account</label>
+                                        <a id="lnkPatientEdit" style="display:none;" href="#" onclick="Bill_FollowUpInsuranceAR_Detail.OpenPatientDemographics();" title="Edit Patient">Patient Account</a>
+                                        <div class="">
+                                            <input class="form-control" id="txtPatientName" name="PatientAccount" type="text" oninput="Bill_FollowUpInsuranceAR_Detail.BindPatientAccount();" onblur="    utility.ValidateAutoComplete(this, 'frmFollowUpInsuranceARDetail #hfPatientId', false);" readonly>
+                                            <div id="divSearchPatient" class="input-group-btn" style="display:none">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Bill_FollowUpInsuranceAR_Detail.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Name">SSN</label>
+                                        <input class="form-control disableAll opacity-text" id="txtPatSSN" name="SSN" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Name">Last Name</label>
+                                        <input class="form-control disableAll opacity-text" id="txtPatLastName" name="LastName" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Name">First Name</label>
+                                        <input class="form-control disableAll opacity-text" id="txtPatFirstName" name="FirstName" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Name">Middle Initial</label>
+                                        <input class="form-control disableAll opacity-text" id="txtPatMI" name="MiddleInitial" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Appointment Date">Date of Birth</label>
+                                        <div class="input-group disableAll opacity-text">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpDOB" class="form-control" name="DOB" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblProvider" class="control-label">Provider</label>
+                                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Bill_FollowUpInsuranceAR_Detail.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                        <div class=" disableAll opacity-text">
+                                            <input type="text" class="form-control" id="txtProvider" name="Provider" onblur="utility.ValidateAutoComplete(this, 'frmFollowUpInsuranceARDetail #hfProvider', true);">
+                                            <div class="input-group-btn" style="display:none">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Bill_FollowUpInsuranceAR_Detail.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Bill_FollowUpInsuranceAR_Detail.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class=" disableAll opacity-text">
+                                            <input class="form-control" id="txtFacility" name="Facility" type="text" onblur="utility.ValidateAutoComplete(this, 'frmFollowUpInsuranceARDetail  #hfFacility', true);">
+                                            <div class="input-group-btn" style="display:none">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Bill_FollowUpInsurance_Detail.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                        <a id="lnkPracticeEdit" style="display:none;" href="#" onclick="Bill_FollowUpInsuranceAR_Detail.OpenPracticeDetail();" title="Edit Practice">Practice</a>
+                                        <div class=" disableAll opacity-text">
+                                            <input class="form-control" id="txtPractice" name="Practice" type="text" onblur="utility.ValidateAutoComplete(this, 'frmFollowUpInsuranceARDetail #hfPractice', true);">
+                                            <div class="input-group-btn" style="display:none">
+                                                <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="Bill_FollowUpInsuranceAR_Detail.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Name">Tax ID</label>
+                                        <input class="form-control disableAll opacity-text" id="txtTaxID" name="TaxID" type="text">
+                                    </div>
+                                    <!--<div class="col-sm-3 col-lg-2">
+                                       <label id="lblInsurancePlan" class="control-label">Insurance Plan</label>
+                                            <a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="Bill_FollowUpInsuranceAR_Detail.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance Plan</a>
+                                            <div class="disableAll">
+                                                <input class="form-control" id="txtInsurancePlan" name="InsurancePlan" onblur="utility.ValidateAutoComplete(this, 'frmFollowUpInsuranceARDetail #hfInsurancePlan', false);" type="text">
+                                                <div class="input-group-btn" style="display:none">
+                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Bill_FollowUpInsuranceAR_Detail.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                    </div>-->
+
+                                    <div class="col-sm-3 col-lg-2 p-none">
+                                        <div class="col-xs-8 pr-xs">
+                                            <label id="lblInsurancePlan" class="control-label">Insurance Plan</label>
+                                            <a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="Bill_FollowUpInsuranceAR_Detail.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance Plan</a>
+                                            <div class="disableAll opacity-text">
+                                                <input class="form-control" id="txtInsurancePlan" name="InsurancePlan" onblur="utility.ValidateAutoComplete(this, 'frmFollowUpInsuranceARDetail #hfInsurancePlan', false);" type="text">
+                                                <div class="input-group-btn" style="display:none">
+                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Bill_FollowUpInsuranceAR_Detail.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 pl-none disableAll opacity-text">
+                                            <label class="control-label" for="Priority">Priority</label>
+                                            <input class="form-control" name="Priority" id="txtPriority" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Name">Insurance Telephone</label>
+                                        <input class="form-control disableAll opacity-text" id="txtInsuranceTelephone" name="InsuranceTelephone" type="text">
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div id="InsuredInformationDiv" class="toggle" data-plugin-toggle>
+                            <section class="toggle">
+                                <label> Insured Information</label>
+                                <div class="toggle-content panel-body NoRadiusT">
+                                    <div class="col-sm-3 col-lg-1">
+                                        <label class="control-label" for="Name">SSN</label>
+                                        <input class="form-control disableAll opacity-text" id="txtInsSSN" name="InsSSN" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Name">Last Name</label>
+                                        <input class="form-control disableAll opacity-text" id="txtInsLastName" name="InsLastName" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Name">First Name</label>
+                                        <input class="form-control disableAll opacity-text" id="txtInsFirstName" name="InsFirstName" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-1">
+                                        <label class="control-label" for="Name">Middle Initial</label>
+                                        <input class="form-control disableAll opacity-text" id="txtInsMI" name="InsMiddleInitial" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3">
+                                        <label class="control-label" for="Name">Subscriber ID</label>
+                                        <input class="form-control disableAll opacity-text" id="txtInsSubscriberID" name="SubscriberID" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-1">
+                                        <label class="control-label" for="Name">Group ID</label>
+                                        <input class="form-control disableAll opacity-text" id="txtGroupID" name="InsGroupID" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Appointment Date">Eligibility Date</label>
+                                        <div class="input-group disableAll">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpEligibilityDate" class="form-control opacity-text" name="EligibilityDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Name">Eligibility Status</label>
+                                        <input class="form-control disableAll opacity-text" id="txtEligibilityStatus" name="EligibilityStatus" type="text">
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div id="ClaimInformationDiv" class="toggle" data-plugin-toggle>
+                            <section class="toggle">
+                                <label> Claim Information</label>
+                                <div class="toggle-content panel-body NoRadiusT">
+                                    <div class="col-sm-3">
+                                        <label id="lblVisit" class="control-label" for="Claim Number">Claim Number</label>
+                                        <a id="lnkVisitEdit" style="display:none;" href="#" onclick="Bill_FollowUpInsuranceAR_Detail.LoadVisitDetail();" title="Edit Visit">Claim Number</a>
+                                        <div class="">
+                                            <input class="form-control" id="txtClaimno" name="ClaimNumber" type="text" onblur="utility.ValidateAutoComplete(this, null, true);" oninput="Bill_FollowUpInsuranceAR_Detail.BindClaimNumber();" readonly>
+                                            <div id="divSearchClaim" class="input-group-btn" style="display:none">
+                                                <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="Bill_FollowUpInsuranceAR_Detail.OpenEncounter();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" for="Name">ICN/DCN</label>
+                                        <input class="form-control disableAll opacity-text" id="txtICN" name="Name" type="text">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" for="Appointment Date">First Submit Date</label>
+                                        <div class="input-group disableAll opacity-text">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpFirstSubmitDate" class="form-control" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" for="Appointment Date">Submit Date</label>
+                                        <div class="input-group disableAll opacity-text">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpSubmitDate" class="form-control" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                    <div id="ChargesInformationDiv" class="toggle" data-plugin-toggle>
+                        <section class="toggle active">
+                            <label> Charges</label>
+                            <div class="toggle-content" style="display: block;">
+                                <div id="pnlBillFollowUpInsuranceARDetail_Result" style="display: inline;">
+                                    <section class="panel">
+                                        <div class="panel-body NoRadiusT">
+                                            <input type="hidden" id="BillFollowUpInsuranceARDetail_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvBillFollowUpInsuranceARDetail">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2" style="display:none;">ChargeId</th>
+                                                        <th rowspan="2" class="size120 va-middle">DOS</th>
+                                                        <th rowspan="2" class="size120 noWordBreak va-middle">Claim #</th>
+                                                        <th rowspan="2" class="size120 va-middle">CPT</th>
+                                                        <th rowspan="2" class="size120 va-middle">Plan</th>
+                                                        <th rowspan="2" class="size-min70  va-middle">Fee</th>
+                                                        <th rowspan="2" class="size120 va-middle">Units</th>
+                                                        <th rowspan="2" class="size120 noWordBreak va-middle">Charge Amt</th>
+                                                        <th rowspan="2" class="size120 va-middle">Balance</th>
+                                                        <th colspan="4" class="size120 text-center">Insurance</th>
+                                                        <th colspan="4" class="size120 text-center">Patient</th>
+                                                        <th colspan="4" class="size120 text-center">Copayment</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="size120">Charge</th>
+                                                        <th class="size120">Paid</th>
+                                                        <th class="size120 noWordBreak">WriteOff</th>
+                                                        <th class="size120">Balance</th>
+                                                        <th class="size120">Charge</th>
+                                                        <th class="size120">Paid</th>
+                                                        <th class="size120">Discount</th>
+                                                        <th class="size120">Balance</th>
+                                                        <th class="size120">Charge</th>
+                                                        <th class="size120">Paid</th>
+                                                        <th class="size120">Discount</th>
+                                                        <th class="size120">Balance</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="divBillFollowUpInsuranceARDetailPaging"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="spacer5"></div> 
+
+                    <input type="hidden" name="hfIstxtComments" id="hfIsCommnetsChanged"/> 
+                    <input type="hidden" name="hftxtComments" id="hftxtComments" />                
+                    <input type="hidden" name="FacilityID" id="hfFacility" value="-1" />
+                    <input type="hidden" name="ProviderID" id="hfProvider" value="-1" />
+                    <input type="hidden" name="PatientID" id="hfPatientId" value="-1" />
+                    <input type="hidden" name="VisitID" id="hfVisitId" value="-1" />
+                    <input type="hidden" name="InsurancePlanID" id="hfInsurancePlan" />
+                    <input type="hidden" name="PracticeID" id="hfPractice" value="-1" />
+                    <input type="hidden" name="FollowUpInsuranceARDetailID" id="hfFollowUpInsuranceARDetailId" value="-1" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+
+        //initialization of date-picker.
+        // utility.CreateDatePicker('pnlPatientCaseDetail #dtpAppointmentDate,#dtpSubmittedDate,#dtpDOSFrom,#dtpInjuryDate,#dtpLMPDate,#dtpDOSTo,#dtpCurrentIllnessDate,#dtpAdmissionDated,#tpDischargeDate', function () {
+        //on-change callback method
+        //  });
+
+
+    });
+</script>

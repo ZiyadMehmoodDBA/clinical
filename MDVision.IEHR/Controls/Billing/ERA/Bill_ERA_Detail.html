@@ -1,0 +1,419 @@
+﻿<div id="ERADetail">
+    <div id="actionPanERADetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header" style="">
+                <button type="button" class="close" onclick="ERADetail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">ERA Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmERADetail" onsubmit="return false">
+                    <div class="btn-block mb-xs">
+                        <a class="btn btn-xs btn-success" onclick="ERADetail.PostPayment();" id="btnPaymentPosting"><i class="fa fa-money"></i> Post Payment</a>
+                        <a class="btn btn-xs btn-success" onclick="ERADetail.OpenViewERA();" id="btnViewERA"><i class="fa fa-eye"></i> View ERA</a>
+                        <!--<a class="btn btn-xs btn-success" onclick="ERADetail.OpenChargeDetail();"><i class="fa fa-money"></i> ERA Charge Detail</a>-->
+                    </div>
+                    <div class="form-group tab-content-featured panel-body  pl-xxs pr-xxs">
+
+                        <div class="toggle" data-plugin-toggle>
+                            <section class="toggle">
+                                <label>Detail</label>
+                                <div class="toggle-content">
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label class="control-label" for="Clearinghouse">Clearinghouse</label>
+                                        <select id="Clearinghouse" name="ClearingHouse" class="form-control" disabled ddlist="GetClearingHouse">
+                                            <option value="" selected="selected">-Select-</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <!--<label class="control-label" for="Facility"><a>Facility</a></label>
+                                        <select id="Facility" class="form-control" ddlist="GetFacility">
+                                            <option value="" selected="selected">-Select-</option>
+
+                                        </select>-->
+
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="ERADetail.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+
+                                            <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="ERADetail.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <!--<label class="control-label" for="Provider"><a>Provider</a></label>
+                                        <select id="Provider" class="form-control" ddlist="GetProvider">
+                                            <option value="" selected="selected">-Select-</option>
+
+                                        </select>-->
+
+                                        <label id="lblProvider" class="control-label">Provider</label>
+                                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="ERADetail.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                        <div class="input-group">
+
+                                            <input class="form-control" id="txtProvider" type="text" name="Provider" placeholder="Start typing to search" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="ERADetail.OpenProvider();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="ERAStatusId">ERA Status</label>
+                                        <select id="ERAStatus" name="ERAStatus" class="form-control" ddlist="GetERAStatus">
+                                            <option value="" selected="selected">-Select-</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="CheckNo">Check Number</label>
+                                        <input class="form-control" name="CheckNumber" id="CheckNo" disabled type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label class="control-label" for="CheckAmount">Check Amount</label>
+                                        <input class="form-control" name="CheckAmount" id="CheckAmount" disabled onkeypress="utility.ValidateDecimal(event,2)" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label class="control-label" for="CheckDate">Check Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="CheckDate" name="CheckDate" disabled type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="CheckDepositDate">Check Deposit Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="CheckDepositDate" name="CheckDepositDate" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="AppliedAmount">Applied Amount</label>
+                                        <input class="form-control" name="AppliedAmount" id="AppliedAmount" disabled onkeypress="utility.ValidateDecimal(event,2)" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="PostedAmount">Posted Amount</label>
+                                        <input class="form-control" name="PostedAmount" id="PostedAmount" disabled onkeypress="utility.ValidateDecimal(event,2)" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="DateofEntry">Date of Entry</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="DateofEntry" name="DateofEntry" disabled type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="User">User</label>
+                                        <input class="form-control" name="User" id="User" disabled type="text">
+                                    </div>
+
+                                    <div class="col-sm-6 toggle" data-plugin-toggle style="clear:none">
+                                        <section class="toggle" onclick="ERADetail.ChangeColor(this, 'PayerInformation');">
+                                            <label id="PayerInformation">Payer Information</label>
+                                            <div class="toggle-content">
+                                                <div class="panel-body NoRadiusT">
+                                                    <div class="col-sm-12">
+                                                        <label class="control-label" for="PayerName">Payer Name</label>
+                                                        <input class="form-control" disabled id="PayerName" name="PayerName" type="text">
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <label class="control-label" for="PayerAddress">Address</label>
+                                                        <input class="form-control" disabled id="PayerAddress" name="PayerAddress" type="text">
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-4">
+                                                        <label class="control-label" for="City">City</label>
+                                                        <input class="form-control" disabled id="PayerCity" name="PayerCity" type="text">
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-4">
+                                                        <label class="control-label" for="PayerState">State</label>
+                                                        <input class="form-control" disabled id="PayerState" name="PayerState" type="text">
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label" for="PayerZip">Zip</label>
+                                                        <input class="form-control" disabled id="PayerZip" name="PayerZip" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-sm-6 toggle" data-plugin-toggle style="clear:none">
+                                        <section class="toggle" onclick="ERADetail.ChangeColor(this, 'PayeeInformation');">
+                                            <label id="PayeeInformation">Payee Information</label>
+
+                                            <div class="toggle-content">
+                                                <div class="panel-body NoRadiusT">
+                                                    <div class="col-sm-12">
+                                                        <label class="control-label" for="PayeeName">Payee Name</label>
+                                                        <input class="form-control" disabled id="PayeeName" name="PayeeName" type="text">
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <label class="control-label" for="PayeeAddress">Address</label>
+                                                        <input class="form-control" disabled id="PayeeAddress" name="PayeeAddress" type="text">
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-4">
+                                                        <label class="control-label" for="PayeeCity">City</label>
+                                                        <input class="form-control" disabled id="PayeeCity" name="PayeeCity" type="text">
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-4">
+                                                        <label class="control-label" for="State">State</label>
+                                                        <input class="form-control" disabled id="PayeeState" name="PayeeState" type="text">
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label" for="PayeeZip">Zip</label>
+                                                        <input class="form-control" disabled id="PayeeZip" name="PayeeZip" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-1 pull-right pad-a-labelsize-btn">
+                                        <button class="btn btn-primary btn-sm rightbtn" type="button" onclick="ERADetail.SaveERA();">Save</button>
+                                    </div>
+
+                                </div>
+                            </section>
+                        </div>
+
+
+                        <div class="spacer10"></div>
+                        <div class="col-sm-12">
+                            <div class="tabs">
+                                <div id="DivERADetailTabs" class="tabs-custome-panel pl-md">
+                                    <a id="a_NotLinkedCharges" href="#NotLinkedCharges" class="active" data-toggle="tab" onclick="ERADetail.ChangeSubTabStyle(this);">Not Linked Charges</a>
+                                    <a id="a_LinkedPaidCharges" href="#LinkedPaidCharges" data-toggle="tab" onclick="ERADetail.ChangeSubTabStyle(this);">Linked Paid Charges</a>
+                                    <a id="a_LinkedUnpaidCharges" href="#LinkedUnpaidCharges" data-toggle="tab" style="max-width:200px" onclick="ERADetail.ChangeSubTabStyle(this);">Linked Unpaid Charges</a>
+                                    <a id="a_LinkedRecoupmentCharges" href="#LinkedRecoupmentCharges" data-toggle="tab" style="max-width:200px" onclick="ERADetail.ChangeSubTabStyle(this);">Linked Recoupment Charges</a>
+                                    <a id="a_PLBSegment" href="#PLBSegment" data-toggle="tab" style="max-width:200px" onclick="ERADetail.ChangeSubTabStyle(this);">PLB Segment</a>
+                                </div>
+                                <div class="tab-content tabs-custome-panel-body  pl-xxs pr-xxs">
+                                    <div id="NotLinkedCharges" class="tab-pane active">
+                                        <span class="spacer10"></span>
+                                        <input type="hidden" id="ERA_NotLinkedCharges_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvNotLinkedChargesDetail">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size120" style="display:none;"></th>
+                                                    <th title="Actions" id="ColumnAction" class="size95">Action</th>
+                                                    <th title="ERA Claim Number" class="size120 noWordBreak">ERA Claim Number</th>
+                                                    <th title="Patient" class="size120">Patient</th>
+                                                    <th title="Subscriber ID" class="size220 noWordBreak">Subscriber ID</th>
+                                                    <th title="Visit Date" class="size200 noWordBreak">Visit Date</th>
+                                                    <th title="CPT Code" class="size120">CPT</th>
+                                                    <!--<th title="Expected Fee" class="size-min70 noWordBreak">Expected Fee</th>-->
+                                                    <th title="Modifier" class="size140">Modifier</th>
+                                                    <th title="Billed Units" class="size200 noWordBreak">Billed Units</th>
+                                                    <th title="Paid Amount" class="size200 noWordBreak">Paid Amount</th>
+                                                    <th title="Comments" class="size200">Comments</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <!--<div id="divOpenVisitsPaging"></div>-->
+
+                                        <span class="spacer10"></span>
+                                    </div>
+
+                                    <div id="LinkedPaidCharges" class="tab-pane">
+                                        <div class="col-sm-12 col-md-6" id="divRadPosted">
+                                            <label class="pull-left control-label" for="RadAll"><strong>Posted</strong></label>
+                                            <span class="spacer3"></span>
+                                            <div class="radio-custom radio-small pull-left">
+                                                <input class="form-control" type="radio" id="radAll" checked="checked" name="RadPosted" onclick="ERADetail.LinkedPaidChargesRadio(this)">
+                                                <label class="control-label" for="RadAll">All</label>
+                                            </div>
+                                            <div class="radio-custom radio-small pull-left ml-default">
+                                                <input class="form-control" type="radio" id="radYes" name="RadPosted" onclick="ERADetail.LinkedPaidChargesRadio(this)">
+                                                <label class=" control-label" for="RadYes">Yes</label>
+                                            </div>
+                                            <div class="radio-custom radio-small pull-left ml-default">
+                                                <input class="form-control" type="radio" id="radNo" name="RadPosted" onclick="ERADetail.LinkedPaidChargesRadio(this)">
+                                                <label class=" control-label" for="RadNo">No</label>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="ERA_LinkedPaidCharges_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLinkedPaidChargesDetail">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size120" style="display:none;"></th>
+                                                    <th title="Actions" id="ColumnAction" coltype="Action" class="size-min130 size130">Action</th>
+                                                    <th title="Plan" class="size95">Plan</th>
+                                                    <th title="Patient Account" class="size120">Pat. Acc</th>
+                                                    <th title="Patient Name" class="size200">Pat Name</th>
+                                                    <th title="Claim Number" class="size120 noWordBreak">Claim #</th>
+                                                    <th title="Visit Date" class="size200 noWordBreak">Visit Date</th>
+                                                    <th title="CPT Code" class="size120">CPT Code</th>
+                                                    <th title="Fee" class="size200 ">Billed Amount</th>
+                                                    <th title="Expected Fee" class="size-min70 va-middle">Expected Fee</th>
+                                                    <th title="Insurance Charge" class="size120">Ins. Charge</th>
+                                                    <!--<th title="Future Insurance Balance" class="size120">Future Ins. Balance</th>-->
+                                                    <th title="Allowed Amount" class="size140">Allowed</th>
+                                                    <th title="Paid Amount" class="size120">Paid</th>
+                                                    <th title="Write off" class="size200">W/Off</th>
+                                                    <th title="Deductible" class="size160">Ded.</th>
+                                                    <th title="Co-Insurance" class="size120">Co Ins</th>
+                                                    <th title="EOB Copay" class="size200">EOB Copay</th>
+                                                    <th title="Charge Copay" class="size230">Charge Copay</th>
+                                                    <th title="Patient Responsibility" class="size200">Pat. Resp</th>
+                                                    <th title="Next Responsibility" class="size200">Next Resp</th>
+                                                    <th title="Next Insurance Plan" class="size200">Next Ins Plan</th>
+                                                    <th title="ERA Secondary Plan" class="size230">ERA Sec. Plan</th>
+                                                    <th title="Posted" class="size120">Posted</th>
+                                                    <th title="Crossed Over" class="size230">Crossed Over</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <!--<div id="divCloseVisitsPaging"></div>-->
+
+                                        <span class="spacer10"></span>
+                                    </div>
+
+                                    <div id="LinkedUnpaidCharges" class="tab-pane">
+                                        <span class="spacer10"></span>
+                                        <input type="hidden" id="ERA_LinkedUnpaidCharges_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLinkedUnpaidChargessDetail">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size120" style="display:none;"></th>
+                                                    <th title="Actions" id="ColumnAction" class="size-min110 size110">Action</th>
+                                                    <th title="Plan" class="size95">Plan</th>
+                                                    <th title="Patient Account" class="size120 noWordBreak">Pat. Acc</th>
+                                                    <th title="Patient Name" class="size200 noWordBreak">Pat Name</th>
+                                                    <th title="Claim Number" class="size120 noWordBreak">Claim #</th>
+                                                    <th title="Visit Date" class="size200 noWordBreak">Visit Date</th>
+                                                    <th title="CPT Code" class="size120 noWordBreak">CPT Code</th>
+                                                    <th title="Fee" class="size200">Billed Amount</th>
+                                                    <th title="Expected Fee" class="size-min70 va-middle">Expected Fee</th>
+                                                    <!--<th title="Insurance Blance" class="size95 noWordBreak">Ins. Blance</th>-->
+                                                    <th title="Allowed Amount" class="size120">Allowed</th>
+                                                    <th title="Paid Amount" class="size120">Paid</th>
+                                                    <th title="Remit Code" class="size230 noWordBreak">Remit Code</th>
+                                                    <th title="Posted" class="size120">Posted</th>
+                                                    <th title="ERA Secondary Plan" class="size230 noWordBreak">ERA Sec. Plan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <!--<div id="divOpenVisitsPaging"></div>-->
+
+                                        <span class="spacer10"></span>
+                                    </div>
+
+                                    <div id="LinkedRecoupmentCharges" class="tab-pane">
+                                        <span class="spacer10"></span>
+                                        <div class="col-sm-12 col-md-6" id="divLRCRadPosted">
+                                            <label class="pull-left control-label" for="RadAll"><strong>Posted</strong></label>
+                                            <span class="spacer3"></span>
+                                            <div class="radio-custom radio-small pull-left">
+                                                <input class="form-control" type="radio" id="radLRCAll" checked="checked" name="RadLRCPosted" onclick="ERADetail.LinkedPaidChargesRadio(this)">
+                                                <label class="control-label" for="radLRCAll">All</label>
+                                            </div>
+                                            <div class="radio-custom radio-small pull-left ml-default">
+                                                <input class="form-control" type="radio" id="radLRCYes" name="RadLRCPosted" onclick="ERADetail.LinkedPaidChargesRadio(this)">
+                                                <label class=" control-label" for="radLRCYes">Yes</label>
+                                            </div>
+                                            <div class="radio-custom radio-small pull-left ml-default">
+                                                <input class="form-control" type="radio" id="radLRCNo" name="RadLRCPosted" onclick="ERADetail.LinkedPaidChargesRadio(this)">
+                                                <label class=" control-label" for="radLRCNo">No</label>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="ERA_LinkedRecoupmentCharges_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLinkedRecoupmentChargesDetail">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size120" style="display:none;"></th>
+                                                    <th title="Actions" id="ColumnAction" coltype="Action" class="size-min130 size100">Action</th>
+                                                    <th title="Plan" class="size95">Plan</th>
+                                                    <th title="Patient Account" class="size120">Pat. Acc</th>
+                                                    <th title="Patient Name" class="size200">Pat Name</th>
+                                                    <th title="Claim Number" class="size120 noWordBreak">Claim #</th>
+                                                    <th title="Visit Date" class="size200 noWordBreak">Visit Date</th>
+                                                    <th title="CPT Code" class="size120">CPT Code</th>
+                                                    <th title="Fee" class="size200 ">Billed Amount</th>
+                                                    <th title="Expected Fee" class="size-min70 va-middle">Expected Fee</th>
+                                                    <th title="Insurance Balance" class="size120">Ins. Balance</th>
+                                                    <th title="Allowed Amount" class="size140">Allowed</th>
+                                                    <th title="Paid Amount" class="size120">Paid</th>
+                                                    <th title="Write off" class="size200">W/Off</th>
+                                                    <th title="Deductible" class="size160">Ded.</th>
+                                                    <th title="Co-Insurance" class="size120">Co Ins</th>
+                                                    <th title="EOB Copay" class="size200">EOB Copay</th>
+                                                    <th title="Charge Copay" class="size230">Charge Copay</th>
+                                                    <th title="Patient Responsibility" class="size200">Pat. Resp</th>
+                                                    <th title="Next Responsibility" class="size200">Next Resp</th>
+                                                    <th title="Next Insurance Plan" class="size200">Next Ins Plan</th>
+                                                    <th title="ERA Secondary Plan" class="size230">ERA Sec. Plan</th>
+                                                    <th title="Posted" class="size120">Posted</th>
+                                                    <th title="Crossed Over" class="size230">Crossed Over</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <span class="spacer10"></span>
+                                    </div>
+
+                                    <div id="PLBSegment" class="tab-pane">
+                                        <span class="spacer10"></span>
+                                        <input type="hidden" id="ERA_PLBSegment_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPLBSegmentDetail">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size120" style="display:none;"></th>
+                                                    <th title="Actions" id="ColumnAction" coltype="Action" class="size-min100 size100">Action</th>
+                                                    <th title="Plan" class="size95">Reason</th>
+                                                    <th title="Patient Account" class="size120">Reason Description</th>
+                                                    <th title="Patient Name" class="size200">FCN/Other Identifier</th>
+                                                    <th title="Claim Number" class="size120 noWordBreak">Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <span class="spacer10"></span>
+                                    </div>
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" name="ProviderID" id="hfProvider" />
+                    <input type="hidden" name="FacilityID" id="hfFacility" />
+                    <input type="hidden" name="InsurancePlanID" id="hfInsurancePlan" />
+                    <input type="hidden" name="ModifierID" id="hfModifier" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    (function ($) {
+        'use strict';
+        if ($.isFunction($.fn['tooltip'])) {
+            $('[data-toggle=tooltip],[rel=tooltip]').tooltip({ container: 'body' });
+        }
+    }).apply(this, [jQuery]);
+
+
+    $(function () {
+        $($("#ERADetail").find($('[data-plugin-toggle]'))[0]).each(function () {
+            var $this = $(this),
+				opts = {};
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+            $this.themePluginToggle(opts);
+        });
+    });
+</script>

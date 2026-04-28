@@ -1,0 +1,74 @@
+﻿<div id="pnlNote_Components_Audit" style="display:none;" class="row">
+    <div id="actionPanNote_Components_Audit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog" class="modal-dialog-full">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Clinical_Note_Components_Audit.UnLoad()"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Audit Log</h4>
+                </div>
+                <div id="modalbody">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="clearfix"></div>
+                        <form method="post" id="frmNote_Components_Audit" onsubmit="return false">
+                            <section>
+                                <div id="activityLogpnlBody" class="panel-body">
+                                    <div id="divAuditTablesData">
+                                        <div class="col-sm-12">
+                                            <h5 class="text-bold" id="UserHeading">User/Actions</h5>
+                                            <div id="pnlActivityLog_User">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <span><strong class="blue">Note Reason:</strong> <span id="sp_Reason">  </span>  </span>
+                                                        <span><strong class="blue">Note Type:</strong> <span id="sp_Type"> </span>  </span>
+                                                        <span><strong class="blue">Note Date:</strong> <span id="sp_Date">  </span></span>
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvUserActions">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="size150">Component Name</th>
+                                                                    <th class="size120">User</th>
+                                                                    <th class="size80">Date & Time</th>
+                                                                    <th class="size80">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                        <div id="divComponentHistory"></div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <hr class="vshort" />
+                                        <div class="col-sm-12">
+                                            <h5 class="text-bold">Component History</h5>
+                                            <div id="pnlActivityLog_NewEntry">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <div class="table-responsive Of-a">
+                                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvComponentHistory">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="size120">Component Old Value</th>
+                                                                        <th class="size120">Component New Value</th>
+                                                                        <!--<th class="size120">Component Current Value</th>-->
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+﻿<div class="row" id="pnlAdminCPTCode" style="display:none;">
+    <div id="actionPanAdminCPTCode" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_CPTCode.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search CPT Codes</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" id="btn_CPTAdd"  onclick="Admin_CPTCode.CPTCodeAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_CPTCode.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search CPT Codes </h2>
+                            </header>
+                            </div>
+                            <div class="panel-body" id="pnlCPTCode_Search">
+                                <form method="post" onsubmit="return false">
+                                    <!--start - CONTENTS-->
+                                    <div class="form-group">
+                                        <!--<div class="col-sm-2">
+                                            <label class="control-label">Short Name</label>
+                                            <input class="form-control" id="txtShortName" type="text" maxlength="10" />
+                                        </div>-->
+                                        <div class="col-sm-2">
+                                            <label class="control-label">CPT Code</label>
+                                            <input class="form-control" id="txtCPTCode" type="text" maxlength="10" />
+                                        </div>
+                                        <div class="col-sm-5 col-md-6">
+                                            <label class="control-label">Description</label>
+                                            <input class="form-control" id="txtDiscription" type="text" maxlength="55" />
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">Type Of Service</label>
+                                            <select id="lstTOSId" class="form-control" ddlist="GetTypeOfService"></select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Specialty</label>
+                                            <select id="lstSpeciality" class="form-control" ddlist="GetSpecialty"></select>
+                                        </div>
+                                        <div class="spacer5"></div>
+                                        <div class="col-sm-2 ">
+                                                <label for="chkDiscontinued">Discontinued</label>
+                                            <select id="lstDiscontinued" class="form-control">
+                                                <option value="">All</option>
+                                                <option value="true">Yes</option>
+                                                <option value="false" selected="selected">No</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Active?</label>
+                                            <select id="ddlActive" class="form-control ">
+                                                <option value="" >- All -</option>
+                                                <option value="1" selected="selected">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                        </div>
+                                        <!--<div id="divCPTCode_Entity" class="col-sm-2">
+                                             <label class="control-label">Entity</label>
+                                             <select id="ddlEntity" class="form-control" onchange="Admin_CPTCode.LoadEntityBasedData(this.value)" ddlist="GetEntity"></select>
+                                        </div>-->
+                                        <div class="col-sm-2 col-lg-1 mt-xs pull-right">
+                                            <button class="btn btn-primary btn-sm rightbtn" id="btnCPTCodeSearch" type="button" onclick="Admin_CPTCode.CPTCodeSearch();">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                    </section>
+
+                    <div id="pnlCPTCode_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="hidden" id="CPTCode_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvCPTCode">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">CPTCodeId</th>
+                                            <th id="ColumnAction" class="size-min120">Action</th>
+                                            <!--<th class="size120">Short Name</th>-->
+                                            <th class="size150">CPT Code</th>
+                                            <th class="size150">Description</th>
+                                            <th class="size150">Type Of Service</th>
+                                            <th class="size150">Specialty</th>
+                                            <th class="size150">Discontinued</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divCPTPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </div>
+   </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+
+                        $.widget("ui.autocomplete", $.ui.autocomplete, {
+                            _renderMenu: function (ul, items) {
+                                var that = this;
+                                $.each(items, function (index, item) {
+                                    that._renderItemData(ul, item);
+                                });
+                                $(ul).wrap("<div></div>");
+                            }
+                        });
+
+
+
+
+                    });
+                </script>

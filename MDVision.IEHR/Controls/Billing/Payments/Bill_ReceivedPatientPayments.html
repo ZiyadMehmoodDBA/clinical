@@ -1,0 +1,99 @@
+﻿<div class="row" id="pnlReceivedPatientPayments" style="display:none;">
+    <div id="actionPanReceivedPatientPayments" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Bill_ReceivedPatientPayments.UnLoadTab()"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Received Patient Payments</h4>
+            </div>
+            <div class="clearfix"></div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section class="panel panel-featured">
+                        <div class="panel-body" id="pnlBillCharge_Search">
+                            <form class="form-bordered" id="frmChargeSearch" method="post" onsubmit="return false">
+                                <div class="form-group">
+                                    <div class="spacer10"></div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-sm-3 col-md-2 ">
+                                        <label class="control-label" for="Payment Type">Payment Type</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtPaymentType" disabled name="PaymentType" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 ">
+                                        <label class="control-label" for="Payment Date">Payment Date</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtPaymentDate" disabled name="PaymentDate" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 ">
+                                        <label class="control-label" for="Check Number">Check Number</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtCardNo" disabled name="CardNo" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 ">
+                                        <label class="control-label " for="Amount">Amount</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtAmount" disabled name="Amount" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="spacer20"></div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <div id="pnlReceivedPatInsurance_Result">
+
+
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvReceivedPatInsurance">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="size180">Patient Insurance(s)</th>
+                                                        <th class="size90">Copay</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div class="clearfix"></div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <div class="clearfix"></div>
+                <div id="pnlReceivedPatientPayments_Result">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvReceivedPatientPayments">
+                                <thead>
+                                    <tr>
+                                        <th class="size150 ">Claim Number</th>
+                                        <th class="size180 nowrap">Patient Name</th>
+                                        <th class="size150">DOS</th>
+                                        <th class="size150">Provider</th>
+                                        <th class="size150">Facility</th>
+                                        <th class="size150">Ins Balance</th>
+                                        <th class="size150">Pat Balance</th>
+                                        <th class="size150">Payment</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div class="col-sm-12 col-md-5 pt-xs pull-right">
+                                <div class="col-sm-12 col-md-5 pt-xs pull-right">
+                                    <div class="row">
+                                        <label class="control-label bold col-xs-12" for="Amount">Total Paid : <span id="totalPaid"></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

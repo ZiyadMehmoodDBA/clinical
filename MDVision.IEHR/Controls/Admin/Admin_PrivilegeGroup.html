@@ -1,0 +1,59 @@
+﻿<div class="row" id="pnlAdminPrivilegeGroup" style="display:none;">
+    <div id="actionPanAdminPrivilegeGroup" class=" modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <button type="button" class="btn btn-success btn-sm" onclick="Admin_PrivilegeGroup.PrivilegeGroupAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>
+    <section class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions"> <a href="#" class="closebtn pull-right" onclick="Admin_PrivilegeGroup.UnLoadTab()"></a> </div>
+            <h2 class="panel-title">Search Security Entity Group</h2>
+        </header>
+        <div class="panel-body" id="pnlPrivilegeGroup_Search">
+            <form class="form-bordered" method="post" onsubmit="return false">
+                <!--start - CONTENTS-->
+                <div class="form-group">
+                    <div class="col-sm-3 col-md-3">
+                        <label class="control-label">Short Name</label>
+                        <input class="form-control" id="txtShortName" type="text" maxlength="10" />
+                    </div>
+                    <div class="col-sm-5 col-md-7">
+                        <label class="control-label">Description</label>
+                        <input class="form-control" id="txtDescription" type="text" maxlength="55" />
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                        <label class="control-label">Active?</label>
+                        <select id="ddlActive" class="form-control">
+                            <option value="">- All -</option>
+                            <option value="1" selected="selected">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-md-1 pad-a-labelsize-btn pull-right">
+                        <button class="btn btn-primary btn-sm" id="btnPrivilegeGroupSearch" type="button" onclick="Admin_PrivilegeGroup.PrivilegeGroupSearch();">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id="pnlPrivilegeGroup_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="PrivilegeGroup_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPrivilegeGroup">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">PrivilegeGroupId</th>
+                            <th class="size120">Action</th>
+                            <th class="size150">Short Name</th>
+                            <th>Description</th>
+                            <th>Is Admin</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divPrivilegeGroupPaging"></div>
+            </div>
+        </section>
+    </div>
+</div>

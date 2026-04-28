@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>API Usage &mdash; CKEditor Sample</title>
+	<script src="../../ckeditor.js"></script>
+	<link href="sample.css" rel="stylesheet">
+
+</head>
+<body>
+	
+	<form action="../../../samples/sample_posteddata.php" method="post">
+		<textarea cols="100" id="editor1" name="editor1" rows="10">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="https://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea>
+
+		<script>
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			CKEDITOR.replace( 'editor1', {
+				on: {
+					
+					// Check for availability of corresponding plugins.
+					pluginsLoaded: function( evt ) {
+						var doc = CKEDITOR.document, ed = evt.editor;
+						if ( !ed.getCommand( 'bold' ) )
+							doc.getById( 'exec-bold' ).hide();
+						if ( !ed.getCommand( 'link' ) )
+							doc.getById( 'exec-link' ).hide();
+					}
+				}
+			});
+		</script>
+
+		
+	</form>
+	
+</body>
+</html>

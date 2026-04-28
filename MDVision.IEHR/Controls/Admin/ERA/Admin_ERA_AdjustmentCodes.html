@@ -1,0 +1,58 @@
+﻿<div class="row" id="pnlAdminERAAdjustmentCodes" style="display:none;">
+    <div id="actionPanAdminERAAdjustmentCodes" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_ERAAdjustmentCodes.ERAAdjustmentCodesAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_ERAAdjustmentCodes.UnLoadTab();"></a>
+                </div>
+                <h2 class="panel-title">Search ERA Adjustment Codes </h2>
+            </header>
+            <div class="panel-body" id="pnlERAAdjustmentCodes_Search">
+                <form class="form-bordered" method="post" onsubmit="return false">
+                    <!--start - CONTENTS-->
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">ShortName</label>
+                            <input class="form-control" id="txtShortName" type="text" />
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" id="txtDescription" type="text" />
+                        </div>
+                        <div id="divERAAdjustmentCodes_Entity" class="col-sm-2">
+                            <label class="control-label">Entity</label>
+                            <select id="ddlEntity" class="form-control" ddlist="GetEntity"></select>
+                        </div>
+                        <div class="col-sm-2 pad-a-labelsize-btn pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnERAAdjustmentCodesSearch" type="button" onclick="Admin_ERAAdjustmentCodes.ERAAdjustmentCodesSearch();">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div id="pnlERAAdjustmentCodes_Result" style="display: none;">
+            <section class="panel">
+                <div class="panel-body">
+                    <input type="hidden" id="ERAAdjustmentCodes_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvERAAdjustmentCodes">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">ERAAdjustmentCodesId</th>
+                                <th class="size120">Action</th>
+                                <th class="size120">ShortName</th>
+                                <th class="size120">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+

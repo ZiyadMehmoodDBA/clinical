@@ -1,0 +1,178 @@
+﻿<div id="pnlAuditbleEventsActivityLog" style="display:none;" class="row">
+    <div id="actionPanAuditbleEventsActivityLog class=" modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog" class="modal-dialog-full">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="AuditbleEvents_ActivityLog.UnLoad()"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Activity Log</h4>
+                </div>
+                <div id="modalbody">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="clearfix"></div>
+                        <form method="post" id="frmAuditbleEventsActivityLog" onsubmit="return false">
+                            <section>
+                                <ul id="ulTabs" class="tabs-custom hidden">
+                                    <li class="liClaimHistory active" id="liClaimHistory"><a href="#" onclick="AuditbleEvents_ActivityLog.LoadClaimHistory()" data-toggle="tab">Claim History</a></li>
+                                    <li class="liPatientHistory" id="liPatientHistory"><a href="#" onclick="AuditbleEvents_ActivityLog.LoadPatientHistory()" data-toggle="tab">Patient History</a></li>
+                                    <li class="liChargestHistory" id="liChargesHistory"><a href="#" onclick="AuditbleEvents_ActivityLog.LoadChargesHistory()" data-toggle="tab">Charges History</a></li>
+                                    <li class="liNotesHistory" id="liNotesHistory"><a href="#" onclick="AuditbleEvents_ActivityLog.LoadActivityLogsNotesComments()" data-toggle="tab">Notes Log</a></li>
+                                </ul>
+                                <div id="activityLogpnlBody" class="panel-body">
+                                    <!-- Search-->
+                                    <div class="visible-sm visible-xs"><div class="clearfix"></div><span class="spacer10"></span></div>
+                                    <div class="col-xs-12 col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <label for="Account" class="control-label">Account#</label>
+                                                <input class="form-control " id="txtAccountNo" name="AccountNo" type="text" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="Last Name" class="control-label">Last Name</label>
+                                                <input type="text" class="form-control " id="txtLastName" onkeypress="return utility.checkSpecialChar(event)" name="LastName" maxlength="50">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="First Name" class="control-label">First Name</label>
+                                                <input type="text" class="form-control " onkeypress="return utility.checkSpecialChar(event)" id="txtFirstName" name="FirstName" maxlength="50">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="control-label" for="Date of Birth">Date of Birth</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                    <input class="form-control " type="text" id="dtpDOB" name="DOB" data-plugin-datepicker>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="SSN" class="control-label">SSN</label>
+                                                <input class="form-control " id="txtSSN" type="text" name="SSN" placeholder="999-99-9999" data-mask="999-99-9999" onblur="utility.validateMasking(this);" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label for="Patient Status" class="control-label">Patient Status</label>
+                                                <select id="ddlPatientStatus" name="Active" class="form-control" onchange="Patient_Demographic.IsDeathSelected(this)">
+                                                    <option value="1">Active</option>
+                                                    <option value="0">InActive</option>
+                                                    <option value="2">Deceased </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="control-label" for="Date of Birth">Date From<span class="required">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                    <input class="form-control " type="text" id="dtpDateFrom" name="DateFrom" data-plugin-datepicker="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <label class="control-label" for="Date of Birth">Date To<span class="required">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                    <input class="form-control " type="text" id="dtpDateTo" name="DateTo" data-plugin-datepicker="">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-2 pad-a-labelsize">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" name="EnergencyAccess" id="chkEnergencyAccess">
+                                                    <label class="control-label" for="EnergencyAccess">Emergency Access</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 mt-md ">
+                                                <button id="btnDemographic" class="btn btn-primary btn-sm center " type="submit">Search</button>
+                                                <!--<button class="btn btn-primary btn-sm rightbtn" id="btnPatientSearch" type="button" onclick="Patient_Search.ValidateSearchCriteria();">Search</button>-->
+                                                <button class="btn btn-primary btn-sm center" id="btnClearPatientSearch" type="button" onclick="AuditbleEvents_ActivityLog.ClearSearch_ActivityLog();">Reset</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--End Search-->
+                                    <div id="divAuditTablesData">
+
+                                        <div class="col-sm-12">
+                                            <h5 class="text-bold">User</h5>
+                                            <div id="pnlActivityLog_NewEntry">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvNewEntry">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ProfileName</th>
+                                                                    <th style="display:none;">PatientId</th>
+                                                                    <th style="display:none;">ColumnKeyId</th>
+                                                                    <th style="display:none;">DateAndTime</th>
+                                                                    <th style="display:none;">UserId</th>
+                                                                    <th class="size120">Patient</th>
+                                                                    <th class="size120">Account#</th>
+                                                                    <th class="size120">User</th>
+                                                                    <th class="size120">Profile</th>
+                                                                    <th class="size120">Date & Time</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                        <div id="dgvActivityLogUser_Paging"></div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <hr class="vshort" />
+                                        <div class="col-sm-9 col-md-6">
+                                            <h5 class="text-bold" id="UserHeading">Components</h5>
+                                            <div id="pnlActivityLog_User">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvUser">
+                                                            <thead>
+                                                                <tr>
+                                                    
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th style="display:none;">ProfileName</th>
+                                                                    <th style="display:none;">DateAndTime</th>
+                                                                    <th class="size120">Profile</th>
+                                                                    <th style="display:none;">Sub Profile</th>
+                                                                    <th class="size80">Action</th>
+                                                                    <th class="size140">Date & Time</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                        <div id="dgvActivityLogComp_Paging"></div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+  
+                                        <div class="col-sm-9 col-md-6">
+                                            <h5 class="text-bold" id="ChangesHeading">Changes</h5>
+                                            <div id="pnlActivityLog_Changes">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvChanges">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th class="size120">Field</th>
+                                                                    <th class="size60 noWordBreak">Original Value</th>
+                                                                    <th class="size120 noWordBreak">Current Value</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                        <div id="dgvActivityLogChanges_Paging"></div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

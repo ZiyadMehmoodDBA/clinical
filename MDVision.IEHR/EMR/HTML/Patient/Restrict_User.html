@@ -1,0 +1,62 @@
+﻿<div class="row" id="pnlRestrictUser" style="display:none;">
+    <!------>
+    <div id="actionPanRestrictUser" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div> <!------>
+    <div id="modaldialog" class="modal-dialog modal-dialog-md">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Restrict_User.unload();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Restrict User</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+
+                    <form class="form-bordered" method="post" onsubmit="return false" id="frmPatientRestrictUser">
+
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Add User to Restrict</h2>
+                        </header>
+                        <div class="panel-body">
+                            <div class="col-sm-6 col-md-4">
+                                <label class="control-label" for="Username">Username</label>
+                                <select class="form-control ValidateCriteria" id="ddlRestrictBy" ddlist="GetUsersFullName" onchange="Restrict_User.SelectUser(this)"></select>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+                <div class="spacer10"></div>
+                <div class="clearfix"></div>
+
+
+
+
+
+
+                <div id="pnlRestrictUser_Result">
+                    <section class="panel panel-featured">
+                        <div class="panel-body">
+                            <input type="hidden" id="Question_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvRestrictUser">
+                                <thead>
+                                    <tr>
+                                        <!--<th style="display:none;">RestrictUserId</th>-->
+                                        <th>Action</th>
+                                        <th>Restricted User</th>
+                                        <th>Break The Glass</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divRestrictUserPaging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

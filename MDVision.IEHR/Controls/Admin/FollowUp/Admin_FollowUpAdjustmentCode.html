@@ -1,0 +1,74 @@
+﻿<div class="row" id="pnlAdminFollowUpAdjustmentCode" style="display:none;">
+    <div id="actionPanAdminFollowUpAdjustmentCode" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_FollowUpAdjustmentCode.AdjustmentCodeAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_FollowUpAdjustmentCode.UnLoadTab()"></a>
+                </div>
+                <h4 class="panel-title">Claim Adjustment Codes</h4>
+            </header>
+            <div class="panel-body" id="pnlAdjustmentCode_Search">
+                <form method="post" id="frmAdjustmentCode" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label" for="Name">Code</label>
+                            <input class="form-control" id="txtCode" name="Code" type="text" maxlength="10">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="Description">Description</label>
+                            <input class="form-control" id="txtDescription" name="Description" type="text">
+                        </div>
+
+                        <!--<div class="col-sm-3 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input checked="checked" id="chkActive" type="checkbox">
+                                <label class="control-label" for="Active">Active</label>
+                            </div>
+                        </div>-->
+
+                        <!--bug# PMS-2274-->
+                        <div class="col-sm-2">
+                            <label class="control-label">Active?</label>
+                            <select id="ddlActive" name="Active" class="form-control">
+                                <option value="">- All -</option>
+                                <option value="1" selected="selected">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <!--bug# PMS-2274-->
+
+                        <div class="col-sm-2 mt-xs pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnAdjustmentCodeSearch" type="button" onclick="Admin_FollowUpAdjustmentCode.AdjustmentCodeSearch('0');">Search</button>
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+        </section>    
+    <div id="pnlAdjustmentCode_Result" style="display: inline;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="AdjustmentCode_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvAdjustmentCode">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">AdjustmentId</th>
+                            <th>Action</th>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th>Active</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divFollowUpAdjustmentCodePaging"></div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+
+

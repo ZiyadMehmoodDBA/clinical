@@ -1,0 +1,97 @@
+﻿<!--/*
+Author: Muhammad Arshad
+Date: 31/03/2016
+Overview: This function is created to show Plan Of Care
+*/-->
+<div class="row" id="pnlPlanOfCare" style="display:none;">
+    <div id="actionPanPlanOfCare" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_PlanOfCare.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Plan Of Care</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmPlanOfCare">
+
+                    <div class="col-md-3">
+                        <section class="panel panel-featured">
+                            <header class="panel-heading">
+                                <h2 class="panel-title">Goal</h2>
+                            </header>
+                            <div class="panel-body pl-none pr-none">
+                                <div class="col-xs-12 pb-xs">
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtGoal" oninput="Clinical_PlanOfCare.bindAutoComplete(this);" name="Goal" type="text" value="">
+                                        <div class="input-group-btn">
+                                            <button id="btnGoal" class="btn btn-primary btn-xs" type="button" onclick="Clinical_PlanOfCare.openCPTCode();">
+                                                <i class="glyphicon glyphicon-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul id="ulPlanOfCareGoal" name="PlanOfCareGoal" class="listPrimary own-scroll  height-max200 height200 overflowY"></ul>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-sm-12 col-md-8">
+                        <section id="sectionPlanOfCareDetail" class="panel panel-featured">
+                            <header class="panel-heading">
+                                <h2 id="headingFamilyMemberDetail" class="panel-title">Details</h2>
+                            </header>
+                            <div id="FamilyMemberDetails" class="panel-body own-scroll  height-max250 height250 overflowY disableAll">
+                                
+
+                                <div class="col-md-9">
+                                    <div class="clearfix"></div>
+                                    <label class="control-label">Instructions</label>
+                                    <textarea id="txtInstructions" name="PlanOfCareGoalInstructions" rows="3" maxlength="5000" class="form-control" spellcheck="true"></textarea>
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <label class="control-label">Clinical Instructions</label>
+                        <div class="spacer20"></div>
+                        <label class="control-label">Patient Clinical Instructions</label>
+                        <textarea id="txtClinicalInstructions" name="ClinicalInstructions" rows="3" maxlength="5000" class="form-control" spellcheck="true"></textarea>
+                    </div>
+                    <div class="spacer20"></div>
+                    <div class="col-md-12">
+
+                        <label class="control-label">Future Schedule Appointments</label>
+                        <textarea id="txtFutureScheduleAppointments" name="FutureScheduleAppointments" rows="3" maxlength="5000" class="form-control" spellcheck="true"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <label class="control-label">Patient Decision Aid</label>
+                        <textarea id="txtAid" name="Aid" rows="3" maxlength="5000" class="form-control" spellcheck="true"></textarea>
+                    </div>
+
+
+                    <div class="pull-right pad-a-labelsize-btn pr-default">
+                        <button id="aHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                        <button id="btnPlanOfCareSave" type="button" onclick="Clinical_PlanOfCare.planOfCareSave('goal');" class="btn btn-sm btn-success">Save</button>
+
+                    </div>
+                    
+                    <input type="hidden" id="hfGoalId" name="GoalId" />
+                    <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                    <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+
+                    <input type="hidden" name="PatientId" id="hfPatientId" />
+                    <input type="hidden" name="PlanOfCareId" id="hfPlanOfCareId" value="-1" />
+                    <input type="hidden" name="PlanOfCareSoapText" id="hfPlanOfCareSoapText" value="" />
+                    <input type="hidden" name="selectedGoal" id="hfSelectedGoal" />
+
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

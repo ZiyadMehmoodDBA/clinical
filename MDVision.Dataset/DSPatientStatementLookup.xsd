@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSPatientStatementLookup" targetNamespace="http://tempuri.org/DSPatientStatementLookup.xsd" xmlns:mstns="http://tempuri.org/DSPatientStatementLookup.xsd" xmlns="http://tempuri.org/DSPatientStatementLookup.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSPatientStatementLookup" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSPatientStatementLookup" msprop:Generator_UserDSName="DSPatientStatementLookup">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="StatementMessageLookup" msprop:Generator_TableClassName="StatementMessageLookupDataTable" msprop:Generator_TableVarName="tableStatementMessageLookup" msprop:Generator_TablePropName="StatementMessageLookup" msprop:Generator_RowDeletingName="StatementMessageLookupRowDeleting" msprop:Generator_RowChangingName="StatementMessageLookupRowChanging" msprop:Generator_RowEvHandlerName="StatementMessageLookupRowChangeEventHandler" msprop:Generator_RowDeletedName="StatementMessageLookupRowDeleted" msprop:Generator_UserTableName="StatementMessageLookup" msprop:Generator_RowChangedName="StatementMessageLookupRowChanged" msprop:Generator_RowEvArgName="StatementMessageLookupRowChangeEvent" msprop:Generator_RowClassName="StatementMessageLookupRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StmtMsgId" msprop:Generator_ColumnVarNameInTable="columnStmtMsgId" msprop:Generator_ColumnPropNameInRow="StmtMsgId" msprop:Generator_ColumnPropNameInTable="StmtMsgIdColumn" msprop:Generator_UserColumnName="StmtMsgId" type="xs:string" />
+              <xs:element name="ShortName" msprop:Generator_ColumnVarNameInTable="columnShortName" msprop:Generator_ColumnPropNameInRow="ShortName" msprop:Generator_ColumnPropNameInTable="ShortNameColumn" msprop:Generator_UserColumnName="ShortName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PatientStatementGroupLookup" msprop:Generator_TableClassName="PatientStatementGroupLookupDataTable" msprop:Generator_TableVarName="tablePatientStatementGroupLookup" msprop:Generator_TablePropName="PatientStatementGroupLookup" msprop:Generator_RowDeletingName="PatientStatementGroupLookupRowDeleting" msprop:Generator_RowChangingName="PatientStatementGroupLookupRowChanging" msprop:Generator_RowEvHandlerName="PatientStatementGroupLookupRowChangeEventHandler" msprop:Generator_RowDeletedName="PatientStatementGroupLookupRowDeleted" msprop:Generator_UserTableName="PatientStatementGroupLookup" msprop:Generator_RowChangedName="PatientStatementGroupLookupRowChanged" msprop:Generator_RowEvArgName="PatientStatementGroupLookupRowChangeEvent" msprop:Generator_RowClassName="PatientStatementGroupLookupRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PtStmtGrpId" msdata:Caption="StmtMsgId" msprop:Generator_ColumnVarNameInTable="columnPtStmtGrpId" msprop:Generator_ColumnPropNameInRow="PtStmtGrpId" msprop:Generator_ColumnPropNameInTable="PtStmtGrpIdColumn" msprop:Generator_UserColumnName="PtStmtGrpId" type="xs:string" />
+              <xs:element name="Name" msdata:Caption="ShortName" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="DataTable1Key1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:StatementMessageLookup" />
+      <xs:field xpath="mstns:StmtMsgId" />
+    </xs:unique>
+    <xs:unique name="PatientStatementGroupLookup_DataTable1Key1" msdata:ConstraintName="DataTable1Key1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PatientStatementGroupLookup" />
+      <xs:field xpath="mstns:PtStmtGrpId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

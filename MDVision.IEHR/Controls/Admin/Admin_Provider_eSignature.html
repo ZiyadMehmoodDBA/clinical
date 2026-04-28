@@ -1,0 +1,172 @@
+﻿<div id="pnleSignatureDetail">
+    <div id="actionPanSignatureDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-md">
+        <div id="modalcontent">
+            <div id="modalheader">
+                <button type="button" class="close" onclick="Admin_Provider_eSignature.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">eSignature Detail</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div id="pnlSection_eSignature">
+
+                        <div class="pull-left mb-sm">
+                            <button id="btn_Create_eSignatureImage_via_Device" type="button" class="btn btn-success btn-sm"
+                                    onclick=" Admin_Provider_eSignature.Create_eSignatureImage_via_Device(); ">
+                                <i class="fa fa-pencil"></i> Create
+                            </button>
+
+
+                            <!--<button id="btn_BrowseScanned_eSignatureImage" type="button" class="btn btn-success btn-sm"
+                                        onclick=" Admin_Provider_eSignature.BrowseScanned_eSignatureImage(); ">
+                                <i class="fa fa-folder-open"></i> Browse
+                            </button>-->
+
+                            <span class="btn btn-success btn-sm btn-file ">
+                                <i class="fa fa-folder-open"></i>
+                                Browse
+                                <input type="file" accept="image/*" class="txtInput" id="Upload_Image_file" name="fileupload" onchange="Admin_Provider_eSignature.BufferFile(this);" />
+                            </span>
+
+                        </div>
+
+
+                        <div class="spacer10"></div>
+                        <label style="color: red;font-weight: 600">Instructions for uploading e-signature:</label>
+                        <br />
+                        <div>
+                            1) The signature should be on a white paper with Black Ink pen.<br />
+                            2) The signature must be signed only by the applicant and not by any other person.<br />
+                            3) Dimensions should not be more than 315 x 125 pixels.
+                        </div>
+
+
+                        <div class=" text-center" id="uploadContainer" style="">
+
+
+                            <div>
+                                <!--<img id="imgUploadImage" src="" alt="" style="height: 125px; width: 315px;" class="pull-left img-responsive img-center mt-lg img-thumbnail"/>-->
+
+                                <div id="eSignatureMousepad" class="m-signature-pad">
+                                    <div class="m-signature-pad--body" style="width:317px;height:127px;">
+                                        <canvas id="eSignatureMousepadCanvas"></canvas>
+                                    </div>
+                                </div>
+                                <!--<div id="eSignatureMousepad">
+                                    <canvas style="height: 125px; width: 315px;" class="pull-left img-responsive img-center mt-lg img-thumbnail signature-pad" width="700" height="200"></canvas>
+
+                                </div>-->
+                                <!--<div class="col-sm-6">
+                                    <div id="imageBox_forDevice_eSignature" class="boxed" style="height: 35mm; width: 60mm; border: 1px solid #d3d3d3;">
+                                    </div>
+                                </div>-->
+
+
+
+
+
+                            </div>
+                        </div>
+                        <!--<div class=" text-center" style="">
+                            <div style="max-height:350px; overflow-y:auto;margin-top:0px;" class="wrapper">
+                                <canvas id="eSignature-mousepad" class="signature-pad" width="700" height="200"></canvas>
+                            </div>
+                        </div>-->
+
+                        <div class="clearfix"></div>
+
+
+
+                        <div class="col-sm-6">
+                            <div id="imageBox" class="boxed" style="visibility: hidden; height:0px;width:0px;">
+                            </div>
+                        </div>
+                        <!--<div class="form-group mt-lg">
+
+
+
+
+
+
+                            <div class=" text-center" id="uploadContainer" style="display:none;">
+
+                                <span class="btn btn-default btn-xs btn-file pull-left">
+                                    <i class="fa fa-folder-open"></i>
+                                    Browse
+                                    <input type="file" accept="image/*" class="txtInput" id="Upload_Image_file" name="fileupload" onchange="uploadImage.BufferFile(this);" />
+                                </span>
+
+
+                                <div style="max-height:350px; overflow-y:auto;margin-top:15px;">
+                                    <img id="imgUploadImage" src="" alt="your image" style="display:none;" class="img-responsive img-center mt-lg img-thumbnail" />
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                            <div class="col-xs-12 p-none" id="webcamContainer" style="display:none;">
+
+
+
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-xs-7 mb-md mt-xxs">
+                                            <select class="form-control" id="cameraNames" size="1" onchange="uploadImage.changeCamera()"></select>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <button class="btn btn-sm btn-primary" id="btn2" onclick="uploadImage.base64_toimage()">Snapshot to image</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 text-center">
+                                    <div class="col-sm-6">
+                                        <div class="visible-xs"><span class="spacer10"></span></div>
+                                        <div id="webcam" class="img-center">
+                                        </div>
+                                        <div class="visible-xs"><span class="spacer10"></span></div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img id="webCamImage" class="img-responsive img-thumbnail img-center" style="min-height:235px;" src="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+
+
+
+
+                        <div class="pull-right pad-a-labelsize-btn pr-default">
+
+                            <button id="eSignatureUndoButton" class="btn btn-primary btn-sm pull-left mr-sm" type="button"
+                                    onclick=" Admin_Provider_eSignature.Undo_eSignature(); ">
+                                Undo
+                            </button>
+
+                            <button id="eSignatureSaveButton" class="btn btn-cancel btn-sm pull-left mr-sm" type="button"
+                                    onclick=" Admin_Provider_eSignature.SavePictureNew(); ">
+                                Save
+                            </button>
+                        </div>
+
+
+                        <!--<div class="col-sm-6">
+                            <div id="imageBox_forDevice_eSignature" class="boxed" style="height:35mm;width:60mm; border:1px solid #d3d3d3;">
+                            </div>
+                        </div>-->
+
+
+
+                    </div>
+                    <!-- <div class="modal-footer"></div>-->
+                    <div class="clearfix"></div>
+                    <input type="hidden" id="VisDateId" value="0">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

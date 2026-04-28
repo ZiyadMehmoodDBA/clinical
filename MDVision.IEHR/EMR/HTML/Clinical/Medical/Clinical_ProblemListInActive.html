@@ -1,0 +1,84 @@
+﻿<div id="Clinical_ProblemListInActive">
+    <div id="actionPanProblemListInActive" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_ProblemListInActive.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titleBlockReason">Active/Inactive Problem</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmProblemListInActive">
+                    <div class="col-sm-4">
+                        <label class="control-label" for="Start Date">End Date</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                            <input type="text" class="form-control" id="dpEndDate" name="EndDate" data-plugin-datepicker>
+                        </div>
+                    </div>
+                    <div class="spacer15"></div>
+                    <div class="pull-left pl-default pr-default">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Resolved" name="chkBox"><label class=" control-label">Resolved</label>
+                        </div>
+                    </div>
+                    <div class="pull-left pl-default pr-default">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Inactive" name="chkBox"><label class="control-label">Inactive</label>
+                        </div>
+                    </div>
+                    <div class="pull-left pl-default pr-default">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Well-Controlled" name="chkBox"><label class="control-label">Well-Controlled</label>
+                        </div>
+                    </div>
+                    <div class="pull-left pl-default pr-default">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Poorly-Controlled" name="chkBox"><label class="control-label">Poorly-Controlled</label>
+                        </div>
+                    </div>
+                    <div class="pull-left pl-default pr-default">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Others" name="chkBox"><label class="control-label">Others</label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-12 mt-sm">
+                        <label class="control-label" for="comments">Comments</label>
+                        <textarea class="form-control" rows="3" id="txtComments" name="Comments" spellcheck="true"></textarea>
+                    </div>
+                    <div class="col-sm-12 pt-sm pull-right">
+                        <button type="button" class="btn btn-sm btn-primary rightbtn" onclick="Clinical_ProblemListInActive.ProblemListCancel();">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-primary rightbtn" onclick="Clinical_ProblemListInActive.ProblemListInActive();">OK</button>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        $("#Clinical_ProblemListInActive input:checkbox").on('click', function () {
+            // in the handler, 'this' refers to the box clicked on
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                // the name of the box is retrieved using the .attr() method
+                // as it is assumed and expected to be immutable
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                // the checked state of the group/box on the other hand will change
+                // and the current value is retrieved using .prop() method
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            } else {
+                $box.prop("checked", false);
+            }
+        });
+
+    });
+
+
+</script>

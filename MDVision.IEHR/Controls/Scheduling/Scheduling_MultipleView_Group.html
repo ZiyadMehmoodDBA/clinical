@@ -1,0 +1,74 @@
+﻿<div id="multipleViewGroup" style="display:none;">
+    <div id="actionPanMultipleViewGroup" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+
+                <button type="button" class="close" onclick="multipleViewGroup.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Schedule Group Search</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmMultipleViewGroup" onsubmit="return false">
+                    <div class="form-group">
+
+                        <button type="button" class=" btn btn-success btn-sm" id="btnMultipleViewGroupAdd" onclick="multipleViewGroup.ScheduleGroupAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                        <div class="spacer5"></div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label">Name</label>
+                            <input class="form-control " name="name" id="txtShortName" type="text" />
+                        </div>
+
+                        <div id="divMultipleView_Entity" class="col-sm-2">
+                            <label class="control-label">Entity</label>
+                            <select id="ddlEntity" class="form-control " name="Entity" ddlist="GetEntity"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Active?</label>
+                            <select id="chkIsActice" class="form-control">
+                                <option value="" selected="selected">- All -</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <label class="control-label">Description</label>
+                            <input class="form-control " id="txtDescription" type="text" />
+                        </div>
+
+
+                        <div class="col-sm-1 mt-md pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnAppointmentStatusSearch" type="button" onclick="multipleViewGroup.ScheduleGroupSearch();">Search</button>
+                        </div>
+                    </div>
+
+                    <div class="spacer10"></div>
+
+
+                    <div id="pnlMultipleViewGroup_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body panel-featured">
+                                <input type="hidden" id="MultipleViewGroup_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-hover table-condensed mb-none" id="dgvMultipleViewGroup">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">MSGroupId</th>
+                                            <th class="size110">Action</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Active</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

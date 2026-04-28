@@ -1,0 +1,145 @@
+﻿<div id="pnlImmunization_AddVaccine">
+    <div id="actionPanImmunization_AddVaccine" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-lg">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Immunization_AddVaccine.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Add Immunization</h4>
+            </div>
+            <div id="modalbody" class="panel-body">
+                <form id="frmAddImmunization">
+                    <div class="col-md-9">
+                        <label class="control-label">Immunization Name<span class="required">*</span></label>
+                        <input class="form-control" id="txtImmunizationName" type="text" name="ImmunizationName" maxlength="255">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">CVX Code<span class="required">*</span></label>
+                        <input class="form-control" id="txtCVX" type="text" name="CVX" maxlength="15">
+
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="control-label">CPT Code</label>
+                        <div class="input-group">
+                            <input class="form-control" description="" code="" id="txtCPTCode" placeholder="search" type="text" name="CPTCode" oninput="Immunization_AddVaccine.bindAutoComplete(this,'CPT')" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary btn-xs " type="button" onclick="Immunization_AddVaccine.openCPTCode('CPT');"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="control-label">Admin Code</label>
+                        <div class="input-group">
+                            <input class="form-control" description="" code="" id="txtAdminCode" placeholder="search" type="text" name="AdminCode" oninput="Immunization_AddVaccine.bindAutoComplete(this, 'AdminCPT')" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary btn-xs " type="button" onclick="Immunization_AddVaccine.openCPTCode('AdminCPT');"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 pl-none pb-tiny" hidden>
+                        <label class="control-label" for="Problems">Problems</label>
+                        <div class="input-group">
+                            <input class="form-control" data-popupunload="false" id="txtProblems" oninput="Immunization_AddVaccine.BindICD9AutoComplete(this)" name="ProblemName" type="text" value="">
+                            <div class="input-group-btn">
+                                <button id="btnProblems" class="btn btn-primary btn-xs " type="button" onclick="Immunization_AddVaccine.OpenSearchPopup()"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive" hidden>
+                        <table class="table table-striped table-condensed table-hover table-bordered" id="dgvVaccineProblems">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">NDC Code</label>
+                        <input class="form-control" id="txtNDCCode" type="text" name="NDCCode" maxlength="110">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="control-label">Dose</label>
+                        <input class="form-control" id="txtDose" type="number" name="Dose">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label" for="ddlAmount">Amount</label>
+                        <select id="ddlAmount" name="Amount" class="form-control" ddlist="GetVaccineAmount"></select>
+
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label" for="ddlManufacture">Manufacture</label>
+                        <select id="ddlManufacture" name="ManufactureIds" multiple="multiple" ddlmultilist="GetVaccineManufacturer" class="form-control"></select>
+                    </div>
+                    <div class="col-md-3 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="IsActive" name="IsActive" checked>
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+                    <div class="spacer15"></div>
+                    <div class="splitter">
+                        VIS Information
+                    </div>
+                    <section>
+                        <div>
+                            <div class="col-md-3">
+                                <label class="control-label">Date on VIS</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input type="text" class="form-control" id="dpVISDate" name="VISDate" data-plugin-datepicker>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">Document Name</label>
+                                <input class="form-control" id="txtDocumentName" type="text" name="DocumentName" maxlength="500">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">Document Link</label>
+                                <input class="form-control" id="txtDocumentLink" type="text" name="DocumentLink">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">VIS Fully Encoded Text</label>
+                                <input class="form-control" maxlength="60" id="txtVISFullyEncodedText" type="number" name="VISFullyEncodedText">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 pull-right mt-md">
+                            
+                            <button class="btn btn-success btn-sm rightbtn" type="button" id="VisButton" onclick="Immunization_AddVaccine.VisButtonClick()">Add VIS Informtion</button>
+                            <button class="btn btn-success btn-sm rightbtn" type="button" id="VisCancelButton" onclick="Immunization_AddVaccine.VisCancleClick()">Cancel</button>
+                        </div>
+                        <input id="WhatVisButtonDo" value="1" hidden />
+                        <input id="WhichRowEdit" value="" hidden />
+
+                    </section>
+                    <div class="spacer10"></div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-condensed table-hover table-bordered" id="dgvVISInformation">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>VIS Date</th>
+                                    <th>Document Name</th>
+                                    <th>Document Link</th>
+                                    <th>VIS Fully Encoded Text</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="col-sm-4 pull-right mt-md">
+                        <button class="btn btn-success btn-sm rightbtn" type="submit" id="btnAdd">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

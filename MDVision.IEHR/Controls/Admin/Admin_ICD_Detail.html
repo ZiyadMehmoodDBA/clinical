@@ -1,0 +1,90 @@
+﻿<div id="ICDDetail">
+    <div id="actionPanICDDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ICDDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">ICD</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblICDDetail" class="col-md-12">
+                    <form method="post" id="frmICDDetail" onsubmit="return false">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label" id="lblICDAndDescription">ICD Code / Description</label>
+                                <!--<a class="control-label" type="" hidden="hidden" href="#" onclick="SupperBillDetail.OpenIMODetail(this, null, 'ICDDetail');" id="anchorICD9">ICD9<span class="required">*</span></a>-->
+                                <input class="form-control" id="txtICDAndDescription" oninput="ICDDetail.BindICD9AutoComplete(this)" name="ICDAndDescription" type="text" placeholder="Search ICD Code / Description" value="">
+                            </div>
+                            <div id="divICDFields" class="form-group mt-md">
+                                <div class="col-sm-4">
+                                    <label class="control-label" id="lblICD9">ICD9</label><span class="required">*</span>
+                                    <a class="control-label" type="" hidden="hidden" href="#" onclick="SupperBillDetail.OpenIMODetail(this, null, 'ICDDetail');" id="anchorICD9">ICD9<span class="required">*</span></a>
+                                    <input class="form-control" id="txtICD9Code" name="ICD9" type="text" value="" maxlength="10">
+                                    <!--<input class="form-control" id="txtICD9Code" oninput="ICDDetail.BindICD9AutoComplete(this)" name="ICD9" type="text" placeholder="Search Code" value="">-->
+                                </div>
+                                <div class="col-sm-8">
+                                    <label class="control-label">ICD9 Description</label><span class="required">*</span>
+                                    <input class="form-control" id="txtICD9Description" name="ICD9Description" type="text" maxlength="500" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label" id="lblICD10">ICD10</label>
+                                    <a class="control-label" type="" hidden="hidden" href="#" onclick="SupperBillDetail.OpenIMODetail(this, null, 'ICDDetail');" id="anchorICD10">ICD10<span class="required">*</span></a>
+                                    <!--<input class="form-control" id="txtICD10Code" name="ICD10" oninput="ICDDetail.BindICD10AutoComplete(this);" type="text" placeholder="Search Code" value="">-->
+                                    <input class="form-control" id="txtICD10Code" name="ICD10" type="text" value="" maxlength="10">
+
+                                </div>
+                                <!--<div class="col-sm-3">
+                                    <label class="control-label">ICD Code</label><span class="required">*</span>
+                                    <input class="form-control" id="txtICD9" name="ICD9" type="text" maxlength="6" />
+                                </div>-->
+                                <div class="col-sm-8">
+                                    <label class="control-label">ICD10 Description</label>
+                                    <input class="form-control" id="txtICD10Description" name="ICD10Description" type="text" maxlength="500" />
+                                </div>
+                                <!--<div class="col-sm-3 pr-md" id="divICDCode_Entity">
+                                    <label class="control-label">Entity<span class="required">*</span></label>
+                                    <select id="ddlEntity" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                                </div>
+                                <div class="col-sm-3 pr-md">
+                                    <label class="control-label">ICD Type</label>
+                                    <select id="ddlICDType" class="form-control">
+                                        <option value="0" selected="selected" >ICD-9</option>
+                                        <option value="1">ICD-10</option>
+                                    </select>
+                                </div>-->
+                                <div class="col-sm-4">
+                                    <label class="control-label">SNOMED Code</label>
+                                    <input class="form-control" id="txtSnomedCode" name="Snomed" type="text" maxlength="10" />
+                                </div>
+                                <div class="col-sm-8">
+                                    <label class="control-label">SNOMED Description</label>
+                                    <input class="form-control" id="txtSnomedDescription" name="SnomedDescription" type="text" maxlength="500" />
+                                </div>
+                                <div class="col-sm-4 pad-a-labelsize">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" checked="" name="ActivelyUsed" id="chkActivelyUsed">
+                                        <label for="chkActivelyUsed">Actively Used</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pad-a-labelsize">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" name="Valid" checked="" id="chkValid">
+                                        <label for="chkValid">Valid</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 pad-a-labelsize-btn pull-right">
+                                    <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                                    <!--<button id="btnHistoryICD" class="btn btn-primary btn-sm rightbtn" type="button" onclick="ICDDetail.ShowHistory();">History</button>-->
+                                </div>
+                            </div>
+                        </div>
+                        <input class="form-control" type="hidden" id="hfLexiCode" name="hfLexiCode" value="" />
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

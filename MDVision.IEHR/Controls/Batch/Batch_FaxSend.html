@@ -1,0 +1,179 @@
+﻿<div id="Batch_FaxSend">
+    <div id="actionPanBatch_FaxSend" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Batch_FaxSend.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Compose Fax</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblBatch_FaxSend" class="col-sm-12">
+                    <form method="post" onsubmit="return false" id="frmBatch_FaxSend">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <!--<div class="col-sm-6">
+                                        <label for="to">To</label>
+                                        <span><a href="#" onclick="Batch_FaxSend.AddContacts();">Add Contacts</a></span>
+                                        <input type="text" class="form-control" name="to" id="to">
+                                    </div>-->
+                                    <div class="col-sm-6">
+                                        <label for="to">To</label>
+                                        <div class="col-sm-6 pull-right">
+                                            <span><a href="#" onclick="Batch_FaxSend.AddContacts();">Add Contact</a></span>
+                                        </div>
+                                      <!--  <input type="text" class="form-control" name="to" id="to">-->
+                                        <select id="ddlNotesOutgroinRefs" multiple="multiple" ddlmultilist="GetOutgoingReferrals" class="form-control"></select>
+
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <!--<label for="toFaxNumber">Fax Number<span><a onclick="Batch_FaxSend.RecipientAdd();">    Add Recipient -> </a></span></label>
+                                        <input class="form-control" id="toFaxNumber" name="faxnumber" type="text" placeholder="(999)-999-9999" maxlength="50" data-mask="(999) 999-9999" onblur="utility.ValidateCtrlMask('frmBatch_FaxSend', this);" />-->
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <label class="control-label">From<span class="required">*</span></label>
+                                        <select id="from" name="from" class="form-control" title="- Select -"></select>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="fromfaxnumber">Fax Number<span class="required">*</span></label>
+                                        <input type="text" class="form-control" name="fromFaxnumber" id="fromfaxnumber">
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label for="subject">Subject<span class="required">*</span></label>
+                                        <input type="text" class="form-control" name="subject" id="subject">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="toCarbonCopy"><span><a class="btn btn-xs" onclick="Batch_FaxSend.openCarvonCopyContacts();">CC</a></span></label>
+                                <input class="form-control" id="toCarbonCopy" name="CarbonCopy" type="text" />
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="panel-body">
+                                    <strong>Fax Recipient List</strong>
+                                    <button id="openContacts" class="btn btn-success btn-xs rightbtn" type="button" onclick="Batch_FaxSend.openContacts();">
+                                        Address Book
+                                    </button>
+                                    <div class="height-max200 col-xs-12 p-none own-scroll">
+                                        <table class="table table-condensed table-noBorder" id="faxRecipients">
+                                            <thead>
+
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="resp">
+
+
+
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="control-label">Letter/Custom Form</label>
+                                    <select ddlist="GetCustomFormLetters" id="letterCustomForm" class="form-control" title="- Select -" onchange="Batch_FaxSend.selectCustomFormLetter(this);"></select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-md mt-md">
+
+                            <div class="dropdown dropdown-custom pull-left ml-xs" id="ddlAttachments">
+                                <button class="btn btn-default btn-xs" type="button" data-toggle="dropdown"> <i class="fa fa-folder-open"></i> Attachments <span class="caret"></span></button>
+                                <ul class="dropdown-menu">                                    
+                                    <li><a href="#" onclick="Batch_FaxSend.LoadPatientDocuments()">Patient Documents</a></li>                                    
+                                    <li><input type="file" name="Attach_Import_file" accept="application/pdf,image/jpg,image/bmp,image/png,image/jpeg,image/gif,application/html" id="Attach_Import_file" multiple style="visibility: hidden; width: 1px; height: 1px" onchange="Batch_FaxSend.BufferFile(this);"/>
+                                    <a href="#" onclick="document.getElementById('Attach_Import_file').click(); return false">  My Computer</a></li>                                                                
+                                 </ul>
+                            </div>
+                           
+                            <!--<span class="btn btn-default btn-xs mb-md mt-md btn-file">
+                                
+                                <span>Attach File</span>
+                                <input type="file" name="fileToUpload" id="fileToUpload" />
+                              
+                            </span>-->
+                            <label><span class="required">*</span></label>
+                            <a href="#" id="fileEdit" style="display:none;" onclick="Batch_FaxSend.AnnotateFile();">Preview</a>
+                            <span id="filename"></span>
+                            <a id="btnRemoveAttachment" onclick="Batch_FaxSend.RemoveAttachment(this);" class="btn btn-link btn-xs closeBtn hidden" title="Remove Attachment"><i class="fa fa-times"></i></a>
+                            <!--
+                              <span>
+
+                                <button type="button" id="Classify" class="btn btn-primary btn-sm mt-sm" data-toggle="tooltip" title="" data-placement="top" onclick="Batch_FaxSend.loadClassifyPages();">Classify Selected Pages</button>
+
+                            </span>
+                                -->
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label><!--<span class="required">*</span>-->
+                            <div id="divTinyMce" class="form-group">
+                                <textarea cols="100" id="message" name="message" spellcheck="true" class="form-control"></textarea>
+                                <input type="hidden" id="EncodedImageString" value="" />
+                                <input type="file" id="ImageUploaderTinymce" style="display:none">
+                                <!--<textarea type="text" class="form-control" name="message" id="message"></textarea>-->
+                            </div>
+                        </div>
+                        <div style="display:none;" id="frmCustomFormPreview">
+                            <div id="containerCustomFormPreview" class="NoRadiusT">
+                                <ul id="customFormDetails" class="list-unstyled dragableGrid" style="width:100% !important; min-height:500px;"></ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2 pl-none">
+                                <button type="submit" id="btnSendFaxTestSimpleModel" class="btn btn-success btn-sm mt-sm" data-toggle="tooltip" title="" data-placement="top" data-original-title="Attach File">Send</button>
+                            </div>
+                            <!--
+                            <div class="col-sm-2">
+                                <input type="checkbox" id="schedule" />
+                                <label>Schedule</label>
+                            </div>
+                                -->
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 pt-xs pl-none problemsListDiv" style="display:none;width:100%">
+                            <div id="divLabTestGrid" class="panel panel-featured">
+                                <div class="panel-body p-none">
+                                    <ul id="customFormProblemsList" class="listPrimary own-scroll height-max180"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 pt-xs pl-none proceduresListDiv" style="display:none;width:100%">
+                            <div id="" class="panel panel-featured">
+                                <div class="panel-body p-none">
+                                    <ul id="customFormProceduresList" class="listPrimary own-scroll height-max180"></ul>
+                                </div>
+                            </div>
+                        </div> 
+                        <input type="hidden" id="hfPatientId" name="hfPatient" />
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <script type="x/kendo-template" id="page-templateLegacy">
+                <div class="page-template" id="legacyViewTemplateDiv">
+                    <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                        <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                        <div id="ClinicalReportsFooterTextLegacy" class="blueBgPrint" style="float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                            Generated by:<span id="ClinicalReportsFooterLegacy">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                        </div>
+                    </div>
+
+                </div>
+            </script>
+
+            <div id="CustomeformprintparentdivFax"></div>
+        </div>
+    </div>
+</div>

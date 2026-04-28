@@ -1,0 +1,75 @@
+﻿<div class="row" id="pnlClinicalOrderSets">
+    <div id="actionPanClinicalOrderSets" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_OrderSets.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Order Sets</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button id="OrderSetAdd" type="button" class="btn btn-success btn-sm" onclick="Clinical_OrderSets.AddOrderSet();"><i class="fa fa-plus-circle"></i> Add</button> <!------>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_OrderSets.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Orderset</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlSection_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalOrderSets">
+                                <div class="form-group">
+                                    <div class="col-md-2 col-sm-3">
+                                        <label class="control-label" for="Name">Name</label>
+                                        <input class="form-control" id="txtName" type="text">
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3" id="divOrderSetsSpecialty">
+                                        <label class="control-label">Specialty </label>
+                                        <select id="ddlSpecialty" multiple="multiple" name="Specialty" class="form-control"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3" id="divProvider">
+                                        <select class="form-control" style="display:none;" name="hiddenProvider" id="ddlHiddenProvider"></select>
+                                        <label class="control-label">Provider</label>
+                                        <select class="form-control" multiple="multiple" name="Provider" id="ddlProvider"></select>
+                                    </div>
+
+                                    <div class="col-sm-1 pull-right pad-a-labelsize-btn">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="sectionSearch" type="submit" onclick="Clinical_OrderSets.OrderSetsSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlOrderSets_Result">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="hidden" id="CPTCode_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOrderSets">
+                                    <thead>
+                                        <tr>
+                                            <th class="size100">Action</th>
+                                            <th>Name</th>
+                                            <th style="width: 400px;">Specialty</th>
+                                            <th>Provider</th>
+                                            <th class="noWordBreak">Last Updated</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divOrderSetsPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                    <input type="hidden" id="hfSectionId" value="-1" />
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

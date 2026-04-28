@@ -1,0 +1,70 @@
+﻿<div id="typeOfServiceDetail">
+    <div id="actionPantypeOfServiceDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="typeOfServiceDetail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Type Of Service</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tbltypeOfServiceDetail" class="col-md-12 ">
+                    <form method="post" onsubmit="return false" id="frmTypeOfServiceDetail">
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Code</label><span class="required">*</span>
+                                <input class="form-control" id="txtCode" name="Code" type="text" maxlength="2" />
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="control-label">Name</label><span class="required">*</span>
+                                <input class="form-control" id="txtName" name="Name" type="text" maxlength="55" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <label class="control-label">Description</label>
+                                <input class="form-control" id="txtDescription" name="Description" type="text" maxlength="55" />
+                            </div>
+                            <div class="col-xs-2 pad-a-labelsize" id="pnlIsActive">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 pull-right mt-md">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                                <!--<button id="btnHistoryTOS" class="btn btn-primary btn-sm rightbtn" type="button" onclick="typeOfServiceDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                       
+                        
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+                <div id="pnlTOSPlanInfo">
+                  
+                    <div class="spacer10"></div>
+                    <section>
+                        <form>
+                        <div class="panel-body">
+                            <table id="dgvTOSPlanInfo" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size85" >Actions</th>
+                                        <th controlid="txtTOSPlan" controlwidth="" isoptional="0" hfcontrolid="hfPlan" coltype="AutoComplete" containerctrl="typeOfServiceDetail" autocompletemethod="InsurancePlan" name="Insurance Plan" customname="Insurance Plan" searchmethod="typeOfServiceDetail.OpenInsurancePlan(null)">Plan</th>
+                                        <th controlid="txtTOS" controlwidth="custom-width-auto" isoptional="0"  coltype="textbox">TOS</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <a href="javascript:typeOfServiceDetail.rowAdd()">Add Line Item</a>
+                        </div>
+                            </form>
+                    </section>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,146 @@
+﻿<div id="pnlIndividualProvider" style="display:none;" class="row">
+    <div id="actionPanIndividualProvider" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog" class="modal-dialog-full">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="pnlAdminMIPSPreference_IndividualProvider.UnLoad()"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Activity Log</h4>
+                </div>
+                <div id="modalbody">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="clearfix"></div>
+                        <form method="post" id="frmMIPSlIndividualProvider" onsubmit="return false">
+                            <section>
+                                <ul id="ulTabs" class="tabs-custom hidden">
+                                    <li class="liClaimHistory active" id="liClaimHistory"><a href="#" onclick="pnlAdminMIPSPreference_IndividualProvider.LoadClaimHistory()" data-toggle="tab">Claim History</a></li>
+                                    <li class="liPatientHistory" id="liPatientHistory"><a href="#" onclick="pnlAdminMIPSPreference_IndividualProvider.LoadPatientHistory()" data-toggle="tab">Patient History</a></li>
+                                    <li class="liChargestHistory" id="liChargesHistory"><a href="#" onclick="pnlAdminMIPSPreference_IndividualProvider.LoadChargesHistory()" data-toggle="tab">Charges History</a></li>
+                                    <li class="liNotesHistory" id="liNotesHistory"><a href="#" onclick="pnlAdminMIPSPreference_IndividualProvider.LoadActivityLogsNotesComments()" data-toggle="tab">Notes Log</a></li>
+                                </ul>
+                                <div id="activityLogpnlBody" class="panel-body">
+                                    <div class="visible-sm visible-xs"><div class="clearfix"></div><span class="spacer10"></span></div>
+                                    <div class="col-xs-12 col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-4 col-md-2" id="providerDiv">
+                                                <label class="control-label">Provider</label>
+                                                <div class="input-group">
+                                                    <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" group="" onblur="utility.FillProviderNPI('#pnlIndividualProvider #frmMIPSlIndividualProvider', '#hfProvider', '#txtNPI')" oninput="    MIPSPreference_IndividualProvider.ResetNPI();" customname="Provider"  maxlength="100" />
+                                                    <div class="input-group-btn">
+                                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="MIPSPreference_IndividualProvider.OpenProvider();"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label">Specialty</label>
+                                                <select id="ddlSpeciality" class="form-control" ddlist="GetSpecialty"></select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label" for="NPI">NPI</label>
+                                                <input type="text" class="form-control" name="NPI" id="txtNPI" placeholder="(999) 999-9999" data-mask="9999999999" onchange="MIPSPreference_IndividualProvider.ResetProvider();" onkeypress=" return utility.ValidateZero(event, this);" onblur="    utility.FillProviderNPI('#pnlIndividualProvider #frmMIPSlIndividualProvider', '#hfProvider', '#txtNPI')">
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label">Entity </label>
+                                                <select id="lstEntityId" class="form-control" ddlist="GetEntity"></select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label for="Practice Type" class="control-label">Practice Type</label>
+                                                <select id="ddlPracticeType" name="Active" class="form-control">
+                                                    <option selected="selected" value="">-Select-</option>
+                                                    <option value="0">Large </option>
+                                                    <option value="1">Small </option>
+                                                    <option value="1">Rural </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label for="MIPS Eligibility" class="control-label">MIPS Eligibility</label>
+                                                <select onchange="MIPSPreference_IndividualProvider.changeEligibility(this.value);" id="ddlMIPSEligibility" name="Active" class="form-control">
+                                                    <option selected="selected" value="">-Select-</option>
+                                                    <option value="1">Eligible </option>
+                                                    <option value="0">Ineligible  </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label for="Ineligible" class="control-label">Ineligible</label>
+                                                <select id="ddlIneligible" name="Active" class="form-control disableAll">
+                                                    <option selected="selected" value="">-Select-</option>
+                                                    <option value="0">Does Not meet low-volume threshold for 2018 </option>
+                                                    <option value="1">Newly enrolled in Medicare </option>
+                                                    <option value="2">Qualifying APM Participant (QP) </option>
+                                                    <option value="3">Partially Qualifying APM Participant (Partial QP) </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label for="Reporting MIPS" class="control-label">Reporting MIPS</label>
+                                                <select id="ddlReportingMIPS" name="Active" class="form-control">
+                                                    <option selected="selected" value="">-Select-</option>
+                                                    <option value="1">Yes </option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label for="Reporting Type" class="control-label">Reporting Type</label>
+                                                <select id="ddlReportingType" name="Active" class="form-control">
+                                                    <option selected="selected" value="">-Select-</option>
+                                                    <option value="0">Individual</option>
+                                                    <option value="1">Group</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="col-sm-4 col-md-2">
+                                                <label for="Reporting Method" class="control-label">Reporting Method</label>
+                                                <select id="ddlReportingMethod" name="Active" class="form-control">
+                                                    <option selected="selected" value="">-Select-</option>
+                                                    <option value="0">MD Vision EHR</option>
+                                                    <option value="1">Sovereign Health Registry</option>
+                                                    <option value="2">Sovereign QCDR</option>
+                                                </select>
+                                            </div>
+                                           
+
+                                           
+                                          
+                                            <input type="hidden" id="hfProvider" name="ProviderId" />
+                                            
+                                            <div class="col-sm-4 col-md-2 mt-md ">
+                                                <button id="btnDemographic" class="btn btn-primary btn-sm center " type="button" onclick="MIPSPreference_IndividualProvider.Search_MIPSIndiviualPreferences()">Search</button>
+                                                
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--End Search-->
+                                    <div class="spacer20"></div>
+                                    <div class="spacer20"></div>
+                                    <div id="divTablesData">
+
+                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvMIPSIndividualPreferences">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none;">MIPSProviderId</th>
+                                                    <th>Provider Name</th>
+                                                    <th>Specialty</th>
+                                                    <th>NPI</th>
+                                                    <th>TIN</th>
+                                                    <th>Entity</th>
+                                                    <th>MIPS Eligibility</th>
+                                                    <th>Reporting MIPS</th>
+                                                    <th>Reporting Type</th>
+                                                    <th>Reporting Method</th>
+                                                    <th>Performance Year</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="divdgvMIPSIndividualPreferencesPaging"></div>
+                                    </div>
+
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

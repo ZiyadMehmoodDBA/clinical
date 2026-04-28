@@ -1,0 +1,130 @@
+﻿<div id="referringproviderDetail">
+    <div id="actionPanAdminReferringProviderDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="referringproviderDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Referring Provider</h4>
+            </div>
+            <div class="modal-body" id="tblreferringproviderDetail">
+
+                <form method="post" onsubmit="return false" id="frmReferringProviderDetail">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label" for="Last Name">Last Name<span class="required">*</span></label>
+                            <input class="form-control" name="LastName" id="txtLastName" type="text" maxlength="60">
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="First Name">First Name<span class="required">*</span></label>
+                            <input class="form-control" name="FirstName" id="txtFirstName" type="text" maxlength="35">
+                        </div>
+                        <div class="col-sm-1">
+                            <label class="control-label" for="MI Name">M.I</label>
+                            <input class="form-control" name="MI" id="txtMI" type="text" maxlength="1">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="NPI">NPI<span class="required">*</span></label>
+                            <input class="form-control" name="NPI" id="txtNPI" type="text" data-ProviderData="" onblur=" utility.validateMasking(this);" placeholder="9999999999" data-mask="9999999999">
+                        </div>
+                        <div class="col-sm-3 ">
+                            <label class="control-label">Specialty </label>
+                            <select id="ddlSpecialty" name="speciality" class="form-control" ddlist="GetSpecialty"></select>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <label class="control-label ">Taxonomy Code</label>
+                            <input id="txtTaxonomyCode" name="TaxonomyCode" class="form-control" type="text" maxlength="10" />
+                        </div>
+                        <div class="col-sm-3 ">
+                            <label class="control-label">Profile Type </label>
+                            <select id="ddlProfileType" name="profiletype" class="form-control" ddlist="GetProfileType"></select>
+                        </div>
+                        <div class="col-sm-3" style="display:none">
+                            <label class="control-label" for="State">State Licence Number</label>
+                            <input class="form-control" name="State" id="txtStateLicenceNumber"  type="text"  maxlength="50">
+
+                        </div>
+                        <div class="col-sm-3 ">
+                            <label class="control-label" for="Address">Address 1</label>
+                            <input class="form-control" name="Address" id="txtAddress" type="text" maxlength="55">
+                        </div>
+                        <div class="col-sm-3 ">
+                            <label class="control-label" for="Address2">Address 2</label>
+                            <input class="form-control" name="Address2" id="txtAddress2" type="text" maxlength="55">
+                        </div>
+                        <div class="col-sm-3 p-none">
+                                <div class="col-xs-8">
+                                    <label class="control-label" for="City">City</label>
+                                    <input class="form-control" id="txtCity" name="City" type="text" maxlength="25">
+                                </div>
+                                <div class="col-xs-4">
+                                    <label class="control-label" for="State">State</label>
+                                    <input id="txtState" class="form-control" type="text" name="state" style="text-transform:uppercase" placeholder="AA" data-mask="aa" />
+                                </div>
+                        </div>
+                        <div class="col-sm-3  p-none">
+                            <div class="col-xs-8">
+                                <label class="control-label pull-left ">Zip</label>
+                                <input id="txtZipCode" class="form-control" name="ZipCode" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#referringproviderDetail #frmReferringProviderDetail', '#txtZipCode', '#txtCity', '#txtState')" />
+                            </div>
+                            <div class="col-xs-4 pad-a-labelsize">
+                                <input id="txtZipCodeExt" name="ZipCodeExt" class="form-control" type="text" placeholder="9999" data-mask="9999" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <label class="control-label" for="Email">Email</label>
+                            <input class="form-control" id="txtEmail" name="Email" type="text" placeholder="eg.: john@abc.com" maxlength="55" onblur="referringproviderDetail.EnableValidation(this)">
+                        </div>
+                        <div class="col-sm-3  p-none">
+                            <div class="col-xs-8">
+                                <label class="control-label" for="Telephone">Telephone</label>
+                                <input class="form-control" id="txtTelephone" name="Telephone" type="text" placeholder="(999)999-9999" data-mask="(999)999-9999">
+                            </div>
+                            <div class="col-xs-4">
+                                <label class="control-label" for="Ext">Ext</label>
+                                <input id="txtTelephoneExt" class="form-control" type="text" name="Ext" placeholder="99999" maxlength="5" onkeypress="return utility.ValidateZero(event, this);" />
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-3 ">
+                            <label class="control-label" for="Fax">Fax</label>
+                            <input class="form-control" id="txtFax" name="Fax" type="text" placeholder="(999)999-9999" data-mask="(999)999-9999">
+                        </div>
+                        <div class="col-sm-3 ">
+                            <label class="control-label" for="Cell">Cell</label>
+                            <input class="form-control" id="txtCell" name="Cell" type="text" placeholder="(999)999-9999" data-mask="(999)999-9999">
+                        </div>
+                        <div id="divReferringProvider_Entity" class="col-sm-3 ">
+                            <label class="control-label">Entity<span class="required">*</span></label>
+                            <select id="ddlEntity" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                        </div>
+                        <div class="col-sm-3  pad-a-labelsize">
+                            <div class="col-sm-5">
+                            <div class="checkbox-custom checkbox-default">
+                              <input type="checkbox" name="Active" id="chkActive" checked>
+                             <label class="control-label" for="chkActive">Active</label>
+                            </div>
+                          </div>
+                            <div class="col-sm-7">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsSovereign" id="chkIsSovereign">
+                                    <label class="control-label" for="chkIsSovereign">Is Sovereign</label>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                        <div class="col-sm-3 col-xs-6 mt-md pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit"> Save & Exit</button>
+                            <!--<button id="btnHistoryRefProv" class="btn btn-primary btn-sm rightbtn" type="button" onclick="referringproviderDetail.ShowHistory();">History</button>-->
+                        </div>
+
+                    </div>
+                </form>
+                <div class="spacer10"></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+</div>

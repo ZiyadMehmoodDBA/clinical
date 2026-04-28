@@ -1,0 +1,257 @@
+﻿<div id="pnlClinicalCDSAlertDetails">
+    <div id="actionPanClinicalCDSAlertDetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_CDSAlertDetails.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">CDS Alert</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false;" id="frmClinicalCDSAlertDetails">
+                    <div class="col-xs-12 col-sm-8 p-none">
+
+                        <div class="col-sm-3">
+                            <label class="control-label">Select :</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="radio-custom">
+                                <input id="Due" name="select" type="radio" checked="checked" />
+                                <label for="Due" class="control-label">Due</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="radio-custom">
+                                <input id="Done" name="select" type="radio" />
+                                <label for="Done" class="control-label">Done</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="radio-custom">
+                                <input id="Override" name="select" type="radio" />
+                                <label for="Override" class="control-label">Override</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="control-label">Alert Type</label>
+                            <input id="txtAlertType" type="text" class="form-control" readonly />
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="control-label">Alert Note</label>
+                            <textarea id="txtAlertNote" class="form-control" rows="4" spellcheck="true" readonly="readonly"></textarea>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="control-label">Developer</label>
+                            <input id="txtDeveloper" type="text" class="form-control" readonly />
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label">Funding Source</label>
+                            <input id="txtFSource" type="text" class="form-control" readonly />
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="control-label">Reference URL</label>
+                            <!--<label class="control-label" id="txtReferenceURL" />-->
+                            <a id="referenceUrl" class="word-break" href="" target="_blank"></a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 p-none">
+                        <div class="col-xs-12">
+                            <label class="control-label">Order Sets:</label>
+                            <div id="OrderSetlist" class="panel-body Of-a own-scroll bg-gray " style="height:142px">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="control-label">Release</label>
+                            <input id="txtRelease" type="text" class="form-control" readonly />
+                        </div>
+                    </div>
+
+
+
+
+                    <section>
+
+                        <div class="col-sm-12 toggle" data-plugin-toggle style="clear:none;">
+                            <section class="toggle">
+                                <label id="ActualConditions">Actual Conditions</label>
+                                <div class="toggle-content">
+                                    <div id="actualCon" class="panel-body NoRadiusT Of-a own-scroll height-max200  ">
+                                        <div id="dvLocation" class="col-sm-6">
+                                            <label class="control-label" name="lblTriggerLocation"><b>Trigger Location: </b></label>
+                                            <label id="lblLocation" class="control-label" name="TriggerLocation"></label>
+                                            <!--<input type="text" class="form-control" name="TriggerLocation" />-->
+                                        </div>
+                                        <div id="dvGender" class="col-sm-6">
+                                            <label class="control-label" name="lblGender"><b>Gender: </b></label>
+                                            <label id="lblGender" class="control-label" name="Gender"></label>
+                                            <!--<input type="text" class="form-control" name="Gender" />-->
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="control-label" name="lblEthnicity"><b>Ethnicity: </b></label>
+                                            <label id="lblEthnicityName" class="control-label" name="EthnicityName"></label>
+                                            <!--<input type="text" class="form-control" name="Ethnicity" />-->
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="control-label" name="lblRace"><b>Race: </b></label>
+                                            <label id="lblRaceName" class="control-label" name="RaceName"></label>
+                                            <!--<input type="text" class="form-control" name="Race" />-->
+                                        </div>
+                                        <div id="dvAge" class="col-sm-6">
+                                            <label class="control-label" name="lblAge"><b>Age: </b></label>
+                                            <label id="lblAge" class="control-label" name="Age"></label>
+                                            <!--<input type="text" class="form-control" name="Age" />-->
+                                        </div>
+                                        <div id="dvVitals" class="col-sm-6">
+                                            <label id="VitalLabel" class="control-label hidden" name="lblVitals"><b>Vitals: </b></label>
+                                            <label id="lblWeight" class="control-label"></label>
+                                            <label id="lblHeight" class="control-label"></label>
+                                            <label id="lblBMI" class="control-label"></label>
+                                            <!--<input type="text" class="form-control" />-->
+                                        </div>
+                                        <div id="dvProblemList" class="col-sm-6">
+                                            <label id="ProblemsLabel" class="control-label hidden" name="lblProblems"><b>Problems: </b></label>
+                                            <label id="lblProblem" class="control-label"></label>
+                                            <!--<input type="text" class="form-control" />-->
+                                        </div>
+                                        <div id="dvAllergy" class="col-sm-6">
+                                            <label id="AllergiesLabel" class="control-label hidden" name="lblAllergies"><b>Allergies: </b></label>
+                                            <label id="lblAllergy" class="control-label" name="Allergies"></label>
+                                            <!--<input type="text" class="form-control" />-->
+                                        </div>
+                                        <div id="dvMedication" class="col-sm-6">
+                                            <label id="MedicationsLabel" class="control-label hidden" name="lblMedication"><b>Medications: </b></label>
+                                            <label id="lblMedication" class="control-label" name="Medications"></label>
+                                            <!--<input type="text" class="form-control" />-->
+                                        </div>
+                                        <div id="dvLabs" class="col-sm-12">
+                                            <label id="LabsLabel" class="control-label hidden" onemptied="lblLabs"><b>Labs: </b></label>
+                                            <label id="lblLabs" class="control-label" name="Labs"></label>
+                                            <!--<input type="text" class="form-control" />-->
+                                        </div>
+                                        <div id="dvInsurance" class="col-sm-6">
+                                            <label id="InsuranceLabel" class="control-label hidden" name="lblInsurance"><b>Insurance: </b></label>
+                                            <label id="lblInsurance" class="control-label" name="Insurance"></label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-sm-12 toggle" data-plugin-toggle style="clear:none;margin-top: 5px;">
+                            <section class="toggle" style="margin-top: 0px;">
+                                <label id="AlertConditions">Alert Conditions</label>
+                                <div class="toggle-content">
+                                    <div id="alertCon" class="panel-body NoRadiusT Of-a own-scroll height-max200">
+                                        <div id="dvLocation" class="col-sm-6">
+                                            <label class="control-label" name="lblTriggerLocation"><b>Trigger Location: </b></label>
+                                            <label id="lblLocation" class="control-label" name="TriggerLocation"></label>
+                                            <!--<input type="text" class="form-control" name="TriggerLocation" />-->
+                                        </div>
+                                        <div id="dvGender" class="col-sm-6">
+                                            <label class="control-label" name="lblGender"><b>Gender: </b></label>
+                                            <label id="lblGender" class="control-label" name="Gender"></label>
+                                            <!--<input type="text" class="form-control" name="Gender" />-->
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="control-label" name="lblEthnicity"><b>Ethnicity: </b></label>
+                                            <label id="lblEthnicityName" class="control-label" name="EthnicityName"></label>
+                                            <!--<input type="text" class="form-control" name="EthnicityName" />-->
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="control-label" name="lblRace"><b>Race: </b></label>
+                                            <label id="lblRaceName" class="control-label" name="RaceName"></label>
+                                            <!--<input type="text" class="form-control" name="RaceName" />-->
+                                        </div>
+                                        <div id="dvAge" class="col-sm-6">
+                                            <label class="control-label" name="lblAge"><b>Age: </b></label>
+                                            <label id="lblAge" class="control-label" name="Age"></label>
+                                            <!--<input type="text" class="form-control" name="Age" />-->
+                                        </div>
+                                        <div id="dvVitals" class="col-sm-6">
+                                            <label id="VitalsLabel" class="control-label hidden" name="lblVitals"><b>Vitals: </b></label>
+                                            <label id="lblWeight" class="control-label"></label>
+                                            <label id="lblHeight" class="control-label"></label>
+                                            <label id="lblBMI" class="control-label"></label>
+                                            <!--<input type="text" class="form-control" />-->
+                                        </div>
+                                        <div id="dvProblemList" class="col-sm-6">
+                                            <label id="ProblemsLabel" class="control-label hidden" name="lblProblems"><b>Problems: </b></label>
+                                            <label id="lblProblemList" class="control-label" name="Problems"></label>
+                                            <!--<input type="text" class="form-control" />-->
+                                        </div>
+                                        <div id="dvAllergy" class="col-sm-6">
+                                            <label id="AllergiesLabel" class="control-label hidden" name="lblAllergies"><b>Allergies: </b></label>
+                                            <label id="lblAllergy" class="control-label" name="Allergies"></label>
+                                            <!--<input type="text" class="form-control" />-->
+                                        </div>
+                                        <div id="dvMedication" class="col-sm-6">
+                                            <label id="MedicationsLabel" class="control-label hidden" name="lblMedication"><b>Medications: </b></label>
+                                            <label id="lblMedication" class="control-label" name="Medications"></label>
+                                            <!--<input type="text" class="form-control" />-->
+                                        </div>
+                                        <div id="dvLabs" class="col-sm-12">
+                                            <label id="LabsLabel" class="control-label hidden" name="lblLabs"><b>Labs: </b></label>
+                                            <label id="lblLabs" class="control-label" name="Labs"></label>
+                                            <!--<input type="text" test class="form-control" />-->
+                                        </div>
+                                        <div id="dvInsurance" class="col-sm-6">
+                                            <label id="InsuranceLabel" class="control-label hidden" name="lblInsurance"><b>Insurance: </b></label>
+                                            <label id="lblInsurance" class="control-label" name="Insurance"></label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-sm-12 toggle" data-plugin-toggle style="clear:none;margin-top: 5px;">
+                            <section class="toggle" style="margin-top: 0px;">
+                                <label id="Questionnaire">Questionnaire</label>
+                                <div class="toggle-content">
+                                    <div id="cds_Questionnaire" class="panel-body NoRadiusT Of-a own-scroll height-max200">
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <!--<ul class="tabs-custom">
+                            <li class="active"><a class="" href="#actualCon" data-toggle="tab">Actual Conditions</a></li>
+                            <li><a class="" href="#alertCon" data-toggle="tab">Alert Conditions</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body pt-default">
+                            <div id="actualCon" class="tab-pane active">
+
+                            </div>
+                            <div id="alertCon" class="tab-pane">
+
+                            </div>
+
+                            <div class="spacer20"></div>
+                        </div>-->
+
+                    </section>
+                    <div class="pull-right pt-sm pr-default">
+                        <button class="btn btn-primary btn-sm" onclick="Clinical_CDSAlertDetails.updateCDSAlertStatus()">Save & Exit</button>
+                    </div>
+
+
+                </form>
+                <div class="spacer15"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    $(function () {
+        $($("#pnlClinicalCDSAlertDetails").find($('[data-plugin-toggle]'))).each(function () {
+            var $this = $(this),
+				opts = {};
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+            $this.themePluginToggle(opts);
+        });
+    });
+</script>

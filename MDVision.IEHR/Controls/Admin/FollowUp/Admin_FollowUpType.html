@@ -1,0 +1,74 @@
+﻿<div class="row" id="pnlAdminFollowUpType" style="display:none;">
+    <div id="actionPanAdminFollowUpType" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_FollowUpType.TypeAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_FollowUpType.UnLoadTab()"></a>
+                </div>
+                <h2 class="panel-title">Search Type</h2>
+            </header>
+            <div class="panel-body" id="pnlLetter_Search">
+                <form method="post" id="tmpid" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Short Name</label>
+                            <input class="form-control" id="txtShortName" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" id="txtDescription" type="text" maxlength="30" />
+                        </div>
+                        <!--<div class="col-sm-2">
+                            <label class="control-label">Type</label>
+                            <select id="lstFolderTypeId" class="form-control" ddlist="GetARType"></select>
+                        </div>-->
+                        <div class="col-sm-2" id="divEntity">
+                            <label class="control-label">Active?</label>
+                            <select id="ddlActive" class="form-control">
+                                <option value="">- All -</option>
+                                <option value="1" selected="selected">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+
+                        </div>
+                        <div class="col-sm-2 mt-xs pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnDataFieldsSave" type="button" onclick="Admin_FollowUpType.TypeSearch('0');">Search</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="hfTypeId" value="-1" />
+                </form>
+            </div>
+        </section>
+    </div>
+    <div id="pnlType_Result" style="display: inline;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="Type_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvType">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">TypeId</th>
+                            <th>Action</th>
+                            <th>Short Name</th>
+                            <th>Description</th>
+                            <th>Active</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divTypePaging"></div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+
+

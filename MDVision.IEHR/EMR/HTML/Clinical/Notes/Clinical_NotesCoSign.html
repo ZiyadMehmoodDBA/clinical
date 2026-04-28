@@ -1,0 +1,84 @@
+﻿<div class="row" id="pnlClinical_NotesCoSign">
+    <div id="actionPanClinical_NotesCoSign" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_NotesCoSign.UnLoadTab();"></button>
+                <h4 class="modal-title">Co-Sign</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmClinical_NotesCoSign" method="post" onsubmit="return false">
+
+                    <div class="col-sm-12">
+                        <div class="radio-custom">
+                            <input type="radio" id="radio1" name="radio1" value="I was present with the resident during history and exam. I discussed the case with resident and agree with the findings and plan as documented in the resident's note above." checked />
+                            <label class="control-label" for="radio1">I was present with the resident during history and exam. I discussed the case with resident and agree with the findings and plan as documented in the resident's note above.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio2" name="radio1" value="I saw and evaluated patient. I agree with the findings and plan of care as documented in resident's note above." class="radioCosign" />
+                            <label class="control-label" for="radio2">I saw and evaluated patient. I agree with the findings and plan of care as documented in resident's note above.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio3" name="radio1" value="I saw and examined the patient. I agree with resident's note above." class="radioCosign" />
+                            <label class="control-label" for="radio3">I saw and examined the patient. I agree with resident's note above.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio4" name="radio1" value="I am supervising physician to the physician assistant and have discussed patient's case and agree with the above written note." class="radioCosign" />
+                            <label class="control-label" for="radio4">I am supervising physician to the physician assistant and have discussed patient's case and agree with the above written note.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio5" name="radio1" value="I am Primary Care Physician for this patient and have discussed the case with rendering provider and agree with above written note." class="radioCosign" />
+                            <label class="control-label" for="radio5">I am Primary Care Physician for this patient and have discussed the case with rendering provider and agree with above written note.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio6" name="radio1" value="I am supervising physician to Nurse Practitioner and have discussed patient's case and agree with the above written note." class="radioCosign" />
+                            <label class="control-label" for="radio6">I am supervising physician to Nurse Practitioner and have discussed patient's case and agree with the above written note.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio7" name="radio1" value="I saw the patient with the resident/intern and agree with his/her findings and care plan." class="radioCosign" />
+                            <label class="control-label" for="radio7">I saw the patient with the resident/intern and agree with his/her findings and care plan.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio8" name="radio1" value="I have reviewed the RD's notes and was available for consultation." class="radioCosign" />
+                            <label class="control-label" for="radio8">I have reviewed the RD's notes and was available for consultation.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio9" name="radio1" value="I saw and examined the patient. I agree with Social Worker's note above." class="radioCosign" />
+                            <label class="control-label" for="radio9">I saw and examined the patient. I agree with Social Worker's note above.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio10" name="radio1" value="I have reviewed the RDHs notes and was available for consultation." class="radioCosign" />
+                            <label class="control-label" for="radio10">I have reviewed the RDHs notes and was available for consultation.</label>
+                        </div>
+                        <div class="radio-custom">
+                            <input type="radio" id="radio11" name="radio1" value="I have reviewed the note and was available for consultation." class="radioCosign" />
+                            <label class="control-label" for="radio11">I have reviewed the note and was available for consultation.</label>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label">Comments </label>
+                        <textarea class="form-control" id="txtCommentsCosign" spellcheck="true" />
+                    </div>
+                    <div class="col-sm-12">
+                        <label id="lblProvider" class="control-label">Co-Sign Provider<span class="required">*</span></label>
+                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Clinical_NotesCoSign.OpenProviderDetail();" title="Edit Provider">Co-Sign Provider</a>
+                        <div class="input-group">
+
+                            <input class="form-control" id="txtProvider" type="text" name="Provider" placeholder="Start typing to search" onblur="utility.ValidateAutoComplete(this, 'ProviderId', false);">
+                            <div class="input-group-btn">
+                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Clinical_NotesCoSign.OpenProvider('Search Provider', 'txtProvider', 'ProviderId', 'lblProvider', 'lnkProviderEdit');"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right mt-md pr-default"><button type="submit" class="btn btn-primary btn-sm" onclick="Clinical_NotesCoSign.CoSignNotes();">Co-Sign</button></div>
+                    <div class="clearfix"></div>
+                    <input type="hidden" id="ProviderId" name="ProviderId" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

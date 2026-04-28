@@ -1,0 +1,76 @@
+﻿<div id="EDIEligibilityInsuranceDetail">
+    <div id="actionPanAdminEDIEligibilityInsuranceDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="EDIEligibilityInsuranceDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">EDI Eligibility Insurance</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblEDIEligibilityInsuranceDetail" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmEDIEligibilityInsuranceDetail">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label for="Clearinghouse" class="control-label">Clearing House <span class="required">*</span></label>
+                                <select id="ddlClearinghouse" class="form-control" name="ClearingHouse" ddlist="GetClearingHouse"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" for="EDI Status Insurance">Eligibility Insurance Name<span class="required">*</span></label>
+                                <input type="text" class="form-control" name="EligibilityInsurance" id="txtEligibilityInsuranceName" maxlength="55">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" for="Payor ID">Payor ID <span class="required">*</span></label>
+                                <input type="text" class="form-control" name="PayorId" id="txtPayorId" maxlength="10">
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-xs-8 pl-md pr-xs">
+                                        <label class="control-label" for="Telephone">Telephone</label>
+                                        <input type="text" class="form-control" id="txtTelephone" name="Telephone" data-mask="(999) 999-9999" placeholder="(999) 999-9999">
+                                    </div>
+                                    <div class="col-xs-4 pr-md pl-none">
+                                        <label class="control-label" for="Ext">Ext</label>
+                                        <input type="text" class="form-control" id="txtExt" name="Ext" maxlength="5" placeholder="99999">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="Subscriber" checked="" id="chkSubscriber">
+                                    <label for="chkSubscriber">Subscriber Required</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="Dependent" checked="" id="chkDependent">
+                                    <label for="chkDependent">Dependent Required</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-4 mt-sm">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="TaxID" checked="" id="chkTaxID">
+                                    <label for="chkTaxID">Tax ID</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-xs-4 mt-sm">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="Active" checked="" id="chkActive">
+                                    <label for="chkActive">Active</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 pull-right mt-sm mb-md">
+                                <button type="submit" id="btnEligibilityInsuranceSave" class="btn btn-primary btn-sm rightbtn">Save & Exit</button>
+                                <!--<button id="btnHistoryEDIEligibilityInsurance" class="btn btn-primary btn-sm rightbtn" type="button" onclick="EDIEligibilityInsuranceDetail.ShowHistory();">History</button>-->
+                            </div>
+
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div><div class="clearfix"></div>
+        </div>
+    </div>
+</div>

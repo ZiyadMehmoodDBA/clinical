@@ -1,0 +1,75 @@
+﻿<div class="row" id="pnlICDCPTCodes">
+    <div id="actionPanICDCPTCodes" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="PQRS_ICDCPTCodes.UnLoad('Save');"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">ICD10/CPT Codes</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmICDCPTCodes" role="form">
+                    <div id="divCodesTemplate" class="hidden">
+                        <header id="headerTemplate" class="panel-heading panel-blue">
+                            <h2 id="headingTemplate" class="panel-title white">ICD-10 Codes</h2>
+                        </header>
+                        <div class="panel-body pl-none">
+                            <div id="divSearch" class="col-xs-12 mb-sm hidden ml-xs" style="width:30%">
+                                <div class="input-group">
+                                    <input class="form-control" id="txtTemplate" placeholder="Search" oninput="PQRS_ICDCPTCodes.bindICD9AutoComplete(this)" type="text" value="">
+                                    <div class="input-group-btn">
+                                        <button id="btnTemplate" class="btn btn-primary btn-xs" type="button" onclick=""><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spacer10"></div>
+                            <div id="lstTemplate" class="ml-xs mr-md">
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">E10.10,</a>
+                                <a class="btn btn-xs btn-link" href="#">More...</a>
+                            </div>
+                        </div>
+                        <div class="spacer10"></div>
+                        <div id="divAndOR" class="col-xs-3 col-xs-offset-5 hidden">
+                            <div class="radio-custom pull-left pr-md">
+                                <input type="radio" id="rdoAndTemplate" name="aa">
+                                <label class="control-label">AND</label>
+                            </div>
+                            <div class="radio-custom pull-left">
+                                <input type="radio" id="rdoOrTemplate" name="aa">
+                                <label class="control-label">OR</label>
+                            </div>
+                        </div>
+                        <div class="spacer10"></div>
+                    </div>
+                    <div id="divVBPAnswer" class="hidden">
+                        <div class="panel-body pl-none height-min180">
+                            <div class="col-sm-3 col-md-3">
+                                <label id="lblVBPQuestion" class="control-label noWordBreak">Question</label>
+                                <select id="ddlVBPAnswerId" name="QuestionAnswersId" class="form-control" ddlist="" onchange=""></select>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="pull-right mr-default text-right">
+                                <button class="btn btn-success btn-sm" onclick="PQRS_ICDCPTCodes.UnLoad('Save');" type="button" id="btnSave"> Save</button>
+                                <button class="btn btn-default btn-sm" onclick="PQRS_ICDCPTCodes.UnLoad('Cancel');" type="button" id="btnCancel"> Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-default btn-sm pull-right hidden" onclick="PQRS_ICDCPTCodes.UnLoad();" type="button" id="btnCancel"> Cancel</button>
+                    <button class="btn btn-default btn-sm pull-right hidden" onclick="" type="button" id="btnSave"> Save</button>
+                    <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!--/ICD-10/CPT Codes-->
+</div>

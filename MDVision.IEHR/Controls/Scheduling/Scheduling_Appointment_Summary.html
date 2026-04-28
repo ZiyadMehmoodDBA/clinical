@@ -1,0 +1,68 @@
+﻿<div id="pnlAppointmentSummary">
+    <div id="actionPanAppointmentSummary" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="appointmentSummary.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Appointment Summary</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form method="post" id="frmAppointmentSummarySearch" onsubmit="return false">
+                        <section class="panel panel-featured">
+                            <div class="panel-body" id="pnlAppointmentSummary_Search">
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">From Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" data-plugin-datepicker="" maxlength="10" class="form-control" name="fromDate" id="dpfromDate">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">To Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" data-plugin-datepicker="" maxlength="10" class="form-control" name="toDate" id="dptoDate">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 mt-md pull-left">
+                                        <input type="hidden" name="hdnFacilityId" id="hdnFacilityId" />
+                                        <input type="hidden" name="hdnProviderId" id="hdnProviderId" />
+                                        <input type="hidden" name="hdnResourceId" id="hdnResourceId" />
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnAppointmentSummary" type="button" onclick="appointmentSummary.SearchAppointmentWithDatePicker();">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </form>
+                </div>
+                <div class="spacer10"></div>
+                <div id="tblAppointment_Summary" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvAppointmentSummary">
+                                <thead>
+                                    <tr>
+                                        <th class="size195">Patient Type</th>
+                                        <th class="size195">Visit Type</th>
+                                        <th class="size100">No. of Appointments</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <div id="divAppointmentSummaryPaging"></div>
+
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

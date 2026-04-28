@@ -1,0 +1,874 @@
+﻿<div id="pnlDocumentScan">
+    <div id="actionPanDocument_Scan" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="actionPanSelectType" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="panel-body splitterbody" id="splitterScanbody">
+        <div id="frmFilters" class="form-group col-md-12">
+            <div class="form-group">
+                <div>
+                    <div id="divPatientName" class="col-sm-3 col-lg-2">
+                        <label class="control-label">Patient Name</label>
+                        <div class="input-group">
+                            <input class="form-control" id="txtPateintName" type="text" title="Patient Name" name="Pateint Account Number" oninput="Document_Scan.BindPatientAutocomplete();" onblur="utility.ValidateAutoComplete(this, 'frmFilters #hfPatientId', false)">
+                            <div class="input-group-btn">
+                                <button id="lnkPatientName" type="button" class="btn btn-primary btn-xs" onclick="Document_Scan.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-lg-2">
+                    <label class="control-label">
+                        DOS
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" id="dtpDcanDOS" name="DOSFrom" class="form-control" data-plugin-datepicker="">
+                    </div>
+                </div>
+                <div class="col-sm-3 col-lg-2">
+                    <label class="control-label"> Received On</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" id="dtpReceivedOn" class="form-control" data-plugin-datepicker="">
+                    </div>
+                </div>
+                <div class="col-sm-3 col-lg-2">
+                    <label class="control-label"> Expiry Date</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" id="dtpScanExpiry" class="form-control" data-plugin-datepicker="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3 col-lg-2">
+                    <label class="control-label" for="ClaimNumber">Claim Number</label>
+                    <div class="input-group">
+                        <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text" onblur="Document_Scan.CheckClaimOnChange(this, 'hfPatientVisitId');" oninput="Document_Scan.BindClaimNumber(this, 'hfPatientVisitId');">
+                        <div id="divSearchClaim" class="input-group-btn">
+                            <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="Document_Scan.OpenPatientCharges('txtClaimNumber');"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-lg-2">
+                    <label for="ddlDocumentPriority" class="control-label">Priority</label>
+                    <select class="form-control" id="ddlDocumentPriority" name="Priority"></select>
+                </div>
+                <div class="col-sm-3 col-lg-2">
+                    <label class="control-label">Assigned User</label>
+                    <select class="form-control" id="ddlAssignedtoReview" ddlist="GetCoWorkerGroupUsersFullName"></select>
+                </div>
+            </div>
+
+            <input type="hidden" id="hfPatientId" />
+            <input type="hidden" id="hfPatientVisitId" />
+        </div>
+    </div>
+    <div class="splitterBtn mb-none"><a><i class="fa fa-angle-up"></i></a></div>-->
+
+    <div id="doc_model" class="modal-dialog  label-strip-modal">
+        <div class="modal-content col-xs-12 p-none">
+            <div id="doc_header" class="modal-header">
+                <button type="button" title="Exit" class="close" onclick="Document_Scan.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Scan</h4>
+            </div>
+            <div class="modal-body NoRadiusT p-xs pr-none">
+                <div class="doc-controls" id="div_controls">
+                    <div class="doc-left-controls">
+                        <button type="button" title="First Page" class="btn btn-link btn-xs" id="DW_btnFirstImage" onclick="btnFirstImage_onclick()"><i class="fa fa-step-backward text-default"></i></button>
+                        <span class="pipe">|</span>
+                        <button type="button" title="Last Page" class="btn btn-link btn-xs" id="DW_btnLastImage" onclick="btnLastImage_onclick()"><i class="fa fa-step-forward text-default"></i></button>
+
+
+                        <button type="button" class="btn btn-link btn-xs" title="Previous Page" onclick="btnPreImage_onclick()" id="DW_btnPreImage"><i class="fa fa-reply text-success"></i></button>
+                        <span class="pipe">|</span>
+                        <button type="button" class="btn btn-link btn-xs" title="Next Page" id="DW_btnNextImage" onclick="btnNextImage_onclick()"><i class="fa fa-reply fa-flip-horizontal text-success"></i></button>
+
+                        <div class="page-number">
+                            Page:
+                            <div class="current-page">
+                                <input type="text" readonly="readonly" id="DW_CurrentImage" class="form-control" value="2">
+                            </div>
+                            <div class="page-number-of">
+                                of
+                            </div>
+                            <div class="total-pages">
+                                <input type="text" class="form-control" id="DW_TotalImage" readonly="readonly" value="12">
+                            </div>
+                        </div>
+                        <span class="pipe">|</span>
+                        <div id="PreviewContainer" class="preview-doc">
+                            Preview Mode :
+                            <select class="form-control" id="DW_PreviewMode" onchange="setlPreviewMode();">
+                                <option value="0">1X1</option>
+                                <option value="1">2X2</option>
+                                <option value="2">3X3</option>
+                                <option value="3">4X4</option>
+                                <option value="4">5X5</option>
+                            </select>
+                        </div>
+                        <div class="checkbox-custom checkboxTiny checkbox">
+                            <input type="checkbox" name="SelectALLImgs" id="chkSelectAllScnImgs" onclick="SelectUnSelectAllImgs(this)">
+                            <label class="control-label" for="chkSelectAllScnImgs">Select All</label>
+                        </div>
+
+                    </div>
+                    <div class="doc-right-controls">
+
+                        <div class="controls-adv">
+                            <button type="button" class="btn btn-link btn-xs" onclick="btnRemoveAllImages_onclick()" id="DW_btnRemoveAllImages"><i class="fa fa-trash text-danger"></i> Remove All</button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <form method="post" onsubmit="return false" id="frmDocumentScan">
+
+                    <div id="wrapper" class="row m-none toggled">
+
+
+                        <div id="container" class="body_Broad_width" style="margin:0 auto;">
+
+                            <div class="DWTHeader">
+                                <!-- header.aspx is used to initiate the head of the sample page. Not necessary!-->
+                                <!-- #include file=includes/PageHead.aspx -->
+                            </div>
+
+                            <!--<div id="DWTcontainer" class="body_Broad_width">-->
+
+                            <div id="DWTcontainer">
+
+                                <div id="page-content-wrapper">
+                                    <div class="dwtcontrolMain" style="width:auto;height:605px;">
+                                        <div id="dwtcontrolContainer" style="height:605px;"></div>
+
+                                        <ul class="pl-xs text-center documentHoverControls" id="actionBtn">
+                                            <li>
+                                                <a class="btn btn-lg" data-toggle="tooltip" title="Remove Image" id="btnEditor" onclick="btnRemoveCurrentImage_onclick()"><i class="fa fa-close"></i></a>
+                                                <a class="btn btn-lg" data-toggle="tooltip" title="Show Image Editor" id="btnEditor" onclick="btnShowImageEditor_onclick()"><i class="fa fa-pencil"></i></a>
+                                                <a class="btn btn-lg" data-toggle="tooltip" title="Rotate Left" id="btnRotateL" onclick="btnRotateLeft_onclick()"><i class="fa fa-undo"></i></a>
+                                                <a class="btn btn-lg" data-toggle="tooltip" title="Rotate Right" id="btnRotateR" onclick="btnRotateRight_onclick()"><i class="fa fa-repeat"></i></a>
+                                                <a class="btn btn-lg" data-toggle="tooltip" title="Rotate 180" onclick="btnRotate180_onclick()"><i class="fa fa-refresh"></i></a>
+                                                <a class="btn btn-lg" data-toggle="tooltip" title="Mirror" id="btnMirror" onclick="btnMirror_onclick()"><i class="fa fa-arrows-h"></i></a>
+                                                <a class="btn btn-lg" data-toggle="tooltip" title="Flip" id="btnFlip" onclick="btnFlip_onclick()"><i class="fa fa-arrows-v"></i></a>
+                                                <a class="btn btn-lg" data-toggle="tooltip" title="Change Image Size" id="btnChangeImageSize" onclick="btnChangeImageSize_onclick();" style="display:none;"><i class="glyphicon glyphicon-resize-full"></i></a>
+                                                <!--<a class="btn btn-lg" data-toggle="tooltip" title="Crop">
+                                                    <i class="fa fa-crop"></i>
+                                                    <img src="Resources/reference/imgs/Crop.png" title="Crop" alt="Crop" id="btnCrop" onclick="btnCrop_onclick();" style="display:none;" />
+                                                </a>-->
+                                            </li>
+                                        </ul>
+
+
+                                    </div>
+                                    <div id="dwtcontrolContainerAttach" style="height:605px">
+                                        <object id="OpenDocumentIFAttach" class="col-sm-12  panel-body hide" data="Scripts/js/pdf/web/viewer.html" style="height:100%;"></object>
+                                        <input type="hidden" id="helperPDFAttach" />
+                                        <div class="col-sm-12 col-md-12 panel-body" id="canvasContainerAttach" style="overflow-y: auto; height: 100%;">
+                                            <canvas id="canvasAttach" class="pb-sm"></canvas>
+                                        </div>
+                                    </div>
+                                    <div id="DWTNonInstallContainerID" style="width:580px"></div>
+                                    <div class="mb-md ml-none hidden" id="DWTemessageContainer"></div>
+
+                                </div>
+
+                                <div id="ImgSizeEditor" style="visibility:hidden; text-align:left;display:none;">
+                                    <ul>
+                                        <li>
+                                            <label for="img_height">
+                                                <b>New Height :</b>
+                                                <input type="text" id="img_height" style="width:50%;" size="10" />pixel
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="img_width">
+                                                <b>New Width :</b>&nbsp;
+                                                <input type="text" id="img_width" style="width:50%;" size="10" />pixel
+                                            </label>
+                                        </li>
+                                        <li>
+                                            Interpolation method:
+                                            <select size="1" id="InterpolationMethod"><option value=""></option></select>
+                                        </li>
+                                        <li style="text-align:center;">
+                                            <input type="button" value="OK" id="btnChangeImageSizeOK" onclick="btnChangeImageSizeOK_onclick();" />
+                                            <input type="button" value="Cancel" id="btnCancelChange" onclick="btnCancelChange_onclick();" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--<div class="narrow-screen">
+                                <div class="tips-header"><a href="http://www.dynamsoft.com/Products/WebTWAIN_Overview.aspx"><img src="images/DWT icon logo.png" border="0" /></a><h1>Online Demo</h1></div>
+                                <div class="tips-desktop"><img src="images/sc-desktop-only.png" border="0" alt="" width="280" /></div>
+                                <p class="tips">Sorry! <br /> Please visit this page in your desktop web browsers. Thanks! </p>
+                            </div>-->
+                            <script type="text/javascript" language="javascript" src="Resources/dynamsoft.webtwain.initiate.js"></script>
+                            <script type="text/javascript" language="javascript" src="Resources/dynamsoft.webtwain.config.js"></script>
+                            <!--<script type="text/javascript" language="javascript" src="Scripts/online_demo_operation.js"></script>
+                            <script type="text/javascript" language="javascript" src="Scripts/online_demo_initpage.js"></script>
+                            <script type="text/javascript" language="javascript" src="Scripts/jquery.js"></script>-->
+                        </div>
+
+
+                        <div id="asideBtn" class="asideBtn-toggled">
+                            <a href="#menu-toggle" onclick="DocumentCustomViewMode();" class="btn side-btn moveTop mb-lg" id="menu-toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <div id="sidebar-wrapperScan" class="font-xxs line-height20">
+                            <div class="p-none">
+                                <div id="divCustomScan" class="toggle mt-none pl-xs pr-xs formFields" data-plugin-toggle>
+                                    <section class="toggle mt-none active">
+                                        <label class="p-none pl-default NoRadius">Document Type</label>
+                                        <div class="toggle-content" style="display: block;">
+                                            <div class="row">
+
+                                                <div class="col-xs-6">
+                                                    <label for="Patient Name" class="control-label">Patient Name</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" id="txtFullNameScan" customname="Patient Name" name="FullName" type="text" />
+                                                        <div class="input-group-btn">
+                                                            <button id="lnkPatientNameScan" type="button" class="btn btn-primary btn-xs" onclick="Document_Scan.OpenPatientAccount('txtFullName');"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-6" id="divFolder">
+                                                    <label class="control-label" for="Folder"><span class="required">*</span> Folder </label>
+                                                    <select id="ddlFolder" name="Folder" multiple="multiple" onchange="Document_Scan.checkFolderSelection();" class="form-control multiselect" ddlmultilist="GetDocument" required></select>
+                                                </div>
+
+                                                <div id="divdptDOS" class="col-xs-6">
+                                                    <label class="control-label" for="DOS">DOS</label>
+                                                    <label class="radio-inline"><input id="rdCalendar" type="radio" name="DOSDate" value="Calendar" onchange="Document_Scan.SelectedDOSControl(this)" checked /> Calendar</label>
+
+                                                    <div class="clearfix"></div>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                        <input type="text" class="form-control" name="DOS" id="dtpDOS" data-plugin-datepicker="">
+                                                    </div>
+                                                </div>
+                                                <div id="divddlDOS" class="col-xs-6">
+                                                    <label class="radio-inline"><input id="rdDropdown" type="radio" name="DOSDate" value="Dropdown" onchange="Document_Scan.SelectedDOSControl(this)" /> Visits</label>
+                                                    <!--<label class="control-label" for="ddlDOS"></label>-->
+                                                    <div class="input-group col-xs-12">
+                                                        <select id="ddlDOS" class="form-control" disabled>
+                                                            <option value="">-Select-</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <label class="control-label">Assign User </label>
+                                                    <select class="form-control" id="ddlAssignUserto" name="AssignedUserTo" ddlist="GetCoWorkerGroupUsersFullName"></select>
+                                                </div>
+
+
+
+
+
+                                                <!--<div class="col-xs-6">
+                                                    <label class="control-label">Claim Number</label>
+                                                    <input class="form-control" id="ddlClaim" name="Claim" type="text" disabled="">
+                                                    <div class="input-group">
+                                                        <input class="form-control ui-autocomplete-input" id="ddlClaim" name="Claim" placeholder="Start typing to search" type="text" onblur="utility.ValidateAutoComplete(this, 'frmDemographic #hfFacility', false); Patient_Demographic.RemovePractice(this)" data-bv-field="Claim" autocomplete="off">
+                                                        <div class="input-group-btn">
+                                                            <button id="lnkClaim" class="btn btn-primary btn-xs " type="button" onclick="Patient_Demographic.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <input type="hidden" id="hfVisitId" />
+                                                        <input class="form-control" id="ddlClaim" name="Claim" type="text" placeholder="Start typing to search" onblur="Document_Scan.CheckClaimOnChange(this,'hfVisitId');" oninput="Document_Scan.BindClaimNumber(this, 'hfVisitId');">
+                                                        <div id="divsearchclaim" class="input-group-btn">
+                                                            <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="Document_Scan.OpenPatientCharges('ddlClaim');"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>-->
+                                                <!--<div class="col-xs-6">
+                                                    <label class="control-label">Case Number</label>
+                                                    <input class="form-control" id="ddlCase" name="Case" type="text" disabled="">
+                                                </div>-->
+                                                <!--<div class="col-xs-6">
+                                                    <label id="lblCaseNumber" class="control-label">Case Number</label>
+                                                    <a id="lnkCaseNumberEdit" style="display:none;" href="#" onclick="Document_Scan.OpenCaseDetail('hfCaseId');" title="Edit Case">Case Number</a>
+                                                    <div class="input-group">
+
+                                                        <input class="form-control ValidateCriteria" id="ddlCase" type="text" placeholder="Start typing to search" name="Case" onblur="utility.ValidateAutoComplete(this, 'hfCaseId', false);" maxlength="35" />
+
+                                                        <div class="input-group-btn">
+                                                            <button id="lnkCaseNumber" class="btn btn-primary btn-xs " type="button" onclick="Document_Scan.OpenCase('Search Case', 'ddlCase', 'hfCaseId', 'lblCaseNumber', 'lnkCaseNumberEdit');"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="hfCaseId" value="" name="CaseId" />
+                                                </div>-->
+                                                <!--<div class="col-xs-6">
+                                                    <label for="ddlDocumentPriority" class="control-label">Priority</label>
+                                                    <select class="form-control" id="ddlDocumentPriority" name="Priority" ddlist="GetDocumentPriority"></select>
+                                                </div>-->
+                                                <!--<div id="divDocumentTag" class="col-xs-6">
+                                                    <label id="lblDocumentTag" class="control-label">Tags</label>
+
+                                                    <div class="input-group">
+                                                        <input class="form-control " id="txtTagName" type="text" placeholder="Start typing to search" name="Document Tag" oninput="Document_Scan.BindTagAutocomplete()" maxlength="35" />
+                                                        <div class="input-group-btn">
+                                                            <button id="lnktags" class="btn btn-primary btn-xs " type="button" onclick="Document_Scan.AddTags()"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+                                                <!--<div id="divExpirtyDate" class="col-sm-6">
+                                                    <label for="dtpExpirtyDate" class="control-label">Expiry Date</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                        <input class="form-control" id="dtpExpirtyDate" name="ExpirtyDate" type="text" data-plugin-datepicker="">
+                                                    </div>
+                                                </div>-->
+                                                <div id="divDocumentPriority" class="col-sm-6">
+                                                    <label for="ddlDocumentPriority" class="control-label">Priority</label>
+                                                    <select class="form-control" id="ddlDocumentPriority" name="Priority" ddlist="GetDocumentPriority"><option value="" refvalue="" refname="">- Select -</option><option value="3" refvalue="" refname="">High</option><option value="1" refvalue="" refname="" selected="">Low</option></select>
+                                                </div>
+
+
+
+                                                <div class="pull-left pt-sm pl-default">
+                                                    <div class="checkbox-custom checkboxTiny">
+                                                        <input type="checkbox" name="Reviewed" id="chkReviewed">
+                                                        <label class="control-label" for="chkReviewed">Reviewed</label>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-left pt-sm pl-default">
+                                                    <div class="checkbox-custom checkboxTiny">
+                                                        <input type="checkbox" name="Private" id="chkPrivate" onclick="Document_Scan.PrivateDocument(this, 'Document_Scan');">
+                                                        <label class="control-label" for="chkPrivate">Private</label>
+                                                    </div>
+                                                </div>
+                                                <div id="divbtn" class="pt-default pull-right pr-default">
+                                                    <button id="btnDocumentScan" class="btn btn-default btn-sm pt-tiny pb-tiny" type="submit" onclick="Document_Scan.SaveScannerClicked(this);">Save & Exit</button>
+                                                    <button id="btnDocumentScanExit" class="btn btn-danger btn-sm pt-tiny pb-tiny hidden" onclick="Patient_Document.UnLoadScanDoc();" type="button">Exit</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                        </div>
+                                    </section>
+                                </div>
+                                <div id="ScanWrapper">
+                                    <div id="divScanner" class="divinput">
+                                        <ul class="PCollapse pl-xs pr-xs pb-none list-unstyled" style="background:#fff !important;">
+                                            <li>
+                                                <!--<div class="divType pt-xlg"><div class="mark_arrow expanded"></div>Custom Scan</div>
+                                                <div id="div_ScanImage" class="divTableStyle">
+                                                    <ul id="ulScaneImageHIDE">
+                                                        <li style="padding-left: 15px;">
+                                                            <label for="source">Select Source:</label>
+                                                            <select size="1" id="source" style="position:relative;width: 220px;" onchange="source_onchange()">
+                                                                <option value=""></option>
+                                                            </select>
+                                                        </li>
+                                                        <li style="display:none;" id="pNoScanner">
+                                                            <a href="javascript: void(0)" class="ShowtblLoadImage" style="font-size: 11px;  position:relative" id="aNoScanner">
+                                                                <b>What if I don't have a scanner/webcam connected?</b>
+                                                            </a>
+                                                        </li>
+                                                        <li id="divProductDetail"></li>
+                                                        <li style="text-align:center;">
+                                                            <input id="btnScan" class="bigbutton" style="color:#C0C0C0;" disabled="disabled" type="button" value="Scan" onclick="acquireImage();" />
+                                                        </li>
+                                                    </ul>
+                                                </div>-->
+
+
+                                                <div id="divvvCustomScan" class="toggle" data-plugin-toggle>
+                                                    <section class="toggle mt-none active">
+                                                        <label class="p-none pl-default NoRadius">Custom Scan</label>
+                                                        <div class="toggle-content">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <div id="div_ScanImage" class="divTableStyle">
+                                                                        <ul id="ulScaneImageHIDE" class="list-unstyled">
+                                                                            <li>
+                                                                                <div class="col-xs-12">
+                                                                                    <label class="control-label" for="source">Select Source</label>
+                                                                                    <select id="source" class="form-control" onchange="source_onchange()">
+                                                                                        <option value=""></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="pl-default pr-default" id="lstFileName">
+                                                                                <label class="pull-left" for="txt_fileNameforSave">File Name:</label>
+                                                                                <input maxlength="100" class="form-control pull-left" type="text" size="20" id="txt_fileNameforSave" />
+                                                                            </li>
+
+                                                                            <li style="display:none;" id="pNoScanner" class="col-xs-12 mt-xs">
+                                                                                <a href="javascript: void(0)" class="ShowtblLoadImage mt-sm" style="font-size: 11px;  position:relative" id="aNoScanner">
+                                                                                    <b>What if I don't have a scanner/webcam connected?</b>
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li id="divProductDetail"> </li>
+                                                                            <li>
+                                                                                <div class="col-xs-12 hidden" id="divcomments">
+                                                                                    <label class="control-label ">Comments</label>
+                                                                                    <textarea id="txtComments" name="Comments" class="form-control" rows="2" spellcheck="true"></textarea>
+                                                                                </div>
+                                                                                <div class="pl-none col-xs-12 mt-xs">
+                                                                                    <input id="btnSave" style="display:none;" class="bigbutton btn btn-default ml-xxs btn-sm pull-right white pt-tiny pb-tiny" type="button" value="Save" onclick="Document_Scan.saveScanDocument();" />
+                                                                                    <input id="btnScanAndExit" style="display:none;" class="bigbutton btn btn-danger ml-xxs btn-sm pull-right white pt-tiny pb-tiny" type="button" value="Scan And Exit" onclick="acquireImage(); Document_Scan.ScanAndExit(true);" />
+                                                                                    <input id="btnScan" class="bigbutton btn btn-default ml-xxs btn-sm pull-right white pt-tiny pb-tiny" disabled="disabled" type="button" value="Scan" onclick="Document_Scan.ScanInsuranceCard(true,'scan');" />
+                                                                                    <input id="btnScanProcess" style="display:none;" class="bigbutton btn btn-default ml-xxs btn-sm pull-right white pt-tiny pb-tiny" disabled="disabled" type="button" value="Scan & Process" onclick="Document_Scan.ScanInsuranceCard(true,false);" />
+                                                                                    <!--add mt-tiny class for AST-2-->
+                                                                                    <input id="btnScanProcessWithInsurance" style="display:none;" class="bigbutton btn btn-default ml-xxs btn-sm pull-right white pt-tiny mt-tiny pb-tiny" disabled="disabled" type="button" value="Scan & Process With New Insurance Plan" onclick="Document_Scan.ScanInsuranceCard(true,true);" />
+                                                                                    <input id="btnScanProcessDemographic" style="display:none;" class="bigbutton btn btn-default ml-xxs btn-sm pull-right white pt-tiny pb-tiny" disabled="disabled" type="button" value="Scan & Process Data" onclick="Document_Scan.ScanDrivingLicense();" />
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div id="divCustomScanAttach" class="toggle" data-plugin-toggle>
+                                                    <section class="toggle active">
+                                                        <label class="p-none pl-default NoRadius">Link Document</label>
+                                                        <div class="toggle-content">
+                                                            <div class="form-group">
+                                                                <div class="row p-sm paddingtop2">
+                                                                    <div id="div_ScanImageAttach" class="divTableStyle table-responsive Of-a">
+                                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="ScanImageAttachtbl">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>File Name</th>
+                                                                                    <th>Folder</th>
+                                                                                    <th>Entry Date</th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody></tbody>
+                                                                        </table>
+                                                                        <div class="pl-none col-xs-12 mt-xs">
+                                                                            <input id="btnAttach" class="bigbutton btn btn-default ml-xxs btn-sm pull-right white pt-tiny pb-tiny" type="button" value="Attach" onclick="Document_Scan.LoadDocumentsForAttach();" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <!--<div class="divType pt-xlg"><div class="mark_arrow expanded"></div>Custom Scan</div>
+                                                <div id="div_ScanImage" class="divTableStyle">
+                                                    <ul id="ulScaneImageHIDE">
+                                                        <li style="padding-left: 15px;">
+                                                            <label for="source">Select Source:</label>
+                                                            <select size="1" id="source" style="position:relative;width: 220px;" onchange="source_onchange()">
+                                                                <option value=""></option>
+                                                            </select>
+                                                        </li>
+                                                        <li style="display:none;" id="pNoScanner">
+                                                            <a href="javascript: void(0)" class="ShowtblLoadImage" style="font-size: 11px;  position:relative" id="aNoScanner">
+                                                                <b>What if I don't have a scanner/webcam connected?</b>
+                                                            </a>
+                                                        </li>
+                                                        <li id="divProductDetail"></li>
+                                                        <li style="text-align:center;">
+                                                            <input id="btnScan" class="bigbutton" style="color:#C0C0C0;" disabled="disabled" type="button" value="Scan" onclick="acquireImage();" />
+                                                        </li>
+                                                    </ul>
+                                                </div-->
+
+
+                                            </li>
+
+                                            <li style="display:none">
+                                                <div id="divCustomScan" class="toggle localImage" data-plugin-toggle>
+                                                    <section class="toggle">
+                                                        <label>Load a Local Image</label>
+                                                        <div class="toggle-content">
+                                                            <div class="form-group">
+                                                                <div class="row p-sm pb-none pt-none">
+                                                                    <div class="col-xs-12 p-xs">
+                                                                        <!--<div class="divType"><div class="mark_arrow collapsed"></div>Load a Local Image</div>-->
+                                                                        <div id="div_LoadLocalImage" class="divTableStyle">
+                                                                            <ul class="p-none">
+                                                                                <li>
+                                                                                    <input type="button" value="Load Image" class="btn btn-primary btn-sm rightbtn" onclick="return btnLoad_onclick()" />
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+
+                                    <!--<div id="divBlank" style="height:20px">
+                                        <ul>
+                                            <li></li>
+                                        </ul>
+                                    </div>-->
+                                    <!--<div id="tblLoadImage" style="visibility:hidden;height:80px;display:none;">-->
+                                    <div id="tblLoadImage" style="display:none; height:100px;">
+                                        <ul class="list-unstyled">
+                                            <li><div class="col-xs-12 pl-xs pr-xs mt-sm"><div class="multiple-heading"><span class="p-xs"> You can</span><a href="javascript: void(0)" style="color:#fff;" class="ClosetblLoadImage pull-right mr-xs"><i class="fa fa-times"></i></a></div></div></li>
+                                        </ul>
+                                        <div id="notformac1" style="padding:5px;">
+                                            <ul>
+                                                <li style="list-style: none;"><!--<img alt="arrow" src="Resources/reference/imgs/arrow.gif" width="9" height="12" />--><div class="spacer5"></div><h5 class="text-center">Install a Virtual Scanner</h5></li>
+                                                <li style="list-style: none;text-align:center;">
+                                                    <a id="samplesource32bit" href="http://www.dynamsoft.com/demo/DWT/Sources/twainds.win32.installer.2.1.3.msi">32-bit Sample Source</a>
+                                                    <a id="samplesource64bit" style="display:none;" href="http://www.dynamsoft.com/demo/DWT/Sources/twainds.win64.installer.2.1.3.msi">64-bit Sample Source</a>
+                                                    from <a href="http://www.twain.org">TWG</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 p-none" style="display:none">
+                                        <div id="divSaveimage" class="toggle toggle pl-xs pr-xs saveImage" data-plugin-toggle>
+                                            <section class="toggle">
+                                                <label>Save Image</label>
+                                                <div class="toggle-content">
+                                                    <div class="form-group">
+                                                        <div class="mt-md">
+                                                            <div id="divSave" class="divinput" style="position:relative">
+                                                                <ul style="background:#fff;margin:0 ;padding: 0;" class="list-unstyled">
+                                                                    <!--<li><img alt="arrow" src="Resources/reference/imgs/arrow.gif" width="9" height="12" /><b>Save Image</b></li>-->
+
+                                                                    <li>
+
+                                                                        <div class="radio-custom col-xs-2">
+                                                                            <input type="radio" class="form-control" value="bmp" name="imgType_save" id="imgTypebmp" onclick="rdsave_onclick();" />
+                                                                            <label for="imgTypebmp" class="control-label">BMP</label>
+                                                                        </div>
+                                                                        <div class="radio-custom col-xs-2">
+                                                                            <input type="radio" class="form-control" value="jpg" name="imgType_save" id="imgTypejpeg" onclick="rdsave_onclick();" />
+                                                                            <label class="control-label" for="imgTypejpeg">JPEG</label>
+                                                                        </div>
+                                                                        <div class="radio-custom col-xs-2" style="display:none;">
+                                                                            <input type="radio" class="form-control" value="tif" name="imgType_save" id="imgTypetiff" onclick="rdTIFFsave_onclick();" />
+                                                                            <label class="control-label" for="imgTypetiff">TIFF</label>
+                                                                        </div>
+
+                                                                        <div class="radio-custom col-xs-2">
+                                                                            <input type="radio" class="form-control" value="png" name="imgType_save" id="imgTypepng" onclick="rdsave_onclick();" />
+                                                                            <label class="control-label" for="imgTypepng">PNG</label>
+                                                                        </div>
+                                                                        <div class="radio-custom col-xs-2">
+                                                                            <input type="radio" class="form-control" value="pdf" name="imgType_save" id="imgTypepdf" onclick="rdPDFsave_onclick();" />
+                                                                            <label class="control-label" for="imgTypepdf">PDF</label>
+                                                                        </div>
+
+                                                                        <!--<label for="imgTypebmp">
+                                                                            <input type="radio" value="bmp" name="imgType_save" id="imgTypebmp" onclick="rdsave_onclick();" />BMP
+                                                                        </label>-->
+                                                                        <!--<label for="imgTypejpeg">
+                                                                            <input type="radio" value="jpg" name="imgType_save" id="imgTypejpeg" onclick="rdsave_onclick();" />JPEG
+                                                                        </label>-->
+                                                                        <!--<label for="imgTypepng">
+                                                                            <input type="radio" value="png" name="imgType_save" id="imgTypepng" onclick="rdsave_onclick();" />PNG
+                                                                        </label>-->
+                                                                        <!--<label for="imgTypepdf">
+                                                                            <input type="radio" value="pdf" name="imgType_save" id="imgTypepdf" onclick="rdPDFsave_onclick();" />PDF
+                                                                        </label>-->
+                                                                    </li>
+                                                                    <li style="padding-left:12px;">
+                                                                        <label for="MultiPageTIFF_save" style="display:none;"><input type="checkbox" id="MultiPageTIFF_save" />Multi-Page TIFF</label>
+
+                                                                        <!--<label for="MultiPagePDF_save"><input type="checkbox" id="MultiPagePDF_save" />Multi-Page PDF </label>-->
+
+                                                                        <div class="col-xs-4 p-none">
+                                                                            <div class="checkbox-custom checkbox-default pr-non pl-lg">
+                                                                                <input type="checkbox" id="MultiPagePDF_save" />
+                                                                                <label class="control-label" for="MultiPagePDF_save">Multi-Page PDF</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="col-xs-5 pull-right mt-sm pr-none">
+                                                                            <button class="btn btn-primary btn-sm rightbtn" id="btnSave" value="Save Image" onclick="btnSave_onclick(); return false;">Save Image</button>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div id="divUpload" class="divinput" style="position:relative; display:none;">
+                                        <ul>
+                                            <li><img alt="arrow" src="Resources/reference/imgs/arrow.gif" width="9" height="12" /><b>Upload Image</b></li>
+                                            <li style="padding-left:9px;">
+                                                <label for="txt_fileName">File Name: <input type="text" size="20" id="txt_fileName" /></label>
+                                            </li>
+                                            <li style="padding-left:9px;">
+                                                <label for="imgTypejpeg2">
+                                                    <input type="radio" value="jpg" name="ImageType" id="imgTypejpeg2" onclick="rd_onclick();" />JPEG
+                                                </label>
+                                                <label for="imgTypetiff2">
+                                                    <input type="radio" value="tif" name="ImageType" id="imgTypetiff2" onclick="rdTIFF_onclick();" />TIFF
+                                                </label>
+                                                <label for="imgTypepng2">
+                                                    <input type="radio" value="png" name="ImageType" id="imgTypepng2" onclick="rd_onclick();" />PNG
+                                                </label>
+                                                <label for="imgTypepdf2">
+                                                    <input type="radio" value="pdf" name="ImageType" id="imgTypepdf2" onclick="rdPDF_onclick();" />PDF
+                                                </label>
+                                            </li>
+                                            <li style="padding-left:9px;">
+                                                <label for="MultiPageTIFF"><input type="checkbox" id="MultiPageTIFF" />Multi-Page TIFF</label>
+                                                <label for="MultiPagePDF"><input type="checkbox" id="MultiPagePDF" />Multi-Page PDF </label>
+                                            </li>
+                                            <li style="text-align: center">
+                                                <input id="btnUpload" type="button" value="Upload Image" onclick="btnUpload_onclick()" />
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+
+                                    <div id="divNoteMessage">
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="DWTTail">
+                                <!-- #include file=includes/PageTail.aspx -->
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <input type="hidden" id="hfDocumentTagId" />
+                    <input type="hidden" id="hfPatientId" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="divImageTypes" style="display:none">
+        <div id="divcontent" class="modal-content modal-dialog modal-dialog-sm">
+            <div class="modal-header">
+                <button id="btnclose" type="button" class="close" onclick="Document_Scan.UnLoadImageType();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Select Type</h4>
+            </div>
+            <div class="modal-body">
+                <div class="clearfix"></div>
+                <div class="spacer10"></div>
+                <div class="clearfix"></div>
+                <div class="panel-body">
+
+                    <div class="radio-custom col-xs-5">
+                        <input type="radio" class="form-control" value="bmp" name="imgType_save" id="imgTypebmp" onclick="rdsave_onclick();" />
+                        <label for="imgTypebmp" class="control-label">BMP</label>
+                    </div>
+                    <div class="radio-custom col-xs-5">
+                        <input type="radio" class="form-control" value="jpg" name="imgType_save" id="imgTypejpeg" onclick="rdsave_onclick();" />
+                        <label class="control-label" for="imgTypejpeg">JPEG</label>
+                    </div>
+                    <div class="radio-custom col-xs-5">
+                        <input type="radio" class="form-control" value="png" name="imgType_save" id="imgTypepng" onclick="rdsave_onclick();" />
+                        <label class="control-label" for="imgTypepng">PNG</label>
+                    </div>
+                    <div class="radio-custom col-xs-5">
+                        <input type="radio" class="form-control" value="tif" name="imgType_save" id="imgTypetiff" onclick="rdTIFFsave_onclick();" />
+                        <label class="control-label" for="imgTypetiff">TIFF</label>
+                    </div>
+                    <div class="radio-custom col-xs-5">
+                        <input type="radio" class="form-control" value="pdf" name="imgType_save" id="imgTypepdf" onclick="rdPDFsave_onclick();" />
+                        <label class="control-label" for="imgTypepdf">PDF</label>
+                    </div>
+
+                    <label for="MultiPageTIFF_save" style="display:none;"><input type="checkbox" id="MultiPageTIFF_save" />Multi-Page TIFF</label>
+                    <div class="col-xs-5 p-none">
+                        <div class="checkbox-custom checkbox-default pr-non pl-lg">
+                            <input type="checkbox" id="MultiPagePDF_save" />
+                            <label class="control-label" for="MultiPagePDF_save">Multi-Page PDF</label>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-5 pull-right mt-sm pr-none">
+                        <input type="button" class="btn btn-primary btn-sm rightbtn" id="btnSave" value="Save" onclick="btnSave_onclick(true); return false;" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .body_Broad_width {
+        position: relative;
+        width: calc(100% - 2px);
+        float: left;
+        /*border: 1px solid #d6d6d6;*/
+    }
+
+    #pnlDocumentScan .btnspliter {
+        color: blue !important;
+        font-size: 50px !important;
+        font-weight: bold !important;
+        background-color: white !important;
+        width: 0px !important;
+        height: auto !important;
+        margin-top: -20px !important;
+        margin-right: 30px !important;
+    }
+
+    #pnlDocumentScan .splitterBtn {
+        text-align: right !important;
+        margin-right: 12px !important;
+        border-top: none !important;
+        margin-top: -15px !important;
+    }
+
+    #wrapper.toggled #sidebar-wrapperScan {
+        height: auto;
+        right: 0;
+        position: absolute;
+        width: 265px !important;
+        z-index: 970;
+        overflow-x: hidden;
+        background: #fff;
+        padding-bottom: 20px;
+    }
+    /*#wrapper.toggled #sidebar-wrapperScan .body_Broad_width {
+        width: calc(100% - 265px);
+    }*/
+    #sidebar-wrapperScan {
+        height: 0;
+        border-left: 2px solid #79b7d6;
+        margin-right: -273px;
+        right: 250px;
+        overflow: auto;
+        padding: 0px 6px 0 6px;
+        transition: all 0.5s ease 0s;
+    }
+
+    .asideBtn-toggled {
+        margin-right: -292px;
+        position: absolute;
+        right: 281px;
+        width: 450px;
+        z-index: 970;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+
+    #wrapper.toggled .moveTop {
+        right: 270px;
+    }
+
+    .asideBtn {
+        margin-right: 0;
+        position: absolute;
+        right: 0;
+        width: 0;
+        z-index: 999;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+
+    .moveTop {
+        border-radius: 3px 0 0 3px;
+        display: block;
+        float: right;
+        /*margin-right: 448px;*/
+    }
+
+    #wrapper {
+        padding-left: 0;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s linear;
+        transition: all 0.5s linear;
+    }
+
+        #wrapper.toggled {
+            padding-right: 270px;
+            min-height: initial;
+        }
+
+    #page-content-wrapper {
+        width: 96%;
+        position: relative;
+        /*padding: 15px;*/
+        display: block;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        -webkit-transition: all 0.5s linear;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+
+    .ds-dwt-container-box div {
+        /*width: 99% !important;*/
+    }
+
+    .ds-dwt-container-box {
+        width: 100% !important;
+    }
+
+    @media (min-width:992px) {
+        #sidebar-wrapperScan {
+            width: 0;
+            height: 26px;
+            margin-right: 0;
+            padding: 0;
+            right: initial;
+            overflow-x: hidden;
+            overflow-y: auto;
+            /*position: absolute;*/
+            position: relative;
+            z-index: 970;
+            background: #fff;
+            transition: all 0.5s ease;
+        }
+
+        #wrapper.toggled #sidebar-wrapperScan {
+            right: 0;
+            z-index: 970;
+        }
+    }
+
+    .ds-dwt-container-box {
+        text-align: center;
+    }
+
+        .ds-dwt-container-box > div {
+            display: inline-block !important;
+        }
+</style>

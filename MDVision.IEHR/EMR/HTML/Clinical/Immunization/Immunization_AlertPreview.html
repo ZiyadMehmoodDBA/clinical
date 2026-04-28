@@ -1,0 +1,114 @@
+﻿<div id="pnlImmunization_AlertPreview">
+    <div id="actionPanImmunization_AlertPreview" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Immunization_AlertPreview.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Immunization Alert</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+
+                    <div class="col-xs-12">
+
+                        <ul class="tabs-custom" id="ulmmunizationDetailTabsItems">
+                            <li id="listSchedulerAlert" class="active" onclick="Clinical_ImmunizationDetail.ChangeTab(this)"><a href="#tabSchedulerAlert" class="custom-made-tabs" data-toggle="tab">Scheduler Alert <span id="spnListSchedulerAlertCount" class="badge">528</span></a> </li>
+                            <li id="listExpiryLot" onclick="Clinical_ImmunizationDetail.ChangeTab(this)"> <a  href="#tabExpiryLot" class="custom-made-tabs" data-toggle="tab" >Expiry Lot <span id="spnListExpiryLotCount" class="badge">528</span></a></li>
+                            <li id="listLowQtyLot" onclick="Clinical_ImmunizationDetail.ChangeTab(this)"> <a href="#tabLowQtyLot " class="custom-made-tabs" data-toggle="tab" >Low Qty Lot <span id="spnListLowQtyCount" class="badge">528</span></a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body pt-default">
+                            <div id="tabSchedulerAlert" class="tab-pane active">
+                                <div id="pnlSection_Search">
+                                    <div class="btn-block">
+                                        <button id="ImmunizationAlertPreviewButtonPrint" type="button" class="btn btn-success btn-xs" onclick="Immunization_AlertPreview.OpenImnunizationAlertPrintPage();"><i class="fa fa-print"></i> Print</button>
+                                    </div>
+                                    <div class="spacer10"></div>
+                                    <div id="pnlImmunizationAlerts_Result" style="display: inline;">
+                                        <div class="panel-body panel-featured">
+                                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvImmunizationAlerts">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display:none;">AlertId</th>
+                                                        <th>Vaccine Name</th>
+                                                        <th>Alert</th>
+                                                        <th>No. of Days</th>
+                                                        <th>Due Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <!--This div is used for pagination purpose-->
+                                            <div id="divImmunizationAlertsPaging"></div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="tabExpiryLot" class="tab-pane">
+
+
+
+                                <div id="pnlExpiryLot_Result" style="display: inline;">
+                                    <div class="panel-body panel-featured">
+                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvExpiryLot">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none;">LotNumber</th>
+                                                    <th>Lot No.</th>
+                                                    <th>Vaccine Name</th>
+                                                    <th>Manufacturer</th>
+                                                    <th>Expiry Date</th>
+                                                    <th>Quantity</th>
+                                                    <th>Quantity Left</th>
+                                                    <th>Type</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <!--This div is used for pagination purpose-->
+                                        <div id="divExpiryLotPaging"></div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div id="tabLowQtyLot" class="tab-pane">
+                                <div id="pnlLowQtyLot_Result" style="display: inline;">
+                                    <div class="panel-body panel-featured">
+                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvLowQtyLot">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none;">LotNumber</th>
+                                                    <th>Lot No.</th>
+                                                    <th>Vaccine Name</th>
+                                                    <th>Manufacturer</th>
+                                                    <th>Expiry Date</th>
+                                                    <th>Quantity</th>
+                                                    <th>Quantity Left</th>
+                                                    <th>Type</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <!--This div is used for pagination purpose-->
+                                        <div id="divLowQtyLotPaging"></div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="FaceSheetPager"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

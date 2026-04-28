@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{23DFCFD5-B158-4C0D-9C31-5E9CB64C64CF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MDVision.WebAPI</RootNamespace>
+    <AssemblyName>MDVision.WebAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MDVision.Common\DLL\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="jose-jwt, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jose-jwt.2.4.0\lib\net40\jose-jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.4\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.2.2\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.2.2\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.2.2\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.2.2\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.2\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.1.2\lib\net45\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.1.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="AuthContext.cs" />
+    <Compile Include="AuthRepository.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\APILookupsController.cs" />
+    <Compile Include="Controllers\ClinicalController.cs" />
+    <Compile Include="Controllers\WebApiCommon.cs" />
+    <Compile Include="Controllers\NotesController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\PrivilegesController.cs" />
+    <Compile Include="Controllers\RefreshTokensController.cs" />
+    <Compile Include="Controllers\SchedulerController.cs" />
+    <Compile Include="Entities\NameValuePair.cs" />
+    <Compile Include="Entities\RefreshToken.cs" />
+    <Compile Include="Filters\SetSessionFromHeader.cs" />
+    <Compile Include="Filters\SetSessionProperties.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="Helpers\APILookups.cs" />
+    <Compile Include="Helpers\ClinicalHelper.cs" />
+    <Compile Include="Helpers\NotesHelpler.cs" />
+    <Compile Include="Helpers\PrivilegesHelper.cs" />
+    <Compile Include="Helpers\RefreshTokenMemoryCacheHelper.cs" />
+    <Compile Include="Helpers\PatientHelper.cs" />
+    <Compile Include="Helpers\SchedulerHelper.cs" />
+    <Compile Include="Models\ExternalLoginModels.cs" />
+    <Compile Include="Models\NotesModel\NotesModel.cs" />
+    <Compile Include="Models\SoapTextBirthHxModel.cs" />
+    <Compile Include="Models\SoapTextHospitalizationHxModel.cs" />
+    <Compile Include="Models\SoapTextResponce\AlcoholHx.cs" />
+    <Compile Include="Models\SoapTextResponce\BirthHx.cs" />
+    <Compile Include="Models\SoapTextResponce\BirthHxLoad.cs" />
+    <Compile Include="Models\SoapTextResponce\BirthHx_GeneralHx.cs" />
+    <Compile Include="Models\SoapTextResponce\BirthHx_MaternalDeliveryHx.cs" />
+    <Compile Include="Models\SoapTextResponce\BirthHx_NewBornHx.cs" />
+    <Compile Include="Models\SoapTextResponce\CaffeineHx.cs" />
+    <Compile Include="Models\SoapTextResponce\DiseaseHx.cs" />
+    <Compile Include="Models\SoapTextResponce\DiseaseLoad.cs" />
+    <Compile Include="Models\SoapTextResponce\DrugAbuseHx.cs" />
+    <Compile Include="Models\SoapTextResponce\ExercisesHx.cs" />
+    <Compile Include="Models\SoapTextResponce\FamilyHx.cs" />
+    <Compile Include="Models\SoapTextResponce\FamilyHxLoad.cs" />
+    <Compile Include="Models\SoapTextResponce\HospitalizationDiseaseHx.cs" />
+    <Compile Include="Models\SoapTextResponce\HospitalizationHistoryDiseaseLoad.cs" />
+    <Compile Include="Models\SoapTextResponce\HospitalizationHx.cs" />
+    <Compile Include="Models\SoapTextResponce\HousingHx.cs" />
+    <Compile Include="Models\SoapTextResponce\MedicalHx.cs" />
+    <Compile Include="Models\SoapTextResponce\MedicalHxDiseaseLoad.cs" />
+    <Compile Include="Models\SoapTextResponce\MemberHasDisease.cs" />
+    <Compile Include="Models\SoapTextResponce\MemberLoad.cs" />
+    <Compile Include="Models\SoapTextResponce\MiscHxComponent.cs" />
+    <Compile Include="Models\SoapTextResponce\OccupationHx.cs" />
+    <Compile Include="Models\SoapTextResponce\SexualHx.cs" />
+    <Compile Include="Models\SoapTextResponce\SleepHx.cs" />
+    <Compile Include="Models\SoapTextResponce\SoapBirthHxResponse.cs" />
+    <Compile Include="Models\SoapTextResponce\SoapFamilyHistoryResponce.cs" />
+    <Compile Include="Models\SoapTextResponce\SoapHospitalizationHxResponse.cs" />
+    <Compile Include="Models\SoapTextResponce\SoapMedicalHistoryResponce.cs" />
+    <Compile Include="Models\SoapTextResponce\SoapSocialHistoryResponce.cs" />
+    <Compile Include="Models\SoapTextResponce\SoapSurgicalHistoryResponce.cs" />
+    <Compile Include="Models\SoapTextResponce\SocialHx.cs" />
+    <Compile Include="Models\SoapTextResponce\SocialHxLoad.cs" />
+    <Compile Include="Models\SoapTextResponce\SurgicalDiseaseHx.cs" />
+    <Compile Include="Models\SoapTextResponce\SurgicalHistoryDiseaseLoad.cs" />
+    <Compile Include="Models\SoapTextResponce\SurgicalHx.cs" />
+    <Compile Include="Models\SoapTextResponce\TobaccoHx.cs" />
+    <Compile Include="Models\SoapTextSurgicalHxModel.cs" />
+    <Compile Include="Models\SoapTextVMModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\FacebookAuthProvider.cs" />
+    <Compile Include="Providers\GoogleAuthProvider.cs" />
+    <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
+    <Compile Include="Providers\SimpleRefreshTokenProvider.cs" />
+    <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\StaticCCDAData.xml" />
+    <Content Include="Global.asax" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="AuthKey\AuthKey_98U3FY2885.p8" />
+    <Content Include="AuthKey\PatientRegistrationPushNotificationCertificate.p12" />
+    <Content Include="AuthKey\Certificates.p12" />
+    <Content Include="AuthKey\Developer_Certificates.p12" />
+    <None Include="Properties\PublishProfiles\aa.pubxml" />
+    <None Include="Properties\PublishProfiles\testWebAPI.pubxml" />
+    <None Include="Properties\PublishProfiles\web api.pubxml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.debug web.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.web.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\Common\" />
+    <Folder Include="Controllers\Physician\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MDVision.Business\MDVision.Business.csproj">
+      <Project>{9d699c78-4b87-4900-8d11-6dad374d170d}</Project>
+      <Name>MDVision.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.Common\MDVision.Common.csproj">
+      <Project>{4c43925d-c035-4657-974b-9d0bc50e884e}</Project>
+      <Name>MDVision.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.DataAccess\MDVision.DataAccess.csproj">
+      <Project>{dca2d6d8-4a90-444f-a09a-c17db5400e51}</Project>
+      <Name>MDVision.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.Dataset\MDVision.Datasets.csproj">
+      <Project>{915677db-0c5d-4dad-9a1e-82a20712b4af}</Project>
+      <Name>MDVision.Datasets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.IEHR\MDVision.IEHR.csproj">
+      <Project>{03983350-149d-4551-a31a-446042398dbe}</Project>
+      <Name>MDVision.IEHR</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.Model\MDVision.Model.csproj">
+      <Project>{ec0b9643-4480-4a17-974e-788f8924cfb5}</Project>
+      <Name>MDVision.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'debug web|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'web|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>26264</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:26202/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:26202/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,29 @@
+﻿<div class="row" id="pnlDocument_Scanner">
+    <div id="actionPanDocument_Scanner" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="btnIframeScannerClose" onclick="Document_Scanner.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Document Scan</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false;" id="frmDocument_Scanner">
+                    <div id="ediTextView" class="tab-pane">
+                        <div class="col-xs-12">
+                            <div class="clearfix"></div>
+                            <iframe id="IFDocument" target='_parent' class="col-lg-12 col-md-12 col-sm-12" height="570" style="border-style: none;" ></iframe>
+                        </div>
+                    </div>
+                    <div id="iframResponse" >
+                        <img id="img_frontImge" style="display:none" />
+                        <img id="img_backImge" style="display:none" />
+                        <input id="hfIsNewInsurancePlan" type="hidden" />
+                        <button id="btn_close_with_scan" type="button" style="display:none" class="close" onclick="Document_Scanner.UnLoadWithScanner();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                        <button id="btn_close_with_processing" type="button" style="display:none" class="close" onclick="Document_Scanner.UnLoadWithProcessing();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,304 @@
+<div id="Patient_Search" class="Patient_Search">
+    <div id="actionPanPatientSearch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="mt-none mr-none mb-none">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_Search.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Patient</h4>
+            </div>
+            <div id="modalbody" class="clsPatientSearch">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" id="btnPatientAdd" class="btn btn-success btn-sm" onclick="Patient_Search.PatientAddEdit('-1','Add');"><i class="fa fa-plus-circle"></i> Add</button>
+                    <button type="button" id="btnPatientQuickSearch" class="btn btn-success btn-sm" onclick="Patient_Search.OpenQuickAddPatient();"><i class="fa fa-plus-circle"></i> Quick Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <form method="post" id="frmPatientSearch" onsubmit="return false" >
+                            <div class="panel-body" id="pnlPatient_Search" >
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Last Name</label>
+                                        <input class="form-control ValidateCriteria"   id="txtSearchLastName" name="LastName" type="text" maxlength="50" autocomplete="nope" />
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">First Name</label>
+                                        <input class="form-control ValidateCriteria" id="txtSearchFirstName" name="FirstName" type="text" maxlength="35" autocomplete="nope" />
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">DOB</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control ValidateCriteria" id="dtpSearchDOB" name="DOB" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <!-- Begin 18-Jan-2016  Edited By Azeem Raza Tayyab Bug # PMS-3018-->
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label" for="Claim Number">Claim Number</label>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtClaimno" name="ClaimNumber" placeholder="Start typing to search" type="text" />
+                                            <div id="divSearchClaim" class="input-group-btn">
+                                                <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="utility.OpenPatientCharges('Patient_Search');"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 ">
+                                        <label class="control-label">SSN</label>
+                                        <input class="form-control ValidateCriteria" id="txtSSNSearch" name="SSN" type="text" placeholder="999-99-9999" data-mask="999-99-9999" onblur="utility.validateMasking(this);" />
+                                    </div>
+                                    <!--End 05-Jan-2015  Added By Azeem Raza Tayyab Bug # PMS-3136-->
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Patient Status</label>
+                                        <select id="ddlActive" name="Active" class="form-control ValidateCriteria">
+                                            <option value="">- All -</option>
+                                            <option value="1" selected="selected">Active</option>
+                                            <option value="0">Inactive</option>
+                                            <option value="2">Deceased </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Account #</label>
+                                        <input class="form-control ValidateCriteria" id="txtSearchAccountNo" name="AccountNo" maxlength="15" type="text" placeholder="P0005" autocomplete="off" />
+                                    </div>
+
+                                    
+                                   
+
+                                    <div class="col-sm-4 col-md-2" id="lastSeenProviderCon" divtype="AdvancedSearch" style="display:none">
+                                        <label id="lblSearchProvider" class="control-label">Last Seen Provider</label>
+                                        <a id="lnkSearchProviderEdit" style="display:none;" href="#" onclick="Patient_Search.OpenProviderDetail();" title="Edit Provider">Last Seen Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtSearchProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Search.OpenProvider();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="col-sm-4 col-md-2" divtype="AdvancedSearch" style="display:none">
+                                        <label id="lblSearchFacility" for="Facility" class="control-label">Last Seen Facility</label>
+                                        <a id="lnkSearchFacilityEdit" style="display:none;" href="#" onclick="Patient_Search.OpenFacilityDetail();" title="Edit Facility">Last Seen Facility</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtSearchFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Patient_Search.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2" divtype="AdvancedSearch" style="display:none">
+                                        <label class="control-label">Last Seen Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control ValidateCriteria" id="dtpLastSeenDate" name="AppointmentDate" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2" divtype="AdvancedSearch" style="display:none">
+                                        <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                        <a id="lnkPracticeEdit" style="display:none;" href="#" onclick="Patient_Search.OpenPracticeDetail();" title="Edit Facility">Practice</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtSearchPractice" type="text" placeholder="Start typing to search" name="Practice" maxlength="35" autocomplete="off" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="Patient_Search.OpenPractice();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2" divtype="AdvancedSearch" style="display:none">
+                                        <label for="MRN" class="control-label">Home Phone</label>
+                                        <input class="form-control ValidateCriteria" id="txtHomeTel" name="HomePhone" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);" autocomplete="nope" />
+                                    </div>
+                                    <div class="col-sm-4 col-md-2" divtype="AdvancedSearch" style="display:none">
+                                        <label for="MRN" class="control-label">Email</label>
+                                        <input class="form-control ValidateCriteria" id="txtEmail" type="text" name="Email" maxlength="35" autocomplete="nope" />
+                                    </div>
+                                    <div class="col-sm-4 col-md-2" divtype="AdvancedSearch" style="display:none">
+                                        <label for="Sex" class="control-label">Sex</label>
+                                        <select id="ddlSearchSex" class="form-control ValidateCriteria" name="Sex" ddlist="GetGenderDemographic"></select>
+                                    </div>
+                                    <!--Begin 05-Jan-2015  Added By Azeem Raza Tayyab Bug # PMS-3136-->
+                                    <div class="col-sm-4 col-md-2" divtype="AdvancedSearch" style="display:none">
+                                        <label for="CoverageType" class="control-label">Coverage Type</label>
+                                        <select id="ddlCoverageType" class="form-control ValidateCriteria" name="CoverageType">
+                                            <option selected="selected" value="">All</option>
+                                            <option value="Insured">Insured</option>
+                                            <option value="Self Pay">Self Pay</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label id="lblPrimaryInsurance" class="control-label">Primary Insurance</label>
+                                        <a id="lnkPrimaryInsurancePlanDetail" style="display:none;" href="#" onclick="Patient_Search.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Primary Insurance</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtPrimaryInsurance" name="InsurancePlan" placeholder="Start typing to search" type="text" autocomplete="nope" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Search.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2">
+                                        <label for="MRN" class="control-label">MRN</label>
+                                        <input class="form-control ValidateCriteria" id="txtMRN" name="MRN" type="text" maxlength="10" autocomplete="nope" />
+                                    </div>
+                                    <div class="col-sm-4 col-md-2" divtype="AdvancedSearch" style="display:none">
+                                        <label id="lblGuarantor" for="Guarantor" class="control-label">Guarantor</label>
+                                        <a id="lnkGuarantorEdit" style="display:none;" href="#" onclick="Patient_Search.OpenGuarantorDetail();" title="Edit Guarantor">Guarantor</a>
+                                        <div class="input-group">
+
+                                            <input class="form-control ValidateCriteria" id="txtGuarantor" name="Guarantor" placeholder="Start typing to search" type="text" autocomplete="nope" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkGurantor" class="btn btn-primary btn-xs " type="button" onclick="Patient_Search.OpenGuarantor();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End 18-Jan-2016  Edited By Azeem Raza Tayyab Bug # PMS-3018-->
+                                    <input class="form-control" id="txtRowspPageHF" type="hidden" style="display:none;" />
+                                    <input class="form-control" id="txtPageNoHF" type="hidden" style="display:none;" />
+                                    <div class="col-sm-4 col-md-2 pad-a-labelsize-btn">
+                                        <a href="#" onclick="Patient_Search.ShowSearchFiels(this);" style="text-decoration:none" class="btn btn-link btn-sm">Advance Search</a>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 pad-a-labelsize" divtype="AdvancedSearch" style="display:none">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="BadAddress" id="chkBadAddress">
+                                            <label class="control-label" for="chkBadAddress">Bad Address</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 pad-a-labelsize" divtype="AdvancedSearch" style="display:none">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IncompleteDemographics" id="chkIncompleteDemographics">
+                                            <label class="control-label" for="chkIncompleteDemographics">Incomplete Demographics</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 mt-md pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnPatientSearch" type="button" onclick="Patient_Search.ValidateSearchCriteria();">Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnClearPatientSearch" type="button" onclick="Patient_Search.ClearPatientSearch();">Reset</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnImportCCDA" type="button" onclick="Patient_Search.ImportCCDASummary();">Import</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnExportCCDA" type="button" onclick="Patient_Search.ExportCCDASummary();">Export Data Portability</button>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="ProviderID" id="hfSearchProvider" />
+                                <input type="hidden" name="FacilityID" id="hfSearchFacility" />
+                                <input type="hidden" name="PracticeID" id="hfSearchPractice" />
+                                <input type="hidden" name="InsurancePlanID" id="hfInsurancePlan" />
+                                <input type="hidden" name="IsRecentPatientCalled" id="hfIsRecentPatientCalled" />
+                            </div>
+                        </form>
+
+                        <div class="pull-left mt-sm">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnRecentPatient" type="button" onclick="Patient_Search.PatientSearch(null, null, null, 1);">Recent Patients</button>
+                        </div>
+
+                    </section>
+                </div>
+                <div class="spacer10"></div>
+                <div id="pnlPatient_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <input type="hidden" id="Patient_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatient">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">BasicFeeGroupId</th>
+                                        <th class="size20"><input type="checkbox" name="selectAll" value="selectAll" id="selectAllPatients" /></th>
+                                        <th id="ColumnAction" class="size110">Action</th>
+                                        <th class="size90 noWordBreak">Account #</th>
+                                        <th class="size120 noWordBreak">Last Name</th>
+                                        <th class="size120 noWordBreak">First Name</th>
+                                        <th class="size85">SSN</th>
+                                        <th class="size70">Sex</th>
+                                        <th class="size75">DOB</th>
+                                        <th class="size200">Address 1</th>
+                                        <th class="size120">Last Seen Provider</th>
+                                        <th class="size120">Last Seen Facility</th>
+                                        <th class="size120">Last Seen Date</th>
+                                        <th class="size120">Primary Insurance</th>
+                                        <th class="size120">Coverage Type</th>
+                                        <th class="size120">Guarantor Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <div id="divPatientPaging"></div>
+
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" id="pnlRestrictUser_PatientConsent" style="display: none;">
+        <div id="actionPanRestrictUser_PatientConsent" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div> <!------>
+        <div class="modal-dialog modal-dialog-md">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <!--<button type="button" id="unload_LinkAppointment_btn" class="close" onclick="Clinical_Notes.UnLoadLinkedAppointmentList();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>-->
+                    <h4 class="modal-title">Patient Consent Unspecified</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="frmPatientConsent" onsubmit="return false">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="col-sm-12 col-lg-12">
+                                    <label>
+                                        <span class="red bold">Warning: </span> <span>
+                                            Viewing patient information without proper consent or authorization may be a violation
+                                            of Federal or State Privacy Regulations.
+                                        </span>
+                                    </label>
+                                    <label>
+                                        The Patient <strong id="lblPatientName">Patient Name</strong> has not given consent to a legal entity that you are a member of. Enter the reason why you are
+                                        attempting to access this patient recorded consent.
+                                    </label>
+                                    <textarea maxlength="500" id="BreakTheReason" rows="6" class="form-control" placeholder="-Enter Reason-" spellcheck="true"></textarea>
+                                    <input type="hidden" id="hfPatientId" value="-1" />
+                                    <input type="hidden" id="hfAccountNumber" value="" />
+                                    <input type="hidden" id="hfFullName" value="" />
+                                    <input type="hidden" id="hfFirstName" value="" />
+                                    <input type="hidden" id="hfLastName" value="" />
+                                    <input type="hidden" id="hfGuarantor" name="GuarantorID" />
+                                </div>
+                                <div class="pull-right pr-default mt-sm">
+                                    <button class="btn btn-danger btn-md rightbtn" type="button" onclick="Patient_Search.UnLoadRestrictUser_PatientConsent();">Cancel</button>
+                                    <button class="btn btn-success btn-md rightbtn" type="button" onclick="Patient_Search.saveBreakGlassReason();">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        utility.ValidateDOB('pnlPatient_Search #frmPatientSearch', 'Patient_Search #dtpSearchDOB', new Date('1800-01-01'), new Date(), false);
+        $(".clsPatientSearch").on("click", function (e) {
+            var $target = $(e.target);
+            if ($target.is('input') || $target.is('select') || $target.is('hidden') || $target.hasClass('k-multiselect-wrap')) {
+            }
+            else {
+                var focused = $(':focus');
+                $(focused).blur();
+            }
+        });
+    });
+    //$(function () {
+    //    $("#pnlPatient_Search input,#pnlPatient_Search select").keypress(function (e) {
+    //        if (e.keyCode == 13) {
+    //            //Patient_Search.PatientSearch();
+    //        }
+    //    });
+    //});
+</script>
+
+
+

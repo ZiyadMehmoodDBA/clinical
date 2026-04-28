@@ -1,0 +1,114 @@
+﻿<div class="row" id="pnlClinicalMedications">
+    <div id="actionPanClinicalMedications" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_Medications.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Medications</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div id="pnlSection_Search">
+                        <form id="frmClinicalMedications" method="post" name="frmClinicalMedications" onsubmit="return false">
+                            <div class="pull-left tab_space">
+                                <button class="btn btn-success btn-sm left-btn" type="button" onclick="Clinical_Medications.openDrFirst()" id="btnOpenDrFirst"><i class="fa fa-plus-circle"></i> Manage</button>
+                                <button class="btn btn-success btn-sm" type="button" onclick="Clinical_Medications.PrintClinicalMedications();" id="btnPrintMedPres"><i class="fa fa-print"></i> Print</button>
+                            </div>
+                                <div class="pull-right" id="divchkReconciledViewOnNote">
+                                    <div class="form-group">
+                                        <div class="col-sm-20">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="chkReconciledViewOnNote" onclick="Clinical_Medications.getMedicationsForReconciledView(this)" title="Reconciled View on Note" class="checkbox-custom ">
+                                                <label class="control-label">Reconciled View on Note</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Reconciled View on Note <input type="checkbox" id="chkReconciledViewOnNote" title="Reconciled View on Note" class="checkbox-custom " />-->
+                                </div>
+                            
+                            <!--<div class="clearfix"></div>
+                            <div class="checkbox-custom pull-left  mt-default">
+                                <input type="checkbox" name="BadAddress" id="chkNoKnownMedications" onchange="Clinical_Medications.AddNoKnownMedications()">
+                                <label class="control-label" for="chkBadAddress">No Known Medications</label>
+                            </div>-->
+                            <div class="pull-left pt-xs">
+                                <label class="control-label" id="reviewedByTop"></label>
+                            </div>
+
+                            <div class="spacer3"></div>
+                           
+                            <!--</div>-->
+                            <section class="panel">
+                                <ul class="tabs-custom" id="ulSocialHxTabsItems">
+                                    <li id="listMedications"><a class=" " href=" #medications" data-toggle="tab" onclick="    Clinical_Medications.ShowHideReconciledViewOnNote('Med')">Medications</a> </li>
+                                    <li id="listPrescriptions"> <a class=" " href=" #prescriptions" data-toggle="tab" onclick="    Clinical_Medications.ShowHideReconciledViewOnNote('Pres')">Prescriptions</a></li>
+                                </ul>
+                                
+                                <div class="tab-content tabs-custom-body">
+                                    <div id="Medications" class="tab-pane">
+                                        <div id="pnlMedications_Result">
+                                                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvMedications">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="size20 p-none" coltype="Expand"></th>
+                                                            <th class="size20" style="display: none;">MedicationId</th>
+                                                            <th id="ColumnAction" class="size90 size-min90">Action</th>
+                                                            <th class="size300">Medication</th>
+                                                            <th class="size300">Dosage</th>
+                                                            <th class="noWordBreak size50">Started On</th>
+                                                            <!--<th class="size140 size-min140">Route</th>-->
+                                                            <th class="size140 size-min140">Negation Reason</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div id="divMedications_Paging"></div>
+                                        </div>
+                                        <div class="pull-right pt-lg text-right">
+                                            <button class="btn btn-success btn-sm" type="button" onclick="Clinical_Medications.addMedicationsToNotesAndClose();" id="btnAddMedications"><i class="fa fa-plus"></i> Add to Note</button>
+                                            <!--<button class="btn btn-cancel btn-sm pull-right mr-sm" type="button" onclick="Clinical_Medications.resetSelectedMedications();" id="btnMedicationReset"><i class="fa fa-refresh"></i> Reset</button>-->
+                                        </div>
+                                    </div>
+                                   
+                                    <div id="Prescriptions" class="tab-pane">
+                                        <div id="pnlPrescriptions_Result" style="display: inline;">
+                                                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvPrescriptions">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="display: none;">PrescriptionsId</th>
+                                                            <th id="ColumnAction" class="size30 size-min30">Action</th>
+                                                            <th>Medication</th>
+                                                            <th>Pharmacy</th>
+                                                            <th>Refill(s)</th>
+                                                            <th>Status</th>
+                                                            <th class="noWordBreak">Prescribed On</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div id="divPrescriptions_Paging"></div>
+                                            </div>
+
+                                       
+                                        <div class="pull-right pad-a-labelsize-btn pr-default">
+                                            <button class="btn btn-success btn-sm pull-right mr-sm" type="button" onclick="Clinical_Medications.addMedicationsToNotesAndClose();" id="activatePrescriptionButtonForNotes"><i class="fa fa-plus"></i> Add to Note</button>
+                                            <!--<button class="btn btn-cancel btn-sm pull-right mr-sm" type="button" onclick="Clinical_Prescriptions.resetPrescription();" id="btnPrescriptionsReset"><i class="fa fa-refresh"></i> Reset</button>-->
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </section>
+                            <!--<div class="pull-right" style="margin-right:20px;">
+                                <button class="btn btn-success btn-sm left-btn" type="button" onclick="Clinical_Medications.PrintClinicalMedications();" id="btnPrint"> Print</button>
+                            </div>-->
+                        </form>
+                    </div>
+                    <div id="FaceSheetPager"></div>
+                    <div class="modal-footer  pb-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,1218 @@
+﻿<div id="providerscheduleDetail">
+    <div id="actionPanproviderscheduleDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="providerscheduleDetail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Provider Schedule</h4>
+            </div>
+            <div class="modal-body">
+
+                <div id="Standard">
+                    <form method="post" onsubmit="return false" id="frmproviderscheduleDetail">
+                        <div class="form-group">
+                            <div class="col-md-2 col-sm-4">
+                                <label class="control-label" for="Patient Account">Provider <span class="required">*</span> </label>
+                                <select id="ddlprovider" name="provider" class="form-control " onchange="providerscheduleDetail.EntityBaseData(this)" ddlist="GetProvider"></select>
+                            </div>
+                            <div class="col-md-2  col-sm-4">
+                                <label class="control-label" for="Case Type">Facility</label>
+                                <select id="ddlfacility" name="facility" class="form-control " ddlist="GetFacilitySchedular"></select>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+                                <label class="control-label">From Date<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" id="fromProviderDate" name="fromdate" data-plugin-datepicker="" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-md-2  col-sm-4">
+                                <label class="control-label">To Date<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" id="todate" name="todate" data-plugin-datepicker="" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-4">
+                                <label class="control-label">From Time<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                    <input type="text" id="frmtime" name="frmtime" data-plugin-timepicker class="form-control " data-plugin-options='{ "minuteStep": 5 }'>
+                                </div>
+                            </div>
+                            <div class="col-md-2  col-sm-4">
+                                <label class="control-label">To Time<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                    <input type="text" id="totime" name="totime" data-plugin-timepicker class="form-control " data-plugin-options='{ "minuteStep": 5 }'>
+                                </div>
+                            </div>
+                            <div class="visible-sm">
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <!--<div class="col-md-3 col-sm-4">
+                                <label class="control-label" for="Patient Account">Schedule Reason</label>
+                                <select id="ddlschreason" name="schreason" class="form-control " ddlist="GetBlockReasons" onchange="providerscheduleDetail.FillDuration('#frmproviderscheduleDetail #ddlschreason', '#frmproviderscheduleDetail #slotminutes');"></select>
+                            </div>-->
+                            <!--<div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="Schedule Reason">Schedule Reason</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtSchReason" name="schreason" customname="Schedule Reason" type="text" oninput="providerscheduleDetail.BindScheduleReasons();">
+                                    <div id="divSchReason" class="input-group-btn">
+                                        <button id="lnkSchReason" type="button" class="btn btn-primary btn-xs" onclick="providerscheduleDetail.OpenScheduleReason();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!--<div class="col-md-2 col-sm-4">
+                                <label class="control-label" for="slotminutes">Slot Minutes<span class="required">*</span></label>
+                                <input class="form-control " id="slotminutes" name="slotminutes" type="text" maxlength="3" placeholder="999" onkeypress="return utility.ValidateZero(event, this);">
+                            </div>-->
+                        </div>
+                        <div class="form-group">
+                           
+
+                            <!--<div class="col-md-3  col-sm-4">
+                                <label  for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                <div class="input-group">
+
+                                    <input class="form-control" id="txtFacility" name="facility" placeholder="Start typing to search" type="text" onblur="utility.ValidateAutoComplete(this, 'frmproviderscheduleDetail #hfFacility', false);">
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="providerscheduleDetail.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>-->
+
+                           
+                           
+                            <div class="visible-sm">
+                                <div class="clearfix"></div>
+                            </div>
+                            <!--<div class="col-md-2  col-sm-4">
+                                <label class="control-label" for="PatientAllowed">Patients Allowed<span class="required">*</span></label>
+                                <input class="form-control " id="PatientAllowed" name="PatientAllowed" type="text" maxlength="2" placeholder="99" onkeypress="return utility.ValidateZero(event, this);">
+                            </div>-->
+                            <!--<div class="col-md-3 pad-a-labelsize  col-sm-4">
+                                <div class="checkbox-custom checkbox-default ">
+                                    <input id="Overbookallow" name="Overbookallow" type="checkbox">
+                                    <label class="control-label" for="Active">Overbook Allowed</label>
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="spacer20"></div>
+                        <h4 class=" splitter"> Block Hours </h4>
+                        <div class="form-group">
+                            <!--<div class="col-md-3">
+                                <label class="control-label" for="Case Type">Block Reason</label>
+                                <select class="form-control " id="blockreason" name="blockreason" ></select>
+                            </div>-->
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="Block Reason">Block Reason</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtBlckReason" name="schreason" customname="Block Reason" type="text" />
+                                    <div id="divBlckReason" class="input-group-btn">
+                                        <button id="lnkBlckReason" type="button" class="btn btn-primary btn-xs" onclick="providerscheduleDetail.OpenBlockReason();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label">From Time</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                    <input type="text" id="frmblckhrstime" data-plugin-timepicker class="form-control " data-plugin-options='{ "minuteStep": 5 }' name="blckhrsfromtime" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label">To Time</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                    <input type="text" id="toblckhrstime" data-plugin-timepicker class="form-control " data-plugin-options='{ "minuteStep": 5 }' name="blckhrstotime" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spacer20"></div>
+                        <h4 class="splitter"> Recurrence Pattern </h4>
+                        <div class="col-md-12">
+                            <div class="spacer10"></div>
+                            <div class="tabs tabs-vertical tabs-left">
+                                <ul class="nav nav-tabs col-md-2 col-xs-2 ">
+                                    <li class="active" onclick="providerscheduleDetail.DailyChecks();"> <a href="#Daily" data-toggle="tab">Daily</a> </li>
+                                    <li class="" onclick="providerscheduleDetail.WeeklyChecks();"> <a href="#Weekly" data-toggle="tab">Weekly</a> </li>
+                                    <li class="" onclick="providerscheduleDetail.MonthlyChecks();"> <a href="#Monthly" data-toggle="tab">Monthly</a> </li>
+                                    <li class="" onclick="providerscheduleDetail.YearlyChecks();"> <a href="#Yearly" data-toggle="tab">Yearly</a> </li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+                                    <div id="Daily" class="tab-pane active">
+                                        <p style="display: none">Daily</p>
+
+                                        <div class="col-md-5 col-sm-6">
+                                            <div class="radio-custom size60 pull-left">
+                                                <input type="radio" id="Every" checked="checked" name="03">
+                                                <label for="Every">Every</label>
+                                            </div>
+                                            <div class="size35 pull-left">
+                                                <input id="txtevrydays" name="DailyEveryDays" class="form-control size30 " type="text" maxlength="2" onkeypress="return utility.ValidateZero(event, this);">
+                                            </div>
+                                            <div class="size75 pull-left">
+                                                <label class="control-label" id="txtDays">Day(s) </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" name="weekendsonly" id="chkweekendsonly">
+                                                <label class="control-label" for="Monday">Weekdays Only</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <hr class="vshort">
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="radio-custom ">
+                                                <input type="radio" id="rdevryweekend" name="03">
+                                                <label for="Every">Every Weekday</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="Weekly" class="tab-pane">
+                                        <p style="display: none">Weekly</p>
+
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="radio-custom">
+                                                <input type="radio" id="rdEveryWeekdayOn" checked="checked" name="02">
+                                                <label for="Every Weekday On:">Every Week On:</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-6">
+                                            <div class="radio-custom size60 pull-left">
+                                                <input type="radio" id="rdEveryweekely" name="02">
+                                                <label for="Every">Every</label>
+                                            </div>
+                                            <div class=" size35 pull-left ">
+                                                <input id="txtactiveweek" class="form-control size30 " type="text" name="txtactiveweek" maxlength="2" onkeypress="return utility.ValidateZero(event, this);">
+                                            </div>
+                                            <div class=" size75 pull-left">
+                                                <label class="control-label">Week(s) On:</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <hr class="vshort">
+                                        <div class="clearfix"></div>
+                                        <div class=" col-sm-12 form-group">
+                                            <div class=" col-md-3 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkwekSunday" name="weekdays[]" data-bv-feedbackicons="false" type="checkbox">
+                                                    <label class="control-label" for="Sunday">Sunday</label>
+                                                </div>
+                                            </div>
+                                            <div class=" col-md-3 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkwekMonday" name="weekdays[]" type="checkbox">
+                                                    <label class="control-label" for="Monday">Monday</label>
+                                                </div>
+                                            </div>
+                                            <div class=" col-md-3 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkwekTuesday" name="weekdays[]" type="checkbox">
+                                                    <label class="control-label" for="Tuesday">Tuesday</label>
+                                                </div>
+                                            </div>
+                                            <div class=" col-md-3 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkwekWednesday" name="weekdays[]" type="checkbox">
+                                                    <label class="control-label" for="Wednesday">Wednesday</label>
+                                                </div>
+                                            </div>
+                                            <div class=" col-md-3 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkwekThursday" name="weekdays[]" type="checkbox">
+                                                    <label class="control-label" for="Thursday">Thursday</label>
+                                                </div>
+                                            </div>
+                                            <div class=" col-md-3 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkwekFriday" name="weekdays[]" type="checkbox">
+                                                    <label class="control-label" for="Friday">Friday</label>
+                                                </div>
+                                            </div>
+                                            <div class=" col-md-3 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkwekSaturday" type="checkbox" name="weekdays[]">
+                                                    <label class="control-label" for="Saturday">Saturday</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Monthly" class="tab-pane">
+                                        <p style="display: none">Monthly</p>
+
+                                        <div class="col-md-2 col-sm-2">
+                                            <div class="radio-custom size50 pull-left">
+                                                <input type="radio" id="rdmntdaay" checked="checked" name="01">
+                                                <label for="Day01">Day</label>
+                                            </div>
+                                            <div class="size35 pull-left">
+                                                <input type="text" id="txtmntActive" class="form-control size30 pull-left" name="txtmntActive" maxlength="2" onkeypress="return utility.ValidateZero(event, this);">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="size160 pull-left">
+                                                <div class="size50 pull-left">
+                                                    <label class="control-label" for="of every">of every</label>
+                                                </div>
+                                                <div class="size35 pull-left">
+                                                    <input type="text" class="form-control size30" id="txtmntofevry" name="txtmntofevryM" maxlength="2" onkeypress="return utility.ValidateZero(event, this);">
+                                                </div>
+                                                <label class="control-label pull-left" for="Month(s)">Month(s)</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <hr class="vshort">
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-2 col-sm-12">
+                                            <div class="radio-custom">
+                                                <input type="radio" id="rdmntthe" name="01">
+                                                <label for="The01">The</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10 nested">
+                                            <div class="themonthsVD">
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntFirst" name="themonths[]" data-bv-feedbackicons="false">
+                                                        <label class="control-label" for="First">First</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntSecond" name="themonths[]">
+                                                        <label class="control-label" for="Second">Second</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntThird" name="themonths[]">
+                                                        <label class="control-label" for="Third">Third</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntFourth" name="themonths[]">
+                                                        <label class="control-label" for="Fourth">Fourth</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntLast" name="themonths[]">
+                                                        <label class="control-label" for="Last">Last</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <hr class="vshort">
+                                            <div class="theweeksmVD">
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntSunday" name="theweeksM[]" data-bv-feedbackicons="false">
+                                                        <label class=" control-label" for="Sunday">Sunday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntMonday" name="theweeksM[]">
+                                                        <label class="control-label" for="Monday">Monday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntTuesday" name="theweeksM[]">
+                                                        <label class="control-label" for="Tuesday">Tuesday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntWednesday" name="theweeksM[]">
+                                                        <label class="control-label" for="Wednesday">Wednesday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntThursday" name="theweeksM[]">
+                                                        <label class="control-label" for="Thursday">Thursday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntFriday" name="theweeksM[]">
+                                                        <label class="control-label" for="Friday">Friday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkmntSaturday" name="theweeksM[]">
+                                                        <label class="control-label" for="Saturday">Saturday</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <hr class="vshort">
+                                            <div class="col-md-2 col-sm-6">
+                                                <div class="size160 pull-left">
+                                                    <div class="size50 pull-left">
+                                                        <label class="control-label" for="of every">of every</label>
+                                                    </div>
+                                                    <div class="size35 pull-left">
+                                                        <input type="text" class="form-control size30" id="txtmnttheofevery" name="txtmntofevry" maxlength="2" onkeypress="return utility.ValidateZero(event, this);">
+                                                    </div>
+                                                    <label class="control-label pull-left" for="Month(s)">Month(s)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="Yearly" class="tab-pane">
+                                        <p style="display: none">Yearly</p>
+
+                                        <div class="col-sm-4">
+                                            <div class="radio-custom size60 pull-left">
+                                                <input type="radio" id="rdyerEvery" checked="checked" name="monthly">
+                                                <label for="Every">Every</label>
+                                            </div>
+                                            <div class="size100 pull-left">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="text" id="yearMonth" maxlength="10" placeholder="Month" name="todateY" data-plugin-datepicker="" class="form-control " readonly style="cursor: pointer;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="size100 pull-left ml-sm">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="text" id="monthDays" maxlength="10" placeholder="Day" name="todateYDay" data-plugin-datepicker="" class="form-control " readonly style="cursor: pointer;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <hr class="vshort">
+                                        <div class="clearfix"></div>
+
+                                        <div class="col-md-2 col-sm-12">
+                                            <div class="radio-custom size60">
+                                                <input type="radio" id="rdyerthe" name="monthly">
+                                                <label for="The">The</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10 nested">
+                                            <div class="theQuartersYVD">
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerFirst" name="theQuartersY[]" data-bv-feedbackicons="false">
+                                                        <label class="control-label" for="First">First</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerSecond" name="theQuartersY[]">
+                                                        <label class="control-label" for="Second">Second</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerThird" name="theQuartersY[]">
+                                                        <label class="control-label" for="Third">Third</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerFourth" name="theQuartersY[]">
+                                                        <label class="control-label" for="Fourth">Fourth</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerLast" name="theQuartersY[]">
+                                                        <label class="control-label" for="Last">Last</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <hr class="vshort">
+                                            <div class="theDaysYVD">
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerSunday" name="theDaysY[]" data-bv-feedbackicons="false">
+                                                        <label class="control-label" for="Sunday">Sunday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerMonday" name="theDaysY[]">
+                                                        <label class="control-label" for="Monday">Monday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerTuesday" name="theDaysY[]">
+                                                        <label class="control-label" for="Tuesday">Tuesday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerWednesday" name="theDaysY[]">
+                                                        <label class="control-label" for="Wednesday">Wednesday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerThursday" name="theDaysY[]">
+                                                        <label class="control-label" for="Thursday">Thursday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerFriday" name="theDaysY[]">
+                                                        <label class="control-label" for="Friday">Friday</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-4">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" id="chkyerSaturday" name="theDaysY[]">
+                                                        <label class="control-label" for="Saturday">Saturday</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                            <hr class="vshort">
+                                            <div class="clearfix"></div>
+
+
+                                        </div>
+                                        <div class="col-md-2 col-sm-12">
+                                            <label for="of"><strong>of</strong></label>
+                                        </div>
+                                        <div class="col-md-10 nested themonthsYVD">
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerJanuary" name="themonthsY[]" data-bv-feedbackicons="false">
+                                                    <label class="control-label" for="January">January</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerFebruary" name="themonthsY[]">
+                                                    <label class="control-label" for="February">February</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerMarch" name="themonthsY[]">
+                                                    <label class="control-label" for="March">March</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerApril" name="themonthsY[]">
+                                                    <label class="control-label" for="April">April</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerMay" name="themonthsY[]">
+                                                    <label class="control-label" for="May">May</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerJune" name="themonthsY[]">
+                                                    <label class="control-label" for="June">June</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerJuly" name="themonthsY[]">
+                                                    <label class="control-label" for="July">July</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerAugust" name="themonthsY[]">
+                                                    <label class="control-label" for="August">August</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerSeptember" name="themonthsY[]">
+                                                    <label class="control-label" for="September">September</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerOctober" name="themonthsY[]">
+                                                    <label class="control-label" for="October">October</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerNovember" name="themonthsY[]">
+                                                    <label class="control-label" for="November">November</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-sm-4">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" id="chkyerDecember" name="themonthsY[]">
+                                                    <label class="control-label" for="December">December</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnsaveProviderSch" type="submit">Save & Exit</button>
+                        <!--<button id="btnHistoryProSch" class="btn btn-primary btn-sm rightbtn" type="button" onclick="providerscheduleDetail.ShowHistory();">History</button>-->
+                        <div class="clearfix"></div>
+
+                        <input type="hidden" id="hfFacility" />
+                        <input type="hidden" id="hfSchReasonId" />
+                        <input type="hidden" id="hfBlckReasonId" />
+
+
+                    </form>
+                </div>
+                <!--========================================================================-->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#frmproviderscheduleDetail').on('change', function () {
+            $("#providerscheduleDetail #btnsaveProviderSch").removeAttr('disabled');
+        });
+
+        utility.ValidateFromToDate('providerscheduleDetail #frmproviderscheduleDetail', 'fromProviderDate', 'todate', true);
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('providerscheduleDetail #todate', function () {
+            //on-change callback method
+            if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'todate');
+            }
+        });
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('providerscheduleDetail #fromProviderDate', function () {
+            //on-change callback method
+            if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'fromdate');
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'todate');
+            }
+        });
+
+        $('#frmproviderscheduleDetail #frmtime').timepicker({
+            defaultTime: '12:00 AM',
+            minuteStep: 1,
+        });
+        $('#frmproviderscheduleDetail #totime').timepicker({
+            minuteStep: 1,
+            defaultTime: '12:00 PM',
+        });
+        $('#frmproviderscheduleDetail #frmblckhrstime').timepicker({
+            defaultTime: false
+        });
+        $('#frmproviderscheduleDetail #toblckhrstime').timepicker({
+            defaultTime: false
+        });
+
+        $('#frmproviderscheduleDetail #frmtime').timepicker().on('changeTime.timepicker', function (e) {
+            disableFocus: false
+            if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'frmtime');
+            }
+
+            if ($('#frmproviderscheduleDetail #frmblckhrstime').val() != '') {
+
+                $('#frmproviderscheduleDetail #frmblckhrstime').timepicker('setTime', $('#frmproviderscheduleDetail #frmtime').data("timepicker").getTime());
+                //$('#frmproviderscheduleDetail #toblckhrstime').timepicker('setTime', $('#frmproviderscheduleDetail #totime').data("timepicker").getTime());
+
+                //$('#frmproviderscheduleDetail #frmblckhrstime').val($('#frmproviderscheduleDetail #frmtime').data("timepicker").getTime());
+                if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                    $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrsfromtime');
+                }
+            }
+            if ($('#frmproviderscheduleDetail #toblckhrstime').val() != '') {
+                //$('#frmproviderscheduleDetail #toblckhrstime').val($('#frmproviderscheduleDetail #totime').data("timepicker").getTime());
+                $('#frmproviderscheduleDetail #toblckhrstime').timepicker('setTime', $('#frmproviderscheduleDetail #totime').data("timepicker").getTime());
+                if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                    $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrstotime');
+                }
+            }
+
+        });
+
+        $('#frmproviderscheduleDetail #totime').timepicker().on('changeTime.timepicker', function (e) {
+            disableFocus: false
+            if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'totime');
+            }
+
+            if ($('#frmproviderscheduleDetail #frmblckhrstime').val() != '') {
+                $('#frmproviderscheduleDetail #frmblckhrstime').timepicker('setTime', $('#frmproviderscheduleDetail #frmtime').data("timepicker").getTime());
+                if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                    $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrsfromtime');
+                }
+            }
+            if ($('#frmproviderscheduleDetail #toblckhrstime').val() != '') {
+                $('#frmproviderscheduleDetail #toblckhrstime').timepicker('setTime', $('#frmproviderscheduleDetail #totime').data("timepicker").getTime());
+                if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                    $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrstotime');
+                }
+            }
+        });
+
+        //$('#frmproviderscheduleDetail #blockreason').on('change', function () {
+        //    if ($(this).val() != "") {
+        //        $('#frmproviderscheduleDetail #frmblckhrstime').timepicker('setTime', $('#frmproviderscheduleDetail #frmtime').data("timepicker").getTime());
+        //        $('#frmproviderscheduleDetail #toblckhrstime').timepicker('setTime', $('#frmproviderscheduleDetail #totime').data("timepicker").getTime());
+        //        $('#frmproviderscheduleDetail #frmblckhrstime').attr('disabled', false);
+        //        $('#frmproviderscheduleDetail #toblckhrstime').attr('disabled', false);
+        //        if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+        //            $('#frmresourcescheduleDetail').bootstrapValidator('revalidateField', 'blckhrsfromtime');
+        //            $('#frmresourcescheduleDetail').bootstrapValidator('revalidateField', 'blckhrstotime');
+        //        }
+        //    }
+        //    else {
+
+        //        $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('blckhrsfromtime', false);
+        //        $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('blckhrstotime', false);
+
+        //        $('#frmproviderscheduleDetail #frmblckhrstime').timepicker('setTime', '');
+        //        $('#frmproviderscheduleDetail #toblckhrstime').timepicker('setTime', '');
+        //        $('#frmproviderscheduleDetail #frmblckhrstime').attr('disabled', true);
+        //        $('#frmproviderscheduleDetail #toblckhrstime').attr('disabled', true);
+
+        //    }
+
+
+
+        //});
+
+        $('#frmproviderscheduleDetail #frmblckhrstime').timepicker().on('changeTime.timepicker', function (e) {
+            disableFocus: false
+            //$('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrsfromtime');
+
+            var frmTime = $('#frmproviderscheduleDetail #frmtime').data("timepicker").getTime();
+
+            var frmblckhrstime = $('#frmproviderscheduleDetail #frmblckhrstime').data("timepicker").getTime();
+
+            var toTime = $('#frmproviderscheduleDetail #totime').data("timepicker").getTime();
+
+            var toTimeParse = Date.parse("1-1-2000 " + toTime);
+
+            var frmtimeParse = Date.parse("1-1-2000 " + frmTime);
+
+            var frmblckhrstimeParse = Date.parse("1-1-2000 " + frmblckhrstime);
+
+            //console.log("called");
+
+            if (frmblckhrstimeParse > frmtimeParse && frmblckhrstimeParse < toTimeParse) {
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrsfromtime');
+            }
+            else if (frmblckhrstimeParse < frmtimeParse) {
+                //$('#frmproviderscheduleDetail #frmblckhrstime').val(frmTime);
+                $('#frmproviderscheduleDetail #frmblckhrstime').timepicker('setTime', frmTime);
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrsfromtime');
+            }
+            else if (frmtimeParse == frmblckhrstimeParse) {
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrsfromtime');
+            }
+
+        });
+
+        $('#frmproviderscheduleDetail #toblckhrstime').timepicker().on('changeTime.timepicker', function (e) {
+            disableFocus: false
+            //$('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrstotime');
+
+            var toTime = $('#frmproviderscheduleDetail #totime').data("timepicker").getTime();
+
+            var toblckhrstime = $('#frmproviderscheduleDetail #toblckhrstime').data("timepicker").getTime();
+
+            var frmTime = $('#frmproviderscheduleDetail #frmtime').data("timepicker").getTime();
+
+            var frmtimeParse = Date.parse("1-1-2000 " + frmTime);
+
+            var toTimeParse = Date.parse("1-1-2000 " + toTime);
+
+            var toblckhrstimeParse = Date.parse("1-1-2000 " + toblckhrstime);
+
+            //console.log("called");
+
+            if (toblckhrstimeParse > toTimeParse) {
+                $('#frmproviderscheduleDetail #toblckhrstime').timepicker('setTime', toTime);
+                //$('#frmproviderscheduleDetail #toblckhrstime').val(toTime);
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrstotime');
+
+            }
+            else if (toblckhrstimeParse < toTimeParse && toblckhrstimeParse > frmtimeParse) {
+
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrstotime');
+
+            }
+            else if (toTimeParse == toblckhrstimeParse) {
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'blckhrstotime');
+            }
+
+        });
+
+
+
+        //*****************************Daily Checks***********************************//
+        $("#frmproviderscheduleDetail #Every").click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#frmproviderscheduleDetail #rdevryweekend').attr('checked', false);
+                $("#frmproviderscheduleDetail #txtevrydays").attr("disabled", false);
+                $('#frmproviderscheduleDetail #chkweekendsonly').attr('disabled', false);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', true);
+                //$('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'DailyEveryDays');
+            }
+            else {
+                $("#frmproviderscheduleDetail #txtevrydays").attr("disabled", true);
+            }
+        });
+        $("#frmproviderscheduleDetail #rdevryweekend").click(function () {
+            if ($(this).is(':checked')) {
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', false);
+                $('#frmproviderscheduleDetail #chkweekendsonly').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkweekendsonly').attr('disabled', true);
+                $('#frmproviderscheduleDetail #Every').attr('checked', false);
+                $("#frmproviderscheduleDetail #txtevrydays").attr("disabled", true);
+
+                // $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'DailyEveryDays');
+            }
+            else {
+                $("#frmproviderscheduleDetail #txtevrydays").attr("disabled", false);
+            }
+        });
+        //*****************************Weekely Checks***********************************//
+
+        $("#frmproviderscheduleDetail #txtactiveweek").attr("disabled", true);
+
+        $("#frmproviderscheduleDetail #rdEveryWeekdayOn").click(function () {
+            if ($(this).is(':checked')) {
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('weekdays[]', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('txtactiveweek', false);
+                $('#frmproviderscheduleDetail #rdEveryweekely').attr('checked', false);
+                $("#frmproviderscheduleDetail #txtactiveweek").attr("disabled", true);
+
+                $('#frmproviderscheduleDetail #chkwekSunday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekMonday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekTuesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekWednesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekThursday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekFriday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekSaturday').attr('checked', false);
+
+                if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                    $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'weekdays[]');
+                }
+
+            }
+            else {
+
+            }
+        });
+
+        $("#frmproviderscheduleDetail #rdEveryweekely").click(function () {
+            if ($(this).is(':checked')) {
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('weekdays[]', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('txtactiveweek', true);
+                $('#frmproviderscheduleDetail #rdEveryWeekdayOn').attr('checked', false);
+                $("#frmproviderscheduleDetail #txtactiveweek").attr("disabled", false);
+
+                $('#frmproviderscheduleDetail #chkwekSunday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekMonday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekTuesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekWednesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekThursday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekFriday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkwekSaturday').attr('checked', false);
+
+                if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                    $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'weekdays[]');
+                }
+            }
+            else {
+
+            }
+        });
+        //*****************************Monthly Checks***********************************//
+
+        $("#frmproviderscheduleDetail #txtmntActive").attr("disabled", false);
+        $("#frmproviderscheduleDetail #txtmntofevry").attr("disabled", false);
+        $("#frmproviderscheduleDetail #txtmnttheofevery").attr("disabled", true);
+        $('#frmproviderscheduleDetail #chkmntFirst').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntFirst').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntSecond').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntSecond').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntThird').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntThird').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntFourth').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntFourth').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntLast').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntLast').attr('disabled', true);
+
+        $('#frmproviderscheduleDetail #chkmntSunday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntMonday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntTuesday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntWednesday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntThursday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntFriday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkmntSaturday').attr('checked', false);
+
+        $('#frmproviderscheduleDetail #chkmntSunday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntMonday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntTuesday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntWednesday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntThursday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntFriday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkmntSaturday').attr('disabled', true);
+
+        $("#frmproviderscheduleDetail #rdmntdaay").click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('txtmntofevryM', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('txtmntActive', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('txtmntofevry', false);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('themonths[]', false);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('theweeksM[]', false);
+
+                $("#frmproviderscheduleDetail #txtmntActive").attr("disabled", false);
+                $("#frmproviderscheduleDetail #txtmntofevry").attr("disabled", false);
+                $("#frmproviderscheduleDetail #txtmnttheofevery").attr("disabled", true);
+                $('#frmproviderscheduleDetail #chkmntFirst').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntFirst').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntSecond').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntSecond').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntThird').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntThird').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntFourth').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntFourth').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntLast').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntLast').attr('disabled', true);
+
+                $('#frmproviderscheduleDetail #chkmntSunday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntMonday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntTuesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntWednesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntThursday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntFriday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntSaturday').attr('checked', false);
+
+                $('#frmproviderscheduleDetail #chkmntSunday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntMonday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntTuesday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntWednesday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntThursday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntFriday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkmntSaturday').attr('disabled', true);
+
+
+            }
+            else {
+
+            }
+        });
+        $("#frmproviderscheduleDetail #rdmntthe").click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('txtmntofevryM', false);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('txtmntActive', false);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('txtmntofevry', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('themonths[]', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('theweeksM[]', true);
+
+                $("#frmproviderscheduleDetail #txtmntActive").attr("disabled", true);
+                $("#frmproviderscheduleDetail #txtmntofevry").attr("disabled", true);
+                $("#frmproviderscheduleDetail #txtmnttheofevery").attr("disabled", false);
+                $('#frmproviderscheduleDetail #chkmntFirst').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntFirst').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntSecond').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntSecond').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntThird').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntThird').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntFourth').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntFourth').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntLast').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntLast').attr('disabled', false);
+
+                $('#frmproviderscheduleDetail #chkmntSunday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntMonday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntTuesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntWednesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntThursday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntFriday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkmntSaturday').attr('checked', false);
+
+                $('#frmproviderscheduleDetail #chkmntSunday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntMonday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntTuesday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntWednesday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntThursday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntFriday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkmntSaturday').attr('disabled', false);
+            }
+            else {
+
+            }
+        });
+        //*****************************Yearly Checks***********************************//
+
+        $('#frmproviderscheduleDetail #yearMonth').attr('disabled', false);
+        $('#frmproviderscheduleDetail #monthDays').attr('disabled', true);
+
+        $('#frmproviderscheduleDetail #chkyerFirst').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerFirst').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerSecond').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerSecond').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerThird').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerThird').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerFourth').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerFourth').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerLast').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerLast').attr('disabled', true);
+
+        $('#frmproviderscheduleDetail #chkyerSunday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerSunday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerMonday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerMonday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerTuesday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerTuesday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerWednesday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerWednesday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerThursday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerThursday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerFriday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerFriday').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerSaturday').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerSaturday').attr('disabled', true);
+
+        $('#frmproviderscheduleDetail #chkyerJanuary').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerJanuary').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerFebruary').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerFebruary').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerMarch').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerMarch').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerApril').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerApril').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerMay').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerMay').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerJune').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerJune').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerJuly').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerJuly').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerAugust').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerAugust').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerSeptember').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerSeptember').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerOctober').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerOctober').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerNovember').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerNovember').attr('disabled', true);
+        $('#frmproviderscheduleDetail #chkyerDecember').attr('checked', false);
+        $('#frmproviderscheduleDetail #chkyerDecember').attr('disabled', true);
+
+        $('#frmproviderscheduleDetail #yearMonth').on('change', function () {
+            $('#frmproviderscheduleDetail #monthDays').attr('disabled', false);
+        });
+
+        $("#frmproviderscheduleDetail #rdyerEvery").click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('theQuartersY[]', false);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('themonthsY[]', false);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('theDaysY[]', false);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('todateY', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('todateYDay', true);
+
+                $('#frmproviderscheduleDetail #yearMonth').attr('disabled', false);
+                $('#frmproviderscheduleDetail #monthDays').attr('disabled', true);
+
+                $('#frmproviderscheduleDetail #chkyerFirst').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerFirst').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerSecond').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerSecond').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerThird').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerThird').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerFourth').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerFourth').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerLast').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerLast').attr('disabled', true);
+
+                $('#frmproviderscheduleDetail #chkyerSunday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerSunday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerMonday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerMonday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerTuesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerTuesday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerWednesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerWednesday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerThursday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerThursday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerFriday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerFriday').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerSaturday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerSaturday').attr('disabled', true);
+
+                $('#frmproviderscheduleDetail #chkyerJanuary').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerJanuary').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerFebruary').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerFebruary').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerMarch').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerMarch').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerApril').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerApril').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerMay').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerMay').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerJune').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerJune').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerJuly').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerJuly').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerAugust').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerAugust').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerSeptember').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerSeptember').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerOctober').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerOctober').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerNovember').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerNovember').attr('disabled', true);
+                $('#frmproviderscheduleDetail #chkyerDecember').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerDecember').attr('disabled', true);
+
+                //$('#frmproviderscheduleDetail #yearMonth').val('');
+                if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                    $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'todateY');
+                    $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'todateYDay');
+                }
+            }
+            else {
+
+            }
+        });
+        $("#frmproviderscheduleDetail #rdyerthe").click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('theQuartersY[]', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('themonthsY[]', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('theDaysY[]', true);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('todateY', false);
+                $('#frmproviderscheduleDetail').data('bootstrapValidator').enableFieldValidators('todateYDay', false);
+
+                $('#frmproviderscheduleDetail #yearMonth').val('');
+                $('#frmproviderscheduleDetail #monthDays').val('');
+                $('#frmproviderscheduleDetail #yearMonth').attr('disabled', true);
+                $('#frmproviderscheduleDetail #monthDays').attr('disabled', true);
+
+                $('#frmproviderscheduleDetail #chkyerFirst').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerFirst').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerSecond').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerSecond').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerThird').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerThird').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerFourth').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerFourth').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerLast').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerLast').attr('disabled', false);
+
+                $('#frmproviderscheduleDetail #chkyerSunday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerSunday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerMonday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerMonday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerTuesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerTuesday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerWednesday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerWednesday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerThursday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerThursday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerFriday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerFriday').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerSaturday').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerSaturday').attr('disabled', false);
+
+                $('#frmproviderscheduleDetail #chkyerJanuary').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerJanuary').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerFebruary').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerFebruary').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerMarch').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerMarch').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerApril').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerApril').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerMay').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerMay').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerJune').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerJune').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerJuly').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerJuly').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerAugust').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerAugust').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerSeptember').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerSeptember').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerOctober').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerOctober').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerNovember').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerNovember').attr('disabled', false);
+                $('#frmproviderscheduleDetail #chkyerDecember').attr('checked', false);
+                $('#frmproviderscheduleDetail #chkyerDecember').attr('disabled', false);
+            }
+            else {
+
+            }
+        });
+
+        // Create the first datepicker based on month
+
+        $('#frmproviderscheduleDetail #yearMonth').datepicker({
+            format: 'MM',
+            viewMode: 'months',
+            minViewMode: 'months',
+
+        });
+
+        $('#frmproviderscheduleDetail #yearMonth').on('change', function () {
+            if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'todateY');
+                $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'todateYDay');
+            }
+            $('#frmproviderscheduleDetail #monthDays').val("").datepicker('update');
+            $('#frmproviderscheduleDetail #monthDays').datepicker('remove');
+            var inputDate = $('#frmproviderscheduleDetail #yearMonth').datepicker('getDate');
+            var lastDate = new Date(inputDate.getFullYear(), inputDate.getMonth() + 1, 0);
+            $(this).datepicker('hide');
+            $('#frmproviderscheduleDetail #monthDays').datepicker({
+                startDate: inputDate,
+                endDate: lastDate,
+                format: "dd",
+                viewMode: "days",
+                minViewMode: "days"
+            }).on('changeDate', function (e) {
+                if ($('#frmproviderscheduleDetail').data('bootstrapValidator') != null && typeof $('#frmproviderscheduleDetail').data('bootstrapValidator') != 'undefined') {
+                    $('#frmproviderscheduleDetail').bootstrapValidator('revalidateField', 'todateYDay');
+                }
+                $(this).datepicker('hide');
+
+            });
+
+        });
+
+    });
+</script>

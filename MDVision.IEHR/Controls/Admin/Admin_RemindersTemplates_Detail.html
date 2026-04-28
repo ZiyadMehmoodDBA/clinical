@@ -1,0 +1,136 @@
+﻿<div class="row" id="pnlRemindersTemplateDetail">
+    <div id="actionPanRemindersTemplateDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="remindersTemplatesDetail.UnLoadTab();"></button>
+                <h4 class="modal-title" id="headerId">Template</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmRemindersTemplateDetail" method="post" onsubmit="return false">
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Name <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="TemplateName" maxlength="100" />
+                    </div>
+                    <div class="col-sm-4 col-lg-3 p-none">
+                        <div id="NoteTypeDropDown">
+                            <div class="col-xs-10 NoteTemplatType">
+                                <label class="control-label">Type<span class="required">*</span></label>
+                                <select id="ddlNoteTemplateType" name="TemplateTypeId" class="form-control" ddlist="GetRemindersType"></select>
+
+                            </div>
+                            <div class="col-xs-2 pad-a-labelsize-btn">
+                                <button type="button" class="btn btn-success btn-xs" onclick="remindersTemplatesDetail.AddNewNoteType()"><i class="fa fa-plus-circle"></i></button>
+                            </div>
+                        </div>
+                        <div id="NoteTypeDTextBox" hidden>
+                            <div class="col-xs-10">
+                                <label class="control-label">Note Type<span class="required">*</span></label>
+                                <input type="text" id="NoteTypeText" class="form-control" name="NoteType" onkeydown="remindersTemplatesDetail.KeyDownOnNoteTypeText(event)" maxlength="100" onblur="    remindersTemplatesDetail.HideNoteTypeTextbox(event)" />
+
+                            </div>
+                            <div class="col-xs-2 pad-a-labelsize-btn">
+                                <button type="button" id="SaveButtonForNewNoteType" class="btn btn-success btn-xs" onclick="remindersTemplatesDetail.SaveNewNoteType(event)"><i class=" fa fa-save"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div id="entityDDL" class="col-sm-4 col-lg-2">
+                        <label class="control-label">Entity <span class="required">*</span></label>
+                        <select class="form-control" ddlist="GetEntity" id="ddlEntity" name="EntityId" onchange="remindersTemplatesDetail.isEntitySelected();">
+                            <option selected>-Select-</option>
+                        </select>
+                    </div>-->
+                    <!--<div class="col-sm-3 col-md-3" id="divNotesTemplateProvider">
+                        <select class="form-control" style="display:none;" name="hiddenPhysicalExamTemplateProvider" id="ddlHiddenNotesTemplateProvider"></select>
+                        <label class="control-label">Provider</label>
+                        <select class="form-control" multiple="multiple" name="ProviderIds" id="ddlNotesTemplateProvider"></select>
+                    </div>-->
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Reminder Type<span class="required">*</span></label>
+                        <select id="ddlReminderType" name="ReminderTemplateType" class="form-control">
+                            <option value="">- Select -</option>
+                            <option value="text">Text</option>
+                            <option value="email">Email</option>
+                            <option value="voice">Voice</option>
+                        </select>
+                    </div>
+
+
+                    <div class="col-sm-4 col-lg-1 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Active" name="IsActive" checked>
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+                    <div class="pull-right mt-md pr-default"><button type="submit" class="btn btn-primary btn-sm">Save</button></div>
+                    <div class="spacer20"></div>
+
+                    <div class="panel-body panel-featured pl-none pr-none">
+                        <div class="col-sm-4 col-lg-3">
+                            <label class="control-label">Tag Category</label>
+                            <select id="ddlNoteTemplateTagCategory" name="NoteTemplatTagCategoryId" class="form-control" ddlist="GetRemindersTemplateTagCategory" onchange="remindersTemplatesDetail.TagCategoryChange()"></select>
+                        </div>
+                        <div class="col-sm-4 col-lg-6 NoteTemplatTagName" id="NoteTemplatTagNameDiv">
+                            <label class="control-label">Tag Name</label>
+                            <select id="NoteTemplatTagName" name="NoteTemplatTagNameId" class="form-control" disabled>
+                                <option selected="selected" value="">-Select-</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-1 pad-a-labelsize pr-default"><button type="button" class="btn btn-success btn-xs" onclick="remindersTemplatesDetail.InsertTag()">Insert</button></div>
+                        <div class="spacer20"></div>
+
+                        <div class="col-sm-12 mt-sm">
+                           <label class="control-label" for="comments">Message<span class="required">*</span></label>
+                            <textarea id="txtTemplate" name="HTMLTemplate" class="form-control" rows="15" onkeyup="remindersTemplatesDetail.setHiddenControl();" spellcheck="true"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="spacer10"></div>
+                    <!--<div class="form-group">
+                        <textarea id="elm1" name="TemplateData"></textarea>
+                        <input type="hidden" id="EncodedImageString" value="" />
+                        <input type="file" id="ImageUploaderTinymce" style="display:none">
+                        <textarea id="txtTemplateData" name="TemplateData"></textarea>
+                    </div>-->
+                    <input type="hidden" id="hfHTMLTemplateWithIds" name="HTMLTemplateWithIds" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

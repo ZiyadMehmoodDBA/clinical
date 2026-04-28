@@ -1,0 +1,542 @@
+﻿<div id="pnlMUAlerts" style="display:none;" class="">
+    <div id="actionPanMUAlerts" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog  modal-dialog-lg">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="MU_Alerts.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Info</h4>
+            </div>
+            <div id="modalbody" class="row">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="clearfix"></div>
+                    <section>
+                        <form role="form" id="frmMUAlerts" onsubmit="return false;">
+                            <ul class="tabs-custom" id="ulMIPSTabs">
+                                <li id="listCQM" onclick="MU_Alerts.activeTab('CQM')" class="active custom-made-tabs"><a id="CQMTab" href="" data-toggle="tab">Quality - eCQMs <span id="CQMAlertCount" class="badge"></span></a></li>
+                                <li id="listPI" onclick="MU_Alerts.activeTab('PI')" class="custom-made-tabs"><a id="PITab" href="" data-toggle="tab">PI (Formerly ACI) <span id="PIAlertCount" class="badge"></span></a></li>
+                                <li id="listIA" onclick="MU_Alerts.activeTab('IA')" class="custom-made-tabs"><a id="IATab" href="" data-toggle="tab">Improvement Activity <span id="IAAlertCount" class="badge"></span></a></li>
+                            </ul>
+
+                            <div class="tab-content tabs-custom-body pt-default">
+                                <div id="CQMAlerts" class="tab-pane active">
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div id="PIAlerts" class="tab-pane">
+                                    <div class="col-sm-12 ">
+                                        <p class="content-alert">
+                                            Highlighted fields are part of the measure(s) you choose to see in the application. Please note
+                                            that these fields have an impact on your performance percentage for reporting. By ignoring
+                                            the highlighted fields, you may have a lesser score by the time you start reporting!
+                                        </p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <div id="div_demographic" data-plugin-toggle style="display:none">
+                                            <section class="toggle">
+                                                <label>
+                                                    Demographics
+                                                    <div class="pull-right" style="margin-right: 10px;">
+                                                        <div class="label-container">
+                                                            <span class="alert-label label-green"></span>
+                                                            <span>Required</span>
+                                                        </div>
+                                                        <div class="label-container">
+                                                            <span class="alert-label label-red"></span>
+                                                            <span>Missing</span>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <span class="bold">
+                                                            <span class="green" val_="Gender Identity">Gender Identity,</span>
+                                                            <span class="green" val_="Sexual Orientation"> Sexual Orientation,</span>
+                                                            <span class="green" val_="Birth Sex"> Birth Sex</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_Healthcare" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>
+                                                    Healthcare Surveys
+                                                    <div class="pull-right" style="margin-right: 10px;">
+                                                        <div class="label-container">
+                                                            <span class="alert-label label-green"></span>
+                                                            <span>Required</span>
+                                                        </div>
+                                                        <div class="label-container">
+                                                            <span class="alert-label label-red"></span>
+                                                            <span>Missing</span>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <span class="bold">
+                                                            <span class="green" val_="Country">Country,</span>
+                                                            <span class="green" val_="Preferred Address"> Preferred Address,</span>
+                                                            <span class="green" val_="Preferred Phone"> Preferred Phone</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_CareReporting" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>Transmission to Public Health Agencies- Case Reporting</label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <span class="bold">
+                                                            <span class="green" val_="From Date">SocialHx Occupation From Date,</span>
+                                                            <span class="green" val_="To Date"> To Date,</span>
+                                                            <span class="green" val_="Travel"> Travel</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_PatientEducation" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>Patient Education</label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <ul style="list-style-type: decimal;">
+                                                            <li>Denominator is achieved upon creation of note for new, referred or transitioned patient.</li>
+                                                            <li>Numerator is achieved when a Patient Education material is attached to the note.</li>
+                                                            <li>
+                                                                To achieve this measure, perform the following steps:
+                                                                <ul style="list-style-type: lower-alpha;">
+                                                                    <li>Clicks on “info” button with problem or medication from Clinical<b>=></b>Problems or Note<b>=></b>Assessment<b>=></b>Problems;the patient education document will appear and will be saved in Patient Education tab in clinical module of patient.</li>
+                                                                    <li>Navigate to Note<b>=></b>Plan<b>=></b>Patient Education and attach the saved document to the note.</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <br />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Note:</b> The numerator will be counted once in a reporting period for a provider for a patient.
+                                                        <div class="checkbox-custom checkbox-default  pull-right">
+                                                            <input type="checkbox" name="donotshow_PE" id="donotshow_PE">
+                                                            <label class="control-label" for="donotshow_PE">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_Reconciliation" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>Clinical Information Reconciliation</label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <ul style="list-style-type: decimal;">
+                                                            <li>Denominator is achieved upon creation of note for new, referred or transitioned patient.</li>
+                                                            <li>Numerator is incremented when Medications, Allergies and Problems are reconciled for the specified patient.</li>
+                                                            <li>
+                                                                To achieve this measure, perform the following steps:
+                                                                <ul style="list-style-type: lower-alpha;">
+                                                                    <li>Create a note for patient.</li>
+                                                                    <li>Navigate to Batch<b>=></b>Import CCDA choose file, select provider for which reconciliation needs to be performed and click on reconcile button.</li>
+                                                                    <li>Select the actions with every record and click on “Yes, Reconcile Data” button.</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <br />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Note:</b> The numerator will be counted once in a reporting period for a provider for a patient.
+                                                        <div class="checkbox-custom checkbox-default  pull-right">
+                                                            <input type="checkbox" name="donotshow_RE" id="donotshow_RE">
+                                                            <label class="control-label" for="donotshow_RE">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_ePrescribing" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>
+                                                    Electronic Prescribing
+                                                    <span id="ePrescriptionCount" class="badge pull-right" style="margin: 5px;"></span>
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <b>Visit Date</b>
+                                                        <ul id="ePrescription" style="list-style:none;"></ul>
+                                                        <ul style="list-style-type: decimal;">
+                                                            <li>Denominator is achieved when a pending prescription is attached on the note.</li>
+                                                            <li>Numerator is incremented when user attaches a sent prescription on note.</li>
+                                                            <li>
+                                                                To achieve this measure, perform the following steps:
+                                                                <ul style="list-style-type: lower-alpha;">
+                                                                    <li>Create a note for patient.</li>
+                                                                    <li>Navigate to Clinical<b>=></b>Medications or Note<b>=></b>Subjective<b>=></b>Medications.</li>
+                                                                    <li>Attach a sent prescription to the note that will increment the numerator.</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <br />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Note:</b> The numerator will be counted for each prescription that is sent to the pharmacy.
+                                                        <div class="checkbox-custom checkbox-default  pull-right">
+                                                            <input type="checkbox" name="donotshow_ePrescribing" id="donotshow_ePrescribing">
+                                                            <label class="control-label" for="donotshow_ePrescribing">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_eAccess" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>Patient Electronic Access</label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <ul style="list-style-type: decimal;">
+                                                            <li>Denominator is achieved upon creation of note for new, referred or transitioned patient.</li>
+                                                            <li>When a note is created, system will check if the Patient Portal account is Enabled for selected patient or not.</li>
+                                                            <li>If Patient Portal is Enabled for selected patient, numerator would be automatically achieved for that patient.</li>
+                                                            <li>If Patient Portal is not Enabled, then the numerator will increment when the Patient Portal is activated for that patient.</li>
+                                                        </ul>
+                                                        <br />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Note:</b> The numerator will be counted once in a reporting period for a provider for a patient.
+                                                        <div class="checkbox-custom checkbox-default  pull-right">
+                                                            <input type="checkbox" name="donotshow_eAccess" id="donotshow_eAccess">
+                                                            <label class="control-label" for="donotshow_eAccess">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_ViewDownloadTransmit" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>View, Download and Transmit</label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <ul style="list-style-type: decimal;">
+                                                            <li>Denominator is achieved when a Progress Note is created and the Patient Portal account is active for that patient.</li>
+                                                            <li>In order to increment the Numerator, patient would have to log into Patient Portal and navigate to Health Record section.</li>
+                                                            <li>Next, patient would have to click on View button along with Download or Transmit button to achieve the numerator.</li>                                                         </li>
+                                                        </ul>
+                                                        <br />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Note:</b> The numerator will be counted once in a reporting period for a provider for a patient.<br />
+
+                                                        <div class="checkbox-custom checkbox-default pull-right">
+                                                            <input type="checkbox" name="donotshow_ViewDownloadTransmit" id="donotshow_ViewDownloadTransmit">
+                                                            <label class="control-label" for="donotshow_ViewDownloadTransmit">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_SecureMessaging" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>Secure Messaging</label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <ul style="list-style-type: decimal;">
+                                                            <li>Denominator is achieved  upon creation of note.</li>
+                                                            <li>
+                                                                Numerator is incremented when patient/ patient authorized representative sends a secure message to a provider and provider replies to the patient/ patient authorized representative.<br />
+                                                                OR<br />
+                                                                Provider sends secure message to another Provider including the patient / patient authorized representative.<br />
+                                                                OR<br />
+                                                                Provider sends a secure message to patient / patient authorized representative.
+                                                            </li>
+                                                            <li>
+                                                                Actions required to achieve this measure are as follows:
+                                                                <ul style="list-style-type: lower-alpha;">
+                                                                    <li>Create a note for the patient and sign it.</li>
+                                                                    <li>User navigates to Messages screen from Patient module/Message quick link/Message widget Dashboard.</li>
+                                                                    <li>User sends message to Patient from patient tab or Views a message received from patient in Patient tab and replies to it by clicking it.</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <br />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Note:</b> The numerator will be counted once in a reporting period for a provider for a patient.
+                                                        <div class="checkbox-custom checkbox-default  pull-right">
+                                                            <input type="checkbox" name="donotshow_SecureMessaging" id="donotshow_SecureMessaging">
+                                                            <label class="control-label" for="donotshow_SecureMessaging">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_TransitionOfCare" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>
+                                                    Send Summary of Care/Transition of Care
+                                                    <span id="TransitionofCareCount" class="badge pull-right" style="margin: 5px;"></span>
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <b>Visit Date</b>
+                                                        <ul id="TOCVisits" style="list-style:none;"></ul>
+                                                        <ul style="list-style-type: decimal;">
+                                                            <li>Denominator is achieved when a Progress Note is signed.</li>
+                                                            <li>Numerator is achieved when a Summary of Care file is sent successfully via Direct Message and its status is received as either Delivered / Not Delivered.</li>
+                                                            <li>
+                                                                Actions required to achieve this measure are as follows:
+                                                                <ul style="list-style-type: lower-alpha;">
+                                                                    <li>Navigate to Clinical Summary and export Continuity of Care Document from “Export C-CDA” button.</li>
+                                                                    <li>Select the Clinical Visit for which Referral Note or Continuity of Care Document is required to sent.</li>
+                                                                    <li>Select Data Elements to be made part of the file and click on Transmit Referral Note / CCD.</li>
+                                                                    <li>Enter a valid Direct address, add message content and click on Transmit button. The Referral Note / CCD will be transmitted.</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <br />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Note:</b> Multiple denominators and numerators can be achieved for a patient in a reporting period.
+                                                        <div class="checkbox-custom checkbox-default  pull-right">
+                                                            <input type="checkbox" name="donotshow_TransitionOfCare" id="donotshow_TransitionOfCare">
+                                                            <label class="control-label" for="donotshow_TransitionOfCare">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_ReceiveAndIncorporate" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>Receive and Incorporate</label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+
+                                                        <ul style="list-style-type: decimal;">
+                                                            <li>Denominator is achieved when a new, referred and transitioned patient.</li>
+                                                            <li>Numerator is achieved when a Summary of Care/CCDA is imported in the system.</li>
+                                                            <li>Summary of care refers to Referral Note and Continuity of Care Document.</li>
+                                                            <li>If a summary of care is received and not incorporated in the system, numerator will not increment.</li>
+                                                            <li>
+                                                                Actions required to achieve this measure are as follows:
+                                                                <ul style="list-style-type: lower-alpha;">
+                                                                    <li>Navigate to Batch Module, choose & upload New Patient’s Summary of Care/CCDA, select a provider and click Import button to add new patient in application.</li>
+                                                                    <li>This would achieve both Denominator & Numerator at the same time for this measure.</li>
+                                                                    <li>The other work flow is while adding new patient through Add Patient or Quick Add Patient screen where there is a mandatory drop-down field named CCDA available.</li>
+                                                                    <li>If user select No under this drop-down, this measure will not be applicable for this patient.</li>
+                                                                    <li>If user selects Yes and adds the patient after selecting Yes, then the denominator will be achieved but user would be unable to achieve numerator.</li>
+                                                                    <li>The processes of passing this measure for that patient would be to Delete that patient and add it again by importing it through Batch module.<br />OR</li>
+                                                                    <li>The user can export patient’s CCDA, mark patient Inactive & upload that CCDA as a new patient.</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <br />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Note:</b> The numerator will be counted once in a reporting period for a patient.
+                                                        <div class="checkbox-custom checkbox-default  pull-right">
+                                                            <input type="checkbox" name="donotshow_RI" id="donotshow_RI">
+                                                            <label class="control-label" for="donotshow_RI">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_PatHealthData" data-plugin-toggle style="display:none">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>
+                                                    Patient Generated Health Data
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <ul style="list-style-type: decimal;">
+                                                            <li>Denominator is achieved when a patient uploads a document from patient portal and document is received in application.</li>
+                                                            <li>Numerator is achieved when a user attaches the document with the note.</li>
+                                                            <li>Actions required to achieve this measure are as follows:
+                                                                <ul style="list-style-type: lower-alpha;">
+                                                                    <li>Patient navigates to Health Records<b>=></b>Heath Records on patient portal.</li>
+                                                                    <li>Patient uploads the document from Upload Documents button.</li>
+                                                                    <li>Document is received in application</li>
+                                                                    <li>Import the document in the required folder and attach it on the note.</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <br />
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Note:</b> The numerator will be counted once in a reporting period for a patient.
+                                                        <div class="checkbox-custom checkbox-default  pull-right">
+                                                            <input type="checkbox" name="donotshow_PatientDocument" id="donotshow_PatientDocument">
+                                                            <label class="control-label" for="donotshow_PatientDocument">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div id="IAAlerts" class="tab-pane">
+                                    <div class="col-sm-12 ">
+                                        <p class="content-alert">
+                                            Processes defined below are part of the improvement activities you choose to report for MIPS 2018. Please
+                                            note that the flows and actions defined below have an impact on your performance score. By ignoring
+                                            specified flows and actions, you may get a lesser score for performance period 2018!
+                                        </p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <div id="div_PatPortalDocument" data-plugin-toggle style="display:none">
+                                            <section class="toggle">
+                                                <label>
+                                                    Use of certified EHR to capture patient reported outcomes
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <p>
+                                                            1. Kindly navigate to Patient Documents and click on first button from left named <b>Uploaded by Patient.</b><br />
+                                                            2. When clicked  a pop up screen would display showing document(s) uploaded by the patient through the Health Record
+                                                            record section on Patient Portal.
+                                                            Click on <b>Import</b> or <b>View</b> document icons provided under action column to complete this activity.<br />
+                                                            3. The Purpose of this activity <b> Use of certified EHR to capture patient reported outcomes</b>
+                                                            is to perform activities that enable capture of patient reported outcomes or patient activation
+                                                            measures through use of CEHRT containing this data in a seperate queue for clinician to review.
+                                                            This is also a medium-weighted activity carrying 10 points being part of MIPS Reporting 2018.
+                                                        </p>
+                                                        <div class="checkbox-custom checkbox-default pull-right">
+                                                            <input type="checkbox" name="donotshow_PatPortalDocument" id="donotshow_PatPortalDocument">
+                                                            <label class="control-label" for="donotshow_PatPortalDocument">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_PatDepressionScreening" data-plugin-toggle style="display:none;">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>
+                                                    Depression Screening
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <p>
+                                                            1. Kindly navigate to Clinical module, expand Screenings section from left  tree menu and click on <b> Depression Screening.</b><br />
+                                                            2. <b>Depression Screening Activity Questionnaire</b> would appear only on right side. Select an answer from the drop down provided 
+                                                            against each question to complete this Improvement Activity.
+                                                            <br />
+                                                            3. <b> Depression Screening </b> activity is mainly required for patients with co-occurring conditions of behavioral or mental health condition.
+                                                            it is a medium-weighted activity carrying 10 points being part of MIPS Reporting 2018.
+                                                               
+                                                        </p>
+                                                        <div class="checkbox-custom checkbox-default pull-right">
+                                                            <input type="checkbox" name="donotshow_Depression" id="donotshow_Depression">
+                                                            <label class="control-label" for="donotshow_Depression">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_PatDiabetesScreening" data-plugin-toggle style="display:none;">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>
+                                                    Diabetes Screening
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <p>
+                                                            1. Kindly click on <b>Diabetes Screening</b> link Provided against the problem attached
+                                                            with patient.<br />
+                                                            2. The <b> Diabetes Screening Activity </b> would appear where you can add diabetic
+                                                            problems (if exists) and any notes against them if required.<br />
+                                                            3. A Diabetic Problem (If Exists) can also be added directly through Problems module to
+                                                            perform  <b>Diabetes Screening</b> activity. <br />
+                                                            4. If no diabetic problem is diagnosed while screening kindly select  <b>Non Diabetic </b>
+                                                            check box to perform <b>Diabetes Screening</b> activity.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_PatTabaccoScreening" data-plugin-toggle style="display:none;">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>
+                                                    Tobacco Screening
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <p>
+                                                            1. Kindly navigate to Clinical module, expand Screenings section from left  tree menu and click on <b> Tobacco Screening.</b><br />
+                                                            2. The <b> Tobacco Screening </b> screen would be appeared on right side containing Tobacco and Drug
+                                                            Abuse tabs. Select the smoking status of Patient and Provide related detail according to status selected. Tobacco Screening can also be performed
+                                                            through Social History section of clinical module.<br />
+                                                            3. <b>Tobacco Screening</b> activity is mainly required for patients with co-occurring conditions of behavioral or mental
+                                                            health and at risk factor for tobacco dependence. it is also a medium-weighted activity carrying 10 points being part of MIPS Reporting 2018.
+                                                        </p>
+                                                        <div class="checkbox-custom checkbox-default pull-right">
+                                                            <input type="checkbox" name="donotshow_Tobacco" id="donotshow_Tobacco">
+                                                            <label class="control-label" for="donotshow_Tobacco">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div id="div_PatCDSAlert" data-plugin-toggle style="display:none;">
+                                            <div class="spacer10"></div>
+                                            <section class="toggle">
+                                                <label>
+                                                    Implementation of fall screening and assessment programs
+                                                </label>
+                                                <div class="toggle-content">
+                                                    <div class="container-alert">
+                                                        <p>
+                                                            1. kindly navigate to Medical section of Clinical module to access <b> CDS Alert</b>.
+                                                             CDS alert can also be accessed by clicking its Icon among Quick Links. 
+                                                            <br />
+                                                            2. Click the CDS Alerts by navigating to it from any of above mentioned flows. Go
+                                                            through defined clinical conditions and change the status to <b>Done</b> or <b>Override</b>
+                                                            in order to proceed as these CDS Alert required to be addressed before signing the Progress Note. 
+                                                             <br />
+                                                            3. <b>Implementation of fall screening and assessment programs</b> is to identify patients at risk for
+                                                            falls and address modifiable risk factors. The patient selected is at risk for fall and require
+                                                            <b>Clinical Decision Support</b> to address risk factors.
+                                                            The activity is also medium-weighted carrying 10 points being part of MIPS Reporting 2018.
+
+                                                        </p>
+                                                        <div class="checkbox-custom checkbox-default pull-right">
+                                                            <input type="checkbox" name="donotshow_Depression" id="donotshow_PatCDSAlert">
+                                                            <label class="control-label" for="donotshow_PatCDSAlert">Ignore</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="spacer10"></div>
+                            <button type="button" onclick="MU_Alerts.OK();" style="margin-right: 15px;" class="btn btn-sm btn-default pull-right">OK</button>
+                        </form>
+                    </section>
+                </div>
+                <div class="spacer10"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    (function ($) {
+        'use strict';
+        if ($.isFunction($.fn['tooltip'])) {
+            $('[data-toggle=tooltip],[rel=tooltip]').tooltip({ container: 'body' });
+        }
+    }).apply(this, [jQuery]);
+
+
+    $(function () {
+        $($("#pnlMUAlerts").find($('[data-plugin-toggle]'))).each(function () {
+            var $this = $(this),
+				opts = {};
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+            $this.themePluginToggle(opts);
+        });
+    });
+</script>

@@ -1,0 +1,65 @@
+﻿<div id="pnlMIPSAdminPreferenceGroupReporting">
+    <div id="actionPanGroupReporting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div class="mainScrollPan" id="mainScrollPan">
+                <button type="button" class="btn btn-success btn-sm" onclick="iTrack_AdminPreferenceGroupReporting.AddGroupReporting()"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div>
+                <div class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions"><a class="closebtn pull-right" onclick="iTrack_AdminPreferenceGroupReporting.UnLoadTab()"></a></div>
+                        <h2 class="panel-title">Search Group Reporting </h2>
+                    </header>
+                    <div class="panel-body">
+                        <form id="frmiTrackAdminPreferenceGroupReporting" method="post" onsubmit="return false">
+
+
+                            <div class="col-sm-2 " id="DivGroupName">
+                                <label class="control-label" for="Group Name">Group Name </label>
+                                <select class="form-control" id="ddlGroupName" name="MeasureGroupId" >
+                                    <option selected="selected" value="">-Select-</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Member Providers</label>
+                                <select id="ddlMemberProvider" multiple="multiple" ddlmultilist="GetProvider" name="ProviderId" class="form-control">
+                                </select>
+                            </div>
+                            <div class="col-sm-4 col-md-2">
+                                <label class="control-label">Active?</label>
+                                <select id="ddlActive" name="is_Active" class="form-control ValidateCriteria">
+                                    <!--<option value="">- All -</option>-->
+                                    <option value="1" selected="selected">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="pull-right mt-md pr-default"><button class="btn btn-primary btn-sm" onclick="iTrack_AdminPreferenceGroupReporting.measureGroupSearch();" type="button">Search</button></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="spacer10"></div>
+                <!--<div class="panel-body panel-featured">
+                </div>-->
+            </div>
+
+        </div>
+    </div>
+    <div id="pnlGroupReporting_Result" style="display: inline;">
+        <form>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvGroupReporting">
+                    <thead>
+                        <tr>
+                            <th class="size90 size-min90">Action</th>
+                            <th>Name</th>
+                            <th class="size90 size-min90">Created</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="dgvGroupReporting_Paging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

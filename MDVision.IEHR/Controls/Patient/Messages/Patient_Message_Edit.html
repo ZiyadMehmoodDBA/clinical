@@ -1,0 +1,213 @@
+﻿<div id="pnlPatientMessageEdit" style="display:none;">
+    <div id="actionPanPatientMessageEdit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div>
+        <div id="modaldialog">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Patient_MessageEdit.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 id="headingTitle" class="modal-title">Edit Message</h4>
+                </div>
+                <div id="modalbody">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="clearfix"></div>
+                        <form method="post" id="frmPatientMessageEdit" onsubmit="return false">
+
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label id="lblMessage" class="control-label" for="Message">Message</label>
+                                    <textarea class="form-control" rows="2" id="txtMessage" spellcheck="true" name="msgDetail"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div id="divCommonControls">
+                                    <div class="col-sm-3 col-lg-2">
+                                        <!--<label class="control-label">Account Number<span class="required">*</span></label>-->
+                                        <label id="lblPatientName" class="control-label">Account Number<span class="required">*</span></label>
+                                        <a id="lnkPatientNameEdit" style="display:none;" href="#" onclick="utility.PatientDemographics(($('#' + Patient_MessageEdit.params.PanelID + ' #hfPatientId').val()), 'Patient_MessageEdit');" title="Edit Patient">Account Number</a>
+                                        <div class="input-group">
+                                            <input class="form-control" title="Account Number" name="AccountNumber" customName="Account Number" oninput="Patient_MessageEdit.BindAutocomplete();" onblur="Patient_MessageEdit.ValidateAutoComplete(this);" id="txtAccountNumber" type="text">
+                                            <div class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Patient_MessageEdit.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <!--<label class="control-label">Patient Name</label>-->
+                                    <label id="lblPatientName" class="control-label">Patient Name</label>
+                                    <a id="lnkPatientNameEdit" style="display:none;" href="#" onclick="utility.PatientDemographics(($('#' + Patient_MessageEdit.params.PanelID + ' #hfPatientId').val()), 'Patient_MessageEdit');" title="Edit Patient">Patient Name</a>
+                                    <input class="form-control" id="txtPatientName" name="PatientName" customname="Patient Name" type="text" disabled>
+
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Called Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" id="dtpCalledDate" name="CalledDate" data-plugin-datepicker="" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Date of Service</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" id="dtpDateOfService" name="DateOfService" data-plugin-datepicker="" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="visible-md visible-sm"><div class="clearfix"></div></div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Status</label>
+                                    <select class="form-control" id="ddlStatus" name="Status" ddlist="GetMessageStatus"></select>
+                                </div>
+
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Assigned to</label>
+                                    <select class="form-control" id="ddlAssignedto" name="Assignedto" ddlist="GetCoWorkerGroupUsersFullName"></select>
+                                </div>
+                                <div class="hidden-md hidden-sm"><div class="clearfix"></div></div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Alert Type</label>
+                                    <select class="form-control" id="ddlAlertType" name="AlertType" ddlist="GetMsgAlertTypes" disabled></select>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Priority</label>
+                                    <select class="form-control" id="ddlPriority" name="Priority" ddlist="GetMsgPriority"></select>
+                                </div>
+                                <div class="visible-md visible-sm"><div class="clearfix"></div></div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <div class="hidden-xs"><div class="spacer20"></div></div>
+                                    <div class="visible-xs"><span class="spacer10"></span></div>
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input id="chkVisibleToPatient" name="VisibleToPatient" type="checkbox">
+                                        <label class="control-label" for="Visible to Patient"><div class="size-max120 elips-text-rap pt-xs">Visible to Patient</div></label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label"><div class="size-max120 elips-text-rap">Amendment Source</div></label>
+                                    <select class="form-control" id="ddlAmendmentSource" name="AmendmentSource" ddlist="GetAmendmentSource" disabled></select>
+                                </div>
+                                
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Type</label>
+                                    <select class="form-control" id="ddlType" name="MessageType" ddlist="GetMessageType" disabled></select>
+                                </div>
+                                <!--</div>
+                                <div class="form-group">-->
+                                <div id="divMedication" style="display:none;">
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Lab Order</label>
+                                        <select class="form-control" name="LabOrder" id="ddlLabOrder">
+                                            <option value="" selected="slected">-Select-</option>
+                                            <option value="P1">Practice 1</option>
+                                            <option value="P2">Practice 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Lab</label>
+                                        <select class="form-control" name="Lab" id="ddlLab">
+                                            <option value="" selected="slected">-Select-</option>
+                                            <option value="P1">Practice 1</option>
+                                            <option value="P2">Practice 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Medication</label>
+                                        <select class="form-control" name="Medication" id="ddlMedication">
+                                            <option value="" selected="slected">-Select-</option>
+                                            <option value="P1">Practice 1</option>
+                                            <option value="P2">Practice 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Pharmacy</label>
+                                        <select class="form-control" name="Pharmacy" id="ddlPharmacy">
+                                            <option value="" selected="slected">-Select-</option>
+                                            <option value="P1">Practice 1</option>
+                                            <option value="P2">Practice 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 pull-right">
+                                    <div class="spacer10"></div>
+                                    <button id="btnMessageEdit" class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                                    <button id="btnReplyMessage" class="btn btn-primary btn-sm rightbtn" type="button" onclick="Patient_MessageEdit.MessageReplyAdd();">Reply Message</button>
+                                </div>
+                            </div>
+                            <div class="spacer10"></div>
+                            <div id="pnlPatientMessageEdit_Result" style="display: none;">
+                                <section class="panel panel-featured">
+                                    <div class="panel-body">
+                                        <input type="hidden" id="PatientMessageEdit_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientMessageEdit">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none;">ClaimId</th>
+                                                    <th id="ColumnAction" class="size120">Action</th>
+                                                    <th class="size120">Folder</th>
+                                                    <th class="size-max50">DOS</th>
+                                                    <th class="size95">Entry Date</th>
+                                                    <th class="size120">Entered By</th>
+                                                    <th class="size120">Assigned To</th>
+                                                    <th class="size120">Reviewed By</th>
+                                                    <th class="size120">Comments</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="splitter">Replies</div>
+                            <div class="form-group">
+                                <div id="divReplies" class="col-xs-12 message-panel own-scroll">
+                                    <!--<label id="lblMessageReplies" class="control-label"></label>-->
+                                    <div id="divReplyTemplate" class="col-xs-12 message-reply" style="display:none">
+                                        <h5>Muhammad Azhar Hussain</h5>
+                                        <h6>2/4/2015 3:30:39 PM</h6>
+                                        <p class="pull-left clearfix">Again i am here to test adding reply to message from Popup. HopefullyAgain iAgain i am here to test adding reply to message from Again i am here to test adding reply to message from </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="hfPatientId" />
+                            <input type="hidden" id="hfPatDocId" />
+                            <input type="hidden" id="hfFilePath" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+
+        'use strict';
+
+        if ($.isFunction($.fn['tooltip'])) {
+            $('[data-toggle=tooltip],[rel=tooltip]').tooltip({ container: 'body' });
+        }
+
+    }).apply(this, [jQuery]);
+
+
+    $(document).ready(function () {
+
+        //$('#pnlPatientMessageEdit #dtpCalledDate,#dtpDateOfService').datepicker({
+        //}).on('changeDate', function (e) {
+        //    $(this).datepicker('hide');
+        //    //$('#frmPatientMessageAdd').bootstrapValidator('revalidateField', 'DOB');
+        //});
+        utility.CreateDatePicker('pnlPatientMessageEdit #dtpCalledDate,#dtpDateOfService', function () {
+            //  on-change callback method
+        }, true);
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            },
+        });
+    });
+</script>

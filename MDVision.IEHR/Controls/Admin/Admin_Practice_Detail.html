@@ -1,0 +1,199 @@
+﻿<div id="practiceDetail">
+    <div id="actionPanPracticeDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="practiceDetail.UnLoad();"><span class=" red" >&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Practice</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblpracticeDetail" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmPracticeDetail">
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Short Name <span class="required">*</span></label>
+                                <input class="form-control" name="shortName" id="txtShortName" type="text" maxlength="10" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Description<span class="required">*</span></label>
+                                <input id="txtDescription" name="descripition" class="form-control" type="text"  maxlength="55" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Entity <span class="required">*</span></label>
+                                <select id="ddlEntity" name="entity" class="form-control" onchange=" practiceDetail.LoadEntityBasedData(this.value)" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">EIN <span class="required">*</span></label>
+                                <input type="text" name="EIN" class="form-control" id="txtEIN" onblur="utility.ValidateCtrlMask('frmPracticeDetail',this);" data-mask="999999999" placeholder="999999999">
+                            </div>
+                            </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label ">NPI <span class="required">*</span></label>
+                                <input id="txtNPI" name="NPI" class="form-control" type="text" onblur="utility.ValidateCtrlMask('frmPracticeDetail', this);" placeholder="9999999999" data-mask="9999999999" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Taxonomy Code</label>
+                                <input id="txtTaxonomyCode" name="TaxonomyCode" class="form-control" type="text" maxlength="10" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Fee Group</label>
+                                <select id="ddlFeeGroup" name="FeeGroup" class="form-control" ddlist="GetFeeGroup"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Basic Fee Group</label>
+                                <select id="ddlBasicFeeGroup" name="BasicFeeGroup" class="form-control" ddlist="GetBasicFeeGroup"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label ">Address <span class="required">*</span></label>
+                                <input id="txtAddress" name="address" class="form-control" type="text" maxlength="55" />
+                            </div>
+                            <!--<div class="col-sm-3">
+                                <div class="row pl-xs">
+                                    <div class="first-Input">
+                                        <label class="control-label">City <span class="required">*</span></label>
+                                        <input id="txtCity" name="city" class="form-control" type="text" maxlength="30" />
+                                    </div>
+                                    <div class="second-Input">
+                                        <label class="control-label "> State <span class="required">*</span></label>
+                                        <input id="txtState" name="state" class="form-control" type="text" placeholder="aa" data-mask="aa" />
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-sm-3 p-none">
+                                <div class="size60per pl-default pr-default pull-left">
+                                    <label class="control-label ">City<span class="required">*</span> </label>
+                                    <input id="txtCity" class="form-control" type="text" maxlength="30" name="city" />
+                                </div>
+                                <div class="size40per pull-left pl-default pr-default ">
+                                    <label class="control-label" for="state"> State<span class="required">*</span> </label>
+                                    <input id="txtState" class="form-control" type="text" name="state" onblur="utility.ValidateCtrlMask('frmPracticeDetail', this);" data-mask="aa" placeholder="AA" style="text-transform:uppercase" />
+                                </div>
+                            </div>
+                            <!--<div class="col-sm-3">
+                                <div class="row pl-zip">
+                                    <div class="col-xs-8 pr-xs">
+                                        <label class="control-label">Zip </label><span class="required">*</span>
+                                        <input id="txtZip" name="zip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#practiceDetail', '#txtZip', '#txtCity', '#txtState')" />
+                                    </div>
+                                    <div class="col-xs-4 pl-none pr-md pad-a-labelsize">
+                                        <input id="txtExt" name="Ext" class="form-control" type="text" data-mask="9999" placeholder="9999" />
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-sm-3 p-none">
+                                <div class="size60per  pull-left pl-default pr-default ">
+                                    <label class="control-label">Zip<span class="required">*</span> </label>
+                                    <input id="txtZip" name="zip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.ValidateCtrlMask('frmPracticeDetail', this); utility.FillCityState('#practiceDetail #frmPracticeDetail', '#txtZip', '#txtCity', '#txtState');" />
+                                </div>
+                                <div class="size40per pull-left pl-default pr-default  pad-a-labelsize">
+                                    <input id="txtExt" name="Ext" class="form-control" type="text" data-mask="9999" placeholder="9999" onblur="utility.ValidateCtrlMask('frmPracticeDetail', this);" />
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class=" control-label" for="inputDefault"> Telephone #</label>
+                                <input id="txtTelephone" name="Telephone" class="form-control" placeholder="(999) 999-9999" type="text" data-mask="(999) 999-9999" onblur="utility.ValidateCtrlMask('frmPracticeDetail', this);" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Fax #</label>
+                                <input id="txtFax" name="Fax" class="form-control" placeholder="(999) 999-9999" type="text" data-mask="(999) 999-9999" onblur="utility.ValidateCtrlMask('frmPracticeDetail', this);" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Email</label>
+                                <input id="txtEmail" name="email" class="form-control" placeholder="eg.: john@abc.com" type="text" maxlength="55" onblur="practiceDetail.EnableValidation(this);" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Website</label>
+                                <input id="txtWebSite" class="form-control" type="text" maxlength="140" name="Website" onblur="practiceDetail.EnableValidation(this);" />
+                            </div>
+
+                            <div class="col-sm-3 col-xs-6 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="Active" id="chkActive">
+                                    <label for="chkActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-6 pad-a-labelsize" id="DivScan">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="Scan" id="chkScan" onclick="practiceDetail.enabledisableOCR(this);" >
+                                    <label for="chkScan">Scan</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-6 pad-a-labelsize" id="DivOCR">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="OCR" id="chkOCR" onclick="practiceDetail.enabledisableScan(this);">
+                                    <label for="chkOCR">OCR</label>
+                                </div>
+                            </div>
+
+                        </div>
+                       
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">
+                                    <input type="checkbox" id="chkIsPayToAddress" onchange="practiceDetail.PayAddress(this);" />
+                                    <label for="chkIsPayToAddress"> Pay to Address </label></legend>
+                                <div id="pay_to_address" class="form-group">
+                                    <div class="col-sm-3">
+                                        <label class="control-label ">Address 1 </label><span class="required" style="display:none">*</span>
+                                        <input id="txtPayAddress1" name="PayAddress1" class="form-control" type="text" maxlength="55" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label ">Address 2 </label><span class="required" style="display:none">*</span>
+                                        <input id="txtPayAddress2" name="PayAddress2" class="form-control" type="text" maxlength="55" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label ">City </label><span class="required" style="display:none">*</span>
+                                                <input id="txtPayCity" name="PayCity" class="form-control" type="text" maxlength="30" />
+                                            </div>
+                                            <div class="col-xs-4 pl-none pl-default pr-md">
+                                                <label class="control-label ">State </label><span class="required" style="display:none">*</span>
+                                                <input id="txtPayState" name="PayState" class="form-control" type="text" data-mask="aa" onblur="utility.ValidateCtrlMask('frmPracticeDetail', this);" style="text-transform:uppercase" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label">Zip </label><span class="required" style="display:none">*</span>
+                                                <input id="txtPayZip" name="PayZip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.ValidateCtrlMask('frmPracticeDetail', this); utility.FillCityState('#practiceDetail #frmPracticeDetail', '#txtPayZip', '#txtPayCity', '#txtPayState')" />
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md pad-a-labelsize">
+                                                <input id="txtPayExt" name="PayExt" class="form-control" type="text" data-mask="9999" placeholder="9999" onblur="utility.ValidateCtrlMask('frmPracticeDetail', this);" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-6">
+                                <label class="control-label ">Comments</label>
+                                <textarea id="txtComments" name="Comments" class="form-control" maxlength="100" rows="2" spellcheck="true"></textarea>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Start Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon add-on">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input class="form-control" name="date" type="text" id="dtpStartDate">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 pad-a-labelsize-btn pull-right">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                                <!--<button id="btnHistoryPractice" class="btn btn-primary btn-xs rightbtn" type="button" onclick="practiceDetail.ShowHistory();">History</button>-->
+                            </div>
+                        
+                        <div class="spacer20"></div>
+                    </form>
+
+                </div><div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

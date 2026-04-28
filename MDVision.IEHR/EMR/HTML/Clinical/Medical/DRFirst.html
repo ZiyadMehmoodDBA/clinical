@@ -1,0 +1,75 @@
+﻿<div class="row" id="pnlClinicalDRFirst">
+    <div id="actionPanClinicalDRFirst" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div class=" modal-dialog pl-lg pr-lg">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="DRFirst.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Dr First</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="DRFirst.UnLoadTab();"></a>
+                                </div>
+                                <h2 id="headingTitle1" class="panel-title">Dr First</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body NoRadiusT p-none" id="pnlSection_Search">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle active">
+                                    <!--<label>Dr First</label>-->
+                                    <div class="toggle-content panel-body NoRadiusT">
+                                        <iframe id="Dr" class="col-lg-12 col-md-12 col-sm-12 noBorder p-none" height="1000" style="height:1000px"></iframe>
+                                        <!--<object id="Dr" class="col-lg-12 col-md-12 col-sm-12" height="1000"></object>-->
+                                    </div>
+
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+
+
+                </div>
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

@@ -1,0 +1,247 @@
+﻿<div id="blockHoursDetail" class="row" style="display:none;">
+    <div id="actionPanBlockHoursDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="blockHoursDetail.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Block Hours</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmBlockHoursDetail" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <div class="size150">
+                                <div class="size75 pull-left">
+                                    <input type="radio" id="rdProvider" name="03" checked="checked" class="mt-none">
+                                    <label for="rdProvider">Provider</label><span class="required">*</span>
+                                </div>
+                                <div class="size75 pull-left">
+                                    <input type="radio" id="rdResource" name="03" class="mt-none">
+                                    <label for="rdResource">Resource</label><span class="required">*</span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div id="divProvider">
+                                <div class="input-group">
+                                    <input class="form-control" id="txtProvider" name="Provider" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="blockHoursDetail.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divResource">
+                                <div class="input-group">
+                                    <input class="form-control" id="txtResource" type="text" name="Resource" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkResource" class="btn btn-primary btn-xs " type="button" onclick="blockHoursDetail.OpenResource();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="control-label" for="Facility">Facility </label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtFacility" name="Facility" type="text" />
+                                <div class="input-group-btn">
+                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="blockHoursDetail.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="control-label">Description<span class="required">*</span></label>
+                            <textarea name="Description" id="txtBlockHours" class="form-control" cols="5" rows="5" maxlength="500" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" checked="checked" name="OverLappingAllowed" id="chkOverLappingAllowed">
+                                <label for="chkOverLappingAllowed">Move Overlapping appt to "Block Appointment" list</label>
+                            </div>
+                          
+                           
+                        </div>
+                        <!--<div class="col-xs-4">
+                            <label class="control-label">Block Reason<span class="required">*</span></label>
+                            <input class="form-control" id="lstBlockReasonType" name="blockReason" type="text" oninput="blockHoursDetail.BindBlockReason();" onblur="    utility.ValidateAutoComplete(this, 'frmBlockHoursDetail #hfBlockReason', false);">
+                        </div>-->
+                        <div class="col-xs-4">
+                            <label class="control-label">From Date<span class="required">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" data-plugin-datepicker="" class="form-control " id="blockHoursFromDate" name="fromDate">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label">From Time<span class="required">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                <input type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 5 }' id="blockHoursFromTime" name="fromTime">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label">Color</label>
+                            <div class="input-group color demo2" data-plugin-colorpicker id="divBlockHoursColor">
+                                <span class="input-group-addon" style="padding:1px 4px; padding-top:2px;"><i></i></span>
+                                <input type="text" class="form-control" name="Color" id="txtColor">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label">To Date<span class="required">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" data-plugin-datepicker="" class="form-control " id="blockHoursToDate" name="toDate">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label">To Time<span class="required">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                <input type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 5 }' id="blockHoursToTime" name="toTime">
+                            </div>
+                        </div>
+                        <div class="col-xs-4 pad-a-labelsize-btn pull-right mb-md">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            <!--<button id="btnHistoryBlckHours" class="btn btn-primary btn-sm rightbtn" type="button" onclick="blockHoursDetail.ShowHistory();">History</button>-->
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <input type="hidden" id="hfFacility" />
+                    <input type="hidden" id="hfProvider" />
+                    <input type="hidden" id="hfResource" />
+                    <input type="hidden" id="hfBlockReason" />
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            }
+        });
+        //------------ Radio Provider/Resource check-------
+
+        $('#blockHoursDetail #divResource').hide();
+
+        $('#blockHoursDetail #rdResource').click(function () {
+            if ($(this).is(':checked')) {
+
+                if (blockHoursDetail.params.Status == "Booked") {
+
+                    $("#blockHoursDetail #buttonDiv").css("display", "none");
+                }
+                $('#blockHoursDetail #divResource').show();
+                $('#blockHoursDetail #divProvider').hide();
+
+                $('#blockHoursDetail #txtProvider').val("");
+
+                $('#blockHoursDetail #txtResource').val("");
+                $('#blockHoursDetail #hfProvider').val(null);
+
+
+                $('#frmBlockHoursDetail').data('bootstrapValidator').enableFieldValidators('Provider', false);
+                $('#frmBlockHoursDetail').data('bootstrapValidator').enableFieldValidators('Resource', true);
+            }
+            else {
+
+            }
+        });
+
+        $('#blockHoursDetail #rdProvider').click(function () {
+            if ($(this).is(':checked')) {
+
+                if (blockHoursDetail.params.Status == "Booked") {
+
+                    $("#blockHoursDetail #buttonDiv").css("display", "none");
+                }
+
+                $('#blockHoursDetail #divResource').hide();
+                $('#blockHoursDetail #divProvider').show();
+
+                $('#blockHoursDetail #txtResource').val("");
+
+                $('#blockHoursDetail #txtResource').val("");
+                $('#blockHoursDetail #hfResource').val(null);
+
+                $('#frmBlockHoursDetail').data('bootstrapValidator').enableFieldValidators('Provider', true);
+                $('#frmBlockHoursDetail').data('bootstrapValidator').enableFieldValidators('Resource', false);
+            }
+            else {
+
+            }
+        });
+
+        //-------------------------------------------------
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('blockHoursDetail #blockHoursToDate', function () {
+            //on-change callback method
+            $('#frmBlockHoursDetail').bootstrapValidator('revalidateField', 'toDate');
+        });
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('blockHoursDetail #blockHoursFromDate', function () {
+            //on-change callback method
+            $('#frmBlockHoursDetail').bootstrapValidator('revalidateField', 'fromDate');
+            $('#frmBlockHoursDetail').bootstrapValidator('revalidateField', 'toDate');
+        });
+
+        utility.ValidateFromToDate('blockHoursDetail #frmBlockHoursDetail', 'blockHoursFromDate', 'blockHoursToDate', true);
+
+        $("#frmBlockHoursDetail #lstProviderType").change(function () {
+
+            $('#frmBlockHoursDetail').data('bootstrapValidator').enableFieldValidators('ResourceType', false);
+            $('#frmBlockHoursDetail').data('bootstrapValidator').enableFieldValidators('ProviderType', true);
+
+            $("#lstResourceType option:first").attr("selected", true);
+
+        });
+
+        $("#frmBlockHoursDetail #lstResourceType").change(function () {
+
+            $('#frmBlockHoursDetail').data('bootstrapValidator').enableFieldValidators('ProviderType', false);
+            $('#frmBlockHoursDetail').data('bootstrapValidator').enableFieldValidators('ResourceType', true);
+
+            $("#lstProviderType option:first").attr("selected", true);
+
+        });
+        $('#frmBlockHoursDetail #blockHoursFromTime').timepicker({
+            defaultTime: '12:00 AM',
+            minuteStep: 1,
+        });
+        $('#frmBlockHoursDetail #blockHoursToTime').timepicker({
+            minuteStep: 1,
+            defaultTime: '12:00 PM',
+        });
+        $('#frmBlockHoursDetail #blockHoursFromTime').timepicker({
+            defaultTime: false
+        }).on('changeTime.timepicker', function (e) {
+            disableFocus: false
+            $('#frmBlockHoursDetail').bootstrapValidator('revalidateField', 'fromTime');
+        });
+
+        $('#frmBlockHoursDetail #blockHoursToTime').timepicker({
+            defaultTime: false
+        }).on('changeTime.timepicker', function (e) {
+            disableFocus: false
+            $('#frmBlockHoursDetail').bootstrapValidator('revalidateField', 'toTime');
+        });
+        //$('#blockHoursFromTime').timepicker({
+        //    defaultTime: false
+
+        //});
+        //$('#blockHoursToTime').timepicker({
+        //    defaultTime: false
+
+        //});
+    });
+</script>

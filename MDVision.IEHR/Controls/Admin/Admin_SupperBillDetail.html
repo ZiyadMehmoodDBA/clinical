@@ -1,0 +1,141 @@
+﻿<div id="SupperBillDetail">
+    <div id="actionPanSupperBillDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="SupperBillDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Super Bill Template</h4>
+            </div>
+            <div class="modal-body pl-xs pr-xs">
+                <div id="tblSupperBillDetail" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmSupperBillDetail">
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label" for="txtShortName">Short Name<span class="required">*</span></label>
+                                <input class="form-control" id="txtShortName" name="ShortName" type="text" maxlength="20">
+                            </div>
+                            <div class="col-sm-5">
+                                <label class="control-label" for="txtDescription">Description<span class="required">*</span></label>
+                                <input class="form-control" id="txtDescription" name="Description" type="text" maxlength="100">
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label" for="ddlPractice">Practice<span class="required">*</span></label>
+                                <select id="ddlPractice" name="Practice" class="form-control" ddlist="GetPractice"></select>
+                            </div>
+                            <div class="col-sm-1 size-min60 p-none mt-lg">
+                                <div class="checkbox-custom checkbox-default mt-xxs">
+                                    <input id="chkActive" checked="checked" type="checkbox">
+                                    <label class="control-label" for="chkActive">Active</label>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-4 col-sm-4 pull-right mt-md">
+                                <button id="btnsaveSupperBill" class="btn btn-primary rightbtn btn-sm" type="submit"> Save</button>
+                                <!--<button id="btnHistorySupperBill" class="btn btn-primary btn-sm rightbtn" type="button" onclick="SupperBillDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                    </form>
+
+                    <!---Hidden Fields--->
+                    <input type="hidden" id="hfbillId" />
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="modal-body pl-xs pr-xs">
+                <div id="tblSupper_Bill" class="col-md-12">
+                    <div class="tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a id="lnkEditCPD" href="#EditCPD" onclick="SupperBillDetail.InitializeCPT()" data-toggle="tab">CPT</a></li>
+                            <li><a id="lnkEditICD" href="#EditICD" onclick="SupperBillDetail.InitializeICD()" data-toggle="tab">ICD</a></li>
+                            <li><a id="lnkModifier" href="#EditModifier" onclick="SupperBillDetail.InitializeModifier()" data-toggle="tab">Modifier</a></li>
+                        </ul>
+                        <div class="tab-content tab-content-featured">
+                            <div id="EditCPD" class="tab-pane active">
+
+                                <form method="post" onsubmit="return false" id="frmCPT">
+
+                                    <div id="pnlCPT_Result" style="display: none;">
+                                        <section class="panel">
+                                            <div class="panel-body">
+                                                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvCPT">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="custom-width">Action</th>
+                                                            <th class="size-max120">Code</th>
+                                                            <th class="size-min300">Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                            <a id="btnAddCPT" href="javascript:EditableTable.rowAdd()">Add Line Item</a>
+                                        </section>
+                                    </div>
+                                    <div class="spacer10"></div>
+                                </form>
+                            </div>
+                            <!--==============================================================================================-->
+                            <div id="EditICD" class="tab-pane">
+
+                                <form method="post" onsubmit="return false" id="frmICD">
+
+                                    <div id="pnlSB_ICT_Result" style="display: none;">
+                                        <section class="panel">
+                                            <div class="panel-body">
+                                                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvICD_SB">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="custom-width">Action</th>
+                                                            <th class="size-min100">ICD-10</th>
+                                                            <th class="size-min300">Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                            <a id="btnAddICD" href="javascript:EditableTable.rowAdd()">Add Line Item</a>
+                                        </section>
+                                    </div>
+
+                                    <div class="spacer10"></div>
+                                </form>
+                            </div>
+                            <!--==============================================================================================-->
+                            <div id="EditModifier" class="tab-pane">
+
+                                <form method="post" onsubmit="return false" id="frmModifier">
+
+                                    <div id="pnlSB_Modifier_Result" style="display: none;">
+                                        <section class="panel">
+                                            <form>
+                                            <div class="panel-body">
+                                                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvModifier_SB">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="custom-width">Action</th>
+                                                            <th class="size-max120">Code</th>
+                                                            <th class="size-min300">Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                            <a id="btnAddModifier" href="javascript:EditableTable.rowAdd()">Add Line Item</a>
+                                        </form>
+                                        </section>
+                                    </div>
+                                    <div class="spacer10"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

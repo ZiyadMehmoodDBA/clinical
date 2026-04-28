@@ -1,0 +1,390 @@
+﻿<div class="row" id="pnlClinicalFaceSheet">
+    <div id="actionPanClinicalFaceSheet" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button id="btnClose" type="button" class="close hidden" onclick="Clinical_FaceSheet.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Clinical Summary</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <!--<div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_FaceSheet.UnLoadTab();"></a>
+                                </div>-->
+                                <h2 class="panel-title">Clinical Summary</h2>
+                            </header>
+
+                        </div>
+
+                        <div class="panel-body NoRadiusT" id="pnlSection_Search">
+
+
+                            <button id="btnPrintFaceSheet" type="button" class="btn btn-success btn-xs mr-xs pull-right" onclick="Clinical_FaceSheet.PrintFaceSheet();"><i class="fa fa-print"></i> Preview</button>
+                            <div class="dropdown pull-right" id="divExportCCDA">
+                                <a id="btnExportCCDA" href="#" class="dropdown-toggle btn btn-success btn-xs mr-xs pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Export C-CDA <span class="caret"></span> </a>
+                                <!--<button id="btnExportCCDA" type="button" class="btn btn-success btn-xs mr-xs pull-right"> Export C-CDA <span class="caret"></span></button>-->
+                                <ul id="menuExportCCDA" class="dropdown-menu" aria-labelledby="btnExportCCDA">
+                                    <li><a href="#" onclick="Clinical_FaceSheet.openSummary('clinicalsummary');">Clinical Summary</a></li>
+                                    <li><a href="#" onclick="Clinical_FaceSheet.openSummary('referralsummary');">Referral Summary</a></li>
+                                    <li><a href="#" onclick="Clinical_FaceSheet.openSummary('referralnote');">Referral Note</a></li>
+                                    <li><a href="#" onclick="Clinical_FaceSheet.openSummary('countinuityofcaredocument');">Countinuity of Care Document</a></li>
+                                    <li id="liHealthCareSurvey"><a href="#" onclick="Clinical_FaceSheet.openSummary('healthcaresurvey');">Health Care Survey</a></li>
+                                </ul>
+                            </div>
+                            <button id="btnExportCaseReport" type="button" class="btn btn-success btn-xs mr-xs pull-right" onclick="Clinical_FaceSheet.OpenCaseReports();"><i class="fa fa-print"></i> Generate Case Report</button>
+                            <div class="clearfix"></div>
+                            <div class="spacer20"></div>
+                            <form id="frmClinicalFaceSheet" method="post" onsubmit="return false">
+
+                                <!--Patient Face Sheet-->
+
+
+
+                                <div id="divAllergies" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Allergies</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divAllergies" onclick="Clinical_FaceSheet.OpenViewAllRecords('Allergies');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped">
+                                            <ul id="listAllergiesData"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divProblemList" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Problem List</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divProblemList" onclick="Clinical_FaceSheet.OpenViewAllRecords('ProblemList');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped">
+                                            <ul id="listProblemListData"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divVitals" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Vitals</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divVitals" onclick="Clinical_FaceSheet.OpenViewAllRecords('Vitals');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped">
+                                            <ul id="listVitalsData"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divMedications" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Medications</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divMedications" onclick="Clinical_FaceSheet.OpenViewAllRecords('Medications');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped own-scroll">
+                                            <ul id="lstMedications"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divLabResults" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Lab Results</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divLabResults" onclick="Clinical_FaceSheet.OpenViewAllRecords('LabResults');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped own-scroll">
+                                            <ul id="lstLabResults"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divNotes" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Notes/Phone Encounters</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divNotes" onclick="Clinical_FaceSheet.OpenViewAllRecords('Notes');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped">
+                                            <ul id="listNotesData"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divHisotry" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">History</h2>
+                                            <!--<div class="pull-right">(Last 4, Active)<a href="#" class="btn btn-link btn-xs white">View All</a> </div>-->
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body pb-xs gridStriped own-scroll">
+                                            <div class="" id="divHistoryData">
+                                                <!--<header class="text-bold">Social Hx</header>
+                                                <p>
+                                                    <strong>Tobacco:</strong>
+                                                    Current everyday smoker, cigrette, 6-10(Half pack a day) for more than 6 years, Patient would quit, Counselling 3-10 minutes for the topic Change daily routine,. The Patient is getting improved.
+                                                    <br /> <strong>Alcohol: </strong>
+                                                    Drinks daily Beer, 2-3 times a week for more than a year, He would quit, Counselling 3-10 minutes for the topic Getting Support, The patient is getting improved.
+                                                </p>
+                                                <header class="text-bold">Family Hx</header>
+                                                <p> any Text you want to put</p>-->
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <!--Start 08/01/2016 Abid Ali  Dummy Rocord Test For Female Patient -->
+                                <div id="divDummy" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Dummy Component</h2>
+                                            <!--<div class="pull-right">(Last 4, Active)<a href="#" class="btn btn-link btn-xs white">View All</a> </div>-->
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body pb-xs pr-none gridStriped own-scroll">
+                                            <div class="" id="divDummmyData">
+                                                <!--<header class="text-bold">Social Hx</header>
+                                                <p>
+                                                    <strong>Tobacco:</strong>
+                                                    Current everyday smoker, cigrette, 6-10(Half pack a day) for more than 6 years, Patient would quit, Counselling 3-10 minutes for the topic Change daily routine,. The Patient is getting improved.
+                                                    <br /> <strong>Alcohol: </strong>
+                                                    Drinks daily Beer, 2-3 times a week for more than a year, He would quit, Counselling 3-10 minutes for the topic Getting Support, The patient is getting improved.
+                                                </p>
+                                                <header class="text-bold">Family Hx</header>
+                                                <p> any Text you want to put</p>-->
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <!--End 08/01/2016 Abid Ali  Dummy Rocord Test For Female Patient -->
+                                <div id="divLabOrders" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Lab Orders</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divLabOrders" onclick="Clinical_FaceSheet.OpenViewAllRecords('LabOrders');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped own-scroll">
+                                            <ul id="lstLabOrders"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divImplantable" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Implantable Devices</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divImplantable" onclick="Clinical_FaceSheet.OpenViewAllRecords('Implantable Devices');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped">
+                                            <ul id="listImplantableData"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divProcedureOrders" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Procedure Orders</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divProcedureOrders" onclick="Clinical_FaceSheet.OpenViewAllRecords('ProcedureOrders');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped own-scroll">
+                                            <ul id="lstProcedureOrders"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divRadiologyOrders" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Diagnostic Imaging Order</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divRadiologyOrders" onclick="Clinical_FaceSheet.OpenViewAllRecords('RadiologyOrders');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped own-scroll">
+                                            <ul id="lstRadiologyOrders"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divRefferals" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Referrals</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divRefferals" onclick="Clinical_FaceSheet.OpenViewAllRecords('Referrals');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped own-scroll">
+                                            <ul id="lstReferrals"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divImmunization" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Immunization</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divImmunization" onclick="Clinical_FaceSheet.OpenViewAllRecords('Immunization');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped own-scroll">
+                                            <ul id="lstImmunizations"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="visible-md"><div class="clearfix"></div></div>
+                                <div id="divAppointments" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Appointments</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#" onclick="Clinical_FaceSheet.OpenViewAllRecords('Appointments');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped">
+                                            <ul id="listAppointmentData"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divComplaints" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Complaints</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divComplaints" onclick="Clinical_FaceSheet.OpenViewAllRecords('Complaints');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped own-scroll">
+                                            <ul id="lstComplaints"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div id="divPatientDocument" style="display:none; min-height: 220px; height:auto;" class="FaceSheet_Drop FaceSheet_Drag col-md-6 col-lg-4">
+                                    <section class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title pull-left">Patient Document</h2>
+                                            <div class="pull-right">(Last 4, Active)<a href="#divComplaints" onclick="Clinical_FaceSheet.OpenViewAllRecords('PatientDocument');" class="btn btn-link btn-xs white disableClinicalFace_Sheet viewall">View All</a> </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body p-none pb-xs gridStriped own-scroll">
+                                            <ul id="lstPatientDocument"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+
+                                <div id="divUserFaceSheet"></div>
+
+                                <!--/Patient Face Sheet-->
+
+                            </form>
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<script id="tooltipTemplateInClinicalFaceSheet" type="text/x-kendo-template">
+    #var AppointmentId =  target[0].id #
+    #var AppointmentDetail = Clinical_FaceSheet.LoadToolTipData(AppointmentId)#
+
+   
+    <div class="sc-tooltip">
+        <header class="status" style="background-color: #: AppointmentDetail.StatusColor #;"><h5>#: AppointmentDetail.AppointmentStatus #</h5></header>
+        <main class="col-xs-12 p-none text-left">
+            <div class="profile-area" style="display:flex">
+                <div style="width: 125px;text-align: center;">
+                    <img class="img-circle img-responsive img-thumbnail" src="#: AppointmentDetail.imgPatient #"><div></div>
+                </div>
+
+                <div class="sc-info text-center">
+                    <h4 class="sc-pat-title">#: AppointmentDetail.PatientName #</h4>
+                    <p class="sc-pat-info">#: AppointmentDetail.Age # | #: AppointmentDetail.Gender # | #: AppointmentDetail.AccountNumber # | #: AppointmentDetail.DOB #</p>
+                    <p class="sc-pat-info mt-default">Mobile: #: AppointmentDetail.CellNo # | Email: #: AppointmentDetail.EmailAddress # </p>
+                    <p class="sc-pat-info mt-default">#: AppointmentDetail.ProviderName # | #: AppointmentDetail.FacilityName #  </p>
+                    <p class="sc-pat-info mt-default">#: AppointmentDetail.ReasonComments # | #: AppointmentDetail.Duration # Mins </p>
+                </div>
+            </div>
+            <section class="col-xs-12 p-none mt-default" style="line-height: 1.3;">
+                <div class="col-xs-6">
+                    <div class="col-xs-12 p-none bg-white">
+                        <div class="col-xs-12 p-none">
+                            <strong>Plan:</strong> #: AppointmentDetail.PrimaryInsuranceName #
+                        </div>
+                        <div class="col-xs-12 p-none">
+                            <strong>Patient Type:</strong> #: AppointmentDetail.PatientType #
+                        </div>
+                        <div class="col-xs-12 p-none">
+                            <strong>Created By:</strong> #: AppointmentDetail.CreatedBy #
+                        </div>
+                        <div class="col-xs-12 p-none">
+                            <strong>Modified By:</strong> #: AppointmentDetail.ModifiedBy #
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-12 p-none bg-white">
+                        <div class="col-xs-12 p-none">
+                            <strong>Copay:</strong> <span style="color: #: AppointmentDetail.CopayClass #"><i class="fa fa-dollar"></i>#: AppointmentDetail.CopayBal #.00</span>
+                        </div>
+
+                        <div class="col-xs-12 p-none">
+                            <strong>Visit Type:</strong><span style="color: #: AppointmentDetail.VisitTypeColor #"> #: AppointmentDetail.VisitTypeName # </span>
+                        </div>
+
+                        <div class="col-xs-12 p-none">
+                            <strong>Created On:</strong> #: AppointmentDetail.CreatedOn #
+                        </div>
+
+                        <div class="col-xs-12 p-none">
+                            <strong>Modified On:</strong> #: AppointmentDetail.ModifiedOn #
+                        </div>
+                    </div>
+                </div>
+                <div class="spacer5"></div>
+                <div class="col-xs-6 text-center">
+                    <div class="col-xs-12 bg-white">
+                        Reminder Delivery Status: #: AppointmentDetail.ReminderDeliveryStatus #
+                    </div>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <div class="col-xs-12 bg-white">
+                        Reminder Response: <span style="color: #: AppointmentDetail.StatusStyleColor #;">#: AppointmentDetail.ReminderDeliveryResponse # </span>
+
+                    </div>
+                </div>
+
+            </section>
+            <div class="spacer10"></div>
+            <div class="col-xs-12">
+                <div class="sc-comments">
+                    <strong> Comments: </strong>#: AppointmentDetail.Comments #
+                </div>
+            </div>
+            <div class="col-xs-12 text-center text-bold ">
+                <span style="color: #: AppointmentDetail.RescheduleColor #;">   #: AppointmentDetail.RescheduleText #</span> #: AppointmentDetail.RescheduleDate # #: AppointmentDetail.RescheduleProvider # #: AppointmentDetail.RescheduleFacility #
+            </div>
+        </main>
+        <div class="clearfix"></div>
+    </div>
+</script>

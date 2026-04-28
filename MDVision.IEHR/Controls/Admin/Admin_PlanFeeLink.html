@@ -1,0 +1,65 @@
+﻿<div class="row" id="pnlAdminPlanFeeLink" style="display:none;">
+    <div id="actionPanAdminPlanFeeLink" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_PlanFeeLink.PlanFeeLinkAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_PlanFeeLink.UnLoadTab();"></a>
+                </div>
+                <h2 class="panel-title">Search Plan Fee Link </h2>
+            </header>
+            <div class="panel-body" id="pnlPlanFeeLink_Search">
+                <form class="form-bordered" method="post" onsubmit="return false">
+                    <!--start - CONTENTS-->
+                    <div class="form-group">
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Name</label>
+                            <input class="form-control" id="txtName" type="text" />
+                        </div>
+                        <div class="col-sm-5 col-md-5">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" id="txtDescription" type="text" />
+                        </div>
+                        <div id="divPlanFeeLink_Entity" class="col-sm-2">
+                            <label class="control-label">Entity</label>
+                            <select id="ddlEntity" class="form-control" ddlist="GetEntity"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Active?</label>
+                            <select id="ddlActive" name="Active" class="form-control">
+                                <option value="">- All -</option>
+                                <option value="1" selected="selected">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="pull-right pr-default pad-a-labelsize-btn">
+                            <button class="btn btn-primary btn-sm" id="btnPlanFeeLinkSearch" type="button" onclick="Admin_PlanFeeLink.PlanFeeLinkSearch();">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div id="pnlPlanFeeLink_Result" style="display: none;">
+            <section class="panel">
+                <div class="panel-body">
+                    <input type="hidden" id="PlanFeeLink_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPlanFeeLink">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">PlanFeeLinkId</th>
+                                <th class="size120">Action</th>
+                                <th class="size120">Name</th>
+                                <th class="size120">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div id="divPlanFeeLinkPaging"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,265 @@
+﻿<div class="row" id="pnlClinicalSurgicalHx">
+    <div id="actionPanClinicalSurgicalHx" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_SurgicalHx.unLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Surgical Hx</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer5"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_SurgicalHx.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Add Surgical Hx</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body pl-none NoRadiusT" id="pnlSection_Search" style="height:315px">
+
+                            <div id="favSectionDiv" data-title="Favorites" class="toggleHorDefault">
+
+                                <div class="col-xs-12 pb-sm">
+                                    <span class="pull-left">Favorites List</span>
+                                    <a id="favSelectAllLink" href="#" onclick="Clinical_SurgicalHx.selectAllFavoriteListContent()" class="btn btn-link btn-xs pull-right disableAll">Select All</a>
+                                    <div class="clearfix"></div>
+                                    <select id="ddlFavoriteListSurgicalHx" name="FavoriteListSurgicalHx" onchange="Clinical_SurgicalHx.loadfavoriteListContent(this)" class="form-control"></select>
+                                    <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="Clinical_SurgicalHx.AutoSearchFavSurgicalHx()" />
+                                </div>
+                                <ul id="ulFavoriteListSurgicalHxContent" name="FavoriteListSurgicalHxContent" class="listPrimary height-max200 overflowY"></ul>
+
+                            </div>
+                            <div id="FormDiv" class="col-xs-12">
+                                <form id="frmClinicalSurgicalHx" method="post" name="frmClinicalSurgicalHx" onsubmit="return false">
+                                    <div class="spacer10"></div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label" for="Date">Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input type="text" class="form-control" id="dtpSurgicalHxDate" name="SurgicalHxDate" data-plugin-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="chkSurgicalHxUnremarkable" onclick="Clinical_SurgicalHx.unRemarkableSurgicalHx(this);" name="SurgicalHxUnremarkable">
+                                                <label class="control-label">Unremarkable</label>
+                                            </div>
+                                        </div>
+                                        <div class="spacer5"></div>
+                                        <section class="panel">
+                                            <div id="Surgical" class="tab-pane">
+                                                <input id="hfMiscHxId" name="SexualHxId" type="hidden" value="-1" />
+                                                <div class="col-sm-4 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">History</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none">
+                                                            <div class="col-xs-12 mb-xs">
+                                                                <!--<div class="input-group">
+                                                                    <input class="form-control" id="txtDisease" data-popupunload="false" oninput="Clinical_SurgicalHx.bindICD9AutoComplete(this)" onkeypress="Clinical_SurgicalHx.disableEnterKey(event)" name="Disease" type="text" value="">
+                                                                    <div class="input-group-btn">
+                                                                        <button id="btnDisease" class="btn btn-primary btn-xs" type="button" onclick="Clinical_SurgicalHx.openSearchPopup('ICD', 'txtDisease', 'hfCPTCode,hfCPTDescription')"><i class="glyphicon glyphicon-search"></i></button>
+                                                                    </div>
+                                                                </div>-->
+                                                                <div class="radio-custom col-sm-6">
+                                                                    <input id="rdoprocedure" type="radio" name="rdoprocedure" checked="checked" onchange="Clinical_SurgicalHx.changeProcedureField();" value="2">
+                                                                    <label for="rdFreeText">CPT</label>
+                                                                </div>
+                                                                <div class="radio-custom col-sm-6">
+                                                                    <input id="rdofreetext" type="radio" name="rdoprocedure" onchange="Clinical_SurgicalHx.changeProcedureField();" value="1">
+                                                                    <label for="rdFreeText">Custom</label>
+                                                                </div>
+                                                                <div class="input-group" id="DivICDAutoComplete">
+                                                                    <input class="form-control" id="txtDisease" placeholder="search procedure" type="text" name="Disease" oninput="Clinical_SurgicalHx.bindAutoComplete(this)" value="" />
+                                                                    <div id="btnsearchcpt" class="input-group-btn">
+                                                                        <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_SurgicalHx.openCPTCode();"><i class="fa fa-search"></i></button>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="input-group col-xs-12 hidden" id="DivFreeText">
+                                                                    <input class="form-control " placeholder="Enter text" maxlength="500" type="text" id="txtFreeText" name="Disease" onblur="Clinical_SurgicalHx.createFreeTextLi();" />
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <ul id="ulSurgicalDisease" name="SurgicalDisease" class="listPrimary own-scroll scroll-2x overflowY" style="height:130px; max-height:130px;"></ul>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-8 col-md-9">
+                                                    <section id="sectionSurgicalDetails" class="panel panel-featured disableAll">
+                                                        <header class="panel-heading">
+                                                            <input type="hidden" id="hfCPTSNOMEDCode" name="CPTSNOMEDCodeId" />
+                                                            <input type="hidden" id="hfCPTSNOMEDDescription" name="CPTSNOMEDDescription" />
+                                                            <h2 id="headingChildDetailMiscStatus" class="panel-title">Details</h2>
+                                                        </header>
+                                                        <div id="SurgicalDetails" class="panel-body">
+                                                            <!--<div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Procedure</label>
+                                                                <div class="input-group">
+                                                                    <input class="form-control" id="txtSurgicalCPTCode" placeholder="search procedure" type="text" name="CPTCode" onblur="Clinical_SurgicalHx.validateProcedure();" oninput="Clinical_SurgicalHx.bindAutoComplete(this)" />
+                                                                    <div class="input-group-btn">
+                                                                        <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_SurgicalHx.openCPTCode();"><i class="fa fa-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>-->
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Status</label>
+                                                                <select id="ddlSurgicalStatus" name="SurgicalStatus" ddlist="GetSurgicalHxStatus" class="form-control"></select>
+                                                            </div>
+
+
+
+
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Date of Surgery</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                    <input id="dtpSurgicalSurgeryDate" name="SurgicalSurgeryDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Age at Surgery</label>
+                                                                <input type="text" id="txtAgeAtSurgery" class="form-control" name="AgeAtSurgery" disabled>
+                                                            </div>
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Location</label>
+                                                                <!--<select id="ddlSurgicalLocation" name="SurgicalLocation" ddlist="GetSurgicalHxLocation" class="form-control">
+                                                                </select>-->
+                                                                <input type="text" id="txtSurgicalLocation" class="form-control" name="SurgicalLocation">
+                                                            </div>
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label class="control-label">Reason for Surgery</label>
+                                                                <input type="text" id="txtSurgicalReason" class="form-control" name="SurgicalReason">
+                                                            </div>
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label id="lblSurgicalOrderingProviderProvider" class="control-label">Ordering Provider</label>
+                                                                <a id="lnkSurgicalOrderingProviderEdit" style="display:none;" href="#" onclick="Clinical_SurgicalHx.openProviderDetail(false);" title="Edit Provider">Ordering Provider</a>
+                                                                <div class="input-group">
+
+                                                                    <input type="text" class="form-control" id="txtSurgicalOrderingProvider" providerid="" name="SurgicalOrderingProvider" placeholder="Start typing to search" />
+                                                                    <div class="input-group-btn">
+                                                                        <button id="lnkSurgicalOrderingProvider" class="btn btn-primary btn-xs " type="button" onclick="Clinical_SurgicalHx.openProvider(false);"><i class="glyphicon glyphicon-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 col-lg-3">
+                                                                <label id="lblSurgicalPerformingProviderProvider" class="control-label">Performing Provider</label>
+                                                                <a id="lnkSurgicalPerformingProviderEdit" style="display:none;" href="#" onclick="Clinical_SurgicalHx.openProviderDetail(true);" title="Edit Provider">Performing Provider</a>
+                                                                <div class="input-group">
+
+                                                                    <input type="text" class="form-control" id="txtSurgicalPerformingProvider" providerid="" name="SurgicalPerformingProvider" placeholder="Start typing to search" />
+                                                                    <div class="input-group-btn">
+                                                                        <button id="lnkSurgicalPerformingProvider" class="btn btn-primary btn-xs " type="button" onclick="Clinical_SurgicalHx.openProvider(true);"><i class="glyphicon glyphicon-search"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtSurgicalComments" name="SurgicalComments" maxlength="500" rows="4" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+
+                                                            <div class="pull-right pad-a-labelsize">
+                                                                <button id="aHistory" type="button" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                                <button id="btnSurgicalSave" type="submit" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="col-md-12">
+                        <label class="control-label">Overall Comments</label>
+                        <textarea id="txtSurgicalOverallComments" name="SurgicalOverallComments" maxlength="5000" rows="3" class="form-control" spellcheck="true"></textarea>
+                    </div>
+                    <div class="pull-right pad-a-labelsize-btn pr-default">
+                        <button class="btn btn-success btn-sm pull-right mr-sm" style="display:none;" type="button" onclick="Clinical_SurgicalHx.addSurgicalHxToNotes();" id="btnAddVitalsOnNote">Add on Note</button>
+                        <button class="btn btn-success btn-sm pull-right mr-sm" type="button" style="display:none" onclick="Clinical_SurgicalHx.surgicalHxSave('');" id="btnSurgicalHxSave">Save</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- /Surgical Hx -->
+                </div>
+                <input type="hidden" name="PatientId" id="hfPatientId" />
+                <input id="hfSurgicalHxId" name="SurgicalHxId" type="hidden" value="-1">
+                <input type="hidden" name="SurgicalPerformingProviderId" id="hfSurgicalPerformingProviderId" />
+                <input type="hidden" name="SurgicalOrderingProviderId" id="hfSurgicalOrderingProviderId" />
+                <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+
+                <input type="hidden" name="SelectedDisease" id="hfSelectedDisease" />
+                <input type="hidden" name="SurgicalHxType" id="hfSurgicalHxType" value="surgical" />
+                <input type="hidden" name="SurgicalHxSoapText" id="hfSurgicalHxSoapText" value="" />
+                <input type="hidden" name="gridComments" id="hfGridComments" />
+
+                <input type="hidden" name="SelectedJsonDisease" id="hfSelectedJsonDisease" />
+            </div>
+            <div id="pnlSurgicalHx_Result" style="display: inline;">
+                <div class="spacer10"></div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="spacer10"></div>
+                    <div class="col-sm-6" id="divSwitch">
+                        <span class="pr-xs">All</span>
+                        <div id="tglSurgicalHx" class="btnWidgetSwitch switch switch-xs switch-success">
+                            <input id="switchVisit" type="checkbox" status="1" checked="" name="Switch" data-plugin-ios-switch="" style="display: inline;" onchange="Clinical_SurgicalHx.ChangeCurrentPast(this);">
+                        </div>
+                        <span class="pl-xs">Current</span>
+                    </div>
+                </div>
+                <section class="panel" id="pnlCurrent">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvSurgicalHx">
+                            <thead>
+                                <tr>
+
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvSurgicalHx_Paging"></div>
+                    </div>
+                </section>
+
+                <section class="panel hidden" id="pnlPast">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPastSurgicalHx">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">HxId</th>
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvPastSurgicalHx_Paging"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+
+</div>

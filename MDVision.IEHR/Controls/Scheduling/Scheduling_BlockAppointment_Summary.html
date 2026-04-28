@@ -1,0 +1,69 @@
+﻿<div id="pnlBlockAppointmentSummary">
+    <div id="actionPanBlockAppointmentSummary" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Scheduling_BlockAppointment_Summary.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Blocked Appointments Summary</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form method="post" id="frmBlockAppointmentSearch" onsubmit="return false">
+                        <section class="panel panel-featured">
+                            <div class="panel-body" id="pnlBlockAppointment_Search">
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">From Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" data-plugin-datepicker="" maxlength="10" class="form-control" name="fromDate" id="dpfromDate">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">To Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" data-plugin-datepicker="" maxlength="10" class="form-control" name="toDate" id="dptoDate">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 mt-md pull-left">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnBlockAppointmentSummary" type="button" onclick="Scheduling_BlockAppointment_Summary.SearchAppointmentWithDatePicker()">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </form>
+                </div>
+                <div class="spacer10"></div>
+                <div id="tblBlockAppointment_Summary" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvBlockAppointment">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">AppointmentId</th>
+                                        <th>Action</th>
+                                        <th>Patient Name</th>
+                                        <th>Date</th>
+                                        <th>From Time</th>
+                                        <th>To Time</th>
+                                        <th>Provider</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            <div id="divBlockAppointmentSummaryPaging"></div>
+
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

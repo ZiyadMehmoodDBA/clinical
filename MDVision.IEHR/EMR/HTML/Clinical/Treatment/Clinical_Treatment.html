@@ -1,0 +1,338 @@
+﻿<div class="row" id="pnlClinicalTreatment">
+    <div id="actionPanClinicalTreatment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_Treatment.UnLoadTab(true);"></button>
+                <h4 class="modal-title">Treatment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div id="orderSetCompunents" class="form-group p-default ">
+                        <div class="rowlink ">
+                            <div class="toggle" data-plugin-toggle>
+
+                                <section class="toggle checkBoxContainer active" id="problemSection">
+                                    <!--'disbleCustom' is dummy class-->
+                                    <label>Problems <a class="font-sm disbleCustom" data-title="Problems" href="javascript:void(0);" onclick="Clinical_Treatment.AddProblem();"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_Problems" name="Problems" checked="checked" class="notesOrderSets hidden" />-->
+                                    <div class="toggle-content panel-body NoRadius" id="pnlProblemLists_ResultT" style="display:block">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvProblemListsT">
+                                            <thead>
+                                                <tr>
+                                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size60 size-min60 notesActions">Action</th>
+                                                    <th controlid="txtProblem" iscontroldisabled="1" controlname="ProblemName" class="noWordBreak size30">Problem</th>
+                                                    <th controlid="ddlDiagnosis" controlname="Description" class="noWordBreak size200" coltype="dropdown">ICD (Diagnosis)</th>
+                                                    <th controlid="ddlChronicityLevel" controlname="ChronicityLevel" class="noWordBreak size30" coltype="dropdown">Chronicity Level</th>
+                                                    <th controlid="ddlSeverity" controlname="Severity" class="noWordBreak size30" coltype="dropdown">Severity</th>
+                                                    <th controlid="dtpFromProblemDate" controlname="StartDate" class="noWordBreak size30" coltype="datetime">Start Date</th>
+                                                    <th controlid="dtpToProblemDate" controlname="EndDate" class="noWordBreak size30" coltype="datetime">End Date</th>
+                                                    <th controlid="txtLastUpdated" iscontroldisabled="1" controlname="LastUpdated" class="noWordBreak size30">Last Updated</th>
+                                                    <th controlid="txtComments" controlname="Comments" class="noWordBreak size30" coltype="btnproblemcommentst">Comments</th>
+                                                    <th style="display:none" controlid="txtComments" controlname="hfComments" class="noWordBreak size30" coltype="textbox">Comments</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvProblemLists_PagingT"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="rowlink disableAll TreatComponent">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer presToggle ComponentToggle">
+                                    <!--'disbleCustom' is dummy class-->
+                                    <label>Prescription <a class="font-sm disbleCustom" data-title="Prescription" href="javascript:void(0);" onclick="Clinical_Treatment.AddPrescription(event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <div id="pnlPrescriptions_ResultT" class="toggle-content panel-body NoRadius">
+                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvPrescriptionsT">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display: none;">PrescriptionsId</th>
+                                                    <th class="center"><input class="CustomCheckBox HeaderCheckBox" type="checkbox" onchange="Clinical_Treatment.CheckUncheckAll(this);" Childname="selectRecordPrescriptions" name="selectRecordPrescriptionsHdr" ArrayProperty="PrescriptionIds" class="input-block text-center HeaderCheckBox" coltype="checkbox" /></th>
+                                                    <th id="ColumnAction" class="size30 size-min30">Action</th>
+                                                    <th>Medication</th>
+                                                    <th>Pharmacy</th>
+                                                    <th>Refill(s)</th>
+                                                    <th>Status</th>
+                                                    <th class="noWordBreak">Prescribed On</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="divPrescriptions_PagingT"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                       
+
+                        <div class="rowlink disableAll TreatComponent">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer LabOrderToggle ComponentToggle">
+                                    <label>Lab Orders <a class="font-sm disbleCustom" data-title="Lab Orders" href="javascript:void(0);" onclick="Clinical_Treatment.AddLabOrder(-1,event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_LabOrders" name="LabOrders" class="notesOrderSets hidden" checked="checked" />-->
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <button id="btnLabOrderDelete" type="button" class="btn btn-sm btn-danger" title="Delete" onclick="Clinical_Treatment.LabOrderDelete(event)"><span class="glyphicon glyphicon-trash"></span></button>
+                                        <div id="pnlLabOrder_ResultT" style="display: inline;">
+                                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLabOrderT">
+                                                <thead>
+                                                    <tr>
+                                                        
+                                                        <th style="display:none">LabOrderId</th>
+                                                       
+                                                        <th class="noWordBreak size30">Date & Time</th>
+                                                        <th class="size300 size-min400">Test</th>
+                                                        <th class="size30">Laboratory</th>
+                                                        <th class="size30">Order Number</th>
+                                                        <th class="size30">Status</th>
+                                                        <th class="size30">Assigned To</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="dgvLabOrderT_Paging"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll TreatComponent">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer DiagOrderToggle ComponentToggle">
+                                    <label>Diagnostic Imaging <a class="font-sm disbleCustom" data-title="Radiology Orders" href="javascript:void(0);" onclick="Clinical_Treatment.AddRadiologyOrder(-1,event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_RadiologyOrders" name="RadiologyOrders" class="notesOrderSets hidden" checked="checked" />-->
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <div id="pnlRadiologyOrder_ResultT" style="display: inline;">
+                                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRadiologyOrderT">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="size20 p-none center"><input class="CustomCheckBox HeaderCheckBox" type="checkbox" onchange="Clinical_Treatment.CheckUncheckAll(this);" Childname="selectRecordDiagnosticImaging" name="selectRecordDiagnosticImagingHdr" ArrayProperty="DiagnosticImagingIds" class="input-block text-center HeaderCheckBox" coltype="checkbox" /></th>
+                                                        <th style="display:none">RadiologyOrderId</th>
+                                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size60 size-min60 notesActions">Action</th>
+                                                        <th class="noWordBreak size30">Date & Time</th>
+                                                        <th class="size300 size-min400">Imaging</th>
+                                                        <th class="size30">Radiology Type</th>
+                                                        <th class="size30">Order Number</th>
+                                                        <th class="size30">Status</th>
+                                                        <th class="size30">Assigned To</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="dgvRadiologyOrderT_Paging"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll TreatComponent">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer ProcToggle ComponentToggle" id="pnlProcedures_ResultT">
+                                    <label>Procedure <a class="font-sm disbleCustom" data-title="Procedure" href="javascript:void(0);" onclick="Clinical_Treatment.AddProcedure(event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_Procedure" name="Procedure" checked="checked" class="notesOrderSets hidden" />-->
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvProceduresT">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size20 p-none center"><input class="CustomCheckBox HeaderCheckBox" type="checkbox" onchange="Clinical_Treatment.CheckUncheckAll(this);" Childname="selectRecordProcedure" name="selectRecordProcedureHdr" ArrayProperty="ProcedureIds" class="input-block text-center HeaderCheckBox" coltype="checkbox" /></th>
+                                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size60 size-min60 notesActions">Action</th>
+                                                    <th controlid="txtProcedures" iscontroldisabled="1" controlname="Procedures" class="noWordBreak size30">Procedures</th>
+                                                    <th id="txtUnit" controlname="Unit" coltype="TextBox" class="noWordBreak size50">Unit</th>
+                                                    <th controlid="txtModifier" controlname="Modifier" controlwidth="size20 p-none" class="size60 size-min105" coltype="TextBox" autocompletemethod="Modifier">Modifiers</th>
+                                                    <th controlid="LookupProblemLists" controlname="Treatment_Diagnosis" class="noWordBreak size200" coltype="dropdown" ddlist="LookupProblemLists">ICD (Diagnosis)</th>
+                                                    <th controlid="dtpFromProcedureDate" controlname="StartDate" class="noWordBreak size30" coltype="datetime">Start Date</th>
+                                                    <th controlid="dtpToProcedureDate" controlname="EndDate" class="noWordBreak size30" coltype="datetime">End Date</th>
+                                                    <th controlid="txtLastUpdated" iscontroldisabled="1" controlname="LastUpdatedDate" coltype="LastModifyDate" class="noWordBreak size30">Last Updated</th>
+                                                    <th controlid="txtComments" controlname="Comments" class="noWordBreak size30" coltype="btncommentsproceduresgrid">Comments</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvProcedures_PagingT"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        
+                        <div class="rowlink disableAll TreatComponent">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer ImmToggle ComponentToggle" id="ImmunizationPnl">
+                                    <label>Immunization <a id="ImmunizationAddButton" class="font-sm disbleCustom" data-title="Immunization" href="javascript:void(0);" onclick="Clinical_Treatment.AddImmunization('Add',event);"><i class="fa fa-plus-circle green"></i></a></label>
+
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <div id="pnlVaccineHx_ResultT" class="col-xs-12 p-none" style="display: inline;">
+                                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvImmunizationVaccineHxT">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="size20 p-none center"><input class="CustomCheckBox HeaderCheckBox" type="checkbox" onchange="Clinical_Treatment.CheckUncheckAll(this);" Childname="selectRecordImmunization" name="selectRecordImmunizationHdr" ArrayProperty="ImmunizationIds" class="input-block text-center HeaderCheckBox" coltype="checkbox" /></th>
+                                                        <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                                        <th id="ColumnAction" coltype="Action" class="size60 size-min60">Action</th>
+                                                        <th controlid="txtCategoryName" iscontroldisabled="1" controlname="CategoryName" class="size60 size-min105 sorting">Category</th>
+                                                        <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Vaccine</th>
+                                                        <th controlid="txtDose" iscontroldisabled="1" controlname="Dose" class="size20 sorting">Dose</th>
+                                                        <th controlid="txtAdministrationDate" iscontroldisabled="1" controlname="AdministrationDate" class="size60 size-min105 sorting noWordBreak">Administration Date</th>
+                                                        <th controlid="txtProviderName" iscontroldisabled="1" controlname="ProviderName" class="size60 size-min105 sorting">Provider</th>
+                                                        <th controlid="txtGivenBy" iscontroldisabled="1" controlname="GivenBy" class="size60 size-min105 sorting">Given By</th>
+                                                        <th controlid="txtLocation" iscontroldisabled="1" controlname="Location" class="size60 size-min105 sorting">Location</th>
+                                                        <th controlid="txtLotNo" iscontroldisabled="1" controlname="LotNo" class="size60 size-min105 sorting">Lot No</th>
+                                                        <th controlid="txtStatus" iscontroldisabled="1" controlname="Type" class="size60 size-min105 sorting">Message Type</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div class="spacer5"></div>
+                                            <div id="divImmunizationVaccineHxT_Paging"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div class="rowlink disableAll TreatComponent">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer theraToggle ComponentToggle">
+                                    <label>Therapeutic <a id="TherapeuticAddButton" class="font-sm disbleCustom" data-title="Therapeutic" href="javascript:void(0);" onclick="Clinical_Treatment.addTherapeutic(event,null,'Add');"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <div class="spacer5"></div>
+
+                                    <div id="pnlTherapeutic_ResultT" class="col-xs-12 p-none toggle-content">
+                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvTherapeuticT">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size20 p-none center"><input class="CustomCheckBox HeaderCheckBox" type="checkbox" onchange="Clinical_Treatment.CheckUncheckAll(this);" Childname="selectRecordTherapeutic" name="selectRecordTherapeuticHdr" ArrayProperty="TherapeuticIds" class="input-block text-center HeaderCheckBox" coltype="checkbox" /></th>
+                                                    <th style="display:none" class="size20 p-none"></th>
+                                                    <th id="ColumnAction" coltype="Action" class="size60 size-min60">Action</th>
+                                                    <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Therapeutic Injection</th>
+                                                    <th controlid="txtDose" iscontroldisabled="1" controlname="Dose" class="size20 sorting">Dose</th>
+                                                    <th controlid="txtAdministrationDate" iscontroldisabled="1" controlname="AdministrationDate" class="size60 size-min105 sorting noWordBreak">Administration Date & Time</th>
+                                                    <th controlid="txtProviderName" iscontroldisabled="1" controlname="ProviderName" class="size60 size-min105 sorting">Provider</th>
+                                                    <th controlid="txtGivenBy" iscontroldisabled="1" controlname="GivenBy" class="size60 size-min105 sorting">Given By</th>
+                                                    <th controlid="txtStatus" iscontroldisabled="1" controlname="Type" class="size60 size-min105 sorting">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div class="spacer5"></div>
+                                        <div id="divTherapeutic_PagingT"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="rowlink disableAll TreatComponent">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle checkBoxContainer referralToggle ComponentToggle">
+                                    <label>Referrals <a class="font-sm disbleCustom" data-title="Referrals" href="javascript:void(0);" onclick="Clinical_Treatment.AddReferral(null,event);"><i class="fa fa-plus-circle green"></i></a></label>
+                                    <!--<input type="checkbox" id="chk_Referrals" name="Referrals" class="notesOrderSets hidden" checked="checked" />-->
+                                    <div class="toggle-content panel-body NoRadius">
+                                        <div id="pnlOutgoingReferal_ResultT" style="display: inline;">
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOutgoingReferralT">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="size20 p-none center"><input class="CustomCheckBox HeaderCheckBox" type="checkbox" onchange="Clinical_Treatment.CheckUncheckAll(this);" Childname="selectRecordReferral" name="selectRecordReferralHdr" ArrayProperty="ReferralIds" class="input-block text-center HeaderCheckBox" coltype="checkbox" /></th>
+                                                        <th id="ColumnAction" actiontype="Delete" coltype="Action" class="size90 size-min90">Action</th>
+                                                        <th controlid="dtpVitalSignDate" controlname="StartDate" class="noWordBreak size30">Date & Time</th>
+                                                        <th controlid="txtCPTCode" controlname="CPTCode" class="noWordBreak size40">Procedure</th>
+                                                        <th controlid="ddlReferralFrom" controlname="ReferralFrom" class="size90 size-min90">Referral From</th>
+                                                        <th controlid="ddlReferralTo" controlname="ReferralTo" class="size90 size-min90">Referral To</th>
+                                                        <th controlid="ddlVisitTypeDescription" controlname="VisitTypeDescription" class="size90 size-min90">Visit Type</th>
+                                                        <th controlid="txtAssignedTo" controlname="AssignedTo" class="size90 size-min90">Assigned To</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="dgvOutgoingReferral_PagingT"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12 col-xs-12  disableAll" id="TreatmentComments">
+                            <label class="control-label" for="Comments">Comments</label>
+                            <textarea class="form-control" rows="5" maxlength="1000" id="txtComments" name="Comments" spellcheck="true" onf></textarea>
+                        </div>
+
+                        <div class="col-sm-4 col-lg-2 pull-right pad-a-labelsize-btn">
+                            <button class="btn btn-success btn-xs rightbtn" type="button" onclick="Clinical_Treatment.AddTreatmentToNote();">Add on Note</button>
+                        </div>
+                    </div>
+                    <div id="LabOrderTemplateT" class="hidden">
+
+                        <div class="panel-body pl-none pr-none">
+                            <div class="col-sm-12 col-md-2">
+                                <strong class="control-label">Order Details</strong>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <label id="orderNo" class="control-label">Order Number</label>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <label id="laboratory" class="control-label">Lab</label>
+                            </div>
+                            <div class="spacer10"></div>
+                            <div class="col-sm-12">
+                                <div class="clearfix"></div>
+
+                                <div id="pnlLabOrderTemplate" class="table-responsive">
+                                    <input type="hidden" id="Lab_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvLabOrderTemplateT">
+                                        <thead>
+                                            <tr class="">
+                                                <th colspan="2" controlid="txtObservation" iscontroldisabled="1" controlname="Observation" class="noWordBreak size300 size-min400">Observation</th>
+                                                <th controlid="txtResult" iscontroldisabled="1" controlname="Result" class="noWordBreak size300"></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-md-6 col-lg-4 Diagnosis hidden" id="DiagnosisDiv">
+                        <select id="ddlDiagnosis" name="ProblemListId" class="form-control"></select>
+                    </div>
+                    <select id="ddlVisitType" name="VisitType" class="form-control hidden">
+                        <option value="0">Select</option>
+                        <option value="1">Follow Up</option>
+                        <option value="2">New Patient</option>
+                        <option value="3">Physical</option>
+                        <option value="4">Surgical Clearance</option>
+                        <option value="5">Consult</option>
+                        <option value="6">Office Visit</option>
+                        <option value="7">Immunization</option>
+                        <option value="8">Injection</option>
+                        <option value="9">Bloodwork</option>
+                        <option value="10">Ultrasound</option>
+                        <option value="11">Procedure</option>
+                        <option value="12">Surgery</option>
+                        <option value="13">Infusion</option>
+                        <option value="14">Test</option>
+                    </select>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+
+
+    $(function () {
+        $($("#pnlClinicalTreatment").find($('[data-plugin-toggle]'))).each(function () {
+            var $this = $(this),
+				opts = {};
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+            $this.themePluginToggle(opts);
+        });
+    });
+</script>

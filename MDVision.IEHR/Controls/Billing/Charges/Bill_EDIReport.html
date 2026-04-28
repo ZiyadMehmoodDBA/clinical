@@ -1,0 +1,128 @@
+﻿<div class="row" id="pnlBillEDIReport" style="display:none;">
+    <div id="actionPanBillEDIReport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display: none;">
+                <button type="button" class="close" onclick="Admin_FollowUpReason.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">EDI Reports</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Bill_EDIReport.GetFilesList(this);"><i class="fa fa-download"></i> Download</button>
+                    <div class="btn btn-success btn-sm" style="cursor: pointer;">
+                        <span class="btn-xs ml-xxs btn-file" style="cursor: pointer;">
+                            <i class="fa fa-folder-open"></i>
+                            <span>Imports EDI Reports</span>
+                            <input type="file" class="btn btn-success btn-xs" name="Import_edi_file" accept="application/txt" id="Import_edi_file" allowfiles="txt,dat,rpt,835,997,277,271" onchange="Bill_EDIReport.Attach_EDIReport(this, false);" />
+                        </span>
+                    </div>
+                    <div class="spacer10"></div>
+                    <div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="closebtn pull-right" onclick="Bill_EDIReport.UnLoadTab()"></a>
+                            </div>
+                            <h2 class="panel-title">EDI Reports</h2>
+                        </header>
+                        <div class="panel-body" id="pnlEDIReport_Search">
+                            <form role="form" id="frmBillEDIReport">
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="Clearinghouse">Clearinghouse<span class="required">*</span></label>
+                                        <select id="Clearinghouse" name="Clearinghouse" class="form-control" ddlist="GetClearingHouse" onchange="Bill_EDIReport.ValidateClearinghouse();"></select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="Report Type">Report Title</label>
+                                        <select id="ReportTitle" name="ReportTitle" class="form-control">
+                                            <option value="" selected="selected">-Select-</option>
+                                            <option value="835">ERA (ELECTRONIC REMITTANCE ADVICE)</option>
+                                            <option value="271">ELIGIBILITY RESPONSE</option>
+                                            <option value="277">CLAIM STATUS RESPONSE</option>
+                                            <option value="997">ACKNOWLEDGEMENT</option>
+                                            <option value="REPORTS">REPORTS</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="Download Date">Download Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="DownloadDate" name="DownloadDate" maxlength="10" type="text" data-plugin-datepicker autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="File Name">File Name</label>
+                                        <input class="form-control" name="FileName" id="fileName" type="text">
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="Review Status">Review Status</label>
+                                        <select id="ReviewStatus" name="ReviewStatus" class="form-control">
+                                            <option value="" selected="selected">-Select-</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="EDI Text">EDI Text</label>
+                                        <input class="form-control" id="EDIText" name="EDIText" type="text">
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="Is Deleted ERA">Is Deleted</label>
+                                        <select id="IsERADeleted" name="IsERADeleted" class="form-control">
+                                            <option value="">-All-</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0" selected="selected">No</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="Billing Provider NPI">Billing Provider NPI</label>
+                                        <input class="form-control" id="BillingProviderNPI" type="text">
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="Claim Number">Claim Number</label>
+                                        <input class="form-control" id="ClaimNumber" type="text">
+                                    </div>-->
+                                    <div class="col-sm-3 col-md-2 pull-right mt-md">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnEDIReportSearch" type="button" onclick="Bill_EDIReport.EDIReportSearch();">Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnEDIReportReset" type="button" onclick="Bill_EDIReport.Bill_EDIReportReset();">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </section>
+
+                    <div id="pnlEDIReport_Result" style="display: inline;">
+                        <section class="panel">
+                            <div class="panel-body panel-featured">
+                                <input type="hidden" id="EDIReport_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvEDIReport">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;" class="reasonId">ReasonId</th>
+                                            <th  class="Action">Action</th>
+                                            <th  class="FileName" >File Name</th>
+                                            <th  class="DownloadDate">Download Date</th>
+                                            <th  class="ReportTitle">Report Title</th>
+                                            <th  class="ReviewStatus">Review Status</th>
+                                            <th  class="ClearingHouse">Clearinghouse</th>
+                                            <th  class="Comment">Comments</th>
+                                            
+                                        </tr>
+                                        
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divEDIRepPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

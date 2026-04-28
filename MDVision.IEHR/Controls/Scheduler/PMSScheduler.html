@@ -1,0 +1,403 @@
+﻿<div id="pnlPMSScheduler" style="display:none;">
+    <div id="actionPanPMSScheduler" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <form class="form-bordered" method="post" id="frmPMSScheduler" onsubmit="return false">
+        <div id="wrapper" class="row" style="margin-right:0px;">
+            <!--<a class="btn side-btn moveTop affix-top" id="menu-toggle"><i class="fa fa-bars"></i></a>-->
+            <div id="sidebar-wrapper" class="hide">
+                <!--<div class="sidebar-right">-->
+                <div id="slimScroll7">
+                    <div class="col-sm-12">
+
+                        <button id="btnblock" type="button" class="btn btn-success btn-xs " style="" onclick="PMSScheduler.BlockSlots();"><i class="fa fa-lock"></i> Block </button>
+                        <button id="btnunblock" type="button" class="btn btn-success btn-xs" style="" onclick="PMSScheduler.UnBlockSlots();"><i class="fa fa-unlock"></i> Unblock </button>
+                        <div class="spacer10"></div>
+                        <input id="txtgoto" name="GoToDate" type="text" class="form-control size35 pull-left mr-sm" maxlength="2" placeholder="99" onkeypress="return utility.ValidateZero(event, this);">
+                        <select id="agenda" class="form-control size100 pull-left  mr-sm" disabled="">
+                            <option value="P1" selected="selected">Days</option>
+                            <option value="P2">Weeks</option>
+                            <option value="P3">Months</option>
+                        </select>
+                        <button id="btngoto" type="submit" class="btn btn-default btn-xs  disableAll" onclick="PMSScheduler.GoTo();"> Go To </button>
+                    </div>
+                    <div class="spacer10"></div>
+                    <div class="col-sm-12">
+                        <div class="radio-custom col-xs-6">
+                            <input type="radio" id="rdprovider" name="RadioProvider" checked="checked">
+                            <label for="rdprovider">Provider</label>
+                        </div>
+                        <div class="radio-custom col-xs-6">
+                            <input type="radio" id="rdresource" name="RadioResource">
+                            <label for="rdresource">Resource</label>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <label for="Facility" class="control-label" id="lblFacility">Facility</label>
+                        <div class="p-default border height-max150 overflowY mt-default" id="schedulerFacility">
+                            <div class="checkbox-custom checkboxTiny checkbox-success mb-none">
+                                <input type="checkbox" value="1">
+                                <label class="control-label">Abanes, Kristina</label>
+                            </div>
+                            <div class="checkbox-custom checkboxTiny checkbox-danger mb-none">
+                                <input type="checkbox" value="2">
+                                <label class="control-label">Alaris at Harborview</label>
+                            </div>
+                            <div class="checkbox-custom checkboxTiny mb-none checkbox-primary">
+                                <input type="checkbox" value="3">
+                                <label class="control-label ">Armenian Home For The Aged</label>
+                            </div>
+                        </div>
+
+                        <div id="patientTypeDiv">
+                            <label for="ddlPatientTypeSc" class="control-label" id="lblPatientType">Patient Type</label>
+                            <a id="lnkPatientTypeEdit" style="display:none;" href="#" title="Edit Patient Type">Patient Type</a>
+                            <select id="ddlPatientTypeSc" name="PatientType" class="form-control" ddlist="GetPatientType" onchange="PMSScheduler.HideShowAndLoadVisitType(this); PMSScheduler.ReloadSchedulerOnDDLChange();"><option value="" refvalue="" refname="">ALL</option><option value="1" refvalue="" refname="">New Patient</option><option value="2" refvalue="" refname="">Established Patient</option></select>
+                        </div>
+
+                        <div id="visitTypeDiv">
+                            <label for="ddlVisitTypeSc" class="control-label" id="lblVisitType">Visit Type</label>
+                            <a id="lnkVisitTypeEdit" style="display:none;" href="#" title="Edit Visit Type">Visit Type</a>
+                            <select id="ddlVisitTypeSc" name="PatientVisitType" disabled="" class="form-control" ddlist="GetPatientVisitType" onchange="PMSScheduler.ReloadSchedulerOnDDLChange();"><option value="" refvalue="" refname="">ALL</option><option value="10" refvalue="2" refname="">Annual Visit/Physical - Established Patient</option><option value="4" refvalue="1" refname="">Annual Visit/Physical - New Patient</option><option value="20" refvalue="2" refname="">Cancer Care - Established Patient</option><option value="19" refvalue="1" refname="">Cancer Care - New Patient</option><option value="9" refvalue="2" refname="">Consult/Specialist Referral - Established Patient</option><option value="3" refvalue="1" refname="">Consult/Specialist Referral - New Patient</option><option value="11" refvalue="2" refname="">General Follow-Up/Lab/Test Results - Established Patient</option><option value="8" refvalue="2" refname="">Illness/Injury/Sick Visit - Established Patient</option><option value="2" refvalue="1" refname="">Illness/Injury/Sick Visit - New Patient</option><option value="14" refvalue="2" refname="">Immunization - Established Patient</option><option value="5" refvalue="1" refname="">Immunization - New Patient</option><option value="15" refvalue="2" refname="">Labs/Bloodwork - Established Patient</option><option value="6" refvalue="1" refname="">Labs/Bloodwork - New Patient</option><option value="12" refvalue="2" refname="">Medication Refill/Management - Established Patient</option><option value="7" refvalue="2" refname="">Office Visit - Established Patient</option><option value="1" refvalue="1" refname="">Office Visit - New Patient</option><option value="13" refvalue="2" refname="">Pre-Surgical Checkup - Established Patient</option><option value="16" refvalue="2" refname="">Procedure/Test - Established Patient</option><option value="18" refvalue="2" refname="">Unassigned - Established Patient</option><option value="17" refvalue="1" refname="">Unassigned - New Patient</option></select>
+                        </div>
+                        <div class="p-default border height-max150 overflowY mt-default" id="">
+                            <div class="checkbox-custom checkboxTiny checkbox-success mb-none">
+                                <input type="checkbox" checked="">
+                                <label class="control-label">Check In</label>
+                            </div>
+                            <div class="checkbox-custom checkboxTiny checkbox-danger mb-none">
+                                <input type="checkbox" checked="">
+                                <label class="control-label">Check Out</label>
+                            </div>
+                            <div class="checkbox-custom checkboxTiny mb-none checkbox-primary">
+                                <input type="checkbox" checked="">
+                                <label class="control-label ">Pending</label>
+                            </div>
+                        </div>
+
+                        <div class="spacer10"></div>
+                        <section id="statusColorPanel2" class="row">
+                            <div id="eligiblity" class="col-xs-6 pl-xxs pr-none">
+                                <span class="fa fa-check-circle green"></span>
+                                <label class="control-label " for="color-reference-box">Eligibility Active</label>
+                            </div>
+                            <div id="CopayCollected" class="col-xs-6 pl-xxs pr-none">
+                                <span class="text-success"><i class="fa fa-dollar"></i></span>
+                                <label class="control-label " for="color-reference-box">Copay Paid</label>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div id="eligiblity" class="col-xs-6 pl-xxs pr-none">
+                                <span class="fa fa-times-circle red"></span>
+                                <label class="control-label " for="color-reference-box">Eligibility Inactive</label>
+                            </div>
+                            <div id="CopayNotCollected" class="col-xs-6 pl-xxs pr-none">
+                                <span class="text-danger"><i class="fa fa-dollar"></i></span>
+                                <label class="control-label " for="color-reference-box">Copay Unpaid</label>
+                            </div>
+                            <div id="eligiblity" class="col-xs-6 pl-xxs pr-none">
+                                <span class="fa fa-circle black"></span>
+                                <label class="control-label " for="color-reference-box">Eligibility Waiting</label>
+                            </div>
+                            <div id="CopayNotCollected" class="col-xs-6 pl-xxs pr-none">
+                                <span class="text"><i class="fa fa-dollar"></i></span>
+                                <label class="control-label " for="color-reference-box">Copay Partial Paid</label>
+                            </div>
+                            <div id="eligiblity" class="col-xs-6 pl-xxs pr-none">
+                                <span class="fa fa-circle blue"></span>
+                                <label class="control-label " for="color-reference-box">Eligibility N/A</label>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div id="page-content-wrapper">
+
+                <div id="example" style="width:100%;float:left;">
+                    <div class="col-xs-12 p-none sc-header-container">
+
+
+                        <div class="panel-body NoRadius p-xxs border">
+                            <div class="sc-container">
+                                <div class="borderRDark  pull-left size148">
+                                    <a data-toggle="tooltip" data-placement="bottom" title="Book Appointment" onclick="PMSScheduler.addAppointment()" href="#" class="btn btn-sm btn-success"><i class="fa fa-calendar-plus-o"></i></a>
+                                    <a data-toggle="tooltip" data-placement="bottom" title="Appointment Summary" onclick="PMSScheduler.ShowAppointmentSummary()" href="#" class="btn btn-sm btn-default"><i class="fa fa-calendar"></i></a>
+                                    <a data-toggle="tooltip" data-placement="bottom" title="Blocked Appointments" onclick="PMSScheduler.ShowBlockedAppointment()" href="#" class="btn btn-sm btn-danger"><i class="fa fa-calendar-o"></i></a>
+                                    <a data-toggle="tooltip" data-placement="bottom" title="Print" onclick="Scheduling_Calendar.ProviderAppointmentPrint()" href="#" class="btn btn-sm btn-warning" id="schedulerPrint"><i class="fa fa-print"></i></a>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div id="filtersbox" class="row">
+                                        <div class="col-sm-6 col-lg-2 custom-height" style="height:28px;">
+                                            <select id="providerMultiselect" multiple="multiple"></select>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-2 custom-height" style="height:28px;">
+                                            <select id="resourceMultiselect" multiple="multiple"></select>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-2 custom-height" style="height:28px;">
+                                            <select id="facilityMultiselect" style="height:28px;" multiple="multiple"></select>
+                                        </div>
+
+                                        <div class="col-sm-6 col-lg-2 custom-height pl-xxs" style="height:28px;">
+                                            <select id="patientTypeSingleselect" class="form-control pl-none"></select>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-2 custom-height" style="height:28px;">
+                                            <select id="visitTypeSingleselect" style="height:28px;" class="custom-height" multiple="multiple"></select>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-2 custom-height" style="height:28px;">
+                                            <select id="statusSingleselect" multiple="multiple"></select>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-1" id="divAppointmentDurationselect" style="height:28px;">
+                                            <select id="appointmentDurationselect" class="form-control pl-none"></select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--</div>
+                                <div class="pull-right">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default bg-white dropdown-toggle pt-xs pb-xxs NoRadius" type="button" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-left">
+                                            <li><a href="#">HTML</a></li>
+                                            <li><a href="#">CSS</a></li>
+                                            <li><a href="#">JavaScript</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>-->
+                                <div class="pull-right   size95 text-right ml-auto">
+                                    <a href="#" class="btn btn-sm btn-default  bg-white" onclick="PMSScheduler.LoadBlockHours()">Block Hours</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- <hr class="hrLine borderClrDark mb-default mt-default" />-->
+
+                    <div id="scheduler"></div>
+
+
+                    <ul id="SchedulerContextMenu" style="display:none;">
+
+                        <li optiontype="option" class="mainli default-op checkin-op checkout-op pending-op cvn-op nc-op" name="demographics">Demographics</li>
+                        <li optiontype="option" class="mainli default-op checkin-op checkout-op pending-op cvn-op" name="copyment">Copayment</li>
+                        <li optiontype="option" class="mainli default-op checkin-op checkout-op pending-op cvn-op nc-op" name="unAllocatedCopay">Unallocated Copayment</li>
+                        <li optiontype="option" class="mainli default-op checkin-op checkout-op pending-op cvn-op nc-op" name="patientEligibility">Patient Eligibility</li>
+                        <li optiontype="option" class="mainli default-op checkin-op checkout-op pending-op cvn-op nc-op" name="editAppointment">Edit Appointment</li>
+                        <li optiontype="option" class="mainli default-op pending-op cvn-op" name="checkIn">Check in</li>
+                        <li optiontype="option" class="mainli default-op pending-op cvn-op" id="reschedule" name="reschedule">Reschedule</li>
+                        <li optiontype="option" class="mainli default-op pending-op cvn-op nc-op" name="deleteAppointment">Delete Appointment</li>
+                        <li optiontype="option" class="mainli default-op pending-op paste-op" id="copy-op" name="copyAppointment">Copy Appointment</li>
+                        <li optiontype="option" class="mainli default-op pending-op paste-op" id="cut-op" name="cutAppointment">Cut Appointment</li>
+                        <li optiontype="option" class="mainli default-op pending-op cvn-op nc-op multi-column-dropdown" appstatus="true">
+                            Change Appointment Status
+                            <ul id="ulAppointmentStatus" style="height:auto !important"></ul>
+                        </li>
+                        <li class="mainli default-op pending-op">
+                            Appointment Reminder
+                            <ul style="height:auto !important">
+                                <li optiontype="reminder" name="sms"> SMS </li>
+                                <li optiontype="reminder" name="voice"> Voice </li>
+                                <li optiontype="reminder" name="email"> Email </li>
+                            </ul>
+                        </li>
+                        <li class="mainli checkin-op" name="checkOut">Check Out</li>
+                        <li class="mainli checkin-op" name="cancelCheckIn">Cancel Check In</li>
+                        <li class="mainli checkin-op checkout-op" name="createNote">Create Note</li> <!--- Change Text on the base of Status --->
+                        <li class="mainli checkout-op" name="viewNote">View Note</li>
+                        <li class="mainli checkin-op checkout-op" name="createCharge">Create Charge</li> <!--- Change Text on the base of Status --->
+                        <li class="mainli checkin-op" name="printSupperBill">Print Super Bill</li>
+                        <li class="mainli default-op checkin-op checkout-op pending-op cvn-op nc-op" name="letter">Create Letter</li>
+                        <li class="mainli default-op checkin-op checkout-op pending-op cvn-op nc-op" name="History">History</li>
+
+                    </ul>
+                </div>
+
+
+                <!-- start: page -->
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <input id="test" class="form-control" type="hidden" value='0' />
+        <input id="hfProviderIds" type="hidden" />
+        <input id="hfResourceIds" type="hidden" />
+        <input id="hfFacilityIds" type="hidden" />
+        <input id="hfPatientTypeId" type="hidden" />
+        <input id="hfVisitTypeIds" type="hidden" />
+        <input id="hfAppointmentStatusIds" type="hidden" />
+    </form>
+    <style>
+        .k-scheduler-table td,
+        .k-scheduler-monthview .k-scheduler-table td {
+            height: 40px !important;
+        }
+    </style>
+
+</div>
+
+<script id="tagProviderTemplate" type="text/x-kendo-template">
+    #:values.length# Provider(s) Selected
+</script>
+<script id="tagResourceTemplate" type="text/x-kendo-template">
+    #:values.length# Resource(s) Selected
+</script>
+<script id="tagFacilityTemplate" type="text/x-kendo-template">
+    #:values.length# Facility(s) Selected
+</script>
+<script id="tagStatusTemplate" type="text/x-kendo-template">
+    #:values.length# Status Selected
+</script>
+
+<script id="tagVisitTypeTemplate" type="text/x-kendo-template">
+    #:values.length# Visit Type(s) Selected
+</script>
+
+<script id="tooltipTemplate" type="text/x-kendo-template">
+    #var element = target.is(".k-task") ? target : target.parent().parent().parent().parent();#
+    #var uid = element.attr("data-uid");#
+    #var model = PMSScheduler.CanScheduler.occurrenceByUid(uid);#
+    #var AppointmentDetail = PMSScheduler.LoadToolTipData(model.AppointmentId)#
+
+
+
+
+    <div class="sc-tooltip">
+        <header class="status" style="background-color: #: model.StatusColor #;"><h5>#: model.AppointmentStatus #</h5></header>
+        <main class="col-xs-12 p-none text-left">
+            <div class="profile-area" style="display:flex">
+                <div style="width: 125px;text-align: center;">
+                    <img class="img-circle img-responsive img-thumbnail" src="#: AppointmentDetail.imgPatient #"><div></div>
+                </div>
+
+                <div class="sc-info text-center">
+                    <h4 class="sc-pat-title">#: model.PatientName #</h4>
+                    <p class="sc-pat-info">#: AppointmentDetail.Age # | #: AppointmentDetail.Gender # | #: AppointmentDetail.AccountNumber # | #: AppointmentDetail.DOB #</p>
+                    <p class="sc-pat-info mt-default">Mobile: #: AppointmentDetail.CellNo # | Email: #: AppointmentDetail.EmailAddress # </p>
+                    <p class="sc-pat-info mt-default">#: model.ProviderName # | #: model.FacilityName #  </p>
+                    <p class="sc-pat-info mt-default">#: AppointmentDetail.ReasonComments # | #: AppointmentDetail.Duration # Mins </p>
+
+                </div>
+            </div>
+            <section class="col-xs-12 p-none mt-default" style="line-height: 1.3;">
+                <div class="col-xs-6">
+                    <div class="col-xs-12 p-none bg-white">
+                        <div class="col-xs-12 p-none">
+                            <strong>Plan:</strong> #: AppointmentDetail.PrimaryInsuranceName #
+                        </div>
+                        <div class="col-xs-12 p-none">
+                            <strong>Patient Type:</strong> #: model.PatientType #
+                        </div>
+                        <div class="col-xs-12 p-none">
+                            <strong>Created By:</strong> #: AppointmentDetail.CreatedBy #
+                        </div>
+                        <div class="col-xs-12 p-none">
+                            <strong>Modified By:</strong> #: AppointmentDetail.ModifiedBy #
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-12 p-none bg-white">
+                        <div class="col-xs-12 p-none">
+                            <strong>Copay:</strong> <span style="color: #: model.CopayClass #"><i class="fa fa-dollar"></i>#: model.CopayBal #.00</span>
+                        </div>
+
+                        <div class="col-xs-12 p-none">
+                            <strong>Visit Type:</strong><span style="color: #: model.VisitTypeColor #"> #: model.VisitTypeName # </span>
+                        </div>
+
+                        <div class="col-xs-12 p-none">
+                            <strong>Created On:</strong> #: AppointmentDetail.CreatedOn #
+                        </div>
+
+                        <div class="col-xs-12 p-none">
+                            <strong>Modified On:</strong> #: AppointmentDetail.ModifiedOn #
+                        </div>
+                    </div>
+                </div>
+                <div class="spacer5"></div>
+                <div class="col-xs-6 text-center">
+                    <div class="col-xs-12 bg-white">
+                        Reminder Delivery Status: #: AppointmentDetail.ReminderDeliveryStatus #
+                    </div>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <div class="col-xs-12 bg-white">
+                        Reminder Response: <span style="color: #: AppointmentDetail.StatusStyleColor #;">#: AppointmentDetail.ReminderDeliveryResponse # </span>
+
+                    </div>
+                </div>
+
+            </section>
+            <div class="spacer10"></div>
+            <div class="col-xs-12">
+                <div class="sc-comments">
+                    <strong> Comments: </strong>#: model.Comments #
+                </div>
+            </div>
+            <div class="col-xs-12 text-center text-bold ">
+                <span style="color: #: AppointmentDetail.RescheduleColor #;">   #: AppointmentDetail.RescheduleText #</span> #: AppointmentDetail.RescheduleDate # #: AppointmentDetail.RescheduleProvider # #: AppointmentDetail.RescheduleFacility #
+            </div>
+        </main>
+        <div class="clearfix"></div>
+    </div>
+</script>
+<script id="event-template" type="text/x-kendo-template">
+    <div class="scheduler-appointment" style="cursor: #: (AppointmentStatus=='Scheduled' || AppointmentStatus=='Pending')?'move':'default' # !important;">
+        <header class="cl-header">
+            <p class="pull-left hand-cursor"> <span onclick="PMSScheduler.OpenEligibility('#: AppointmentId #', '#: EligibilityStatus #', '#: PatientId #', '#: ProviderName #', '#: ProviderId #', '#: AccountNumber #', '#: LastName #', '#: FirstName #', '#: InsuranceId #', '#: InsurancePlanId #')"
+                      title="Eligibility #:  EligibilityStatus=='Active'?'Active':(EligibilityStatus=='Inactive'? 'Inactive':(EligibilityStatus=='Waiting'?'Waiting':(EligibilityStatus=='Pending'?'Pending':(EligibilityStatus=='0'?'N/A':(EligibilityStatus==''?'N/A':EligibilityStatus))))) #" class="fa #: EligibilityStatus=='Active'?'fa-check-circle':(EligibilityStatus=='Inactive'? 'fa-times-circle':(EligibilityStatus=='Waiting'?'fa-circle':(EligibilityStatus=='Pending'?'fa-circle':'fa-minus-circle'))) #"
+                      style="color: #: EligibilityStatus=='Active'?'Green':(EligibilityStatus=='Inactive'? 'Red':(EligibilityStatus=='Waiting'?'Orange':(EligibilityStatus=='Pending'?'Orange':'Blue'))) #"></span> <a class="PatientNameTooltip"
+                      onmouseover="PMSScheduler.ShowTooltipclass()" onclick="PMSScheduler.PatientDemographics('#: PatientId #', '#: AccountNumber #')">#: PatientName # </a><a class="PatientNameTooltip"
+                      onmouseover="PMSScheduler.ShowTooltipclass()"><strong class="font-tiny">#: ReasonComments? "("+ReasonComments+")":"" #</strong></a></p>
+            <p class="pull-right hand-cursor contextmenuleftclick" title="Appointment Status">#: AppointmentStatus # <span class="fa fa-circle" style="color: #: StatusColor #"></span></p>
+            <p class="hand-cursor">
+                <a class="PatientNameTooltip" onmouseover="PMSScheduler.ShowTooltipclass()">  <strong style="color: #: CopayClass #"> &nbsp;<i class="fa fa-dollar"></i>#: CopayBal #</strong></a> <a class="PatientNameTooltip" onmouseover="PMSScheduler.ShowTooltipclass()"><span class="font-tiny" style="font-weight: #: PatientType == 'New Patient' ? '900' : '' #; color: #: PatientType == 'New Patient' ? NewPatientColor : EstablishedPatientColor #"> #: PatientType #</span> &nbsp; <span class="font-tiny"  style="color: #: VisitTypeColor #"> #: VisitTypeName #</span></a>
+            </p>
+        </header>
+    </div>
+</script>
+<script id="event-template-waitlist" type="text/x-kendo-template">
+    <div class="scheduler-appointment" style="background-color: #: FacilityColor #">
+        <header class="cl-header">
+            <p class="pull-left"> <span class="fa fa-circle" style="color: #: EligibilityStatus=='Active'?'Green':(EligibilityStatus=='Inactive'? 'Red':(EligibilityStatus=='Waiting'?'Black':'Blue')) #"></span>&nbsp;<span> #: PatientName # </span><strong>#: ReasonComments? "("+ReasonComments+")":"" #</strong></p>
+            <p class="pull-right">#: AppointmentStatus # <span class="fa fa-circle" style="color: #: StatusColor #"></span></p>
+        </header>
+        <p>
+            <strong style="color: #: CopayClass #"><i class="fa fa-dollar"></i>#: CopayBal #</strong>&nbsp;<span class="font-tiny"> #: PatientType #</span> &nbsp; <span class="font-tiny" style="color: #: VisitTypeColor #"> #: VisitTypeName #</span>
+        </p>
+    </div>
+</script>
+
+<script id="event-template-month" type="text/x-kendo-template">
+    <div class="scheduler-appointment-month" style="font-size:11px !important;">
+        <header class="cl-header" style="font-size:11px !important;">
+            <p class="pull-left hand-cursor"> <a class="PatientNameTooltip" onmouseover="PMSScheduler.ShowTooltipclass()" onclick="PMSScheduler.PatientDemographics('#: PatientId #', '#: AccountNumber #')">#if(PatientName.length>20){# # var myContent =PatientName; #  # var dcontent = PatientName.substring(0,20) + '...'; # <span> #=kendo.toString(dcontent)#</span> #}else{# <span>#=PatientName#</span> #}# </a></p>
+            <p class="pull-right hand-cursor" title="#: AppointmentStatus #"><span class="fa fa-circle" style="color: #: StatusColor #"></span></p>
+        </header>
+    </div>
+</script>
+<!--Appointment Edit Template-->
+<script id="tooltipTemplateMonthView" type="text/x-kendo-template">
+    #var element = target.prev();#
+    #var uid = element.attr("data-uid");#
+    #var model = PMSScheduler.CanScheduler.occurrenceByUid(uid);#
+    #var currentDay = model.start.getDate();#
+    # var arr = PMSScheduler.CanScheduler._data; #
+
+    <div class='height-max425'>
+        <table class='table table-noBorder table-condensed'>
+            # for (var i = 0; i < arr.length; i++) { #
+            # if(currentDay == arr[i].start.getDate()) { #
+
+            <tr>
+                <td class='text-left'>#= arr[i].PatientName #</td>
+                <td class='text-right'><p class='pull-right mr-default'><span class='fa fa-circle' style="color: #: arr[i].StatusColor #"></span></p></td>
+            </tr>
+            # } #
+            # } #
+
+        </table>
+    </div>
+
+</script>

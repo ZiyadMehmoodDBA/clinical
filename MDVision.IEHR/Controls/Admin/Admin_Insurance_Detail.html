@@ -1,0 +1,53 @@
+﻿<div id="insurDetail">
+    <div id="actionPaninsurDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="insurDetail.UnLoad();"><span class=" red" >&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Insurance</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblinsurDetail" class="col-sm-12">
+                    <form method="post" id="frmInsurDetail" onsubmit="return false">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Short Name</label><span class="required">*</span>
+                                <input class="form-control" id="txtShortName" name="ShortName" type="text" maxlength="10" />
+                            </div>
+                            <div class="col-sm-5 col-sm-offset-1">
+                                <label class="control-label">Description</label><span class="required">*</span>
+                                <input class="form-control" id="txtDescription" name="Description" type="text" maxlength="55" />
+                            </div>
+                            <div id ="divInsurance_Entity" class="col-sm-3">
+                                <label class="control-label">Entity<span class="required">*</span></label>
+                                <select id="ddlEntity" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Email</label>
+                                <input class="form-control" id="txtEmail" name="Email" type="text" maxlength="55" />
+                            </div>
+                            <div class="col-sm-5 col-xs-9">
+                                <label class="control-label">Website</label>
+                                <input class="form-control" id="txtWebsite" name="URL" type="text" maxlength="200" />
+                            </div>
+                            <div class="col-xs-2 pad-a-labelsize" id="pnlIsActive">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-3 pad-a-labelsize-btn pull-right">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                                <!--<button id="btnHistoryInsuranceDtl" class="btn btn-primary btn-sm rightbtn" type="button" onclick="insurDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                        
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

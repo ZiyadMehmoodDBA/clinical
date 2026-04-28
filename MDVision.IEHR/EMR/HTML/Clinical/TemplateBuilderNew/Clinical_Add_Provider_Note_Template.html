@@ -1,0 +1,117 @@
+﻿<div class="row" id="pnlClinicalAddProviderNoteTemplate">
+    <div id="actionPanClinicalAddProviderNoteTemplate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_Add_Provider_Note_Template.UnLoadTab();"></button>
+                <h4 class="modal-title">Provider Note Template</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmClinicalAddProviderNoteTemplate" method="post" onsubmit="return false">
+                    <div class="col-sm-4 col-lg-3">
+                        <label class="control-label">Name <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="Name" maxlength="100" />
+                    </div>
+                    <div class="col-sm-4 col-lg-3 p-none">
+                        <div class="col-xs-10">
+                            <label class="control-label">Note Type<span class="required">*</span></label>
+                            <select id="ddlNoteTemplateType" name="NoteTemplateTypeId" class="form-control" ddlist="GetNoteTemplateType"></select>
+
+                        </div>
+                        <div class="col-xs-2 pad-a-labelsize-btn">
+                            <button type="button" class="btn btn-success btn-xs"><i class="fa fa-plus-circle"></i></button>
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-sm-4 col-lg-3">
+                        <label class="control-label">Specialty</label>
+                        <select id="ddlSpecialty" name="SpecialtyIds[]" multiple="multiple" ddlmultilist="GetSpecialty" class="form-control"></select>
+                    </div>
+                    <div class="col-sm-4 col-lg-1 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Active" name="IsActive" checked>
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Provider</label>
+                        <select id="ddlProvider" name="ProviderIds[]" multiple="multiple" ddlmultilist="GetProvider" class="form-control"></select>
+                    </div>
+                    <div class="col-sm-4 col-lg-3">
+                        <label class="control-label">Default ROS Data Template</label>
+                        <select id="ddlROSDataTemplateId" class="form-control"  name="ROSDataTemplateId"></select>
+                    </div>
+                    <div class="col-sm-4 col-lg-3">
+                        <label class="control-label">Default PE Data Template</label>
+                        <select id="ddlPEDataTemplate" class="form-control"  name="PEDataTemplateId"></select>
+                    </div>
+                    <div class="col-sm-4 col-lg-3" id="divEntity" hidden>
+                        <label class="control-label">Entity<span class="required">*</span></label>
+                        <select id="lstEntityId" class="form-control" ddlist="GetEntity" name="EntityId"></select>
+                    </div>
+                    <div class="pull-right mt-md pr-default"><button type="submit" class="btn btn-primary btn-sm">Save</button></div>
+                    <div class="spacer20"></div>
+
+                    <div class="panel-body panel-featured pl-none pr-none">
+                        <div class="col-sm-4 col-lg-3">
+                            <label class="control-label">Tag Category</label>
+                            <select id="ddlNoteTemplateTagCategory" name="NoteTemplatTagCategoryId" class="form-control" ddlist="GetNoteTemplatTagCategory" onchange="Clinical_Add_Provider_Note_Template.TagCategoryChange()"></select>
+                        </div>
+                        <div class="col-sm-4 col-lg-6 NoteTemplatTagName" id="NoteTemplatTagNameDiv">
+                            <label class="control-label">Tag Name</label>
+                            <select id="NoteTemplatTagName" name="NoteTemplatTagNameId" class="form-control" disabled>
+                                <option selected="selected" value="">-Select-</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-1 pad-a-labelsize pr-default"><button type="button" class="btn btn-success btn-xs" onclick="Clinical_Add_Provider_Note_Template.InsertTag()">Insert</button></div>
+                        <div class="spacer20"></div>
+
+                    </div>
+                    <div class="spacer10"></div>
+
+                    <div class="form-group">
+                        <textarea id="elm1" name="TemplateData"></textarea>
+                        <input type="hidden" id="EncodedImageString" value="" />
+                        <input type="file" id="ImageUploaderTinymce" style="display:none">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

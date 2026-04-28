@@ -1,0 +1,78 @@
+﻿
+    <div id="ParticipentProviderDetail">
+        <div id="actionPanAdminParticipentProviders" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        <div class="modal-dialog modal-dialog-lg">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="ParticipentProviderDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">PAR/Non PAR Provider</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="tblParticipentDetail" class="col-md-12">
+                        <form method="post" id="frm_ParticipentProviderDetail" onsubmit="return false">
+                            <!--start - CONTENTS-->
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                                    <a id="lnkProviderEdit" style="display:none;" href="#" onclick="ParticipentProviderDetail.OpenProviderDetail();" title="Edit Provider">Provider<span class="required">*</span></a>
+                                    <div class="input-group">
+
+                                        <input class="form-control" id="txtProvider" type="text" name="Provider" placeholder="Start typing to search" onblur="utility.ValidateAutoComplete(this, 'hfProvider',false);">
+                                        <div class="input-group-btn">
+                                            <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="ParticipentProviderDetail.OpenProvider('Search Provider', 'txtProvider', 'hfProvider', 'lblProvider', 'lnkProviderEdit');"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="control-label">Assignments <span class="required">*</span></label>
+                                    <input type="text" id="txtAssignment" name="Assignment" class="form-control" maxlength="50"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label" for="ParticipantStatus">Status <span class="required">*</span></label>
+                                    <select id="ddlParticipentStatus" class="form-control" name="ProviderParticipantStatusId" ddlist="GetProviderParticipentStatus" data-bv-field="ProviderParticipantStatusId">
+                                        
+                                    </select>
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label class="control-label">ID(Assignments)</label>
+                                    <input class="form-control" id="txtAssingmentId" name="AssingnmentId" type="text" maxlength="30" />
+                                </div>
+                                <div id="divAssignmentGroupId_Entity" class="col-md-3">
+                                    <label class="control-label">Ent Assn ID Type Rtk </label>
+                                    <select id="ddlAssignmentTypeRTK" class="form-control" name="AssignmentTypeRTK">
+                                        <option value="">--Select --</option>
+                                        <option value="GroupId">Group ID</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">Ent Assn Addl ID</label>
+                                    <input class="form-control" id="txtAssingnmentAdditionalId" name="AssingnmentAdditionalId" type="text" maxlength="30" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label">Ent Assn ID StartDate</label>
+                                    <input class="form-control ValidateCriteria" type="text" id="dpAssingStartDate" name="StartDate" maxlength="10" data-plugin-datepicker="" data-bv-field="AssingStartDate">
+                                </div>
+                                
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <label class="control-label">Comments</label>
+                                    <textarea class="form-control ValidateCriteria" type="text" id="txtComments" name="Comments" maxlength="2000"spellcheck="true" ></textarea>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 mt-sm">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            </div>
+
+                            <input type="hidden" id="hfProvider" name="ProviderID" />
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>

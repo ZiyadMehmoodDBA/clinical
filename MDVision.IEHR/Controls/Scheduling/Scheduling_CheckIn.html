@@ -1,0 +1,175 @@
+﻿<div id="schcheckin">
+    <div id="actionPanCheckIn" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="schcheckin.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Check in</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmcheckin" onsubmit="return false">
+
+                    <div class="form-group">
+                        <div class="col-sm-12 btn-block mb-sm" id="copayy">
+                            <!--<button class="btn btn-primary btn-sm rightbtn" type="button" onclick="schcheckin.OpenCoPayment();">CoPayment</button>-->
+                            <a href="#" class="btn btn-success btn-xs" onclick="schcheckin.OpenCoPayment();">Copayment</a>
+                            <a href="#" class="btn btn-success btn-xs" onclick="schcheckin.OpenUnallocatedCopayment();">Unallocated Copayment</a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-4 col-md-3">
+                            <label for="Patient Name" class="control-label">Patient Name</label>
+                            <input class="form-control" id="txtPatientName" name="PatientName" type="text" disabled>
+                        </div>
+                        <div class="col-sm-4 col-md-3">
+                            <label class="control-label">DOB</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" data-plugin-datepicker="" name="DOB" class="form-control" id="txtDOB" disabled>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-3">
+                            <label for="Provider1" class="control-label">Provider</label>
+                            <input class="form-control" id="txtProvider" name="Provider" type="text" disabled>
+                        </div>
+                        <div class="col-sm-4 col-md-3">
+                            <label for="Facility" class="control-label">Facility</label>
+                            <input class="form-control" id="txtFacility" name="Facility" type="text" disabled>
+                        </div>
+                        <!--<div class="col-sm-4 col-md-2">
+                            <label class="control-label" for="Plan">Plan</label>
+                            <select class="form-control" name="Plan" id="Plan">
+                                <option value="" selected="selected">-Slected-</option>
+                                <option value="P1">Prictace1</option>
+                                <option value="P2">Prictace2</option>
+                            </select>
+                        </div>-->
+                        <div class="col-sm-4 col-md-3" id="selectedresouce">
+                            <label for="Resource" class="control-label">Resource</label>
+                            <input class="form-control" id="txtRecource" name="Recource" type="text" disabled>
+                        </div>
+                        <div class="col-sm-4 col-md-3">
+                            <label for="Insurance Plan" class="control-label">Plan</label>
+                            <select id="ddlInsurancePlan" disabled name="InsurancePlan" class="form-control" onchange="schcheckin.FillInsuranceData('#frmcheckin #ddlInsurancePlan', '#frmcheckin #txtCopayment');"></select>
+                        </div>
+                        <div class="col-sm-4 col-md-3 ">
+                            <div class="size70 pull-left">
+                                <label for="Copayment" class="control-label">Copayment</label>
+                            </div>
+                            <div class="size125 pull-left">
+                                <div class="radio-custom radio-small mb-none pull-left">
+                                    <input type="radio" id="rdPCP" name="SpecialistPCP" disabled>
+                                    <label class="control-label" for="PCP">PCP</label>
+                                </div>
+                                <div class="radio-custom radio-small mb-none pull-left ml-sm">
+                                    <input type="radio" id="rdSpecialist" name="SpecialistPCP" disabled>
+                                    <label class="control-label" for="Specialist">Specialist</label>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="size70per pull-left">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input class="form-control" id="txtCopayment" name="Copayment" type="text" disabled="disabled">
+                                </div>
+                            </div>
+                            <div class="size30per pull-left pl-xs">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input id="chkPaid" class="form-control" name="Paid" type="checkbox" disabled="disabled">
+                                    <label class="control-label" for="Paid">Paid</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-md-3">
+                            <label id="lblPatBalance" for="Patient Balance" class="control-label">Patient Balance</label>
+                            <div id="divPatientLedgerChkIn" style="display:none"></div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                <input class="form-control" id="txtPatientBalance" name="PatientBalance" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-3">
+                            <label for="Plan Balance" class="control-label">Plan Balance</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                <input class="form-control" id="txtPlanBalance" name="PlanBalance" type="text" disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-md-3">
+                            <div class="size60 pull-left"><label class="control-label">Template</label></div>
+                            <div class="size140 pull-left ">
+                                <!--<label for="Patient Name" class="control-label">Patient Name</label>-->
+                                <!--<input class="form-control" id="txtPatientName1" name="PatientName1" type="text" disabled>-->
+
+                                <div class="radio-custom radio-small mb-none pull-left">
+                                    <input id="radSpeciality" name="RadTemplate" type="radio" value="Speciality">
+                                    <label id="lblRadSpeciality" class="control-label" for="">Specialty</label>
+                                </div>
+                                <div class="radio-custom radio-small mb-none ml-xs pull-left">
+                                    <input checked="checked" id="radProvider" name="RadTemplate" type="radio" value="Provider">
+                                    <label id="lblRadProvider" class="control-label" for="">Provider</label>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="size100per pull-left"><select class="form-control" id="ddlClinicalTemplate" name="ddlClinicalTemplate"></select></div>
+                        </div>
+
+                        <div class="col-sm-4 col-md-3">
+                            <label for="Reason" class="control-label">Reason</label>
+                            <input class="form-control" id="txtReason" name="Reason" type="text" disabled>
+                        </div>
+                        <div class="col-sm-4 col-md-3">
+                            <div class="input-group">
+                                <label id="lblRefProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                                <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="schcheckin.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                                <div class="input-group">
+
+                                    <input class="form-control" id="txtRefProvider" name="Referral Provider" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="schcheckin.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 pull-right mt-md mb-md">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit" id="btnCheckInSave">Check In</button>
+                            <button class="btn btn-primary btn-sm rightbtn hidden" id="btnAddReferral" type="button" onclick="schcheckin.addReferral();">Add Referral</button>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <input type="hidden" id="hfisAllVisitUsed" />
+                    <input type="hidden" id="hfCheckInReason" />
+                    <input type="hidden" id="hfProviderId" />
+                    <input type="hidden" id="hfFacilityId" />
+                    <input type="hidden" id="hfResourceId" />
+                    <input type="hidden" id="hfSchStatusId" />
+                    <input type="hidden" id="hfSchReasonId" />
+                    <input type="hidden" id="hfRefProvider" />
+                    <input type="hidden" id="hfpatientid" />
+                    <input type="hidden" id="hfInsurancePlanId" />
+                    <input type="hidden" id="hfSlottimeid" />
+                    <input type="hidden" id="hfSlottimedtlid" />
+                    <input type="hidden" id="hfAppointmentId" />
+                    <input type="hidden" id="hfReferralId" />
+
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#frmcheckin input:radio[name=SpecialistPCP]').change(function () {
+
+            schcheckin.FillInsuranceData('#frmcheckin #ddlInsurancePlan', '#frmcheckin #txtCopayment');
+
+        });
+    });
+
+
+</script>

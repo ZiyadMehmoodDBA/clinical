@@ -1,0 +1,115 @@
+﻿<div id="pnliTrackDashboard" style="display:block;" class="row">
+    <div id="actionPaniTrackDashboard" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="col-xs-12 pl-none pr-md pb-sm">
+        <div id="modaldialog" class="modal-dialog-full">
+            <div id="modalcontent">
+
+                <div id="modalbody">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="clearfix"></div>
+                        <form method="post" id="frmiTrackDashboard" onsubmit="return false">
+                            <section>
+                                <p><strong>iTrack</strong> | Incentive Programs Performance Status</p>
+                                <div class="bg-primary pt-xxs"></div>
+                                <p id="noDefaultProvider">No information is displayed because the Default Provider is not selected. Kindly select a Default Provider through <strong>My Setting</strong> to view their Performance Status.</p>
+                                <div class="col-md-6 hidden" id="widgetMU">
+                                    <p class="text-primary">
+                                        <strong id="txtmuprovider">Dr. </strong><span class="bold"> | </span>MU Stage 3 Attestation <span class="bold">|</span> Submission Year: 2018
+                                    </p>
+                                    <a class="pull-right white mr-default" href="#" onclick="iTrack_Dashboard.openMUReport();">View Report <i class="fa fa-bar-chart"></i></a>
+                                    <div class="bg-primary white pl-default bold">MU (Meaningful Use) - Stage 3</div>
+                                    <div class="panel-body NoRadiusT pt-lg">
+                                        <div id="MUchart" style="margin:0 auto;"></div>
+                                        <div class="col-xs-12 text-center">
+                                            <ul class="text-left d-inline-block list-unstyled">
+                                                <li>
+                                                    <label class="tab_space"><span style="background-color:#ff5a5a" class="chip-notifi"></span> No Performance</label>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li>
+                                                    <label class="tab_space"><span style="background-color:#F5F573" class="chip-notifi"></span> Performance In Progress</label>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                                <li>
+                                                    <label class="tab_space"><span style="background-color:#78ff78" class="chip-notifi"></span> Performance Met</label>
+                                                    <div class="clearfix"></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 hidden" id="widgetMIPS">
+                                    <p class="text-primary"><strong id="txtMIPSProvider">Dr. </strong> <span class="bold">|</span> MIPS <span class="bold">|</span> Performance Year: 2018 <span class="bold">|</span> Individual Clinician <span class="bold">|</span> Reporting Via EHR</p>
+
+                                    <a class="pull-right white mr-default" href="#" onclick="iTrack_Dashboard.openMIPSummary();">View Report <i class="fa fa-bar-chart"></i></a>
+                                    <div class="bg-primary white pl-default bold">MIPS (Merit-Based Incentive Payment System)</div>
+                                    <div class="panel-body NoRadiusT">
+                                        <div id="ReportingType" class="hidden pull-right">
+
+
+                                            <div class="pull-left mb-none">
+
+                                                <label for="chkScore" class="pl-xs">Individual Score </label>
+                                                <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                    <input id="switchReporting" isactive="1" type="checkbox" name="Reporting" data-plugin-ios-switch="" style="display: inline;" onchange="iTrack_Dashboard.calculateMIPScore('update',this)">
+                                                </span>
+                                                <label for="chkGroupScore" class="pl-xs">Group Score </label>
+
+                                            </div>
+                                            <!--<div class="checkbox-custom checkboxTiny pull-left mb-none ml-sm">
+                                                <input onchange="iTrack_Dashboard.calculateMIPScore('update')" type="checkbox" name="ScoreType" id="chkGroupScore">
+                                                <label for="chkGroupScore" class="pl-xs">Group Score </label>
+                                            </div>
+
+
+                                            <legend>
+                                                <label class="text-uppercase">reporting </label>
+                                                <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                    <input id="switchReporting" isactive="1" type="checkbox" name="Reporting" data-plugin-ios-switch="" style="display: inline;" onchange="iTrack_AdminIPPreference.SelectReportingDiv(this);">
+                                                </span>
+                                                <label class="text-uppercase">not reporting</label>
+                                            </legend>-->
+
+
+                                        </div>
+                                        <div id="MIPSchart" style="margin:0 auto;"></div>
+                                        <div class="spacer20"></div>
+                                        <div class="col-xs-12 text-center mb-md">
+                                            <ul class="text-left d-inline-block list-unstyled">
+                                                <li class="borderB">
+                                                    <label class="tab_space text-bold"> MIPS Categories</label><label class="pull-right text-bold">Score</label><div class="clearfix"></div>
+                                                </li>
+                                                <li class="borderB">
+                                                    <label class="tab_space"><span style="background-color:#418fc3" class="chip-notifi"></span> Quality</label><label id="lblQuality" class="pull-right"></label><div class="clearfix"></div>
+                                                </li>
+                                                <li class="borderB">
+                                                    <label class="tab_space"><span style="background-color:#88d612" class="chip-notifi"></span> Promoting Interoperability(Formerly ACI) <i class="fa fa-info btn btn-primary btn-xs" style="border-radius:0px;" data-toggle="tooltip" title="" data-original-title="PI Reporting Period: 10/01/18 - 12/30/18"></i></label><label class="pull-right" id="lblPI"></label><div class="clearfix"></div>
+                                                </li>
+                                                <li class="borderB">
+                                                    <label class="tab_space"><span style="background-color:#068c35" class="chip-notifi"></span> IA(Improvement Activities) <i class="fa fa-info btn btn-primary btn-xs" style="border-radius:0px;" data-toggle="tooltip" title="" data-original-title="IA Reporting Period: 10/01/18 - 12/30/18"></i></label><label class="pull-right" id="lblIA"></label><div class="clearfix"></div>
+                                                </li>
+                                                <li class="borderB">
+                                                    <label class="tab_space"><span style="background-color:#033939" class="chip-notifi"></span> Cost</label><label class="pull-right" id="lblCost"></label><div class="clearfix"></div>
+                                                </li>
+                                                <li class="borderB">
+                                                    <label class="tab_space text-bold"><span></span> Total Score </label><label class="pull-right text-bold" id="lblTotalScore"></label><div class="clearfix"></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="textTargetAcheivedForMU" type="text/x-kendo-template">
+    test target
+</script>

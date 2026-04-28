@@ -1,0 +1,141 @@
+﻿<div class="row" id="pnlCCM_CarePlanDetail">
+    <div id="actionPanCCM_CarePlanDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="CCM_CarePlanDetail.Unload();"></button>
+                <h4 class="modal-title" id="headerId">Add Goals</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmCCM_CarePlanDetail" method="post" onsubmit="return false">
+                    <div class="form-group" id="divSelectTemplate">
+                        <div class="col-sm-6 col-lg-6">
+                            <label class="control-label">Template </label>
+                            <select class="form-control" ddlist="GetCarePlanTempt" name="TemplateCarePlan" id="ddlTemplateCarePlan"></select>
+                        </div>
+                        <div class="col-sm-6 col-lg-6 mt-md">
+                            <button class="btn btn-primary  btn-sm" type="button" onclick="CCM_CarePlanDetail.loadCarePlanTemplate();" id="btnCreate">Create</button>
+                        </div>
+                    </div>
+                    <div class="spacer20"></div>
+                    <div class="form-group" id="divCarePlanDetail" style="display:none">
+                        <div class="panel Of-a height-max400" id="divCarePlanHTML" name="CarePlanHTML">
+                            
+                        </div>
+                        <div class="row pull-right mr-md">
+                            <button class="btn btn-primary mr-xxs btn-sm" type="button" onclick="CCM_CarePlanDetail.saveCarePlan();" id="btnSave">Save</button>
+                            <button class="btn btn-primary mr-xxs btn-sm" type="button" onclick="CCM_CarePlanDetail.printCarePlan(true);" id="btnPrint">Print</button>
+                            <div class="btn-group">
+                                <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button" id="btnExport">Export to <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0);" onclick="CCM_CarePlanDetail.exportToPdf();">PDF</a></li>
+                                    <li class="disabled"><a href="javascript:void(0);">Patient Portal</a></li>
+                                </ul>
+                                </div>
+                            </div>
+                    </div>
+                    <div>
+                        <input type="hidden" id="hfCarePlanTemplateId" name="CarePlanTemplateId" value=""/>
+                    </div>
+                </form>
+                <div class="panel-body" id="PrintPdfControlDiv" style="display:none;">
+                    <input type="hidden" id="helperPDF" />
+                    <iframe id="PreviewReportPrint" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12" style="height:1066px;"></iframe>
+                </div>
+                <script>
+
+                        kendo.pdf.defineFont({
+                            "DejaVu Sans": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans.ttf",
+                            "DejaVu Sans|Bold": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+                            "DejaVu Sans|Bold|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+                            "DejaVu Sans|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+                        });
+                </script>
+                <style type="text/css">
+                    .blueBgPrint {
+                        background: #005da9 !important;
+                        color: #fff !important;
+                    }
+
+                    .blueBorderPrint {
+                        border-bottom: 2px solid #005da9;
+                    }
+                </style>
+
+                <script type="x/kendo-template" id="page-template">
+                    <div class="page-template">
+                        <div class="blueBorderPrint" style="position:absolute;left:20px; right: 20px;font-size: 90%;height: 100%;top: 15px; padding:2px 5px 0 5px;">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="col-sm-5 col-lg-5 pull-left">
+                                    <img id="ClinicalReportsHeaderLogo" src="content/images/SHS-nav-logo-small-100.png" class="img-responsive" style="max-width: 350px;max-height:140px;" />
+                                </div>
+
+                                <div class="pull-right col-sm-5 col-lg-5" id="PracticeDiv"></div>
+                            </div>
+                            <div class='clearfix'></div><div class='splitter m-none mt-xs'>
+                                <div class='spacer3'></div>
+                            </div>
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="pull-left col-sm-5 col-lg-5" id="PatientDiv"></div>
+                                <div class="pull-right col-sm-5 col-lg-5" id="ProviderDiv"></div>
+                            </div>
+                            <div class='clearfix'></div><div class='splitter m-none mt-xs'>
+                                <div class='spacer3'></div>
+                            </div>
+                        </div>
+                        <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                            <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                            <div id="ClinicalReportsFooterText" class="blueBgPrint" style=" float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                                Generated by:<span id="ClinicalReportsFooter">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </script>
+
+                <div id="printcall" style="display:none;">
+                    <div id="PatientInfo" class="panel-body panel-featured">
+                       
+                            <div class="col-sm-5 col-lg-5 pull-left">
+                                <img src="content/images/SHS-nav-logo-small-100.png" class="img-responsive" style="max-width: 350px;max-height:140px;" />
+                            </div>
+                            <ul class="list-unstyled pull-right line-height-fix" id="PracticeList">
+                                <li id="PracticeName"> </li>
+                                <li id="PracticeAddress"></li>
+                                <li id="PracticeCity"></li>
+                                <li id="PracticePhone"></li>
+                            </ul>
+                            
+                            <div class="clearfix"></div>
+                            <div class="splitter m-none mt-xs"><div class="spacer3"></div></div>
+
+                       
+                            <ul class="list-unstyled pull-left line-height-fix" id="PatientList">
+                                <li id="PatientName"></li>
+                                <li id="PatientAge"></li>
+                                <li id="PatientAccount"></li>
+                                <li id="PatientPhone"></li>
+                                <li id="PatientAddress"></li>
+                            </ul>
+
+                            <ul class="list-unstyled pull-right line-height-fix" id="ProviderList">
+                                <li id="ProviderName"></li>
+                                <li id="Specialty"></li>
+                                <li id="NoteDateTime"></li>
+                                <li id="VisitReason"></li>
+                            </ul>
+                            
+                        </div>
+                    <div class="spacer5"></div>
+                    <section class="panel panel-featured">
+                        <div class="panel-body" id="ulContent">
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

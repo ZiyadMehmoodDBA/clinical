@@ -1,0 +1,105 @@
+﻿<div class="row" id="schAppointmentStatus" style="display:none;">
+    <div id="actionPanSchAppointmentStatus" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="schAppointmentStatus.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Appointments Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmblckreason">
+
+                    <div id="pnlSchAppointmentStatus_Result" style="display: none;">
+                            <div class="panel-body panel-featured">
+
+                                <table class="table table-bordered table-striped table-hover mb-none" id="dgvSchAppointmentStatus">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                            <th class="size135">Time</th>
+                                            <th class="size120">Facility</th>
+                                            <th>Provider/Resource</th>
+                                            <th>Patient</th>
+                                            <th>Phone</th>
+                                            <th>Reason</th>
+                                            <th>DOB</th>
+                                            <th class="size120">Comments</th>
+                                            <th class="size80">Patient Type</th>
+                                            <th class="size80">Visit Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+ 
+    
+    $(document).ready(function () {
+        oTable = $('#schAppointmentStatus #dgvSchAppointmentStatus').dataTable();
+        //Start 01/02/2016 Muhammad Irfan for bug # PMS-3784
+        $('#dgvSchAppointmentStatus_length').hide();
+        //End 01/02/2016 Muhammad Irfan for bug # PMS-3784
+        $('#schAppointmentStatus #dgvSchAppointmentStatus tbody').on('dblclick', 'tr', function () {
+            var data = oTable.fnGetData(this);
+            var provid = schAppointmentStatus.params.ProviderId;
+            var facid = schAppointmentStatus.params.FacilityId;
+            var resid = schAppointmentStatus.params.ResourceId;
+            var slotdate = schAppointmentStatus.params.SlotDate;
+            var slotdate1 = schAppointmentStatus.params.SlotDate;
+            var temp = slotdate1.split('-');           
+            var tempDate = "";
+            if (temp[2].length == 1) {
+
+                tempDate = temp[0] + '/' + temp[1] + '/' + '0' + temp[2];
+
+            }
+            else {
+                tempDate = temp[0] + '/' + temp[1] + '/' + temp[2];
+            }
+
+            var cur = $.datepicker.formatDate('mm/dd/yy', new Date(tempDate));
+
+            var time = data[2].substr(0, data[2].indexOf('-'));
+
+            $('#pnlScheduleCalendar #fromdate').datepicker("setDate", cur);
+            UnloadActionPan();
+            
+            Scheduling_Calendar.DayCalendarbystatus(provid, resid, facid, slotdate,time);
+           
+            $('#pnlScheduleCalendar #daydate span').html(cur);
+
+           
+
+        });
+
+        function searchTable(inputVal) {
+            var table = $('#myTable');
+            table.find('tr').each(function (index, row) {
+                var allCells = $(row).find('td');
+                if (allCells.length > 0) {
+                    var found = false;
+                    allCells.each(function (index, td) {
+                        var regExp = new RegExp(inputVal, 'i');
+                        if (regExp.test($(td).text())) {
+                            found = true;
+                            return false;
+                        }
+                    });
+                    if (found == true)
+                        $(row).show();
+                    else
+                        $(row).hide();
+                }
+            });
+        }
+    });
+    </script>

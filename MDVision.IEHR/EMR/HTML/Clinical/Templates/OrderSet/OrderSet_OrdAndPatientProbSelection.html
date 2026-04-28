@@ -1,0 +1,55 @@
+﻿<div id="pnlOrderSetAndPatientProblem">
+    <div id="actionPanOrderSetPatientProblem" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="OrderSet_OrdAndPatientProbSelection.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titleBlockReason">Problems</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmProblemListsComments">
+                    <div class="form-group" id="divRadiobtnOptions">
+                        <div class="col-sm-3 pad-a-labelsize">
+                            <div class="size100 pull-left">
+                                <div class="radio-custom radio-dafault">
+                                    <input type="radio" id="rdReplace" value="replace" name="rdBtn_OS_Action">
+                                    <label class="control-label" for="rdReplace">Replace</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3 pad-a-labelsize">
+                            <div class="size80 pull-left">
+                                <div class="radio-custom radio-dafault">
+                                    <input type="radio" id="rdMerge" value="merge" name="rdBtn_OS_Action">
+                                    <label class="control-label" for="rdMerge">Merge</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr class="hrLine">
+                        <div>
+                            <label id="lblWarning" class="control-label"><span class="required">*</span>All the order sets will be replaced with this order set.</label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        <div class="col-sm-12" id="divProblems">
+                            <div id="PatientProblemDiv">
+                                <h5 class="text-primary">ProblemList</h5>
+                                <ul id="PProblems" class="list-unstyled"></ul>
+                            </div>
+                            <div id="OrderSetProblemDiv">
+                                <h5 class="text-primary">Associated Problems</h5>
+                                <ul id="OProblems" class="list-unstyled"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer5"></div>
+                    <button class="btn btn-primary btn-sm rightbtn" id="btnOS_Ok" type="button" onclick="OrderSet_OrdAndPatientProbSelection.OpenOrderSet();">OK</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

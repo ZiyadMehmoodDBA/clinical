@@ -1,0 +1,75 @@
+﻿<div class="row" id="pnlAdminOccupationStatus" style="display:none;">
+    <div id="actionPanAdminOccupationStatus" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_OccupationStatus.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Occupation Status</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" id="btn_OccupationStatusAdd" onclick="Admin_OccupationStatus.OccupationStatusAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_OccupationStatus.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search Occupation Status </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlOccupationStatus_Search">
+                            <form method="post" onsubmit="return false">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Code</label>
+                                        <input class="form-control" id="txtConceptCode" type="text" maxlength="10" />
+                                    </div>
+                                    <div class="col-sm-5 col-md-6">
+                                        <label class="control-label">Description</label>
+                                        <input class="form-control" id="txtDescription" type="text" maxlength="55" />
+                                    </div>
+                                    <div class="col-sm-2 ">
+                                        <label for="chkDiscontinued">Status</label>
+                                        <select id="lstOccupation" class="form-control">
+                                            <option value="" selected="selected">All</option>
+                                            <option value="true">Occupation</option>
+                                            <option value="false">Industry</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-1 mt-xs pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnOccupationStatusSearch" type="button" onclick="Admin_OccupationStatus.OccupationStatusSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlOccupationStatus_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="hidden" id="OccupationStatus_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOccupationStatus">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">StatusId</th>
+                                            <th class="size120">Action</th>
+                                            <th class="size120">Status</th>
+                                            <th class="size120">Code</th>
+                                            <th class="size120">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divOccupationStatusPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

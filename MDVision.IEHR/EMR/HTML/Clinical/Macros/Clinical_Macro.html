@@ -1,0 +1,74 @@
+﻿<div class="row" id="pnlClinicalMacro" style="display:none;">
+    <div id="actionPanClinicalMacro" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<form method="post" id="frmClinicalMacro" onsubmit="return false">-->
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_Macro.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Laboratory</h4>
+            </div>
+            <div id="modalbody">
+                <form id="frmClinicalMacro" role="form">
+                    <div class="mainScrollPan pb-xs" id="mainScrollPan">
+                        <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_Macro.openMacroDetails();" title="Add Macro"><i class="fa fa-plus-circle"></i> Add</button>
+                        <input type="hidden" id="hfMacroId" value="-1" />
+                    </div>
+
+                    <div id="pnlMacros" style="display: inline;">
+                        <section class="panel">
+                            <div class="panel-body panel-featured">
+                                <button type="button" class="btn btn-danger btn-sm pull-left tab_space" id="btnCancel" style="margin-top: 15px;"  onclick="Clinical_Macro.deleteMacro();" title="Delete Macro(s)"><i class="fa fa-trash"></i></button>
+                                    <div class="col-sm-12 col-md-9" id="divMacroSearch">                                     
+                                        <div class="col-sm-3 col-md-2">
+                                            <label for="" class="control-label">Macro Name</label>
+                                            <input id="txtMacroName" type="text" maxlength="255" name="MacroName" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label for="" class="control-label">Keyword</label>
+                                            <input id="txtKeyword" type="text" maxlength="80" name="Keyword" class="form-control" />
+                                        </div>
+                                        <div class="col-sm-3 col-md-2" id="divComponentNames">
+                                            <label class="control-label">Components</label>
+                                            <select class="form-control" multiple="multiple" name="ComponentNames" id="ddlMacroComponentNames"></select>
+                                        </div>
+                                        <div class="col-sm-3 col-md-2" id="divUsers">
+                                            <label class="control-label">Visible to Users</label>
+                                            <select class="form-control" multiple="multiple" name="Users" id="ddlMacroUsers"></select>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4">
+                                            <div class="col-sm-4 col-md-6">
+                                                <label class="control-label">Date From</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                    <input type="text" class="form-control" id="dpDateFrom" name="DateFrom" data-plugin-datepicker>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-6">
+                                                <label class="control-label">Date To</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                    <input type="text" class="form-control" id="dpDateTo" name="DateTo" data-plugin-datepicker>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>  
+
+                                    <div class="col-sm-3 col-lg-2 pull-right mt-md pr-default">
+                                        <button id="btnResetMacro" class="btn btn-primary btn-sm tab_space" type="button" onclick="Clinical_Macro.MacroReset();">Reset </button>
+                                        <button class="btn btn-primary btn-sm" id="btnMacroSearch" type="button" onclick="Clinical_Macro.MacroSearch();">Search</button>
+                                    </div>
+
+                                <div class="clearfix"></div>
+                                <div class="spacer20"></div>
+                                <input type="hidden" id="Provider_SelectedDataKeys" />
+                                <div id="dgvLab_Paging"></div>
+                                <div id="macrotable"></div>
+                            </div>
+                        </section>
+                    </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+    <!--</form>-->
+</div>

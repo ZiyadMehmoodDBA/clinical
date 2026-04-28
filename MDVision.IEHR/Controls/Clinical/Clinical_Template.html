@@ -1,0 +1,71 @@
+﻿<div class="row" id="pnlClinicalTemplate" style="display:none;">
+    <!------>
+    <div id="actionPanClinicalTemplate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div> <!------>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Clinical_Template.TemplateAdd();"><i class="fa fa-plus-circle"></i> Add</button> <!------>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Clinical_Template.UnLoadTab()"></a>
+                </div>
+                <h2 class="panel-title">Search Template </h2>
+            </header>
+            <div class="panel-body" id="pnlTemplate_Search">
+                <form class="form-bordered" method="post" onsubmit="return false">
+
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">User Name</label>
+                            <input class="form-control" id="txtUserName" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Entity </label>
+                            <select id="lstEntityId" class="form-control" ddlist="GetEntity"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">First Name</label>
+                            <input class="form-control" id="txtFirstName" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Last Name</label>
+                            <input class="form-control" id="txtLastName" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Active?</label>
+                            <select id="chkIsActice" class="form-control">
+                                <option value="" selected="selected">- All -</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 mt-xs pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnTemplateSearch" type="button" onclick="Clinical_Template.TemplateSearch('0');">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <div id="pnlTemplate_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="Template_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvTemplate">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">UserId</th>
+                            <th>Action</th>
+                            <th>Short Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Entity</th>
+                            <th>Is Admin</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>

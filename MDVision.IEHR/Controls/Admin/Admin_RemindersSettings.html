@@ -1,0 +1,146 @@
+﻿<div class="row" id="pnlAdminRemindersSettings" style="display:none;">
+    <div id="actionPanAdminRemindersSettings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <button type="button" class="btn btn-success btn-sm" id="btnProviderScheduleAdd" onclick="Admin_RemindersSettings.RemindersSettingsAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>
+    <section class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Admin_RemindersSettings.UnLoadTab();"></a>
+            </div>
+            <h2 class="panel-title">Search Settings</h2>
+        </header>
+        <div class="panel-body" id="pnlRemindersSettings_Search">
+            <form class="form-bordered" method="post" onsubmit="return false">
+                <!--start - CONTENTS-->
+                <div class="form-group">
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Provider</label>
+                        <select id="ddlprovider" name="Provider" class="form-control " ddlist="GetProvider"></select>
+                    </div>
+                    <div class="col-sm-2 pad-a-labelsize" id="divSwitch">
+                          <span class="pr-xs">InActive</span>
+                          <div class="btnWidgetSwitch switch switch-xs switch-success">
+                              <input id="switchVisit" visitstatus="1" type="checkbox" checked="checked" name="Switch" data-plugin-ios-switch="" style="display: inline;" onchange="Admin_RemindersSettings.ActiveSettingsSearch(this);">
+                          </div>
+                          <span class="pl-xs">Active</span>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize-btn">
+                        <button class="btn btn-primary btn-sm pull-right" id="btnRemindersSettingsSearch" type="button" onclick="Admin_RemindersSettings.searchFromButton();">Search</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <ul class="tabs-custom" id="divULTabs">
+        <li class="" id="text" type="text"><a class="custom-made-tabs" href="#divTxtSettings" onclick="Admin_RemindersSettings.RemindersSettingsSearch(); Admin_RemindersSettings.TabToggle(this);" data-toggle="tab">Text</a></li>
+        <li class="" id="email" type="email"><a class="custom-made-tabs" href="#divEmailSettings" onclick="Admin_RemindersSettings.RemindersSettingsSearchEmail(); Admin_RemindersSettings.TabToggle(this);" data-toggle="tab">Email</a></li>
+        <li class="" id="voice" type="voice"><a class="custom-made-tabs" href="#divVoiceSettings" onclick="Admin_RemindersSettings.RemindersSettingsSearchVoice(); Admin_RemindersSettings.TabToggle(this);" data-toggle="tab">Voice</a></li>
+    </ul>
+
+    <div class="tab-content tabs-custom-body pl-xxs pr-xxs">
+        <div id="divTxtSettings" class="tab-pane active custom-made-tabs">
+            <div id="pnlRemindersTextSettings_Result" style="display: inline;">
+                <section class="panel">
+                    <div class="panel-body">
+                        <input type="hidden" id="RemindersSettings_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRemindersTextSettings">
+                            <thead>
+                                <tr>
+                                    <th style="display:none;">ScheduleId</th>
+                                    <th class="size120">Action</th>
+
+                                    <th class="size150">Provider</th>
+
+                                    <th class="size150">Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="divRemindersTextSettingsPaging"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="divEmailSettings" class="tab-pane custom-made-tabs">
+            <div id="pnlRemindersSettingsEmail_Result" style="display: inline;">
+                <section class="panel">
+                    <div class="panel-body">
+                        <input type="hidden" id="RemindersSettingsEmail_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRemindersSettingsEmail">
+                            <thead>
+                                <tr>
+                                    <th style="display:none;">ScheduleId</th>
+                                    <th class="size120">Action</th>
+                                
+                                    <th class="size150">Provider</th>
+                              
+                                    <th class="size150">Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="divRemindersSettingsEmailPaging"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="divVoiceSettings" class="tab-pane custom-made-tabs">
+            <div id="pnlRemindersSettingsVoice_Result" style="display: inline;">
+                <section class="panel">
+                    <div class="panel-body">
+                        <input type="hidden" id="RemindersSettingsVoice_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRemindersSettingsVoice">
+                            <thead>
+                                <tr>
+                                    <th style="display:none;">ScheduleId</th>
+                                    <th class="size120">Action</th>
+
+                                    <th class="size150">Provider</th>
+
+                                    <th class="size150">Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="divRemindersSettingsVoicePaging"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

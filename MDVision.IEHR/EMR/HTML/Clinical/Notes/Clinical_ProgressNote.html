@@ -1,0 +1,470 @@
+﻿<!--
+    Author: Muhammad Azhar Shahzad
+    Creation Date: November 18,2015
+    OverView:This File Is created for Clinical Notes
+-->
+
+<div id="pnlClinicalProgressNote" style="display:none;">
+    <div id="wrapper" class="toggled" style="min-height: 100vh;">
+        <a class="btn side-btn moveTop affix-top" id="menu-toggle1"><i class="fa fa-bars"></i></a>
+
+        <div id="sidebar-wrapper" style="overflow-y:visible">
+
+            <div class="col-xs-12" style="max-height: 76%; overflow:auto;" >
+                <div class="toggle mt-none" data-plugin-toggle>
+                    <section class="toggle toggleSmall mt-xxs active">
+                        <label>Note Components</label>
+                        <div class="toggle-content panel-body NoRadiusT p-none">
+                            <nav id="NotesComponentList"></nav>
+                        </div>
+                    </section>
+                </div>
+                <div id="OrderSet_toggle" class="toggle mt-none" data-plugin-toggle>
+                    <section class="toggle toggleSmall mt-xxs active">
+                        <label>OrderSet</label>
+                        <div class="toggle-content panel-body NoRadiusT p-none">
+                            <nav id="OrderSetList">
+                                <ul id="OrderSetUl" class="nav nav-main nav-small height200 Of-a" style=""></ul>
+                            </nav>
+                        </div>
+                    </section>
+                </div>
+                <div id="CDSAlert_toggle" class="toggle mt-none" data-plugin-toggle>
+                    <section class="toggle toggleSmall mt-xxs active">
+                        <label>CDS Alerts</label>
+                        <div class="toggle-content panel-body NoRadiusT p-none">
+                            <nav id="CDsAlertList"></nav>
+                        </div>
+                    </section>
+                </div>
+                <div id="OrthopedicChart_toggle" class="toggle mt-none hidden" onclick="Clinical_ProgressNote.OrthopedicChart()">
+                    <section class="toggle toggleSmall mt-xxs ortho active">
+                        <label>Orthopedic Chart</label>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div id="page-content-wrapper" class="pt-none pr-md">
+            <div id="actionPanClinicalProgressNote" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+            <form method="post" id="frmClinicalProgressNote" onsubmit="return false">
+                <section class="panel panel-featured mb-xs" id="StickyPNSection">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="javascript:void(0);" class="closebtn pull-right" id="btnunloadProgressNote" onclick="Clinical_ProgressNote.UnLoad();"></a>
+                        </div>
+                        <h2 class="panel-title">Progress Note</h2>
+                    </header>
+                    <div class="panel-body pb-none">
+                        <div class="form-group">
+                            <div class="btn-block col-xs-12 pb-xxs">
+                                <div class="pull-left mr-xs">
+                                    <button class="btn btn-success btn-xs" type="submit" id="btnSave"><i class="fa fa-save"></i> Save</button>
+                                    <button class="btn btn-success btn-xs hidden" type="button" id="btnSign" onclick="Clinical_ProgressNote.Sign(null, null, null, false, 'clinicalTabProgressNote',true);"><i class="fa fa-pencil"></i> Sign</button>
+                                    <button class="btn btn-success btn-xs" type="button" id="btnPrint" onclick="Clinical_ProgressNote.Print();"><i class="fa fa-print"></i> Print</button>
+                                    <button class="btn btn-success btn-xs hidden" type="button" id="btnAssign" onclick="Clinical_ProgressNote.Assign();"><i class="fa fa-check"></i> Assign</button>
+                                    <button class="btn btn-success btn-xs" id="btnSend" type="button" onclick="Clinical_ProgressNote.Send();"><i class="fa fa-send"></i> Send</button>
+                                    <button class="btn btn-success btn-xs disabled hidden" type="button" id="btnReview" onclick="Clinical_ProgressNote.Review();"><i class="fa fa-sitemap"></i> Review</button>
+                                    <button class="btn btn-success btn-xs " type="button" id="btnBillingInfo" onclick="Clinical_ProgressNote.BillingInfo(true);"><i class="fa fa-book"></i> eSuperbill</button>
+                                    <!--<button class="btn btn-success btn-xs disabled" type="button" id="btnCreate_eSupperbill" onclick="Clinical_ProgressNote.Create_eSupperbill();"><i class="fa fa-book"></i> Create eSuperbill</button>-->
+                                    <button class="btn btn-success btn-xs" type="button" id="btnCreateLetter" onclick="Clinical_ProgressNote.createLetter();"><i class="fa fa-book"></i> Create Letter</button>
+                                    <button class="btn btn-success btn-xs" type="button" id="btnNotesDelete" onclick="Clinical_ProgressNote.NotesDelete();"><i class="fa fa-trash"></i> Delete</button>
+                                    <button id="btnNoteCoSign" class="btn btn-success btn-xs disabled hidden" type="button" onclick="Clinical_ProgressNote.CoSignNotesOpen();"><i class="fa fa-sign-in"></i> Co-Sign</button>
+                                    <button id="btnNoteAmendment" class="btn btn-success btn-xs disabled" type="button" onclick="Clinical_ProgressNote.AmendmentNotesOpen();"><i class="fa fa-sign-in"></i> Amendment</button>
+                                </div>
+                                <div class="dropdown dropdown-custom pull-left" id="btnSyndromicSurveillance">
+                                    <button class="btn btn-success btn-xs" type="button" data-toggle="dropdown"> Syndromic Surveillance <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-submenu">
+                                            <a href="#">Discharge</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#" onclick="Clinical_ProgressNote.SelectSyndromicSurveillance('01')">Discharged to home or self care</a></li>
+                                                <li><a href="#" onclick="Clinical_ProgressNote.SelectSyndromicSurveillance('20')">Expired</a></li>
+                                                <li><a href="#" onclick="Clinical_ProgressNote.SelectSyndromicSurveillance('09')">Admitted as an inpatient</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#" onclick="Clinical_ProgressNote.SelectSyndromicSurveillance('Admit')">Admit</a></li>
+                                        <li><a href="#" onclick="Clinical_ProgressNote.SelectSyndromicSurveillance('Register')">Register</a></li>
+                                        <li><a href="#" onclick="Clinical_ProgressNote.SelectSyndromicSurveillance('Update')">Update</a></li>
+                                    </ul>
+                                </div>
+                                <div class="pull-left ml-xxs mr-xs">
+                                    <button id="btnNoteViewCharges" class="btn btn-success btn-xs disabled" type="button"><i class="fa fa-pencil"></i> View Charge</button>
+                                </div>
+                                <div class="pull-left ml-xxs mr-xs">
+                                    <button id="btnNoteAttachment" class="btn btn-success btn-xs" type="button" onclick="Clinical_ProgressNote.NoteAttachment()"><i id="noteatch_i" class="fa "></i> Documents</button>
+                                </div>
+
+                                <div class="pull-left ml-xxs mr-xs">
+                                    <button id="btnCancerReport" class="disabled btn btn-success btn-xs" type="button" onclick="Clinical_ProgressNote.CancerReport()"><i class="fa "></i> Cancer Report</button>
+                                </div>
+                                <div class="pull-left ml-xxs mr-xs">
+                                    <button id="btnRefresh" class="btn btn-success btn-xs" type="button" onclick="Clinical_ProgressNote.RefreshNote()"><i class="fa fa-refresh "></i> Refresh </button>
+                                </div>
+                                <div class="pr-default IsNonBilable pull-right IsNonBilable IsNonBilablep" id="IsNonBilableDiv">
+                                    <!--<label class="control-label" for="IsNonBilable">Non-billable visit</label>
+                                    <input id="ChkBox_IsNonBilable" name="IsNonBilable" type="checkbox" onchange="Clinical_Notes.changeIsNonBilable(this);">-->
+
+                                    <div class="checkbox-custom checkboxTiny checkbox-success">
+                                        <input id="ChkBox_IsNonBilable" name="IsNonBilable" type="checkbox" onchange="Clinical_Notes.changeIsNonBilableForProgressNote(this);">
+                                        <label class="control-label" for="IsNonBilable"><strong>Non-billable visit</strong></label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="splitterBody mt-xs" id="splitterbody">
+                                <div class="col-sm-4 col-lg-3">
+                                    <label class="control-label" for="VisitDate" id="lblVisitDate">Visit Date<span class="required">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" id="dtpVisitDate" name="VisitDate" data-plugin-datepicker autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-lg-3">
+                                    <label class="control-label" id="lblVisitTime">Visit Time<span class="required">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input type="text" class="form-control" id="VisitTime" name="VisitTime" data-plugin-timepicker>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-lg-3 GetDDLOnLoad" id="divVisitReason">
+                                    <label class="control-label" id="lblvisitreason" for="VisitReason">Visit Reason<span class="required">*</span></label>
+                                    <input class="form-control" id="txtVisitReason" name="VisitReason" customname="Visit Reason" placeholder="Start typing to search" type="text" disabled>
+                                    <!--<div class="input-group">
+                                        <input class="form-control" id="txtVisitReason" name="VisitReason" customname="Visit Reason" placeholder="Start typing to search" type="text" onblur="utility.ValidateAutoComplete(this, 'frmClinicalProgressNote #hfVisitReason', true);" oninput="    Clinical_ProgressNote.BindBlockReason();" disabled>
+                                        <div class="input-group-btn">
+                                            <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" disabled><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>-->
+                                </div>
+
+
+
+
+                                <div class="col-sm-4 col-lg-3 NoteTemplate" id="NoteTemplateDiv">
+                                    <label class="control-label" for="NoteTemplate">Note Template</label>
+                                    <select class="form-control" id="NoteTemplate" name="NoteTemplate" onchange="Clinical_ProgressNote.OnChangeNoteTemplate(this);">
+                                        <option selected="selected" value="">-Select-</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-lg-3 NoteType" id="NoteTypeDiv">
+                                    <label class="control-label" for="NoteType">Note Type<span class="required">*</span></label>
+                                    <select class="form-control" disabled id="NoteType" name="NoteType">
+                                        <option selected="selected" value="">-Select-</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-md-4 col-lg-3  ">
+                                    <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                                    <!--<a id="lnkProviderEdit" style="display:none;" href="#" title="Edit Provider">Provider</a>-->
+                                    <div class="input-group">
+                                        <input class="form-control " id="txtProvider" type="text" disabled placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkProvider" class="btn btn-primary btn-xs " disabled type="button"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-3" id="divfacility">
+                                    <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                    <!--<a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Clinical_Notes.OpenFacilityDetail();" title="Edit Facility">Facility</a>-->
+                                    <div class="input-group">
+                                        <input class="form-control " id="txtFacility" type="text" disabled placeholder="Start typing to search" name="Facility" customname="Facility" oninput="Clinical_ProgressNote.BindFacility();" onblur="utility.ValidateAutoComplete(this, 'frmClinicalProgressNote #hfFacility', true);" maxlength="35" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkFacility" class="btn btn-primary btn-xs " disabled type="button" onclick="Clinical_ProgressNote.OpenFacility();"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label id="lblResourceProvider" for="ResourceProvider" class="control-label">Resource Provider</label>
+                                    <!--<a id="lnkResourceProviderEdit" style="display:none;" href="#" onclick="Clinical_Notes.OpenProviderDetail('frmClinicalNotes #hfResourceProvider', 'txtResourceProvider');" title="Edit Ref Provider">Resource Provider</a>-->
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtResourceProvider" customname="Resource Provider" disabled name="ResourceProvider" placeholder="Start typing to search" type="text" onblur="utility.ValidateAutoComplete(this, 'frmClinicalNotes #hfResourceProvider', false);">
+                                        <div class="input-group-btn">
+                                            <button id="lnkResourceProvider" class="btn btn-primary btn-xs " disabled type="button" onclick="Clinical_Notes.OpenResourceProvider('Search Resource Provider', 'frmClinicalNotes #txtResourceProvider', 'frmClinicalNotes #hfResourceProvider', 'frmClinicalNotes #lblResourceProvider', 'frmClinicalNotes #lnkResourceProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-lg-3" id="VisitTypeDiv">
+                                    <label class="control-label" for="VisitType">Visit Type</label>
+                                    <select id="ddlVisitType" name="PatientVisitType" class="form-control" data-bv-field="PatientVisitType" onchange="Clinical_ProgressNote.UpdateVisitType();"></select>
+
+                                </div>
+
+                                <div class="col-sm-4 col-lg-3" id="GetRoomsDiv">
+                                    <label class="control-label" for="RoomNo">Room No.</label>
+                                    <select class="form-control" id="RoomNo" name="RoomNo">
+                                        <option selected="selected" value="">-Select-</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-md-4 col-lg-3">
+                                    <label id="lblRefProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                                    <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="Clinical_ProgressNote.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                                    <div class="input-group">
+
+                                        <input class="form-control" id="txtRefProvider" name="RefProvider" customname="Ref Provider" placeholder="Start typing to search" type="text" maxlength="35" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="Clinical_ProgressNote.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="col-sm-4 col-lg-2 " style="display:none" id="DivDuration">
+                                    <label class="control-label" for="ddlDuration">Duration<span class="required">*</span></label>
+                                    <select class="form-control" id="ddlDuration" name="Duration" disabled ddlist="GetPhoneEncounterDuration"></select>
+                                </div>-->
+                                <div class="col-sm-4 col-lg-3" style="display:none;" id="divCaller">
+                                    <label class="control-label" for="Caller">Caller</label>
+                                    <input class="form-control" id="txtCaller" name="Caller" type="text">
+                                </div>
+                                <div class="col-sm-4 col-lg-3" style="display:none;" id="divReceiver">
+                                    <label class="control-label" for="Receiver">Receiver</label>
+                                    <input class="form-control" id="txtReceiver" name="Receiver" type="text">
+                                </div>
+                                <div class="col-sm-4 col-lg-3" id="divUser">
+                                    <label id="lblUser" for="User" class="control-label">User<span class="required">*</span></label>
+                                    <!--<a id="lnkUserEdit" style="display:none;" href="#" onclick="" title="Edit Facility">User</a>-->
+                                    <div class="input-group">
+                                        <input class="form-control " id="txtUser" type="text" placeholder="Start typing to search" name="User" oninput="Clinical_ProgressNote.BindUserName();" disabled />
+                                        <div class="input-group-btn">
+                                            <button id="lnkUser" class="btn btn-primary btn-xs " disabled type="button" onclick=""><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-4 col-lg-3" id="EncounterTypeDiv">
+                                    <label class="control-label" for="ddlEncounterType">Encounter Type</label>
+                                    <select class="form-control" id="ddlEncounterType" name="EncounterType">
+                                        <option selected="selected" value="">-Blank-</option>
+                                        <option selected="" value="1">Incoming</option>
+                                        <option selected="" value="2">Outgoing</option>
+                                        <option selected="" value="3">CCM</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-8 col-lg-5" id="DivDuration" style="display:none;">
+                                    <div class="col-xs-12 col-sm-7 p-none">
+                                        <label class="control-label col-xs-12 p-none" for="ddlDuration">Duration<!--<span id="EitherFromCCM" class="required hidden">*</span>--></label>
+                                        <div class="col-xs-12 recording-time small">
+                                            <div id="divTaskHours" class="col-xs-4"><input type="number" value="0" id="txtTaskHours" name="TaskHours" min="0" max="24" placeholder="H"></div>
+                                            <div id="divTaskMinutes" class="col-xs-4 dot"><input type="number" value="0" id="txtTaskMinutes" name="TaskMinutes" min="0" max="59" placeholder="M"></div>
+                                            <div id="divTaskSeconds" class="col-xs-4"><input type="number" value="0" id="txtTaskSeconds" name="TaskSeconds" min="0" max="59" placeholder="S"></div>
+                                            <input type="hidden" id="ddlDuration" name="Duration" />
+                                            <!--<div id="divTaskMiliSeconds" class="col-xs-4"><input type="number" value="0" id="txtTaskMiliSeconds" name="TaskMiliSeconds" min="0" max="1000" placeholder="S"></div>-->
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5 pad-a-labelsize">
+                                        <a data-toggle="tooltip" data-original-title="Start" id="btnRecord" onclick="Clinical_ProgressNote.RecordTaskTime();" class="btn btn-xs btn-circle border pl-xs pr-xs font-xxs black"><i class="fa fa-play"></i></a>
+                                        <a id="btnStop" data-toggle="tooltip" data-original-title="Pause" onclick="Clinical_ProgressNote.StopTaskTime();" class="btn btn-xs btn-circle border pl-xs pr-xs font-xxs black"><i class="fa fa-pause"></i></a>
+                                        <a id="btnReset" data-toggle="tooltip" data-original-title="Reset" onclick="Clinical_ProgressNote.ResetTaskTime();" class="btn btn-xs btn-circle border pl-xs pr-xs font-xxs black bold">R</a>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="pull-right text-right mt-sm pull-right" id="Audioupload">
+                                    <span><i class="fa fa-paperclip" id="filetag" aria-hidden="true"></i></span>
+                                    <a id="lnkAudioupload" href="#" onclick="Clinical_ProgressNote.loadAudio(this);" style="display:block" title="Audio upload">Attach file (.mp3)</a>
+                                    <a id="lnkPlayfile" href="#" onclick="Clinical_ProgressNote.AudioFileSearch();" style="display:block" title="Audio upload"></a>
+                                    <audio controls="controls" id="AudioPlayer" autobuffer="autobuffer" autoplay="autoplay" style="display:none"></audio>
+
+                                </div>
+                                <div class="col-sm-4 col-lg-3" id="divLinkAppointment">
+                                    <a id="lnkLinkedAppointment" href="javascript:void(0);" onclick="Clinical_Notes.GetLinkedAppointment('#pnlClinicalProgressNote #actionPanClinicalProgressNote');">Linked Appointment</a>
+                                    <label id="lblLinkedAppointment" for="LinkedAppointment" style="display:none" class="control-label">Linked Appointment</label>
+                                    <div class="clearfix"></div>
+                                    <div class="pull-left size15per">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input id="ChkBox_LinkedAppointment" name="IsLinkedAppointment" onchange="Clinical_Notes.UnlinkAppointment(this, 'pnlClinicalProgressNote',true);" type="checkbox" disabled>
+                                            <label class="control-label"></label>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left size85per pl-xxs">
+                                        <input class="form-control" id="txtLinkedAppointment" name="LinkedAppointment" type="text" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-lg-3 OrderSet ">
+                                    <label class="control-label">Order Set</label>
+                                    <select class="form-control" id="ddlOrderSet" name="OrderSetId" onchange="Clinical_ProgressNote.ChangeOrderSet();" onfocus="Clinical_ProgressNote.GetOrderSetId(this);">
+                                        <!--<option selected="selected" value="">-Select-</option>-->
+                                    </select>
+                                </div>
+                                <!-- EMR-602
+                                    <div class="col-sm-4 col-lg-2">
+                                    <label id="lblPreviousNote" for="PreviousNote" style="display:none" class="control-label">Copy Previous Note</label>
+                                    <a id="lnkPreviousNote" href="javascript:void(0);" onclick="Clinical_ProgressNote.GetPreviousNotePatient();" disabled>Copy Previous Note</a>
+                                    <div class="clearfix"></div>
+                                    <div class="pull-left size15per">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input id="chkCopayPreviousNote" name="IsCopayPreviousNote" disabled type="checkbox" onchange="Clinical_Notes.UnLinkPreviousNotePatient(this, 'pnlClinicalProgressNote');">
+                                            <label class="control-label"></label>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left size85per pl-xxs">
+                                        <input class="form-control" id="txtCopayPreviousNote" name="CopayPreviousNote" disabled type="text">
+                                    </div>
+                                </div>-->
+                                <div class="col-sm-4 col-lg-2 pull-right pad-a-labelsize-btn hidden">
+                                    <button class="btn btn-success btn-xs rightbtn" type="submit">Create Note</button>
+                                </div>
+
+                            </div>
+                            <div class="splitterBtn mb-none"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <input type="hidden" id="hfProvider" name="Provider" />
+
+                <input type="hidden" id="hfFacility" name="FacilityName" />
+
+                <input type="hidden" id="hfFacilityId" name="FacilityId" />
+                <input type="hidden" id="hfRefProvider" name="RefProviderId" />
+                <input type="hidden" id="hfVisitReason" name="VisitReasonId" />
+                <input type="hidden" id="hfVisitId" name="VisitId" />
+                <input type="hidden" id="hfPatientId" name="PatientId" />
+                <input type="hidden" id="hfAppointmentId" name="AppointmentId" />
+                <input type="hidden" id="hfNoteId" name="NoteId" />
+                <input type="hidden" id="hfVitalsData" name="VitalsData" />
+                <input type="hidden" id="hfBillingInfoId" name="BillingInfoId" />
+                <input type="hidden" id="hfNoteStatus" name="NoteStatus" />
+                <input type="hidden" id="hfNoteText" name="NoteText" />
+                <input type="hidden" id="hfPrevNotesId" name="PrevNotesId" />
+                <input type="hidden" id="hfbMedReconciled" name="bMedReconciled" />
+                <input type="hidden" id="hfMedReconciledId" name="MedReconciledId" />
+                <input type="hidden" id="hfProviderId" name="ProviderId" />
+                <input type="hidden" id="hfResourceId" name="ResourceId" />
+                <input type="hidden" id="hfResourceProvider" name="ResourceProviderId" />
+                <input type="hidden" id="hfUserId" name="UserId" />
+                <input type="hidden" id="hfSpecialtyId" name="SpecialtyId" />
+                <input type="hidden" id="hfOSComponents" name="OSComponents" />
+
+
+                <!--<div class="col-sm-4 pull-right">
+                    <button class="btn btn-xs pull-right" type="button" onclick="findInDiv.ShowProgressNoteSearchPopUp();">Search <i class="glyphicon glyphicon-search"></i></button>
+                </div>-->
+                <!--<div class="clearfix spacer10"></div>-->
+                <div class="panel panel-featured mb-none" id="InitialOfficeVisit">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <button class="btn btn-xs moveRT-Search hidden" id="btnSearchInDiv" type="button" onclick="findInDiv.ShowProgressNoteSearch(this);">Search <i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+
+                        <h2 class="panel-title col-md-9 col-lg-10">
+                            <label id="lblNotesReason"></label>
+                        </h2>
+                        <div class="panel-search col-xs-12 col-md-3 col-lg-2 p-none">
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </header>
+                    <div class="panel-body" contenteditable="false" spellcheck="true">
+                        <div id="ActionsInitialOfficeVisit" class="btn-block mb-xs">
+                        </div>
+                        <div id="ProgressnoteHTML">
+                            <!--<ul class="initialVisit ui-sortable" id="ProgressNoteComponentList"></ul>-->
+                            <p>Subjective</p>
+                            <ul class="initialVisit ui-sortable" id="SubjectiveNoteComponentList"></ul>
+                            <p>Objective</p>
+                            <ul class="initialVisit ui-sortable" id="ObjectiveNoteComponentList"></ul>
+                            <p>Assessment</p>
+                            <ul class="initialVisit ui-sortable" id="AssessmentNoteComponentList"></ul>
+                            <p>Plan</p>
+                            <ul class="initialVisit ui-sortable" id="PlanNoteComponentList"></ul>
+                            <p>Miscellaneous</p>
+                            <ul class="initialVisit ui-sortable" id="MiscellaneousNoteComponentList"></ul>
+                        </div>
+                        <div class="free-text-tooltip" id="MacrosPanel" hidden><div class="bg-primary pl-xs">Macros</div><div class="p-xs" id="MacroButtons"></div></div>
+                        <!--Start || added by Talha Tanweer || 28 july 2016-->
+                        <!--<div style="max-height:350px; overflow-y:auto;margin-top:15px; display: none;" >
+                            <img id="img_eSignature_ProgressNotes" src="" alt="" style="height: 125px; width: 315px;"
+                                 class="img-responsive img-center mt-lg img-thumbnail"/>
+                            <br/>
+                            <label id="lbleSignature_ProgressNotes"></label>
+                        </div>-->
+                        <!--End   || added by Talha Tanweer || 28 july 2016-->
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Panel for Copy Patient Notes Categories-->
+<div id="pnlPatientNotesCategories" style="display: none;">
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_ProgressNote.UnLoadPatientNotesCategories();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="Header_NotesCategory">Appointment List</h4>
+            </div>
+            <div class="modal-body">
+
+                <section>
+                    <div class="pull-right hidden"><a class=" btn btn-link btn-xs"><i class="fa fa-edit"></i></a><a class=" btn btn-link btn-xs closeBtn"><i class="fa fa-times"></i></a></div>
+
+                    <div class="btn-block">
+                        <button class="btn btn-success btn-xs" type="button" onclick="Clinical_ProgressNote.CheckAllNotesCategories();"><i class="fa fa-check-square-o"></i> Slelect All</button>
+                        <button class="btn btn-success btn-xs" type="button" onclick="Clinical_ProgressNote.CopyAllNotesCategories();"><i class="fa fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="spacer5"></div>
+                    <div class="splitter m-none  pl-sm pt-xxs pb-xxs">Initial Office Visit</div>
+                    <div class="panel-body NoRadiusT" id="divNote_Details">
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div id="pnlCustomFormPreview" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:1049">
+    <div id="customFormDialog" class="modal-dialog modal-dialog-lg">
+        <div id="customFormModel">
+            <div id="customFormHeader" class="modal-header">
+                <button id="CloseCD" type="button" class="close" onclick="Clinical_CustomForms.unLoadPreview();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="CustomFormHeading">Select Heading</h4>
+            </div>
+            <div class="modal-body">
+                <div id="containerCustomFormPreview" class="NoRadiusT">
+                    <ul id="customFormDetails" class="list-unstyled" style="width:100% !important; min-height:500px;"></ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Customeformprintparentdiv"></div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#pnlClinicalProgressNote').find($('[data-plugin-toggle]')).each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+        $('#pnlClinicalProgressNote #menu-toggle1').click(function (e) {
+            e.preventDefault();
+            localStorage.setItem('IsNoteLeftCollasped', $('#pnlClinicalProgressNote #wrapper').hasClass('toggled'));
+            $('#pnlClinicalProgressNote #wrapper').toggleClass('toggled');
+        });
+    });
+</script>
+<style>
+    audio::-webkit-media-controls-enclosure {
+        overflow: hidden;
+    }
+
+    audio::-webkit-media-controls-panel {
+        width: calc(100% + 30px);
+    }
+</style>

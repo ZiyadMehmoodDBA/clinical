@@ -1,0 +1,85 @@
+﻿<div id="privilegeGroupDetail">
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="privilegeGroupDetail.UnLoad();"><span class=" red" >&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Security Entity Group</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmPrivilegeGroupDetail">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label">Short Name</label><span class="required">*</span>
+                                <input class="form-control" id="txtShortName" name="ShortName" type="text" maxlength="10" />
+                            </div>
+                            <div class="col-sm-5 col-md-6">
+                                <label class="control-label">Description</label>
+                                <input class="form-control" id="txtDescription" type="text" maxlength="55" />
+                            </div>
+                            <div class="col-xs-4 col-sm-1 pad-a-labelsize" id="pnlIsActive">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="Active" id="chkActive">
+                                    <label for="chkActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-2 pl-md">
+                                <div class="pad-a-labelsize" id="pnlIsAdmin">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" name="Admin" id="chkAdmin">
+                                        <label for="chkAdmin">Is Admin</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-2 col-md-1 pad-a-labelsize-btn">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="spacer20"></div>
+                        <div id="pnlPrivilegeGroup" style="">
+                            <div class="col-md-8 col-lg-5">
+                                <!--<header class="panel-blue col-xs-12">
+                                    <span class="pull-left pl-default pr-xs"><span class="ml-none  checkbox-custom checkbox-default pl-sm"><input type="checkbox" id="chkFaciltySelectAll" onclick="privilegeGroupDetail.FacilitySelectAll(this);"> <label></label></span></span>
+                                    <span class="col-xs-3">Facility</span>
+                                    <span class="col-sm-4 col-xs-3 pl-md">Description</span>
+                                    <span class="col-xs-2 text-center"><span class="hidden-xs"><span class="col-xs-1"></span></span>Entity</span>
+                                    <span class="col-sm-1 col-xs-1 pl-none">Practice</span>
+                                </header>-->
+                                <div id="pnlFacility">
+                                </div>
+                            </div>
+                            <div class="hidden-lg"><div class="spacer20"></div></div>
+                            <div class="col-lg-7 pr-none pl-none">
+                                <div class="col-md-6 col-xs-12 panel">
+                                    <!--<header class="panel-blue col-xs-12">
+                                        <span class="pull-left pl-xs pr-xs"><span class="ml-none  checkbox-custom checkbox-default pl-sm"><input type="checkbox" id="chkProviderSelectAll" onclick="privilegeGroupDetail.ProviderSelectAll(this);"> <label></label></span></span>
+                                        <span class="col-xs-4">Provider</span>
+                                        <span class="col-xs-5">Name</span>
+                                        <span class="col-xs-2">Entity</span>
+                                    </header>-->
+                                    <div id="pnlProvider">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 panel">
+                                    <!--<header class="panel-blue col-xs-12">
+                                        <span class="pull-left pl-xs pr-xs"><span class="ml-none  checkbox-custom checkbox-default pl-sm"><input type="checkbox" id="chkResourcesSelectAll" onclick="privilegeGroupDetail.ResourcesSelectAll(this);"> <label></label></span></span>
+                                        <span class="col-sm-5 col-xs-6">Resource</span>
+                                        <span class="col-sm-4 col-xs-6">Facility</span>
+                                    </header>-->
+                                    <div id="pnlResources">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

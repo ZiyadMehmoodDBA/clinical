@@ -1,0 +1,24 @@
+﻿<div class="row" id="pnlCCMTermination" style="display:none;">
+    <div id="actionPanCCMTermination" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="CCMTermination.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Reason for Termination</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmCCMTermination">
+                    <div id="terminationReason" class="col-md-12">
+                        <label class="control-label">Enter Reason</label>
+                        <textarea id="txtTerminationReason" name="TerminationReason" onkeyup="CCMTermination.CountTerminationReasonChar()" rows="3" maxlength="100" class="form-control" spellcheck="true"></textarea>
+                        <label class="control-label">Characters Remaining: <label class="control-label" id="charNum">100</label></label>
+                    </div>
+                    <div class="pull-right pad-a-labelsize-btn pr-default">
+                        <button id="btnPlanOfCareSave" type="button" onclick="CCMTermination.SaveTerminationReason();" class="btn btn-sm btn-success">Save</button>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

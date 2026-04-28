@@ -1,0 +1,61 @@
+﻿<div class="row" id="pnlAdminProviderSchedule" style="display:none;">
+    <div id="actionPanAdminProviderSchedule" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <button type="button" class=" btn btn-success btn-sm" id="btnProviderScheduleAdd" onclick="Admin_ProviderSchedule.ProviderScheduleAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>
+    <section class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Admin_ProviderSchedule.UnLoadTab();"></a>
+            </div>
+            <h2 class="panel-title">Search Provider Schedule </h2>
+        </header>
+        <div class="panel-body" id="pnlProviderSchedule_Search">
+            <form class="form-bordered" method="post" onsubmit="return false">
+                <!--start - CONTENTS-->
+                <div class="form-group">
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Provider</label>
+                        <select id="ddlprovider" name="provider" class="form-control " ddlist="GetProvider"></select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Facility</label>
+                        <select id="ddlfacility" name="facility" class="form-control " ddlist="GetFacilitySchedular"></select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize-btn">
+                        <button class="btn btn-primary btn-sm" id="btnProviderScheduleSearch" type="button" onclick="Admin_ProviderSchedule.ProviderScheduleSearch();">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id="pnlProviderSchedule_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="ProviderSchedule_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvProviderSchedule">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">ScheduleId</th>
+                            <th class="size120">Action</th>
+                            <th class="size150">Provider</th>
+                            <th class="size150">Facility</th>
+                            <th class="size150 noWordBreak">From Date</th>
+                            <th class="size150 noWordBreak">To Date</th>                      
+                            <th class="size150 noWordBreak">From Time</th>
+                            <th class="size150 noWordBreak">To Time</th>
+                            <!--<th class="size100 noWordBreak">Slot Minutes</th>
+                            <th>Reason</th>-->
+                            <th class="size100 noWordBreak">Created Date</th>
+                            <th class="noWordBreak">Created By</th>
+                            <!--<th class="noWordBreak">Total Slots</th>-->
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divProviderSchedulePaging"></div>
+            </div>
+        </section>
+    </div>
+</div>

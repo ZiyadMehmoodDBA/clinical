@@ -1,0 +1,528 @@
+﻿<div class="row" id="schwaitlistdetail" style="display:none;">
+    <div id="actionPanWaitListdetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="schwaitlistdetail.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Add Wait List</h4>
+            </div>
+            <div class="modal-body pt-xs">
+                <form method="post" id="frmSchedulingWaitListDetail" onsubmit="return false">
+
+                    <div class="clearfix"></div>
+                    <div class="spacer10"></div>
+                    <div class="form-group">
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Patient Name">Patient Name <span class="required">*</span></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" customname="Patient Name" id="txtFullName" name="FullName" />
+                                <div class="input-group-btn">
+                                    <button id="lnkPatientName" class="btn btn-primary btn-xs " type="button" onclick="schwaitlistdetail.OpenPatientAccount();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Account">Account</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtAccount" name="PatientAccount" />
+                                <div class="input-group-btn">
+                                    <button id="lnkPatientAccount" class="btn btn-primary btn-xs " type="button" onclick="schwaitlistdetail.OpenPatientAccount();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label id="lblFacility" class="control-label" for="Facility">Facility <span class="required">*</span></label>
+                            <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="schwaitlistdetail.OpenFacilityDetail();" title="Edit Facility">Facility<span class="required">*</span></a>
+                            <div class="input-group">
+                                <input class="form-control" id="txtFacility" name="Facility" type="text" />
+                                <div class="input-group-btn">
+                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="schwaitlistdetail.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <div class="size150">
+                                <div class="size75 pull-left">
+                                    <input type="radio" id="rdProvider" name="03" checked="checked" class="mt-none">
+                                    <label for="rdProvider" id="lblProvider">Provider<span class="required">*</span></label>
+                                    <a id="lnkProviderEdit" style="display:none;" href="#" onclick="schwaitlistdetail.OpenProviderDetail();" title="Edit Provider">Provider<span class="required">*</span></a>
+                                </div>
+                                <div class="size75 pull-left">
+                                    <input type="radio" id="rdResource" name="03" class="mt-none">
+                                    <label for="rdResource" id="lblResource">Resource<span class="required">*</span></label>
+                                    <a id="lnkResourceEdit" style="display:none;" href="#" onclick="schwaitlistdetail.OpenResourceDetail();" title="Edit Resource">Resource<span class="required">*</span></a>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div id="divProvider">
+                                <div class="input-group">
+                                    <input class="form-control" id="txtProvider" name="Provider" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="schwaitlistdetail.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divResource">
+                                <div class="input-group">
+                                    <input class="form-control" id="txtResource" type="text" name="Resource" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkResource" class="btn btn-primary btn-xs " type="button" onclick="schwaitlistdetail.OpenResource();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- <div class="visible-sm"><div class="clearfix"></div></div>-->
+                        <!--<div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Reason">Reason <span class="required">*</span></label>
+                            <select id="ddlReason" name="Reason" class="form-control" ddlist="GetBlockReasons" onchange=""></select>
+                        </div>-->
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Reason">Reason</label>
+                            <input class="form-control" id="txtSchReason" name="Reason" customname="Reason" type="text" maxlength="500">
+                            <!--<label class="control-label" for="Reason">Reason<span class="required">*</span></label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtSchReason" name="Reason" customname="Reason" type="text" oninput="schwaitlistdetail.BindScheduleReasons();">
+                                <div id="divSchReason" class="input-group-btn">
+                                    <button id="lnkSchReason" type="button" class="btn btn-primary btn-xs" onclick="schwaitlistdetail.OpenScheduleReason();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">From Date<span class="required">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="fromDate" name="fromdate" data-plugin-datepicker="" class="form-control ">
+                            </div>
+                        </div>
+                        <!--<div class="visible-md"><div class="clearfix"></div></div>-->
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">To Date<span class="required">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="toDate" name="todate" data-plugin-datepicker="" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Preferred Date">Preferred Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="preferredDate" name="prefDate" data-plugin-datepicker="" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label id="lblRefProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                            <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="schwaitlistdetail.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                            <div class="input-group">
+                                <input class="form-control" id="txtRefProvider" name="RefProvider" placeholder="Search Ref Provider" type="text" />
+                                <div class="input-group-btn">
+                                    <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="schwaitlistdetail.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="PAN">PAN</label>
+                            <input class="form-control" id="txtPAN" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Status">Status<span class="required">*</span></label>
+                            <select id="ddlStatus" class="form-control" ddlist="GetWaitListStatus" name="Status"></select>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Preferred Time">Preferred Time</label>
+                            <select id="ddlPreferredTime" class="form-control" ddlist="GetPreferredTime"></select>
+                        </div>
+                    </div>
+                    <div class="form-group mt-md pl-default pr-default">
+                        <div class="panel-blue NoRadiusT">
+                            <h5 class="modal-title text-center">Preferred Day</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT">
+
+                            <div class="spacer10"></div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="size105 pull-left">
+                                    <div class="radio-custom radio-dafault">
+                                        <input type="radio" id="rdWeekDay" value="1" onchange="schwaitlistdetail.PrefferDayRadioButtonClick();" name="rdPreferredDay">
+                                        <label class="control-label" for="Any Weekday">Any Weekday</label>
+                                    </div>
+                                </div>
+                                <div class="size80 pull-left">
+                                    <div class="radio-custom radio-dafault">
+                                        <input type="radio" id="rdAnyDay" value="2" onchange="schwaitlistdetail.PrefferDayRadioButtonClick();" name="rdPreferredDay" checked="checked">
+                                        <label class="control-label" for="Any Day">Any Day</label>
+                                    </div>
+                                </div>
+                                <div class="size80 pull-left">
+                                    <div class="radio-custom radio-dafault">
+                                        <input type="radio" id="rdCustom" value="3" onchange="schwaitlistdetail.PrefferDayRadioButtonClick();" name="rdPreferredDay">
+                                        <label class="control-label" for="Custom">Custom</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="visible-sm visible-xs"><span class="spacer10"></span></div>
+                            <div class="col-md-8 col-xs-12" id="divPreferedDay">
+                                <div class="size60 pull-left">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" id="chkMonday" disabled name="theDays[]">
+                                        <label class="control-label" for="Monday">Mon</label>
+                                    </div>
+                                </div>
+                                <div class="size60 pull-left">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" id="chkTuesday" disabled name="theDays[]">
+                                        <label class="control-label" for="Tuesday">Tue</label>
+                                    </div>
+                                </div>
+                                <div class="size60 pull-left">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" id="chkWednesday" disabled name="theDays[]">
+                                        <label class="control-label" for="Wednesday">Wed</label>
+                                    </div>
+                                </div>
+                                <div class="size60 pull-left">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" id="chkThursday" disabled name="theDays[]">
+                                        <label class="control-label" for="Thursday">Thu</label>
+                                    </div>
+                                </div>
+                                <div class="size60 pull-left">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" id="chkFriday" disabled name="theDays[]">
+                                        <label class="control-label" for="Friday">Fri</label>
+                                    </div>
+                                </div>
+                                <div class="size60 pull-left">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" id="chkSaturday" disabled name="theDays[]">
+                                        <label class="control-label" for="Saturday">Sat</label>
+                                    </div>
+                                </div>
+                                <div class="size60 pull-left">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" id="chkSunday" disabled name="theDays[]">
+                                        <label class="control-label" for="Sunday">Sun</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 col-md-9">
+                            <label class="control-label" for="Comments">Comments</label>
+                            <textarea rows="2" class="form-control" id="txtComments" spellcheck="true" maxlength="255"></textarea>
+                        </div>
+                        <div class="" id="buttonDiv">
+                            <div class="hidden-xs hidden-sm"><div class="pad-a-labelsize-btn"></div></div>
+                            <div class="visible-sm visible-sm"><div class="spacer5"></div></div>
+                            <button class="btn btn-primary btn-sm rightbtn ml-md" data-saveexit type="submit" id="btnSaveWaitList">Save & Exit</button>
+                            <button class="btn btn-sm btn-primary rightbtn" type="button" id="btnsearch" onclick="schwaitlistdetail.ScheduleSearch();"><i class="fa fa-search"></i> Schedule Search</button>
+                        </div>
+                        <div class="col-sm-6 mt-sm">
+                            <div id="DivSearch" style="display:none;">
+                                <div class="size175 pull-left radio-custom radio-small" id="DivPrefDate">
+                                    <input type="radio" id="rdPrefDate" name="Search" class="mt-none">
+                                    <label for="rdPrefDate">Search(Preferred Date)</label>
+                                </div>
+                                <div class="size150 pull-left radio-custom radio-small" id="DivFrmToDate">
+                                    <input type="radio" id="rdFrmToDate" name="Search" class="mt-none">
+                                    <label for="rdFrmToDate">Search(From/To Date)</label>
+                                </div>
+                                <div class="col-sm-6 col-lg-2 disabled" id="divAppointmentDurationselectWaitlist">
+                                    <select id="appointmentDurationselectWaitlist" class="form-control pl-none"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spacer10"></div>
+                    <input type="hidden" id="hfPatientid" />
+                    <input type="hidden" id="hfFacility" />
+                    <input type="hidden" id="hfProvider" />
+                    <input type="hidden" id="hfResource" />
+                    <input type="hidden" id="hfRefProvider" />
+                    <input type="hidden" id="hfSchReasonId" />
+                </form>
+
+            </div>
+            <div id="waitListScheduler"></div>
+
+            <div id="pnlBookedApp_Result" style="display: none;">
+                <div class="panel-body">
+                    <input type="hidden" id="BookedApp_SelectedDataKeys" />
+                    <table class="table table-bordered  table-condensed table-hover mb-none" id="dgvBookedApp">
+                        <thead>
+                            <tr>
+                                <th style="display: none;"></th>
+                                <th class="size200">Patient Name</th>
+                                <th>Provider</th>
+                                <th>Facility</th>
+                                <th>Resource</th>
+                                <th class="size300">Reasons</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    .k-scheduler-table td {
+        height: 40px !important;
+    }
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var checkchange = 0;
+        //$('#schwaitlistdetail #ddlStatus').change(function () {
+        //    var selectedvalue = this.value;
+
+        //    if(selectedvalue=='3')
+        //    {
+        //        $("#schwaitlistdetail #ddlStatus").val(4);
+        //    }
+        //});
+
+        $('#schwaitlistdetail input:radio[name="Search"]').change(function () {
+            checkchange = 1;
+
+            var id = $(this).attr('id');
+            $("#dgvSchSearch").dataTable().fnDestroy();
+            $("#pnlSchSearch_Result #dgvSchSearch tbody").find("tr").remove();
+            $("#schwaitlistdetail #pnlSchSearch_Result").css("display", "none");
+            schwaitlistdetail.ScheduleSearch();
+        });
+        $('#schwaitlistdetail form input,#schwaitlistdetail form select').change(function () {
+            var lastJQueryTS = 0;
+            if (!schwaitlistdetail.bIsFirstLoad) {
+                //console.log(this);
+                var send = true;
+                // Where your onChange event fires, put this at the top
+                if (typeof (event) == 'object') {
+                    var d = new Date();
+                    var eventTime = d.getTime();
+                    if (eventTime - lastJQueryTS < 300) {
+                        send = false;
+                    }
+                    lastJQueryTS = eventTime;//event.timeStamp;
+                }
+                if (send && schwaitlistdetail.params.mode == "Edit" && checkchange != 1) {
+                    //   if (schwaitlistdetail.params.mode == "Edit" && checkchange != 1) {
+
+                    $("#dgvSchSearch").dataTable().fnDestroy();
+                    $("#pnlSchSearch_Result #dgvSchSearch tbody").find("tr").remove();
+                    $("#schwaitlistdetail #pnlSchSearch_Result").css("display", "none");
+
+                    // $('#schwaitlistdetail #btnsearch').attr("disabled", "disabled");
+                    //$('#schwaitlistdetail #DivSearch').css("display", "none");
+                    // }
+                }
+            }
+
+
+        });
+
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            }
+        });
+
+        //schwaitlistdetail.BindPatientAccount();
+
+        //---------------------------------------------------------------
+
+        utility.ValidateFromToDate('schwaitlistdetail #frmSchedulingWaitListDetail', 'fromDate', 'toDate', true);
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('schwaitlistdetail #toDate', function () {
+            //on-change callback method
+            $('#frmSchedulingWaitListDetail').bootstrapValidator('revalidateField', 'todate');
+        });
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('schwaitlistdetail #fromDate', function () {
+            //on-change callback method
+            $('#frmSchedulingWaitListDetail').bootstrapValidator('revalidateField', 'fromdate');
+            $('#frmSchedulingWaitListDetail').bootstrapValidator('revalidateField', 'todate');
+        });
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('schwaitlistdetail #preferredDate', function () {
+            //on-change callback method
+        });
+        //---------------------Provider Resource Check---------------
+        $('#schwaitlistdetail #divResource').hide();
+
+        $('#schwaitlistdetail #rdResource').click(function () {
+            debugger;
+            if ($(this).is(':checked')) {
+
+                $("#schwaitlistdetail #lblProvider").css("display", "inline");
+                $("#schwaitlistdetail #lnkProviderEdit").css("display", "none");
+
+                if (schwaitlistdetail.params.Status == "Booked") {
+
+                    $("#schwaitlistdetail #buttonDiv").css("display", "none");
+                }
+                $('#schwaitlistdetail #divResource').show();
+                $('#schwaitlistdetail #divProvider').hide();
+
+                $('#schwaitlistdetail #txtProvider').val("");
+
+                if (!($('#schwaitlistdetail #txtResource').val().length > 0)) {
+                    $('#schwaitlistdetail #txtResource').val("");
+                }
+                $('#schwaitlistdetail #hfProvider').val(null);
+
+
+                $('#frmSchedulingWaitListDetail').data('bootstrapValidator').enableFieldValidators('Provider', false);
+                $('#frmSchedulingWaitListDetail').data('bootstrapValidator').enableFieldValidators('Resource', true);
+            }
+            else {
+
+            }
+        });
+
+        $('#schwaitlistdetail #rdProvider').click(function () {
+            debugger;
+            if ($(this).is(':checked')) {
+
+                $("#schwaitlistdetail #lblResource").css("display", "inline");
+                $("#schwaitlistdetail #lnkResourceEdit").css("display", "none");
+
+                if (schwaitlistdetail.params.Status == "Booked") {
+
+                    $("#schwaitlistdetail #buttonDiv").css("display", "none");
+                }
+
+                $('#schwaitlistdetail #divResource').hide();
+                $('#schwaitlistdetail #divProvider').show();
+
+                $('#schwaitlistdetail #txtResource').val("");
+
+                $('#schwaitlistdetail #txtResource').val("");
+                $('#schwaitlistdetail #hfResource').val(null);
+
+                $('#frmSchedulingWaitListDetail').data('bootstrapValidator').enableFieldValidators('Provider', true);
+                $('#frmSchedulingWaitListDetail').data('bootstrapValidator').enableFieldValidators('Resource', false);
+            }
+            else {
+
+            }
+        });
+        //---------------------Preferred Day Checks---------------
+        //$("#schwaitlistdetail #rdWeekDay").click(function () {
+        //    if ($(this).is(':checked')) {
+
+        //        $("#schwaitlistdetail #chkSaturday").attr("disabled", true);
+        //        $("#schwaitlistdetail #chkSunday").attr("disabled", true);
+        //        $("#schwaitlistdetail #chkMonday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkTuesday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkWednesday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkThursday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkFriday").attr("disabled", false);
+
+        //        $("#schwaitlistdetail #chkFriday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkSaturday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkSunday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkMonday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkTuesday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkWednesday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkThursday").filter(':checkbox').prop('checked', false);
+
+        //    }
+        //    else {
+        //    }
+        //});
+
+        //$("#schwaitlistdetail #rdAnyDay").click(function () {
+        //    if ($(this).is(':checked')) {
+
+        //        $("#schwaitlistdetail #chkSaturday").attr("disabled", true);
+        //        $("#schwaitlistdetail #chkSunday").attr("disabled", true);
+        //        $("#schwaitlistdetail #chkMonday").attr("disabled", true);
+        //        $("#schwaitlistdetail #chkTuesday").attr("disabled", true);
+        //        $("#schwaitlistdetail #chkWednesday").attr("disabled", true);
+        //        $("#schwaitlistdetail #chkThursday").attr("disabled", true);
+        //        $("#schwaitlistdetail #chkFriday").attr("disabled", true);
+
+        //        $("#schwaitlistdetail #chkFriday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkSaturday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkSunday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkMonday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkTuesday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkWednesday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkThursday").filter(':checkbox').prop('checked', false);
+        //    }
+        //    else {
+        //    }
+        //});
+
+        //$("#schwaitlistdetail #rdCustom").click(function () {
+        //    if ($(this).is(':checked')) {
+
+        //        $("#schwaitlistdetail #chkSaturday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkSunday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkMonday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkTuesday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkWednesday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkThursday").attr("disabled", false);
+        //        $("#schwaitlistdetail #chkFriday").attr("disabled", false);
+
+        //        $("#schwaitlistdetail #chkFriday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkSaturday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkSunday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkMonday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkTuesday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkWednesday").filter(':checkbox').prop('checked', false);
+        //        $("#schwaitlistdetail #chkThursday").filter(':checkbox').prop('checked', false);
+        //    }
+        //    else {
+        //    }
+        //});
+        //------------------------ Double Click Data Row------------------------------
+
+        //oTable = $('#pnlSchSearch_Result #dgvSchSearch').dataTable();
+        //$('#pnlSchSearch_Result #dgvSchSearch tbody').on('dblclick', 'tr', function () {
+        //    var data = oTable.fnGetData(this);
+
+        //    schwaitlistdetail.OpenAppointmentDetail();
+
+
+        //});
+
+        //function searchTable(inputVal) {
+        //    var table = $('#myTable');
+        //    table.find('tr').each(function (index, row) {
+        //        var allCells = $(row).find('td');
+        //        if (allCells.length > 0) {
+        //            var found = false;
+        //            allCells.each(function (index, td) {
+        //                var regExp = new RegExp(inputVal, 'i');
+        //                if (regExp.test($(td).text())) {
+        //                    found = true;
+        //                    return false;
+        //                }
+        //            });
+        //            if (found == true)
+        //                $(row).show();
+        //            else
+        //                $(row).hide();
+        //        }
+        //    });
+        //}
+    });
+
+</script>

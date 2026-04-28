@@ -1,0 +1,73 @@
+﻿<div class="row" id="pnlAdminFollowUpAction" style="display:none;">
+    <div id="actionPanAdminFollowUpAction" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_FollowUpAction.OpenAction();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_FollowUpReason.UnLoadTab()"></a>
+                </div>
+                <h2 class="panel-title">Search Action</h2>
+            </header>
+            <div class="panel-body" id="pnlReason_Search">
+                <form method="post" id="tmpid" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Short Name</label>
+                            <input class="form-control" id="txtShortName" name="txtShortName" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" id="txtDiscription" name="txtDiscription" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Type</label>
+                            <select id="ddlType" class="form-control" ddlist="GetARType"></select>
+                        </div>
+                        <div class="col-sm-2" id="divEntity">
+                            <label class="control-label">Active?</label>
+                            <select id="ddlActive" class="form-control">
+                                <option value="">- All -</option>
+                                <option value="1" selected="selected">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 mt-xs pull-right">
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnDataFieldsSave" type="button" onclick="Admin_FollowUpAction.ActionSearch();">Search</button>
+                    </div>
+                    <input type="hidden" id="hfReasonId" value="-1" />
+                </form>
+            </div>
+        </section>
+    </div>
+    <div id="pnlAdminFollowUpAction_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body panel-featured">
+                <input type="hidden" id="FollowUpAction_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvFollowUpAction">
+                    <thead>
+                        <tr>
+                            <th class="size-min110">Action</th>
+                            <th class="noWordBreak">Short Name</th>
+                            <th class="size180">Description</th>
+                            <th class="noWordBreak" ">Suspended Days</th>
+                            <th class="size120">AR Type</th>
+                            <th class="size120">Auto Action</th>
+                            <th class="size120">Ledger Account</th>
+                            <th class="size120">Letter</th>
+                            <th class="size120">Entry Date</th>
+                            <th class="size120">Entered By</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divFollowUpActionPaging"></div>
+            </div>
+        </section>
+    </div>
+</div>
+
+

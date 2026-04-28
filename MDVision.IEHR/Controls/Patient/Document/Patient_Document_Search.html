@@ -1,0 +1,247 @@
+﻿<div id="pnlPatientDocument_Search" style="display:none;" class="row">
+    <div id="actionPanPatientDocument_Search" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+        <div id="dialogDiv_Document_Search" class="modal-dialog modal-dialog-lg modal-dialog-full">
+            <div id="modalcontent">
+
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Patient_Document_Search.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 id="headingTitle" class="modal-title">Patient Documents</h4>
+                </div>
+
+                <div class="mainScrollPan" id="mainScrollPan_Search">
+                    <div class="spacer10"></div>
+                    <div class="clearfix"></div>
+                    <section>
+                        <div id="formpanelheading_Search" style="display: none;">
+                            <section class="panel panel-featured">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="closebtn pull-right" onclick="Patient_Document_Search.UnLoadTab();"></a>
+
+                                    </div>
+                                    <h2 class="panel-title">Patient Documents</h2>
+                                </header>
+                            </section>
+                        </div>
+                        <form method="post" id="frmPatientDocument_Search" onsubmit="return false">
+                            <!--<div class="col-sm-3 col-md-2">
+                                <div class="panel panel-featured panel panel-featured panel-body panel-body-nopadding fix-nav">
+                                    <div class="text-center panel-blue NoRadius">
+                                        Folder
+                                        <a href="#" id="FavType" class="pull-right" onclick="Patient_Document_Search.SearchFolder();" style="color:white"> Show All</a>
+                                    </div>
+                                    <ul id="lstDocument_Search" class="nav nav-pills nav-stacked navSidebar-stacked-NoRadius own-scroll"></ul>
+                                </div>
+                            </div>-->
+                            <div class="col-sm-3 col-md-2 folder-container" id="treeBasicDocumentScan"></div>
+                            <div class="col-sm-9 col-md-10">
+                                <section class="panel panel-featured">
+                                    <div id="divGridView">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div id="divCommonControls">
+                                                    <div id="divAccountNumber" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Account Number</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" title="Account Number" name="Account Number" oninput="Patient_Document_Search.BindAutocomplete();" onblur="Patient_Document_Search.ValidateAutoComplete(this);" id="txtAccountNumber" type="text">
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Patient_Document_Search.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="divPatientLastName" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Patient Last Name</label>
+                                                        <input class="form-control" id="txtPatientLastName" type="text">
+                                                    </div>
+                                                    <div id="divPatientFirstName" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Patient First Name</label>
+                                                        <input class="form-control" id="txtPatientFirstName" type="text">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label">
+                                                        DOS From
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpFromDOS" name="DOSFrom" class="form-control" data-plugin-datepicker="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label">DOS To</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpToDOS" name="DOSTo" class="form-control" data-plugin-datepicker="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label"> Entry From</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpFromEntry" class="form-control" data-plugin-datepicker="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label"> Entry To</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpToEntry" class="form-control" data-plugin-datepicker="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label">Entered By</label>
+                                                    <select class="form-control" id="ddlEnteredBy" ddlist="GetUsersFullName"></select>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label">Assigned to Review</label>
+                                                    <select class="form-control" id="ddlAssignedtoReview" ddlist="GetCoWorkerGroupUsersFullName"></select>
+                                                </div>
+
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label">Active?</label>
+                                                    <select id="ddlActive" class="form-control">
+                                                        <option value="" selected="selected">- All -</option>
+                                                        <option value="1">Active</option>
+                                                        <option value="0">Inactive</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label for="ddlDocumentPriority" class="control-label">Priority</label>
+                                                    <select class="form-control" id="ddlDocumentPriority" name="Priority" ddlist="GetDocumentPriority"></select>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2" id="practiceDiv">
+                                                    <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                                    <label id="lnkPracticeEdit" style="display:none;" for="Practice" class="control-label">Practice</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" id="txtPractice" name="Practice" placeholder="Start typing to search" type="text" onblur="utility.ValidateAutoComplete(this, 'pnlPatientDocument_Search #hfPractice', true);">
+                                                        <div class="input-group-btn">
+                                                            <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="Patient_Document_Search.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="hfPractice" />
+                                                </div>
+                                                <div class="col-xs-2 pull-right mt-sm">
+                                                    <button type="button" onclick="Patient_Document_Search.LoadFolders();" id="btnPatientDocument" class="btn btn-primary btn-sm rightbtn">Search</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        </section>
+                                <div class="clearfix"></div>
+                                <div class="spacer10"></div>
+                                <div id="pnlPatientDocument_Result_Search" style="display: none;">
+                                    <section class="panel">
+                                        <ul class="tabs-custom">
+                                            <li class="active"><a class="custom-made-tabs" href="#Pending_Search" onclick="Patient_Document_Search.SetGrid('Pending')" data-toggle="tab">Pending <span id="pendingDocument_Search" class="badge"></span></a></li>
+                                            <li> <a class="custom-made-tabs" href="#Reviewed_Search" onclick="Patient_Document_Search.SetGrid('Reviewed')" data-toggle="tab">Reviewed <span id="ReviewedDocument_Search" class="badge"></span></a></li>
+                                            <!--<li id="op_attached" class="hidden"><a class="custom-made-tabs" href="#Attached" onclick="Patient_Document.SetGrid('Attached')" data-toggle="tab">Attached</a></li>-->
+                                        </ul>
+                                        <div class="tab-content tabs-custom-body pl-xxs pr-xxs">
+                                            <button type="button" onclick="Patient_Document.AttachDocumentToFax();" id="btnAddToFax" class="btn btn-success btn-xs hidden">Attach</button>
+
+                                            <div id="Pending_Search" class="tab-pane active custom-made-tabs">
+                                                <input type="hidden" id="PatientDocument_SelectedDataKeys_Search" />
+                                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientDocument_Search">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="display: none;">DocumentId</th>
+                                                            <!--<th class="size10"><input type="checkbox" id="chkMasterPatDoc" onclick="Patient_Document.checkUncheckAll(this);" /></th>
+                                                            <th id="ColumnAction" class="size-min100">Action</th>-->
+                                                            <th class="size-min130">Folder</th>
+                                                            <th class="noWordBreak">Patient Info</th>
+                                                            <th class="size120">DOS</th>
+                                                            <th class="noWordBreak">File Name</th>
+                                                            <th class="noWordBreak">File Type</th>
+                                                            <th class="size120">Pages</th>
+                                                            <th class="noWordBreak">Entry Date</th>
+                                                            <th class="noWordBreak">Entered By</th>
+                                                            <th class="noWordBreak">Assigned To</th>
+                                                            <th class="noWordBreak">Priority</th>
+                                                            <th class="size120">Comments</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div id="divPendingPaging_Search"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div id="Reviewed_Search" class="tab-pane custom-made-tabs">
+                                                <input type="hidden" id="PatientDocument_SelectedDataKeys_Search" />
+                                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatRevDocument_Search">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="display: none;">DocumentId</th>
+                                                            <!--<th class="size10"><input type="checkbox" id="chkMasterPatDoc" onclick="Patient_Document.checkUncheckAll(this);" /></th>
+                                                            <th id="ColumnAction" class="size-min100">Action</th>-->
+                                                            <th class="size120">Folder</th>
+                                                            <th class="noWordBreak">Patient Info</th>
+                                                            <th class="size120">DOS</th>
+                                                            <th class="noWordBreak">File Name</th>
+                                                            <th class="noWordBreak">File Type</th>
+                                                            <th class="size120">Pages</th>
+                                                            <th class="noWordBreak">Entry Date</th>
+                                                            <th class="noWordBreak">Entered By</th>
+                                                            <th class="noWordBreak">Assigned To</th>
+                                                            <th class="noWordBreak">Priority</th>
+                                                            <th id="threviewd" class="noWordBreak">Reviewed By</th>
+                                                            <th id="threviewddate" class="noWordBreak">Reviewed Date</th>
+                                                            <th id="thsigned" class="noWordBreak">Signed By</th>
+                                                            <th class="size120">Comments</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div id="divReviewedPaging_Search"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <!--<div id="Attached_Search" class="tab-pane custom-made-tabs">
+                                                <span class="spacer10"></span>
+                                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatAttachedDocument_Search">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="display: none;">DocumentId</th>
+                                                            <th class="size10"><input type="checkbox" id="chkMasterPatDoc" onclick="Patient_Document.checkUncheckAll(this);" /></th>
+                                                            <th id="ColumnAction" class="size-min100">Action</th>
+                                                            <th class="size120">Folder</th>
+                                                            <th class="size120">DOS</th>
+                                                            <th class="noWordBreak">File Name</th>
+                                                            <th class="noWordBreak">File Type</th>
+                                                            <th class="size120">Pages</th>
+                                                            <th class="noWordBreak">Entry Date</th>
+                                                            <th class="noWordBreak">Entered By</th>
+                                                            <th class="size120">Status</th>
+                                                            <th class="size120">Comments</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div id="divAttachedPaging_Search"></div>
+                                                <div class="clearfix"></div>
+                                            </div>-->
+                                        </div>
+
+                                    </section>
+                                </div>
+                            </div>
+                            <input type="hidden" id="hfDocumentId" />
+                            <input type="hidden" id="hfPatientId" />
+                            <div class="clearfix"></div>
+                        </form>
+                    </section>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="FaceSheetPager_Search"></div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+</div>

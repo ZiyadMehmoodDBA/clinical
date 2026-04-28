@@ -1,0 +1,2579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{915677DB-0C5D-4DAD-9A1E-82A20712B4AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MDVision.Datasets</RootNamespace>
+    <AssemblyName>MDVision.Datasets</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'debug web|AnyCPU'">
+    <OutputPath>bin\debug web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'web|AnyCPU'">
+    <OutputPath>bin\web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.core">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.interfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.util">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.util.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NUnit.VisualStudio.TestAdapter">
+      <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DSAllergyLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSAllergyLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSAOETemplate.cs">
+      <DependentUpon>DSAOETemplate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSAOETemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSAOETemplate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSAR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSAR.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSBatchCharge.cs">
+      <DependentUpon>DSBatchCharge.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSBatchPatientList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSBatchPatientList.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSBillingInformation.cs">
+      <DependentUpon>DSBillingInformation.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSBillingInformation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSBillingInformation.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSBirthHistory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSBirthHistory.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCase.cs">
+      <DependentUpon>DSCase.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCCDA.cs">
+      <DependentUpon>DSCCDA.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCCDA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCCDA.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCCM.cs">
+      <DependentUpon>DSCCM.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCCM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCCM.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCDSLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCDSLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClaimSummary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSClaimSummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalComplaint.cs">
+      <DependentUpon>DSClinicalComplaint.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalComplaint.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSClinicalComplaint.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalComplaintLookup.cs">
+      <DependentUpon>DSClinicalComplaintLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalComplaintLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSClinicalComplaintLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalLetterTemplateLookup.cs">
+      <DependentUpon>DSClinicalLetterTemplateLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalLetterTemplateLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSClinicalLetterTemplateLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalMedication.cs">
+      <DependentUpon>DSClinicalMedication.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalMedication.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSClinicalMedication.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalNoteTemplateLookup.cs">
+      <DependentUpon>DSClinicalNoteTemplateLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalNoteTemplateLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSClinicalNoteTemplateLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalReviewofSystem.cs">
+      <DependentUpon>DSClinicalReviewofSystem.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalReviewofSystem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSClinicalReviewofSystem.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalReviewofSystemTemplate.cs">
+      <DependentUpon>DSClinicalReviewofSystemTemplate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSClinicalReviewofSystemTemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSClinicalReviewofSystemTemplate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSConsultationOrder.cs">
+      <DependentUpon>DSConsultationOrder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSConsultationOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSConsultationOrder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCoWorkersGroup.cs">
+      <DependentUpon>DSCoWorkersGroup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCoWorkersGroup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCoWorkersGroup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCQM.cs">
+      <DependentUpon>DSCQM.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCQM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCQM.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCQMReasoning.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCQMReasoning.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCustomForm.cs">
+      <DependentUpon>DSCustomForm.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCustomForm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCustomForm.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSHxMobileApp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSHxMobileApp.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSInsurance.cs">
+      <DependentUpon>DSInsurance.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSInsuranceLookup.cs">
+      <DependentUpon>DSInsuranceLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSiTrack.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSiTrack.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSLabLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSLabLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSLabOrder.cs">
+      <DependentUpon>DSLabOrder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSMedicalHx.cs">
+      <DependentUpon>DSMedicalHx.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSMessage.cs">
+      <DependentUpon>DSMessage.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOrderSet.cs">
+      <DependentUpon>DSOrderSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOrderSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSOrderSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOS_Immunization.cs">
+      <DependentUpon>DSOS_Immunization.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOS_Immunization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSOS_Immunization.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOS_LabOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSOS_LabOrder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOS_ProblemLists.cs">
+      <DependentUpon>DSOS_ProblemLists.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOS_ProblemLists.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSOS_ProblemLists.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOS_Procedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSOS_Procedures.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOS_RadiologyOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSOS_RadiologyOrder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientEligibilityService.cs">
+      <DependentUpon>DSPatientEligibilityService.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientEligibilityService.Designer.cs">
+      <DependentUpon>DSPatientEligibilityService.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DSEDI.cs">
+      <DependentUpon>DSEDI.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSEDIReports.cs">
+      <DependentUpon>DSEDIReports.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSEDIReports.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSEDIReports.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSAllergies.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSAppointment.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSBillingInformationLookup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSCaseReports.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSCharge.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSClinical.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSClinicalLab.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSClinicalNoteTemplate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSClinicalSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSDocument.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSFamilyHx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSPQRS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSRadiologyOrder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DSVitals.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DS837Batch.cs">
+      <DependentUpon>DS837Batch.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DS837Batch.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS837Batch.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSBatchCharge.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSBatchCharge.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSBillingProviderSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSBillingProviderSettings.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCase.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCaseLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCaseLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCityStateZip.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCityStateZip.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCodeLookup.cs">
+      <DependentUpon>DSCodeLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCodeLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCodeLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCodes.cs">
+      <DependentUpon>DSCodes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSCodes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCodes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSDBAudit.cs">
+      <DependentUpon>DSDBAudit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSDBAudit.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSDBAudit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSDocumentLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSDocumentLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSEDI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSEDI.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSEDILookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSEDILookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSERA.cs">
+      <DependentUpon>DSERA.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSERA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSERA.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSERALookup.cs">
+      <DependentUpon>DSERALookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSERALookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSERALookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSFaceSheet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSFaceSheet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSFamilyHxLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSFamilyHxLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSFavoriteList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSFavoriteList.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSFavoriteListLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSFavoriteListLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSFeeSchedule.cs">
+      <DependentUpon>DSFeeSchedule.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSFeeSchedule.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSFeeSchedule.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSFeeScheduleLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSFeeScheduleLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSFollowUp.cs">
+      <DependentUpon>DSFollowUp.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSFollowUp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSFollowUp.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSHistorySummary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSHistorySummary.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSHL7.cs">
+      <DependentUpon>DSHL7.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSHL7.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSHL7.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSHospitalizationHx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSHospitalizationHx.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSHospitalizationHxLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSHospitalizationHxLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSImmunization.cs">
+      <DependentUpon>DSImmunization.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSImmunization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSImmunization.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSImmunizationHL7.cs">
+      <DependentUpon>DSImmunizationHL7.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSImmunizationHL7.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSImmunizationHL7.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSIMO.cs">
+      <DependentUpon>DSIMO.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSIMO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSIMO.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSInsurance.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInsurance.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSInsuranceLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSInsuranceLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSLab.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSLab.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSLabOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSLabOrder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSLabResult.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSLabResult.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSLetter.cs">
+      <DependentUpon>DSLetter.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSLetter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSLetter.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSLetterLookup.cs">
+      <DependentUpon>DSLetterLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSLetterLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSLetterLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSMedicalHx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSMedicalHx.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSMedicalHxLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSMedicalHxLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSMedication.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSMedication.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSMedicationLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSMedicationLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSMessage.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSMessageLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSMessageLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSModuleForm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSModuleForm.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSNotes.cs">
+      <DependentUpon>DSNotes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSNotes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSNotes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSOutOfOfficeVisitLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSOutOfOfficeVisitLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatient.cs">
+      <DependentUpon>DSPatient.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatient.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatient.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientBreakGlass.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientBreakGlass.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientEducation.cs">
+      <DependentUpon>DSPatientEducation.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientEducation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientEducation.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientEligibility.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientEligibility.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientLedger.cs">
+      <DependentUpon>DSPatientLedger.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientLedger.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientLedger.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientLookups.cs">
+      <DependentUpon>DSPatientLookups.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientLookups.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientLookups.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientPortal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientPortal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientProfile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientProfile.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientReferral.cs">
+      <DependentUpon>DSPatientReferral.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientReferral.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientReferral.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientStatement.cs">
+      <DependentUpon>DSPatientStatement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientStatement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientStatement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPatientStatementLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPatientStatementLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPayment.cs">
+      <DependentUpon>DSPayment.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPayment.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPayment.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPaymentLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPaymentLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPaymentSetup.cs">
+      <DependentUpon>DSPaymentSetup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPaymentSetup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPaymentSetup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPhysicalExam.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPhysicalExam.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPhysicalExamDataTemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPhysicalExamDataTemplate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPhysicalExamECW.cs">
+      <DependentUpon>DSPhysicalExamECW.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPhysicalExamECW.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPhysicalExamECW.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPhysicalExamECWLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPhysicalExamECWLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPhysicalExamLookup.cs">
+      <DependentUpon>DSPhysicalExamLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPhysicalExamLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPhysicalExamLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPhysicalExamTemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPhysicalExamTemplate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPrivilegeGroup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPrivilegeGroup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProblemLists.cs">
+      <DependentUpon>DSProblemLists.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProblemLists.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSProblemLists.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProcedureOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSProcedureOrder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProcedures.cs">
+      <DependentUpon>DSProcedures.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProcedures.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSProcedures.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPersonnel.cs">
+      <DependentUpon>DSPersonnel.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSPersonnel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSPersonnel.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProcedureTemplate.cs">
+      <DependentUpon>DSProcedureTemplate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProcedureTemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSProcedureTemplate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProfile.cs">
+      <DependentUpon>DSProfile.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProfile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSProfile.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProfileLookup.cs">
+      <DependentUpon>DSProfileLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProfileLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSProfileLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProgressNote.cs">
+      <DependentUpon>DSProgressNote.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSProgressNote.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSProgressNote.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSRadiologyOrderLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSRadiologyOrderLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSRadiologyResult.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSRadiologyResult.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSRcopia.cs">
+      <DependentUpon>DSRcopia.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSRcopia.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSRcopia.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSReminders.cs">
+      <DependentUpon>DSReminders.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSReminders.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSReminders.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSRemindersLookup.cs">
+      <DependentUpon>DSRemindersLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSRemindersLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSRemindersLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSReportHeader.cs">
+      <DependentUpon>DSReportHeader.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSReportHeader.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSReportHeader.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSReports.cs">
+      <DependentUpon>DSReports.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSReports.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSReports.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSResources.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSROSDataTemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSROSDataTemplate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSettings.cs">
+      <DependentUpon>DSSettings.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSSettings.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSocialHistory.cs">
+      <DependentUpon>DSSocialHistory.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSocialHistory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSSocialHistory.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSocialHistoryLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSSocialHistoryLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSurgicalHx.cs">
+      <DependentUpon>DSSurgicalHx.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSurgicalHx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSSurgicalHx.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSurgicalHxLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSSurgicalHxLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSTemplateBuilder.cs">
+      <DependentUpon>DSTemplateBuilder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSTemplateBuilder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSTemplateBuilder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSRoles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSRoles.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSScheduleGroup.cs">
+      <DependentUpon>DSScheduleGroup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSScheduleGroup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSScheduleGroup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSScheduleLookups.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSScheduleLookups.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSScheduleSetup.cs">
+      <DependentUpon>DSScheduleSetup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSScheduleSetup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSScheduleSetup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSupperBill.cs">
+      <DependentUpon>DSSupperBill.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSupperBill.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSSupperBill.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSSupperBillLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSSupperBillLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSTemplateBuilderLookups.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSTemplateBuilderLookups.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSUserLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSUserLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSUsers.cs">
+      <DependentUpon>DSUsers.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSUsers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSUsers.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSUsersActivity.cs">
+      <DependentUpon>DSUsersActivity.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSUsersActivity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSUsersActivity.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSVisitLookup.cs">
+      <DependentUpon>DSVisitLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSVisitLookup.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSVisitLookup.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSVisits.cs">
+      <DependentUpon>DSVisits.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSVisits.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSVisits.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DSWCNF.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSWCNF.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MDVisionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MDVisionDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="DSSoftwareCustomersInfo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProviderNPI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProviderNPI.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DSAllergyLookup.xsc">
+      <DependentUpon>DSAllergyLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSAllergyLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSAllergyLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSAllergyLookup.xss">
+      <DependentUpon>DSAllergyLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSAOETemplate.xsc">
+      <DependentUpon>DSAOETemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSAOETemplate.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSAOETemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSAOETemplate.xss">
+      <DependentUpon>DSAOETemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSAR.xsc">
+      <DependentUpon>DSAR.xsd</DependentUpon>
+    </None>
+    <None Include="DSAR.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSAR.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSAR.xss">
+      <DependentUpon>DSAR.xsd</DependentUpon>
+    </None>
+    <None Include="DSBatchPatientList.xsc">
+      <DependentUpon>DSBatchPatientList.xsd</DependentUpon>
+    </None>
+    <None Include="DSBatchPatientList.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSBatchPatientList.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSBatchPatientList.xss">
+      <DependentUpon>DSBatchPatientList.xsd</DependentUpon>
+    </None>
+    <None Include="DSBillingInformation.xsc">
+      <DependentUpon>DSBillingInformation.xsd</DependentUpon>
+    </None>
+    <None Include="DSBillingInformation.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSBillingInformation.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSBillingInformation.xss">
+      <DependentUpon>DSBillingInformation.xsd</DependentUpon>
+    </None>
+    <None Include="DSBirthHistory.xsc">
+      <DependentUpon>DSBirthHistory.xsd</DependentUpon>
+    </None>
+    <None Include="DSBirthHistory.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSBirthHistory.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSBirthHistory.xss">
+      <DependentUpon>DSBirthHistory.xsd</DependentUpon>
+    </None>
+    <None Include="DSCCDA.xsc">
+      <DependentUpon>DSCCDA.xsd</DependentUpon>
+    </None>
+    <None Include="DSCCDA.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCCDA.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCCDA.xss">
+      <DependentUpon>DSCCDA.xsd</DependentUpon>
+    </None>
+    <None Include="DSCCM.xsc">
+      <DependentUpon>DSCCM.xsd</DependentUpon>
+    </None>
+    <None Include="DSCCM.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCCM.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCCM.xss">
+      <DependentUpon>DSCCM.xsd</DependentUpon>
+    </None>
+    <None Include="DSCDS.xsc">
+      <DependentUpon>DSCDS.xsd</DependentUpon>
+    </None>
+    <None Include="DSCDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCDS.xss">
+      <DependentUpon>DSCDS.xsd</DependentUpon>
+    </None>
+    <None Include="DSCDSLookup.xsc">
+      <DependentUpon>DSCDSLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSCDSLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCDSLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCDSLookup.xss">
+      <DependentUpon>DSCDSLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSClaimSummary.xsc">
+      <DependentUpon>DSClaimSummary.xsd</DependentUpon>
+    </None>
+    <None Include="DSClaimSummary.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSClaimSummary.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSClaimSummary.xss">
+      <DependentUpon>DSClaimSummary.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalComplaint.xsc">
+      <DependentUpon>DSClinicalComplaint.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalComplaint.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSClinicalComplaint.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSClinicalComplaint.xss">
+      <DependentUpon>DSClinicalComplaint.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalComplaintLookup.xsc">
+      <DependentUpon>DSClinicalComplaintLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalComplaintLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSClinicalComplaintLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSClinicalComplaintLookup.xss">
+      <DependentUpon>DSClinicalComplaintLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalLetterTemplateLookup.xsc">
+      <DependentUpon>DSClinicalLetterTemplateLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalLetterTemplateLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSClinicalLetterTemplateLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSClinicalLetterTemplateLookup.xss">
+      <DependentUpon>DSClinicalLetterTemplateLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalMedication.xsc">
+      <DependentUpon>DSClinicalMedication.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalMedication.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSClinicalMedication.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSClinicalMedication.xss">
+      <DependentUpon>DSClinicalMedication.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalNoteTemplateLookup.xsc">
+      <DependentUpon>DSClinicalNoteTemplateLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalNoteTemplateLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSClinicalNoteTemplateLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSClinicalNoteTemplateLookup.xss">
+      <DependentUpon>DSClinicalNoteTemplateLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalReviewofSystem.xsc">
+      <DependentUpon>DSClinicalReviewofSystem.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalReviewofSystem.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSClinicalReviewofSystem.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSClinicalReviewofSystem.xss">
+      <DependentUpon>DSClinicalReviewofSystem.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalReviewofSystemTemplate.xsc">
+      <DependentUpon>DSClinicalReviewofSystemTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSClinicalReviewofSystemTemplate.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSClinicalReviewofSystemTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSClinicalReviewofSystemTemplate.xss">
+      <DependentUpon>DSClinicalReviewofSystemTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSConsultationOrder.xsc">
+      <DependentUpon>DSConsultationOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSConsultationOrder.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSConsultationOrder.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSConsultationOrder.xss">
+      <DependentUpon>DSConsultationOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSCoWorkersGroup.xsc">
+      <DependentUpon>DSCoWorkersGroup.xsd</DependentUpon>
+    </None>
+    <None Include="DSCoWorkersGroup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCoWorkersGroup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCoWorkersGroup.xss">
+      <DependentUpon>DSCoWorkersGroup.xsd</DependentUpon>
+    </None>
+    <None Include="DSCQM.xsc">
+      <DependentUpon>DSCQM.xsd</DependentUpon>
+    </None>
+    <None Include="DSCQM.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCQM.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCQM.xss">
+      <DependentUpon>DSCQM.xsd</DependentUpon>
+    </None>
+    <None Include="DSCQMReasoning.xsc">
+      <DependentUpon>DSCQMReasoning.xsd</DependentUpon>
+    </None>
+    <None Include="DSCQMReasoning.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCQMReasoning.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCQMReasoning.xss">
+      <DependentUpon>DSCQMReasoning.xsd</DependentUpon>
+    </None>
+    <None Include="DSCustomForm.xsc">
+      <DependentUpon>DSCustomForm.xsd</DependentUpon>
+    </None>
+    <None Include="DSCustomForm.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCustomForm.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCustomForm.xss">
+      <DependentUpon>DSCustomForm.xsd</DependentUpon>
+    </None>
+    <None Include="DSHxMobileApp.xsc">
+      <DependentUpon>DSHxMobileApp.xsd</DependentUpon>
+    </None>
+    <None Include="DSHxMobileApp.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSHxMobileApp.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSHxMobileApp.xss">
+      <DependentUpon>DSHxMobileApp.xsd</DependentUpon>
+    </None>
+    <None Include="DSiTrack.xsc">
+      <DependentUpon>DSiTrack.xsd</DependentUpon>
+    </None>
+    <None Include="DSiTrack.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSiTrack.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSiTrack.xss">
+      <DependentUpon>DSiTrack.xsd</DependentUpon>
+    </None>
+    <None Include="DSLabLookup.xsc">
+      <DependentUpon>DSLabLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSLabLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSLabLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSLabLookup.xss">
+      <DependentUpon>DSLabLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSOrderSet.xsc">
+      <DependentUpon>DSOrderSet.xsd</DependentUpon>
+    </None>
+    <None Include="DSOrderSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSOrderSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSOrderSet.xss">
+      <DependentUpon>DSOrderSet.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_Immunization.xsc">
+      <DependentUpon>DSOS_Immunization.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_Immunization.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSOS_Immunization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSOS_Immunization.xss">
+      <DependentUpon>DSOS_Immunization.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_LabOrder.xsc">
+      <DependentUpon>DSOS_LabOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_LabOrder.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSOS_LabOrder.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSOS_LabOrder.xss">
+      <DependentUpon>DSOS_LabOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_ProblemLists.xsc">
+      <DependentUpon>DSOS_ProblemLists.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_ProblemLists.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSOS_ProblemLists.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSOS_ProblemLists.xss">
+      <DependentUpon>DSOS_ProblemLists.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_Procedures.xsc">
+      <DependentUpon>DSOS_Procedures.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_Procedures.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSOS_Procedures.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSOS_Procedures.xss">
+      <DependentUpon>DSOS_Procedures.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_RadiologyOrder.xsc">
+      <DependentUpon>DSOS_RadiologyOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSOS_RadiologyOrder.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSOS_RadiologyOrder.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSOS_RadiologyOrder.xss">
+      <DependentUpon>DSOS_RadiologyOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientEligibilityService.xsc">
+      <DependentUpon>DSPatientEligibilityService.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientEligibilityService.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientEligibilityService.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DSPatientEligibilityService.xss">
+      <DependentUpon>DSPatientEligibilityService.xsd</DependentUpon>
+    </None>
+    <None Include="DSEDIReports.xsc">
+      <DependentUpon>DSEDIReports.xsd</DependentUpon>
+    </None>
+    <None Include="DSEDIReports.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSEDIReports.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSEDIReports.xss">
+      <DependentUpon>DSEDIReports.xsd</DependentUpon>
+    </None>
+    <None Include="DS837Batch.xsc">
+      <DependentUpon>DS837Batch.xsd</DependentUpon>
+    </None>
+    <None Include="DS837Batch.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS837Batch.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DS837Batch.xss">
+      <DependentUpon>DS837Batch.xsd</DependentUpon>
+    </None>
+    <None Include="DSBatchCharge.xsc">
+      <DependentUpon>DSBatchCharge.xsd</DependentUpon>
+    </None>
+    <None Include="DSBatchCharge.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSBatchCharge.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSBatchCharge.xss">
+      <DependentUpon>DSBatchCharge.xsd</DependentUpon>
+    </None>
+    <None Include="DSBillingProviderSettings.xsc">
+      <DependentUpon>DSBillingProviderSettings.xsd</DependentUpon>
+    </None>
+    <None Include="DSBillingProviderSettings.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSBillingProviderSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSBillingProviderSettings.xss">
+      <DependentUpon>DSBillingProviderSettings.xsd</DependentUpon>
+    </None>
+    <None Include="DSCase.xsc">
+      <DependentUpon>DSCase.xsd</DependentUpon>
+    </None>
+    <None Include="DSCase.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCase.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCase.xss">
+      <DependentUpon>DSCase.xsd</DependentUpon>
+    </None>
+    <None Include="DSCaseLookup.xsc">
+      <DependentUpon>DSCaseLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSCaseLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCaseLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCaseLookup.xss">
+      <DependentUpon>DSCaseLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSCityStateZip.xsc">
+      <DependentUpon>DSCityStateZip.xsd</DependentUpon>
+    </None>
+    <None Include="DSCityStateZip.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCityStateZip.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCityStateZip.xss">
+      <DependentUpon>DSCityStateZip.xsd</DependentUpon>
+    </None>
+    <None Include="DSCodeLookup.xsc">
+      <DependentUpon>DSCodeLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSCodeLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCodeLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCodeLookup.xss">
+      <DependentUpon>DSCodeLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSCodes.xsc">
+      <DependentUpon>DSCodes.xsd</DependentUpon>
+    </None>
+    <None Include="DSCodes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCodes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSCodes.xss">
+      <DependentUpon>DSCodes.xsd</DependentUpon>
+    </None>
+    <None Include="DSDBAudit.xsc">
+      <DependentUpon>DSDBAudit.xsd</DependentUpon>
+    </None>
+    <None Include="DSDBAudit.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSDBAudit.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSDBAudit.xss">
+      <DependentUpon>DSDBAudit.xsd</DependentUpon>
+    </None>
+    <None Include="DSDocumentLookup.xsc">
+      <DependentUpon>DSDocumentLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSDocumentLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSDocumentLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSDocumentLookup.xss">
+      <DependentUpon>DSDocumentLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSEDI.xsc">
+      <DependentUpon>DSEDI.xsd</DependentUpon>
+    </None>
+    <None Include="DSEDI.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSEDI.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSEDI.xss">
+      <DependentUpon>DSEDI.xsd</DependentUpon>
+    </None>
+    <None Include="DSEDILookup.xsc">
+      <DependentUpon>DSEDILookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSEDILookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSEDILookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSEDILookup.xss">
+      <DependentUpon>DSEDILookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSERA.xsc">
+      <DependentUpon>DSERA.xsd</DependentUpon>
+    </None>
+    <None Include="DSERA.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSERA.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSERA.xss">
+      <DependentUpon>DSERA.xsd</DependentUpon>
+    </None>
+    <None Include="DSERALookup.xsc">
+      <DependentUpon>DSERALookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSERALookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSERALookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSERALookup.xss">
+      <DependentUpon>DSERALookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSFaceSheet.xsc">
+      <DependentUpon>DSFaceSheet.xsd</DependentUpon>
+    </None>
+    <None Include="DSFaceSheet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSFaceSheet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSFaceSheet.xss">
+      <DependentUpon>DSFaceSheet.xsd</DependentUpon>
+    </None>
+    <None Include="DSFamilyHxLookup.xsc">
+      <DependentUpon>DSFamilyHxLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSFamilyHxLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSFamilyHxLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSFamilyHxLookup.xss">
+      <DependentUpon>DSFamilyHxLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSFavoriteList.xsc">
+      <DependentUpon>DSFavoriteList.xsd</DependentUpon>
+    </None>
+    <None Include="DSFavoriteList.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSFavoriteList.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSFavoriteList.xss">
+      <DependentUpon>DSFavoriteList.xsd</DependentUpon>
+    </None>
+    <None Include="DSFavoriteListLookup.xsc">
+      <DependentUpon>DSFavoriteListLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSFavoriteListLookup.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSFavoriteListLookup.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DSFavoriteListLookup.xss">
+      <DependentUpon>DSFavoriteListLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSFeeSchedule.xsc">
+      <DependentUpon>DSFeeSchedule.xsd</DependentUpon>
+    </None>
+    <None Include="DSFeeSchedule.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSFeeSchedule.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSFeeSchedule.xss">
+      <DependentUpon>DSFeeSchedule.xsd</DependentUpon>
+    </None>
+    <None Include="DSFeeScheduleLookup.xsc">
+      <DependentUpon>DSFeeScheduleLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSFeeScheduleLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSFeeScheduleLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSFeeScheduleLookup.xss">
+      <DependentUpon>DSFeeScheduleLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSFollowUp.xsc">
+      <DependentUpon>DSFollowUp.xsd</DependentUpon>
+    </None>
+    <None Include="DSFollowUp.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSFollowUp.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSFollowUp.xss">
+      <DependentUpon>DSFollowUp.xsd</DependentUpon>
+    </None>
+    <None Include="DSHistorySummary.xsc">
+      <DependentUpon>DSHistorySummary.xsd</DependentUpon>
+    </None>
+    <None Include="DSHistorySummary.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSHistorySummary.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSHistorySummary.xss">
+      <DependentUpon>DSHistorySummary.xsd</DependentUpon>
+    </None>
+    <None Include="DSHL7.xsc">
+      <DependentUpon>DSHL7.xsd</DependentUpon>
+    </None>
+    <None Include="DSHL7.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSHL7.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSHL7.xss">
+      <DependentUpon>DSHL7.xsd</DependentUpon>
+    </None>
+    <None Include="DSHospitalizationHx.xsc">
+      <DependentUpon>DSHospitalizationHx.xsd</DependentUpon>
+    </None>
+    <None Include="DSHospitalizationHx.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSHospitalizationHx.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSHospitalizationHx.xss">
+      <DependentUpon>DSHospitalizationHx.xsd</DependentUpon>
+    </None>
+    <None Include="DSHospitalizationHxLookup.xsc">
+      <DependentUpon>DSHospitalizationHxLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSHospitalizationHxLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSHospitalizationHxLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSHospitalizationHxLookup.xss">
+      <DependentUpon>DSHospitalizationHxLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSImmunization.xsc">
+      <DependentUpon>DSImmunization.xsd</DependentUpon>
+    </None>
+    <None Include="DSImmunization.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSImmunization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSImmunization.xss">
+      <DependentUpon>DSImmunization.xsd</DependentUpon>
+    </None>
+    <None Include="DSImmunizationHL7.xsc">
+      <DependentUpon>DSImmunizationHL7.xsd</DependentUpon>
+    </None>
+    <None Include="DSImmunizationHL7.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSImmunizationHL7.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSImmunizationHL7.xss">
+      <DependentUpon>DSImmunizationHL7.xsd</DependentUpon>
+    </None>
+    <None Include="DSIMO.xsc">
+      <DependentUpon>DSIMO.xsd</DependentUpon>
+    </None>
+    <None Include="DSIMO.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSIMO.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSIMO.xss">
+      <DependentUpon>DSIMO.xsd</DependentUpon>
+    </None>
+    <None Include="DSInsurance.xsc">
+      <DependentUpon>DSInsurance.xsd</DependentUpon>
+    </None>
+    <None Include="DSInsurance.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInsurance.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSInsurance.xss">
+      <DependentUpon>DSInsurance.xsd</DependentUpon>
+    </None>
+    <None Include="DSInsuranceLookup.xsc">
+      <DependentUpon>DSInsuranceLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSInsuranceLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSInsuranceLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSInsuranceLookup.xss">
+      <DependentUpon>DSInsuranceLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSLab.xsc">
+      <DependentUpon>DSLab.xsd</DependentUpon>
+    </None>
+    <None Include="DSLab.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSLab.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSLab.xss">
+      <DependentUpon>DSLab.xsd</DependentUpon>
+    </None>
+    <None Include="DSLabOrder.xsc">
+      <DependentUpon>DSLabOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSLabOrder.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSLabOrder.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSLabOrder.xss">
+      <DependentUpon>DSLabOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSLabResult.xsc">
+      <DependentUpon>DSLabResult.xsd</DependentUpon>
+    </None>
+    <None Include="DSLabResult.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSLabResult.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSLabResult.xss">
+      <DependentUpon>DSLabResult.xsd</DependentUpon>
+    </None>
+    <None Include="DSLetter.xsc">
+      <DependentUpon>DSLetter.xsd</DependentUpon>
+    </None>
+    <None Include="DSLetter.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSLetter.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSLetter.xss">
+      <DependentUpon>DSLetter.xsd</DependentUpon>
+    </None>
+    <None Include="DSLetterLookup.xsc">
+      <DependentUpon>DSLetterLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSLetterLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSLetterLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSLetterLookup.xss">
+      <DependentUpon>DSLetterLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSMedicalHx.xsc">
+      <DependentUpon>DSMedicalHx.xsd</DependentUpon>
+    </None>
+    <None Include="DSMedicalHx.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSMedicalHx.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSMedicalHx.xss">
+      <DependentUpon>DSMedicalHx.xsd</DependentUpon>
+    </None>
+    <None Include="DSMedicalHxLookup.xsc">
+      <DependentUpon>DSMedicalHxLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSMedicalHxLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSMedicalHxLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSMedicalHxLookup.xss">
+      <DependentUpon>DSMedicalHxLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSMedication.xsc">
+      <DependentUpon>DSMedication.xsd</DependentUpon>
+    </None>
+    <None Include="DSMedication.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSMedication.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSMedication.xss">
+      <DependentUpon>DSMedication.xsd</DependentUpon>
+    </None>
+    <None Include="DSMedicationLookup.xsc">
+      <DependentUpon>DSMedicationLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSMedicationLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSMedicationLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSMedicationLookup.xss">
+      <DependentUpon>DSMedicationLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSMessage.xsc">
+      <DependentUpon>DSMessage.xsd</DependentUpon>
+    </None>
+    <None Include="DSMessage.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSMessage.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSMessage.xss">
+      <DependentUpon>DSMessage.xsd</DependentUpon>
+    </None>
+    <None Include="DSMessageLookup.xsc">
+      <DependentUpon>DSMessageLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSMessageLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSMessageLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSMessageLookup.xss">
+      <DependentUpon>DSMessageLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSModuleForm.xsc">
+      <DependentUpon>DSModuleForm.xsd</DependentUpon>
+    </None>
+    <None Include="DSModuleForm.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSModuleForm.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSModuleForm.xss">
+      <DependentUpon>DSModuleForm.xsd</DependentUpon>
+    </None>
+    <None Include="DSNotes.xsc">
+      <DependentUpon>DSNotes.xsd</DependentUpon>
+    </None>
+    <None Include="DSNotes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSNotes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSNotes.xss">
+      <DependentUpon>DSNotes.xsd</DependentUpon>
+    </None>
+    <None Include="DSOutOfOfficeVisitLookup.xsc">
+      <DependentUpon>DSOutOfOfficeVisitLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSOutOfOfficeVisitLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSOutOfOfficeVisitLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSOutOfOfficeVisitLookup.xss">
+      <DependentUpon>DSOutOfOfficeVisitLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatient.xsc">
+      <DependentUpon>DSPatient.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatient.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatient.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatient.xss">
+      <DependentUpon>DSPatient.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientBreakGlass.xsc">
+      <DependentUpon>DSPatientBreakGlass.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientBreakGlass.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientBreakGlass.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientBreakGlass.xss">
+      <DependentUpon>DSPatientBreakGlass.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientEducation.xsc">
+      <DependentUpon>DSPatientEducation.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientEducation.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientEducation.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientEducation.xss">
+      <DependentUpon>DSPatientEducation.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientEligibility.xsc">
+      <DependentUpon>DSPatientEligibility.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientEligibility.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientEligibility.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientEligibility.xss">
+      <DependentUpon>DSPatientEligibility.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientLedger.xsc">
+      <DependentUpon>DSPatientLedger.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientLedger.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientLedger.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientLedger.xss">
+      <DependentUpon>DSPatientLedger.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientLookups.xsc">
+      <DependentUpon>DSPatientLookups.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientLookups.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientLookups.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientLookups.xss">
+      <DependentUpon>DSPatientLookups.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientPortal.xsc">
+      <DependentUpon>DSPatientPortal.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientPortal.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientPortal.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientPortal.xss">
+      <DependentUpon>DSPatientPortal.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientProfile.xsc">
+      <DependentUpon>DSPatientProfile.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientProfile.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientProfile.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientProfile.xss">
+      <DependentUpon>DSPatientProfile.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientReferral.xsc">
+      <DependentUpon>DSPatientReferral.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientReferral.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientReferral.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientReferral.xss">
+      <DependentUpon>DSPatientReferral.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientStatement.xsc">
+      <DependentUpon>DSPatientStatement.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientStatement.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientStatement.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientStatement.xss">
+      <DependentUpon>DSPatientStatement.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientStatementLookup.xsc">
+      <DependentUpon>DSPatientStatementLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPatientStatementLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPatientStatementLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPatientStatementLookup.xss">
+      <DependentUpon>DSPatientStatementLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPayment.xsc">
+      <DependentUpon>DSPayment.xsd</DependentUpon>
+    </None>
+    <None Include="DSPayment.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPayment.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPayment.xss">
+      <DependentUpon>DSPayment.xsd</DependentUpon>
+    </None>
+    <None Include="DSPaymentLookup.xsc">
+      <DependentUpon>DSPaymentLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPaymentLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPaymentLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPaymentLookup.xss">
+      <DependentUpon>DSPaymentLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPaymentSetup.xsc">
+      <DependentUpon>DSPaymentSetup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPaymentSetup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPaymentSetup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPaymentSetup.xss">
+      <DependentUpon>DSPaymentSetup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExam.xsc">
+      <DependentUpon>DSPhysicalExam.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExam.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPhysicalExam.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPhysicalExam.xss">
+      <DependentUpon>DSPhysicalExam.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamDataTemplate.xsc">
+      <DependentUpon>DSPhysicalExamDataTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamDataTemplate.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPhysicalExamDataTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPhysicalExamDataTemplate.xss">
+      <DependentUpon>DSPhysicalExamDataTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamECW.xsc">
+      <DependentUpon>DSPhysicalExamECW.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamECW.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPhysicalExamECW.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPhysicalExamECW.xss">
+      <DependentUpon>DSPhysicalExamECW.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamECWLookup.xsc">
+      <DependentUpon>DSPhysicalExamECWLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamECWLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPhysicalExamECWLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPhysicalExamECWLookup.xss">
+      <DependentUpon>DSPhysicalExamECWLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamLookup.xsc">
+      <DependentUpon>DSPhysicalExamLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPhysicalExamLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPhysicalExamLookup.xss">
+      <DependentUpon>DSPhysicalExamLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamTemplate.xsc">
+      <DependentUpon>DSPhysicalExamTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSPhysicalExamTemplate.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPhysicalExamTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPhysicalExamTemplate.xss">
+      <DependentUpon>DSPhysicalExamTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSPrivilegeGroup.xsc">
+      <DependentUpon>DSPrivilegeGroup.xsd</DependentUpon>
+    </None>
+    <None Include="DSPrivilegeGroup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPrivilegeGroup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPrivilegeGroup.xss">
+      <DependentUpon>DSPrivilegeGroup.xsd</DependentUpon>
+    </None>
+    <None Include="DSProblemLists.xsc">
+      <DependentUpon>DSProblemLists.xsd</DependentUpon>
+    </None>
+    <None Include="DSProblemLists.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSProblemLists.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSProblemLists.xss">
+      <DependentUpon>DSProblemLists.xsd</DependentUpon>
+    </None>
+    <None Include="DSProcedureOrder.xsc">
+      <DependentUpon>DSProcedureOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSProcedureOrder.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSProcedureOrder.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSProcedureOrder.xss">
+      <DependentUpon>DSProcedureOrder.xsd</DependentUpon>
+    </None>
+    <None Include="DSProcedures.xsc">
+      <DependentUpon>DSProcedures.xsd</DependentUpon>
+    </None>
+    <None Include="DSProcedures.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSProcedures.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSProcedures.xss">
+      <DependentUpon>DSProcedures.xsd</DependentUpon>
+    </None>
+    <None Include="DSPersonnel.xsc">
+      <DependentUpon>DSPersonnel.xsd</DependentUpon>
+    </None>
+    <None Include="DSPersonnel.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSPersonnel.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSPersonnel.xss">
+      <DependentUpon>DSPersonnel.xsd</DependentUpon>
+    </None>
+    <None Include="DSProcedureTemplate.xsc">
+      <DependentUpon>DSProcedureTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSProcedureTemplate.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSProcedureTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSProcedureTemplate.xss">
+      <DependentUpon>DSProcedureTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSProfile.xsc">
+      <DependentUpon>DSProfile.xsd</DependentUpon>
+    </None>
+    <None Include="DSProfile.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSProfile.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSProfile.xss">
+      <DependentUpon>DSProfile.xsd</DependentUpon>
+    </None>
+    <None Include="DSProfileLookup.xsc">
+      <DependentUpon>DSProfileLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSProfileLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSProfileLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSProfileLookup.xss">
+      <DependentUpon>DSProfileLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSProgressNote.xsc">
+      <DependentUpon>DSProgressNote.xsd</DependentUpon>
+    </None>
+    <None Include="DSProgressNote.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSProgressNote.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSProgressNote.xss">
+      <DependentUpon>DSProgressNote.xsd</DependentUpon>
+    </None>
+    <None Include="DSRadiologyOrderLookup.xsc">
+      <DependentUpon>DSRadiologyOrderLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSRadiologyOrderLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSRadiologyOrderLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSRadiologyOrderLookup.xss">
+      <DependentUpon>DSRadiologyOrderLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSRadiologyResult.xsc">
+      <DependentUpon>DSRadiologyResult.xsd</DependentUpon>
+    </None>
+    <None Include="DSRadiologyResult.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSRadiologyResult.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSRadiologyResult.xss">
+      <DependentUpon>DSRadiologyResult.xsd</DependentUpon>
+    </None>
+    <None Include="DSRcopia.xsc">
+      <DependentUpon>DSRcopia.xsd</DependentUpon>
+    </None>
+    <None Include="DSRcopia.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSRcopia.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSRcopia.xss">
+      <DependentUpon>DSRcopia.xsd</DependentUpon>
+    </None>
+    <None Include="DSReminders.xsc">
+      <DependentUpon>DSReminders.xsd</DependentUpon>
+    </None>
+    <None Include="DSReminders.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSReminders.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSReminders.xss">
+      <DependentUpon>DSReminders.xsd</DependentUpon>
+    </None>
+    <None Include="DSRemindersLookup.xsc">
+      <DependentUpon>DSRemindersLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSRemindersLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSRemindersLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSRemindersLookup.xss">
+      <DependentUpon>DSRemindersLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSReportHeader.xsc">
+      <DependentUpon>DSReportHeader.xsd</DependentUpon>
+    </None>
+    <None Include="DSReportHeader.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSReportHeader.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSReportHeader.xss">
+      <DependentUpon>DSReportHeader.xsd</DependentUpon>
+    </None>
+    <None Include="DSReports.xsc">
+      <DependentUpon>DSReports.xsd</DependentUpon>
+    </None>
+    <None Include="DSReports.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSReports.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSReports.xss">
+      <DependentUpon>DSReports.xsd</DependentUpon>
+    </None>
+    <None Include="DSResources.xsc">
+      <DependentUpon>DSResources.xsd</DependentUpon>
+    </None>
+    <None Include="DSResources.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSResources.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSResources.xss">
+      <DependentUpon>DSResources.xsd</DependentUpon>
+    </None>
+    <None Include="DSROSDataTemplate.xsc">
+      <DependentUpon>DSROSDataTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSROSDataTemplate.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSROSDataTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSROSDataTemplate.xss">
+      <DependentUpon>DSROSDataTemplate.xsd</DependentUpon>
+    </None>
+    <None Include="DSSettings.xsc">
+      <DependentUpon>DSSettings.xsd</DependentUpon>
+    </None>
+    <None Include="DSSettings.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSSettings.xss">
+      <DependentUpon>DSSettings.xsd</DependentUpon>
+    </None>
+    <None Include="DSSocialHistory.xsc">
+      <DependentUpon>DSSocialHistory.xsd</DependentUpon>
+    </None>
+    <None Include="DSSocialHistory.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSSocialHistory.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSSocialHistory.xss">
+      <DependentUpon>DSSocialHistory.xsd</DependentUpon>
+    </None>
+    <None Include="DSSocialHistoryLookup.xsc">
+      <DependentUpon>DSSocialHistoryLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSSocialHistoryLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSSocialHistoryLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSSocialHistoryLookup.xss">
+      <DependentUpon>DSSocialHistoryLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSSurgicalHx.xsc">
+      <DependentUpon>DSSurgicalHx.xsd</DependentUpon>
+    </None>
+    <None Include="DSSurgicalHx.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSSurgicalHx.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSSurgicalHx.xss">
+      <DependentUpon>DSSurgicalHx.xsd</DependentUpon>
+    </None>
+    <None Include="DSSurgicalHxLookup.xsc">
+      <DependentUpon>DSSurgicalHxLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSSurgicalHxLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSSurgicalHxLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSSurgicalHxLookup.xss">
+      <DependentUpon>DSSurgicalHxLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSTemplateBuilder.xsc">
+      <DependentUpon>DSTemplateBuilder.xsd</DependentUpon>
+    </None>
+    <None Include="DSTemplateBuilder.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSTemplateBuilder.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSTemplateBuilder.xss">
+      <DependentUpon>DSTemplateBuilder.xsd</DependentUpon>
+    </None>
+    <None Include="DSRoles.xsc">
+      <DependentUpon>DSRoles.xsd</DependentUpon>
+    </None>
+    <None Include="DSRoles.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSRoles.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSRoles.xss">
+      <DependentUpon>DSRoles.xsd</DependentUpon>
+    </None>
+    <None Include="DSScheduleGroup.xsc">
+      <DependentUpon>DSScheduleGroup.xsd</DependentUpon>
+    </None>
+    <None Include="DSScheduleGroup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSScheduleGroup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSScheduleGroup.xss">
+      <DependentUpon>DSScheduleGroup.xsd</DependentUpon>
+    </None>
+    <None Include="DSScheduleLookups.xsc">
+      <DependentUpon>DSScheduleLookups.xsd</DependentUpon>
+    </None>
+    <None Include="DSScheduleLookups.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSScheduleLookups.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSScheduleLookups.xss">
+      <DependentUpon>DSScheduleLookups.xsd</DependentUpon>
+    </None>
+    <None Include="DSScheduleSetup.xsc">
+      <DependentUpon>DSScheduleSetup.xsd</DependentUpon>
+    </None>
+    <None Include="DSScheduleSetup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSScheduleSetup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSScheduleSetup.xss">
+      <DependentUpon>DSScheduleSetup.xsd</DependentUpon>
+    </None>
+    <None Include="DSSupperBill.xsc">
+      <DependentUpon>DSSupperBill.xsd</DependentUpon>
+    </None>
+    <None Include="DSSupperBill.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSSupperBill.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSSupperBill.xss">
+      <DependentUpon>DSSupperBill.xsd</DependentUpon>
+    </None>
+    <None Include="DSSupperBillLookup.xsc">
+      <DependentUpon>DSSupperBillLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSSupperBillLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSSupperBillLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSSupperBillLookup.xss">
+      <DependentUpon>DSSupperBillLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSTemplateBuilderLookups.xsc">
+      <DependentUpon>DSTemplateBuilderLookups.xsd</DependentUpon>
+    </None>
+    <None Include="DSTemplateBuilderLookups.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSTemplateBuilderLookups.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSTemplateBuilderLookups.xss">
+      <DependentUpon>DSTemplateBuilderLookups.xsd</DependentUpon>
+    </None>
+    <None Include="DSUserLookup.xsc">
+      <DependentUpon>DSUserLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSUserLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSUserLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSUserLookup.xss">
+      <DependentUpon>DSUserLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSUsers.xsc">
+      <DependentUpon>DSUsers.xsd</DependentUpon>
+    </None>
+    <None Include="DSUsers.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSUsers.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSUsers.xss">
+      <DependentUpon>DSUsers.xsd</DependentUpon>
+    </None>
+    <None Include="DSUsersActivity.xsc">
+      <DependentUpon>DSUsersActivity.xsd</DependentUpon>
+    </None>
+    <None Include="DSUsersActivity.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSUsersActivity.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSUsersActivity.xss">
+      <DependentUpon>DSUsersActivity.xsd</DependentUpon>
+    </None>
+    <None Include="DSVisitLookup.xsc">
+      <DependentUpon>DSVisitLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSVisitLookup.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSVisitLookup.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSVisitLookup.xss">
+      <DependentUpon>DSVisitLookup.xsd</DependentUpon>
+    </None>
+    <None Include="DSVisits.xsc">
+      <DependentUpon>DSVisits.xsd</DependentUpon>
+    </None>
+    <None Include="DSVisits.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSVisits.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSVisits.xss">
+      <DependentUpon>DSVisits.xsd</DependentUpon>
+    </None>
+    <None Include="DSWCNF.xsc">
+      <DependentUpon>DSWCNF.xsd</DependentUpon>
+    </None>
+    <None Include="DSWCNF.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSWCNF.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DSWCNF.xss">
+      <DependentUpon>DSWCNF.xsd</DependentUpon>
+    </None>
+    <None Include="MDVisionDataSet.xsc">
+      <DependentUpon>MDVisionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MDVisionDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MDVisionDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MDVisionDataSet.xss">
+      <DependentUpon>MDVisionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\MDVision.Datasets.csprojResolveAssemblyReference.cache" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ProviderNPI.xsc">
+      <DependentUpon>ProviderNPI.xsd</DependentUpon>
+    </None>
+    <None Include="ProviderNPI.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProviderNPI.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ProviderNPI.xss">
+      <DependentUpon>ProviderNPI.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="obj\Debug\MDVision.Datasets.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\MDVision.Datasets.dll" />
+    <Content Include="obj\Debug\MDVision.Datasets.pdb" />
+    <Content Include="obj\Debug\TempPE\DSReports.Designer.cs.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

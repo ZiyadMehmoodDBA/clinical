@@ -1,0 +1,175 @@
+﻿<div id="pnlScheduleWaitList" style="display:none;" class="row">
+    <div id="actionPanScheduleWaitList" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <div class="clearfix"></div>
+    <button class="btn btn-success btn-sm" type="button" id="btnaddwaitlist" onclick="Scheduling_WaitList.WaitListAdd();"><i class="fa fa-plus-circle"></i>  Add </button>
+    <div class="spacer10"></div>
+
+    <section class="panel panel-featured">
+        <header class="panel-heading">
+            <h4 class="panel-title">Wait List</h4>
+        </header>
+
+        <div class="panel-body">
+            <form method="post" id="frmSchedulingWaitList" onsubmit="return false">
+                <div class="spacer5"></div>
+                <div class="col-sm-3 col-md-2 ">
+                    <label for="Patient Account" class="control-label">Account</label>
+                    <div class="input-group">
+                        <input class="form-control" id="txtAccount" type="text" name="patientAccount" />
+                        <div class="input-group-btn">
+                            <button id="lnkPatientAccount" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_WaitList.OpenPatientAccount();"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3" id="facilitydiv">
+                    <label class="control-label" for="Case Type">Facility</label>
+                    <select id="ddlFacility" name="facility" class="form-control" ddlist="GetFacility"></select>
+                </div>
+
+                <div class="col-sm-3 ">
+                    <div class="size150">
+                        <div class="size75 pull-left radio-custom radio-small">
+                            <input type="radio" id="rdProvider" name="03" checked="checked" class="mt-none">
+                            <label for="rdProvider">Provider</label>
+                        </div>
+                        <div class="size75 pull-left radio-custom radio-small">
+                            <input type="radio" id="rdResource" name="03" class="mt-none">
+                            <label for="rdResource">Resource</label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div id="divProvider"><select id="ddlProvider" name="provider" class="form-control " ddlist="GetProvider"></select></div>
+                    <div id="divResource"> <select id="ddlResource" class="form-control" ddlist="GetResources"></select></div>
+                </div>
+                <div class="col-sm-3  col-md-2">
+                    <label for="fromdate" class="control-label">From Date</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="text" id="dpFromDate" name="Date1" placeholder="Date" data-plugin-datepicker="" class="form-control ">
+                    </div>
+                </div>
+                <div class="col-sm-3  col-md-2">
+                    <label for="fromdate" class="control-label">To Date</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="text" id="dpToDate" name="Date2" placeholder="Date" data-plugin-datepicker="" class="form-control ">
+                    </div>
+                </div>
+                <div class="col-sm-3  col-md-2">
+                    <label for="fromdate" class="control-label">Preferred Date</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="text" id="dpPrefDate" name="Date3" placeholder="Date" data-plugin-datepicker="" class="form-control ">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label class="control-label">Preferred Time</label>
+                    <select id="ddlPreferredTime" class="form-control" ddlist="GetPreferredTime"></select>
+                </div>
+                <div class="col-sm-3">
+                    <label class="control-label">Status</label>
+                    <select id="ddlAppstatus" class="form-control" ddlist="GetWaitListStatus"></select>
+                </div>
+                <div class="col-sm-2  mt-md pull-right">
+                    <button class="btn btn-primary btn-sm rightbtn" id="btnWaitListSearch" type="button" onclick="Scheduling_WaitList.WaitListSearch();">Search</button>
+                </div>
+
+                <div class="spacer10"></div>
+                <input type="hidden" id="hfpatientid" />
+            </form>
+        </div>
+    </section>
+
+    <div id="pnlWaitList_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="WaitList_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvWaitList">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">WaitListId</th>
+                            <th>Action</th>
+                            <th>Account</th>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Facility</th>
+                            <th>Provider</th>
+                            <th>Resource</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>Preferred Date</th>
+                            <th>Preferred Time</th>
+                            <th>Status</th>
+                            <th>Created Date</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divWaitListPaging"></div>
+            </div>
+        </section>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            }
+        });
+
+        //Scheduling_WaitList.BindPatientAccount();
+        //------------------------------------------------------
+
+
+        utility.ValidateFromToDate('pnlScheduleWaitList #frmSchedulingWaitList', 'dpFromDate', 'dpToDate', true);
+
+        utility.CreateDatePicker('pnlScheduleWaitList #dpToDate', function () {
+
+        });
+        utility.CreateDatePicker('pnlScheduleWaitList #dpFromDate', function () {
+
+        });
+        utility.CreateDatePicker('pnlScheduleWaitList #dpPrefDate', function () {
+
+        });
+
+        //---------------------Provider Resource Check---------------
+        $('#pnlScheduleWaitList #divResource').hide();
+
+        $('#pnlScheduleWaitList #rdResource').click(function () {
+            if ($(this).is(':checked')) {
+
+
+                $('#pnlScheduleWaitList #divResource').show();
+                $('#pnlScheduleWaitList #divProvider').hide();
+
+                $('#pnlScheduleWaitList #ddlProvider').val("");
+            }
+            else {
+
+            }
+        });
+
+        $('#pnlScheduleWaitList #rdProvider').click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#pnlScheduleWaitList #divResource').hide();
+                $('#pnlScheduleWaitList #divProvider').show();
+
+                $('#pnlScheduleWaitList #ddlResource').val("");
+            }
+            else {
+
+            }
+        });
+
+    });
+</script>

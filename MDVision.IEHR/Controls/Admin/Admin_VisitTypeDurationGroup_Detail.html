@@ -1,0 +1,85 @@
+﻿<div id="pnlAdmin_VisitTypeDurationGroupDetail">
+    <div id="actionPanAdminVisitTypeDurationGroupDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div id="modalheader" style="display:none;">
+                <!--<button id="popUpClose" type="button" class="close" onclick="VisitTypeDetail.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Add Visit Type Duration Group</h4>-->
+                <button type="button" class="close" onclick="VisitTypeDetail.UnloadTab();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Visit Type Duration Group</h4>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" id="frmVisitTypeDurationGroupDetail" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-xs-4">
+                            <label class="control-label">Name<span class="required">*</span></label>
+                            <input class="form-control " id="txtName" name="Name" type="text" maxlength="55" />
+                        </div>
+                        <div id="divVisitType_Entity" class="col-xs-5">
+                            <label class="control-label">Entity<span class="required">*</span></label>
+                            <select id="ddlEntity" class="form-control " name="Entity" ddlist="GetEntity"></select>
+                        </div>
+                        <div class="col-xs-2 pad-a-labelsize pl-xs">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" checked="checked" name="Active" id="chkActive">
+                                <label for="chkActive">Active</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 mt-sm pull-right pr-none">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit" id="SaveButton">Save</button>
+                        </div>
+                        <input type="hidden" id="hfVisitId" value="-1" />
+                    </div>
+
+                    <div id="divVisitTypes" >
+                        <div class="modal-header">
+                            <h4 id="NewPatientTitle" class="modal-title">New Patient</h4>
+                        </div>
+                        <div id="pnlNewPatientsResult">
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <input type="hidden" id="NewPatient_SelectedDataKeys" value="1" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvNewPatientRecords">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">NewVisitTypeId</th>
+                                                <th class="col-sm-8">Visit Types</th>
+                                                <th class="col-sm-2">Duration</th>
+                                                <th class="col-sm-2">Color</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="modal-header">
+                            <h4 id="EstablishedPatientTitle" class="modal-title">Established Patient</h4>
+                        </div>
+
+                        <div id="pnlEstablishedPatientsResult">
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <input type="hidden" id="EstablishedPatient_SelectedDataKeys" value="2" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvEstablishedPatientRecords">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">EstablishedVisitTypeId</th>
+                                                <th class="col-sm-8">Visit Types</th>
+                                                <th class="col-sm-2">Duration</th>
+                                                <th class="col-sm-2">Color</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

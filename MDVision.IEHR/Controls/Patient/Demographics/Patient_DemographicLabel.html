@@ -1,0 +1,81 @@
+﻿<div id="pnlDemographicLabel">
+    <div id="actionPanDemographicLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-smd">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="DemographicLabel.UnLoad();">
+                    <span class=" red">&nbsp;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 id="headingTitle" class="modal-title">Print Demographic Label</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmDemographicLabel" onsubmit="return false">
+                    <div id="divNoOfPrints" class="col-md-6">
+                        <label class="control-label">Number of Prints</label>
+                        <input class="form-control" name="NoOfPrints" id="txtNoOfPrints" onchange="DemographicLabel.generateNoOfPrints(this)" onkeydown="DemographicLabel.maxLegthCheck(e,this)" value="1" type="number" maxlength="3" />
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="spacer15"></div>
+                    <div id="divPrintSpecimenLabel" class="hidden">
+                        <div class="col-md-12">
+                            
+                            <label class="control-label" id="lblPatInfo"></label>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <label class="control-label" id="lblPatAddress"></label>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            
+                            <label class="control-label" id="lblPatInsuranceInfo"></label>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            
+                            <label class="control-label" id="lblPatProvAccount"></label>
+                        </div>
+                       
+                        <div class="clearfix"></div>
+                        <div class="spacer15"></div>
+                    </div>
+                    <div id="printAllSpecimen">
+
+                    </div>
+                    <!--<div class="col-md-6">
+                        <label class="control-label" id="lblOrderDateTime"></label>
+
+                    </div>
+                    <div class="col-sm-4 col-md-6">
+                        <label class="control-label" id="lblAccountNumberAndName"></label>
+
+                    </div>
+                    <div class="col-sm-4 col-md-6">
+                        <label class="control-label" id="lblGenderAge"></label>
+
+                    </div>-->
+                    <div class="col-sm-4 col-md-6">
+                        <div id="barcodeTarget"></div>
+                    </div>
+
+
+                    <input type="hidden" id="hfLabOrderId" name="LabOrderId" value="-1" />
+                    <input type="hidden" id="hfPatientId" name="PatientId" value="-1">
+                    <input type="hidden" id="hfProvider" name="ProviderId" />
+                    <input type="hidden" id="hfFacility" name="FacilityId" />
+                    <input type="hidden" id="hfGuarantorId" name="GuarantorId" />
+                    <input type="hidden" id="hfRalationId" name="RelationId" />
+                    <div class="spacer15"></div>
+
+                    <div class="pull-right pt-md pr-default">
+                        <button type="button" class="btn btn-sm btn-primary" id="btnPrint" onclick="DemographicLabel.PrintBarCode()">Print</button>
+                    </div>
+                    <!-- End Irfan Code for Editable Grid portion -->
+                </form>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

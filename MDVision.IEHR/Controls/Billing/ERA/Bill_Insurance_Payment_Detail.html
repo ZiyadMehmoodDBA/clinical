@@ -1,0 +1,193 @@
+﻿<div class="row" id="pnlBillInsurancePaymentDetail" style="display:none;">
+    <div id="actionPanBillInsurancePaymentDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display: none;">
+                <button type="button" class="close" onclick="Bill_Insurance_Payment_Detail.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Insurance Payment Detail</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-xs" id="btnPostAllCharge" onclick="Bill_Insurance_Payment_Detail.PostAllCharge();"><i class="fa fa-plus-circle"></i> Post Payment</button>
+                    <button type="button" class="btn btn-success btn-xs" id="btnPostDoc" onclick="Bill_Insurance_Payment_Detail.LoadEOBManualPostDocument();"><i class="fa fa-paperclip"></i> EOB </button>
+                    <div class="spacer10"></div>
+                    <div class="clearfix"></div>
+
+                    <section class="panel panel-featured">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="closebtn pull-right" onclick="Bill_Insurance_Payment_Detail.UnLoadTab();"></a>
+                            </div>
+                            <h2 class="panel-title">Detail</h2>
+                        </header>
+                        <div class="panel-body" id="pnlBillInsurancePaymentDetail_Search">
+                            <form id="frmBillInsurancePaymentDetail" method="post" onsubmit="return false">
+                                <div id="divSearchBillInsurancePaymentDetail" class="form-group">
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label id="lblInsurancePlan" class="control-label">Payer <span class="red">*</span> </label>
+                                        <a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="Bill_Insurance_Payment_Detail.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance Plan</a>
+                                        <div class="input-group">
+
+                                            <input class="form-control" id="txtInsurancePlan" name="InsurancePlan" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Bill_Insurance_Payment_Detail.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="Status">Status <span class="red">*</span></label>
+                                        <select id="ddlStatus" class="form-control" name="Status">
+                                            <option value="1">Posted</option>
+                                            <option value="2" selected="selected">UnPosted</option>
+                                            <option value="3">Partially Posted</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="CheckNumber">Check Number <span class="red">*</span></label>
+                                        <input class="form-control" id="txtCheckNumber" name="CheckNumber" type="text">
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="Check Amount">Check Amount <span class="red">*</span></label>
+                                        <input class="form-control" id="txtCheckAmount" name="CheckAmount" type="number">
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="From Entry Date">Check Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="dpCheckDate" name="CheckDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="To Entry Date">Check Deposit Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="dpCheckDepositDate" name="ToCheckDepositDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="Processed Amount">Posted Amount</label>
+                                        <input class="form-control" id="txtPostedAmount" name="PostedAmount" type="text" disabled>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="Date of Entry">Date of Entry</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="dpEntryDate" name="EntryDate" type="text" data-plugin-datepicker="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="User">User</label>
+                                        <input class="form-control" id="txtUser" name="User" type="text" disabled>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 pull-right mt-md">
+                                        <button id="btnSearchEOB" class="btn btn-primary btn-sm rightbtn"  type="submit">Save</button>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="spacer10"></div>
+                                <input type="hidden" id="hfInsurancePlan" name="InsurancePlanId" />
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlBillManualPost_Detail" class="disableAll">
+                        <section class="panel">
+                            <ul class="tabs-custom">
+                                <li id="liClaimDetail" class="active"><a class="custom-made-tabs" href="#Pending" data-toggle="tab">Payment Posting</a></li>
+                            </ul>
+                            <div class="panel-body panel-featured">
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-3">
+                                        <div class="col-md-8">
+                                            <label class="control-label" for="Case Number">Claim Number</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text" placeholder="Start typing to search" autocomplete="off" />
+                                                <div id="divsearchclaim" class="input-group-btn">
+                                                    <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="utility.OpenPatientCharges('Bill_Insurance_Payment_Detail', false);"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-primary btn-sm mt-md mb-md" id="btnBillPaymentPostingDetail" type="button" onclick="Bill_Insurance_Payment_Detail.LoadInsurancePaymentPostingDetail();">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="pnlPaymentPost_Detail">
+                                    <div class="table-responsive overflowX">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none table-responsive" id="dgvPaymentPostDetail">
+                                            <thead>
+                                                <tr class="">
+                                                    <th rowspan="2" id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Payments,PaymentDetail" coltype="Action" class="size-min100 text-center va-middle">Action</th>
+                                                    <th rowspan="2" id="thInsurancePlan" controlid="ddlInsurancePlan" iscontroldisabled="1" controlname="InsurancePlan" controlwidth="" class="size-min200">Plan</th>
+                                                    <th rowspan="2" id="thPatAccount" controlid="txtPatAccount" iscontroldisabled="1" controlname="PatAccount" controlwidth="" class="size-min40 size40 ">Pat.Acc</th>
+                                                    <th rowspan="2" id="thPatientName" controlid="txtPatientName" iscontroldisabled="1" controlname="PatientName" controlwidth="" class="size-min100">Pat.Name</th>
+                                                    <th rowspan="2" id="thCliamNumber" controlid="txtCliamNumber" iscontroldisabled="1" controlname="CliamNumber" controlwidth="" class="size-min40 size40 ">Claim#</th>
+                                                    <th rowspan="2" id="thVisitDate" controlid="dtpVisitDate" iscontroldisabled="1" controlname="VisitDate" controlwidth="" class="size-min40 size40 ">Visit Date</th>
+                                                    <th rowspan="2" id="thCPTCode" controlid="lblCPTCode" iscontroldisabled="1" controlname="CPTCode" controlwidth="" class="size-min40 size40">CPT Code</th>
+                                                    <th rowspan="2" id="thBilledAmount" controlid="txtBilledAmount" controlname="BilledAmount" class="size100">Billed Amount</th>
+                                                    <th rowspan="2" id="thExpectedFee" controlid="txtExpectedFee" controlname="ExpectedFee" class="size50">Expected Fee</th>
+                                                    <th rowspan="2" id="thInsCharge" controlid="txtInsCharge" controlname="InsCharge" controlwidth="size20 p-none" class="size20 size-min50">Ins. Charge</th>
+                                                    <th rowspan="2" id="thAllowedAmount" controlid="txtAllowedAmount" controlname="AllowedAmount" class="size30 text-center va-middle" >Allowed</th>
+                                                    <th rowspan="2" id="thPaidAmount" controlid="txtPaidAmount" controlname="PaidAmount" class="size30 text-center va-middle">Paid</th>
+                                                    <th rowspan="2" id="thWriteOffAmount" controlid="txtWriteOffAmount" controlname="WriteOffAmount" class="size30 text-center va-middle">W/Off</th>
+                                                    <th rowspan="2" id="thDeductionAmount" controlid="txtDeductionAmount" controlname="Deducables" class="size30 text-center va-middle">Ded.</th>
+                                                    <th rowspan="2" id="thCoInsAmount" controlid="txtCoInsAmount" controlname="CoInsAmount" class="size30 text-center va-middle">Co Ins</th>
+                                                    <th rowspan="2" id="thEOBCopay" controlid="txtEOBCopay" controlname="EOBCopay" class="size30 text-center va-middle">EOB Copay</th>
+                                                    <th rowspan="2" id="thChargeCopay" controlid="txtChargeCopay" controlname="ChargeCopay" class="size30 text-center va-middle">Charge Copay</th>
+                                                    <th rowspan="2" id="thPatResp" controlid="txtPatResp" controlname="PatientResp" class="size30 text-center">Pat. Resp</th>
+                                                    <th rowspan="2" id="thNextResp" controlid="ddlNextResp" class="size-min50 size150 noWordBreak" controlname="NextResp">Next Resp</th>
+                                                    <th rowspan="2" id="thNextInsPlan" controlid="ddlNextInsPlan" class="size50 noWordBreak" controlname="NextInsPlan">Next Ins Plan</th>
+                                                    <th colspan="2" id="thAdjustmentCode" controlid="ddlAdjustmentCode" class="size-min150 text-center noWordBreak" controlname="AdjustmentCode">Adjustment Code</th>
+                                                    <th rowspan="2" id="thRemarkCode" controlid="ddlRemarkCode" class="size50 noWordBreak" controlname="RemarkCode">Remark Code</th>
+                                                    <th rowspan="2" id="thPostedStatus" controlid="txtPostedStatus" controlname="PostedStatus" class="size-min80 size90 ">Posted</th>
+                                                    <th rowspan="2" id="thCrossedOverStatus" controlid="txtCrossedOverStatus" controlname="CrossedOverStatus" class="size105 text-center noWordBreak">Crossed Over</th>
+                                                    <th rowspan="2" id="thComments" controlid="txtComments" controlname="Comments" class="size-min200 text-center va-middle">Comments</th>
+                                                </tr>
+                                                <tr>
+                                                    <th class="noWordBreak size-min120  va-middle" id="thGroupCode" controlname="GroupCode" controlid="ddlGroupCode">Group Code</th>
+                                                    <th class="noWordBreak size-min120 va-middle" id="thReasonCode" controlname="ReasonCode" controlid="ddlReasonCode">Reason Code</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>   
+                                    <input type="hidden" id="hfVisitId" />
+                                    <input type="hidden" id="hfEOBManualPostingId" />
+                                    <input type="hidden" id="hfIsEobDetailExists" />
+                                    <input type="hidden" id="hfPatientId" />
+                                    <input type="hidden" id="hfPatientName" />
+                                    <input type="hidden" id="hfDOS" />
+                                </div>
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+    });
+</script>
+

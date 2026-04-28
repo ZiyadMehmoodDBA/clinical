@@ -1,0 +1,48 @@
+﻿<div id="pnlLabResultHL7_Import">
+    <div id="actionPanLabResultHL7_Import" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_LabResultHL7_Import.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titleDocument">Import Lab Result HL7 Message</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 pl-xxs pr-xxs">
+                    <form method="post" onsubmit="return false" id="frmLabResultHL7Import">
+                        <div class="form-group">
+                            <!--<div class="col-sm-8">-->
+                            <div class="col-sm-9" data-provides="fileinput">
+                                <div class="row">
+                                    <div class="col-xs-8 pl-md pr-sm">
+                                        <label class="control-label" for="uploadFilePH">File(s)<span class="required">*</span></label>
+                                        <input type="text" class="form-control size100per ellipses disableAll" name="fileupload" id="uploadFilePH" placeholder="No File Selected" />
+                                    </div>
+                                    <div class="col-xs-4 pl-xs pr-none pt-lg size-min125 ">
+                                        <span class="btn btn-default btn-xs ml-xxs mr-sm btn-file">
+                                            <i class="fa fa-folder-open"></i>
+                                            <span>Browse</span>
+                                            <input type="file" name="Upload_HL7LabResult_file" accept="txt" id="Upload_HL7LabResult_file" multiple onchange="Clinical_LabResultHL7_Import.BufferFile(this);" />
+                                        </span>
+
+                                        <label class="control-label" id="totalFiles">0 file(s) selected</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--</div>-->
+
+
+                            <div class="col-sm-2 conditional pull-right pad-a-labelsize-btn">
+                                <button id="btnDocumentImport" type="button" onclick="Clinical_LabResultHL7_Import.ImportLabResultHL7Message();" class="btn btn-primary btn-sm  rightbtn">Upload</button>
+
+                            </div>
+                            <div class="spacer10"></div>
+                        </div>
+                       
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿<div id="pnlAdminFollowUpGroupDetail">
+    <div id="actionPanAdminFollowUpGroupDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="">
+                <button type="button" class="close" onclick="Admin_FollowUpGroup_Detail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">FollowUp Group</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmAdminFollowUpGroupDetail">
+                    <!--start - CONTENTS-->
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">Short Name<span class="required">*</span></label>
+                                <input class="form-control" name="ShortName" id="txtShortName" type="text" maxlength="50" />
+                            </div>
+
+                            <div class="col-sm-7">
+                                <label class="control-label">Description</label>
+                                <textarea class="form-control" name="Description" id="txtDescription" rows="1" maxlength="100" spellcheck="true"></textarea>
+                            </div>
+
+                            <div class="col-sm-2 col-xs-2 pad-a-labelsize col-lg-1" id="pnlIsActive">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="checked" name="IsActive" id="chkIsActive">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-xs-2 pad-a-labelsize-btn pull-right col-lg-1">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="visible-xs"><div class="clearfix"></div><span class="spacer5"></span></div>
+                    <div class="clearfix"></div>
+                    <div class="spacer20"></div>
+                    <div class="special-block">
+                        <h5> Select AR Group</h5>
+                        <div id="pnlARGroupSection" class="disableAll">
+                            <div class="row">
+                                <div class="col-sm-7 pr-none">
+
+                                    <div class="col-sm-4">
+                                        <header class="panel-blue center">Place Of Service</header>
+                                        <div class="panel-body height150" id="pnlPOS"></div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <header class="panel-blue center">Plan Type</header>
+                                        <div class="panel-body height150" id="pnlPlanType"></div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <header class="panel-blue center">Plan Category</header>
+                                        <div class="panel-body height150" id="pnlPlanCategory"></div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-5 pl-none">
+
+                                    <div class="col-sm-6">
+                                        <header class="panel-blue center">Facility</header>
+                                        <div class="panel-body height150" id="pnlFacility"></div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <header class="panel-blue center">Provider</header>
+                                        <div class="panel-body height150" id="pnlProvider">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

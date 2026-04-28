@@ -1,0 +1,92 @@
+﻿<div id="Scheduling_AppointmentSearch">
+    <div id="actionPanAppointmentSearch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Scheduling_AppointmentSearch.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Appointments</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section class="panel panel-featured">
+                        <form method="post" id="frmAppointmentSearch" onsubmit="return false">
+                            <div class="panel-body" id="pnlAppointment_Search">
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Last Name</label>
+                                        <input class="form-control " id="txtSearchLastName" type="text" />
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">First Name</label>
+                                        <input class="form-control " id="txtSearchFirstName" type="text" />
+                                    </div>
+
+                                    <div class="col-md-3  col-sm-4">
+                                        <label class="control-label" for="Case Type">Facility</label>
+                                        <select id="ddlfacility" name="facility" class="form-control " ddlist="GetFacility"></select>
+                                    </div>
+
+                                    <div class="col-md-3 col-sm-4">
+                                        <label class="control-label" for="Patient Account">Provider</label>
+                                        <select id="ddlprovider" name="provider" class="form-control" ddlist="GetProvider"></select>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Account</label>
+                                        <input class="form-control " id="txtAccount" type="text" maxlength="60" />
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Status</label>
+                                        <select id="ddlAppointmentStatus" name="AppointmentStatusIds" multiple="multiple" ddlmultilist="GetAppointmentStatus" class="form-control"></select>
+                                    </div>
+                                    <div class="col-xs-2 pull-right mt-sm">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="" type="button" onclick="Scheduling_AppointmentSearch.AppointmentSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+                <div class="spacer10"></div>
+                <div id="pnlAppointment_Result" style="display: inline;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <input type="hidden" id="Patient_SelectedDataKeys" />
+                            <div class="col-sm-8 col-lg-8 text-center" id="gridControl">
+                                <a class="btn btn-link btn-xs" onclick="Scheduling_AppointmentSearch.BackDate();"><i class="fa fa-angle-double-left"></i></a> <a data-plugin-datepicker class="btn btn-link btn-xs"><span id="appDate"></span></a>  <a class="btn btn-link btn-xs" onclick="    Scheduling_AppointmentSearch.NextDate();"><i class="fa fa-angle-double-right"></i></a>
+                            </div>                            
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvAppointmentSearch">
+                                <thead>
+                                    <tr>
+                                        <!--<th style="display:none;">AppointmentId</th>-->
+                                        <th class="size120">Patient</th>
+                                        <th class="size90">Account</th>
+                                        <th class="size120">Provider</th>
+                                        <th class="size120">Patient Type</th>
+                                        <th class="size120">Vist Type</th>
+                                        <th class="size120">Reason</th>
+                                        <th class="size85">Time</th>
+                                        <th class="size70">Duration</th>
+                                        <th class="size75">Checkin</th>
+                                        <!--<th class="size95">Wait</th>-->
+                                        <th class="size120">Status</th>
+                                        <!--<th class="size120">Room</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divAppointmentSearchPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div id="FaceSheetPager"></div>
+            
+        </div>
+    </div>
+
+</div>
+
+

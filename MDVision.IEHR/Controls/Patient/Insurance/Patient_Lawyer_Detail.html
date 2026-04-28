@@ -1,0 +1,74 @@
+﻿<div id="lawyerDetail">
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="lawyerDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Lawyer</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tbllawyerDetail">
+                    <form method="post" id="frmLawyerDetail" onsubmit="return false">
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Lawyer Name<span class="required">*</span></label>
+                                <input class="form-control" id="txtLawyerName" name="LawyerName" type="text" maxlength="20">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Firm Name</label>
+                                <input class="form-control" id="txtFirmName" name="FirmName" type="text" maxlength="20">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">License #</label>
+                                <input class="form-control" id="txtLicense" name="License" type="text" maxlength="15">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Contact</label>
+                                <input class="form-control" id="txtContact" name="Contact" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Address 1</label>
+                                <input class="form-control" id="txtAddress1" name="Address1" type="text" maxlength="55">
+                            </div>
+                            <div class="col-sm-4 p-none">
+                                <div class="col-xs-7 pr-xs">
+                                    <label class="control-label">City</label>
+                                    <input class="form-control" id="txtCity" name="City" type="text" maxlength="25">
+                                </div>
+                                <div class="col-xs-5 pl-xs">
+                                    <label class="control-label">State</label>
+                                    <input class="form-control" id="txtState" name="State" type="text" placeholder="aa" data-mask="aa">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 p-none">
+                                <div class="col-xs-7 pr-xs">
+                                    <label class="control-label pull-left "> Zip </label>
+                                    <input id="txtZip" name="Zip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="lawyerDetail.FillCityState('#lawyerDetail', '#txtZip', '#txtCity', '#txtState');" />
+                                </div>
+                                <div class="col-xs-5 pad-a-labelsize pl-xs">
+                                    <input id="txtZipExt" name="ZipExt" class="form-control" type="text" placeholder="9999" data-mask="9999" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Telephone</label>
+                                <input class="form-control" id="txtTelephone" name="Telephone" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Email</label>
+                                <input class="form-control" id="txtEmail" type="text" name="Email" maxlength="100" onblur="lawyerDetail.EnableValidation(this);">
+                            </div>
+                            <div class="col-sm-4 mt-sm">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="Active" id="chkActive" checked>
+                                    <label class="control-label" for="chkActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="pt-sm pull-right pr-default"><button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

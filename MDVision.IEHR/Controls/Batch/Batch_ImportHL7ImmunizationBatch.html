@@ -1,0 +1,197 @@
+﻿
+<div class="panel panel-featured" id="pnlBatchImportHL7ImmunizationBatch">
+    <div id="actionPanBatchImportHL7ImmunizationBatch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <header class="panel-heading">
+        <h2 class="panel-title">Import HL7 Immunization Batch</h2>
+        <div class="panel-actions"><a href="javascript:void(0);" class="closebtn pull-right" onclick="Batch_ImportHL7ImmunizationBatch.UnLoad();"></a></div>
+    </header>
+    <form id="frmImportHL7ImmunizationBatch" method="post" name="frmImportHL7ImmunizationBatch" onsubmit="return false">
+
+        <div class="panel-body">
+            <ul id="ulTabs" class="tabs-custom">
+                <li class="active" id="liBatch"><a href=".Batch" onclick="Batch_ImportHL7ImmunizationBatch.HL7ImmunizationGridTabChange('Batch');" data-toggle="tab">Batch</a></li>
+                <li id="liOutbound"><a href=".Outbound" onclick="Batch_ImportHL7ImmunizationBatch.HL7ImmunizationGridTabChange('OutBound');" data-toggle="tab">Outbound</a></li>
+            </ul>
+            <div class="tab-content tabs-custom-body">
+                <div class="Batch tab-pane active" id="divBatch">
+                    <span class="spacer10"></span>
+                    <div class="panel-body ">
+                        <div class="form-group">
+                            <div class="col-sm-4 col-md-2" id="providerDiv">
+                                <label id="lblProvider" class="control-label">Provider</label>
+                                <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Batch_ImportHL7ImmunizationBatch.OpenProviderDetail('frmImportHL7ImmunizationBatch #divBatch #hfProvider', 'txtProvider');" title="Edit Provider">Provider</a>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" customname="Provider" maxlength="35" />
+                                    <input type="hidden" id="hfProviderId" name="ProviderId" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Batch_ImportHL7ImmunizationBatch.OpenProvider('divBatch');"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label" for="DateFrom">Date From</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input type="text" class="form-control" id="dtpDateFrom" name="DateFrom" data-plugin-datepicker autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label" for="DateTo">Date To</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input type="text" class="form-control" id="dtpDateTo" name="DateTo" data-plugin-datepicker autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label" for="Status">Status</label>
+                                <select class="form-control" id="ddlStatus" name="Status" ddlist="GetHL7BatchStatus">
+                                    <option selected="selected" value="">-Select-</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 col-md-2 mt-md mb-md">
+                                <button class="btn btn-primary btn-sm" id="btnHL7immunizationBatchSearch" type="button" onclick="Batch_ImportHL7ImmunizationBatch.BatchSearch();">Search</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body panel-featured" id="pnlBatchImportHL7ImmunizationBatch_Result">
+                        <div class="panel-body">
+                            <div class="col-lg-3 pad-a-labelsize-btn">
+                                <!--<button type="button" class="btn btn-success btn-sm" id="btnDownloadImportHL7"onclick="Batch_ImportHL7ImmunizationBatch.DownloadBatch()"><i class="fa fa-arrow-down"></i> Download</button>-->
+                                <button type="button" class="btn btn-success btn-sm" id="btnMarkCompleteImportHL7" onclick="Batch_ImportHL7ImmunizationBatch.MarkAsComplete()"> Mark as Complete</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="Record_SelectedDataKeys_Batch" />
+                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvBatch">
+                            <thead>
+                                <tr>
+                                    <th style="display:none;">BatchId</th>
+                                    <th class="size90">
+                                    <input id="chkSelectAllBatches_Batch" type="checkbox" name="checkboxheader_Batch" 
+                                     onchange="Batch_ImportHL7ImmunizationBatch.SelectAllChkBx(this, event, 'dgvBatch');" class="checkbox-custom" />&nbsp;<a class="btn btn-xs" href="#" title="Delete Message" onclick="Batch_ImportHL7ImmunizationBatch.DeleteMultipleBatches('dgvBatch')"> <i class="fa fa-close red"></i></a> Actions</th>
+                                    <th class="size120">Provider</th>
+                                    <th class="size100">Creation Date</th>
+                                    <th class="size80">Records</th>
+                                    <th class="size170">Name</th>
+                                    <th class="size110">Status</th>
+                                    <th class="size100">Completion Date</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <!--This div is used for pagination purpose-->
+                        <div id="divdgvBatchPaging"></div>
+                        <span class="spacer10"></span>
+                    </div>
+                </div>
+                <div class="Outbound tab-pane" id="divOutBound">
+                    <span class="spacer10"></span>
+                    <div class="panel-body ">
+                        <div class="form-group">
+                            <div id="divAccountNumber" class="col-sm-3 col-lg-2">
+                                <label class="control-label">Account Number</label>
+                                <div class="input-group">
+                                    <input class="form-control" title="Account Number" name="Account Number" id="txtAccountNumber" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Batch_ImportHL7ImmunizationBatch.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="hfPatientId" name="PatientId" />
+                            </div>
+                            <div id="divPatientLastName" class="col-sm-3 col-lg-2">
+                                <label class="control-label">Patient Last Name</label>
+                                <input class="form-control" id="txtPatientLastName" type="text">
+                            </div>
+                            <div id="divPatientFirstName" class="col-sm-3 col-lg-2">
+                                <label class="control-label">Patient First Name</label>
+                                <input class="form-control" id="txtPatientFirstName" type="text">
+                            </div>
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label" for="DateFrom">DOS From</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input type="text" class="form-control" id="dtpDateFrom" name="DateFrom" data-plugin-datepicker autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label" for="DateTo">DOS To</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input type="text" class="form-control" id="dtpDateTo" name="DateTo" data-plugin-datepicker autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-2 ">
+                                <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Batch_ImportHL7ImmunizationBatch.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Batch_ImportHL7ImmunizationBatch.OpenFacility();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="hfFacilityId" name="FacilityId" />
+                            </div>
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label" for="Status">Type</label>
+                                <select class="form-control" id="ddlType" name="Type" ddlist="GetHL7BatchMessageType">
+                                    <option selected="selected" value="">-Select-</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 col-lg-2 ">
+                                <label id="lblGivenByProvider" for="GivenBy" class="control-label">Given By</label>
+                                <a id="lnkGivenByProviderEdit" style="display:none;" href="#" title="Given By">Given By</a>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtGivenBy" type="text" placeholder="Start typing to search" name="GivenBy" customname="Provider" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkGivenBy" class="btn btn-primary btn-xs" type="button" onclick="Batch_ImportHL7ImmunizationBatch.OpenProvider('divOutBound');"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="hfGivenByProviderId" name="GivenByProvider" />
+                            </div>
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label" for="Status">Status</label>
+                                <select class="form-control" id="ddlStatus" name="Status" ddlist="GetHL7BatchStatus">
+                                    <option selected="selected" value="">-Select-</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 col-md-2 mt-md mb-md">
+                                <button class="btn btn-primary btn-sm" id="btnHL7immunizationBatchSearch" type="button" onclick="Batch_ImportHL7ImmunizationBatch.QueueSearch();">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-body panel-featured" id="pnlBatchImportHL7ImmunizationQueue_Result">
+                        <div class="panel-body">
+                            <div class="col-lg-3 pad-a-labelsize-btn">
+                                <button type="button" class="btn btn-success btn-sm" id="btnReProcess" onclick="Batch_ImportHL7ImmunizationBatch.ReProcess()">Reprocess</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="Record_SelectedDataKeys_Queue" />
+                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvQueue">
+                            <thead>
+                                <tr>
+                                    <th style="display:none;">BatchId</th>
+                                    <th class="size110">
+                                    <input id="chkSelectAllBatches_Queue" type="checkbox" name="checkboxheader_Queue"
+                                     onchange="Batch_ImportHL7ImmunizationBatch.SelectAllChkBx(this, event, 'dgvQueue');" class="checkbox-custom" />&nbsp;<a class="btn btn-xs" href="#" title="Delete Message" onclick="Batch_ImportHL7ImmunizationBatch.DeleteMultipleBatches('dgvQueue')"> <i class="fa fa-close red"></i></a> Actions</th>
+                                    <th class="size140">Patient Name</th>
+                                    <th class="size140">Account Number</th>
+                                    <th class="size140">Type</th>
+                                    <th class="size140">Provider</th>
+                                    <th class="size140">Facility</th>
+                                    
+                                    <th class="size120">Date</th>
+                                    <th class="size120">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="divdgvQueuePaging"></div>
+                        <span class="spacer10"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,217 @@
+﻿<div class="row" id="pnlCreate_Letter">
+    <div id="actionPanCreate_Letter" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Create_Letter.UnLoadTab('CloseButton');"></button>
+                <h4 class="modal-title">Letter</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form id="frmCreate_Letter" method="post" onsubmit="return false">
+                        <div style="height:482px;">
+
+                            <div id="favSectionDivLetter" class="toggleHorDefault toggled" data-title="Macros">
+                                <div>
+                                    <section class="panel panel-featured size100per " id="macro">
+                                        <header class="panel-heading">
+                                            <h2 id="headingFamilyMember" class="panel-title pull-left">Macros</h2>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                        <div class="panel-body pl-none pr-none height330 height-max330 own-scroll overflowY">
+                                            <div class="demo-section k-content pl-default pr-default mb-xs">
+                                                <span role="presentation" class="k-widget k-autocomplete k-header form-control k-state-default size100per" style=""><input id="macros" class="form-control k-input" data-role="autocomplete" placeholder="Select System..." type="text" autocomplete="off" role="textbox" aria-haspopup="true" aria-disabled="false" aria-readonly="false" aria-owns="Systems_listbox" aria-autocomplete="list" style="width: 100%;"><span class="k-icon k-loading" style="display:none"></span></span>
+                                            </div>
+                                            <div id="divMacroDetails">
+                                                <ul id="ulMacroDetails" name="MacroDetails" class="listPrimary"></ul>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12" id="FormDivCreateLetter" style="overflow-y:auto !important; position:sticky;">
+                                <section class="panel-featured">
+                                    <header class="panel-heading">
+                                        <h2 id="LetterName" class="panel-title">Macros</h2>
+                                    </header>
+                                    <div class="panel-body">
+
+
+
+                                        <button type="button" class="btn btn-xs btn-success " id="btnSavePatientLetter" onclick="Create_Letter.SavePatientLetter('Draft')"><i class="fa fa-save"></i> Save</button>
+                                        <button type="button" class="btn btn-xs btn-success " id="btnSignPatientLetter" onclick="Create_Letter.SavePatientLetter('Signed')"><i class="fa fa-pencil"></i> Sign</button>
+                                        <button class="btn btn-xs btn-success" type="button" id="btnPrintPatientLetter" onclick="Create_Letter.printPatientLetter()"><i class="fa fa-print"></i> Print</button>
+                                        <button class="btn btn-xs btn-success" type="button" id="btnAssignLetter" onclick=""><i class="fa fa-check"></i> Assign</button>
+                                        <button class="btn btn-xs btn-success" type="button" id="btnFaxPatientLetter" onclick="Create_Letter.sendAsFax()"><i class="fa fa-print"></i> Fax</button>
+                                        <button class="btn btn-xs btn-success" type="button" id="btnSendLetter" onclick="Create_Letter.SendPatientLetter();"><i class="fa fa-send"></i> Send</button>
+                                        <button class="btn btn-xs btn-success " type="button" id="btnDeletePatientLetter" onclick="Create_Letter.deletePatientLetter()"><i class=" fa fa-trash"></i> Delete</button>
+                                        <div class="spacer15"></div>
+                                        <div class="form-group">
+                                            <div id="MacroDescDetails" class="tinymce-autocomplete" style="max-width:500px;width: auto;min-width:250px;" hidden>
+                                                <ul id="MacroDescriptions" class="listPrimary list-unstyled list-underlined"></ul>
+
+                                            </div>
+                                            <textarea id="elm1" spellcheck="true" name="TemplateData"></textarea>
+                                            <input type="hidden" id="EncodedImageString" value="" />
+                                            <input type="file" id="ImageUploaderTinymce" style="display:none">
+                                        </div>
+                                        <div class="spacer10"></div>
+                                        <div id="sendHtml"></div>
+
+
+
+                                    </div>
+                                    <div class="panel-body" id="PrintPdfControlDiv" style="display:none;">
+                                        <input type="hidden" id="helperPDF" />
+                                        <iframe id="PreviewReportPrint" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12" style="height:1066px;"></iframe>
+                                    </div>
+                                    <script>
+
+                                        kendo.pdf.defineFont({
+                                            "DejaVu Sans": "../fonts/DejaVuSans.ttf",
+                                            "DejaVu Sans|Bold": "../fonts/DejaVuSans-Bold.ttf",
+                                            "DejaVu Sans|Bold|Italic": "../fonts/DejaVuSans-Oblique.ttf",
+                                            "DejaVu Sans|Italic": "../fonts/DejaVuSans-Oblique.ttf"
+                                        });
+                                    </script>
+                                    <style type="text/css">
+                                        .blueBgPrint {
+                                            background: #005da9 !important;
+                                            color: #fff !important;
+                                        }
+
+                                        .blueBorderPrint {
+                                            border-bottom: 2px solid #005da9;
+                                        }
+
+                                        .btn-link-print {
+                                            color: #000000 !important;
+                                            font-size: 16px;
+                                            font-weight: 700;
+                                        }
+
+                                        .line-height-fix {
+                                            font-size: 14px !important;
+                                        }
+
+                                        .bluefgColor {
+                                            color: #005da9 !important;
+                                        }
+
+                                        .blackfgColor {
+                                            color: black !important;
+                                        }
+                                    </style>
+
+                                    <script type="x/kendo-template" id="page-template">
+                                        <div class="page-template">
+                                            <div class="blueBorderPrint" style="position:absolute;left:20px; right: 20px;font-size: 90%;height: 100%;top: 15px; padding:2px 5px 0 5px;">
+                                                <div class="col-sm-12 col-lg-12">
+                                                    <div class="col-sm-5 col-lg-5 pull-left">
+                                                        <img id="ClinicalReportsHeaderLogo" src="content/images/SHS-nav-logo-small-100.png" class="img-responsive" style="max-width: 350px;max-height:140px;" />
+                                                    </div>
+
+                                                    <div class="pull-right col-sm-5 col-lg-5" id="PracticeDiv"></div>
+                                                </div>
+                                                <div class='clearfix'></div><div class='splitter m-none mt-xs'>
+                                                    <div class='spacer3'></div>
+                                                </div>
+                                                <div class="col-sm-12 col-lg-12">
+                                                    <div class="pull-left col-sm-5 col-lg-5" id="PatientDiv"></div>
+                                                    <div class="pull-right col-sm-5 col-lg-5" id="ProviderDiv"></div>
+                                                </div>
+                                                <div class='clearfix'></div><div class='splitter m-none mt-xs'>
+                                                    <div class='spacer3'></div>
+                                                </div>
+                                            </div>
+                                            <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                                                <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                                                <div id="ClinicalReportsFooterText" class="blueBgPrint" style=" float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                                                    Generated by:<span id="ClinicalReportsFooter">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </script>
+
+                                    <div id="printcall" style="display:none;">
+                                        <div id="PatientInfo" class="panel-body panel-featured">
+                                            <div class="col-sm-4 col-lg-2 pull-left">
+                                                <img src="content/images/SHS-nav-logo-small-100.png" class="img-responsive">
+                                            </div>
+                                            <ul class="list-unstyled pull-right line-height-fix" id="PracticeList">
+                                                <li id="PracticeName"> </li>
+                                                <li id="PracticeAddress"></li>
+                                                <li id="PracticeCity"></li>
+                                                <li id="PracticePhone"></li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                            <div class="splitter m-none mt-xs"><div class="spacer3"></div></div>
+
+
+                                            <ul class="list-unstyled pull-left line-height-fix" id="PatientList">
+                                                <li id="PatientName"></li>
+                                                <li id="PatientAge"></li>
+                                                <li id="PatientAccount"></li>
+                                                <li id="PatientPhone"></li>
+                                                <li id="PatientAddress"></li>
+                                            </ul>
+
+                                            <ul class="list-unstyled pull-right line-height-fix" id="ProviderList">
+                                                <li id="ProviderName"></li>
+                                                <li id="Specialty"></li>
+                                                <li id="LetterDateTime"></li>
+                                            </ul>
+                                        </div>
+                                        <div class="spacer5"></div>
+                                        <section class="panel panel-featured mt-lg">
+                                            <div class="panel-body bg-white" id="ulContent">
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                </section>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

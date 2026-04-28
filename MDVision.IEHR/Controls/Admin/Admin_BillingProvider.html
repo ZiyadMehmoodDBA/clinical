@@ -1,0 +1,87 @@
+﻿<div class="row" id="pnlAdminBillingProvider" style="display:none;">
+    <div id="actionPanAdminBillingProvider" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_BillingProvider.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Billing Provider</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Admin_BillingProvider.BillingProviderAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_BillingProvider.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search Billing Provider </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlBillingProvider_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Short Name</label>
+                                        <input id="txtShortName" type="text" class="form-control"></input>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Entity</label>
+                                        <select id="ddlEntity" class="form-control" ddlist="GetEntity"></select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Bill To?</label>
+                                        <select id="chkIsBillToEIN" class="form-control">
+                                            <option value="" selected="selected">- All -</option>
+                                            <option value="true">EIN</option>
+                                            <option value="false">SSN</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Active?</label>
+                                        <select id="chkIsActice" class="form-control">
+                                            <option value="" selected="selected">- All -</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 pad-a-labelsize-btn">
+                                        <div class="btn-block">
+                                            <button class="btn btn-primary btn-sm" id="btnBillingProviderSearch" type="button" onclick="Admin_BillingProvider.BillingProviderSearch();">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="pnlBillingProvider_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="BillingProvider_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvBillingProvider">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">BillingProviderId</th>
+                                        <th class="size120">Action</th>
+                                        <th class="size120">Short Name</th>
+                                        <th class="size120">Entity</th>
+                                        <th class="size150">EIN/SSN</th>
+                                        <th class="size150">EIN Name</th>
+                                        <th class="size150">NPI</th>
+                                        <th class="size150">Bill to</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divBillingProviderPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

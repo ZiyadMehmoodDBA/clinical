@@ -1,0 +1,182 @@
+﻿<div id="pnlBatchExportCCDA">
+    <div id="actionPanBatchExportCCDA" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div>
+        <div>
+            <div id="modalheader" class="modal-header" style="display: none;">
+                <button type="button" class="close" onclick="Batch_ImportCCDA.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Export CCDA</h4>
+            </div>
+            <div>
+                <div class="spacer10"></div><div class="clearfix"></div>
+                <section class="panel panel-featured">
+                    <div id="formpanelheading">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="closebtn pull-right" onclick="Batch_ExportCCDA.UnLoadTab();"></a>
+                            </div>
+                            <h2 class="panel-title">Export CCDA </h2>
+                        </header>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-bordered" onsubmit="return false" method="post" id="frmBatchExportCCDA"> 
+                            <!--start - CONTENTS-->
+                            <input type="hidden" id="hfPatientMulti" />
+                            <input type="hidden" id="hfIspatientAll" />
+                            <div class="form-group">
+                                <div>
+                                    <div class="col-sm-2 col-md-3" id="divProvider">
+                                        <label class="control-label">Provider </label>
+                                        <select id="ddlProvider"  name="Provider" class="form-control"></select>
+                                    </div>
+                                    <div class="col-sm-2 col-md-3 hidden" id="divPatients">
+                                        <label class="control-label">Patient<span class="required">*</span> </label>
+                                        <select id="ddlPatients" multiple="multiple" name="Patients" class="form-control"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 patientMulti" id="divpatientMulti">
+                                        <label for="txtpatientMulti" class="control-label">Patient<span class="required">*</span></label>
+                                        <input name="patientMulti" id="txtpatientMulti" type="text" class="form-control " data-bv-field="txtpatientMulti" oninput="Batch_ExportCCDA.LoadPatientMultiSelect(this)" onblur=" Batch_ExportCCDA.ClearHiddenField(this, 'hfPatientMulti' );"></input>
+                                    </div>
+                                    <div class="col-sm-2 col-md-3" id="divNoteComponents">
+                                        <label class="control-label">Data to include in Clinical Summary </label>
+                                        <select id="ddlNoteComponents" multiple="multiple" name="NoteComponents" class="form-control"></select>
+                                    </div>
+                                    <div class="col-sm-2 " id="divRoleType">
+                                        <label class="control-label">Rule Type<span class="required">*</span></label>
+                                        <select id="ddlRoleType" name="RuleType" ddlist="GetRoleType" class="form-control"></select>
+                                    </div>
+                                    <div class="col-sm-2 " id="divdatefrom">
+                                        <label class="control-label" for="Date of Birth">DOS From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control " type="text" id="dtpDateFrom" name="DateFrom" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2" id="divdateto">
+                                        <label class="control-label" for="Date of Birth">DOS To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control " type="text" id="dtpDateTo" name="DateTo" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div id="divOnetime">
+                                        <div class="col-sm-2" id="divdateexport">
+                                            <label class="control-label" for="Date Export">Date Export<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input class="form-control " type="text" id="dtpDateExport" name="DateExport" data-plugin-datepicker data-date-start-date="0d" autocomplete="off">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2 " id="divTimeOneTime">
+                                            <label class="control-label" for="VisitTime">Time<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                <input type="text" class="form-control" id="Time" name="Time">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="divReOcurring" class="hidden">
+
+                                        <div class="col-sm-2" id="divYears">
+                                            <label class="control-label">Year(s)<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <select id="ddlYears" multiple="multiple" name="Years"  class="form-control"></select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2 " id="divMonths">
+                                            <label class="control-label" for="Month(s)">Month(s)<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <select multiple="multiple" class="form-control" id="ddlMonths" name="Months"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 " id="divWeeks">
+                                            <label class="control-label" for="Weeks(s)">Week(s)</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <select multiple="multiple" class="form-control" id="ddlWeeks" name="Weeks"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 " id="divDays">
+                                            <label class="control-label" for="Day(s)">Day(s)<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <select multiple="multiple" class="form-control" id="ddlDays" name="Days"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="divTime">
+
+                                            <label class="control-label">Time<span class="required">*</span> </label>
+                                            <div class="row">
+                                                <div class="col-xs-11">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                        <span><input id="txtMultiTime" type="text" name="MultiTime" class="form-control col-sm-1"></span>
+                                                    </div>
+                                                    <div id="demo" class="collapse mt-xs">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                            <input type="text" class="form-control  " name="MultiTime2" id="txtMultiTime2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-1 p-none">
+                                                    <a id="hrfToggle" href="#demo" class="btn  p-none " onclick="Batch_ExportCCDA.TooglePlusMinus();" data-toggle="collapse"><i class="fa fa-plus-square"></i></a>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                       
+                                        <!--<a href="#demo" class="btn btn-info" data-toggle="collapse">Simple collapsible</a>-->
+
+                                    </div>
+
+                                    <div class="col-sm-2 " id="divFilePath">
+                                        <label class="control-label" for="FilePath">File Path<span class="required">*</span></label>
+                                        <input class="form-control" id="txtFilePath" value="CCDA_ScheduledFiles" name="FilePath" customname="File Path" type="text">
+
+                                    </div>
+                                   
+                                    <div class="pull-right mt-md mr-default">
+                                        <button id="btnSave" class="btn btn-primary btn-sm center" type="submit">Save</button>
+                                        <button class="btn btn-primary btn-sm center" id="btnCCDAClear" type="button" onclick="Batch_ExportCCDA.ClearValues();">Clear</button>
+                                        <button class="btn btn-primary btn-sm center disableAll" id="btnDownloadCCDA" type="button" onclick="Batch_ExportCCDA.CCDAGenerate(2);">Download CCDA</button>
+                                        <button class="btn btn-primary btn-sm center hidden" id="btnDownloadCCDA2" type="button" onclick="Batch_ExportCCDA.CCDAGenerate(2,'ddl');">Download CCDA</button>
+                                    </div>
+                                </div>
+                                <div class="spacer10"></div> <div class="spacer10"></div><div class="clearfix"></div>
+                            </div>
+                            <section class="panel " id="secTable">
+                                <div class="panel-body panel-featured">
+                                    <div class="spacer5"></div>
+                                    <input type="hidden" id="Provider_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvCCDAExport">
+                                        <thead>
+                                            <tr>
+
+                                                <th style="display: none;">ID</th>
+                                                <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size100 size-min80">Action</th>
+
+                                                <th>Patient</th>
+                                                <th>Type</th>
+                                                <th>Entered By</th>
+                                                <th>Entry Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="dgvCCDAExport_Paging"></div>
+                                </div>
+                            </section>
+
+                        </form>
+                    </div>
+                </section>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

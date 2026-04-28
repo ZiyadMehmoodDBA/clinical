@@ -1,0 +1,68 @@
+﻿<div id="pnlClinicalLabResultTrendsGraphs">
+    <div id="actionPanClinicalLabResultTrendsGraphs" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ClinicalLabResultTrendsGraphs.UnLoad();">
+                    <span class=" red">&nbsp;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 id="headingTitle" class="modal-title">Lab Trending</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-body">
+                    <h4 style="color:#0088cc;" id="PatientDetails"></h4>
+                    <hr />
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 editable-control">
+                        <strong><label class="control-label">Observations</label></strong>
+                        <br />
+                        <select id="ddlFilterObservation" onchange="ClinicalLabResultTrendsGraphs.onChangeFilter();" name="Observation" class="form-control"></select>
+                    </div>
+                    <div class="col-sm-2 col-md-2 pull-right">
+                        <label class="radio-inline"><input type="radio" name="radgroupGraph" checked value="2D">2D</label><br />
+                        <label class="radio-inline"><input type="radio" name="radgroupGraph" value="3D">3D</label>
+                    </div>
+                </div>
+                    <div class="row">
+                   <div class="col-md-1"></div>
+                    <div class="col-md-11 col-sm-11">
+                        <div id="TwoD">
+                            <div id="dgvLabGraphs">
+
+                                </div>
+                            </div>
+         
+                    </div>
+                        </div>
+                    <div class="row">
+                        <div id="ThreeD" hidden>
+                            <div id="Graph3d"></div>
+                            <div id="sliders">
+                                <table>
+                                    <tr>
+                                        <td>Alpha Angle</td>
+                                        <td><input id="alpha" type="range" min="0" max="45" value="15" /> <span id="alpha-value" class="value"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Beta Angle</td>
+                                        <td><input id="beta" type="range" min="-45" max="45" value="15" /> <span id="beta-value" class="value"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Depth</td>
+                                        <td><input id="depth" type="range" min="20" max="100" value="50" /> <span id="depth-value" class="value"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
+                     
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+    </div>
+

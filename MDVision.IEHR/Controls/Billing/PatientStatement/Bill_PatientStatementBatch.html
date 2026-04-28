@@ -1,0 +1,322 @@
+﻿<div class="row" id="pnlBillPatientStatementBatch" style="display:none;">
+    <div id="actionPanBillPatientStatementBatch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="mainScrollPan" id="mainScrollPan">
+                
+
+                <div class="modal-header" style="">
+                    <button id="btnClose" type="button" class="close" onclick="Bill_PatientStatementBatch.UnLoadTab();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Patient Statement Batch Detail</h4>
+                </div>
+                <section class="panel panel-featured">
+                    <div class="panel-body" id="pnlPatientStatement_Batch">
+
+                        <form id="frmBillPatientStatementBatch" method="post" onsubmit="return false">
+                            <div class="col-sm-3 mb-xs">
+                                <a id="btnResubmit" onclick="Bill_PatientStatementBatch.Statement_ReSubmit(true)" class="btn btn-link btn-xs"><i class="fa fa-upload pull-left" style="font-size:20px"></i> <span class="pull-left" style="margin-top: 3px;">Resubmit Statements</span></a>
+                            </div>
+                            <div class="spacer10"></div>
+                            <div class="clearfix"></div>
+                           
+                            <div id="pnlStatementBatch_Result" style="display: none;">
+                                <section class="panel">
+                                    <div class="tab-content tabs-custom-body">
+
+                                        <div id="StatementsBatch" class="tab-pane active custom-made-tabs tabStatements">
+                                            <div class="clearfix"></div>
+                                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvStatementBatch">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none;">StatementId</th>
+                                                        <th><input type="checkbox" title="Select all" name="checkbox" id="chkAllStatements" onclick="Bill_PatientStatementBatch.checkUncheckAll(this);"></th>
+                                                        <th class="size-max50">Account</th>
+                                                        <th>Last Name</th>
+                                                        <th>First Name</th>
+                                                        <th>Facility</th>
+                                                        <th class="size-max70">Advance Payment</th>
+                                                        <th class="size-max70">Patient Balance</th>
+                                                        <th class="size-max70">Last Statement</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div class="clearfix"></div>
+                                            <div id="divPostingStatementPaging"></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                      
+
+                                    </div>
+                                </section>
+                            </div>
+
+
+                        </form>
+
+
+                        <div id="accountStatementContainer" style="display:none;">
+
+                        </div>
+
+                    </div>
+
+                    <printstatement style="display:none;">
+                        <div class="templatePrintStatement">
+                            <div class="tableHeader">
+                                <div style=" background-image: url('Content/Default/images/header-bg.png'); background-repeat:repeat-x;  float:left; padding-bottom:30px;width:100%;">
+                                    <div class="col-sm-12">
+                                        <table style="width:100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:center" colspan="2"><h4 class="text-bold" style="color:#fff">STATEMENT</h4></td>
+                                                <tr />
+                                                <tr>
+                                                    <td class="pl-md pr-default" width="50%">
+                                                        <div style="min-height:190px;">
+                                                            <div class="col-sm-12 patientStatementAddress" style="min-height: 130px;">
+                                                                <h4 class="FromName mb-none" style="font-weight:700;"></h4>
+                                                                <span class="FromAddress"></span> <br />
+                                                                <span class="FromCity"></span>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                Office Hours : <span class="Ofctime"></span><br />
+                                                                Phone : <span class="OfcPhone"></span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td width="48%">
+                                                        <div style="border-radius:21px;background:white">
+                                                            <div class="tableCraditcard">
+                                                                <table class="table table-condensed  mb-none">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th colspan="7" class="text-center"> COMPLETE AND RETURN IF PAYING BY CREDIT CARD.</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody style="font-size:11px;">
+                                                                        <tr>
+                                                                            <td class="size-min100 borderTransprentR borderTransprentB">
+                                                                                <img class="ml-sm" src="Content/images/scan-foto-yokoz.png" width="50">
+
+                                                                            </td>
+                                                                            <td class="size-min100 borderTransprentR borderTransprentB">
+                                                                                <img class="ml-sm" src="Content/images/visa-logo_trans.png" width="50">
+                                                                            </td>
+                                                                            <td class="size-min100 borderTransprentR borderTransprentB">
+                                                                                <img class="ml-sm" src="Content/Default/images/discover.png" width="50">
+                                                                            </td>
+                                                                            <td class="size-min100 borderTransprentB">
+                                                                                <img class="ml-sm" src="Content/images/amex.jpg" width="50">
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;"> CARD NUMBER <br /></td>
+                                                                            <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;padding-left:40px !important"> |SECURITY CODE <br /></td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;"> NAME ON CARD (PLEASE PRINT) <br /></td>
+                                                                            <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;padding-left:40px !important"> |EXP. DATE <br /></td>
+                                                                        </tr>
+
+
+                                                                        <tr>
+                                                                            <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;"> SIGNATURE <br /></td>
+                                                                            <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;padding-left:40px !important"> |AMOUNT <br /></td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td colspan="4" style="padding: 0 !important; border-radius: 10px !important;">
+                                                                                <table class="table-condensed " width="100%">
+                                                                                    <tr>
+                                                                                        <td style="border-radius: 10px !important;">
+                                                                                            <div style="font-weight:bold;text-align:center"> STATEMENT DATE</div>
+                                                                                            <div style="text-align:center;font-weight:bold">
+                                                                                                <span class="patientCurrentDate"></span>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td style="background-color:yellow; border-left:1px solid #ccc;border-right:1px solid #ccc;">
+                                                                                            <div style="font-weight:bold;text-align:center"> ACCOUNT #</div>
+                                                                                            <div style="text-align:center;font-weight:bold">
+                                                                                                <span class="patientAccount"></span>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td style="padding: 0 !important; border-radius: 10px !important;">
+                                                                                            <div style="background-color:#c3313e;font-weight:bold;text-align:center; color: #fff;"> PAY THIS AMOUNT </div>
+                                                                                            <div style="text-align:center;font-weight:bold">
+                                                                                                <span class="PatientBalanceDue"></span>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td width="2%"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <table width="100%">
+                                    <tr>
+                                        <td width="50%"></td>
+                                        <td width="50%"><b style="color:#c3313e;"> MAKE CHECK PAYABLE AND REMIT TO:</b><br /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%" style="line-height: 1;">
+                                            <div style="margin-left:55px">
+
+                                                <span class=" patientName" style="margin-right:15px;font-size:13px"></span><span class="patientAccount" style="font-size:13px"></span><br />
+                                                <span class=" patientAddress" style="font-size:13px"></span><br />
+                                                <span class="patientCity" style="font-size:13px"></span>
+
+                                            </div>
+                                        </td>
+                                        <td width="50%" style="line-height: 1;">
+                                            <h5 class="RemitToName mb-none" style="font-weight: 600;font-size:13px"></h5>
+                                            <span class="RemitToAddress" style="font-size:13px"></span><br />
+                                            <span class="RemitToCity" style="font-size:13px"></span>
+                                            <br />
+                                            <br />
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+
+                            <div class="tableBody" style="min-height: 370px;background-image: url('Content/Default/images/grid-bg.png');background-repeat:repeat-x;">
+                                <div class="clearfix"></div>
+
+                                <div class="pull-right" style="color:#c3313e;font-size:7px;font-weight: 800;"> DETACH TOP PORTION AND RETURN WITH PAYMENT IN ENCLOSED ENVELOPE</div>
+                                <table width="100%" class="table table-bordered  table-condensed table-hover reportTableTd">
+                                    <thead class="printHeading">
+                                        <tr>
+                                            <th class="text-center">DATE</th>
+                                            <th class="text-center">PROVIDER</th>
+                                            <!--<th class="text-center">Procedure</th>-->
+                                            <th class="text-center">DESCRIPTION</th>
+                                            <th class="text-center">CHARGES</th>
+                                            <th class="text-center">PAYMENT/AD.</th>
+                                            <!--<th class="text-center">Balance</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody class="printBody"></tbody>
+                                </table>
+                            </div>
+                            <div class="tableFooter FooterBreak">
+                                <table width="100%">
+                                    <tr>
+                                        <td width="30%">
+                                            <div style="border:2px solid #c3313e;min-height: 115px;">
+                                                <div style="text-align:center">
+                                                    <label style="color:#c3313e;font-weight: 800;font-size: 16px;">Account Information</label>
+                                                </div>
+                                                <div style="margin-left:10px;margin-right:10px;min-height:80px">
+                                                    <span>Statement Date : </span><span class="pull-right patientCurrentDate"></span><br />
+                                                    <span>Account : </span><span class="pull-right patientAccount"></span><br />
+                                                    <span>Patient : </span><span class="pull-right patientName"></span><br />
+                                                    <span style="font-weight:bold">Patient Balance : </span><span class="pull-right PatientBalanceDue" style="font-weight:bold"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td width="20%" style="padding-left:8px;padding-right:8px;">
+                                            <img style="position:absolute;margin-top: -76px;margin-left: 12%;height: 74px;" src="Content/Default/images/arrow.png" />
+                                            <div style="border:2px solid #c3313e;min-height: 115px;">
+                                                <div style="text-align:center">
+                                                    <label style="color:#c3313e;font-weight: 900;font-size: 20px;">DUE NOW</label>
+                                                </div>
+                                                <div style="min-height:80px;margin-left:5px;margin-right:5px;text-align:center; line-height:1.2;">
+                                                    <span class="PatientBalanceDue" style="font-weight:800;font-size:15px"></span>
+                                                    <div style="font-weight:bold;font-size:14px;text-align:center;color:#c3313e;padding-top:10px"> This Amount is your responsibility </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td width="50%">
+                                            <div style="border:2px solid #c3313e;min-height: 115px;">
+                                                <div style="min-height:80px;margin-left:5px">
+                                                    <span class="StatementGrpMessage" style="font-weight:800"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table width="100%">
+                                    <tr>
+                                        <td width="40%">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td valign="top">
+                                                            <div class="printHeadingAging bg-hedder" style="padding: 12px 5px 11px 5px;  border: 1px solid #ddd;  border-right: none;  color: #fff;  font-size: 11px;  font-weight: bold;">Aging</div>
+                                                        </td>
+                                                        <td width="81%" valign="top">
+                                                            <table width="100%" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                                                                <thead class="printHeading">
+                                                                    <tr class="white tiny-font">
+                                                                        <th class="text-center bg-hedder size-min50">Current</th>
+                                                                        <th class="text-center bg-hedder size-min70">31-60 Days</th>
+                                                                        <th class="text-center bg-hedder size-min70">61-90 Days</th>
+                                                                        <th class="text-center bg-hedder size-min75">91-120 Days</th>
+                                                                        <th class="text-center bg-hedder size-min80">120+ Days</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <tr>
+                                                                        <td class="0_30Days text-center">$0.00</td>
+                                                                        <td class="31_60Days text-center">$0.00</td>
+                                                                        <td class="61_90Days text-center">$0.00</td>
+                                                                        <td class="91_120Days text-center">$0.00</td>
+                                                                        <td class="120_above text-center">$0.00</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td width="30%">
+                                            <div style="border:1px solid #c3313e;border-left-width:2px;border-right-width:2px;min-height:60px;text-align:center; line-height:1.3;padding-top:5px;">
+                                                <span class="statementMessage" style="font-weight: 500;"></span>
+                                            </div>
+                                        </td>
+                                        <td width="30%">
+                                            <div style="margin-left:5px;margin-right:5px;margin-top:8px;line-height:1.2;font-weight:600;">
+                                                <span class="FromName" style="font-weight:bold;font-size:16px"></span><br />
+                                                <span class="FromAddress"></span><br />
+                                                <span class="FromCity"></span><br />
+                                                <span class="Telephone"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </printstatement>
+
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

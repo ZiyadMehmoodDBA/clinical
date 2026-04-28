@@ -1,0 +1,83 @@
+﻿<div id="pnlImmunization_LotNumber">
+    <div id="actionPanImmunization_LotNumber" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Immunization_LotNumber.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Lot Numbers</h4>
+            </div>
+            <div id="modalbody" class="panel-body">
+                <form class="form-inline" role="form" id="frmImmunization_LotNumber">
+                    <div class="panel panel-default">
+                        <div id="gridLotNumbeControls" class="panel-body">
+                            <div class="col-sm-1 pt-sm" id="AddLot" style="display:none;">
+                                <button type="button" class="btn btn-sm btn-success" onclick="Immunization_LotNumber.AddLotNumber()"><i class="fa fa-plus-circle"></i> Add</button>
+                            </div>
+                            <div class="col-sm-4 pt-sm" id="divSwitch">
+                                <span class="pr-xs">Inactive</span>
+                                <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                    <input id="switchActive" isactive="1" type="checkbox" checked="checked" data-plugin-ios-switch="" style="display: none;" onchange=" Immunization_LotNumber.LoadLotNumberList();">
+                                </div>
+                                <span class="pl-xs">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pnlLotNumber_Result" style="display: inline;">
+
+                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvLotNumer">
+                            <thead>
+                                <tr>
+                                    <th id="ColumnAction" coltype="Action" class="size100" style="display:none;">LotNumber</th>
+                                    <th id="ColumnAction" coltype="Action" class="size100">Action</th>
+                                    <th id="ColumnAction" coltype="Action" class="size100">Lot No.</th>
+                                    <th id="ColumnAction" name="vaccineName" coltype="Action" class="size100">Vaccine Name</th>
+                                    <th id="ColumnAction" coltype="Action" class="size100">Manufacturer</th>
+                                    <th id="ColumnAction" coltype="Action" class="size100">Expiry Date</th>
+                                    <th id="ColumnAction" coltype="Action" class="size100">Quantity</th>
+                                    <th id="ColumnAction" coltype="Action" class="size100">Quantity Left</th>
+                                    <th id="ColumnAction" coltype="Action" class="size100">Type</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="spacer5"></div>
+                        <div id="divLotNumber_Paging"></div>
+                        <div class="spacer5"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+    });
+
+</script>

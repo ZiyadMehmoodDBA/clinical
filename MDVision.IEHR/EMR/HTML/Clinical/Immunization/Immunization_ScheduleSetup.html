@@ -1,0 +1,230 @@
+﻿<div id="pnlImmunization_ScheduleSetup">
+    <div id="actionPanImmunization_ScheduleSetup" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Immunization_ScheduleSetup.UnLoadTab()"></a>
+            </div>
+            <h2 class="panel-title">Schedule Setup</h2>
+        </header>
+        <div class="panel-body">
+            <form class="form-bordered" role="form" id="frmImmunizationScheduleSetup">
+                <div class="form-group">
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            Schedule Type
+                            <span class="required">*</span>
+                        </label>
+                        <select id="ddlScheduleType" name="ScheduleTypeId" class="form-control" onchange="Immunization_ScheduleSetup.BindSchedule(this, 'ddlSchedule')"></select>
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            Schedule
+                            <span class="required">*</span>
+                        </label>
+                        <select id="ddlSchedule" name="ScheduleId" class="form-control"></select>
+                    </div>
+                    
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            Category
+                            <span class="required">*</span>
+                        </label>
+                        <select id="ddlCategory" name="VaccineGroupID" class="form-control"></select>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            Start Due (Days)
+                        </label>
+                        <input class="form-control" type="text" id="txtStartDueDate" name="StartDueDate" maxlength="6">
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            End Overdue (Days)
+                        </label>
+                        <input class="form-control" type="text" id="txtEndOverDueDate" name="EndOverDueDate" maxlength="6">
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            Max Age (Days)
+                        </label>
+                        <input class="form-control" type="text" id="txtMaxage" name="Maxage" maxlength="6">
+                    </div>
+                    <div class="col-sm-1 col-md-3 col-lg-1 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="chkActive" name="IsActive" checked>
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 pull-right mt-md">
+                        <button class="btn btn-success btn-sm rightbtn" type="submit" id="btnAddScheduleSetup">Add</button>
+                    </div>
+                </div>
+                <div class="spacer20"></div>
+                <header class="panel-heading">
+                    <h2 class="panel-title">Search Schedule Setup </h2>
+                </header>
+                <div class="panel-body" id="pnlScheduleSetup_Search">
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            Schedule Type
+                        </label>
+                        <select id="ddlScheduleTypeSearch" class="form-control" onchange="Immunization_ScheduleSetup.BindSchedule(this, 'ddlScheduleSearch'); Immunization_ScheduleSetup.ActiveteSelectedTypeId(this)"></select>
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            Schedule
+                        </label>
+                        <select id="ddlScheduleSearch" class="form-control"></select>
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label" for="Category">Category</label>
+                        <select id="ddlCategorySearch" class="form-control"></select>
+                    </div>
+                    <div class="col-sm-3 col-sm-3 pad-a-labelsize" id="divSwitch">
+                        <span class="pr-xs">Inactive</span>
+                        <div class="btnWidgetSwitch switch switch-xs switch-success">
+                            <input id="switchActive" isactive="1" type="checkbox" checked="checked" data-plugin-ios-switch="" style="display: none;">
+                        </div>
+                        <span class="pl-xs">Active</span>
+                    </div>
+                    <div class="col-sm-2 mt-xs pull-right">
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnScheduleSetupSearch" type="button" onclick="Immunization_ScheduleSetup.ScheduleSetupSearch();">Search</button>
+                    </div>
+                </div>
+                <input type="hidden" id="hfVaccineId" name="VaccineId" />
+                <input type="hidden" id="hfVaccineIdSearch" />
+            </form>
+            <div class="clearfix"></div>
+            <ul class="tabs-custom" id="ulSocialHxTabsItems">
+                <li id="listBirth_2_years" scheduletypeid="1" onclick="Immunization_ScheduleSetup.LoadSchedlerAndActiveTabData('Birth_2_years', true, this);" class="li-tab"> <a class="active" href="#tab_Birth_2_years" data-toggle="tab">Birth - 2 years</a></li>
+                <li id="list2_18_years" scheduletypeid="2" onclick="Immunization_ScheduleSetup.LoadSchedlerAndActiveTabData('2_18_years', true, this);" class="li-tab"> <a class="" href="#tab_2_18_years" data-toggle="tab">2 - 18 Years</a></li>
+                <li id="listAdult" scheduletypeid="3" onclick=" Immunization_ScheduleSetup.LoadSchedlerAndActiveTabData('Adult', true, this);" class="li-tab"> <a class="" href="#tabAdult" data-toggle="tab">Adult</a></li>
+                <li id="listRecurring" scheduletypeid="4" onclick=" Immunization_ScheduleSetup.LoadSchedlerAndActiveTabData('Recurring', true, this);" class="li-tab"> <a class="" href="#tabRecurring" data-toggle="tab">Recurring</a></li>
+            </ul>
+            <div id="pnlScheduleSetup_Result" class="tab-content tabs-custom-body pt-default pl-none pr-none">
+                <div id="tab_Birth_2_years" class="tab-pane active" scheduletypeid="1">
+                    <div id="pnlScheduleSetup_Birth_2_years_Result" style="display: inline;">
+                        <div class="panel panel-body panel-featured">
+                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvScheduleSetup_Birth_2_years">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,VacScheduleSetUpActive,Cancel,Down,Up" coltype="Action" class="size100">Action</th>
+                                        <th controlid="ddlScheduleIdLitem" controlname="ScheduleId" schtypeid="1" isoptional="0" coltype="dropdown" class="size100">Schedule</th>
+                                        <th controlid="ddlCategoryLitem" controlname="VaccineGroupID" isoptional="0" coltype="dropdown" class="size100">Category</th>
+                                        <th controlid="txtStartDueDate" controlname="StartDueDate" isoptional="1" coltype="textbox" class="size100">Start Due (Days)</th>
+                                        <th controlid="txtEndOverDueDate" controlname="EndOverDueDate" isoptional="1" coltype="textbox" class="size100">End Overdue (Days)</th>
+                                        <th controlid="txtMaxage" controlname="Maxage" isoptional="1" coltype="textbox" class="size100">Max Age (Days)</th>
+                                        <th controlname="ScheduleTypeId" style="display:none;">Schedule Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab_2_18_years" class="tab-pane" scheduletypeid="2">
+                    <div id="pnlScheduleSetup_2_18_years_Result" style="display: inline;">
+                        <div class="panel panel-body panel-featured">
+                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvScheduleSetup_2_18_years">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,VacScheduleSetUpActive,Cancel,Down,Up" coltype="Action" class="size100">Action</th>
+                                        <th controlid="ddlScheduleIdLitem" controlname="ScheduleId" schtypeid="2" isoptional="0" coltype="dropdown" class="size100">Schedule</th>
+                                        <th controlid="ddlCategoryLitem" controlname="VaccineGroupID" isoptional="0" coltype="dropdown" class="size100">Category</th>
+                                        <th controlid="txtStartDueDate" controlname="StartDueDate" isoptional="1" coltype="textbox" class="size100">Start (Due Date)</th>
+                                        <th controlid="txtEndOverDueDate" controlname="EndOverDueDate" isoptional="1" coltype="textbox" class="size100">End (Overdue Date)</th>
+                                        <th controlid="txtMaxage" controlname="Maxage" isoptional="1" coltype="textbox" class="size100">Max age</th>
+                                        <th controlname="ScheduleTypeId" style="display:none;">Schedule Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div class="spacer5"></div>
+                            <div id="divPrescriptions_Paging"></div>
+                            <div class="spacer5"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab_Adult" class="tab-pane" scheduletypeid="3">
+                    <div id="pnlScheduleSetup_Adult_Result" style="display: inline;">
+                        <div class="panel panel-body panel-featured">
+                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvScheduleSetup_Adult">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,VacScheduleSetUpActive,Cancel,Down,Up" coltype="Action" class="size100">Action</th>
+                                        <th controlid="ddlScheduleIdLitem" controlname="ScheduleId" schtypeid="3" isoptional="0" coltype="dropdown" class="size100">Schedule</th>
+                                        <th controlid="ddlCategoryLitem" controlname="VaccineGroupID" isoptional="0" coltype="dropdown" class="size100">Category</th>
+                                        <th controlid="txtStartDueDate" controlname="StartDueDate" isoptional="1" coltype="textbox" class="size100">Start (Due Date)</th>
+                                        <th controlid="txtEndOverDueDate" controlname="EndOverDueDate" isoptional="1" coltype="textbox" class="size100">End (Overdue Date)</th>
+                                        <th controlid="txtMaxage" controlname="Maxage" isoptional="1" coltype="textbox" class="size100">Max age</th>
+                                        <th controlname="ScheduleTypeId" style="display:none;">Schedule Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+
+                            </table>
+                            <div class="spacer5"></div>
+                            <div id="divPrescriptions_Paging"></div>
+                            <div class="spacer5"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab_Recurring" class="tab-pane" scheduletypeid="4">
+                    <div id="pnlScheduleSetup_Recurrinng_Result" style="display: inline;">
+                        <div class="panel panel-body panel-featured">
+                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvScheduleSetup_Recurring">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,VacScheduleSetUpActive,Cancel,Down,Up" coltype="Action" class="size100">Action</th>
+                                        <th controlid="ddlScheduleIdLitem" controlname="ScheduleId" schtypeid="4" isoptional="0" coltype="dropdown" class="size100">Schedule</th>
+                                        <th controlid="ddlCategoryLitem" controlname="VaccineGroupID" isoptional="0" coltype="dropdown" class="size100">Category</th>
+                                        <th controlid="txtStartDueDate" controlname="StartDueDate" isoptional="1" coltype="textbox" class="size100">Start (Due Date)</th>
+                                        <th controlid="txtEndOverDueDate" controlname="EndOverDueDate" isoptional="1" coltype="textbox" class="size100">End (Overdue Date)</th>
+                                        <th controlid="txtMaxage" controlname="Maxage" isoptional="1" coltype="textbox" class="size100">Max age</th>
+                                        <th controlname="ScheduleTypeId" style="display:none;">Schedule Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div class="spacer5"></div>
+                            <div id="divPrescriptions_Paging"></div>
+                            <div class="spacer5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+    });
+
+</script>

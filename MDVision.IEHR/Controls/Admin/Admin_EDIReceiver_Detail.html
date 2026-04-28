@@ -1,0 +1,409 @@
+﻿<div id="EDIReceiverDetail">
+    <div id="actionPanEDIReceiverDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="EDIReceiverDetail.UnLoad();"><span class=" red" >&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">EDI Receiver</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblEDIReceiverDetail" class="col-md-12">
+                    <div class="tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#EdiReceiver" data-toggle="tab">EDI Receiver</a></li>
+                            <li><a id="lnkEdiReceiverX12" href="#EdiReceiverSecond" data-toggle="tab">EDI Receiver X12</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="EdiReceiver" class="tab-pane active">
+                                <h4 class="panel-title">EDI Receiver</h4>
+                                <form method="post" onsubmit="return false" id="frmReceiverSetup">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label">Short Name <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="txtShortName" name="ShortName" maxlength="10">
+                                        </div>
+                                        <div class="col-md-3 ">
+                                            <label class="control-label" for="Submitter ID">Submitter ID <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="txtSubmitterID" onchange="EDIReceiverDetail.SetInterchangeSenderID(this)" name="SubmitterID" maxlength="15">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">Clearing House<span class="required">*</span></label>
+                                            <select id="ddlClearingHouse" name="ClearingHouse" class="form-control" ddlist="GetClearingHouse"></select>
+                                        </div>
+                                        <div class="col-md-1 pad-a-labelsize">
+                                            <div class="checkbox-custom checkbox-default pad">
+                                                <input type="checkbox" name="ANSI5010" checked="" id="chkANSI5010">
+                                                <label for="chkANSI5010">ANSI 5010</label>
+                                            </div>
+                                        </div>
+                                        <div class=" col-md-1 pad-a-labelsize">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                                <label for="chkIsActive">Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label">Receiver ID <span class="required">*</span></label>
+                                            <input class="form-control" type="text" name="ReceiverID" onchange="EDIReceiverDetail.SetInterchangeReceiverID(this)" id="txtReceiverID" maxlength="15">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="col-md-3 control-label">Entity<span class="required">*</span></label>
+                                            <select id="ddlEntity" class="form-control" name="Entity" ddlist="GetEntity"></select>
+                                        </div>
+                                        
+                                        <div class="col-md-3">
+                                            <div class="spacer10"></div>
+                                            <div class="spacer10"></div>
+                                            <!--<button id="btnHistoryEdiReceiver" class="btn btn-primary btn-sm lefttbtn" type="button" onclick="EDIReceiverDetail.ShowHistory();">History</button>-->
+                                            <button type="submit" id="btnEDIReceiverSave" class="btn btn-primary btn-sm leftbtn">Save</button>
+                                           
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label for="Version code National" class="control-label">Version code National </label>
+                                            <input type="text" class="form-control" name="VersionCodeNational" id="txtVersionCodeNational" maxlength="20">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Software Issuer ID </label>
+                                            <input type="text" class="form-control" id="txtSoftwareIssuerID" name="SoftwareIssuerID" maxlength="55">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group hidden">
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Validation XML </label>
+                                            <input type="text" class="form-control" name="ValidationXML" id="txtValidationXML">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">
+                                                2000A PRV01 Billing/Pay to provider Type
+                                            </label>
+                                            <select id="ddlBillingToProvType" name="BillingToProvType" class="form-control">
+                                                <option value="" selected="selected">- Select -</option>
+                                                <option value="1">PI</option>
+                                                <option value="2">BI</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 pad-a-labelsize hidden">
+                                            <div class="checkbox-custom checkbox-default ">
+                                                <input type="checkbox" name="BatchBillingNPI" checked="" id="chkBatchBillingNPI">
+                                                <label for="chkBatchBillingNPI ">Batch by Billing NPI </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Batch Type </label>
+                                            <input type="text" class="form-control" name="BatchType" id="txtBatchType">
+                                        </div>
+                                    </div>
+                                    <div class="form-group hidden">
+                                        <div class="col-md-3 pad-a-labelsize hidden">
+                                            <div class="checkbox-custom checkbox-default pad">
+                                                <input type="checkbox" name="SendSiteID" checked="" id="chkSendSiteID">
+                                                <label for="chkSendSiteID">2010AA REF&lowast;G5 Send Site ID </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Receiver Code</label>
+                                            <input type="text" class="form-control" name="ReceiverCode" id="txtReceiverCode" maxlength="10">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Test Production Indicator </label>
+                                            <input type="text" class="form-control" name="TestProductionIndicator" id="txtTestProductionIndicator" maxlength="1">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Receiver NSF Name </label>
+                                            <input type="text" class="form-control" name="ReceiverNSFName" id="txtReceiverNSFName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group hidden">
+
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Receiver Type Code </label>
+                                            <input type="text" class="form-control" name="ReceiverTypeCode" id="txtReceiverTypeCode" maxlength="10">
+                                        </div>
+
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Version Code Local </label>
+                                            <input type="text" class="form-control" name="VersionCodeLocal" id="txtVersionCodeLocal" maxlength="55">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">
+                                                BHT02 Transaction Set Purpose Code <span class="required">*</span>
+                                            </label>
+                                            <select id="ddlTranSetPurposeCode" class="form-control" name="TranSetPurposeCode">
+                                                <option value="">-- Select --</option>
+                                                <option value="00">00- Original</option>
+                                                <option value="18">18- Reissue</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Org Sub ID </label>
+                                            <input type="text" class="form-control" id="txtOrgSubID" name="OrgSubID" maxlength="55">
+                                        </div>
+                                    </div>
+                                    <div class="form-group hidden">
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Vendor App Category </label>
+                                            <input type="text" class="form-control" name="VendorAppCategory" id="txtVendorAppCategory">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Vendor SoftUpdate </label>
+                                            <input type="text" class="form-control" name="VendorSoftUpdate" id="txtVendorSoftUpdate">
+                                        </div>
+
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Path </label>
+                                            <input type="text" class="form-control" name="Path" id="txtPath">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Vendor SoftVersion </label>
+                                            <input type="text" class="form-control" name="VendorSoftVersion" id="txtVendorSoftVersion">
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group hidden">
+                                        <div class="col-md-2 pad-a-labelsize hidden">
+                                            <div class="checkbox-custom checkbox-default pad">
+                                                <input type="checkbox" name="IsPrimary" checked="" id="chkIsPrimary">
+                                                <label for="chkIsPrimary">Is Primary </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--==============================================================================================-->
+                            <div id="EdiReceiverSecond" class="tab-pane">
+                                <h4 class="panel-title">ED Receiver - X12 Setup</h4>
+                                <form method="post" onsubmit="return false" id="frmReceiverSetupX12">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label">ISA01 Auth Info Qual <span class="required">*</span></label>
+                                            <select id="ddlAuthInfoQual" class="form-control" name="AuthInfoQual">
+                                                <option value="">-- Select --</option>
+                                                <option value="00">00- No Authorization Information Present</option>
+                                                <option value="03">03- Additional Data Identification</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 ">
+                                            <label class="control-label">ISA02 Auth info <span class="required">*</span></label>
+                                            <input class="form-control" type="text" id="txtAuthInfo" maxlength="10" name="AuthInfo" onblur="EDIReceiverDetail.ValidateCtrl(this)"  placeholder="**********" onkeyup="    utility.ConvertSpaceToSpecial('txtAuthInfo');">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">ISA03 Security info Qual <span class="required">*</span></label>
+                                            <select id="ddlSecurityInfoQual" class="form-control" name="SecurityInfoQual">
+                                                <option value="">-- Select --</option>
+                                                <option value="00">00- No Security Information Present</option>
+                                                <option value="01">01- Password</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 ">
+                                            <label class="control-label">ISA04 Security Info <span class="required">*</span></label>
+                                            <input class="form-control" type="text" id="txtSecurityInfo" maxlength="10" name="SecurityInfo" onblur="EDIReceiverDetail.ValidateCtrl(this)"  placeholder="**********" onkeyup="    utility.ConvertSpaceToSpecial('txtSecurityInfo');">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label">
+                                                ISA05 Interchange Sender ID Qual <span class="required">*</span>
+                                            </label>
+                                            <select id="ddlInterSenderIDQual" class="form-control" name="InterSenderIDQual">
+                                                <option value="">-- Select --</option>
+                                                <option value="01">01- Duns (Dun & Bradstreet)</option>
+                                                <option value="14">14- Duns Plus Suffix</option>
+                                                <option value="20">20- Health Industry Number (HIN)</option>
+                                                <option value="27">27- Carrier Identification Number</option>
+                                                <option value="28">28- Fiscal Intermediary Identification Number</option>
+                                                <option value="29">29- Medicare Provider and Supplier Identification Number</option>
+                                                <option value="30">30- U.S. Federal Tax Identification Number</option>
+                                                <option value="33">33- NAIC Code</option>
+                                                <option value="ZZ">ZZ- Mutually Defined</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">Interchange Sender ID <span class="required">*</span></label>
+                                            <input class="form-control" type="text" id="txtInterSenderID" name="InterSenderID" disabled="disabled" maxlength="15">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">
+                                                ISA07 Interchange Receiver ID Qual <span class="required">*</span>
+                                            </label>
+                                            <select id="ddlInterReceiverIDQual" class="form-control" name="InterReceiverIDQual">
+                                                <option value="">-- Select --</option>
+                                                <option value="01">01- Duns (Dun & Bradstreet)</option>
+                                                <option value="14">14- Duns Plus Suffix</option>
+                                                <option value="20">20- Health Industry Number (HIN)</option>
+                                                <option value="27">27- Carrier Identification Number</option>
+                                                <option value="28">28- Fiscal Intermediary Identification Number</option>
+                                                <option value="29">29- Medicare Provider and Supplier Identification Number</option>
+                                                <option value="30">30- U.S. Federal Tax Identification Number</option>
+                                                <option value="33">33- NAIC Code</option>
+                                                <option value="ZZ">ZZ- Mutually Defined</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">ISA08 Interchange Receiver ID <span class="required">*</span></label>
+                                            <input class="form-control" type="text" id="txtInterReceiverID" disabled="disabled" name="InterReceiverID" maxlength="15">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label">ISA11 Repetition Separator <span class="required">*</span></label>
+                                            <input class="form-control" type="text" id="txtRepetitionSeparator" name="RepetitionSeparator" maxlength="1">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">
+                                                ISA12 Interchange Control Version No. <span class="required">*</span>
+                                            </label>
+                                            <input class="form-control" type="text" id="txtInterCtrlVerNum" name="InterCtrlVerNum" maxlength="5">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">
+                                                ISA13 Interchange Control Number <!--<span class="required">*</span>-->
+                                            </label>
+                                            <input type="text" class="form-control" id="txtInterchangeControlNumber" disabled="disabled" name="InterchangeControlNumber" maxlength="9">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">
+                                                ISA14 Acknowledgment Requested <span class="required">*</span>
+                                            </label>
+                                            <select id="ddlAcknowledgementRequested" class="form-control" name="AcknowledgementRequested">
+                                                <option value="">-- Select --</option>
+                                                <option value="0">0-  No Interchange Acknowledgment Requested</option>
+                                                <option value="1">1-  Interchange Acknowledgment Requested (TA1)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">ISA15 usage indicator <span class="required">*</span></label>
+                                            <select id="ddlUsageIndicator" class="form-control" name="UsageIndicator">
+                                                <option value="P">Production Data</option>
+                                                <option value="T">Test Data</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">GS06 Group Control Number <!--<span class="required">*</span>--> </label>
+                                            <input type="text" class="form-control" id="txtGroupControlNum" name="GroupControlNum" disabled="disabled" maxlength="9">
+                                        </div>
+                                      
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">
+                                                BHT02 Transaction Setup Purpose Code <span class="required">*</span>
+                                            </label>
+                                            <select id="ddlTransactionSetupPurposeCode" class="form-control" name="TranSetupPurposeCode">
+                                                <option value="">-- Select --</option>
+                                                <option value="00">00- Original</option>
+                                                <option value="18">18- Reissue</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class=" control-label">
+                                                ISA16 Component Element Separator <span class="required">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="txtCompElemSeparator" name="CompElemSeparator" maxlength="1">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">
+                                                GS02 Application Sender's Code <span class="required">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="txtAppSenderCode" name="AppSenderCode" maxlength="15">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">
+                                                GS03 Application Receiver's Code <span class="required">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="txtAppReceiverCode" name="AppReceiverCode" maxlength="15">
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="control-label">
+                                                GS08 Version/Release/ Industry ID <span class="required">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="txtVersionReleaseID" name="VersionReleaseID" maxlength="12">
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="control-label">Receiver Name <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="txtReceiverName" name="ReceiverName" maxlength="60">
+                                        </div>
+                                        <div class="col-md-3 ">
+                                            <label class="control-label">File Counter <!--<span class="required">*</span>--></label>
+                                            <input type="text" class="form-control" id="txtFileCounter" maxlength="10" name="FileCounter">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label"> 1000B NM109 Receiver Primary ID Num <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="txtRecPrimaryIDNum" name="RecPrimaryIDNum" maxlength="80">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                       
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">BHT03 Reference ID <!--<span class="required">*</span>--> </label>
+                                            <input type="text" class="form-control" id="txtReferenceID" name="ReferenceID" disabled="disabled" maxlength="50">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">
+                                                BHT06 Transaction Type Code <span class="required">*</span>
+                                            </label>
+                                            <select id="ddlTranTypeCode" class="form-control" name="TranTypeCode">
+                                                <option value="">-- Select --</option>
+                                                <option value="31">31- Subrogation Demand</option>
+                                                <option value="CH">CH- Chargeable</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">
+                                                ST02 Transaction Setup Control Number <!--<span class="required">*</span>-->
+                                            </label>
+                                            <input type="text" class="form-control" id="txtTranSetupCtrlNum" disabled="disabled" name="TranSetupCtrlNum" maxlength="9">
+                                        </div>
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">
+                                                ST03 Implementation Convention Ref <span class="required">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="txtImplementationConventionRef" name="ImplementConventionRef" maxlength="35">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">TNSHDLR Class <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="txtTNSHDLRClass" name="TNSHDLRClass">
+                                        </div>
+                                        
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">To Day <!--<span class="required">*</span>--></label>
+                                            <input type="text" class="form-control" id="txtToDay" name="ToDay">
+                                        </div>
+                                        <div class="col-md-3 pad-a-labelsize">
+                                            <div class="checkbox-custom checkbox-default pad">
+                                                <input type="checkbox" checked="" name="ISAOneFile" id="chkISAOneFile">
+                                                <label for="chkISAOneFile">ONE ISA create one file for all payers </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3 hidden">
+                                            <label class="control-label">Segment Terminator <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="txtSegmentTerminator" name="SegmentTerminator" maxlength="1">
+                                        </div>
+                                    </div>
+                                        <div class="form-group">
+                                            <div class="btn-block">
+                                                <button type="submit" id="btnEDIReceiverX12Save" class="btn btn-primary btn-sm rightbtn">Save & Exit</button>
+                                                <!--<button id="btnHistoryEdiReceiverSecond" class="btn btn-primary btn-sm rightbtn" type="button" onclick="EDIReceiverDetail.ShowHistoryReceiverX12();">History</button>-->
+                                            </div>
+                                        </div>
+</form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

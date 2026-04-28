@@ -1,0 +1,49 @@
+﻿<div id="Clinical_AllergyInActive">
+    <div id="actionPanAllergyInActive" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_AllergyInActive.unLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titleBlockReason">Active/Inactive Allergy</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmAllergyInActive">
+                   
+                    <div class="spacer15"></div>
+                    <div class="pull-left pl-default pr-default">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Resolved" name="Resolved"><label class=" control-label">Resolved</label>
+                        </div>
+                    </div>
+                    <div class="pull-left pl-default pr-default">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Inactive" name="Inactive"><label class="control-label">Inactive</label>
+                        </div>
+                    </div>
+                    <div class="pull-left pl-default pr-default">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Erroneous" name="Erroneous"><label class="control-label">Erroneous</label>
+                        </div>
+                    </div>
+                    <div class="pull-left pl-default pr-default">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Others" name="Others"><label class="control-label">Others</label>
+                        </div>
+                    </div>
+                    
+                    <div class="clearfix"></div>
+                    <div class="col-sm-12 mt-sm">
+                        <label class="control-label" for="comments">Comments</label>
+                        <textarea class="form-control" rows="3" id="txtComments" name="Comments" spellcheck="true"></textarea>
+                    </div>
+                    <div class="col-sm-12 pt-sm pull-right">
+                        <button type="button" class="btn btn-sm btn-primary rightbtn" onclick="Clinical_AllergyInActive.allergyCancel();">Cancel</button>
+                        <button type="button" class="btn btn-sm btn-primary rightbtn" onclick="Clinical_AllergyInActive.allergyInActive();">OK</button>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

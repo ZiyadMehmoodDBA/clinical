@@ -1,0 +1,214 @@
+﻿<div class="row" id="pnlAdminBlockHours" style="display:none;">
+    <div id="actionPanAdminBlockHours" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modalBlockHourdialog" class="modal-dialog-full">
+        <div id="modalcontent" class="modal-content">
+            <div class="clearfix"></div>
+            <div id="btnad">
+                <button type="button" class="btn btn-success btn-sm" id="btnBlockHoursAdd" onclick="Admin_BlockHours.BlockHoursAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div><div class="clearfix"></div>
+            </div>
+            <section class="panel">
+                <!--<header class="panel-heading">
+                    <div class="panel-actions">
+                      <a href="#" class="closebtn pull-right" onclick="Admin_BlockHours.UnloadPan();"></a>
+                    </div>
+                    <h2 class="panel-title">Search Block Hours </h2>
+                </header>-->
+                <div class="modal-header">
+                    <button type="button" id="SearchBlockHoursBtn" class="close" onclick="Admin_BlockHours.UnloadPan();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="headingTitle">Search Block Hours</h4>
+                </div>
+                <div id="btnad2" style="margin-left:17px;">
+                    <div class="spacer10"></div>
+                    <button type="button" class="btn btn-success btn-sm" id="btnBlockHoursAdd2" onclick="Admin_BlockHours.BlockHoursAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="panel-body" id="pnlBlockHours_Search">
+                    <form class="form-bordered" method="post" onsubmit="return false">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <!--<div class="col-sm-3 col-md-2">
+                                <div class="size150">
+                                    <div class="size75 pull-left">
+                                        <input type="radio" id="rdProvider" name="03" checked="checked" class="mt-none">
+                                        <label for="rdProvider">Provider</label>
+                                    </div>
+                                    <div class="size75 pull-left">
+                                        <input type="radio" id="rdResource" name="03" class="mt-none">
+                                        <label for="rdResource">Resource</label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div id="divProvider"><select id="ddlProvider" name="provider" class="form-control " ddlist="GetProvider"></select></div>
+                                <div id="divResource"> <select id="ddlResource" name="resource" class="form-control" ddlist="GetResources"></select></div>
+                            </div>-->
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">Provider</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Admin_BlockHours.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">Resource</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtResource" name="Resource" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Admin_BlockHours.OpenResource();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">Facility</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Admin_BlockHours.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                                </div>
+
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">From Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon add-on">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input class="form-control " name="date" type="text" id="blockHoursFromDate">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">To Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon add-on">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input class="form-control " name="date" type="text" id="blockHoursToDate">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">From Time</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                    <input type="text" data-plugin-timepicker class="form-control  " data-plugin-options='{ "minuteStep": 5 }' id="blockHoursFromTime">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">To Time</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                    <input type="text" data-plugin-timepicker class="form-control  " data-plugin-options='{ "minuteStep": 5 }' id="blockHoursToTime">
+                                </div>
+                            </div>
+                            <!--<div class="col-sm-3 col-md-2">
+                                <label class="control-label">Active?</label>
+                                <select id="chkIsActice" class="form-control ">
+                                    <option value="" >- All -</option>
+                                    <option value="1" selected="selected">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </div>-->
+                            <div class="col-sm-3 col-md-2 pad-a-labelsize-btn pull-right">
+                                <button class="btn btn-primary btn-sm rightbtn" id="btnBlockHoursSearch" type="submit" onclick="Admin_BlockHours.BlockHoursSearch();">Search</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="hfFacility" value="-1" />
+                        <input type="hidden" id="hfProvider" value="-1" />
+                        <input type="hidden" id="hfResource" value="-1" />
+                    </form>
+                </div>
+            </section>
+
+            <div id="pnlBlockHours_Result" style="display: none;">
+                <section class="panel">
+                    <div class="panel-body">
+                        <input type="hidden" id="BlockHours_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvBlockHours">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th style="display:none;">Block Hour ID</th>
+                                    <th>Date From</th>
+                                    <th>Date To</th>
+                                    <th>Time From</th>
+                                    <th>Time To</th>
+                                    <th>Provider</th>
+                                    <th>Resource</th>
+                                    <th>Facility</th>
+                                    <th>Description</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="divBlockHoursPaging"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //------------ Radio Provider/Resource check-------
+
+        $('#pnlAdminBlockHours #divResource').hide();
+
+        $('#pnlAdminBlockHours #rdResource').click(function () {
+            if ($(this).is(':checked')) {
+
+
+                $('#pnlAdminBlockHours #divResource').show();
+                $('#pnlAdminBlockHours #divProvider').hide();
+
+                $('#pnlAdminBlockHours #ddlProvider').val("");
+
+            }
+            else {
+
+            }
+        });
+
+        $('#pnlAdminBlockHours #rdProvider').click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#pnlAdminBlockHours #divResource').hide();
+                $('#pnlAdminBlockHours #divProvider').show();
+
+                $('#pnlAdminBlockHours #ddlResource').val("");
+
+            }
+            else {
+
+            }
+        });
+
+        //-------------------------------------------------
+
+        utility.CreateDatePicker('pnlAdminBlockHours #blockHoursToDate', function () {
+
+        });
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('pnlAdminBlockHours #blockHoursFromDate', function () {
+
+        });
+
+        utility.ValidateFromToDate('pnlAdminBlockHours', 'blockHoursFromDate', 'blockHoursToDate', true);
+
+        $('#pnlAdminBlockHours #blockHoursFromTime').timepicker({
+            defaultTime: false
+
+        });
+        $('#pnlAdminBlockHours #blockHoursToTime').timepicker({
+            defaultTime: false
+
+        });
+
+    });
+</script>

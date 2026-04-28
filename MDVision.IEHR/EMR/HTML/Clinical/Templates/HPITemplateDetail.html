@@ -1,0 +1,174 @@
+﻿<div id="pnlHPITemplateDetail">
+    <div id="actionPanHPITemplateDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full mb-none">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="HPITemplateDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">HPI Template Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblHPITemplateDetail">
+                    <form method="post" onsubmit="return false;" id="frmHPITemplateDetail" name="frmHPITemplateDetail">
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <div class="col-sm-3 col-md-3">
+                                <label class="control-label">Template Name</label><span class="required">*</span>
+                                <input type="text" class="form-control" id="txtHPITemplateName" name="Name">
+                            </div>                            
+                            <div class="col-sm-3 col-md-3" id="divHPITemplateSpecialty">
+                                <label class="control-label">Specialty </label>
+                                <select id="ddlHPITemplateSpecialty" multiple="multiple" name="HPITemplateSpecialty" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-3 col-md-3" id="divHPITemplateProvider">
+                                <select class="form-control" style="display:none;" name="hiddenHPITemplateProvider" id="ddlHiddenHPITemplateProvider"></select>
+                                <label class="control-label">Provider</label>
+                                <select class="form-control" multiple="multiple" name="HPITemplateProvider" id="ddlHPITemplateProvider"></select>
+                            </div>                           
+                            <!--<div id="divNormalExams" class="col-sm-8 pad-a-labelsize hidden">
+                                <button id="btnNormalExamDetails" onclick="PhysicalExamTemplateDetailRevamp.openNormalExamDetail(this);" class="btn btn-link btn-xs pull-left"><i class="fa fa-book"></i></button>
+                                <div id="divNormalExamsDetail" class="size90per pull-left  hidden">
+                                    <textarea id="txtNormalExamsDetail" name="NormalExamsDetail" rows="2" class="form-control" spellcheck="true"></textarea>
+                                </div>
+                            </div>-->
+                            <div class="spacer20"></div>
+                            <section id="sectionHPISymptoms">
+                                <div id="HPISymptoms">
+                                    <div class="col-xs-3">
+                                        <section class="panel panel-featured size100per " id="System">
+                                            <header class="panel-heading">
+                                                <h2 id="headingHPISymptoms" class="panel-title pull-left">Symptoms</h2>
+                                                <div class="pull-right" id="divAddNewSymptom" onclick="HPITemplateDetail.addNewItem('symptom')"><button class="btn-link white btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                                <div class="clearfix"></div>
+                                            </header>
+
+                                            <div class="panel-body pl-none pr-none height330 height-max330 own-scroll overflowY">
+                                                <div class="demo-section k-content pl-default pr-default mb-xs">
+                                                    <input id="Symptoms" class="form-control" />
+                                                </div>
+                                                <div id="divHPISymptoms" class="table-responsive Of-a">
+                                                    <table id="ulHPISymptoms" name="HPISymptoms" class="table table-bordered table-condensed hidden">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="size20">C/O</td>
+                                                                <td class="size20">Denies</td>
+                                                                <td></td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>                                            
+                                        </section>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <section id="SymptomFindings" class="panel panel-featured size100per  ">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFindings" class="panel-title pull-left">Findings</h2>
+                                                <div class="pull-right" id="divAddNewFinding" onclick="HPITemplateDetail.addNewItem('finding')"><button class="btn-link white btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                                <div class="clearfix"></div>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none height330 height-max330 own-scroll overflowY">
+                                                <div id="divHPISymptomFindings">
+                                                    <ul id="ulHPISymptomFindings" name="HPISymptomFindings" class="listPrimary"></ul>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <section id="sectionFindingDetails" class="panel panel-featured mb-none disableAll">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title">Details</h2>
+                                            </header>
+                                            <div class="panel-body pb-sm">
+                                                <div class="col-sm-4">
+                                                    <label class="control-label">Severity</label>
+                                                    <select id="ddlSeverity" name="HPISymptoms_SeverityId" class="form-control" ddlist="GetSeverity"></select>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="control-label">Location</label>                                                   
+                                                    <select id="ddlLocation" name="HPISymptoms_LocationIds" multiple="multiple" ddlmultilist="GetLocation" class="form-control"></select>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="control-label">Radiation</label>
+                                                    <select id="ddlRadiation" name="HPISymptoms_RadiationId" class="form-control" ddlist="GetRadiation"></select>
+
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="control-label">Quality</label>
+                                                    <select id="ddlQuality" name="HPISymptoms_QualityId" class="form-control" ddlist="GetQuality"></select>
+
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="control-label">Onset</label>
+                                                    <input class="form-control" type="text" id="txtOnset" name="Onset" maxlength="100">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="control-label">Associated with</label>
+                                                    <input class="form-control" type="text" id="txtAssociatedWith" name="AssociatedWith" maxlength="100">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="control-label">Aggravated by</label>
+                                                    <select id="ddlAggravatedBy" name="HPISymptoms_AggravatedById" class="form-control" ddlist="GetAggravatedBy"></select>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="control-label">Relieved by</label>
+                                                    <select id="ddlRevieledBy" name="HPISymptoms_RelievedById" class="form-control" ddlist="GetRevieledBy"></select>
+                                                </div>                                               
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                    <div class="col-xs-6 mt-md">
+                                        <section id="SymptomPreview" class="panel panel-featured size100per hidden">
+                                            <header class="panel-heading">
+                                                <h2 id="headingPreview" class="panel-title">Preview</h2>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none" style="min-height:138px;">
+                                                <div class="col-xs-12 borderB pb-sm">
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <label class="control-label">Delimiter</label>
+                                                    </div>
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <select id="delimator" class="form-control bold">
+                                                            <option id="comma" value=",">,</option>
+                                                            <option id="fullstop" value=".">.</option>
+                                                            <option id="collon" value=":">:</option>
+                                                            <option id="terminator" value=";">;</option>
+                                                            <option id="hiphen" value="-">-</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <button class="btn btn-xs btn-success" id="btnBold" type="button" data-toggle="tooltip" title="" data-original-title="Bold">B</button>                                                      
+                                                        <button class="btn btn-xs btn-success" id="btnItalic" type="button" data-toggle="tooltip" title="" data-original-title="Italic"><i>I</i></button>                                                        
+                                                        <button class="btn btn-xs btn-success" id="btnUnderline" type="button" data-toggle="tooltip" title="" data-original-title="Underline"><u>U</u></button>                                                       
+                                                        <button class="btn btn-xs btn-success" type="button" data-toggle="tooltip" title="" data-original-title="Clear All" onclick="HPITemplateDetail.applyStyle('clear');">Clear All</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div style="max-height:80px; overflow-y:auto" id="findingContent">                                                        
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-xs-12">
+                            <label class="control-label">Comments</label>
+                            <textarea class="form-control" rows="3" id="txtOverallComments" name="OverallComments" maxlength="5000" spellcheck="true"></textarea>
+                        </div>
+                        <div class="pull-right pr-default mt-md">
+                            <button class="btn btn-success btn-sm" type="submit" id="btnHPITemplateSave">Save & Exit </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,89 @@
+﻿<div class="row" id="pnlAdminFollowUpGroup">
+    <div id="actionPanAdminFollowUpGroup" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_FollowUpGroup.FollowUpGroupAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div>
+        <div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_FollowUpGroup.UnLoadTab()"></a>
+                </div>
+                <h2 class="panel-title">Search Group</h2>
+            </header>
+            <div class="panel-body">
+                <div id="tbluserDetail" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmAdminFollowUpGroup">
+                        <!--start - CONTENTS-->
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label class="control-label">Short Name</label>
+                                    <input class="form-control" name="ShortName" id="txtShortName" type="text" />
+                                </div>
+
+                                <div class="col-sm-7">
+                                    <label class="cont  rol-label">Description</label>
+                                    <input type="text" class="form-control" name="Description" id="txtDiscription" >
+                                </div>
+
+                                <!--<div class="col-sm-2 col-xs-2 pad-a-labelsize col-lg-1" id="pnlIsActive">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" checked="" name="IsActive" id="chkIsActive">
+                                        <label for="chkIsActive">Active</label>
+                                    </div>
+                                </div>-->
+
+                                <!--bug# PMS-2274-->
+                                <div class="col-sm-2">
+                                    <label class="control-label">Active?</label>
+                                    <select id="ddlActive" name="Active" class="form-control">
+                                        <option value="">- All -</option>
+                                        <option value="1" selected="selected">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                                <!--bug# PMS-2274-->
+                                <div class="col-sm-2 col-xs-2 pad-a-labelsize-btn pull-right col-lg-1">
+                                    <button class="btn btn-primary btn-sm rightbtn" type="submit" onclick="Admin_FollowUpGroup.GroupSearch();">Search</button>
+                                </div>
+                            </div>
+                      
+                                
+                        </div>
+                        <div class="visible-xs"><div class="clearfix"></div><span class="spacer5"></span></div>
+                        <div class="clearfix"></div>
+                        <div class="spacer20"></div>
+                        <div id="pnlAdminFollowUpGroup_Result" style="display: none;">
+                            <section class="panel">
+                                <div class="panel-body panel-featured">
+                                    <input type="hidden" id="FollowUpAction_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvFollowUpGroup">
+                                        <thead>
+                                            <tr>
+                                                <th class="size-min110">Action</th>
+                                                <th class="noWordBreak">Short Name</th>
+                                                <th class="size180">Description</th>
+                                                <th class="size120">Entry Date</th>
+                                                <th class="size120">Entered By</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="divFollowUpGroupPaging"></div>
+                                </div>
+                            </section>
+                        </div>
+
+
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </section>
+    </div>
+</div>
+</div>
+

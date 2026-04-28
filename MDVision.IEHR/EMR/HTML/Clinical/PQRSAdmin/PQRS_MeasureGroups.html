@@ -1,0 +1,63 @@
+﻿<div id="pnlPQRSMeasureGroups">
+    <div id="actionPanPQRSMeasureGroups" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div class="mainScrollPan" id="mainScrollPan">
+                <button type="button" class="btn btn-success btn-sm" onclick="PQRS_MeasureGroups.AddMeasureGroups()"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div>
+                <div class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions"><a class="closebtn pull-right" onclick="PQRS_MeasureGroups.UnLoadTab()"></a></div>
+                        <h2 class="panel-title">Search Measure Groups </h2>
+                    </header>
+                    <div class="panel-body">
+                        <form id="frmPQRSMeasureGroups" method="post" onsubmit="return false">
+                            <div class="col-sm-4 col-lg-4">
+                                <label class="control-label">Name</label>
+                                <input type="text" id="MeasureGroupName" name="MeasureGroupName" class="form-control" maxlength="100" />
+                            </div>
+
+                            <div class="col-sm-3 col-md-3" id="divMeasureGroupsProvider">
+                                <label class="control-label">Provider</label>
+                                <select id="ddlProviderIds" name="ProviderIds" multiple="multiple" class="form-control multiselect" ddlmultilist="GetMemberProvidersWithTIN" data-bv-field="txtProvider"></select>
+                            </div>
+
+                            <div class="col-sm-4 col-md-2">
+                                <label class="control-label">Active?</label>
+                                <select id="ddlActive" name="IsActive" class="form-control ValidateCriteria">
+                                    <option value="">- All -</option>
+                                    <option value="1" selected="selected">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="pull-right mt-md pr-default"><button class="btn btn-primary btn-sm" onclick="PQRS_MeasureGroups.measureGroupsSearch();" type="button">Search</button></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="spacer10"></div>
+                <!--<div class="panel-body panel-featured">
+                </div>-->
+            </div>
+
+        </div>
+    </div>
+    <div id="pnlMeasureGroups_Result" style="display: inline;">
+        <form>
+            <div class="panel-body">
+                <!--<input type="hidden" id="LetterTemplate_SelectedDataKeys" />-->
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvMeasureGroups">
+                    <thead>
+                        <tr>
+                            <th class="size90 size-min90">Action</th>
+                            <th>Name</th>
+                            <th class="size90 size-min90">Created</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="dgvMeasureGroups_Paging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

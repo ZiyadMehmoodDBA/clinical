@@ -1,0 +1,118 @@
+﻿<div id="Clinical_NotesSearch">
+    <div id="actionPanNotesSearch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_NotesSearch.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Notes/Phone Encounters</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section class="panel panel-featured" id="sectionNotesSearch">
+                        <form method="post" id="frmNotesSearch" onsubmit="return false">
+                            <div class="panel-body" id="pnlNotes_Search">
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Last Name</label>
+                                        <input class="form-control " id="txtSearchLastName" type="text" name="LastName" />
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">First Name</label>
+                                        <input class="form-control " id="txtSearchFirstName" type="text" name="FirstName" />
+                                    </div> 
+                                    <!--// Start 30/11/2015 Muhammad Irfan Bug # 37-->                               
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Account</label>
+                                        <input class="form-control " id="txtAccountNumber" type="text" name="AccountNumber" />
+                                    </div>  
+                                    <!--// Start 30/11/2015 Muhammad Irfan Bug # 37-->                        
+                                    <div class="col-md-3 col-sm-4">
+                                        <label class="control-label" for="Patient Account">Provider</label>
+                                        <select id="ddlprovider" name="provider" class="form-control" ddlist="GetProvider"></select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Status</label>
+                                        <select id="ddlNoteStatus" name="NoteStatus" class="form-control" ddlist="GetNoteStatus"></select>
+                                        <!--<select id="ddlNoteStatus" name="NoteStatus" class="form-control">
+                                            <option value="">All</option>
+                                            <option value="1" selected="selected">Draft</option>
+                                            <option value="2">Signed</option>
+                                        </select>-->
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Visit From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="VisitFrom" data-plugin-datepicker="" class="form-control" id="dpVisitFrom" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Visit To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="VisitTo" data-plugin-datepicker="" class="form-control" id="dpVisitTo" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Note Type</label>
+                                        <select id="ddlType" name="NoteType" class="form-control" ddlist="GetNoteTemplateType">
+                                            <!--<option value="" selected="selected">- Select -</option>
+        <option value="1">Test Template Note</option>-->
+                                        </select>
+                                    </div>                                                                                                         
+                                    <div class="col-xs-2 pull-right mt-sm">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="" type="button" onclick="Clinical_NotesSearch.NotesSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+                <div class="spacer10"></div>
+                <div id="pnlNotes_Result" style="display: inline;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <input type="hidden" id="Patient_SelectedDataKeys" />                            
+                            <div class="clearfix"></div>
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvNotes">
+                                <thead>
+                                    <tr>
+                                        <!--<th style="display:none;">NotesId</th>-->
+                                        <th class="size120">Action</th>
+                                        <th class="size120">Patient</th>
+                                        <th class="size120">Account</th>
+                                        <th class="size120">Provider</th>
+                                        <!--<th class="size120">Facility</th>-->
+                                        <th class="size120">Visit Date</th>
+                                        <th class="size120">Reason</th>
+                                        <th class="size120">Note Type</th>
+                                        <th class="size120">Created By</th>
+                                        <th class="size120">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divAllNotesPaging"></div>
+                        </div>
+                    </section>
+                </div>
+                <div id="FaceSheetPager"></div>
+                <div class="modal-footer"></div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+    });
+
+</script>
+

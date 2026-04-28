@@ -1,0 +1,254 @@
+﻿<div id="pnliTrackMIPSummary">
+    <div id="actionPaniTrackMIPSummary" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <form id="frmiTrackMIPSummary" method="post" name="frmiTrackMIPSummary" onsubmit="return false">
+        <div class="col-xs-12 p-none pr-default pb-sm">
+            <!--MIPS-->
+            <div class="col-xs-12 p-none">
+                <div class="col-xs-12 p-none">
+                    <div id="divPatientBanner" class="toggle localImage mb-sm" data-plugin-toggle="">
+                        <section class="toggle">
+                            <label>About MIPS</label>
+                            <div class="toggle-content panel-body" style="display: none;">
+
+                                <span><b>What is MIPS</b></span>
+                                <div>
+                                    MIPS is a new approach to paying for Medicare Part B items and services in which clinicians may receive an increase
+                                    or decrease in their payments based on performance.Performance is measured through the data clinicians report in four areas - Quality, Improvement Activities, Advancing Care Information, and Cost.
+                                    We designed MIPS to update and consolidate previous programs, including: Medicare Meaningful Use (MU), Physician Quality Reporting System (PQRS),
+                                    and the Value-Based Payment Modifier (VBM).<a href="https://qpp.cms.gov/mips/overview" target="_blank"> Learn more</a>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="col-xs-12 p-none">
+
+                    <button id="btnViewIndividualProvider" class="btn btn-link btn-xs tab_space" onclick="iTrack_MIPSummary.viewIndividualReporting();"><i class="fa fa-user"></i> Individual Reporting</button>
+                    <button id="btnViewGroup" class="btn btn-link btn-xs tab_space" onclick="iTrack_MIPSummary.viewGroup();"><i class="fa fa-users"></i> Group Reporting</button>
+                    <!--<button class="btn btn-link btn-xs tab_space"><i class="fa fa-users"></i> Virtual Group Reporting</button>-->
+
+                    <a href="https://npiregistry.cms.hhs.gov" target="_blank" class="btn btn-link btn-xs pull-right"> Verify TIN/NPI</a>
+
+                    <div class="clearfix"></div>
+                    <!--MIPS preferences-->
+                    <div id="IndividualReporting" class="panel panel-featured mb-default" >
+                        <header class="panel-heading">
+                            <h2 class="panel-title">MIPS preferences</h2>
+                        </header>
+                        <div class="panel-body bg-gray black">
+                            <div class="col-xs-12 p-none black">
+                               
+                                <a href="https://qpp.cms.gov/participation-lookup" target="_blank" class="btn btn-link btn-xs pull-left"><i class="fa fa-link"></i> Check your Participation Status</a>
+                                <span class="pl-lg"><b id="IndividualPracticeType"> Practice Type:</b></span>
+                                <span id="spnIndividualPracticeType"></span>
+                                <button onclick="iTrack_MIPSummary.viewGraph();" class="btn btn-link btn-xs pull-right"> View Graph <i class="fa fa-bar-chart"></i></button>
+
+                            </div>
+
+                            <div id="IndividualReportingSearch" class="row black">
+
+                                <div class="col-xs-12 col-sm-6 col-lg-2">
+                                    <label id="lblProvider" class="control-label" style="display: inline;">Provider</label>
+                                    <a href="#" title="Edit Provider" style="display: none;" onclick="iTrack_MIPSummary.OpenProviderDetail();" id="lnkProviderEdit">Provider</a>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtIndividualProvider" oninput="iTrack_MIPSummary.ResetNPI();" onblur="iTrack_MIPSummary.HideProviderLink(this.value);" type="text" placeholder="Start typing to search" name="Provider" customname="Provider" for="txtIndividualProvider" maxlength="35" data-bv-field="Provider">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary btn-xs" type="button" onclick="iTrack_MIPSummary.OpenProvider();"> <i class="glyphicon glyphicon-search"></i> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-lg-2">
+                                    <label id="lblIndividualProviderNPI" class="control-label">NPI</label>
+                                        <input class="form-control disableAll" id="txtIndividualProviderNPI" type="text"  name="ProviderNPI" customname="ProviderNPI" for="txtIndividualProviderNPI" onchange="iTrack_MIPSummary.ResetProvider();" onkeypress=" return utility.ValidateZero(event, this);" onblur=" utility.FillProviderNPI('#pnliTrackMIPSummary #frmiTrackMIPSummary', '#hfProviderId' , '#txtIndividualProviderNPI' )" maxlength="35" data-bv-field="Provider">
+                                </div>
+                                <div class="col-xs-12 col-lg-6 p-none">
+                                    <div class="col-xs-3">
+                                        <label class="control-label" for="Date">From Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" onchange="iTrack_MIPSummary.setPeriodsFrom(this.value);" id="dtpFromDate" class="form-control" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <label class="control-label" for="Date">To Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" onchange="iTrack_MIPSummary.setPeriodsTo(this.value);" id="dtpToDate" class="form-control" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label class="control-label">Performance Year</label>
+                                        <select id="ddlPerformanceYear" onchange="iTrack_MIPSummary.changeYearLabel(this.value);" class="form-control">
+                                            <option >-select-</option>
+                                            <option value="1">2017</option>
+                                            <option selected="selected" value="2">2018</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <label class="control-label">Reporting Method</label>
+                                        <select id="ddlReportingVia" onchange="iTrack_MIPSummary.reportingVia(this.value);" class="form-control">
+                                            <option >-select-</option>
+                                            <option selected="selected" value="1">MD Vision EHR</option>
+                                            <option value="2">Sovereign Health Registry</option>
+                                            <option value="3">Sovereign QCDR</option>
+                                            <option value="4">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                              
+                                <div class="pull-right pr-default pt-md">
+                                    <button id="btnIndividualProviderSearch" onclick="iTrack_MIPSummary.searchMIPScore('IndProvider');" class="btn btn-default btn-sm">Search</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="GroupReporting" class="panel panel-featured mb-default hidden">
+                        <header class="panel-heading">
+                            <h2 class="panel-title">MIPS preferences</h2>
+                        </header>
+                        <div class="panel-body bg-gray black">
+                            <div class="col-xs-12 p-none black">
+
+                                <a href="https://qpp.cms.gov/participation-lookup" target="_blank" class="btn btn-link btn-xs pull-left"><i class="fa fa-link"></i> Check your Participation Status</a>
+                                <span ><b id="GroupPracticeType"> Practice Type: Large Practice</b></span>
+                                <span id="spnGroupPracticeType"></span>
+                                <button onclick="iTrack_MIPSummary.viewGraph();" class="btn btn-link btn-xs pull-right"> View Graph<i class="fa fa-bar-chart"></i></button>
+
+                            </div>
+
+                            <div id="gp" class="row black">
+                                <div class="col-xs-12 col-sm-6 col-lg-2">
+                                    <label id="lblGroupName" class="control-label" style="display: inline;">Group Name</label>
+                                    <a href="#" title="Edit Group" style="display: none;" onclick="iTrack_MIPSummary.GroupPreferencesEdit();" id="lnkGroupEdit">Group Name</a>
+                                    
+                                        <input class="form-control" onblur="iTrack_MIPSummary.HideGroupNameLink(this.value);"   id="txtGroupName" name="GroupName" placeholder="Start typing to search" type="text" data-bv-field="GroupName">
+                                    
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-lg-2">
+                                    <label class="control-label">Group TIN</label>
+                                        <input class="form-control" name="GroupTIN" id="txtGroupTIN"  type="text">
+                                   </div>
+                                <div class="col-xs-12 col-lg-6 col-lg-2">
+                                    <label class="control-label">Member Provider</label>
+                                    <select id="ddlMemberProviders" multiple="multiple"  name="MemberProvider" class="form-control">
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-xs-12 col-lg-6 p-none">
+                                    <div class="col-xs-3">
+                                        <label class="control-label" for="Date">From Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input id="dtpGroupFromDate" onchange="iTrack_MIPSummary.setPeriodsFrom(this.value);" type="text" class="form-control" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <label class="control-label" for="Date">To Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input id="dtpGroupToDate" type="text" onchange="iTrack_MIPSummary.setPeriodsTo(this.value);" class="form-control" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label class="control-label">Performance Year</label>
+                                        <select id="ddlPerformanceYearGroup" class="form-control" onchange="iTrack_MIPSummary.changeYearLabel(this.value);">
+                                            <option >-select-</option>
+                                            <option value="1">2017</option>
+                                            <option selected="selected" value="2">2018</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <label class="control-label">Reporting Method</label>
+                                        <select id="ddlReportingViaGroup" class="form-control" onchange="iTrack_MIPSummary.reportingVia(this.value);">
+                                            <option >-select-</option>
+                                            <option selected="selected" value="1">MD Vision EHR</option>
+                                            <option value="2">Sovereign Health Registry</option>
+                                            <option value="3">Sovereign QCDR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                               
+                                <div class="pull-right pr-default pt-md">
+                                    <button id="btnGroupProviderSearch" onclick="iTrack_MIPSummary.searchMIPScore('GroupProvider');" class="btn btn-default btn-sm">Search</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--/MIPS preferences-->
+
+                    <div id="infoLabels" class="panel-featured-light panel-body text-primary mb-default">
+                        <strong id="lblProviderName">Dr: |  </strong><span id="lblinfoPerformanceYear">Performance Year:</span><span id="spnYear"></span><strong>  </strong> <span id="isIndividual"> | Individual Clinician </span> <strong></strong> <span id="spnReportingVia"> | Reporting Via</span><a id="btnOpenPreference" href="#" onclick="iTrack_MIPSummary.openPreferenceDetail();" class="pull-right hidden"><i class="fa fa-eye"></i> MIPS Preference</a>
+                    </div>
+                    <div id="MIPSGraphs" class="panel-featured panel-body">
+                        <div class="mips-graph-container">
+                            <div class="mips-graph-box text-center">
+                                <p>Reporting Period: <strong class="text-uppercase">full year</strong><br/><strong id="lblyearQuality">Year: 2018</strong></p>
+                                <div id="dvQuality" class="progress-bar-circle-new primary" data-percent="0" data-line="15" data-size="180" data-text-before="Quality" data-text-after="points" data-is-percent="false"></div>
+                                <p class="mt-sm">Weight age: <strong>50%</strong> of <br /> Composite Score <i class="fa fa-info btn btn-primary btn-xs" style="border-radius: 0px;" data-toggle="tooltip" title="" data-original-title="Quality category is a replacement of PQRS. Participants must submit data for at least 6 measures for full year and one of these measures should be an outcome measure."></i></p>
+                            </div>
+                            <div class="mips-graph-box text-center">
+                                <p>Reporting Period: <strong class="text-uppercase">90 Days</strong><br />From: <strong id="lblPeriodFromPI"></strong> - <strong id="lblPeriodToPI"></strong></p>
+                                <div id="dvPromotingInteroperability" class="progress-bar-circle-new primary" data-percent="0" data-line="15" data-size="180" data-text-before="Promoting Interoperability" data-text-after="points" data-is-percent="false"></div>
+                                <p class="mt-sm">Weight age: <strong>25%</strong> of <br /> Composite Score <i class="fa fa-info btn btn-primary btn-xs" style="border-radius: 0px;" data-toggle="tooltip" data-original-title="PI category is a replacement of MU program. Participants must submit collected data for 4 or 5 Base Score measures and up to 9 Performance Score measures for 90 days."></i></p>
+                            </div>
+                            <div class="mips-graph-box text-center">
+                                <p>Reporting Period: <strong class="text-uppercase">90 Days</strong><br />From: <strong id="lblPeriodFromIA"></strong> - <strong id="lblPeriodToIA"></strong></p>
+                                <div id="dvImprovementActivities" class="progress-bar-circle-new primary" data-percent="100" data-line="15" data-size="180" data-text-before="Improvement Activities" data-text-after="points" data-is-percent="false"></div>
+                                <p class="mt-sm">Weight age: <strong>15%</strong> of <br /> Composite Score <i class="fa fa-info btn btn-primary btn-xs" style="border-radius: 0px;" data-toggle="tooltip" data-original-title="This is a new category and has to be reported for 90 days or more during 2018. Participants have to earn 40 points through the combination of High and Medium Rated activities."></i></p>
+                            </div>
+                            <div class="mips-graph-box text-center">
+                                <p>Reporting Period: <strong class="text-uppercase">full year</strong><br /><strong id="lblyearIA">Year: 2018</strong></p>
+                                <div id="dvCost" class="progress-bar-circle-new primary" data-percent="100" data-line="15" data-size="180" data-text-before="Cost" data-text-after="points" data-is-percent="false"></div>
+                                <p class="mt-sm">Weight age: <strong>10%</strong> of <br /> Composite Score <i class="fa fa-info btn btn-primary btn-xs" style="border-radius: 0px;" data-toggle="tooltip" data-original-title="Cost measures are evaluated automatically through administrative claims data for full year and there is no data submission requirement for the cost performance category."></i></p>
+                            </div>
+                            <div class="mips-graph-box text-center">
+                                <p>MIPS<br /><strong id="lblYearCompositeScore">Performance Year: 2018</strong> </p>
+                                <div id="dvTotal" class="progress-bar-circle-new primary" data-percent="25" data-line="15" data-size="180" data-text-before="Total" data-text-after="points" data-is-percent="false"></div>
+                                <p class="mt-sm"><strong>MIPS</strong> Composite Score 100 </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dvNotReporting" class="panel panel-featured hidden" >
+                        <header class="panel-heading">
+                            <h2 class="panel-title">Reason for NOT REPORTING</h2>
+                        </header>
+                        <p id="r1"></p>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /MIPS-->
+        </div>
+        <input type="hidden" id="hfProviderId" />
+        <input type="hidden" id="hfGroupId" />
+        <input type="hidden" id="hfGroupProviderIDs" />
+        <input type="hidden" id="hfProviderName" />
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {
+                };
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });</script>

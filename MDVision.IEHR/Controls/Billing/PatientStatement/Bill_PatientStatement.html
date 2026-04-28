@@ -1,0 +1,724 @@
+﻿<div class="row" id="pnlBillPatientStatement" style="display:none;">
+    <div id="actionPanBillPatientStatement" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="mainScrollPan" id="mainScrollPan">
+                <!--<header class="panel-heading">
+
+                    <div class="panel-actions">
+                        <a href="#" class="closebtn pull-right" onclick="Bill_PatientStatement.UnLoadTab()"></a>
+                    </div>
+                    <h2 class="panel-title">Search Patient Statement</h2>
+                </header>-->
+
+                <div class="modal-header" style="">
+                    <button type="button" class="close" onclick="Bill_PatientStatement.UnLoadTab();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Search Patient Statement</h4>
+                </div>
+                <section class="panel panel-featured">
+                    <div class="panel-body" id="pnlPatientStatement_Search">
+
+                        <form id="frmBillPatientStatement" method="post" onsubmit="return false">
+
+                            <div class="spacer10"></div>
+                            <div class="clearfix"></div>
+
+                            <div id="pnlStatement_Result" style="display: none;">
+                                <section class="panel">
+                                    <ul class="tabs-custom">
+                                        <li class="active" id="statementli"><a class="custom-made-tabs" href=".tabStatements" data-toggle="tab">Statements</a></li>
+                                        <li><a class="custom-made-tabs" href=".tabSubmittedStatementsBatch" onclick="Bill_PatientStatement.LoadSubmittedStatementsBatch();" data-toggle="tab">Submitted Statement Batch</a></li>
+                                        <li><a class="custom-made-tabs" href=".tabSubmittedStatements" onclick="Bill_PatientStatement.LoadPatientStatements();" data-toggle="tab">Submitted Statements</a></li>
+                                    </ul>
+
+                                    <div class="tab-content tabs-custom-body">
+
+                                        <div id="Statements" class="tab-pane active custom-made-tabs tabStatements">
+                                            <div class="form-group">
+                                                <a class="btn btn-success btn-xs" onclick="Bill_PatientStatement.PrintStatement(false);"><i class="fa fa-print"></i> View and Print</a>
+                                                <a class="btn btn-success btn-xs" onclick="Bill_PatientStatement.PrintStatement(true);"><i class="fa fa-check-circle"></i> Submit</a>
+                                                <a class="btn btn-success btn-xs" onclick="Bill_PatientStatement.StatementXMLView();"><i class="fa fa-download"></i> View XML</a>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div id="pnlStatementsSearch">
+                                                    <div id="divAccountNumber" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label" for="Account">Account <span id="lblAccountNumber" class="required" style="display:none">*</span></label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" title="Account Number" name="AccountNumber" id="txtAccountNumber" type="text" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Bill_PatientStatement.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="divPatientLastName" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Last Name</label>
+                                                        <input class="form-control" id="txtPatientLastName" name="LastName" type="text">
+                                                    </div>
+                                                    <div id="divPatientFirstName" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">First Name</label>
+                                                        <input class="form-control" id="txtPatientFirstName" name="FirstName" type="text">
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2" style="display:none">
+                                                        <label id="lblProvider" class="control-label">Provider</label>
+                                                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Bill_PatientStatement.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Bill_PatientStatement.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Bill_PatientStatement.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                                        <div class="input-group">
+                                                            <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Bill_PatientStatement.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-sm-3 col-lg-2" style="display:none">
+                                                        <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                                        <a id="lnkPracticeEdit" style="display:none;" href="#" onclick="Bill_PatientStatement.OpenPracticeDetail();" title="Edit Practice">Practice</a>
+                                                        <div class="input-group">
+                                                            <input class="form-control" id="txtPractice" name="Practice" placeholder="Start typing to search" type="text" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="Bill_PatientStatement.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label" for="Age"> Aging</label>
+                                                        <select id="ddlAge" name="Age" class="form-control">
+                                                            <option value="" selected="selected">-Select-</option>
+                                                            <option value="1">0-30 Days</option>
+                                                            <option value="2">31-60 Days</option>
+                                                            <option value="3">61-90 Days</option>
+                                                            <option value="4">91-120 Days</option>
+                                                            <option value="5">120+ Days</option>
+                                                        </select>
+
+                                                    </div>
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">DOS From</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input id="dtpDOSFrom" name="DOSFrom" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">DOS To</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input id="dtpDOSTo" name="DOSTo" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label ">Clearinghouse</label>
+                                                        <select id="ddlClearinghouse" ddlist="GetClearingHouse" name="ClearingHouse" class="form-control"></select>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Last statement Date From</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input id="dtpLastStatmentDateFrom" name="LastStatmentDateFrom" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Last statement Date To</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input id="dtpLastStatmentDateTo" name="LastStatmentDateTo" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                        </div>
+                                                    </div>
+                                                    <div id="divPatBalGreater" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Patient balance greater than</label>
+                                                        <input class="form-control" id="txtc" name="PatBalGreater" type="number" min="0">
+                                                    </div>
+                                                    <div id="divPatBalLess" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Patient balance less than</label>
+                                                        <input class="form-control" id="txtPatBalLess" name="PatBalLess" type="number" min="0">
+                                                    </div>
+
+                                                    <div class="col-sm-2 col-lg-2 pad-a-labelsize">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkIgnoreCycleDays" name="IgnoreCycleDays" onchange="Bill_PatientStatement.IgnoreCycleDays(this);">
+                                                            <label for="IgnoreCycleDays" class="control-label">Ignore Cycle Days</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2" style="display:none">
+                                                        <label class="control-label" for="Statement Format">Statement Format</label>
+                                                        <select id="ddlStatementFormat" name="StatementFormat" class="form-control">
+                                                            <option value="" selected="selected">-Select-</option>
+                                                            <option value="P1">Practice 1</option>
+                                                            <option value="P2">Practice 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-4 col-sm-2 pull-right mt-md">
+                                                        <button id="btnSearchStatements" type="submit" class="btn btn-primary btn-sm rightbtn">Search</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" type="button" onclick="Bill_PatientStatement.ResetFilters();">Reset</button>
+                                                    </div>
+                                                    <input type="hidden" name="PatientId" id="hfPatientId" value="" />
+                                                    <input type="hidden" name="FacilityId" id="hfFacility" value="" />
+                                                </div>
+
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvStatement">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none;">StatementId</th>
+                                                        <th class="table-checkbox-center"><input type="checkbox" title="Select all" name="checkbox" id="chkAllStatements" onclick="Bill_PatientStatement.checkUncheckAll(this);"></th>
+                                                        <th class="size-max50">Account</th>
+                                                        <th>Last Name</th>
+                                                        <th>First Name</th>
+                                                        <th>Facility</th>
+                                                        <th class="size-max70">Advance Payment</th>
+                                                        <th class="size-max70">Patient Balance</th>
+                                                        <th class="size-max70">Last Statement</th>
+                                                        <th class="size-max120 nowrap">Number Of Statements Sent</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div class="clearfix"></div>
+                                            <div id="divPostingStatementPaging"></div>
+                                            <div class="clearfix"></div>
+
+                                        </div>
+
+                                        <div id="SubmittedStatementsBatch" class="tab-pane custom-made-tabs tabSubmittedStatementsBatch">
+
+                                            <div class="form-group">
+
+                                                <div id="pnlStatementsBatchSearch">
+                                                    <div id="divBatchNumber" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Batch Number</label>
+                                                        <input class="form-control" id="txtBatchNumber" name="BatchNumber" type="text">
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label ">Clearinghouse</label>
+                                                        <select id="ddlClearinghouse" ddlist="GetClearingHouse" name="ClearingHouse" class="form-control"></select>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Submit Date</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input type="text" data-plugin-datepicker="" class="form-control" name="SubmittedDate" id="dtpSubmittedDate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Submitted By</label>
+                                                        <select id="ddlSubmittedBy" ddlist="GetUsersFullName" name="SubmittedBy" class="form-control"></select>
+                                                    </div>
+                                                    <div class="visible-sm">
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Submission Mode</label>
+                                                        <select id="ddlSubmitType" name="SubmitType" class="form-control">
+                                                            <option value="">All</option>
+                                                            <option value="0">Paper</option>
+                                                            <option value="1">Electronic</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label">Batch Status</label>
+                                                        <select id="ddlBatchStatus" name="BatchStatus" class="form-control">
+                                                            <option value="">All</option>
+                                                            <option selected="selected" value="Submitted">Submitted</option>
+                                                            <option value="Resubmitted">Resubmitted</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-4 col-sm-2 pull-right mt-md">
+                                                        <button id="btnSearchStatementsBatch" type="button" class="btn btn-primary btn-sm rightbtn" onclick="Bill_PatientStatement.LoadSubmittedStatementsBatch();">Search</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" type="button" onclick="Bill_PatientStatement.ResetBatchFilters();">Reset</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvSubmittedStatementBatch">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none;">PatStatementId</th>
+                                                        <th class="size-max50">Action</th>
+                                                        <th class="size-max50">Batch</th>
+                                                        <th>Submitted Date</th>
+                                                        <th>Submitted By</th>
+                                                        <th>Submission Mode</th>
+                                                        <th class="size-max70">Clearinghouse</th>
+                                                        <th class="size-max70">Total Patients</th>
+                                                        <th class="size-max70">Batch Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div class="clearfix"></div>
+                                            <div id="divSubmittedStatementBatchPaging"></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div id="SubmittedStatements" class="tab-pane custom-made-tabs tabSubmittedStatements">
+
+                                            <div class="form-group">
+                                                <div id="pnlSubmittedStatementsSearch">
+                                                    <div id="divAccountNumber" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label" for="Account">Account</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" title="Account Number" name="AccountNumber" id="txtSubmitAccountNumber" type="text" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Bill_PatientStatement.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="divPatientLastName" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Last Name</label>
+                                                        <input class="form-control" id="txtPatientLastName" name="LastName" type="text">
+                                                    </div>
+                                                    <div id="divPatientFirstName" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">First Name</label>
+                                                        <input class="form-control" id="txtPatientFirstName" name="FirstName" type="text">
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2" style="display:none">
+                                                        <label id="lblProvider" class="control-label">Provider</label>
+                                                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Bill_PatientStatement.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Bill_PatientStatement.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Bill_PatientStatement.OpenSubmitFacilityDetail();" title="Edit Facility">Facility</a>
+                                                        <div class="input-group">
+                                                            <input class="form-control" id="txtSubmitFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Bill_PatientStatement.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-sm-3 col-lg-2" style="display:none">
+                                                        <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                                        <a id="lnkPracticeEdit" style="display:none;" href="#" onclick="Bill_PatientStatement.OpenPracticeDetail();" title="Edit Practice">Practice</a>
+                                                        <div class="input-group">
+                                                            <input class="form-control" id="txtPractice" name="Practice" placeholder="Start typing to search" type="text" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="Bill_PatientStatement.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label" for="Age"> Aging</label>
+                                                        <select id="ddlAge" name="Age" class="form-control">
+                                                            <option value="" selected="selected">-Select-</option>
+                                                            <option value="1">0-30 Days</option>
+                                                            <option value="2">31-60 Days</option>
+                                                            <option value="3">61-90 Days</option>
+                                                            <option value="4">91-120 Days</option>
+                                                            <option value="5">120+ Days</option>
+                                                        </select>
+
+                                                    </div>
+                                                    <!--<div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">DOS From</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input id="dtpDOSFrom" name="DOSFrom" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">DOS To</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input id="dtpDOSTo" name="DOSTo" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <label class="control-label ">Clearinghouse</label>
+                                                        <select id="ddlClearinghouse" ddlist="GetClearingHouse" name="ClearingHouse" class="form-control"></select>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Last statement Date From</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input id="dtpLastStatmentDateFrom" name="LastStatmentDateFrom" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Last statement Date To</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input id="dtpLastStatmentDateTo" name="LastStatmentDateTo" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                        </div>
+                                                    </div>
+                                                    <div id="divPatBalGreater" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Patient balance greater than</label>
+                                                        <input class="form-control" id="txtc" name="PatBalGreater" type="number" min="0">
+                                                    </div>
+                                                    <div id="divPatBalLess" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Patient balance less than</label>
+                                                        <input class="form-control" id="txtPatBalLess" name="PatBalLess" type="number" min="0">
+                                                    </div>
+                                                    <div class="col-sm-3 col-lg-2" style="display:none">
+                                                        <label class="control-label" for="Statement Format">Statement Format</label>
+                                                        <select id="ddlStatementFormat" name="StatementFormat" class="form-control">
+                                                            <option value="" selected="selected">-Select-</option>
+                                                            <option value="P1">Practice 1</option>
+                                                            <option value="P2">Practice 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-4 col-sm-2 pull-right mt-md">
+                                                        <button id="btnSearchStatements" type="button" class="btn btn-primary btn-sm rightbtn" onclick="Bill_PatientStatement.LoadPatientStatements(null,null,null,null);">Search</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn" type="button" onclick="Bill_PatientStatement.SubmitResetFilters();">Reset</button>
+                                                    </div>
+                                                    <input type="hidden" name="PatientId" id="hfPatientId" value="" />
+                                                    <input type="hidden" name="FacilityId" id="hfSubmitFacility" value="" />
+                                                </div>
+
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvSubmittedStatement">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none;">PatStatementId</th>
+                                                        <th class="size-max50">Action</th>
+                                                        <th class="size-max50">Account</th>
+                                                        <th>Last Name</th>
+                                                        <th>First Name</th>
+                                                        <th>Facility</th>
+                                                        <th class="size-max70">Advance Payment</th>
+                                                        <th class="size-max70">Patient Balance</th>
+                                                        <th class="size-max70">Last Statement</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div class="clearfix"></div>
+                                            <div id="divSubmittedStatementPaging"></div>
+                                            <div class="clearfix"></div>
+
+
+                                        </div>
+
+                                    </div>
+                                </section>
+                            </div>
+
+
+                            <input type="hidden" name="ProviderId" id="hfProvider" value="" />
+
+                            <input type="hidden" name="PracticeId" id="hfPractice" value="" />
+
+
+
+                        </form>
+
+                        <div id="accountStatementContainer" style="display:none;">
+
+                        </div>
+                        <div id="statementXMLConatiner" style="display:none;" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+
+                            <div class="modal-dialog modal-dialog-lg" style="margin-top:4% !important">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" onclick="Bill_PatientStatement.UnLoadXMLView();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">Patient Statement XML</h4>
+                                    </div>
+                                    <div class="modal-body" style="background-color:white !important">
+                                        <a id="btnDownloadXML" style="display:none;" class="btn btn-success btn-xs pull-right mb-sm" onclick="Bill_PatientStatement.downloadXML();"><i class="fa fa-download"></i> download</a>
+                                        <div class="clearfix"></div>
+                                        <div id="xmlDataContainer" class="height-max425 own-scroll">
+                                            <div lang="xml" id="xmlData"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <printstatement style="display:none;">
+                        <div class="templatePrintStatement">
+                            <div class="tableHeader">
+                                <div style="background-image: url('Content/Default/images/header-bg.png'); background-repeat:repeat-x;  float:left; padding-bottom:30px;width:100%;">
+                                <div class="col-sm-12">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center" colspan="2"><h4 class="text-bold" style="color:#fff">STATEMENT</h4></td>
+                                            <tr />
+                                            <tr>
+                                                <td class="pl-md pr-default" width="50%">
+                                                    <div style="min-height:190px;">
+                                                        <div class="col-sm-12 patientStatementAddress" style="min-height: 130px;">
+                                                            <h4 class="FromName mb-none" style="font-weight:700;"></h4>
+                                                            <span class="FromAddress"></span> <br />
+                                                            <span class="FromCity"></span>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            Office Hours : <span class="Ofctime"></span><br />
+                                                            Phone : <span class="OfcPhone"></span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td width="48%">
+                                                    <div style="border-radius:21px;background:white">
+                                                        <div class="tableCraditcard">
+                                                            <table class="table table-condensed  mb-none">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="7" class="text-center"> COMPLETE AND RETURN IF PAYING BY CREDIT CARD.</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody style="font-size:11px;">
+                                                                    <tr>
+                                                                        <td class="size-min100 borderTransprentR borderTransprentB">
+                                                                            <img class="ml-sm" src="Content/images/scan-foto-yokoz.png" width="50">
+
+                                                                        </td>
+                                                                        <td class="size-min100 borderTransprentR borderTransprentB">
+                                                                            <img class="ml-sm" src="Content/images/visa-logo_trans.png" width="50">
+                                                                        </td>
+                                                                        <td class="size-min100 borderTransprentR borderTransprentB">
+                                                                            <img class="ml-sm" src="Content/Default/images/discover.png" width="50">
+                                                                        </td>
+                                                                        <td class="size-min100 borderTransprentB">
+                                                                            <img class="ml-sm" src="Content/images/amex.jpg" width="50">
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;"> CARD NUMBER <br /></td>
+                                                                        <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;padding-left:40px !important"> |SECURITY CODE <br /></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;"> NAME ON CARD (PLEASE PRINT) <br /></td>
+                                                                        <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;padding-left:40px !important"> |EXP. DATE <br /></td>
+                                                                    </tr>
+
+
+                                                                    <tr>
+                                                                        <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;"> SIGNATURE <br /></td>
+                                                                        <td colspan="2" class="borderTransprentB" style="padding-bottom: 15px !important;padding-left:40px !important"> |AMOUNT <br /></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td colspan="4" style="padding: 0 !important; border-radius: 10px !important;">
+                                                                            <table class="table-condensed " width="100%">
+                                                                                <tr>
+                                                                                    <td style="border-radius: 10px !important;">
+                                                                                        <div style="font-weight:bold;text-align:center"> STATEMENT DATE</div>
+                                                                                        <div style="text-align:center;font-weight:bold">
+                                                                                            <span class="patientCurrentDate"></span>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td style="background-color:yellow; border-left:1px solid #ccc;border-right:1px solid #ccc;">
+                                                                                        <div style="font-weight:bold;text-align:center"> ACCOUNT #</div>
+                                                                                        <div style="text-align:center;font-weight:bold">
+                                                                                            <span class="patientAccount"></span>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td style="padding: 0 !important; border-radius: 10px !important;">
+                                                                                        <div style="background-color:#c3313e;font-weight:bold;text-align:center; color: #fff;"> PAY THIS AMOUNT </div>
+                                                                                        <div style="text-align:center;font-weight:bold">
+                                                                                            <span class="PatientBalanceDue"></span>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td width="2%"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <table width="100%">
+                                <tr>
+                                    <td width="50%"></td>
+                                    <td width="50%"><b style="color:#c3313e;"> MAKE CHECK PAYABLE AND REMIT TO:</b><br /></td>
+                                </tr>
+                                <tr>
+                                    <td width="50%" style="line-height: 1;">
+                                        <div style="margin-left:55px">
+
+                                            <span class="patientName" style="margin-right:15px;font-size:13px"></span><span class="patientAccount" style="font-size:13px"></span><br />
+                                            <span class="patientAddress" style="font-size:13px"></span><br />
+                                            <span class="patientCity" style="font-size:13px"></span>
+
+                                        </div>
+                                    </td>
+                                    <td width="50%" style="line-height: 1;">
+                                        <h5 class="RemitToName mb-none" style="font-weight: 600;font-size:13px"></h5>
+                                        <span class="RemitToAddress" style="font-size:13px"></span><br />
+                                        <span class="RemitToCity" style="font-size:13px"></span>
+                                        <br />
+                                        <br />
+                                    </td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                        <div class="tableBody" style="min-height: 370px;background-image: url('Content/Default/images/grid-bg.png');background-repeat:repeat-x;">
+                            <div class="clearfix"></div>
+
+                            <div class="pull-right" style="color:#c3313e;font-size:7px;font-weight: 800;"> DETACH TOP PORTION AND RETURN WITH PAYMENT IN ENCLOSED ENVELOPE</div>
+                            <table width="100%" class="table table-bordered  table-condensed table-hover reportTableTd">
+                                <thead class="printHeading">
+                                    <tr>
+                                        <th class="text-center">DATE</th>
+                                        <th class="text-center">PROVIDER</th>
+                                        <!--<th class="text-center">Procedure</th>-->
+                                        <th class="text-center">DESCRIPTION</th>
+                                        <th class="text-center">CHARGES</th>
+                                        <th class="text-center">PAYMENT/AD.</th>
+                                        <!--<th class="text-center">Balance</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody class="printBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="tableFooter FooterBreak">
+                            <table width="100%">
+                                <tr>
+                                    <td width="30%">
+                                        <div style="border:2px solid #c3313e;min-height: 115px;">
+                                            <div style="text-align:center">
+                                                <label style="color:#c3313e;font-weight: 800;font-size: 16px;">Account Information</label>
+                                            </div>
+                                            <div style="margin-left:10px;margin-right:10px;min-height:80px">
+                                                <span>Statement Date : </span><span class="pull-right patientCurrentDate"></span><br />
+                                                <span>Account : </span><span class="pull-right patientAccount"></span><br />
+                                                <span>Patient : </span><span class="pull-right actualpatientName"></span><br />
+                                                <span style="font-weight:bold">Patient Balance : </span><span class="pull-right PatientBalanceDue" style="font-weight:bold"></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td width="20%" style="padding-left:8px;padding-right:8px;">
+                                        <img style="position:absolute;margin-top: -76px;margin-left: 12%;height: 74px;" src="Content/Default/images/arrow.png" />
+                                        <div style="border:2px solid #c3313e;min-height: 115px;">
+                                            <div style="text-align:center">
+                                                <label style="color:#c3313e;font-weight: 900;font-size: 20px;">DUE NOW</label>
+                                            </div>
+                                            <div style="min-height:80px;margin-left:5px;margin-right:5px;text-align:center; line-height:1.2;">
+                                                <span class="PatientBalanceDue" style="font-weight:800;font-size:15px"></span>
+                                                <div style="font-weight:bold;font-size:14px;text-align:center;color:#c3313e;padding-top:10px"> This Amount is your responsibility </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td width="50%">
+                                        <div style="border:2px solid #c3313e;min-height: 115px;">
+                                            <div style="min-height:80px;margin-left:5px">
+                                                <span class="StatementGrpMessage" style="font-weight:800"></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table width="100%">
+                                <tr>
+                                    <td width="40%">
+                                        <table width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top">
+                                                        <div class="printHeadingAging bg-hedder" style="padding: 12px 5px 11px 5px;  border: 1px solid #ddd;  border-right: none;  color: #fff;  font-size: 11px;  font-weight: bold;">Aging</div>
+                                                    </td>
+                                                    <td width="81%" valign="top">
+                                                        <table width="100%" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                                                            <thead class="printHeading">
+                                                                <tr class="white tiny-font">
+                                                                    <th class="text-center bg-hedder size-min50">Current</th>
+                                                                    <th class="text-center bg-hedder size-min70">31-60 Days</th>
+                                                                    <th class="text-center bg-hedder size-min70">61-90 Days</th>
+                                                                    <th class="text-center bg-hedder size-min75">91-120 Days</th>
+                                                                    <th class="text-center bg-hedder size-min80">120+ Days</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                                <tr>
+                                                                    <td class="0_30Days text-center">$0.00</td>
+                                                                    <td class="31_60Days text-center">$0.00</td>
+                                                                    <td class="61_90Days text-center">$0.00</td>
+                                                                    <td class="91_120Days text-center">$0.00</td>
+                                                                    <td class="120_above text-center">$0.00</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td width="30%">
+                                        <div style="border:1px solid #c3313e;border-left-width:2px;border-right-width:2px;min-height:60px;text-align:center; line-height:1.3;padding-top:5px;">
+                                            <span class="statementMessage" style="font-weight: 500;"></span>
+                                        </div>
+                                    </td>
+                                    <td width="30%">
+                                        <div style="margin-left:5px;margin-right:5px;margin-top:8px;line-height:1.2;font-weight:600;">
+                                            <span class="FromName" style="font-weight:bold;font-size:16px"></span><br />
+                                            <span class="FromAddress"></span><br />
+                                            <span class="FromCity"></span><br />
+                                            <span class="Telephone"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+            </div>
+
+            </printstatement>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+</div>
+

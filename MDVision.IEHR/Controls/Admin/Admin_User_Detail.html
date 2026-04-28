@@ -1,0 +1,314 @@
+﻿<div id="userDetail">
+    <div id="actionPanUserDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg mt-lg mb-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="userDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="headingTitle">Add User</h4>
+            </div>
+            <div class="modal-body pl-default pr-default pt-default pb-tiny">
+                <div id="tbluserDetail" class="col-md-12 p-none">
+                    <form method="post" onsubmit="return false" id="frmUserDetail">
+                        <div class="col-xs-12 col-md-4 p-none pull-right">
+                            <div class="col-sm-12 panel mb-none" id="pnlPriviligesGroupMain">
+                                <header class="panel-blue center">Security Entity Group</header>
+                                <div class="panel-body NoRadiusT overflowY" id="pnlPriviligesGroup" style="height:194px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-8 p-none">
+
+
+                            <div class="col-xs-12 col-sm-6">
+                                <label class="control-label">User Name <span class="required">*</span></label>
+                                <input class="form-control text-uppercase" maxlength="50" placeholder="i.e. smehmood" name="UserName" id="txtUserName" type="text" onblur="setTimeout(userDetail.UserNameAvailability(),0);" />
+                                <label class="control-label" id="lblAvaiability" style="display:none;"></label>
+
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label class="control-label">Password <span class="required">*</span></label>
+                                <button id="btnChangePassword" title="Change Password" style="display:none;" onclick="userDetail.ChangePassword(); return false;" class="pl-xs pr-xs btn btn-xs btn-danger">
+                                    <i class="fa fa-lock"> </i>
+                                </button>
+                                <input class="form-control" name="Password" id="txtUserPassword" placeholder="Password" type="password" maxlength="50" />
+                            </div>
+
+                            <div class="col-xs-12 col-sm-3">
+                                <label class="control-label">First Name <span class="required">*</span></label>
+                                <input class="form-control" name="FirstName" id="txtFirstName" placeholder="Paul" type="text" maxlength="30" />
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <label class="control-label ">MiddIe Name</label>
+                                <input id="txtMI" name="MI" class="form-control" type="text" /> <!--placeholder="a" data-mask="a" onblur="utility.ValidateCtrlMask('frmProviderDetail', this);" />-->
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label class="control-label">Last Name <span class="required">*</span></label>
+                                <input class="form-control" name="LastName" id="txtLastName" placeholder="Petter" type="text" maxlength="30" />
+                            </div>
+
+                            <div class="col-xs-12 col-sm-3">
+                                <label class="control-label">Entity <span class="required">*</span></label>
+                                <select id="lstEntityId" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-xs-12 col-sm-3" id="pnlrole">
+                                <label class="control-label">User Role <span class="required">*</span></label>
+                                <select id="lstUserRoles" name="Roles" class="form-control" ddlist="GetRoles"></select>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label class="control-label">Default Provider </label>
+                                <select id="lstProviderId" name="Provider" class="form-control" ddlist="GetProvider"></select>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-3">
+                                <label class="control-label">Telephone</label>
+                                <input class="form-control" name="Telephone" id="txtPhoneNo" placeholder="(000) 000-0000" type="text" data-mask="(999) 999-9999" />
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <label class="control-label">Email <span class="required">*</span></label>
+                                <input class="form-control" name="email" id="txtEmailAddress" placeholder="john@abc.com" type="text" maxlength="55" />
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label class="control-label">Automatic Log-off (minutes)</label>
+                                <input class="form-control" type="text" id="txtAutoLogOff" name="AutoLogOff" maxlength="2">
+                            </div>
+                            
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <label class="control-label ">Direct Address</label>
+                            <input id="txtDirectAddress" name="directAddress" class="form-control" onblur="userDetail.enabledirectvalidation(this);" placeholder="eg.: john@abc.com" type="text" maxlength="55" />
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <label class="control-label">Emergency Access Role</label>
+
+                            <select onchange="userDetail.disableUserRole(this);" id="lstEmergencyUserRoles" name="EmergencyRole" ddlist="GetEmergencyRoles" class="form-control"></select>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <label class="control-label">Co-Workers Group</label>
+                            <select id="lstCoWorkersGroups" name="CoWorkersGroup" ddlist="GetCoWorkersGroups" class="form-control"></select>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4" id="foldersddl">
+                            <label class="control-label">Folder <span class=""></span></label>
+                            <select id="ddlFolder" name="Folder" multiple="multiple" customid="Folder" onchange="" class="form-control multiselect" ddlmultilist="GetFolders" required></select>
+                        </div>
+
+
+                        <div class="col-xs-12 col-sm-6 col-md-4" id="pnlMobSessionExpTime">
+                            <label class="control-label">Check in App time out min(s)</label>
+                            <input class="form-control" type="text" id="MobSessionExpTime" name="MobSessionExpTime" maxlength="2" value="30" data-bv-field="MobSessionExpTime"><i class="form-control-feedback" data-bv-icon-for="MobSessionExpTime" style="display: none;"></i>
+                            <small class="help-block" data-bv-validator="notEmpty" data-bv-for="MobSessionExpTime" data-bv-result="NOT_VALIDATED" style="display: none;"></small><small class="help-block" data-bv-validator="between" data-bv-for="MobSessionExpTime" data-bv-result="NOT_VALIDATED" style="display: none;">Check in App time out must be between 10 to 30 minutes</small>
+                        </div>
+                        <div class="col-xs-12 mt-default">
+                            <div class="bg-gray panel-body text-black p-xs pt-sm mb-default border">
+                                
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsActive">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" checked="" name="IsActive" id="chkIsActive">
+                                            <label for="chkIsActive">Active</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsMedText">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsMedText" id="chkIsMedText">
+                                            <label for="chkIsMedText">MedText Referrals</label>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsNoteUnSign">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsNoteUnSign" id="chkIsNoteUnSign" />
+                                            <label for="chkIsNoteUnSign">Note Unsign</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsFullSSN">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsFullSSN" id="chkIsFullSSN" />
+                                            <label for="chkIsFullSSN">Patient Full SSN</label>
+                                        </div>
+                                    </div>
+                              
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlDataPrivacy">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsDataPrivacy" id="chkIsDataPrivacy" />
+                                            <label for="chkIsDataPrivacy">Data Privacy</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlConfigureAlerts">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="ConfigureAlerts" id="chkConfigureAlerts" />
+                                            <label for="chkConfigureAlerts">Configure Alerts</label>
+                                        </div>
+                                    </div>
+                               
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsMobileLogin">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsMobileLogin" id="IsMobileLogin">
+                                            <label for="IsMobileLogin">Patient CheckIn App</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="RCopialUser" id="RCopialUser" onchange="userDetail.RCopialUserChange(this)">
+                                            <label for="RCopialUser">Rcopia User</label>
+                                        </div>
+                                    </div>
+                               
+
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsExpiryAlert">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsExpiryAlert" id="chkIsExpiryAlert" />
+                                            <label for="chkIsExpiryAlert">Doc Expiry Alert</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlTxtDaysBeforeExpiry">
+                                        <input id="txtDaysBeforeExpiry" name="DaysBeforeExpiry" class="form-control size40 height22 pull-left mr-default" type="text" />
+                                        <label for="txtDaysBeforeExpiry" class="control-label pull-left">Days Before</label>
+                                    </div>
+                               
+
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsAdmin">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsAdmin" id="chkIsAdmin" onchange="userDetail.UserRoleDropDown()">
+                                            <label for="chkIsAdmin">Is Admin</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsLocked">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsLocked" id="chkIsLocked" />
+                                            <label for="pnlIsLocked">Locked</label>
+                                        </div>
+                                    </div>
+                                    
+
+                                
+
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsEMR">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsEMR" id="chkIsEMR" />
+                                            <label for="chkIsEMR">EMR Required</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2 mb-xs p-none" id="pnlIsShowColBal">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsShowColBal" id="chkIsShowColBal" />
+                                            <label for="chkIsShowColBal">Show Collection Balance</label>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-10 p-none">
+                            <div class="col-xs-12 col-sm-3">
+                                <label for="lstUserType" class="control-label">User Type </label>
+                                <select id="lstUserType" class="form-control" ddlist="GetUserType"></select>
+                            </div>
+                            <div class="col-xs-12 col-sm-9 p-none" id="RcopiaUserInfoDiv" hidden>
+                                <div class="col-sm-4">
+                                    <label class="control-label">User Name <span class="required">*</span></label>
+                                    <input class="form-control" name="RcUserName" id="RcUserName" placeholder="User Name" type="text" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">Password <span class="required">*</span></label>
+                                    <input class="form-control" name="RcPassword" id="RcPassword" placeholder="Password" type="password" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">Signature Password <span class="required">*</span></label>
+                                    <input class="form-control" name="RcSigPassword" id="RcSigPassword" placeholder="Signature Password" type="password" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-right pt-md pr-default">
+                            <button class="btn btn-success btn-sm" type="submit">Save</button>
+                            <button id="btnAudit" class="btn btn-default btn-sm" type="button" onclick="userDetail.LoadUserActivityLog()">Activity Log</button>
+                        </div>
+                        <!--start - CONTENTS-->
+
+
+
+
+                        <div class="clearfix"></div>
+                        <div class="spacer10"></div>
+                        <div class="special-block">
+                            <h5> Additional User Roles</h5>
+                            <div id="pnlAditionalPriviliges">
+                                <div class="col-sm-4 panel-featured-success">
+                                    <header class="panel-blue center">Modules</header>
+                                    <div class="panel-body height150" id="pnlModules">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 panel">
+                                    <header class="panel-blue center">Forms</header>
+                                    <div class="panel-body height150" id="pnlForms">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 panel">
+                                    <header class="panel-blue center">Privileges</header>
+                                    <div class="panel-body height150" id="pnlPrivileges">
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <input class="form-control" name="password" id="txtUserPasswordHF" placeholder="Password" type="hidden" style="display:none;" />
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtUserPassword").keypress(function (event) {
+            var ew = event.which;
+
+            if (48 <= ew && ew <= 57)
+                return true;
+            if (65 <= ew && ew <= 90)
+                return true;
+            if (97 <= ew && ew <= 122)
+                return true;
+            if (33 == ew)
+                return true;
+            if (64 == ew)
+                return true;
+            if (35 == ew)
+                return true;
+            if (36 == ew)
+                return true;
+            if (94 == ew)
+                return true;
+            if (38 == ew)
+                return true;
+            if (42 == ew)
+                return true;
+            if (95 == ew)
+                return true;
+            if (45 == ew)
+                return true;
+            if (37 == ew)
+                return true;
+            if (40 == ew)
+                return true;
+            if (41 == ew)
+                return true;
+            if (126 == ew)
+                return true;
+            if (61 == ew)
+                return true;
+            if (43 == ew)
+                return true;
+            if (123 == ew)
+                return true;
+            if (91 == ew)
+                return true;
+            if (125 == ew)
+                return true;
+            if (93 == ew)
+                return true;
+            if (8 == ew)
+                return true;
+            return false;
+        });
+    });
+    </script>-->

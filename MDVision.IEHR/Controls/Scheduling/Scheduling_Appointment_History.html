@@ -1,0 +1,114 @@
+﻿<div id="pnlappointmenthistory" >
+    <div id="actionPanAppointmentHistory" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg modal-dialog-full" id="AppointmentHistoryFormDiv">
+        <div  class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="appointmentHistory.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="headingTitle">Appointment History Log</h4>
+            </div>
+            <div class="model-body">
+                
+              
+                    <div class="form-group" id="mainScrollPan">
+                        
+                        <form method="post" id="frmAppointmentHistory" onsubmit="return false">
+                            <section>
+                                <!--<ul id="ulTabs" class="tabs-custom hidden">
+                                    <li class="liClaimHistory active" id="liClaimHistory"><a href="#" onclick="Activity_Log.LoadClaimHistory()" data-toggle="tab">Claim History</a></li>
+                                    <li class="liPatientHistory" id="liPatientHistory"><a href="#" onclick="Activity_Log.LoadPatientHistory()" data-toggle="tab">Patient History</a></li>
+                                    <li class="liChargestHistory" id="liChargesHistory"><a href="#" onclick="Activity_Log.LoadChargesHistory()" data-toggle="tab">Charges History</a></li>
+                                    <li class="liNotesHistory" id="liNotesHistory"><a href="#" onclick="Activity_Log.LoadActivityLogsNotesComments()" data-toggle="tab">Notes Log</a></li>
+                                </ul>-->
+                                <div  class="panel-body">
+
+                                    <div id="divAuditTablesData">
+
+                                        <div class="col-sm-12">
+                                            <h5 class="text-bold">New Entry</h5>
+                                            <div id="pnlActivityLog_NewEntry" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvNewEntry">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th class="size120">Profile</th>
+                                                                    <th class="size120">User</th>
+                                                                    <th class="size120">Entry Date & Time</th>
+                                                                    <!--<th class="size120">Field</th>
+                                                            <th class="size60 noWordBreak">Original Value</th>
+                                                            <th class="size120 noWordBreak">Current Value</th>-->
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <hr class="vshort" />
+                                        <div class="col-sm-9 col-md-6">
+                                            <h5 class="text-bold" id="UserHeading" style="display: none;">User/Actions</h5>
+                                            <div id="pnlActivityLog_User" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvUser">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th class="size120">Profile</th>
+                                                                    <th class="size80">Action</th>
+                                                                    <th class="size120">User</th>
+                                                                    <th class="size120">Date & Time</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <!--<div class="clearfix"></div>
+                                <hr class="vshort" />-->
+                                        <div class="col-sm-9 col-md-6">
+                                            <h5 class="text-bold" id="ChangesHeading" style="display: none;">Changes</h5>
+                                            <div id="pnlActivityLog_Changes" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvChanges">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th class="size120">Field</th>
+                                                                    <th class="size60 noWordBreak">Original Value</th>
+                                                                    <th class="size120 noWordBreak">Current Value</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        
+
+                                    </div>
+
+
+
+                             
+
+
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9D699C78-4B87-4900-8D11-6DAD374D170D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MDVision.Business</RootNamespace>
+    <AssemblyName>MDVision.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'debug web|AnyCPU'">
+    <OutputPath>bin\debug web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'web|AnyCPU'">
+    <OutputPath>bin\web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CryptoStringify">
+      <HintPath>..\packages\CryptoStringify.1.0.0\lib\net45\CryptoStringify.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.7.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.9\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="jose-jwt, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jose-jwt.2.4.0\lib\net40\jose-jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="KeepAutomation.Barcode.Web, Version=6.0.0.40124, Culture=neutral, PublicKeyToken=7bccd45cd3040107, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\KeepAutomation.Barcode.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SmartThreadPool, Version=2.2.3.0, Culture=neutral, PublicKeyToken=1126fe8b671e8a79, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\SmartThreadPool.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WinSCPnet, Version=1.2.8.5438, Culture=neutral, PublicKeyToken=2271ec4a3c56d0bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MDVision.Common\DLL\WinSCPnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppointmentReminders\AppointmentReminders.cs" />
+    <Compile Include="AppointmentReminders\ReminderConfiguration.cs" />
+    <Compile Include="AppointmentReminders\Request\request.cs" />
+    <Compile Include="AppointmentReminders\Response\response.cs" />
+    <Compile Include="AppointmentReminders\TeleVoxAppointmentReminder.cs" />
+    <Compile Include="BCommon\BarCode39.cs" />
+    <Compile Include="BCommon\ClaimSubmission.cs" />
+    <Compile Include="BCommon\CustomImageTagProcessor.cs" />
+    <Compile Include="BCommon\EDI270Parser.cs" />
+    <Compile Include="BCommon\EDI271Parser.cs" />
+    <Compile Include="BCommon\FileServer.cs" />
+    <Compile Include="BCommon\FTP.cs" />
+    <Compile Include="BLL\BLLEOBManualPosting.cs" />
+    <Compile Include="BLL\BLLiTrack.cs" />
+    <Compile Include="BLL\BLLMacro.cs" />
+    <Compile Include="BLL\BLLMUAlerts.cs" />
+    <Compile Include="MedTextReferrals\Medtext_Referrals.cs" />
+    <Compile Include="BCommon\NetworkSecurity.cs" />
+    <Compile Include="BCommon\SFTP.cs" />
+    <Compile Include="BLL\BLLExportCCDA.cs" />
+    <Compile Include="BLL\BLLAuditbleEventsActivityLog.cs" />
+    <Compile Include="BLL\BLLBatchFax.cs" />
+    <Compile Include="BLL\BLLActivity.cs" />
+    <Compile Include="BLL\BLLAdminClinical.cs" />
+    <Compile Include="BLL\BLLAdminPatientEligibilityService.cs" />
+    <Compile Include="BLL\BLLAOETemplates.cs" />
+    <Compile Include="BLL\BLLBatch.cs" />
+    <Compile Include="BLL\BLLCCDA.cs" />
+    <Compile Include="BLL\BLLCCM.cs" />
+    <Compile Include="BLL\BLLEMCodeGenerator.cs" />
+    <Compile Include="BLL\BLLHPI.cs" />
+    <Compile Include="BLL\BLLMobileApp.cs" />
+    <Compile Include="BLL\BLLMobileLogin.cs" />
+    <Compile Include="BLL\BLLOrderSet.cs" />
+    <Compile Include="BLL\BLLPatientEducation.cs" />
+    <Compile Include="BLL\BLLAdmin.cs" />
+    <Compile Include="BLL\BLLAdminEDI.cs" />
+    <Compile Include="BLL\BLLAdminFollowUp.cs" />
+    <Compile Include="BLL\BLLAdminHL7.cs" />
+    <Compile Include="BLL\BLLAdminInsurance.cs" />
+    <Compile Include="BLL\BLLAdminProfile.cs" />
+    <Compile Include="BLL\BLLAdminCodes.cs" />
+    <Compile Include="BLL\BLLBillingClaim.cs" />
+    <Compile Include="BLL\BLLClinical.cs" />
+    <Compile Include="BLL\BLLCQM.cs" />
+    <Compile Include="BLL\BLLERA.cs" />
+    <Compile Include="BLL\BLLPayment.cs" />
+    <Compile Include="BLL\BLLCityStateZip.cs" />
+    <Compile Include="BLL\BLLCommon.cs" />
+    <Compile Include="BLL\BLLDocument.cs" />
+    <Compile Include="BLL\BLLFeeSchedule.cs" />
+    <Compile Include="BLL\BLLIMO.cs" />
+    <Compile Include="BLL\BLLLogin.cs" />
+    <Compile Include="BLL\BLLAdminSecurity.cs" />
+    <Compile Include="BLL\BLLMessage.cs" />
+    <Compile Include="BLL\BLLMiscellaneousLookups.cs" />
+    <Compile Include="BLL\BLLBilling.cs" />
+    <Compile Include="BLL\BLLPatient.cs" />
+    <Compile Include="BLL\BLLPhysicalExamECW.cs" />
+    <Compile Include="BLL\BLLPQRS.cs" />
+    <Compile Include="BLL\BLLProcedureTemplates.cs" />
+    <Compile Include="BLL\BLLReportHeader.cs" />
+    <Compile Include="BLL\BLLReports.cs" />
+    <Compile Include="BLL\BLLReviewOfSystem.cs" />
+    <Compile Include="BLL\BLLSchedule.cs" />
+    <Compile Include="BLL\BLLSettings.cs" />
+    <Compile Include="BLL\BLLVisits.cs" />
+    <Compile Include="BLL\Personnel.cs" />
+    <Compile Include="BCommon\BLObject.cs" />
+    <Compile Include="BLL\BLLRcopia.cs" />
+    <Compile Include="ClaimScrubber\ClaimScrub.cs" />
+    <Compile Include="MedTextReferrals\RequestModels\RequestModel.cs" />
+    <Compile Include="MedTextReferrals\ResponseModels\ResponseModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\AlphaIIService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\NavicureService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MDVision.Common\MDVision.Common.csproj">
+      <Project>{4c43925d-c035-4657-974b-9d0bc50e884e}</Project>
+      <Name>MDVision.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.DataAccess\MDVision.DataAccess.csproj">
+      <Project>{DCA2D6D8-4A90-444F-A09A-C17DB5400E51}</Project>
+      <Name>MDVision.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.Dataset\MDVision.Datasets.csproj">
+      <Project>{915677DB-0C5D-4DAD-9A1E-82A20712B4AF}</Project>
+      <Name>MDVision.Datasets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.EDIParser\EDIParser.csproj">
+      <Project>{483d8955-caeb-4838-acd5-67e90834461c}</Project>
+      <Name>EDIParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDVision.Model\MDVision.Model.csproj">
+      <Project>{ec0b9643-4480-4a17-974e-788f8924cfb5}</Project>
+      <Name>MDVision.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\itextsharp.dll" />
+    <Content Include="DLL\itextsharp.pdfa.dll" />
+    <Content Include="DLL\itextsharp.xmlworker.dll" />
+    <Content Include="DLL\KeepAutomation.Barcode.Web.dll" />
+    <Content Include="DLL\SmartThreadPool.dll" />
+    <Content Include="DLL\System.Windows.Forms.dll" />
+    <None Include="Service References\AlphaIIService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\AlphaIIService\configuration.svcinfo" />
+    <None Include="Service References\AlphaIIService\configuration91.svcinfo" />
+    <None Include="Service References\AlphaIIService\scrub.disco" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AlphaIIService\scrub.wsdl" />
+    <None Include="Service References\NavicureService\MDVision.Business.NavicureService.ResponseType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\NavicureService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\NavicureService\configuration.svcinfo" />
+    <None Include="Service References\NavicureService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NavicureService\NavicureSubmissionService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AlphaIIService\" />
+    <WCFMetadataStorage Include="Service References\NavicureService\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

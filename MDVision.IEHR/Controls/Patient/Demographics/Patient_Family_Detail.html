@@ -1,0 +1,189 @@
+﻿<div id="pnlFamilyDetail">
+    <div id="actionPanPatient_Family_Detail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_Family_Detail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Family Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mainScrollPan" id="tblemergencyContactDetail">    
+                    <section class="panel">
+                        <div class="panel-body tab-content-featured">
+                            <form method="post" id="frmFamilyDetail" onsubmit="return false">
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Last Name<span class="required">*</span></label>
+                                        <input type="text" class="form-control" id="txtLastName" oninput="utility.numbersNotAllowed(this)" name="LastName" maxlength="50" onblur="utility.ChangeNameCase(this);">
+                                    </div>
+                                    <div class="col-sm-3 ">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label">First Name<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="txtFirstName" name="FirstName" maxlength="35" oninput="utility.numbersNotAllowed(this)" onblur="utility.ChangeNameCase(this);">
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md">
+                                                <label class="control-label">M.I./Name</label>
+                                                <input type="text" class="form-control" name="MiddleInitial" placeholder="" maxlength="25" id="txtMiddleInitial" onblur="utility.ChangeNameCase(this);">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Relation<span class="required">*</span></label>
+                                        <select class="form-control" id="ddlRelation" name="Relation" ddlist="GetRelationship" onchange="Patient_Family_Detail.GetSelectedRelationship(this);"></select>
+                                    </div>
+                                    <div class="col-sm-3" style="display:none" id="divOtherRelationship">
+                                        <label class="control-label">Other Relationship<span class="required">*</span></label>
+                                        <input type="text" class="form-control" id="txtOtherRelation" name="OtherRelationship" maxlength="50">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" for="Date of Birth">Date of Birth<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" id="dtpDOB" name="DOB" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-sm-3">
+                                        <label class="control-label" for="Date of Birth">Date of Death</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" id="dtpDOD" name="DOD" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Address 1</label>&nbsp;<a id="lnkAddress1" href="#" class="blue" onclick="Patient_Family_Detail.FillSameAsPatientInfo();">Same as patient</a>
+                                        <input type="text" class="form-control" id="txtAddress1" name="Address1" maxlength="55">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Address 2</label>
+                                        <input type="text" class="form-control" id="txtAddress2" name="Address2" maxlength="55">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label">City</label>
+                                                <input class="form-control" id="txtCity" name="City" type="text" maxlength="25">
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md">
+                                                <label class="control-label">State</label>
+                                                <input class="form-control" id="txtState" name="State" type="text" placeholder="aa" data-mask="aa">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label pull-left "> Zip </label>
+                                                <input id="txtZip" name="Zip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#pnlFamilyDetail', '#txtZip', '#txtCity', '#txtState')" />
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md pad-a-labelsize">
+                                                <input id="txtZipExt" name="ZipExt" class="form-control" type="text" placeholder="9999" data-mask="9999" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Home Tel</label>
+                                        <input type="text" class="form-control" id="txtHomeTel" name="HomeTel" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label">Work Tel</label>
+                                                <input class="form-control" id="txtWorkTel" name="WorkTel" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md">
+                                                <label class="control-label">Ext</label>
+                                                <input class="form-control" id="txtExt" name="Ext" type="text" placeholder="99999" maxlength="5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Cell</label>
+                                        <input type="text" class="form-control" id="txtCell" name="Cell" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Fax</label>
+                                        <input type="text" class="form-control" id="txtFax" name="Fax" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Email</label>
+                                        <input type="text" class="form-control" id="txtEmail" name="Email" maxlength="55">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Account Number</label>
+                                        <input type="text" class="form-control" id="txtAccountNumber" name="AccountNumber" disabled>
+                                    </div>
+                                    <div class="col-sm-3 pad-a-labelsize pl-none pr-none">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="AddAsPatient" id="chkAddAsPatient" onchange="Patient_Family_Detail.HideShowProviderFacilityPanel(this);">
+                                            <label class="control-label" for="chkAddAsPatient">Add as Patient</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 pl-none pr-none" id="DisplayAddAsPatient" style="display:none;">
+                                        <div class="col-sm-3 col-md-3">
+                                            <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                                            <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Patient_Family_Detail.OpenProviderDetail();" title="Edit Provider">Provider<span class="required">*</span></a>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Family_Detail.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                            <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Patient_Family_Detail.OpenFacilityDetail();" title="Edit Facility">Facility<span class="required">*</span></a>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Patient_Family_Detail.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3 col-md-3">
+                                            <label for="Practice" class="control-label">Practice<span class="required">*</span></label>
+                                            <input class="form-control" id="txtPractice" name="Practice" type="text" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 pad-a-labelsize-btn pull-right">
+                                    <button type="button" class="btn btn-primary btn-sm" id="btnPatientSearch" onclick="Patient_Family_Detail.OpenPatientSearch();" name="btnPatientSearch">Search Existing Patients</button>
+                                    <button id="btnFamily" class="btn btn-primary btn-sm" type="submit">Save & Exit</button>
+                                </div>
+                                <div class="clearfix"></div>
+                                <input type="hidden" id="hfIsPrimary" value="False" />
+                                <input type="hidden" id="hfIsActive" value="False" />
+                                <input type="hidden" id="hfRelationName" />
+                                <input type="hidden" id="hfLinkedPatientId" value="-1" />
+                                <input type="hidden" id="hfProvider" name="ProviderID" />
+                                <input type="hidden" id="hfFacility" name="FacilityID" />
+                                <input type="hidden" id="hfPractice" name="PracticeID" />
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        utility.ValidateDOB('frmFamilyDetail', 'pnlFamilyDetail #dtpDOB', new Date('1800-01-01'), new Date(), true);
+        utility.ValidateDOB('frmFamilyDetail', 'pnlFamilyDetail #dtpDOD', new Date('1800-01-01'), new Date(), true);
+    });
+</script>

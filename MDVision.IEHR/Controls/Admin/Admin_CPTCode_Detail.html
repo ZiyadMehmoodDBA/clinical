@@ -1,0 +1,205 @@
+﻿<div id="cptcodeDetail">
+    <div id="actioncptcodeDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="cptcodeDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">CPT</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblcptcodeDetail" class="col-sm-12 p-none">
+                    <form method="post" onsubmit="return false" id="frmCPTCodeDetail">
+                        <!--start - CONTENTS-->
+
+                        <div class="col-sm-3">
+                            <!--<div class="size60per pull-left pl-default pr-default">
+                                <label class="control-label">Short Name <span class="required">*</span></label>
+                                <input class="form-control" name="ShortName" id="txtShortName" type="text" maxlength="10" />
+                            </div>-->
+                            <!--<div class="size40per pull-left pl-default">-->
+                            <label class="control-label">CPT<span class="required">*</span></label>
+                            <input class="form-control" name="CPTCode" id="txtCPTCode" oninput="cptcodeDetail.BindCPTAutoComplete(this);" type="text" placeholder="Search Code" value="" maxlength="10" />
+                            <!--</div>-->
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Description<span class="required">*</span></label>
+                            <input class="form-control" name="Description" id="txtDescription" type="text" maxlength="55" />
+                        </div>
+                        <div class="col-sm-3">
+                            <!--<div class="size50per pull-left pl-default pr-default">-->
+                            <label class="control-label">Basic Units<span class="required">*</span></label>
+                            <input class="form-control" name="BasicUnits" id="txtBasicUnits" type="text" maxlength="5" onkeypress="utility.ValidateDecimal(event,2)" />
+                            <!--</div>-->
+                            <!--<div class="size50per pull-left pl-default" id="divCPTCode_Entity">
+                                <label class="control-label">Entity<span class="required">*</span></label>
+                                <select id="ddlEntity" onchange="cptcodeDetail.LoadEntityBasedData($(this).val())" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                            </div>-->
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label class="control-label">Fee</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                        <input class="form-control" name="Fee" id="txtFee" type="text" maxlength="8" onkeypress="utility.ValidateDecimal(event,2)" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="control-label">Expected Fee</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                        <input class="form-control" name="ExpectedFee" id="txtExpectedFee" type="text" maxlength="8" onkeypress="utility.ValidateDecimal(event,2)" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <label class="control-label">Duration/Unit</label>
+                                    <input class="form-control" name="DurationPerUnit" id="txtDurationPerUnit" type="text" data-mask="9?9" placeholder="99" />
+                                </div>
+                                <div class="col-xs-7">
+                                    <label class="control-label">Global Period Days</label>
+                                    <input class="form-control" id="txtGlobalPeriodDays" name="GlobalPeriodDays" type="text" data-mask="9?99" placeholder="999" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Type of Service</label>
+                            <select id="lstTypeOfService" name="TypeOfService" class="form-control" ddlist="GetTypeOfService"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label ">Specialty</label>
+                            <select id="lstSpecialtyId" name="SpecialtyId" class="form-control" ddlist="GetSpecialty"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Procedure Category</label>
+                            <select id="lstProcedureCategoryId" name="ProcedureCategoryId" class="form-control" ddlist="GetProcedureCategory"></select>
+                        </div>
+
+                        <div class="col-sm-3" style="display:none">
+                            <label class="control-label">Place of Service Category</label>
+                            <select id="lstPOScategory" name="POScategory" class="form-control" ddlist="GetPlaceOfService"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Start Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="txtStartDate" name="StartDate" data-plugin-datepicker="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">End Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="txtEndDate" name="EndDate" data-plugin-datepicker="" class="form-control">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-3">
+                            <label class="control-label">Service Description</label>
+                            <input class="form-control" id="txtServiceDescription" type="text" maxlength="80" />
+                        </div>
+                        <div class="col-xs-12 p-none">
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="Electronic" id="chkElectronic">
+                                    <label for="Electronic">Electronic</label>
+                                </div>
+                            </div>
+
+
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="Discontinued" id="chkDiscontinued">
+                                    <label for="Discontinued">Discontinued</label>
+                                </div>
+                            </div>
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="CLIA" id="txtCLIA">
+                                    <label for="CLIA">CLIA</label>
+                                </div>
+                            </div>
+
+
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="PrintOptions" id="chkPrintOptions">
+                                    <label for="Don not Print">Don't Print</label>
+                                </div>
+                            </div>
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="ReferralRequired" id="chkReferralRequired">
+                                    <label for="Referal Required">Referral Required</label>
+                                </div>
+                            </div>
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="ActivelyUsed" id="chkActivelyUsed">
+                                    <label for="Actively Used">Actively Used</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-right mt-md pr-default">
+                            <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                            <!--<button id="btnHistoryCPTCode" class="btn btn-primary btn-sm rightbtn" type="button" onclick="cptcodeDetail.ShowHistory();">History</button>-->
+                        </div>
+                        <input type="hidden" id="hfLexiCode" name="hflexiCode" value="" />
+                    </form>
+                </div>
+                <div class="spacer5"></div>
+                <div id="pnlCPTNdcInfo" class="col-xs-12">
+                    <form>
+                        <table id="dgvCPTNdcInfo" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                            <thead>
+                                <tr>
+                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" class="size80" coltype="Action">Action</th>
+                                    <th controlid="txtNDCCode" controlwidth="custom-width-auto" isoptional="0" coltype="textbox" onfocusout="cptcodeDetail.SetValidation('id_');">NDC</th>
+                                    <th controlid="txtNDCDescription" controlwidth="custom-width-auto" isoptional="0" coltype="textbox" >NDC Description</th>
+                                    <th controlid="txtNDCUnits" controlwidth="custom-width-auto" coltype="textbox" onkeypress="utility.ValidateDecimal(event, 2);" onfocusout="cptcodeDetail.ValidateUnit('id_')">NDC Unit</th>
+                                    <th controlid="txtNDCUnitPrice" controlwidth="custom-width-auto" coltype="textbox" onkeypress="utility.ValidateDecimal(event, 2);" currencyicon="fa fa-dollar">Unit Price</th>
+                                    <th controlid="txtNDCMeasurementId" controlwidth="custom-width-auto" coltype="dropdown" ddlist="GetNDCMeasurementCode">NDC Measurement Code</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                    <a href="javascript:cptcodeDetail.rowAddNdc()">Add Line Item</a>
+
+                </div>
+                <div class="spacer5"></div>
+                <div id="pnlCPTPlanInfo" class="col-xs-12">
+                    <form>
+                        <table id="dgvCPTPlanInfo" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                            <thead>
+                                <tr>
+                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" class="size80" coltype="Action">Action</th>
+                                    <th controlid="txtCodePlan" controlwidth="" isoptional="0" hfcontrolid="hfPlan" coltype="AutoComplete" containerctrl="cptcodeDetail" autocompletemethod="InsurancePlan" customname="Insurance Plan" searchmethod="cptcodeDetail.OpenInsurancePlan(null)">Plan</th>
+                                    <th controlid="txtCode" controlwidth="custom-width-auto" isoptional="0" coltype="textbox">Code</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </form>
+                    <a href="javascript:cptcodeDetail.rowAdd()">Add Line Item</a>
+
+                </div>
+                <div class="spacer5"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        utility.ValidateFromToDate('cptcodeDetail #frmCPTCodeDetail', 'txtStartDate', 'txtEndDate', true);
+
+    });
+</script>
+

@@ -1,0 +1,48 @@
+﻿<div class="row" id="pnlClinicalMacroDetail">
+    <div id="actionPanClinicalMacroDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" onclick="Clinical_MacroDetail.UnLoad();" class="close"></button>
+                <h4 class="modal-title"><span id="macTitle">Add</span> Macro</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmClinicalMacroDetail" role="form">
+                    <div class="col-sm-3">
+                        <label for="" class="control-label">Macro Name<span class="required">*</span></label>
+                        <input id="txtMacroName" type="text" maxlength="255" name="MacroName" class="form-control" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="" class="control-label">Keyword<span class="required">*</span></label>
+                        <input id="txtKeyword" type="text" maxlength="80" name="Keyword" class="form-control" />
+                    </div>
+                    
+
+                             <div class="col-sm-3" id="divMacroDetailComponentNames">
+                                <select class="form-control" style="display:none;" name="hiddenMacroDetailComponentNames" id="ddlHiddendivMacroDetailComponentNames"></select>
+                                <label class="control-label">Clinical Components</label>
+                                <select class="form-control" multiple="multiple" name="MacroDetailComponentNames" id="ddlMacroDetailComponentNames"></select>
+                            </div>
+                    <div class="col-sm-3" id="divMacroDetailUsers">
+                        <select class="form-control" style="display:none;" name="hiddenMacroDetailUsers" id="ddlHiddendivMacroDetailUsers"></select>
+                        <label class="control-label">Users</label>
+                        <select class="form-control" multiple="multiple" name="MacroDetailUsers" id="ddlMacroDetailUsers"></select>
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="" class="control-label">Description<span class="required">*</span></label>
+                        <textarea id="txtDescription" type="text" name="Description" spellcheck="true" class="form-control height300-fixed"  />
+                    </div>
+                    <div class="pull-right pr-default">
+                        <button style="margin-top:5px;" class="btn btn-success btn-sm" type="submit" id="btnMacroDetailSave">Save </button>
+                        <!--onclick="AOETemplateDetail.saveAOETemplateDetail();"-->
+                    </div>
+                    <input type="hidden" id="hfFavoriteListId" name="FavoriteListId" value="-1">
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

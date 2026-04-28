@@ -1,0 +1,150 @@
+﻿<div class="row" id="pnlBatchFaxQuickLink" style="display:none;">
+    <div id="actionPanBatchFaxQuickLink" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<form method="post" id="frmClinicalLab" onsubmit="return false">-->
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Batch_Fax_QuickLink.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Fax</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section id="removeDiv">
+                        <ul class="tabs-custom" id="ulFaxItems">
+                            <li id="FaxInboxTab" onclick="Batch_Fax_QuickLink.getInboxItems();" class="active"><a id="inboxTab" class="" href="#Inbox" data-toggle="tab">Inbox</a></li>
+                            <li id="FaxOutboxTab" onclick="Batch_Fax_QuickLink.getOutboxItems();"><a id="outboxTab" class="" href="#Outbox" data-toggle="tab">Outbox</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body pt-default">
+                            <div id="Inbox" class="tab-pane active" style="display: block;">
+                                <div class="form-group">
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="control-label">Date From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon add-on">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" name="date" type="text" id="dtpFromDate" maxlength="10">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="control-label">Date To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon add-on">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" name="date" type="text" id="dtpToDate" maxlength="10">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-3">
+                                        <div class="col-sm-2 mt-sm pull-right">
+                                            <button class="btn btn-primary rightbtn btn-sm" id="btnInboxSearch" type="button" onclick="Batch_Fax_QuickLink.getInbox(true);">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="spacer15"></div>
+                                <div class="panel-body panel-featured">
+                                    <div class="col-sm-6 mt-sm pull-left">
+                                        <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Batch_Fax_QuickLink.loadSendFax();"><i class="fa fa-plus-circle"></i> Compose </button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <input class="pull-right" type="hidden" id="Provider_SelectedDataKeys" />
+
+                                    <table class="table table-bordered table-condensed table-striped table-hover mb-none" id="tblInbox">
+                                        <thead>
+                                            <tr>
+                                                <th class="size60"><input type="checkbox" id="selectAll">  <a class="btn  btn-xs" href="#" onclick="Batch_Fax_QuickLink.deleteAllFaxes();" title="Delete All Records"><i class="fa fa-close red"></i></a>&nbsp;</th>
+                                                <th class="size60">Actions</th>
+                                                <th>From</th>
+                                               
+                                                <th>Date</th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="Outbox" class="tab-pane">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-2 col-md-3">
+                                        <label id="lblProviderOutPut" class="control-label" style="display: inline;">Provider</label>
+                                        <a href="#" title="Edit Provider" style="display: none;" onclick="Batch_Fax_QuickLink.OpenProviderDetailOutPut();" id="lnkProviderEditOutPut">Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtProviderOutPut" onblur="Batch_Fax_QuickLink.HideProviderLinkOutPut(this.value);" type="text" placeholder="Start typing to search" name="ProviderOutPut" customname="Provider" maxlength="35" oninput=" Batch_Fax_QuickLink.ResetProviderOutPut();" data-bv-field="ProviderOutPut" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProviderOutPut" class="btn btn-primary btn-xs " type="button" onclick="Batch_Fax_QuickLink.OpenProviderOutPut();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="control-label"> Date From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon add-on">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" name="date" type="text" id="dtpOutFromDate" maxlength="10">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2">
+                                        <label class="control-label"> Date To </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon add-on">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" name="date" type="text" id="dtpOutToDate" maxlength="10">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-3">
+                                        <div class="col-sm-2 mt-sm pull-right">
+                                            <button class="btn btn-primary rightbtn btn-sm" id="btnOutboxSearch" type="button" onclick="Batch_Fax_QuickLink.getOutbox(true);">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="spacer15"></div>
+                                <div class="panel-body panel-featured">
+                                    <input class="pull-right" type="hidden" id="Provider_SelectedDataKeys" />
+                                    <table class="table table-bordered table-condensed table-striped table-hover mb-none" id="tblOutbox">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">Id</th>
+                                                <th>Actions</th>
+                                                <th class="size110">To</th>
+                                                <th>Subject</th>
+                                                <th>Status</th>
+                                                <th>Date & Time</th>
+                                                <th>Recipient Name</th>
+                                                <th class="size90">Total Pages</th>
+                                                <th class="size90">Provider</th>
+                                                <th>Sender Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="dgvtblOutbox_Paging"></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </section>
+                </div>
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+    <input type="hidden" id="hfProviderId" />
+    <input type="hidden" id="hfProviderIdOutPut" />
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#pnlBatchFaxQuickLink input").keypress(function (e) {
+            if (e.keyCode == 13) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>

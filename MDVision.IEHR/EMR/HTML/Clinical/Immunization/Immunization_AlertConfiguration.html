@@ -1,0 +1,161 @@
+﻿<div id="pnlImmunization_AlertConfiguration">
+    <div id="actionPanImmunization_AlertConfiguration" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Immunization_AlertConfiguration.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Immunization</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+
+                    <div id="pnlSection_Search">
+
+                        <ul class="tabs-custom" id="ulSocialHxTabsItems">
+                            <li id="AlertlistBirth_2_years" onclick="Immunization_AlertConfiguration.ActiveInActiveTab('Birth_2_years', true);"> <a class="" href="#tab_Birth_2_years" data-toggle="tab">Birth - 2 years</a></li>
+                            <li id="Alertlist2_18_years" onclick="Immunization_AlertConfiguration.ActiveInActiveTab('2_18_years', true);"> <a class="" href="#tab_2_18_years" data-toggle="tab">2 - 18 Years</a></li>
+                            <li id="AlertlistAdult" onclick="Immunization_AlertConfiguration.ActiveInActiveTab('Adult', true);"> <a class="" href="#tabAdult" data-toggle="tab">Adult</a></li>
+                            <li id="AlertlistRecurring" onclick="Immunization_AlertConfiguration.ActiveInActiveTab('Recurring', true);"> <a class="" href="#tabRecurring" data-toggle="tab">Recurring</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body pt-default pl-none pr-none">
+
+                            
+
+                            <div id="tabAlert_Birth_2_years" class="tab-pane">
+                                <div id="pnlVaccineAlert_Birth_2_years_Result" style="display: inline;">
+                                    <div class="panel panel-body panel-featured">
+                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVaccineAlert_Birth_2_years">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                                    <th controlid="txtCategory" iscontroldisabled="1" controlname="Category" class="size60 size-min105 sorting">Category</th>
+                                                    <th id="ColumnAction" actiontype="Save,Delete,Edit,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                    <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Vaccine</th>
+                                                    <th controlid="txtCVX" iscontroldisabled="1" controlname="CVX" class="size60 size-min105 sorting">CVX</th>
+                                                    <th controlid="txtStartDueDate" iscontroldisabled="1" controlname="StartDueDate" class="size60 size-min105 sorting">Start (Due Date)</th>
+                                                    <th controlid="txtEndDueDate" iscontroldisabled="1" controlname="EndDueDate" class="size60 size-min105 sorting">End (Due Date)</th>
+                                                    <th controlid="txtMaxAge" iscontroldisabled="1" controlname="MaxAge" class="size60 size-min105 sorting">Max Age</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tabAlert_2_18_years" class="tab-pane">
+                                <div id="pnlVaccineAlert_2_18_years_Result" style="display: inline;">
+                                    <div class="panel panel-body panel-featured">
+                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVaccineAlert_2_18_years">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                                    <th controlid="txtCategory" iscontroldisabled="1" controlname="Category" class="size60 size-min105 sorting">Category</th>
+                                                    <th id="ColumnAction" actiontype="Save,Delete,Edit,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                    <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Vaccine</th>
+                                                    <th controlid="txtCVX" iscontroldisabled="1" controlname="CVX" class="size60 size-min105 sorting">CVX</th>
+                                                    <th controlid="txtStartDueDate" iscontroldisabled="1" controlname="StartDueDate" class="size60 size-min105 sorting">Start (Due Date)</th>
+                                                    <th controlid="txtEndDueDate" iscontroldisabled="1" controlname="EndDueDate" class="size60 size-min105 sorting">End (Due Date)</th>
+                                                    <th controlid="txtMaxAge" iscontroldisabled="1" controlname="MaxAge" class="size60 size-min105 sorting">Max Age</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                            <!--<tbody>
+        <tr>
+            <td>Birth</td>
+            <td>Hep B</td>
+            <td>
+                <div class="pull-right" id="divAddNewSystem" onclick="PhysicalExamTemplateDetail.addNewItem('system')"><button class="btn-success btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+            </td>
+            <td></td>
+            <td></td>
+            <td>Refuse</td>
+            <td style="color: red">Overdue</td>
+        </tr>
+        </tbody>-->
+                                        </table>
+                                        <div class="spacer5"></div>
+                                        <div id="divPrescriptions_Paging"></div>
+                                        <div class="spacer5"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div id="tabAlert_Adult" class="tab-pane">
+                                <div id="pnlVaccineAlert_Adult_Result" style="display: inline;">
+                                    <div class="panel panel-body panel-featured">
+                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVaccineAlert_Adult">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                                    <th controlid="txtCategory" iscontroldisabled="1" controlname="Category" class="size60 size-min105 sorting">Category</th>
+                                                    <th id="ColumnAction" actiontype="Save,Delete,Edit,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                    <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Vaccine</th>
+                                                    <th controlid="txtCVX" iscontroldisabled="1" controlname="CVX" class="size60 size-min105 sorting">CVX</th>
+                                                    <th controlid="txtStartDueDate" iscontroldisabled="1" controlname="StartDueDate" class="size60 size-min105 sorting">Start (Due Date)</th>
+                                                    <th controlid="txtEndDueDate" iscontroldisabled="1" controlname="EndDueDate" class="size60 size-min105 sorting">End (Due Date)</th>
+                                                    <th controlid="txtMaxAge" iscontroldisabled="1" controlname="MaxAge" class="size60 size-min105 sorting">Max Age</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+                                        <div class="spacer5"></div>
+                                        <div id="divPrescriptions_Paging"></div>
+                                        <div class="spacer5"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tabAlert_Recurring" class="tab-pane">
+
+                                <div id="pnlVaccineAlert_Recurrinng_Result" style="display: inline;">
+                                    <div class="panel panel-body panel-featured">
+                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVaccineAlert_Recurring">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                                    <th controlid="txtCategory" iscontroldisabled="1" controlname="Category" class="size60 size-min105 sorting">Category</th>
+                                                    <th id="ColumnAction" actiontype="Save,Delete,Edit,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                    <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Vaccine</th>
+                                                    <th controlid="txtCVX" iscontroldisabled="1" controlname="CVX" class="size60 size-min105 sorting">CVX</th>
+                                                    <th controlid="txtStartDueDate" iscontroldisabled="1" controlname="StartDueDate" class="size60 size-min105 sorting">Start (Due Date)</th>
+                                                    <th controlid="txtEndDueDate" iscontroldisabled="1" controlname="EndDueDate" class="size60 size-min105 sorting">End (Due Date)</th>
+                                                    <th controlid="txtMaxAge" iscontroldisabled="1" controlname="MaxAge" class="size60 size-min105 sorting">Max Age</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                            <!--<tbody>
+        <tr>
+            <td>Birth</td>
+            <td>Hep B</td>
+            <td>
+                <div class="pull-right" id="divAddNewSystem" onclick="PhysicalExamTemplateDetail.addNewItem('system')"><button class="btn-success btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+            </td>
+            <td></td>
+            <td></td>
+            <td>Refuse</td>
+            <td style="color: red">Overdue</td>
+        </tr>
+        </tbody>-->
+                                        </table>
+                                        <div class="spacer5"></div>
+                                        <div id="divPrescriptions_Paging"></div>
+                                        <div class="spacer5"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div id="FaceSheetPager"></div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+</div>

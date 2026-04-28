@@ -1,0 +1,343 @@
+﻿<div id="insurancePlanDetail">
+    <div id="actionPaninsurancePlanDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="insurancePlanDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Insurance Plan</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblinsurancePlanDetail" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmInsurancePlanDetail">
+                        <div class="form-group">
+
+                            <div class="col-sm-3">
+                                <label class="control-label">Short Name</label><span class="required">*</span>
+                                <input class="form-control" id="txtShortName" name="ShortName" type="text" maxlength="10" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="control-label">Description</label><span class="required">*</span>
+                                <input class="form-control" id="txtDiscription" name="Description" type="text" maxlength="55" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Insurance</label><span class="required">*</span>
+                                <select id="ddlInsurance" class="form-control" name="Insurance" ddlist="GetInsurance"></select>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Plan Category</label><span class="required">*</span>
+                                <select id="ddlPlanCategory" class="form-control" name="PlanCategory" ddlist="GetPlanCategory"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Plan Fee Link</label>
+                                <select id="ddlPlanFeeLink" name="PlanFeeLink" class="form-control" ddlist="GetPlanFeeLink"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Plan Type</label><span class="required">*</span>
+                                <select id="ddlPlanType" class="form-control" name="PlanType" ddlist="GetPlanType"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Claim Flag</label><span class="required">*</span>
+                                <select id="ddlClaimFlag" class="form-control" name="ClaimFlag" ddlist="GetClaimFlag"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Claim Type</label><span class="required">*</span>
+                                <select id="ddlClaimType" class="form-control" name="ClaimType" ddlist="GetClaimType"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <!--<div class="row">
+                                <div class="col-xs-8 pl-md pr-xs">
+                                    <label class="control-label">Copayment</label>
+                                    <input class="form-control" id="txtCopayment" name="Copayment" type="text" placeholder="999" data-mask="9?99" />
+                                </div>
+                                <div class="col-xs-4 pl-md pr-xs">-->
+                                <label class="control-label">AR Days </label>
+                                <input class="form-control" id="txtOutstandingDays" name="OutstandingDays" type="text" placeholder="9999" data-mask="9?999" />
+                                <!--</div>-->
+                                <!--</div>-->
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Modifier</label>
+                                <input class="form-control" id="txtModifier" name="Modifier" type="text" placeholder="ww,ww,ww,ww" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Scrubbing Template</label>
+                                <select id="ddlScrubbingTemplate" name="ScrubbingTemplate" class="form-control" ddlist="GetClaimScrubbingProfile"></select>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-3 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="CapitatedPlan" id="chkCapitatedPlan">
+                                    <label for="chkCapitatedPlan">Capitated Plan</label>
+                                </div>
+                            </div>
+                            <!--<div class="col-sm-3">
+                                <label class="control-label">EDI Submit Insurance</label><span id="SubmitInsurance_span" class="required">*</span>
+                                <select id="ddlEDISubmitInsurance" name="EDISubmitInsurance" class="form-control" onchange="insurancePlanDetail.GetPayorId()" ddlist="GetEDISubmitInsurance"></select>
+                            </div>-->
+                            <!--changes for autocmplete-->
+                            <div class="col-md-3">
+                                <label id="lblInsuranceEDI" class="control-label">EDI Submit Insurance<span id="SubmitInsurance_span" class="required">*</span></label>
+                                <a id="lnkInsuranceEDI" style="display:none;" href="#" onclick="insurancePlanDetail.OpenEDISubmitInsuranceDetail();" title="Edit EDI Insurance">EDI Submit Insurance<span id="SubmitInsurance_span" class="required">*</span></a>
+                                <!--<span id="SubmitInsurance_span" class="required">*</span>-->
+                                <div class="input-group">
+                                    <input class="form-control" id="ddlEDISubmitInsurance" type="text" placeholder="Start typing to search" name="EDISubmitInsurance" customname="EDI Submit Insurance" /><!--<span id="SubmitInsurance_span" class="required">*</span>-->
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-xs " type="button" onclick="insurancePlanDetail.OpenEDISubmitInsurance();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="col-sm-3">
+                                <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                                <a id="lnkProviderEdit" style="display:none;" href="#" onclick="demographicDetail.OpenProviderDetail();" title="Edit Provider">Provider<span class="required">*</span></a>
+                                <div class="input-group">
+
+                                    <input class="form-control" id="txtProvider" type="text" name="Provider" placeholder="Start typing to search" onblur="utility.ValidateAutoComplete(this, 'hfProvider',false);">
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="demographicDetail.OpenProvider();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!--end-->
+                            <div class="col-sm-3">
+                                <label class="control-label ">EDI Claim Status Insurance</label>
+                                <select id="ddlEDIClaimStatusInsurance" name="EDIClaimStatusInsurance" class="form-control" ddlist="GetEDIClaimStatusInsurance"></select>
+                            </div>
+                            
+                            <div class="col-sm-3">
+                                <label class="control-label ">Box 24 'I' & 'J' Shaded</label>
+                                <select id="ddlBox24IJShaded" name="Box24IJShaded" class="form-control">
+                                    <option value="0"> -Select-</option>
+                                    <option value="1">Print Tax ID</option>
+                                    <option value="2">Print Taxonomy Code</option>
+                                    <option value="3">Do not Print</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="CapitatedAutoWriteoff" id="chkCapitatedAutoWriteoff">
+                                    <label for="chkCapitatedAutoWriteoff">Capitated Auto Write off</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label id="lblEligibilityInsuranceEDI" class="control-label">EDI Eligibility Insurance</label>
+                                <a id="lnkEligibilityInsuranceEDI" style="display:none;" href="#" onclick="insurancePlanDetail.OpenEDIEligibilityInsuranceDetail();" title="Edit EDI Insurance">EDI Eligibility Insurance</a>
+                                <div class="input-group">
+                                    <input class="form-control" id="ddlEDIEligibilityInsurance" type="text" placeholder="Start typing to search" name="EDIEligibilityInsurance" customname="EDI Eligibility Insurance" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-xs " type="button" onclick="insurancePlanDetail.OpenEDIEligibilityInsurance();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Claim Payor ID</label>
+                                <input class="form-control" id="txtClaimPayorId" name="ClaimPayorId" type="text" disabled="disabled" placeholder="9999999999" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label ">Box 33 'b' Shaded</label>
+                                <select id="ddlBox24BShaded" name="Box24BShaded" class="form-control">
+                                    <option value="0"> -Select-</option>
+                                    <option value="1">Print Tax ID</option>
+                                    <option value="2">Print Rendering Provider Taxonomy Code</option>
+                                    <option value="3">Print Billing Provider Taxonomy Code</option>
+                                    <option value="4">Do not Print</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <label class="control-label">ICD Type</label><span class="required"> *</span>
+
+                                <select id="ICDType" name="ICDTypeInsurancePlan" class="form-control">
+                                    <option value="">- Select -</option>
+                                    <option id="ICD9" value="0">ICD9</option>
+                                    <option id="ICD10" value="1">ICD10</option>
+                                </select>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="control-label">Search Pattern</label>
+                                <input class="form-control" id="txtSearchPattern" type="text" maxlength="55" />
+                                ~ Letter (a-z and A-Z) , # Numeric , * Alphanumeric , % like , | OR
+
+                            </div>
+                            <div class="col-sm-3 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="ElectronicSubmit" checked="" onchange="insurancePlanDetail.ElectronicSubmit(this);" id="chkElectronicSubmit">
+                                    <label for="chkElectronicSubmit">Electronic Submit</label>
+                                </div>
+                            </div>
+                            
+                            <!--<div class="col-sm-3">
+                                <label class="control-label">EDI Eligibility Insurance</label>
+                                <select id="ddlEDIEligibilityInsurance" name="EDIEligibilityInsurance" class="form-control" ddlist="GetEDIEligibilityInsurance"></select>
+                            </div>-->
+                            <!--autpcomplete changes-->
+                            
+                            <!--//-->
+                            <div class="clearfix"></div>
+                           
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="Active" checked="" id="chkActive">
+                                    <label for="chkActive">Active</label>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="ManagedCare" checked="" id="chkManagedCare">
+                                    <label for="chkManagedCare">Managed Care</label>
+                                </div>
+                            </div>
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsReportNPI" id="chkIsReportNPI">
+                                    <label for="chkIsReportNPI">Print NPI in Box 24J</label>
+                                </div>
+                            </div>
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsAnesthesiaByMinutes" id="chkIsAnesthesiaByMinutes" checked>
+                                    <label for="chkIsAnesthesiaByMinutes">Anesthesia by Minutes</label>
+                                </div>
+                            </div>
+                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="RefRequired" id="chkRefRequired" >
+                                    <label for="chkRefRequired">Referral Required</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 pad-a-labelsize-btn pull-right">
+                                <button class="btn btn-primary btn-sm rightbtn" id="btnInsurancePlanSave" type="submit">Save</button>
+                                <!--<button id="btnHistoryInsurancePlan" class="btn btn-primary btn-sm rightbtn" type="button" onclick="insurancePlanDetail.ShowHistory();">History</button>
+                                <button id="btnHistoryPlanAddress" class="btn btn-primary btn-sm rightbtn" type="button" onclick="insurancePlanDetail.ShowPlanAddressHistory();">Plan Address History</button>-->
+                            </div>
+                        </div>
+                        <input type="hidden" id="hfEDIInsurance" />
+                        <input type="hidden" id="hfEDIEligibilityInsurance" />
+                        <input type="hidden" id="hfSplitInsurancePlanId" />
+
+
+                        <div class="clearfix"></div>
+                        <div id="pnlAddressInfo">
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="addressDetailGrid" onclick="insurancePlanDetail.InsurancePlanAddressAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                            <div class="panel-body panel-featured mt-default">
+                                <table id="dgvAddressInfo" class="table table-bordered table-striped table-condensed table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">InsurancePlanId</th>
+                                            <th>Action</th>
+                                            <th>Address</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>Zip</th>
+                                            <th>Telephone</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="spacer20"></div>
+                        <div class="splitter m-none">Claim Split Rules</div>
+                        <div class="panel-body NoRadiusT">
+                            <div class="col-sm-4 col-lg-2 pad-a-labelsize">
+                                <div class="checkbox-default checkbox-custom">
+                                    <input id="chkSplit" name="Split" type="checkbox" onclick="insurancePlanDetail.SplitInsurancePlan(this)" />
+                                    <label class="control-label">Split Claim</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Insurance Plan</label><span id="span_required" style="display:none" class="required"> *</span>
+                                <div class="input-group">
+                                    <input id="txtSplitInsurancePlan" name="SplitInsurancePlan" customname="Split Insurance Plan" type="text" class="form-control" placeholder="Start typing to search" />
+                                    <div class="input-group-btn">
+                                        <a href="#" onclick="insurancePlanDetail.OpenInsurancePlan()" class="btn btn-xs btn-primary"><i class="fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" id="hfSplitInsurancePlan" />
+                    </form>
+                </div>
+            </div>
+            <div class="spacer20"></div>
+        </div>
+    </div>
+    <div id="addressDetailGrid" style="display:none;" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-lg">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="insurancePlanDetail.UnLoadPlan();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Insurance Plan Address Info</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="tblAddressDetail">
+                        <form method="post" id="frmAddressInfo" onsubmit="return false">
+                            <div class="col-sm-6">
+                                <label class="control-label">Address<span class="required">*</span></label>
+                                <input class="form-control" id="txtAddInfoAddress" type="text" name="Address" maxlength="100"/>
+                            </div>
+                            <div class="col-sm-3 p-none">
+                                
+                                    <div class="col-xs-7">
+                                        <label class="control-label">City<span class="required">*</span></label>
+                                        <input class="form-control" id="txtAddInfoCity" type="text" name="City" />
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <label class="control-label">State<span class="required">*</span></label>
+                                        <input class="form-control" id="txtAddInfoState" type="text" name="State" data-mask="aa" placeholder="AA" style="text-transform:uppercase" />
+                                    </div>
+                                
+                             </div>
+                            <div class="col-sm-3 p-none">
+                                    <div class="col-xs-7">
+                                        <label class="control-label">Zip<span class="required">*</span></label>
+                                        <input class="form-control" id="txtAddInfoZip" onblur="utility.FillCityState('#insurancePlanDetail #addressDetailGrid #frmAddressInfo', '#txtAddInfoZip', '#txtAddInfoCity', '#txtAddInfoState')" type="text" name="Zip" data-mask="99999" placeholder="99999" />
+                                    </div>
+                                    <div class="col-xs-5 pad-a-labelsize">
+                                        <input class="form-control" id="txtAddInfoZipExt" type="text" name="ZipExt" data-mask="9999" placeholder="9999" />
+                                    </div>
+                            </div>
+                            <div class="col-sm-3 p-none">
+                                    <div class="col-xs-7">
+                                        <label class="control-label">Telephone</label>
+                                        <input class="form-control" id="txtAddInfoTelephone" type="text" name="Telephone" data-mask="(999) 999-9999" placeholder="(999) 999-9999" />
+                                    </div>
+                                    <div class="col-xs-5 pad-a-labelsize">
+                                        <input class="form-control" id="txtAddInfoPhoneExt" type="text" name="PhoneExt" data-mask="99999" placeholder="99999" />
+                                    </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Fax</label>
+                                <input class="form-control" id="txtAddInfoFax" type="text" name="Fax" data-mask="(999) 999-9999" placeholder="(999) 999-9999" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">User ID</label>
+                                <input class="form-control" id="txtAddInfoUserId" type="text" name="UserID" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Password</label>
+                                <input class="form-control" id="txtAddInfoPassword" type="password" name="Password" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Email</label>
+                                <input class="form-control" id="txtAddInfoEmail" onblur="insurancePlanDetail.enableemailvalidation(this);"type="text" name="Email" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Web Portal</label>
+                                <input class="form-control" id="txtAddInfoWebPortal" type="text" name="WebPortal" maxlength="90" onblur="insurancePlanDetail.enableemailvalidation(this);" />
+                            </div>
+                            <div class="col-sm-3 pad-a-labelsize-btn pull-right mb-sm">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

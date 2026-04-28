@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{483D8955-CAEB-4838-ACD5-67E90834461C}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>EDIParser</AssemblyName>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Debug\</OutputPath>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'debug web|x86'">
+    <OutputPath>bin\x86\debug web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'debug web|AnyCPU'">
+    <OutputPath>bin\debug web\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'web|x86'">
+    <OutputPath>bin\x86\web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'web|AnyCPU'">
+    <OutputPath>bin\web\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="EDIParser\DS271.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EDIParser\DS277.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS277.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EDIParser\DSHCFA.cs">
+      <DependentUpon>DSHCFA.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EDIParser\Professional\EDI277Parser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Compile Include="EDIParser\DS270.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS270.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EDIParser\dsCache.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCache.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EDIParser\DSHCFA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSHCFA.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="EDIParser\EDILogger.cs" />
+    <Compile Include="EDIParser\EDICommon.cs" />
+    <Compile Include="EDIParser\Professional\EDI270Parser.cs" />
+    <Compile Include="EDIParser\Professional\EDI271Parser.cs" />
+    <Compile Include="EDIParser\Professional\EDI835Parser.cs" />
+    <Compile Include="EDIParser\Professional\EDI837Parser.cs" />
+    <Compile Include="EDIParser\EDI837Segment\Header.cs" />
+    <Compile Include="EDIParser\EDI837Segment\Trailer.cs" />
+    <Compile Include="EDIParser\EDI837Segment\Name.cs" />
+    <Compile Include="EDIParser\EDI837Segment\Claim.cs" />
+    <Compile Include="EDIParser\EDI837Segment\ServiceLine.cs" />
+    <Compile Include="EDIParser\EDI837Segment\SVDServiceLine.cs" />
+    <Compile Include="EDIParser\EDI837Segment\Diagnosis.cs" />
+    <Compile Include="EDIParser\EDIUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EDIParser\DS270.xsc">
+      <DependentUpon>DS270.xsd</DependentUpon>
+    </None>
+    <None Include="EDIParser\DS270.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS270.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="EDIParser\DS270.xss">
+      <DependentUpon>DS270.xsd</DependentUpon>
+    </None>
+    <None Include="EDIParser\DS277.xsc">
+      <DependentUpon>DS277.xsd</DependentUpon>
+    </None>
+    <None Include="EDIParser\DS277.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS277.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="EDIParser\DS277.xss">
+      <DependentUpon>DS277.xsd</DependentUpon>
+    </None>
+    <None Include="EDIParser\dsCache.xsc">
+      <DependentUpon>dsCache.xsd</DependentUpon>
+    </None>
+    <None Include="EDIParser\dsCache.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCache.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="EDIParser\dsCache.xss">
+      <DependentUpon>dsCache.xsd</DependentUpon>
+    </None>
+    <None Include="EDIParser\DSHCFA.xsc">
+      <DependentUpon>DSHCFA.xsd</DependentUpon>
+    </None>
+    <None Include="EDIParser\DSHCFA.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSHCFA.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="EDIParser\DSHCFA.xss">
+      <DependentUpon>DSHCFA.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MDVision.Common\MDVision.Common.csproj">
+      <Project>{4c43925d-c035-4657-974b-9d0bc50e884e}</Project>
+      <Name>MDVision.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

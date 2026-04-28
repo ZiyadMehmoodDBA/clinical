@@ -1,0 +1,294 @@
+﻿<div id="pnlClinicalRadiologyResultDetail">
+    <div id="actionPanClinicalRadiologyResultDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ClinicalRadiologyResultDetail.UnLoad();">
+                    <span class="red">&nbsp;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 id="headingTitle" class="modal-title">Add Radiology Diagnostic Imaging Result</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmClinicalRadiologyResultDetail" onsubmit="return false">
+                    <div class="col-md-12" id="divRadiologyResultInformation">
+
+                        <input type="hidden" id="hfProvider" name="ProviderId" />
+                        <input type="hidden" id="hfFacility" name="FacilityId" />
+                        <input type="hidden" id="hfAssigneeId" name="AssigneeId" />
+                        <input type="hidden" id="hfLaboratoryId" name="LabId" />
+
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Order Information</h2>
+                        </header>
+                        <div class="panel-body">
+                            <div id="dvLocation" class="col-sm-3">
+                                <div class="Order-label-control">
+                                    <label class="control-label bold" name="lblLaboratory">Radiology Type</label>
+                                    <br />
+                                    <label id="lblLaboratory" class="control-label" name="Laboratory"></label>
+                                    <!--<input type="text" class="form-control" name="TriggerLocation" />-->
+                                </div>
+
+                                <!-- Laboratory ddl -->
+                                <div class="editable-control hidden">
+                                    <label class="control-label">Diagnostic Imaging Type<span class="required">*</span></label>
+                                    <br />
+                                    <select id="ddlLabId" name="LabId" class="form-control" ddlist="" onchange="ClinicalRadiologyResultDetail.setFavSearch()"></select>
+                                </div>
+
+                            </div>
+                            <div id="dvGender" class="col-sm-3">
+                                <div class="Order-label-control">
+                                    <label class="control-label bold" name="lblFacility">Facility</label>
+                                    <br />
+                                    <label id="lblFacility" class="control-label" name="Facility"></label>
+                                </div>
+
+                                <!-- Facility input control -->
+                                <div class="editable-control hidden">
+
+                                    <label class="control-label" for="Facility">Facility<span class="required">*</span></label>
+                                    <br />
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtFacility" placeholder="Start typing to search" type="text" name="Facility" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary btn-xs" type="button" onclick="ClinicalRadiologyResultDetail.OpenFacility();">
+                                                <i class="glyphicon glyphicon-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="Order-label-control">
+                                    <label class="control-label bold" name="lblProvider">Provider</label>
+                                    <br />
+                                    <label class="control-label" name="Provider"></label>
+                                </div>
+                                <!-- Provider input control -->
+                                <div class="editable-control hidden">
+                                    <label class="control-label" for="Provider">Provider<span class="required">*</span></label>
+                                    <br />
+                                    <div class="input-group">
+                                        <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="ClinicalRadiologyResultDetail.OpenProvider();"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <!--<div class="Order-label-control">
+                                    <label class="control-label" name="lblAssignee">Assignee</label>
+                                    <br />
+                                    <!--<label class="control-label" name="Assignee"></label>
+                                </div>-->
+                                <!-- Assignee ddl -->
+                                <div class="">
+                                    <label class="control-label bold" name="lblAssignee">Assignee</label>
+                                    <br />
+                                    <!--<select id="ddlAssigneeId" name="AssigneeId" class="form-control" ddlist="GetUsers" />-->
+                                    <div class="">
+                                        <input onkeypress="return event.keyCode != 13;" class="form-control" id="txtAssignee" name="Assignee" type="text" placeholder="Start typing to search" value="" />
+                                        <!--<input class="form-control ui-autocomplete-input" id="txtAssignee" type="text" placeholder="Start typing to search" name="Assignee" onblur="utility.ValidateAutoComplete(this, 'frmClinicalLabResultDetail #hfAssigneeId', true);" autocomplete="off">-->
+                                        <!--<div class="input-group-btn">
+                                            <button id="lnkAssignee" class="btn btn-primary btn-xs " type="button" onclick="ClinicalRadiologyResultDetail.OpenAssignee();"><i class="fa fa-search"></i></button>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="dvAge" class="col-sm-3">
+                                <div class="Order-label-control">
+                                    <label class="control-label bold" name="lblDate">Date & Time</label>
+                                    <br />
+                                    <label id="lblDate" class="control-label" name="DateAndTime"></label>
+                                </div>
+                                <!-- Date dtp -->
+                                <div class="editable-control hidden">
+                                    <label class="control-label" for="Date">Date</label>
+                                    <br />
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" id="txtOrderDate" class="form-control" name="OrderDate" data-plugin-datepicker="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="dvAge" class="col-sm-3">
+                                <div class="Order-label-control">
+                                    <label class="control-label bold" name="lblOrderNumber">Order Number</label>
+                                    <br />
+                                    <label id="lblOrderNo" class="control-label" name="OrderNo"></label>
+                                </div>
+                                <!-- Time Picker -->
+                                <div class="editable-control hidden">
+                                    <label class="control-label" for="">Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input type="text" id="txtOrderTime" name="OrderTime" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label bold">Status<span class="required">*</span></label>
+                                <select id="ddlStatus" name="Status" class="form-control" ddlist="">
+                                    <option value="">- Select -</option>
+                                    <option value="Open">Open</option>
+                                    <option value="Reviewed">Reviewed</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Type</label>
+                                <select id="ddlType" name="Type" class="form-control" ddlist="">
+                                    <option value="">- Select -</option>
+                                    <option value="Final">Final</option>
+                                    <option value="Partial">Partial</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <!--<div class="dropdown">
+                                    <a id="btnScanResult" href="#" class="dropdown-toggle btn btn-link btn-xs p-none" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attach</a>
+                                    <ul id="menuAttach" class="dropdown-menu" aria-labelledby="btnScanResult">
+                                        <li><a href="#" onclick="ClinicalRadiologyResultDetail.documentScan()">Scan</a></li>
+                                        <li><a href="#" onclick="ClinicalRadiologyResultDetail.documentImport()">Upload</a></li>
+                                    </ul>
+                                </div>-->
+                                <a id="btnUploadResult" onclick="ClinicalRadiologyResultDetail.documentImport()" href="#" class="btn btn-link btn-xs p-none">Upload</a>
+                                <div class="clearfix"></div>
+                                <div class="dropdown">
+                                    <a id="btnViewAttachment" href="#" class="dropdown-toggle btn btn-link btn-xs p-none" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="ClinicalRadiologyResultDetail.loadAttachments()">View Attachment</a>
+                                    <ul id="menuViewAttachment" class="dropdown-menu" aria-labelledby="btnViewAttachment"></ul>
+                                </div>
+                                <div class="clearfix"></div>
+                                <a class="btn btn-link btn-xs p-none" id="btnViewPDF" href="#" onclick="ClinicalRadiologyResultDetail.viewPdfRadiologyResult();">View Result PDF</a>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!--<div class="col-sm-3">
+                                <div class="dropdown">
+                                    <a id="btnScanResult" href="#" class="dropdown-toggle btn btn-link btn-xs p-none hidden" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attach</a>
+                                    <ul id="menuAttach" class="dropdown-menu" aria-labelledby="btnScanResult">
+                                        <li><a href="#" onclick="ClinicalRadiologyResultDetail.documentScan()">Scan</a></li>
+                                        <li><a href="#" onclick="ClinicalRadiologyResultDetail.documentImport()">Upload</a></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="dropdown">
+                                    <a id="btnViewAttachment" href="#" class="dropdown-toggle btn btn-link btn-xs p-none hidden" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="ClinicalRadiologyResultDetail.loadAttachments()">View Attachment</a>
+                                    <ul id="menuViewAttachment" class="dropdown-menu" aria-labelledby="btnViewAttachment"></ul>
+                                </div>
+                                <div class="clearfix"></div>
+                                <a class="btn btn-link btn-xs p-none hidden" id="btnViewPDF" href="#" onclick="ClinicalRadiologyResultDetail.viewPdfRadiologyResult();">View PDF</a>
+                                <div class="clearfix"></div>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="visible-sm visible-xs"><div class="spacer15"></div></div>
+
+                    <!-- Start Irfan Code for Editable Grid portion  -->
+                    <div id="divResultInformation" class="col-sm-12 mt-md">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Result Information</h2>
+                        </header>
+                        <div class="panel-body pl-none pr-none">
+                            <div id="favSectionDiv" class="toggleHorSmallLeft toggled">
+                                <section>
+                                    <h2>Favorites<i class="fa fa-chevron-down"></i></h2>
+                                </section>
+                                <div class="toggle-content">
+                                    <div class="col-xs-12 pb-sm">
+                                        <span class="pull-left">Favorites List</span>
+                                        <div id="divSelectAllRadiologyResultFavorites" class="disableAll">
+                                            <a href="#" onclick="ClinicalRadiologyResultDetail.selectAllFavoriteListContent()" class="btn btn-link btn-xs pull-right">Select All</a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <select id="ddlFavoriteListRadiologyResult" name="FavoriteListRadiologyResult" onchange="ClinicalRadiologyResultDetail.loadfavoriteListContent(this)" class="form-control"></select>
+                                        <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="ClinicalRadiologyResultDetail.AutoSearchFavRadiologyResult()" />
+                                    </div>
+                                    <ul id="ulFavoriteListRadiologyResultContent" name="FavoriteListRadiologyResultContent" class="listPrimary height-max150 overflowY"></ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 toggleHorSmContainer overflowY" style="position:sticky;">
+                                <div class="col-sm-12 col-md-4 pb-tiny">
+                                    <label class="control-label">Imaging</label>
+                                    <div class="input-group">
+                                        <input onkeypress="return event.keyCode != 13;" class="form-control" id="txtLabCPTCode" placeholder="search test" type="text" name="LabCPTCode" oninput="ClinicalRadiologyResultDetail.bindAutoComplete(this)">
+                                        <div class="input-group-btn">
+                                            <!--<button class="btn btn-primary btn-xs " type="button" onclick="ClinicalRadiologyResultDetail.openCPTCode();"><i class="fa fa-search"></i></button>-->
+                                            <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div id="pnlRadiology_Result" class="table-responsive">
+                                    <input type="hidden" id="Lab_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvRadiologyResultDetail">
+                                        <thead>
+                                            <tr class="">
+                                                <th class="size20 p-none" coltype="Expand"></th>
+                                                <!--<th controlid="txtDateAndTime" iscontroldisabled="1" controlname="DateAndTime" class="noWordBreak size100">Date And Time</th>-->
+                                                <th controlid="dtpDate" controlname="Date" class="noWordBreak size65" coltype="datetime">Date</th>
+                                                <th controlid="tpTime" controlname="Time" class="noWordBreak size50" coltype="time">Time</th>
+                                                <th controlid="txtObservation" iscontroldisabled="1" controlname="Observation" class="noWordBreak size300 size-min400">Observation</th>
+                                                <!--<th controlid="txtResult" iscontroldisabled="1" controlname="Result" class="noWordBreak size100">Result</th>-->
+                                                <th controlid="txtUoM" iscontroldisabled="1" controlname="UoM" class="noWordBreak size100">UoM</th>
+                                                <th controlid="txtFlag" iscontroldisabled="1" controlname="Flag" class="noWordBreak size100">Result</th>
+                                                <th controlid="txtRange" iscontroldisabled="1" controlname="Range" class="noWordBreak size100">Remarks</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+
+                                    </table>
+                                    <div id="divRadiologyResultPaging"></div>
+                                    <input type="hidden" name="LabTestIdsa" id="hfLabTestIds" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start Abid, hidden fields for RadiologyResult  -->
+
+                    <input type="hidden" id="hfRadiologyOrderId" name="RadiologyOrderId" value="-1" />
+                    <input type="hidden" id="hfRadiologyResultId" name="RadiologyOrderResultId" value="-1" />
+                    <input type="hidden" id="hfIsSentToPortal" name="IsSentToPortal" value="-1" />
+                    <input type="hidden" id="hfOrderNo" name="OrderNo" value="-1" />
+                    <input type="hidden" id="hfPatientId" name="PatientId" value="-1">
+                    <input type="hidden" id="hfAssigneeId" name="AssigneeId" value="-1">
+                    <input type="hidden" id="hfLabId" name="hfLabId" value="-1">
+                    <div class="spacer15"></div>
+                    <!-- End Abid, hidden fields for RadiologyResult  -->
+                    <div id="comments-remarks">
+                        <div id="divLabAssociatedProblems" class="col-xs-12">
+                            <label class="control-label bold">Comments</label>
+                            <!--<textarea id="txtComments" name="Comments" rows="3" class="form-control" spellcheck="true"></textarea>-->
+                            <div id="MacroDescDetails" class="tinymce-autocomplete" hidden>
+                                <ul id="MacroDescriptions" class="list-unstyled list-underlined"></ul>
+                            </div>
+                            
+                            <input type="hidden" id="txtComments" name="Comments" />
+                            <div class="form-control editable" style="height:60px; font-size: 12px; overflow-y:auto" maxlength="3000" id="txtComment" name="Comments" contenteditable="true" spellcheck="true"></div>
+                        </div>
+                    </div>
+                    <div class="pull-right pt-md pr-default">
+                        <!--<button class="btn btn-cancel btn-sm  mr-sm" type="button" id="btnResetPhysicalExam">Reset</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right mr-sm" type="button" id="btnPhysicalExamSave">Save</button>-->
+
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveResult" onkeypress="return event.keyCode != 13;">Save</button>
+                        <button type="button" class="btn btn-sm btn-primary" id="btnPrintResult" onclick="ClinicalRadiologyResultDetail.printRadiologyResult();">Print</button>
+                        <!--<button type="submit" class="btn btn-sm btn-primary" id="btnAcknowledge"  onkeypress="return event.keyCode != 13;">Acknowledge</button>-->
+                        <button type="submit" class="btn btn-sm btn-primary hidden" id="btnSendToPortal" onkeypress="return event.keyCode != 13;">Send to Portal</button>
+                        <!--<button type="button" class="btn btn-sm" id="btnResetRadiologyResult" onclick="ClinicalRadiologyResultDetail.radiologyOrderResultReset();">Reset</button>-->
+                        <!--<button type="button" class="btn btn-sm hidden" onclick="ClinicalRadiologyResultDetail.openLOINCSearch();" id="btnOpenLOINCSearh">LOINC Search</button>-->
+                    </div>
+
+                    <!-- End Irfan Code for Editable Grid portion -->
+                    <!--<input type="hidden" id="hfCPTSNOMEDCode" name="CPTSNOMEDCodeId" value="" />
+                    <input type="hidden" id="hfCPTSNOMEDDescription" name="CPTSNOMEDDescription" />-->
+                </form>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer"></div>
+
+        </div>
+    </div>
+
+</div>

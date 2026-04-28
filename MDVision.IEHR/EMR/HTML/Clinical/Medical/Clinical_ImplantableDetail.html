@@ -1,0 +1,285 @@
+﻿<div id="pnlClinicalImplantableDetail">
+    <div id="actionPanClinicalImplantableDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="divDialogLength" class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_ImplantableDetail.UnLoadTab();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Implantable Device</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmClinicalImplantableDetail" onsubmit="return false">
+                    <div class="panel-body panel-featured">
+                        <div class="col-sm-12 ">
+                            <div class="size100 pull-left radio-custom radio-small">
+                                <input type="radio" id="rdUdiKnown" name="rdUdi" class="mt-none" onclick="Clinical_ImplantableDetail.UdiKnown();">
+                                <label for="rdUdiKnown">UDI Known</label>
+                            </div>
+                            <div class="size100 pull-left radio-custom radio-small">
+                                <input type="radio" id="rdUdiUnknown" name="rdUdi" class="mt-none" onclick="Clinical_ImplantableDetail.UdiUnknown();">
+                                <label for="rdUdiUnknown">UDI Unknown</label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        </div>
+
+                        <div id="divUdiUnknownSpace" class="spacer15"></div>
+                    <div id="divUdiUnknown" class="panel-body panel-featured">
+                        <div class="col-xs-4">
+                            <label class="control-label">Device Name<span class="required">*</span></label>
+                            <input class="form-control " id="DeviceName" name="DeviceName" type="text" placeholder="Enter Device Name" />
+                        </div>
+                        <div class="col-sm-4 col-md-3">
+                            <label class="control-label">Informant</label>
+                            <select id="ddlInformant" name="InformantId" class="form-control" ddlist='GetInformant'></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Implant Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="ImplantDateUNK" data-plugin-datepicker="" class="form-control" id="ImplantDateUnknown" maxlength="10">
+                            </div>
+                        </div>
+                        <div class="col-sm-2 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" checked="checked" name="IsActiveUnknown" id="IsActiveUnknown">
+                                <label for="IsActiveUnknown">Device Active</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <label class="control-label">Unique Device Identifier</label>
+                            <input class="form-control " id="UdiUnknown" name="UDIUNK" type="text" placeholder="Enter UDI" />
+                        </div>
+                        <div class="col-sm-12 col-lg-12">
+                            <label class="control-label">Comments</label>
+                            <textarea id="txtCommentsUdiUnknown" name="CommentsUNK" maxlength="500" class="form-control" spellcheck="true"></textarea>
+                        </div>
+                    </div>
+
+                    <div id="divVerifySpace" class="spacer15"></div>
+                    <div id="divVerify" class="panel-body panel-featured">
+                        <div class="col-sm-3 col-lg-2">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" name="Issuing_agencyGS1" id="Issuing_agencyGS1">
+                                <label for="Issuing_agencyGS1">GS1</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" name="Issuing_agencyHIBCC" id="Issuing_agencyHIBCC">
+                                <label for="Issuing_agencyHIBCC">HIBCC</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" name="Issuing_agencyICCBBA" id="Issuing_agencyICCBBA">
+                                <label for="Issuing_agencyICCBBA">ICCBBA</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <label class="control-label">Unique Device Identifier<span class="required">*</span></label>
+                            <input class="form-control " id="UDI" name="UDI" type="text" placeholder="Enter UDI" onclick="Clinical_ImplantableDetail.HideAllDivs();" onchange="Clinical_ImplantableDetail.ClearFields();"/>
+                        </div>
+                        <div class="col-sm-2 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" checked="checked" name="IsActive" id="IsActive">
+                                <label for="IsActive">Device Active</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Implant Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="ImplantDate" data-plugin-datepicker="" class="form-control" id="ImplantDate" maxlength="10">
+                            </div>
+                        </div>
+                        <div class="mt-sm pull-right pr-default">
+                            <button class="btn btn-success btn-sm" type="submit" id="VerifyButton" >Verify</button>
+                        </div>
+                    </div>
+                    
+                    <div id="divDeviceDetailSpace" class="spacer15"></div>
+                    <div id ="pnlDeviceDetail" class="toggle" data-plugin-toggle style="display:none;">
+                        <section class="toggle active">
+                            <label id="lblDetailsHeading">Detail</label>
+                            <div class="toggle-content panel-body NoRadiusT">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="LotNo">
+                                        <span>Lot No: </span>
+                                        <label id="LotNoDetail" name="Lot_Number" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="GMDPTName">
+                                        <span>GMDPT Name: </span>
+                                        <label id="GMDPTNameDetail" name="GMDNPTName" class="ellipses size-max70per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="SerialNum">
+                                        <span>Serial No: </span>
+                                        <label id="SerialNoDetail" name="Serial_Number" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="DeviceDescription">
+                                        <span>Device Description: </span>
+                                        <label id="DeviceDescriptionDetail" name="DeviceDescription" class="ellipses size-max70per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="BrandName">
+                                        <span>Brand Name: </span>
+                                        <label id="BrandNameDetail" name="BrandName" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="ExpiryDate">
+                                        <span>Expiry date: </span>
+                                        <label id="ExpiryDateDetail" name="Expiration_Date" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="ModelNo">
+                                        <span>Model No: </span>
+                                        <label id="ModelNoDetail" name="VersionModelNumber" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="ManufacturingDate">
+                                        <span>Manufacturing Date: </span>
+                                        <label id="ManufacturingDateDetail" name="Manufacturing_Date" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="CompanyName">
+                                        <span>Company Name: </span>
+                                        <label id="CompanyNameDetail" name="CompanyName" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="DistinctIdentificationCode">
+                                        <span>Distinct Identification Code: </span>
+                                        <label id="DistinctIdentificationCodeDetail" name="DI" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="MRIInfo">
+                                        <span>MRI Information: </span>
+                                        <label id="MRIInfoDetail" name="MRISafetyStatus" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="control-label text-underline-full" id="LabelingInfo">
+                                        <span>Labeling Information: </span>
+                                        <label id="LabelingInfoDetail" name="LabeledContainsNRL" class="ellipses size-max80per" title=""></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    
+                    <div id="divImplantationDetailsSpace" class="spacer15"></div>
+                    <div id="divImplantationDetails" class="panel-body panel-featured">
+                        <div class="col-sm-12 col-md-5">
+                            <label class="control-label">Target Site</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtTargetSite" name="TargetSite" placeholder="Search using test name or test code" type="text" oninput="Clinical_ImplantableDetail.BindTargetSite();" /> <!--onblur="utility.ValidateAutoComplete(this, 'frmClinicalImplantableDetail #hfTargetSite', false);">-->
+                                <div class="input-group-btn">
+                                    <button id="lnkTargetSite" class="btn btn-primary btn-xs " type="button" disabled="disabled"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-3">
+                            <label class="control-label">Laterality</label>
+                            <select id="ddlLaterality" name="LateralityId" class="form-control" ddlist='GetLaterality'></select>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label">Area</label>
+                            <input class="form-control " id="Area" name="Area" type="text" placeholder="Enter Area" />
+                        </div>
+                        <div class="col-sm-12 col-lg-12">
+                            <label class="control-label">Comments</label>
+                            <textarea id="txtCommentsUdiKnown" name="Comments" maxlength="500" class="form-control" spellcheck="true"></textarea>
+                        </div>
+                    </div>
+
+                        <div id="divProcedureSpace" class="spacer15"></div>
+                        <div class="col-sm-14" id="divProcedures">
+                            <header class="panel-heading panel-blue">
+                                <h2 class="panel-title white">Associated Procedures</h2>
+                            </header>
+                            <div class="panel-body pl-none">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-12 col-md-8 pl-none">
+                                        <label class="control-label" for="test">Procedure</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtImplantableDeviceCPTCode" placeholder="Search using test name or test code" type="text" name="ImplantableDeviceProcedure" oninput="Clinical_ImplantableDetail.bindAutoComplete(this);" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_ImplantableDetail.openCPTCode();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="spacer15"></div>
+                                    <div id="pnlImplantableDeviceProcedure_Result" class="table-responsive">
+                                        <table class="table table-bordered table-condensed table-striped table-hover" id="dgvProcedureImplantableDevice">
+                                            <thead>
+                                                <tr class="">
+                                                    <th id="ColumnAction" actiontype="Delete" coltype="Action" class="size90 size-min90">Action</th>
+                                                    <th class="size300" hfcontrolid="ProcedureId" hfcontrolname="ProcedureId" controlid="ImplantableProcedure" iscontroldisabled="1" controlname="Procedure" coltype="TextBox" isoptional="0">Procedure</th>
+                                                    <!--<th controlid="Urgency" class="size-min130 size130 noWordBreak" controlname="Urgency" coltype="dropdown" ddlist="GetUrgency">Urgency</th>-->
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <input type="hidden" name="ImplantableDeviceProcedureIds" id="hfImplantableDeviceProcedureIds" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                    <div id="divProcedureSpaceUNK" class="spacer15"></div>
+                    <div class="col-sm-14" id="divProceduresUNK">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Associated Procedures</h2>
+                        </header>
+                        <div class="panel-body pl-none">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12 col-md-8 pl-none">
+                                    <label class="control-label" for="test">Procedure</label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtImplantableDeviceCPTCodeUNK" placeholder="Search using test name or test code" type="text" name="ImplantableDeviceProcedure" oninput="Clinical_ImplantableDetail.bindAutoComplete(this);" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_ImplantableDetail.openCPTCode();"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="spacer15"></div>
+                                <div id="pnlImplantableDeviceProcedureUNK_Result" class="table-responsive">
+                                    <table class="table table-bordered table-condensed table-striped table-hover" id="dgvProcedureImplantableDeviceUNK">
+                                        <thead>
+                                            <tr class="">
+                                                <th id="ColumnAction" actiontype="Delete" coltype="Action" class="size90 size-min90">Action</th>
+                                                <th class="size300" hfcontrolid="ProcedureId" hfcontrolname="ProcedureId" controlid="ImplantableProcedure" iscontroldisabled="1" controlname="Procedure" coltype="TextBox" isoptional="0">Procedure</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <input type="hidden" name="ImplantableDeviceProcedureIdsUNK" id="hfImplantableDeviceProcedureIdsUNK" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="mt-md pull-right pr-default">
+                            <button class="btn btn-primary btn-sm" type="submit" id="SaveButton" >Save</button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="hfImplantableDeviceId" value="-1" />
+                        <input type="hidden" id="hfTargetSite" name="TargetSiteId" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

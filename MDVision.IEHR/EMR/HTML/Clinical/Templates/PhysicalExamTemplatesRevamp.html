@@ -1,0 +1,141 @@
+﻿<div id="pnlPhysicalExamTemplatesRevamp">
+    <div id="actionPanPhysicalExamTemplatesRevamp" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full mb-none">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="PhysicalExamTemplatesRevamp.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Physical Examination</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblPhysicalExamTemplatesRevamp">
+                    <form method="post" onsubmit="return false;" id="frmPhysicalExamTemplatesRevamp" name="frmPhysicalExamTemplatesRevamp">
+
+                        <div class="form-group">
+                            <ul class="tabs-custom" id="ulSelectedPETemplates"></ul>
+                            <section id="sectionPhysicalExam" class="panel-body tabs-custom-body pl-none pr-none">
+                                <div id="PhysicalExam">
+                                    <div class="col-xs-2">
+                                        <section class="panel panel-featured size100per mb-xs" id="Exam">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title pull-left">Exam</h2>
+                                                <div class="pull-right" id="divAddNewSystem" onclick="PhysicalExamTemplatesRevamp.addNewItem('exam')"><button class="btn-link white btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                                <div class="clearfix"></div>
+                                            </header>
+
+                                            <div class="panel-body pl-none pr-none">
+                                                <div class="demo-section k-content pl-default pr-default">
+                                                    <input id="Exams" class="form-control" />
+                                                </div>
+                                                <div id="divPhysicalExams" class="height330 height-max330 own-scroll overflowY">
+                                                    <ul id="ulPhysicalExams" name="PhysicalExams" class="listPrimary"></ul>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <section class="panel panel-featured size100per  mb-xs" id="System">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title pull-left">Systems</h2>
+                                                <div class="pull-right" id="divAddNewSystem" onclick="PhysicalExamTemplatesRevamp.addNewItem('system')"><button class="btn-link white btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                                <div class="pull-right" id="divResetSystems" onclick="PhysicalExamTemplatesRevamp.ResetSystems(this)"><button class="btn-link white btn btn-xs" title="Reset" type="button"><i class="fa fa-undo"></i></button></div>
+                                                <div class="clearfix"></div>
+                                            </header>
+
+                                            <div class="panel-body pl-none pr-none">
+                                                <div class="demo-section k-content pl-default pr-default">
+                                                    <input id="Systems" class="form-control" />
+                                                </div>
+                                                <div id="divPhysicalExamSystems" class="height330 height-max330 own-scroll overflowY">
+                                                    <ul id="ulPhysicalExamSystems" name="PhysicalExamSystems" class="listPrimary"></ul>
+                                                </div>
+                                            </div>
+                                            <!--<div class="demo-section k-content">
+                                                <div>
+                                                    <h4>Select Systems nodes</h4>
+                                                    <div id="treeview"></div>
+                                                </div>
+                                                <div style="padding-top: 2em;">
+                                                    <h4>Status</h4>
+                                                    <p id="result">No nodes checked.</p>
+                                                </div>
+                                            </div>-->
+                                        </section>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <section id="SystemSections" class="panel panel-featured size100per mb-xs">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title pull-left">Observations</h2>
+                                                <div class="pull-right" id="divAddNewSubSystem" onclick="PhysicalExamTemplatesRevamp.addNewItem('subsystem')"><button class="btn-link white btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                                <div class="clearfix"></div>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none">
+                                                <div class="demo-section k-content pl-default pr-default">
+                                                    <input id="Observations" class="form-control" />
+                                                </div>
+                                                <div id="divPhysicalExamSystemSection" class="height330 height-max330 own-scroll overflowY">
+                                                    <ul id="ulPhysicalExamSystemSection" name="PhysicalExamSystemSection" class="listPrimary"></ul>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <section id="SystemPreview" class="panel panel-featured size100per mb-xs">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title">Preview</h2>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none ">
+                                                <div class="col-xs-12 borderB pb-sm">
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <label class="control-label">Delimator</label>
+                                                    </div>
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <select id="delimator" class="form-control">
+                                                            <option id="comma" value=",">,</option>
+                                                            <option id="fullstop" value=".">.</option>
+                                                            <option id="collon" value=":">:</option>
+                                                            <option id="terminator" value=";">;</option>
+                                                            <option id="hiphen" value="-">-</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xs-12 pl-xs">
+                                                    <textarea id="observationContent" name="observationContent"></textarea>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="pull-right  mt-default text-right">
+                            <!--<button class="btn btn-cancel btn-sm  mr-sm hidden" type="button" onclick="PhysicalExamTemplatesRevamp.resetPhysicalExam();" id="btnResetPhysicalExam">Reset</button>-->
+                            <button class="btn btn-success btn-sm" type="button" onclick="PhysicalExamTemplatesRevamp.addPhysicalExamToNotes();" id="btnAddNote">Add to Note</button>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style type="text/css">
+    .cke_button__cut_icon {
+        display: none !important; /*without icon*/
+    }
+
+    .cke_button__cut_label {
+        display: inline !important; /*show the text label*/
+        font-size: 0px;
+    }
+
+        .cke_button__cut_label:before {
+            content: "Clear Selected";
+            font-size: 14px;
+            font-weight: bold;
+        }
+</style>

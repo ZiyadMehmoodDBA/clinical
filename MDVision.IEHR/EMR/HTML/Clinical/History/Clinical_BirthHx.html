@@ -1,0 +1,409 @@
+﻿
+<div class="row" id="pnlClinicalBirthHx">
+    <div id="actionPanClinicalBirthHx" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_BirthHx.unLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Birth Hx</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_BirthHx.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Add Birth Hx</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body NoRadiusT" id="pnlSection_Search">
+                            <form id="frmClinicalBirthHx" method="post" name="frmClinicalBirthHx" onsubmit="return false">
+
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="Date">Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dtBirthHxDate" name="BirthHxDate" data-plugin-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                        <div class="checkbox-custom">
+                                            <input type="checkbox" id="chkBirthHxUnremarkable" onclick="Clinical_BirthHx.unRemarkableBirthHx(this);" name="BirthHxUnremarkable">
+                                            <label class="control-label">Unremarkable</label>
+                                        </div>
+                                    </div>
+                                    <div class="spacer20"></div>
+
+                                    <div id="BirthHxChildSection">
+                                        <div class="col-md-3">
+                                            <section class="panel panel-featured">
+                                                <header class="panel-heading">
+                                                    <h2 class="panel-title">Section</h2>
+                                                </header>
+                                                <div class="panel-body p-none">
+                                                    <ul id="ulSection" name="birthHxSection" class="listPrimary own-scroll overflowY" style="height:235px;max-height:235px;">
+                                                        <li id="general" name="general" class="active" onclick="Clinical_BirthHx.enableDisableBirthHxControls(this, 'General');"><a href="javascript:void(0);">General</a></li>
+                                                        <li id="maternalDelivery" name="maternalDelivery" onclick="Clinical_BirthHx.enableDisableBirthHxControls(this, 'MaternalDelivery');"><a href="javascript:void(0);">Maternal & Delivery</a></li>
+                                                        <li id="newborn" name="newborn" onclick="Clinical_BirthHx.enableDisableBirthHxControls(this, 'Newborn');"><a href="javascript:void(0);">Newborn Information</a></li>
+                                                    </ul>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <section class="panel panel-featured">
+                                                <header class="panel-heading">
+                                                    <h2 class="panel-title">Details</h2>
+                                                </header>
+                                                <div class="panel-body pb-md">
+                                                    <div id="sectionGeneral">
+                                                        <input type="hidden" name="GeneralId" id="hfBirthHxGeneralId" value="-1" />
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Name of Hospital</label>
+                                                            <input class="form-control" id="HospitalName" name="HospitalName" type="text" maxlength="100" />
+                                                        </div>
+
+
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label" for="VisitDate">Patient’s Date of Birth</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="PatientDOB" name="PatientDOB" data-plugin-datepicker="" maxlength="10">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Length of Stay at Hospital (in days)</label>
+                                                            <div style="position:relative;">
+                                                                <input class="form-control " id="LengthStayatHospital" name="LengthStayatHospital" type="text" maxlength="2" onkeydown="utility.ValidateDecimal(event, 0);" data-plugin-keyboard-numpad-nodecimal />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Date Admitted</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="DateAdmitted" name="DateAdmitted" data-plugin-datepicker="" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Name of Obstetrician</label>
+                                                            <input class="form-control" id="ObstetricianName" name="ObstetricianName" type="text" maxlength="100" />
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Name of Pediatrician</label>
+                                                            <input class="form-control" id="PediatricianName" name="PediatricianName" type="text" maxlength="100" />
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label id="lblProvider" class="control-label">Responsible Physician</label>
+                                                            <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Clinical_BirthHx.openProviderDetail();" title="Edit Provider">Responsible Physician</a>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtProvider" name="ResponsiblePhysicianId" type="text" placeholder="Start typing to search" maxlength="35" />
+                                                                <div class="input-group-btn">
+                                                                    <button id="lnkProvider" class="btn btn-primary btn-xs" type="button" onclick="Clinical_BirthHx.openProvider();"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-sm-12 col-lg-8">
+                                                            <label class="control-label">Comments</label>
+                                                            <textarea id="Comments" name="GeneralComments" rows="3" class="form-control" maxlength="500" spellcheck="true"></textarea>
+                                                        </div>
+
+                                                        <input type="hidden" id="hfProvider" name="ProviderId" />
+                                                    </div>
+
+                                                    <div id="sectionMaternalDelivery" style="display:none">
+                                                        <input type="hidden" name="MaternalDeliveryId" id="hfBirthHxMaternalDeliveryId" value="-1" />
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Gestation (in weeks)</label>
+                                                            <div style="position:relative;">
+                                                                <input class="form-control " id="Gestation" name="Gestation" type="text" maxlength="2" onblur="Clinical_BirthHx.Preventzerovalue(this);" onkeydown="utility.ValidateDecimal(event, 0);" data-plugin-keyboard-numpad-nodecimal />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Number of Fetuses</label>
+                                                            <div style="position:relative;">
+                                                                <input class="form-control" id="NumberOfFetuses" name="NumberOfFetuses" type="text" onblur="Clinical_BirthHx.compareFetuses(this);" onkeydown="utility.ValidateDecimal(event, 0);" maxlength="2" data-plugin-keyboard-numpad-nodecimal />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Number of Living Fetuses</label>
+                                                            <div style="position:relative;">
+                                                                <input class="form-control" id="NumberOfLivingFetuses" name="NumberOfLivingFetuses" type="text" onblur="Clinical_BirthHx.compareFetuses(this);" onkeydown="utility.ValidateDecimal(event, 0);" maxlength="2" data-plugin-keyboard-numpad-nodecimal />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Labor Length (in hours)</label>
+                                                            <div style="position:relative;">
+                                                                <input class="form-control " id="LaborLength" name="LaborLength" type="text" maxlength="2" onblur="Clinical_BirthHx.Preventzerovalue(this);" onkeydown="utility.ValidateDecimal(event, 0);" data-plugin-keyboard-numpad-nodecimal />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4" id="divDeliveryMethodId">
+                                                            <label class="control-label" for="DeliveryMethodId">Delivery Method</label>
+                                                            <select class="form-control" id="DeliveryMethodId" name="DeliveryMethodId" ddlist="getBirthHxDeliveryMethod">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-6 col-md-4" id="divDeliveryPresentationId">
+                                                            <label class="control-label" for="DeliveryPresentationId">Delivery Presentation</label>
+                                                            <select class="form-control" id="DeliveryPresentationId" name="DeliveryPresentationId" ddlist="getBirthHxDeliveryPresentation">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4" id="divMaternalHistoryId">
+                                                            <label class="control-label" for="MaternalHistoryId">Maternal History</label>
+                                                            <select class="form-control" id="MaternalHistoryId" name="MaternalHistoryId" ddlist="getBirthHxMaternalHistory">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-sm-12 col-md-8">
+                                                            <div class="clearfix"></div>
+                                                            <label class="control-label">Comments</label>
+                                                            <textarea id="MaternalDeliveryComments" name="MaternalDeliveryComments" rows="3" class="form-control" maxlength="500" spellcheck="true"></textarea>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div id="sectionNewborn" style="display:none">
+                                                        <input type="hidden" name="NewbornId" id="hfBirthHxNewbornId" value="-1" />
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Head Circumference</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="HeadCircumference" name="HeadCircumference" maxlength="6" onkeydown="utility.ValidateDecimal(event, 2);" type="text" data-plugin-keyboard-numpad />
+                                                                <div class="input-group-addon tiny-font">
+                                                                    in
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Chest Circumference</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="ChestCircumference" name="ChestCircumference" maxlength="6" onkeydown="utility.ValidateDecimal(event, 2);" type="text" data-plugin-keyboard-numpad />
+                                                                <div class="input-group-addon tiny-font">
+                                                                    in
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Weight at Birth</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="WeightAtBirth" name="WeightAtBirth" maxlength="6" onkeydown="utility.ValidateDecimal(event, 2);" type="text" data-plugin-keyboard-numpad />
+                                                                <div class="input-group-addon tiny-font">
+                                                                    lbs
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Length at Birth</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="LengthAtBirth" name="LengthAtBirth" maxlength="6" type="text" onkeydown="utility.ValidateDecimal(event, 2);" data-plugin-keyboard-numpad />
+                                                                <div class="input-group-addon tiny-font">
+                                                                    in
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4" id="divVisitReason">
+                                                            <label class="control-label" for="VisitReason">Apgar at Birth</label>
+                                                            <select class="form-control" id="ApgarAtBirth" name="ApgarAtBirth">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                                <option value="00">00</option>
+                                                                <option value="01">01</option>
+                                                                <option value="02">02</option>
+                                                                <option value="03">03</option>
+                                                                <option value="04">04</option>
+                                                                <option value="05">05</option>
+                                                                <option value="06">06</option>
+                                                                <option value="07">07</option>
+                                                                <option value="08">08</option>
+                                                                <option value="09">09</option>
+                                                                <option value="10">10</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4" id="divVisitReason">
+                                                            <label class="control-label" for="VisitReason">Apgar at 5 Minutes</label>
+                                                            <select class="form-control" id="ApgarAt5Minutes" name="ApgarAt5Minutes">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                                <option value="00">00</option>
+                                                                <option value="01">01</option>
+                                                                <option value="02">02</option>
+                                                                <option value="03">03</option>
+                                                                <option value="04">04</option>
+                                                                <option value="05">05</option>
+                                                                <option value="06">06</option>
+                                                                <option value="07">07</option>
+                                                                <option value="08">08</option>
+                                                                <option value="09">09</option>
+                                                                <option value="10">10</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4">
+                                                            <label class="control-label">Weight Released</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="WeightReleased" name="WeightReleased" maxlength="6" onkeydown="utility.ValidateDecimal(event, 2);" type="text" data-plugin-keyboard-numpad />
+                                                                <div class="input-group-addon tiny-font">
+                                                                    lbs
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4" id="divPatientBloodTypeId">
+                                                            <label class="control-label" for="PatientBloodTypeId">Patient’s Blood Type</label>
+                                                            <select class="form-control" id="PatientBloodTypeId" name="PatientBloodTypeId" ddlist="getBirthHxNewbornPatientBloodType">
+                                                                <option selected="selected" value="">-Select-</option>
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4" id="divProblemsAtBirthId">
+                                                            <label class="control-label" for="ProblemsAtBirthId">Problems at Birth</label>
+                                                            <select class="form-control" id="ProblemsAtBirthId" name="ProblemsAtBirthId" ddlist="getBirthHxNewbornProblemsAtBirth">
+                                                                <option selected="selected" value="">-Select-</option>
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-6 col-md-4 pt-xxs">
+                                                            <div class="visible-xs visible-sm"><div class="spacer10"></div></div>
+                                                            <label class="control-label pull-left">Fetal Distress</label>
+                                                            <div class="pull-left pl-default">
+                                                                <div class="checkbox-custom">
+                                                                    <input type="checkbox" id="bFetalDistressYes" onchange="Clinical_BirthHx.checkUncheckFetalDistress(this);" name="bFetalDistressYes">
+                                                                    <label class="control-label">Yes</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="pull-left pl-default">
+                                                                <div class="checkbox-custom">
+                                                                    <input type="checkbox" id="bFetalDistressNo" onchange="Clinical_BirthHx.checkUncheckFetalDistress(this);" name="bFetalDistressNo">
+                                                                    <label class="control-label">No</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-sm-12 col-md-8">
+                                                            <label class="control-label">Comments</label>
+                                                            <textarea id="Comments" name="NewbornComments" rows="3" class="form-control" maxlength="500" spellcheck="true"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                        <button class="btn btn-success btn-sm pull-left mr-sm" style="display:none;" type="button" onclick="Clinical_BirthHx.addBirthHxToNotes();" id="btnAddVitalsOnNote">Add on Note</button>
+                                                        <button id="btnHistory" class="btn pull-left mr-sm btn-sm hidden" onclick="Clinical_BirthHx.viewHistory(this);"><i class="fa fa-history"></i> History</button>
+                                                        <!--<button class="btn btn-cancel btn-sm pull-left mr-sm" type="button" onclick="Clinical_BirthHx.resetBirthHx(false);" id="btnBirthHxReset"> Reset</button>-->
+                                                        <button class="btn btn-success btn-sm pull-left mr-sm" type="button" style="display:none" onclick="Clinical_BirthHx.saveBirthHx('');" id="btnBirthHxSave"> Save</button>
+                                                    </div>
+                                                </div>
+                                            </section>
+
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="control-label">Overall Comments</label>
+                                        <textarea id="txtBirthHxComments" name="BirthHxComments" rows="3" class="form-control" maxlength="5000" spellcheck="true"></textarea>
+                                    </div>
+                                    <div class="pull-right pad-a-labelsize-btn pr-default" id="UnremarkableButton" style="display:none;">
+                                        <button class="btn btn-success btn-sm pull-right mr-sm" type="button" onclick="Clinical_BirthHx.addBirthHxToNotes();" id="btnAddBirthHxOnNoteOverlAll">Add on Note</button>
+                                        <button class="btn btn-success btn-sm pull-right mr-sm" type="button" onclick="Clinical_BirthHx.saveBirthHx('');" id="btnOverallBirthHxSave">Save</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <!-- /Birth Hx -->
+                                </div>
+                                <input type="hidden" name="PatientId" id="hfPatientId" />
+                                <input type="hidden" name="BirthHxId" id="hfBirthHxId" value="-1" />
+                                <input type="hidden" name="BirthHxSoapText" id="hfBirthHxSoapText" value="" />
+                                <input type="hidden" name="gridComments" id="hfGridComments" />
+                                <input type="hidden" name="IsGeneralUpdate" id="hfIsGeneralUpdate" value="false" />
+                                <input type="hidden" name="IsDeliveryUpdate" id="hfIsDeliveryUpdate" value="false" />
+                                <input type="hidden" name="IsNewbornUpdate" id="hfIsNewbornUpdate" value="false" />
+                                <input type="hidden" name="BirthHxType" id="hfBirthHxType" value="general" />
+                                <input type="hidden" name="BirthHxDataChangeBit" id="hfBirthHxDataChangeBit" value="0" />
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div id="pnlBirthHx_Result" style="display: inline;">
+                <div class="spacer10"></div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="spacer10"></div>
+                    <div class="col-sm-6" id="divSwitch">
+                        <span class="pr-xs">All</span>
+                        <div id="tglBirthHx" class="btnWidgetSwitch switch switch-xs switch-success">
+                            <input id="switchVisit" type="checkbox" status="1" checked="" name="Switch" data-plugin-ios-switch="" style="display: inline;" onchange="Clinical_BirthHx.ChangeCurrentPast(this);">
+                        </div>
+                        <span class="pl-xs">Current</span>
+                    </div>
+                </div>
+                <section class="panel" id="pnlCurrent">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvBirthHx">
+                            <thead>
+                                <tr>
+
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvBirthHx_Paging"></div>
+                    </div>
+                </section>
+
+                <section class="panel hidden" id="pnlPast">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPastBirthHx">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">HxId</th>
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvPastBirthHx_Paging"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+
+        //initialization of date-picker.
+        // utility.CreateDatePicker('pnlPatientCaseDetail #dtpAppointmentDate,#dtpSubmittedDate,#dtpDOSFrom,#dtpInjuryDate,#dtpLMPDate,#dtpDOSTo,#dtpCurrentIllnessDate,#dtpAdmissionDated,#tpDischargeDate', function () {
+        //on-change callback method
+        //  });
+
+
+    });
+</script>-->

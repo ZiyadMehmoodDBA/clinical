@@ -1,0 +1,282 @@
+﻿<div id="visitDetail">
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header" style="">
+                <button type="button" class="close" onclick="visitDetail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Visit Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmVisitDetail" onsubmit="return false">
+                    <div class="col-xs-12 btn-block mb-md">
+                        <button class="btn btn-primary btn-xs">Save</button>
+                        <button class="btn btn-primary btn-xs">Resubmit</button>
+                        <button class="btn btn-primary btn-xs">History</button>
+                        <button class="btn btn-primary btn-xs">Electronic EOB</button>
+                        <button class="btn btn-primary btn-xs">Recalculate Fee</button>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Account">Account</label>
+                            <input class="form-control" id="Account" name="Account" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Patient Name">Patient Name</label>
+                            <input class="form-control" id="Patient Name" name="Patient Name" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Appointment Date">Appointment Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input id="Appointment Date" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Case Number"><a href="">Case Number</a></label>
+                            <div class="input-group">
+                                <input class="form-control" id="Case Number" name="Case Number" type="text">
+                                <div class="input-group-btn"><a class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="visible-sm">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Date Submitted">Date Submitted</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input id="Date Submitted" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Batch Number">Batch Number</label>
+                            <input class="form-control" id="Batch Number" name="Batch Number" type="text" disabled>
+                        </div>
+                        <div class="hidden-sm">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Claim Number">Claim Number</label>
+                            <input class="form-control" id="Claim Number" name="Claim Number" type="text" disabled>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Provider">Provider</label>
+                            <div class="input-group">
+                                <input class="form-control" id="Provider" name="Provider" type="text">
+                                <div class="input-group-btn"><a class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="visible-sm">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Facility">Facility</label>
+                            <div class="input-group">
+                                <input class="form-control" id="Facility" name="Facility" type="text">
+                                <div class="input-group-btn"><a class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Submitted By">Submitted By</label>
+                            <input type="text" id="Submitted By" name="Submitted By" class="form-control">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <div class="row">
+                                <div class="col-xs-8 pl-md pr-xs">
+                                    <label class="control-label" for="Plan">Plan</label>
+                                    <select id="Plan" class="form-control">
+                                        <option value="" selected="selected">- Select -</option>
+                                        <option value="P1">Practice1</option>
+                                        <option value="P2">Practice2</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-4 pad-a-labelsize pl-none pr-md">
+                                    <input class="form-control" id="Plan" name="Plan" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <div class="row">
+                                <div class="col-xs-8 pl-md pr-xs">
+                                    <label class="control-label" for="Visit Copayment">Visit Copayment</label>
+                                    <input class="form-control" id="Visit Copayment" name="Visit Copayment" type="text" disabled>
+                                </div>
+                                <div class="col-xs-4 pl-none pr-md pad-a-labelsize">
+                                    <div class="checkbox checkbox-custom ">
+                                        <input id="Paid" name="Paid" type="checkbox">
+                                        <label class="control-label pl-none" for="Paid">Paid</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="visible-sm">
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Referring Provider">Referring Provider</label>
+                            <div class="input-group">
+                                <input class="form-control" id="Referring Provider" name="Referring Provider" type="text">
+                                <div class="input-group-btn"><a class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="PAN/Referral #">PAN/Referral #</label>
+                            <input class="form-control" id="PAN/Referral #" name="PAN/Referral #" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Visit Type">Visit Type</label>
+                            <input class="form-control" id="Visit Type" name="Visit Type" type="text">
+                        </div>
+                    </div>
+                    <div class="toggle" data-plugin-toggle="">
+                        <section class="toggle active">
+                            <label> Claim Additional Information</label>
+                            <div class="toggle-content" style="display: block;">
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Date of Service From">Date of Service From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="Date of Service From" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Unable to work From">Unable to work From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="Unable to work From" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Injury Date">Injury Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="Injury Date" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Delay Reason">Delay Reason</label>
+                                        <select id="Delay Reason" class="form-control">
+                                            <option value="" selected="selected">- Select -</option>
+                                            <option value="P1">Practice1</option>
+                                            <option value="P2">Practice2</option>
+                                        </select>
+                                    </div>
+                                    <div class="visible-sm">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="LMP Date">LMP Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="LMP Date" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Ordering Provider">Ordering Provider</label>
+                                        <select id="Ordering Provider" class="form-control">
+                                            <option value="" selected="selected">- Select -</option>
+                                            <option value="P1">Practice1</option>
+                                            <option value="P2">Practice2</option>
+                                        </select>
+                                    </div>
+                                    <div class="hidden-sm">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Date of Service To">Date of Service To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="Date of Service To" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Unable to work To">Unable to work To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="Unable to work To" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="visible-sm">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Current Illness Date">Current Illness Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="Current Illness Date" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Claim Frequency">Claim Frequency</label>
+                                        <select id="Claim Frequency" class="form-control">
+                                            <option value="" selected="selected">- Select -</option>
+                                            <option value="P1">Practice1</option>
+                                            <option value="P2">Practice2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Supervising Provider">Supervising Provider</label>
+                                        <select id="Supervising Provider" class="form-control">
+                                            <option value="" selected="selected">- Select -</option>
+                                            <option value="P1">Practice1</option>
+                                            <option value="P2">Practice2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 pad-a-labelsize">
+                                        <div class="checkbox checkbox-custom">
+                                            <input type="checkbox" id="Assg Benefits">
+                                            <label class="control-label pl-none" for="Assg Benefits">Assg Benefits</label>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Admission Date">Admission Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="Admission Date" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Discharge Date">Discharge Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="Discharge Date" class="form-control" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="ICN/DCN">ICN/DCN</label>
+                                        <input class="form-control" type="text" id="ICN/DCN">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Status">Status</label>
+                                        <input class="form-control" type="text" id="Status">
+                                    </div>
+                                    <div class="visible-sm">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <div class="size200">
+                                            <label class="control-label pull-left" for="Comments">Comments</label>
+                                            <div class="checkbox checkbox-custom pull-right">
+                                                <input type="checkbox" id="Print on HCFA F-19">
+                                                <label class="control-label pl-none" for="Print on HCFA F-19">Print on HCFA 19</label>
+                                            </div>
+                                        </div>
+                                        <textarea class="form-control" id="Comments" rows="1" spellcheck="true"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="spacer10"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript">
+    $(document).ready(function () {
+        $('.demo2').colorpicker();
+
+    });
+</script>-->

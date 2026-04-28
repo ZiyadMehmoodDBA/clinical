@@ -1,0 +1,132 @@
+﻿<div class="row" id="pnliTrackQualityMeasureDetail" style="display:none;">
+    <div id="actionPaniTrackQualityMeasureDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog" class="modal-dialog modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="iTrack_QualityMeasureDetail.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="measureName" class="modal-title">Measures</h4>
+            </div>
+            <div id="modalbody">
+                <div >
+                    <button id="btnMeasureDocument" type="button" class="btn btn-primary btn-sm" onclick="iTrack_QualityMeasureDetail.GetMeasurePDF();"><i class="fa fa-file-pdf-o"></i></button>
+                </div>
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="iTrack_QualityMeasureDetail.UnLoadTab();"></a>
+                                </div>
+                                <!--<h2 id="measureName1" class="panel-title">Search Insurance Plan </h2>-->
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnliTrackQualityMeasureDetail_Search">
+                            <form class="form-bordered" onsubmit="return false" id="frmiTrackQualityMeasureDetail" method="post">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label" for="Patient Account">Account Number</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtPatientName" name="PatientName" type="text" oninput="iTrack_QualityMeasureDetail.BindPatientAccount(false);" onblur="utility.ValidateAutoCompletePatientAccount(this, 'frmBatchClinicalQualityMeasureDetail #hfPatientId' , false, 0, null, null);">
+                                            <div id="divSearchPatient" class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="iTrack_QualityMeasureDetail.OpenPatientSearch('txtPatientName');"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2" id="dvPatientName">
+                                        <label for="Patient Name" class="control-label">Patient Name</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtFullName" customname="Patient Name" name="FullName" type="text"/>
+                                            <div class="input-group-btn">
+                                                <button id="lnkPatientName" type="button" class="btn btn-primary btn-xs" onclick="iTrack_QualityMeasureDetail.OpenPatientSearch('txtPatientName');"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Exclusion</label>
+                                        <select id="ddlExclusion" class="form-control">
+                                            <option value="All" selected="selected">All</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Exception</label>
+                                        <select id="ddlException" class="form-control">
+                                            <option value="All" selected="selected">All</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label" for="EntryFrom">From</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input class="form-control" type="text" name="dpFrom" id="dpFrom" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label" for="EntryTo">To</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input class="form-control" type="text" name="dpTo" id="dpTo" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+
+                                    <div class="pull-right pr-default mt-md">
+
+                                        <button class="btn btn-primary btn-sm tab_space" id="btnInsurancePlanSearch" type="submit" onclick="iTrack_QualityMeasureDetail.ClinicalQualityMeasuresSearch();">Search</button>
+                                        <div class="dropdown pull-right" id="divExport">
+                                            <a id="btnExport" href="#" class="dropdown-toggle btn btn-primary btn-sm pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Export <span class="caret"></span></a>
+                                            <ul id="menuExport" class="dropdown-menu" aria-labelledby="btnExport">
+                                                <li><a href="#" onclick="iTrack_QualityMeasureDetail.ExportPatientData();">QRDA 1</a></li>
+                                                <li><a href="#" onclick="iTrack_QualityMeasureDetail.BatchClinicalQualityMeasureExport();">QRDA 3</a></li>
+                                                <li><a href="#" onclick="iTrack_QualityMeasureDetail.ExportExcelData();">Excel</a></li>
+
+                                            </ul>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+                                </div>
+                            </form>
+                        </div>
+                        <input type="hidden" id="hfPatientId" value="-1" />
+                        <input type="hidden" id="hfAccountNo" value="-1" />
+                    </section>
+                </div>
+
+                <div id="pnliTrackQualityMeasureDetail_Result">
+                    <div class="panel-body panel-featured">
+                        <input type="hidden" id="iTrackQualityMeasureDetail_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgviTrackQualityMeasureDetail">
+                            <thead>
+                                <tr>
+                                    <th style="display:none;">CQMID</th>
+                                    <th class="size80">Account #</th>
+                                    <th class="size80">Last Name</th>
+                                    <th class="size80">First Name</th>
+                                    <th class="size80">Denominator</th>
+                                    <th class="size80">Numerator</th>
+                                    <th class="size80">Exclusion</th>
+                                    <th class="size80">Exception</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="diviTrackQualityMeasureDetailPaging"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

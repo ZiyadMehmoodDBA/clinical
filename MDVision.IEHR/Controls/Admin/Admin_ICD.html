@@ -1,0 +1,119 @@
+﻿<div class="row" id="pnlAdminICD" style="display:none;">
+    <div id="actionPanAdminICD" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_ICD.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">ICD Codes</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" id="btn_ICDAdd" onclick="Admin_ICD.ICDAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_ICD.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search ICD </h2>
+                            </header>
+                        </div> 
+                        <div class="panel-body" id="pnlICD_Search">
+                            <form method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <!--<div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Short Name</label>
+                                        <input class="form-control" id="txtShortName" type="text" maxlength="10" />
+                                    </div>-->
+                                    <div class="col-sm-2">
+                                        <label class="control-label">ICD9</label>
+                                        <input class="form-control" id="txtICD9" type="text" maxlength="20" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="control-label">ICD9 Description</label>
+                                        <input class="form-control" id="txtDescription" type="text" maxlength="100" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">ICD10</label>
+                                        <input class="form-control" id="txtICD10" type="text" maxlength="20" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="control-label">ICD10 Description</label>
+                                        <input class="form-control" id="txtICD10Description" type="text" maxlength="100" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">SNOMED</label>
+                                        <input class="form-control" id="txtSNOMED" type="text" maxlength="20" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="control-label">SNOMED Description</label>
+                                        <input class="form-control" id="txtSNOMEDDescription" type="text" maxlength="100" />
+                                    </div>
+                                    <!--<div class="col-sm-2" id="divICDCode_Entity">
+                                        <label class="control-label">Entity<span class="required">*</span></label>
+                                        <select id="ddlEntity" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                                    </div>-->
+                                    <div class="col-xs-2">
+                                        <label class="control-label">Valid?</label>
+                                        <select id="ddlActive" class="form-control">
+                                            <option value="">- All -</option>
+                                            <option value="1" selected="selected">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+
+                                
+                                    <!--<div class="col-sm-2">
+                                        <label class="control-label">ICD Type</label>
+                                        <select id="ddlICDType" class="form-control">
+                                            <option value="">- Both -</option>
+                                            <option value="0">ICD-9</option>
+                                            <option value="1">ICD-10</option>
+                                        </select>
+                                    </div>-->
+
+                                    <div class="col-sm-2 mt-md pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnICDSearch" type="button" onclick="Admin_ICD.ICDSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlICD_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="hidden" id="ICD_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvICD">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">ICDId</th>
+                                            <th class="size120">Action</th>
+                                            <!--<th class="size150">Short Name</th>-->
+                                            <th>ICD9</th>
+                                            <th>ICD9 Description</th>
+                                            <th>ICD10</th>
+                                            <th>ICD10 Description</th>
+                                            <th>SNOMED</th>
+                                            <th>SNOMED Description</th>
+                                            <th>Actively Used</th>
+                                            <th>Valid</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divICDPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

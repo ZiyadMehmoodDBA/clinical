@@ -1,0 +1,78 @@
+﻿<div id="pnlOCRScannerViewer" style="display:block;">
+    <div id="actionPanOCRScannerViewer" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="OCR_Scanner.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+
+                <h4 class="modal-title">Scanner Viewer</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <div id="main">
+                    <!--<a href="../index.html" style="float:right;font-weight:bold;">Home</a>-->
+                    <h2 class="media-heading"></h2>
+                    <div id="ScanAndExtract" class="ScanExtract">
+                        <div id="downloadPlugInContainer" class="col-sm-3 pull-right hidden">
+                            <a class="btn rightbtn btn-success btn-sm" href="./Resources/OCRScanner/id_scanner_ocr.zip" target="_blank">
+                                <i class="fa fa-download"></i>
+                                Download
+                            </a>
+                        </div>
+                        <div class="spacer5"></div>
+                        <div class="col-sm-12">
+                            <div class="panel-body panel-featured">
+                                <button id="btnScanCard" type="button" class="btn btn-primary btn-sm disableAll" onclick="OCR_Scanner.ScanCard();">Scan Image</button>
+                                <button id="btnProcess" type="button" class="btn btn-primary btn-sm disableAll" onclick="OCR_Scanner.ProcessingCard();">Process</button>
+                                <button id="btnProcessCard" type="button" class="btn btn-primary btn-sm disableAll" onclick="OCR_Scanner.ProcessMedCard(0);">Scan & Process Card</button>
+                                <button id="btnProcessCardNew" type="button" class="btn btn-primary btn-sm disableAll" onclick="OCR_Scanner.ProcessNewMedCard();">Scan & Process Data with new Plan</button>
+                                <div class="col-sm-12 mt-sm">
+                                    <div class="col-sm-4" id="scanBothSideContainer" style="display:none;">
+                                        <div class="checkbox-default checkbox-custom">
+                                            <input id="cbscanBothSides" type="checkbox" value="Scan Both Side" disabled="true">
+                                            <label class="control-label">Scan Both Side</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" id="lbOneSide" style="display:none">
+                                        <div class="radio-custom">
+                                            <input type="radio" name="Mode" value="Process One Side" id="ProcessOneSide" disabled="true">
+                                            <label class="control-label">Process Front Side</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" id="lbBothSides" style="display:none">
+                                        <div class="radio-custom">
+                                            <input type="radio" name="Mode" value="Process Both Sides" id="ProcessBothSides" disabled="true">
+                                            <label class="control-label"> Process Both Sides</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="spacer10"></span>
+                                <hr />
+                                <div class="col-sm-12" id="scanImage">
+                                    <img id="image" class="img-responsive img-center" src="Content/images/idcard1.png" />
+                                </div>
+                                <div class="col-sm-6" id="scanBackImage" style="display:none;">
+                                    <img id="backimage" class="img-responsive img-center" src="Content/images/idcard2.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img id="cardlineImage" src="Content/Images/insurance_card_line.jpg" style="display:none;" />
+                    <canvas id="myDrawingCanvas" width="1250" height="1429" style="display:none;"></canvas>
+                    <input type="hidden" id="hdnIsScannerConnected" />
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12 mb-xxs">
+                    <button id="btnConnect" type="button" class="btn btn-success btn-sm btn-block hidden" onclick="OCR_Scanner.InitLibrary();">Connect to Scanner </button>
+                </div>
+                <applet name="CSSNLibJ" id="CSSNLibJ" archive="Resources/OCRScanner/xFunction.jar, Resources/OCRScanner/CSSNLibJ.jar" code="lib.CSSNLibJ" width="0" height="0"></applet>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,169 @@
+﻿<div class="row" id="pnlAdminHL7DFT" style="display:none;">
+    <div id="actionPanAdminHL7DFT" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_HL7DFT.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search DFT Log</h4>
+            </div>
+            <div id="modalbody">
+
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <!--<button type="button" class="btn btn-success btn-sm" onclick="Admin_HL7DFT.HL7DFTAdd();"><i class="fa fa-plus-circle"></i> Add</button>-->
+                    <div class="spacer10"></div><div class="clearfix"></div>
+
+                    <section class="panel panel-featured">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="closebtn pull-right" onclick="Admin_HL7DFT.UnLoadTab()"></a>
+                            </div>
+                            <h2 class="panel-title max">Search DFT Log </h2>
+                        </header>
+                        <div class="panel-body" id="pnlAdminHL7DFT_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class=" col-sm-2">
+                                        <label class="control-label">MR Number <span class="required">*</span></label>
+                                        <input class="form-control" id="txtMRNumber" name="Name" type="text" maxlength="15">
+                                    </div>
+                                    <div class=" col-sm-2">
+                                        <label class="control-label">Patient Name <span class="required">*</span></label>
+                                        <input class="form-control" id="txtPatientName" name="Name" type="text" maxlength="15">
+                                    </div>
+                                    <div id="divHL7DFT_Entity" class="col-sm-2">
+                                        <label class="control-label">Facility <span class="required">*</span></label>
+                                        <input class="form-control" id="txtFacility" name="Name" type="text" maxlength="15">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Provider <span class="required">*</span></label>
+                                        <input class="form-control" id="txtProvider" name="Name" type="text" maxlength="15">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Status</label>
+                                        <select id="ddlStatus" class="form-control" name="Mode">
+                                            <option value="" selected="selected">- Select -</option>
+                                            <option value="Accepted">Accepted</option>
+                                            <option value="Rejected">Rejected</option>
+                                            <option value="Errored">Errored</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Error Message <span class="required">*</span></label>
+                                        <input class="form-control" id="txtErrorMessage" name="Name" type="text" maxlength="15">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">File Name <span class="required">*</span></label>
+                                        <input class="form-control" id="txtFileName" name="Name" type="text" maxlength="15">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">App Status <span class="required">*</span></label>
+                                        <input class="form-control" id="txtAppStatus" name="Name" type="text" maxlength="15">
+                                    </div>
+                                    <!--<div class="col-sm-2">
+                                        <label class="control-label">Created On <span class="required">*</span></label>
+                                        <input class="form-control" id="CreatedOn" name="Name" type="text" maxlength="15">
+                                    </div>-->
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Created On </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon add-on">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control " name="date" type="text" id="CreatedOn">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 pad-a-labelsize-btn">
+                                        <div class="btn-block">
+                                            <button class="btn btn-primary btn-sm" id="btnHL7DFTSearch" type="button" onclick="Admin_HL7DFT.HL7DFTSearch();">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <div id="pnlHL7DFT_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="col-sm-12 col-md-6">
+                                    <input type="hidden" id="HL7DFT_SelectedDataKeys" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <span class="pull-left pl-default pr-default"><strong>Total: </strong> <label class="control-label" id="total"></label></span><span class="pull-left pl-default pr-default"><strong>Accepted: </strong><label class="control-label" id="accepted"></label></span><span class="pull-left pl-default pr-default"><strong>Rejected: </strong><label class="control-label" id="rejected"></label></span>
+                                </div>
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvHL7DFT">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">HL7DFTId</th>
+                                            <th>FileName</th>
+                                            <th>Message Status</th>
+                                            <th>MR Number</th>
+                                            <th>Patient Name</th>
+                                            <th>Facility</th>
+                                            <th>Provider</th>
+                                            <th>Quantity</th>
+                                            <th>ICD1</th>
+                                            <th>ICD1 Description</th>
+                                            <th>ICD2</th>
+                                            <th>ICD2 Description</th>
+                                            <th>ICD3</th>
+                                            <th>ICD3 Description</th>
+                                            <th>ICD4</th>
+                                            <th>ICD4 Description</th>
+                                            <th>CPT</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Copay</th>
+                                            <th>Created On</th>
+                                            <th>Error Message</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divHL7DFTPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div id="viewDFTFileData" style="display:none">
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Bill_ClaimSubmission.UnLoadDFTFileViewer();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">View DFT</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmViewDFTFile" class="form-bordered" method="post" onsubmit="return false">
+                    <div id="DFTTextView" class="tab-pane">
+                        <div class="col-xs-12">
+                            <textarea class="form-control" rows="25" cols="50" id="txtTextView" readonly="readonly" name="textViewDFT"></textarea>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //initialization of date-picker.
+
+    });
+
+</script><!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>

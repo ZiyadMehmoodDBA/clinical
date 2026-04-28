@@ -1,0 +1,122 @@
+﻿<div class="row" id="pnlImmunization_LotNumberDetail">
+    <div id="actionPanImmunization_LotNumberDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Immunization_LotNumberDetail.UnLoadTab()"></button>
+                <h4 class="modal-title">Lot Number</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmImmunization_LotNumberDetail" method="post" onsubmit=" return false ">
+
+                    <div id="entityDDL" class="col-sm-4 col-lg-3">
+                        <label class="control-label">Entity <span class="required">*</span></label>
+                        <select class="form-control" ddlist="GetEntity" id="ddlEntity" name="EntityId" onchange="Immunization_LotNumberDetail.isEntitySelected();">
+                            <option selected>-Select-</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 col-md-3" id="divLotProvider">
+                        <label class="control-label">Provider<span class="required">*</span></label>
+                        <select class="form-control" multiple="multiple" name="LotProvider" id="ddlLotProvider"></select>
+                    </div>
+
+                    <div class="col-sm-4" id="TherapeuticInjectionDiv">
+                        <label class="control-label">
+                            Therapeutic Injection
+                            <span class="required">*</span>
+                        </label>
+                        <div>
+                            <input class="form-control" id="txtTherapeuticInjection" type="text" name="TherapeuticInjection" customname="Therapeutic Injection" oninput="Immunization_LotNumberDetail.BindAutocomplete('Immunization_LotNumberDetail', 'frmImmunization_LotNumberDetail', 'txtTherapeuticInjection', 'hfTherapeuticInjection', '2', this);" onblur="utility.ValidateAutoComplete(this, 'frmImmunization_LotNumberDetail #hfTherapeuticInjection', false, false, true);">
+                        </div>
+                    </div>
+                    <!--<div class="col-sm-4" id="TherapeuticInjectionDiv">
+                        <label class="control-label" for="TherapeuticInjection">Therapeutic Injection<span class="required">*</span></label>
+                        <select id="ddlTherapeuticInjection" name="TherapeuticInjectionIds" multiple="multiple" ddlmultilist="GetTherapeuticInjection" class="form-control" onchange="Immunization_LotNumberDetail.changeTherapeutic()"></select>
+                    </div>-->
+                    <!--<div class="col-sm-4" id="VaccineDiv">
+                        <label class="control-label" for="Vaccine">Vaccine<span class="required">*</span></label>
+                        <div class="input-group">
+                            <input class="form-control" id="txtVaccine" placeholder="Start typing to search" type="text" name="VaccineName" onblur="    Immunization_LotNumberDetail.ValidateVaccine(this)" disabled>
+                            
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary btn-xs" type="button" onclick="Immunization_LotNumberDetail.OpenVacineSearch()">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="col-sm-3" id="VaccineDiv">
+                        <label class="control-label" for="Vaccine">Vaccine<span class="required">*</span></label>
+                        <select id="ddlVaccine" name="LotVaccineIds" multiple="multiple" ddlmultilist="GetVaccine" class="form-control" onchange="Immunization_LotNumberDetail.PopulateVISDate_VISURL_and_ManufacturerDropDown()"></select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="" class="control-label">Lot Number<span class="required">*</span></label>
+                        <input id="txtLotNo" type="text" class="form-control" name="LotNo" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="control-label">Funding Source</label>
+                        <select id="ddlFundingSource" name="VaccineFundingSourceId" class="form-control" ddlist="GetVaccineFundingSource"></select>
+                    </div>
+                    <div class="col-sm-4 Manufacturer" id="ManufacturerDiv">
+                        <!--<label class="control-label">Manufacturer<span class="required">*</span></label>
+                        <select id="ddlManufacturer" name="VacManufacturerId" ddlist="GetManufacturer" class="form-control"></select>-->
+
+                        <label class="control-label">Manufacturer<span class="required">*</span></label>
+                        <select id="ddlManufacturer" name="VacManufacturerId" class="form-control" disabled>
+                            <option selected="selected" value="">-Select-</option>
+                        </select>
+
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="control-label">Route of Administration</label>
+                        <select id="ddlRoute" class="form-control" ddlist="GetVaccineRoute" name="RouteId"> </select>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <label class="control-label" for="Date">Expiry Date<span class="required">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                            <input id="dtpExpiryDate" name="ExpiryDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="" class="control-label">NDC Code</label>
+                        <input id="txtNDCCode" name="NDCCode" type="text" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-4 col-lg-2">
+                        <label for="" class="control-label">Quantity<span class="required">*</span></label>
+                        <input id="txtQuantity" name="Quantity" type="number" class="form-control" onblur="Immunization_LotNumberDetail.QuantityChange(this.value)" />
+                    </div>
+                    <div class="col-sm-4 col-lg-2">
+                        <label for="" class="control-label">Qty. Remaining</label>
+                        <input id="txtQuantityLeft" name="QuantityLeft" type="number" class="form-control" disabled />
+                    </div>
+                    <div class="col-sm-4" id="VISDateDiv">
+                        <label class="control-label" for="Date">VIS Date</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                            <input id="dtpVISDate" name="VISDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize" id="ViewDocumDiv">
+                        <a href="#" class="btn btn-link btn-xs" target="_blank" id="lnklblAdministerVaccine_VISURL" disabled>View Document</a>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Active" name="Active" checked>
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+                    <div class="pull-right pt-md">
+                        <button class="btn btn-primary btn-sm" type="submit" onclick="Immunization_LotNumberDetail.CheckProviderValidation()">Save</button>
+                        <!--<button class="btn btn-sm" type="button" onclick="Immunization_LotNumberDetail.LotNumberReset()">Reset</button>-->
+                    </div>
+
+                    <input type="hidden" id="txtVaccineId" name="VaccineId" />
+                    <input type="hidden" id="txtManufacturerId" name="ManufacturerId" />
+                    <input type="hidden" id="hfTherapeuticInjection" name="TherapeuticInjectionId" value="">
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

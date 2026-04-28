@@ -1,0 +1,75 @@
+﻿<div class="row" id="pnlAdminSpecialty" style="display:none;">
+    <div id="actionPanAdminSpecialty" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_Specialty.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Specialty</h4>
+            </div>
+            <div class="clearfix"></div>
+            <div id="modalbody">
+                <button type="button" class=" btn btn-success btn-sm" id="btnSpecialityAdd" onclick="Admin_Specialty.SpecialtyAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div><div class="clearfix"></div>
+                <section class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="closebtn pull-right" onclick="Admin_Specialty.UnLoadTab();"></a>
+                        </div>
+                        <h2 class="panel-title">Search Specialty </h2>
+                    </header>
+                    <div class="panel-body" id="pnlSpecialty_Search">
+                        <form class="form-bordered" method="post" onsubmit="return false">
+                            <!--start - CONTENTS-->
+                            <div class="form-group">
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Short Name</label>
+                                    <input class="form-control" id="txtShortName" name="ShortName" type="text" maxlength="30" />
+                                </div>
+                                <div class="col-sm-4 col-lg-5">
+                                    <label class="control-label">Description</label>
+                                    <input class="form-control" id="txtDescription" name="Description" type="text" maxlength="55" />
+                                </div>
+                                <div id="divSpecialty_Entity" class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Entity</label>
+                                    <select id="ddlEntity" class="form-control" name="Entity" ddlist="GetEntity"></select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">Active?</label>
+                                    <select id="chkActive" name="Active" class="form-control">
+                                        <option value="">- All -</option>
+                                        <option value="1" selected="selected">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-1 mt-md pull-right">
+                                    <button class="btn btn-primary btn-sm pull-right" id="btnSpecialtySearch" type="button" onclick="Admin_Specialty.SpecialtySearch();">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <div id="pnlSpecialty_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="Specialty_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvSpecialty">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">SpecialtyId</th>
+                                        <th class="size120">Action</th>
+                                        <th class="size150">Short Name</th>
+                                        <th class="size150">Entity</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divSpecialtyPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

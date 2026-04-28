@@ -1,0 +1,62 @@
+﻿<div id="pnlClinicalCDS" style="display:none;">
+    <div id="actionPanClinicalCDS" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent" class="panel panel-featured">
+            <header id="modalheader" class="panel-heading">
+                <h2 class="panel-title">Search CDS Rules</h2>
+                <a class="closebtn" onclick="Clinical_CDS.UnLoadTab();"></a>
+            </header>
+            <!--<div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_CDS.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search CDS Rules</h4>
+            </div>-->
+            <div id="modalbody" class="panel-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_CDS.CDSAddEdit(-1);"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                </div>
+
+
+                <div id="pnlCDS_Result" style="display: inline;">
+                    <!--<div class="col-sm-3" id="divSwitch">
+                        <span class="pr-xs">Inactive</span>
+                        <div class="btnWidgetSwitch switch switch-xs switch-success">
+                            <input id="switchVisit" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: none;" onchange="Clinical_CDS.activeCDSSearch(this);">
+                        </div>
+                        <span class="pl-xs">Active</span>
+                    </div>-->
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <div class="spacer5"></div>
+                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvCDS">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none">CDSId</th>
+                                        <th id="ColumnAction" actiontype="Edit,Delete,Cancel,Active,History" coltype="Action" class="size100 size-min100">Action</th>
+                                        <!--<th style="display:none;">ProviderId</th>
+                                        <th class="size120 size-min110">Action</th>-->
+                                        <th>Title</th>
+                                        <th>Developer</th>
+                                        <th>Bibliography</th>
+                                        <th>Funding Source</th>
+                                        <th>Release Date</th>
+                                        <th>Revision Date</th>
+                                        <th>Alert Notes</th>
+                                        <!--<th>First Name</th>
+                                        <th>Specialty</th>
+                                        <th>NPI</th>
+                                        <th>Entity</th>
+                                        <th>Specialist</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="dgvCDS_Paging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

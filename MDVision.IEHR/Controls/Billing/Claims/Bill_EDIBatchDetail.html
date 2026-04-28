@@ -1,0 +1,135 @@
+﻿<div id="EDIBatchDetail">
+    <div id="actionPanEDIBatchDetail" class=" modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="EDIBatchDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Submit Batch Detail</h4>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" id="frmEDIBatchDetail" onsubmit="return false">
+                    <div class="pull-left">
+                        <a class="btn btn-success btn-xs" onclick="EDIBatchDetail.View_Claims(); return false;"><i class="fa fa-save"></i> Claims</a>
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="size25per pull-left">
+                            <span class="btn btn-success btn-xs ml-xxs mr-sm btn-file">
+                                <i class="fa fa-eye"></i>
+                                <span>View EDI File</span>
+                                <input type="file" onclick="EDIBatchDetail.View_EDIFile(); return false;" name="View_edi_file" id="View_EDI_file" style="cursor:pointer" />
+                            </span>
+
+                        </div>
+
+                        <div class="size25per pull-left">
+                            <span class="btn btn-success btn-xs ml-xxs mr-sm btn-file">
+                                <i class="fa fa-paperclip"></i>
+                                <span>Attach EDI Reports</span>
+                                <input type="file" name="Attach_edi_file" allowfiles="txt,dat,rpt,835,997,277,271" accept="application/txt" id="Attach_EDI_file" onchange="EDIBatchDetail.Attach_EDIReport(this,true);" style="cursor:pointer" />
+                            </span>
+
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group" id="batch_details">
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Batch Number</label>
+                            <input class="form-control" id="txtBatchNumber" type="text" name="batchNumber">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Clearing house</label>
+                            <input class="form-control" id="txtClearingHouse" name="clearingHouse" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Submit Date</label>
+                            <input class="form-control" id="txtSubmitDate" name="Submit Date" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Submitted By</label>
+                            <input type="text" class="form-control" id="txtSubmittedBy" name="submittedBy">
+                        </div>
+
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Submit Type</label>
+                            <input class="form-control" id="txtSubmitType" name="submitType" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Total Claims</label>
+                            <input class="form-control" id="txtTotalClaims" name="totalClaims" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Claims Accepted</label>
+                            <input class="form-control" id="txtClaimsAccepted" name="claimsAccepted" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Claims Rejected</label>
+                            <input class="form-control" id="txtClaimsRejected" name="cliamsRejected" type="text">
+                        </div>
+                        <div class="col-sm-2  pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" checked="" name="Completed" id="chkCompleted">
+                                <label for="chkCompleted">Completed</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <label class="control-label">Comments</label>
+                            <textarea class="form-control" id="txtComments" name="comments" rows="2" spellcheck="true"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 col-md-1 pull-right mt-md mb-md">
+                        <button class="btn btn-primary btn-sm rightbtn" onclick="EDIBatchDetail.Save_BatchReport();" id="btnBatchSave" type="button">Save</button>
+                    </div>
+
+                    <input type="hidden" id="hfEDI837String" />
+                    <input type="hidden" id="hfClearingHouseId" />
+                </form>
+
+                <span class="spacer10"></span>
+                <div class="splitter text-center"> Attachment</div>
+
+                <div id="pnlAttachmentBatch_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvAttachments">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">ReportId</th>
+                                        <th class="size95">Action</th>
+                                        <th>EDI File Name</th>
+                                        <th>Entered By</th>
+                                        <th>Entry Date</th>
+                                        <th>Comments</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="viewEDIFileData" style="display:none">
+        <div class="modal-dialog modal-dialog-sm">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="EDIBatchDetail.UnLoadEdiFileViewer();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">View EDI</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" rows="25" cols="50" id="txtTextView" readonly="readonly" name="textViewedi" spellcheck="true"></textarea>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

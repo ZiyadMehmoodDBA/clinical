@@ -1,0 +1,54 @@
+﻿<div id="designLetterDataFieldsCreate">
+    <div class="modal-dialog modal-dialog-md">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header" style="">
+                <button type="button" class="close" onclick="designLetterDataFieldsCreate.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Create Data Fields</h4>
+            </div>
+            <div class="modal-body pt-xs" id="aaa">
+                <form method="post" onsubmit="return false" id="frmdesignLetterDataFieldsCreate">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label" for="Type">Category<span class="required">*</span></label>
+                            <select class="form-control" name="ddlCategory" id="ddlCategory" ddlist="LookupCategory"></select>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label" for="Short Name">Name<span class="required">*</span></label>
+                            <input class="form-control" id="txtDataFieldName" name="txtDataFieldName" type="text">
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label" for="Short Name">Description<span class="required">*</span></label>
+                            <input class="form-control" id="txtDataFieldDescription" name="txtDataFieldDescription" type="text">
+                        </div>
+                        <div class="col-xs-4" id="divEntity">
+                            <label class="control-label">Entity</label><span class="required">*</span>
+                            <select id="lstEntityId" class="form-control" name="lstEntityId" ddlist="GetEntity"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkManualInput" type="checkbox">
+                                <label class="control-label" for="Manual Input">Manual Input</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkNullAllowed" type="checkbox">
+                                <label class="control-label" for="Null Allowed">Null Allowed</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkIsActive" type="checkbox">
+                                <label class="control-label" for="Active">Active</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="btnQuestionSave" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="hfFieldsId" value="-1" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

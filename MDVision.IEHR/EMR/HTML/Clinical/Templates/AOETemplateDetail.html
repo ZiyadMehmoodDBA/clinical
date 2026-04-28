@@ -1,0 +1,181 @@
+﻿<div id="pnlAOETemplateDetail">
+    <div id="actionPanAOETemplateDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full mb-none">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="AOETemplateDetail.Unload();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">AOE Template Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblAOETemplateDetail">
+                    <form method="post" onsubmit="return false;" id="frmAOETemplateDetail" name="frmAOETemplateDetail">
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <div class="col-sm-3 col-md-3">
+                                <label class="control-label">Template Name</label><span class="required">*</span>
+                                <input type="text" class="form-control" id="txtAOETemplateDetailTemplateName" name="AOETemplateDetailTemplateName" />
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <label class="control-label">Laboratory<span class="required">*</span></label>
+                                <select id="ddlLabId" name="LabId" class="form-control" ddlist="" onchange="AOETemplateDetail.updateCategory();"></select>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <label class="control-label">Category</label>
+                                <input id="txtCategory" name="Category" class="form-control" disabled />
+                            </div>
+                            <!--<div id="divEntity" class="col-sm-3 col-md-3">
+                                <label class="control-label">Entity</label><span class="required">*</span>
+                                <select id="ddlAOETemplateDetailTemplateEntity" name="AOETemplateDetailTemplateEntity" class="form-control" ddlist="GetEntity"></select>
+                            </div>-->
+                            <!--<div class="demo-section k-content">
+                                <select id="ddlAOETemplateDetailTemplateSpecialty" data-placeholder="Select Specialty..."></select>
+                            </div>-->
+                            <!--<div class="col-sm-3 col-md-3" id="divAOETemplateDetailTemplateSpecialty">
+                                <label class="control-label">Specialty </label>
+                                <div class="demo-section k-content pl-default pr-default mb-xs">
+                                    <input id="ddlAOETemplateDetailTemplateSpecialty_" class="form-control" />
+                                </div>
+                            </div>-->
+                            <div class="col-sm-3 col-md-3" id="divAOETemplateDetailSpecialty">
+                                <label class="control-label">Specialty </label>
+                                <select id="ddlAOETemplateDetailTemplateSpecialty" multiple="multiple" name="AOETemplateDetailTemplateSpecialty" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-3 col-md-3" id="divAOETemplateDetailTemplateProvider">
+                                <select class="form-control" style="display:none;" name="hiddenAOETemplateDetailTemplateProvider" id="ddlHiddenAOETemplateDetailTemplateProvider"></select>
+                                <label class="control-label">Provider<span class="required">*</span></label>
+                                <select class="form-control" multiple="multiple" name="AOETemplateDetailTemplateProvider" id="ddlAOETemplateDetailProvider"></select>
+                            </div>
+                            <div class="col-sm-8 col-md-3">
+                                <label class="control-label">Test</label><span class="required">*</span>
+                                <div class="input-group">
+                                    <input class="form-control disableAll" id="txtLabCPTCode" placeholder="Search test" type="text" name="LabCPTCode" oninput="AOETemplateDetail.bindAutoComplete(this)" />
+                                    <div class="input-group-btn">
+                                        <!--<button class="btn btn-primary btn-xs " type="button" onclick="ClinicalLabOrderDetail.openCPTCode();"><i class="fa fa-search"></i></button>-->
+                                        <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 pull-right" style="padding-top:2%;">
+                                <div class="checkbox-custom checkbox-default pull-right">
+                                    <input type="checkbox" name="IsActive" id="chkActive" checked>
+                                    <label class="control-label" for="IsActive">Active</label>
+                                </div>
+                            </div>
+                            <!--<div class="col-sm-3 col-md-3" id="divPhysicalExamTemplateSpecialty">
+                                <label class="control-label">Specialty </label>
+                                <select id="ddlPhysicalExamTemplateSpecialty" multiple="multiple" name="PhysicalExamTemplateSpecialty" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-3 col-md-3" id="divPhysicalExamTemplateProvider">
+                                <select class="form-control" style="display:none;" name="hiddenPhysicalExamTemplateProvider" id="ddlHiddenPhysicalExamTemplateProvider"></select>
+                                <label class="control-label">Provider</label>
+                                <select class="form-control" multiple="multiple" name="PhysicalExamTemplateProvider" id="ddlPhysicalExamTemplateProvider"></select>
+                            </div>-->
+                            <!--<div class="col-sm-3 col-md-3" id="divAOETemplateDetailTemplateProvider">
+                                <label class="control-label">Provider</label>
+                                <select id="ddlAOETemplateDetailTemplateProvider_"></select>
+                            </div>-->
+                            <div id="divNormalExams" class="col-sm-8 pad-a-labelsize hidden">
+                                <button id="btnNormalExamDetails" onclick="AOETemplateDetail.openNormalExamDetail(this);" class="btn btn-link btn-xs pull-left"><i class="fa fa-book"></i></button>
+                                <div id="divNormalExamsDetail" class="size90per pull-left  hidden">
+                                    <textarea id="txtNormalExamsDetail" name="NormalExamsDetail" rows="2" class="form-control" spellcheck="true"></textarea>
+                                </div>
+                            </div>
+                            <div class="spacer20"></div>
+                            <section id="sectionAOETemplateDetail">
+                                <div id="AOETemplateDetail">
+                                    <div class="col-xs-3">
+                                        <section class="panel panel-featured size100per " id="System">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title pull-left">Systems</h2>
+                                                <div class="pull-right" id="divAddNewSystem" onclick="AOETemplateDetail.addNewItem('system')"><button class="btn-link white btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                                <div class="clearfix"></div>
+                                            </header>
+
+                                            <div class="panel-body pl-none pr-none height330 height-max330 own-scroll overflowY">
+                                                <div class="demo-section k-content pl-default pr-default mb-xs">
+                                                    <input id="Systems" class="form-control" />
+                                                </div>
+                                                <div id="divAOETemplateDetailSystems">
+                                                    <ul id="ulAOETemplateDetailSystems" name="AOETemplateDetailSystems" class="listPrimary"></ul>
+                                                </div>
+                                            </div>
+                                            <!--<div class="demo-section k-content">
+                                                <div>
+                                                    <h4>Select Systems nodes</h4>
+                                                    <div id="treeview"></div>
+                                                </div>
+                                                <div style="padding-top: 2em;">
+                                                    <h4>Status</h4>
+                                                    <p id="result">No nodes checked.</p>
+                                                </div>
+                                            </div>-->
+                                        </section>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <section id="SystemSections" class="panel panel-featured size100per  ">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title pull-left">Observations</h2>
+                                                <div class="pull-right" id="divAddNewSubSystem" onclick="AOETemplateDetail.addNewItem('subsystem')"><button class="btn-link white btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                                <div class="clearfix"></div>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none height330 height-max330 own-scroll overflowY">
+                                                <div id="divAOETemplateDetailSystemSection">
+                                                    <ul id="ulAOETemplateDetailSystemSection" name="AOETemplateDetailSystemSection" class="listPrimary"></ul>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <section id="SystemPreview" class="panel panel-featured size100per hidden">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title">Preview</h2>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none" style="min-height:330px;">
+                                                <div class="col-xs-12 borderB pb-sm">
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <label class="control-label">Delimator</label>
+                                                    </div>
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <select id="delimator" class="form-control bold">
+                                                            <option id="comma" value=",">,</option>
+                                                            <option id="fullstop" value=".">.</option>
+                                                            <option id="collon" value=":">:</option>
+                                                            <option id="terminator" value=";">;</option>
+                                                            <option id="hiphen" value="-">-</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <button class="btn btn-xs btn-success" id="btnBold" type="button" data-toggle="tooltip" title="" data-original-title="Bold">B</button>
+                                                        <!--onclick="AOETemplateDetail.applyStyle('bold');-->
+                                                        <button class="btn btn-xs btn-success" id="btnItalic" type="button" data-toggle="tooltip" title="" data-original-title="Italic"><i>I</i></button>
+                                                        <!--onclick="AOETemplateDetail.applyStyle('italic');"-->
+                                                        <button class="btn btn-xs btn-success" id="btnUnderline" type="button" data-toggle="tooltip" title="" data-original-title="Underline"><u>U</u></button>
+                                                        <!--onclick="AOETemplateDetail.applyStyle('underline');"-->
+                                                        <button class="btn btn-xs btn-success" type="button" data-toggle="tooltip" title="" data-original-title="Clear All" onclick="AOETemplateDetail.applyStyle('clear');">Clear All</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div id="observationContent" style="max-height:281px;overflow-y:auto;">
+                                                        <!--<ul id="ulPENotePreview" name="PENotePreview" class="listPrimary"></ul>-->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="pull-right pr-default">
+                            <button class="btn btn-success btn-sm" type="submit" id="btnAOETemplateDetailSave">Save & Exit </button>
+                            <!--onclick="AOETemplateDetail.saveAOETemplateDetail();"-->
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

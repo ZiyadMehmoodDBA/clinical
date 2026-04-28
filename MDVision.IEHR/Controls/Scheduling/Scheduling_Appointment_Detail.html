@@ -1,0 +1,944 @@
+﻿<div id="appointmentDetail">
+    <div id="actionPanAppointmentDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg" id="SchedulingFormDiv">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="appointmentDetail.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="headingTitle">Add Appointment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="appointmentpanel">
+                    <form method="post" onsubmit="return false" id="frmappointmentDetail">
+
+                        <div class="form-group">
+
+                            <div class="col-sm-3" id="dvPatientName">
+                                <label for="Patient Name" class="control-label">Patient Name</label><span class="required">*</span>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtFullName" customname="Patient Name" name="FullName" type="text" oninput="appointmentDetail.PatientNameOnInput();" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkPatientName" type="button" class="btn btn-primary btn-xs" onclick="appointmentDetail.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" id="divPatNameAccount">
+                                <label for="Patient Account" class="control-label">Patient Account</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtAccountNo" customname="Patient Name" type="text" name="patientAccount" oninput="appointmentDetail.PatientAccountOnInput();" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="appointmentDetail.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Patient DOB</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input id="dtpDOB" name="DOB" type="text" data-plugin-datepicker="" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Patient Balance" class="control-label">Patient Balance</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input class="form-control" id="txtPatientBalance" name="PatientBalance" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Insurance Balance" class="control-label">Insurance Balance</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input class="form-control" id="txtInsuranceBalance" name="InsuranceBalance" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Advance Balance" class="control-label">Advance Balance</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input class="form-control" id="txtAdvanceBalance" name="AdvanceBalance" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="Appointment Date" class="control-label">Appointment Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input class="form-control" id="txtScheduleDate" name="ScheduleDate" type="text" data-plugin-datepicker>
+                                </div>
+                            </div>
+                            <div id="totimefrmtime">
+                                <div class="col-sm-2">
+                                    <label for="From Time" class="control-label">From Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                        <input class="form-control" id="txtFromTime" name="FromTime" type="text" data-plugin-timepicker onchange="appointmentDetail.AddTime(this);">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="To Time" class="control-label">To Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                        <input class="form-control" id="txtToTime" name="ToTime" type="text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="spacer15"></div>
+                        <div class="col-md-12">
+                            <div class="toggle" data-plugin-toggle data-plugin-options='{ "isAccordion": true }'>
+                                <section class="toggle active">
+                                    <label>Appointment Detail</label>
+                                    <div class="toggle-content panel-body NoRadiusT">
+                                        <div class="form-group">
+                                            <div class="col-sm-3">
+                                                <label for="Provider" class="control-label">Provider <span class="required">*</span> </label>
+                                                <!--<div class="clearfix"></div>
+                                                <input class="form-control" id="txtProvider" name="Provider" type="text" disabled>-->
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" type="text" />
+                                                    <div class="input-group-btn">
+                                                        <button id="lnkProviderEdit" class="btn btn-primary btn-xs " type="button" onclick="appointmentDetail.OpenProviderDetail('Search Provider', 'txtProvider', 'hfProviderId', 'lblProvider', 'lnkProviderEdit')"><i class="glyphicon glyphicon-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label for="Resource" class="control-label">Resource</label>
+                                                <div class="clearfix"></div>
+                                                <input class="form-control" id="txtResource" name="Resource" type="text" disabled>
+                                            </div>
+                                            <div class="col-sm-3 customvalidate">
+                                                <label for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                                <!--<div class="clearfix"></div>-->
+                                                <!--<input class="form-control" id="txtFacility" name="Facility" type="text" disabled>-->
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtFacility" name="Facility" type="text" autocomplete="off" />
+                                                    <div class="input-group-btn">
+                                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="appointmentDetail.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 ">
+                                                <label id="lblRefProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                                                <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="appointmentDetail.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtRefProvider" customname="Ref Provider" name="RefProvider" placeholder="Search Ref Provider" type="text" />
+                                                    <div class="input-group-btn">
+                                                        <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="appointmentDetail.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <label id="lblInsurancePlan" for="Insurance Plan" class="control-label">Plan</label>
+                                                <a id="lnkInsurancePlanEdit" style="display:none;" href="#" onclick="appointmentDetail.OpenInsurance(event);" title="Add/Edit Plan">Plan</a>
+                                                <div class="clearfix"></div>
+                                                <div class="row">
+                                                    <div class="col-xs-10 col-sm-9">
+                                                        <select id="ddlInsurancePlan" name="InsurancePlan" class="form-control" onchange="appointmentDetail.FillInsuranceData('#frmappointmentDetail #ddlInsurancePlan', '#frmappointmentDetail #CoPayment'); appointmentDetail.OpenPatReferralSearch(this.value);"></select>
+                                                    </div>
+                                                    <div class="col-xs-2 col-sm-3">
+                                                        <input class="form-control" id="txtPriority" name="Priority" type="text" disabled="disabled">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Patient Type</label><span class="required">*</span>
+                                                <select id="ddlPatientType" name="PatientType" class="form-control" ddlist="GetPatientType" onchange="appointmentDetail.BindVisitType(this);"></select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Visit Type</label><span class="required">*</span>
+                                                <select id="ddlVisitType" name="PatientVisitType" class="form-control" ddlist="GetPatientVisitType" disabled="disabled" onchange="appointmentDetail.setDurationOnVisitType(this);"></select>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Duration<span class="required">*</span></label>
+                                                <input class="form-control" id="Duration" name="Duration" type="text" maxlength="3" placeholder="999" onchange="appointmentDetail.changeFunction();" onkeypress="return utility.ValidateZero(event, this);" onblur="appointmentDetail.AddTime(this);">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Status</label><span class="required">*</span>
+                                                <select id="ddlStatus" class="form-control" ddlist="GetAppointmentStatus" name="Status"></select>
+                                            </div>
+                                            <!--<div class="col-sm-3">
+                                                <label class="control-label" for="Copayment">Copayment</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                                    <input type="text" class="form-control" id="CoPayment" name="CoPayment" disabled="">
+                                                </div>
+                                            </div>-->
+                                            <div class="col-sm-3">
+                                                <div class="col-sm-4">       
+                                                  <label class="control-label" for="Copayment">Copayment</label>
+                                                </div> 
+                                                <div class="col-sm-8">
+                                                    <div class="checkbox-custom checkbox-default ml-sm">
+                                                        <input id="chkcopayalert" class="form-control" name="CopayAlert" type="checkbox" disabled >
+                                                        <label class="control-label" for="CopayAlert">Collect Copay</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                                    <input type="text" class="form-control" id="CoPayment" name="CoPayment" onchange="appointmentDetail.EnableDisableCopayAlert(this)">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-3 pad-a-labelsize">
+                                                <div class="size100 pull-left">
+                                                    <div class="radio-custom radio-dafault">
+                                                        <input type="radio" id="rdPCP" name="SpecialistPCP">
+                                                        <label class="control-label" for="PCP">PCP</label>
+                                                    </div>
+                                                </div>
+                                                <div class="size80 pull-left">
+                                                    <div class="radio-custom radio-dafault">
+                                                        <input type="radio" id="rdSpecialist" name="SpecialistPCP">
+                                                        <label class="control-label" for="Specialist">Specialist</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group col-sm-12">
+                                                    <label class="control-label pull-left col-sm-4" for="Comments">Reason</label>
+                                                    <div class="radio-custom col-sm-4">
+                                                        <input id="radioProblem" type="radio" name="radioFreetext" checked="checked" onchange="appointmentDetail.changeICDField();" value="procedure">
+                                                        <label for="rdFreeText">ICD</label>
+                                                    </div>
+                                                    <div class="radio-custom col-sm-4">
+                                                        <input id="radioFreetext" type="radio" name="radioFreetext" onchange="appointmentDetail.changeICDField();" value="freetext">
+                                                        <label for="rdFreeText">Custom</label>
+                                                    </div>
+                                                    <div class="input-group col-sm-12">
+                                                        <input class="form-control" id="txtComplaintsICD" data-popupunload="false" oninput="appointmentDetail.bindICD9AutoComplete(this);" name="ComplaintName" type="text" value="">
+                                                        <div class="input-group-btn" id="btnSearchCPT">
+                                                            <button id="btnComplaints" class="btn btn-primary btn-xs" type="button" onclick="appointmentDetail.OpenSearchPopup('txtComplaintsICD', 'txtComplaintsICD,hfICDCode,hfICDCode9,hfICDDescription9,hfICDCode10,hfICDDescription10,hfSNOMEDCode,hfSNOMEDDescription')"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group col-sm-12">
+                                                        <input class="form-control hidden" maxlength="500" spellcheck="true" type="text" id="txtReasonComments" name="ReasonComments" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label id="lblReferralNumber" class="control-label" style="display: inline;">Prior Authorization/ Referral Number</label>
+                                                <a id="lnkReferralNumberEdit" style="display:none;" href="#" onclick="appointmentDetail.OpenPatientReferralDetail('frmappointmentDetail #hfReferralNumerId');" title="Edit Referral">PAN/Referral Number</a>
+                                                <div class="input-group">
+                                                    <input class="form-control " id="txtReferralNo" type="text" placeholder="Start typing to search" name="ReferralNo" maxlength="30" disabled="disabled">
+                                                    <div class="input-group-btn">
+                                                        <button id="lnkReferralNumber" class="btn btn-primary btn-xs " type="button" onclick="appointmentDetail.OpenPatientReferral()"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 pad-a-labelsize">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkNonBilable" class="form-control" name="NonBilabale" type="checkbox" onchange="appointmentDetail.changeIsNonBilable(this);">
+                                                    <label class="control-label" for="chkNonBilable">Non-billable visit</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3" id="CancelReason" hidden>
+                                                <a href="#" onclick="" >Cancel Reason</a>
+                                                <div class="input-group col-sm-12">
+                                                    <textarea class="form-control" maxlength="55" spellcheck="true" type="text" id="txtCancellationReason" name="ReasonComments" value="" disabled></textarea>
+                                                </div>
+                                            </div>
+                                            <!--<label class="control-label">Reason </label>
+                                            <select id="ddlReason" name="Reason" class="form-control" ddlist="GetBlockReasons" onchange="appointmentDetail.FillDuration('#frmappointmentDetail #ddlReason', 1);"></select>-->
+                                            <!--<div class="col-sm-3">
+                                                <label class="control-label" for="Reason">Reason</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtSchReason" name="schreason" customname="Reason" type="text" oninput="appointmentDetail.BindScheduleReasons();">
+                                                    <div id="divSchReason" class="input-group-btn">
+                                                        <button id="lnkSchReason" type="button" class="btn btn-primary btn-xs" onclick="appointmentDetail.OpenScheduleReason();"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+
+
+
+                                            <div class="clerfix"></div>
+
+                                            <div class="col-sm-12">
+                                                <label class="control-label" for="Comments">Comments</label>
+                                                <textarea id="txtComments" maxlength="500" name="Comments" class="form-control" rows="2" spellcheck="true"></textarea>
+                                            </div>
+
+
+
+
+                                            <!--<div class="col-sm-6">
+                                                <label class="control-label" for="Comments">Reason</label>
+                                                <textarea id="txtReasonComments" maxlength="500" name="ReasonComments" class="form-control" rows="2" spellcheck="true"></textarea>
+                                            </div>-->
+
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="toggle recpatt" style="display:none">
+                                    <label>Appointment Recurrence Pattern</label>
+                                    <div class="toggle-content">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="spacer20"></div>
+                                                <div class="tabs tabs-vertical tabs-left">
+                                                    <ul class="nav nav-tabs col-md-2 col-xs-2 ">
+                                                        <li class="active"> <a href="#Daily" data-toggle="tab">Daily</a> </li>
+                                                        <li class=""> <a href="#Weekly" data-toggle="tab">Weekly</a> </li>
+                                                        <li class=""> <a href="#Monthly" data-toggle="tab">Monthly</a> </li>
+                                                    </ul>
+                                                    <div id="myTabContent" class="tab-content">
+                                                        <div id="Daily" class="tab-pane active">
+                                                            <p style="display: none">Daily</p>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size60 pull-left">
+                                                                        <input type="radio" id="Every" name="03">
+                                                                        <label for="Every">Every</label>
+                                                                    </div>
+                                                                    <div class="size35 pull-left">
+                                                                        <input id="txtevrydays" name="DailyEveryDays" class="form-control size30 " type="text">
+                                                                    </div>
+                                                                    <div class="size75 pull-left">
+                                                                        <label class="control-label" id="txtDays">Day(s) </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="radio-custom ">
+                                                                        <input type="radio" id="rdEveryWeekdays" name="03">
+                                                                        <label for="Every Weekday">Every Weekday</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size95 pull-left">
+                                                                        <input type="radio" id="rdEveryEndByDate" name="02">
+                                                                        <label for="End By Date">End By Date</label>
+                                                                    </div>
+                                                                    <div class="search-size150">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="text" id="dailyEndDate" name="DailyEndByDate" data-plugin-datepicker="" class="form-control ">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size70 pull-left">
+                                                                        <input type="radio" id="rdEveryEndByAppointment" name="02">
+                                                                        <label for="End By">End By</label>
+                                                                    </div>
+                                                                    <div class="size35 pull-left">
+                                                                        <input type="text" id="txtDailyAppointment" class="form-control size30 " name="DailyAppointment">
+                                                                    </div>
+                                                                    <div class="size75 pull-left">
+                                                                        <label class="control-label"> Appointment(s)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="Weekly" class="tab-pane">
+                                                            <p style="display: none">Weekly</p>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="radio-custom">
+                                                                        <input type="radio" id="rdEveryWeekdayOn" name="02">
+                                                                        <label for="Every Weekday On:">Every Week On:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size60 pull-left">
+                                                                        <input type="radio" id="rdEveryweekely" name="02">
+                                                                        <label for="Every">Every</label>
+                                                                    </div>
+                                                                    <div class="size35 pull-left ">
+                                                                        <input id="txtactiveweek" class="form-control size30 " type="text" name="txtactiveweek">
+                                                                    </div>
+                                                                    <div class="size75 pull-left">
+                                                                        <label class="control-label">Week(s) On:</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="row">
+                                                                <div class="col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekSunday" name="weekdays[]" data-bv-feedbackicons="false" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Sunday">Sunday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekMonday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Monday">Monday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekTuesday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Tuesday">Tuesday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekWednesday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Wednesday">Wednesday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekThursday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Thursday">Thursday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekFriday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Friday">Friday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekSaturday" class="form-control" type="checkbox" name="weekdays[]">
+                                                                        <label class="control-label" for="Saturday">Saturday</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size95 pull-left">
+                                                                        <input type="radio" id="rdWeeklyEndByDate" name="03">
+                                                                        <label for="End By Date">End By Date</label>
+                                                                    </div>
+                                                                    <div class="search-size150">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="text" id="weeklyEndDate" name="WeeklyEndByDate" data-plugin-datepicker="" class="form-control ">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size70 pull-left">
+                                                                        <input type="radio" id="rdWeeklyEndByAppointment" name="03">
+                                                                        <label for="End By">End By</label>
+                                                                    </div>
+                                                                    <div class="size35 pull-left">
+                                                                        <input id="txtWeeklyAppointment" name="WeeklyAppointment" class="form-control size30 " type="text">
+                                                                    </div>
+                                                                    <div class="size75 pull-left">
+                                                                        <label class="control-label"> Appointment(s)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="Monthly" class="tab-pane">
+                                                            <p style="display: none">Monthly</p>
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <div class="radio-custom size50 pull-left">
+                                                                        <input type="radio" id="rdmntdaay" name="01">
+                                                                        <label for="Day01">Day</label>
+                                                                    </div>
+                                                                    <div class="size35 pull-left">
+                                                                        <input type="text" id="txtmntActive" class="form-control size30 pull-left" name="txtmntActive">
+                                                                    </div>
+                                                                    <div class="size160 pull-left">
+                                                                        <div class="size50 pull-left">
+                                                                            <label class="control-label" for="of every">of every</label>
+                                                                        </div>
+                                                                        <div class="size35 pull-left">
+                                                                            <input type="text" class="form-control size30" id="txtmntofevry" name="txtmntofevry">
+                                                                        </div>
+                                                                        <label class="control-label pull-left" for="Month(s)">Month(s)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-2 col-sm-12">
+                                                                    <div class="radio-custom">
+                                                                        <input type="radio" id="rdmntthe" name="01">
+                                                                        <label for="The01">The</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-10 nested">
+                                                                    <div class="themonthsVD">
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntFirst" name="themonths[]" data-bv-feedbackicons="false">
+                                                                                <label class="control-label" for="First">First</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntSecond" name="themonths[]">
+                                                                                <label class="control-label" for="Second">Second</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntThird" name="themonths[]">
+                                                                                <label class="control-label" for="Third">Third</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntFourth" name="themonths[]">
+                                                                                <label class="control-label" for="Fourth">Fourth</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntLast" name="themonths[]">
+                                                                                <label class="control-label" for="Last">Last</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                    <hr>
+                                                                    <div class="theweeksmVD">
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntSunday" name="theweeksM[]" data-bv-feedbackicons="false">
+                                                                                <label class="control-label" for="Sunday">Sunday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntMonday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Monday">Monday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntTuesday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Tuesday">Tuesday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntWednesday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Wednesday">Wednesday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntThursday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Thursday">Thursday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntFriday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Friday">Friday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntSaturday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Saturday">Saturday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                    <hr>
+                                                                    <div class="col-md-2 col-sm-6">
+                                                                        <div class="size160 pull-left">
+                                                                            <div class="size50 pull-left">
+                                                                                <label class="control-label" for="of every">of every</label>
+                                                                            </div>
+                                                                            <div class="size35 pull-left">
+                                                                                <input type="text" class="form-control size30" id="txtmnttheofevery" name="txtmntofevry">
+                                                                            </div>
+                                                                            <label class="control-label size40 pull-left" for="Month(s)">Month(s)</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size95 pull-left">
+                                                                        <input type="radio" id="rdMonthlyEndByDate" name="03">
+                                                                        <label for="End By Date">End By Date</label>
+                                                                    </div>
+                                                                    <div class="search-size150">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="text" id="monthlyEndDate" name="MonthlyEndByDate" data-plugin-datepicker="" class="form-control ">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size70 pull-left">
+                                                                        <input type="radio" id="rdMonthlyEndByAppointment" name="03">
+                                                                        <label for="End By">End By</label>
+                                                                    </div>
+                                                                    <div class="size35 pull-left">
+                                                                        <input id="txtMonthlyAppointment" class="form-control size30 " type="text" name="MonthlyAppointment">
+                                                                    </div>
+                                                                    <div class="size75 pull-left">
+                                                                        <label class="control-label"> Appointment(s)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <span class="spacer10"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+
+                        <div class="spacer20"></div>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnsave" type="submit">Save & Exit</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnCopayment" type="button" onclick="appointmentDetail.OpenCoPayment();">Copayment</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnUnallocatedCopayment" type="button" onclick="appointmentDetail.OpenUnallocatedCopayment();">Unallocated Copayment</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnEligibility" type="button" onclick="appointmentDetail.OpenPatientEligibility();">Patient Eligibility</button>
+                        <button class="btn btn-primary btn-sm rightbtn disableAll hidden" id="btnAddReferral" type="button" onclick="appointmentDetail.addReferral();">Add Referral</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnQuickAddPatient" type="button" onclick="appointmentDetail.OpenQuickAddPatient();">Quick Add Patient</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnAppointmentHistory" type="button" onclick="appointmentDetail.OpenAppointmentHistory();" style=""><i class="fa fa-history"></i> History</button>
+
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="hfProviderId" />
+                        <input type="hidden" id="hfFacilityId" />
+                        <input type="hidden" id="hfResourceId" />
+                        <input type="hidden" id="hfProviderName" />
+                        <input type="hidden" id="hfFacilityName" />
+                        <input type="hidden" id="hfResourceName" />
+                        <input type="hidden" id="hfSchReasonId" />
+                        <input type="hidden" id="hfRefProvider" />
+                        <input type="hidden" id="hfpatientid" />
+                        <input type="hidden" id="insuranceid" />
+                        <input type="hidden" id="hfSlottimeid" />
+                        <input type="hidden" id="hfSlottimedtlid" />
+                        <input type="hidden" id="hfWaitListId" />
+                        <input type="hidden" id="hfAppointmentDate" />
+                        <input type="hidden" id="hfPatientVisitStatus" />
+                        <input type="hidden" id="hfReferralNumerId" />
+                        <input type="hidden" id="hfIsPatientActive" />
+                        <input type="hidden" id="hfReferralId" />
+                        <input type="hidden" id="isRequestFromPortal" value="0" />
+                        <input type="hidden" id="PortalAppRequestId" />
+                        <input type="hidden" id="hfPracticeId" />
+                        <input type="hidden" id="hfPortalSchDate" />
+                        <input type="hidden" id="hfPatientFirstLastName" />
+                        <input type="hidden" id="hfSlotDuration" />
+                        <input type="hidden" id="hfICDCode" name="ICDCode" />
+                        <input type="hidden" id="hfICDCode9" name="ICDCode9" />
+                        <input type="hidden" id="hfICDDescription9" name="ICDDescription9" />
+                        <input type="hidden" id="hfICDCode10" name="ICDCode10" />
+                        <input type="hidden" id="hfICDDescription10" name="ICDDescription10" />
+                        <input type="hidden" id="hfSNOMEDCode" name="hfSNOMEDCode" />
+                        <input type="hidden" id="hfSNOMEDDescription" name="SNOMEDDescription" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //-----------Radio Specialist/PCP---------
+
+        $('#frmappointmentDetail input:radio[name=SpecialistPCP]').change(function () {
+
+            appointmentDetail.FillInsuranceData('#frmappointmentDetail #ddlInsurancePlan', '#frmappointmentDetail #CoPayment');
+
+        });
+
+        //----------------------------------------
+
+        $('#appointmentDetail #txtAccountNo').keyup(function () {
+            var AccountValue = $('#frmappointmentDetail #txtAccountNo').val();
+            if (AccountValue.length < 4) {
+                $('#frmappointmentDetail #ddlInsurancePlan').val("");
+                $('#frmappointmentDetail #txtPriority').val("");
+                $('#frmappointmentDetail #CoPayment').val("");
+            }
+        });
+
+        $("#appointmentDetail #txtAccountNo").change(function () {
+            $('#frmappointmentDetail #ddlInsurancePlan').val("");
+            $('#frmappointmentDetail #CoPayment').val("");
+            $('#frmappointmentDetail #ddlInsurancePlan').val("");
+        });
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            }
+        });
+
+        $('#appointmentDetail #dailyEndDate').datepicker({
+        }).on('changeDate', function (e) {
+            $(this).datepicker('hide');
+            $('#frmappointmentDetail').bootstrapValidator('revalidateField', 'DailyEndByDate');
+        });
+
+        $('#appointmentDetail #monthlyEndDate').datepicker({
+        }).on('changeDate', function (e) {
+            $(this).datepicker('hide');
+            $('#frmappointmentDetail').bootstrapValidator('revalidateField', 'MonthlyEndByDate');
+        });
+
+        $('#appointmentDetail #weeklyEndDate').datepicker({
+        }).on('changeDate', function (e) {
+            $(this).datepicker('hide');
+            $('#frmappointmentDetail').bootstrapValidator('revalidateField', 'WeeklyEndByDate');
+        });
+
+
+
+        //*****************************Daily Checks***********************************//
+
+        $("#appointmentDetail #Every").click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyEndByDate', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyAppointment', true);
+                $("#appointmentDetail #txtevrydays").attr("disabled", false);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', true);
+            }
+            else {
+            }
+        });
+        $("#appointmentDetail #rdEveryWeekdays").click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#appointmentDetail #txtevrydays').val("");
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', false);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyEndByDate', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyAppointment', true);
+                $("#appointmentDetail #txtevrydays").attr("disabled", true);
+            }
+            else {
+            }
+        });
+        $("#appointmentDetail #rdEveryEndByDate").click(function () {
+            if ($(this).is(':checked')) {
+                $('#appointmentDetail #txtDailyAppointment').val("");
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyAppointment', false);
+                $("#appointmentDetail #dailyEndDate").attr("disabled", false);
+                $("#appointmentDetail #txtDailyAppointment").attr("disabled", true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyEndByDate', true);
+            }
+            else {
+            }
+        });
+        $("#appointmentDetail #rdEveryEndByAppointment").click(function () {
+            if ($(this).is(':checked')) {
+                $('#appointmentDetail #dailyEndDate').val("");
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyEndByDate', false);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('DailyAppointment', true);
+                $("#appointmentDetail #dailyEndDate").attr("disabled", true);
+                $("#appointmentDetail #txtDailyAppointment").attr("disabled", false);
+            }
+            else {
+            }
+        });
+        //*****************************Weekely Checks***********************************//
+
+        $("#appointmentDetail #rdEveryWeekdayOn").click(function () {
+            if ($(this).is(':checked')) {
+                $('#appointmentDetail #txtactiveweek').val("");
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('WeeklyEndByDate', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('WeeklyAppointment', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtactiveweek', false);
+                $('#appointmentDetail #rdEveryweekely').attr('checked', false);
+                $("#appointmentDetail #txtactiveweek").attr("disabled", true);
+
+                $('#appointmentDetail #chkwekSunday').attr('checked', false);
+                $('#appointmentDetail #chkwekMonday').attr('checked', false);
+                $('#appointmentDetail #chkwekTuesday').attr('checked', false);
+                $('#appointmentDetail #chkwekWednesday').attr('checked', false);
+                $('#appointmentDetail #chkwekThursday').attr('checked', false);
+                $('#appointmentDetail #chkwekFriday').attr('checked', false);
+                $('#appointmentDetail #chkwekSaturday').attr('checked', false);
+
+            }
+            else {
+
+            }
+        });
+
+        $("#appointmentDetail #rdEveryweekely").click(function () {
+            if ($(this).is(':checked')) {
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('WeeklyEndByDate', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('WeeklyAppointment', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtactiveweek', true);
+                $('#rdEveryWeekdayOn').attr('checked', false);
+                $("#appointmentDetail #txtactiveweek").attr("disabled", false);
+
+                $('#appointmentDetail #chkwekSunday').attr('checked', false);
+                $('#appointmentDetail #chkwekMonday').attr('checked', false);
+                $('#appointmentDetail #chkwekTuesday').attr('checked', false);
+                $('#appointmentDetail #chkwekWednesday').attr('checked', false);
+                $('#appointmentDetail #chkwekThursday').attr('checked', false);
+                $('#appointmentDetail #chkwekFriday').attr('checked', false);
+                $('#appointmentDetail #chkwekSaturday').attr('checked', false);
+            }
+            else {
+            }
+        });
+        $("#appointmentDetail #rdWeeklyEndByDate").click(function () {
+            if ($(this).is(':checked')) {
+                $('#txtWeeklyAppointment').val("");
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtactiveweek', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('WeeklyAppointment', false);
+                $("#weeklyEndDate").attr("disabled", false);
+                $("#txtWeeklyAppointment").attr("disabled", true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('WeeklyEndByDate', true);
+            }
+            else {
+            }
+        });
+        $("#appointmentDetail #rdWeeklyEndByAppointment").click(function () {
+            if ($(this).is(':checked')) {
+                $('#appointmentDetail #weeklyEndDate').val("");
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('WeeklyEndByDate', false);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('WeeklyAppointment', true);
+                $("#appointmentDetail #weeklyEndDate").attr("disabled", true);
+                $("#appointmentDetail #txtWeeklyAppointment").attr("disabled", false);
+            }
+            else {
+            }
+        });
+        //*****************************Monthly Checks***********************************//
+        $("#appointmentDetail #rdmntdaay").click(function () {
+            if ($(this).is(':checked')) {
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('MonthlyEndByDate', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('MonthlyAppointment', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtmntActive', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtmntofevry', true);
+                $("#appointmentDetail #txtmntActive").attr("disabled", false);
+                $("#appointmentDetail #txtmntofevry").attr("disabled", false);
+                $("#appointmentDetail #txtmnttheofevery").attr("disabled", true);
+                $('#appointmentDetail #chkmntFirst').attr('checked', false);
+                $('#appointmentDetail #chkmntFirst').attr('disabled', true);
+                $('#appointmentDetail #chkmntSecond').attr('checked', false);
+                $('#appointmentDetail #chkmntSecond').attr('disabled', true);
+                $('#appointmentDetail #chkmntThird').attr('checked', false);
+                $('#appointmentDetail #chkmntThird').attr('disabled', true);
+                $('#appointmentDetail #chkmntFourth').attr('checked', false);
+                $('#appointmentDetail #chkmntFourth').attr('disabled', true);
+                $('#appointmentDetail #chkmntLast').attr('checked', false);
+                $('#appointmentDetail #chkmntLast').attr('disabled', true);
+
+                $('#appointmentDetail #chkmntSunday').attr('checked', false);
+                $('#appointmentDetail #chkmntMonday').attr('checked', false);
+                $('#appointmentDetail #chkmntTuesday').attr('checked', false);
+                $('#appointmentDetail #chkmntWednesday').attr('checked', false);
+                $('#appointmentDetail #chkmntThursday').attr('checked', false);
+                $('#appointmentDetail #chkmntFriday').attr('checked', false);
+                $('#appointmentDetail #chkmntSaturday').attr('checked', false);
+
+                $('#appointmentDetail #chkmntSunday').attr('disabled', true);
+                $('#appointmentDetail #chkmntMonday').attr('disabled', true);
+                $('#appointmentDetail #chkmntTuesday').attr('disabled', true);
+                $('#appointmentDetail #chkmntWednesday').attr('disabled', true);
+                $('#appointmentDetail #chkmntThursday').attr('disabled', true);
+                $('#appointmentDetail #chkmntFriday').attr('disabled', true);
+                $('#appointmentDetail #chkmntSaturday').attr('disabled', true);
+
+
+            }
+            else {
+            }
+        });
+        $("#appointmentDetail #rdmntthe").click(function () {
+            if ($(this).is(':checked')) {
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('MonthlyEndByDate', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('MonthlyAppointment', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtmntActive', false);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtmntofevry', false);
+                $("#appointmentDetail #txtmntActive").attr("disabled", true);
+                $("#appointmentDetail #txtmntofevry").attr("disabled", true);
+                $("#appointmentDetail #txtmnttheofevery").attr("disabled", false);
+                $('#appointmentDetail #chkmntFirst').attr('checked', false);
+                $('#appointmentDetail #chkmntFirst').attr('disabled', false);
+                $('#appointmentDetail #chkmntSecond').attr('checked', false);
+                $('#appointmentDetail #chkmntSecond').attr('disabled', false);
+                $('#appointmentDetail #chkmntThird').attr('checked', false);
+                $('#appointmentDetail #chkmntThird').attr('disabled', false);
+                $('#appointmentDetail #chkmntFourth').attr('checked', false);
+                $('#appointmentDetail #chkmntFourth').attr('disabled', false);
+                $('#appointmentDetail #chkmntLast').attr('checked', false);
+                $('#appointmentDetail #chkmntLast').attr('disabled', false);
+
+                $('#appointmentDetail #chkmntSunday').attr('checked', false);
+                $('#appointmentDetail #chkmntMonday').attr('checked', false);
+                $('#appointmentDetail #chkmntTuesday').attr('checked', false);
+                $('#appointmentDetail #chkmntWednesday').attr('checked', false);
+                $('#appointmentDetail #chkmntThursday').attr('checked', false);
+                $('#appointmentDetail #chkmntFriday').attr('checked', false);
+                $('#appointmentDetail #chkmntSaturday').attr('checked', false);
+
+                $('#appointmentDetail #chkmntSunday').attr('disabled', false);
+                $('#appointmentDetail #chkmntMonday').attr('disabled', false);
+                $('#appointmentDetail #chkmntTuesday').attr('disabled', false);
+                $('#appointmentDetail #chkmntWednesday').attr('disabled', false);
+                $('#appointmentDetail #chkmntThursday').attr('disabled', false);
+                $('#appointmentDetail #chkmntFriday').attr('disabled', false);
+                $('#appointmentDetail #chkmntSaturday').attr('disabled', false);
+            }
+            else {
+            }
+        });
+        $("#appointmentDetail #rdMonthlyEndByDate").click(function () {
+            if ($(this).is(':checked')) {
+                $('#appointmentDetail #txtMonthlyAppointment').val("");
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtmntActive', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtmntofevry', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('MonthlyAppointment', false);
+                $("#appointmentDetail #monthlyEndDate").attr("disabled", false);
+                $("#appointmentDetail #txtMonthlyAppointment").attr("disabled", true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('MonthlyEndByDate', true);
+            }
+            else {
+            }
+        });
+        $("#rdMonthlyEndByAppointment").click(function () {
+            if ($(this).is(':checked')) {
+                $('#monthlyEndDate').val("");
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtmntActive', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('txtmntofevry', true);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('MonthlyEndByDate', false);
+                $('#frmappointmentDetail').data('bootstrapValidator').enableFieldValidators('MonthlyAppointment', true);
+                $("#monthlyEndDate").attr("disabled", true);
+                $("#txtMonthlyAppointment").attr("disabled", false);
+            }
+            else {
+            }
+        });
+    });
+</script>

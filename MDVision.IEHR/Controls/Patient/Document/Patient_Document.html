@@ -1,0 +1,339 @@
+﻿<div id="pnlPatientDocument" style="display:none;" class="row">
+    <div id="actionPanPatientDocument" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="dialogDiv" class="modal-dialog-full mb-none">
+            <div id="modalcontent">
+
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Patient_Document.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 id="headingTitle" class="modal-title">Patient Documents</h4>
+                </div>
+
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="clearfix"></div>
+                    <section id="secPanel">
+                        <!--<div id="formpanelheading" style="display: none;">
+                            <section class="panel panel-featured">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="closebtn pull-right" onclick="Patient_Document.UnLoadTab();"></a>
+
+                                    </div>
+                                    <h2 class="panel-title">Patient Documents</h2>
+                                </header>
+                            </section>
+                        </div>-->
+                        <div id="docActionsDiv" class="form-group">
+                            <!--<a class="not-for-note btn btn-success btn-xs" onclick="Patient_Document.FolderAdd();"><i class="fa fa-plus-circle"></i> Add Folder</a>-->
+                            <a id="btnInformationSubmission" class="btn btn-success btn-xs not-for-note" onclick="Patient_Document.InformationSubmission();"><i class="glyphicon glyphicon-import"></i> Uploaded by Patient</a>
+                            <a id="scanButton" class="btn btn-success btn-xs" onclick="Patient_Document.DocumentScan();"><img class="scan-icon" src="Content/images/scan.svg"> Scan</a>
+                            <a class="btn btn-success btn-xs" onclick="Patient_Document.DocumentImport();"><i class="glyphicon glyphicon-import"></i> Import</a>
+                            <a id="btnExport" class="not-for-note btn btn-success btn-xs" onclick="Patient_Document.DocumentExport();"><i class="glyphicon glyphicon-export"></i> Export</a>
+                            <a class="not-for-note btn btn-success btn-xs hidden" onclick="Patient_Document.FolderImport();"><i class="glyphicon glyphicon-import"></i> Import Folder</a>
+                            <button class="not-for-note btn btn-success btn-xs" id="documentButtonPrint" type="button" onclick="Patient_Document.PrintViewDocument();"><i class="fa fa-print"></i> Print </button>
+                            <button class="not-for-note btn btn-success btn-xs" id="documentButtonFax" type="button" onclick="Patient_Document.sendAsFax();"><i class="fa fa-fax"></i> Fax </button>
+                            <a id="btnAssignUserToReview" class="btn btn-success btn-xs" onclick="Patient_Document.DocumentAssignedTo();"><i class="fa fa-user"></i> Assign User to Review</a>
+                            <a id="btnReviewSign" class="not-for-note btn btn-success btn-xs" onclick="Patient_Document.SignAndReview();"><i class="fa fa-check-square-o"></i> Review & Sign </a>
+                            <a id="btnDelete" class="btn btn-danger btn-xs" onclick="Patient_Document.SelectedDocumentDelete();"><i class="fa fa-close"></i> Delete</a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-3 col-md-3 pl-none pr-xs pt-xs" id="divFolderMenu">
+
+                            <div id="folderPanel" class="panel panel-featured panel panel-featured panel-body panel-body-nopadding fix-nav">
+                                <div class="panel-blue NoRadius pr-xlg" onclick="Patient_Document.ExpandJsTree(); DocumentCustomViewMode();">
+                                    <a href="javascript:DocumentCustomViewMode();" class="btn btn-default btn-toggle-folder active"><i class="fa fa-caret-left"></i></a>
+                                    Folders <i class="fa fa-plus hidden" style="margin-left:5px;cursor:pointer" onclick="Patient_Document.FolderAdd();"></i>
+                                    <a href="#" id="FavType" class="pull-right" onclick="Patient_Document.SearchFolder();" style="color:white"> Show All</a>
+                                </div>
+                                <div class="col-sm-12 bg-primary text-center p-xs pr-lg">
+                                    <div class="col-sm-10 p-none">
+                                        <input type="text" placeholder="Search Here .." class="search-input form-control" id="DocTreeSearch"/>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <i class="fa fa-list" style="cursor:pointer" onclick="Patient_Document.DefaultView();" title="View All Documents"></i>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 folder-container" id="treeBasicDocument"></div>
+                            </div>
+
+                        </div>
+                        <div class="splitterbody pt-xs col-sm-9 col-md-9 pl-none" id="splitterbody">
+                            <div id="divPatDocument">
+                                <form method="post" id="frmPatientDocument" onsubmit="return false">
+
+                                    <div class="col-sm-9 col-md-12" id="divGridView">
+
+
+                                        <section class="panel-featured searchPanel">
+                                            <div class="panel-body NoRadius">
+                                                <div id="divCommonControls">
+                                                    <div id="divAccountNumber" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Account Number</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control ValidateCriteria" title="Account Number" name="Account Number" id="txtAccountNumber" type="text" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Patient_Document.OpenPatientAccount('txtAccountNumber');"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div id="divPatientLastName" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Patient Last Name</label>
+                                                        <input class="form-control" id="txtPatientLastName" type="text">
+                                                    </div>
+                                                    <div id="divPatientFirstName" class="col-sm-3 col-lg-2">
+                                                        <label class="control-label">Patient First Name</label>
+                                                        <input class="form-control" id="txtPatientFirstName" type="text">
+                                                    </div>-->
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2" id="dvPatientName">
+                                                    <label for="Patient Name" class="control-label">Patient Name</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control ValidateCriteria" id="txtFullName" customname="Patient Name" name="FullName" type="text" />
+                                                        <div class="input-group-btn">
+                                                            <button id="lnkPatientName" type="button" class="btn btn-primary btn-xs" onclick="Patient_Document.OpenPatientAccount('txtFullName');"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label">
+                                                        DOS From
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpFromDOS" name="DOSFrom" class="form-control ValidateCriteria" data-plugin-datepicker="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label">DOS To</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpToDOS" name="DOSTo" class="form-control ValidateCriteria" data-plugin-datepicker="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label"> Entry From</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpFromEntry" class="form-control ValidateCriteria" data-plugin-datepicker="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label"> Entry To</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpToEntry" class="form-control ValidateCriteria" data-plugin-datepicker="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label">Entered By</label>
+                                                    <select class="form-control ValidateCriteria" id="ddlEnteredBy" ddlist="GetUsersFullName"></select>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label"> Expiry From</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpFromExpiry" class="form-control ValidateCriteria" data-plugin-datepicker="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label"> Expiry To</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" id="dtpToExpiry" class="form-control ValidateCriteria" data-plugin-datepicker="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label class="control-label">Assigned to Review</label>
+                                                    <select class="form-control ValidateCriteria" id="ddlAssignedtoReview" ddlist="GetCoWorkerGroupUsersFullName"></select>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-2">
+                                                    <label for="ddlDocumentPriority" class="control-label ValidateCriteria">Priority</label>
+                                                    <select class="form-control" id="ddlDocumentPriority" name="Priority"></select>
+                                                </div>
+                                                <div id="divDocumentTag" class="col-sm-3 col-lg-2">
+                                                    <label id="lblDocumentTag" class="control-label">Tags</label>
+
+                                                    <div class="input-group">
+                                                        <input class="form-control ValidateCriteria" id="txtTagName" type="text" placeholder="Start typing to search" name="Document Tag" maxlength="35" />
+                                                        <div class="input-group-btn">
+                                                            <button id="lnktags" class="btn btn-primary btn-xs " type="button" onclick="Patient_Document.AddTags();"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                                <!--<div class="col-sm-3 col-lg-2">
+                                                    <label for="lblTags" class="control-label">Tags</label>
+                                                        <input class="form-control " id="txtCaseNumber" type="text" placeholder="Start typing to search" name="CaseNumber"  maxlength="35" />
+                                                            <button id="lnkCaseNumber" class="btn btn-primary btn-xs " type="button" onclick="Patient_Document.AddTags();"><i class="fa fa-search"></i></button>
+
+
+                                                </div>-->
+
+                                                <div class="col-sm-3 col-lg-2 " id="practiceDiv">
+                                                    <label id="lblPractice" for="Practice" class="control-label">Practice</label>
+                                                    <label id="lnkPracticeEdit" style="display:none;" for="Practice" class="control-label">Practice</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control ValidateCriteria" id="txtPractice" name="Practice" placeholder="Start typing to search" type="text" />
+                                                        <div class="input-group-btn">
+                                                            <button id="lnkPractice" class="btn btn-primary btn-xs " type="button" onclick="Patient_Document.OpenPractice();"><i class="glyphicon glyphicon-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="hfPractice" />
+                                                </div>
+                                                <div class="col-sm-2 pad-a-labelsize ">
+                                                    <div class="checkbox-custom checkbox-default">
+                                                        <input type="checkbox" class="ValidateCriteria" name="Recentdocument" id="chkRecentDocuments">
+                                                        <label class="control-label" for="chkRecentDocuments">Recent Document</label>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right mt-sm">
+                                                    <button type="button" onclick="Patient_Document.ValidateSearchCriteria();" id="btnPatientDocument" class="btn btn-primary btn-sm">Search</button>
+                                                </div>
+                                            </div>
+                                            <div class="splitterBtn mb-none mt-none"><a><i class="fa fa-angle-up"></i></a></div>
+                                            <input type="hidden" id="hfDocumentId" />
+                                            <input type="hidden" id="hfPatientId" class="ValidateCriteria" />
+                                            <input type="hidden" id="hfDocumentTagId" />
+                                            <input type="hidden" id="hfFolderDocumentId" />
+                                            <input type="hidden" id="hfFolderId" />
+                                            <input type="hidden" id="hfFolderCount" />
+                                            <input type="hidden" id="hfFileType" />
+                                            <input type="hidden" id="hfAccountNo" />
+                                        </section>
+                                        <div class="clearfix"></div>
+                                        <div id="pnlPatientDocument_Result" style="display: none;">
+                                            <section class="panel">
+                                                <ul class="tabs-custom">
+                                                    <li id="liPending"><a class="custom-made-tabs" href="#Pending" onclick="Patient_Document.SetGrid('Pending')" data-toggle="tab">Pending <span id="pendingDocument" class="badge"></span></a></li>
+                                                    <li id="liReviewd" class="active"> <a class="custom-made-tabs" href="#Reviewed" onclick="Patient_Document.SetGrid('Reviewed')" data-toggle="tab">Reviewed <span id="ReviewedDocument" class="badge"></span></a></li>
+                                                    <!--<li id="op_attached" class="hidden"><a class="custom-made-tabs" href="#Attached" onclick="Patient_Document.SetGrid('Attached')" data-toggle="tab">Attached</a></li>-->
+                                                </ul>
+                                                <div class="tab-content tabs-custom-body pl-xxs pr-xxs">
+                                                    <button type="button" onclick="Patient_Document.AttachDocumentToFax();" id="btnAddToFax" class="btn btn-success btn-xs hidden">Attach</button>
+
+                                                    <div id="Pending" class="tab-pane active custom-made-tabs">
+                                                        <input type="hidden" id="PatientDocument_SelectedDataKeys" />
+                                                        <div id="PendingKGrid" class="table-plus-minus"></div>
+
+                                                        <div id="divPendingPaging"></div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div id="Reviewed" class="tab-pane custom-made-tabs">
+                                                        <!--<input type="hidden" id="PatientDocument_SelectedDataKeys" />-->
+                                                        <div id="ReviewedKGrid" class="table-plus-minus"></div>
+                                                        <div id="divReviewedPaging"></div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div id="Attached" class="tab-pane custom-made-tabs">
+                                                        <span class="spacer10"></span>
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatAttachedDocument">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display: none;">DocumentId</th>
+                                                                    <th class="size10"><input type="checkbox" id="chkMasterPatDoc" onclick="Patient_Document.checkUncheckAll(this);" /></th>
+                                                                    <th id="ColumnAction" class="size-min130">Action</th>
+                                                                    <th class="size120">Folder</th>
+                                                                    <th class="size120">DOS</th>
+                                                                    <th class="noWordBreak">File Name</th>
+                                                                    <th class="noWordBreak">File Type</th>
+                                                                    <th class="size120">Pages</th>
+                                                                    <th class="noWordBreak">Entry Date</th>
+                                                                    <th class="noWordBreak">Entered By</th>
+                                                                    <th class="size120">Status</th>
+                                                                    <th class="size120">Comments</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                        <div id="divAttachedPaging"></div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <!--<div id="Reviewed" class="tab-pane">
+                                                        <span class="spacer10"></span>
+                                                    </div>--> 
+                                                                                                    </div>
+
+                                            </section>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-9 col-md-12" id="DivDocumentView" style="display:none">
+                                        <div class="row">
+                                            <div class="controls-left col-sm-3">
+                                                <a class="btn btn-link btn-xs btn-next-prev pr-none" id="lnkPreviousDocument" onclick="Patient_Document.previousDocument();"><i class="fa fa-angle-left text-success"></i> Prev Doc</a>
+                                                <span class="pipe">|</span>
+                                                <a class="btn btn-link btn-xs btn-next-prev pl-none" id="lnkNextDocument" onclick="Patient_Document.nextDocument();">Next Doc <i class="fa fa-angle-right text-success"></i> </a>
+                                            </div>
+                                            <div class="col-sm-6">
+
+                                                <!--<i class="fa fa fa-caret-left blue" style="font-size:24px;margin-right:10px;cursor:pointer" onclick="Patient_Document.previousDocument();"></i>
+                                                <input type="text" id="txtpageNo" class="" style="width: 54px;text-align: center;" value="1" />
+                                                <span style="margin-left:5px;margin-right:5px">/</span> <label id="lblTotalCount"></label><i class="fa fa fa-caret-right blue" style="font-size:24px;;cursor:pointer;margin-left:10px" onclick="Patient_Document.nextDocument();"></i>-->
+
+                                            </div>
+
+                                            <div class="col-sm-3 text-right">
+                                                <a class="btn btn-link btn-xs" id="lnkEditDocument" onclick="Patient_Document.EditViewerDocument();"><i class="fa fa fa-edit text-warning"></i> Edit</a>
+                                                <a class="btn btn-link btn-xs" id="lnkEditClose" onclick="Patient_Document.DefaultView(1);"><i class="fa fa-close text-danger"></i> Close</a>
+
+                                            </div>
+                                        </div>
+                                        <iframe id="OpenHTMLDocument" class="col-sm-12  panel-body panel-featured" style="display:none;height:450px"></iframe>
+                                        <iframe id="OpenDocumentIF1" class="col-sm-12  panel-body panel-featured" style="display:none;<!--height:350px;-->"></iframe>
+                                        <input type="hidden" id="helperPDF" />
+                                        <input type="button" style="display:none" id="btnCallBack" onclick="Patient_Document.SaveAnnotatedDocument()"   />
+                                        <object id="OpenDocumentIF" editRequired="true" class="col-sm-12  p-none" data="Scripts/js/pdf/web/viewer.html" style="display:none;height:1000px;"></object>
+                                        <div class="col-sm-9 col-md-12 panel-body panel-featured NoRadius" id="canvasContainer" style="max-height:800px; display:none;">
+                                            <canvas id="canvasdocument" class="col-xs-12"></canvas>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-2 pull-right">
+                                        <button type="button" onclick="Patient_Document.AttachDocumentToNote();" id="btnAddToNote" class="btn btn-primary btn-sm rightbtn hidden mt-sm">Add to Note</button>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                            <div class="col-sm-9 col-md-12" id="divDocScan" style="display:none"></div>
+                        </div>
+
+
+                    </section>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="FaceSheetPager"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    // folderToggle
+    $('.btn-toggle-folder').click(function (e) {
+        e.stopPropagation();
+        $('#' + Patient_Document.params["PanelID"] + ' #folderPanel').addClass('reportToggle NoRadiusB');
+        $('#' + Patient_Document.params["PanelID"] + ' #folderPanel').parent().addClass('folder');
+        $('#' + Patient_Document.params["PanelID"] + ' #splitterbody').addClass('folder-main');
+        //$('#divDocScan').addClass('folder-main');
+        if ($('.ds-dwt-container-box')) {
+            var prntWdth = $('#dwtcontrolContainer').innerWidth();
+            $('.ds-dwt-container-box').width(prntWdth ? prntWdth : 580);
+        }
+    });
+</script>

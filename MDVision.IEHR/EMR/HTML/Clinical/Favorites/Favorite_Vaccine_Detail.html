@@ -1,0 +1,106 @@
+﻿<div class="row" id="pnlFavoriteVaccineDetail">
+    <div id="actionPanFavoriteVaccineDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" onclick="Favorite_Vaccine_Detail.UnLoadTab()"></button>
+                <h4 id="lblHeading" class="modal-title">Add Favorites List</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmFavoriteVaccineDetail" method="post" onsubmit="return false">
+                    <div class="col-sm-4" id="divEntity" hidden>
+                        <label class="control-label">Entity<span class="required">*</span></label>
+                        <select id="lstEntityId" class="form-control" ddlist="GetEntity" name="EntityId"></select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="" class="control-label">Favorites List Name<span class="required">*</span></label>
+                        <input id="txtFavoriteListName" maxlength="200" type="text" name="FavoriteListName" class="form-control" />
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-xs-9" id="divFavProvider">
+                                <select class="form-control" style="display:none;" name="hiddenFavProvider" id="ddlHiddenFavProvider"></select>
+                                <label class="control-label">Provider<span class="required">*</span></label>
+                                <select class="form-control" multiple="multiple" name="ProviderIds" id="ddlProvider" ddlmultilist="GetProvider"></select>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="col-sm-2 pad-a-labelsize">
+                                    <div class="checkbox-custom">
+                                        <input type="checkbox" id="IsActive" name="IsActive" checked>
+                                        <label class="control-label">Active</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-4">
+                        <label class="control-label" for="search">Category<span class="required">*</span></label>
+
+                        <select id="ddlCategory" name="VaccineGroupId" class="form-control" ddlist="GetAdministerVaccine_Category" onchange="Favorite_Vaccine_Detail.CategoryChange(this)"></select>
+
+                        <ul id="ulFavCompliantDisease" name="FavCompliantDisease" class="listPrimary height300 height-max200 own-scroll"></ul>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm-4 Vaccine" id="VaccineDiv">
+                                <label for="" class="control-label">Vaccine<span class="required">*</span></label>
+                                <select id="ddlVaccine" name="VaccineId" class="form-control" disabled onchange="Favorite_Vaccine_Detail.VaccineChange(this)" onblur="Favorite_Vaccine_Detail.onBlurVaccine()">
+                                    <option selected="selected" value=""> -Select- </option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="" class="control-label">CVX</label>
+                                <input id="txtCVX" type="text" name="CVX" class="form-control" disabled />
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="" class="control-label">CPT Code</label>
+                                <input id="txtCptCode" type="text" name="CptCode" class="form-control" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pull-right mt-md">
+                        <button type="submit" class="btn btn-primary btn-sm" onclick="Favorite_Vaccine_Detail.CheckProviderValidation()">Save</button>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

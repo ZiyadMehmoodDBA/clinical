@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSSupperBillLookup" targetNamespace="http://tempuri.org/DSSupperBillLookup.xsd" xmlns:mstns="http://tempuri.org/DSSupperBillLookup.xsd" xmlns="http://tempuri.org/DSSupperBillLookup.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="MDVisionConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="MDVisionConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.MDVision.Datasets.Properties.Settings.GlobalReference.Default.MDVisionConnectionString1" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSSupperBillLookup" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSSupperBillLookup" msprop:Generator_UserDSName="DSSupperBillLookup">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SuperBillsLookUp" msprop:Generator_TableClassName="SuperBillsLookUpDataTable" msprop:Generator_TableVarName="tableSuperBillsLookUp" msprop:Generator_RowChangedName="SuperBillsLookUpRowChanged" msprop:Generator_TablePropName="SuperBillsLookUp" msprop:Generator_RowDeletingName="SuperBillsLookUpRowDeleting" msprop:Generator_RowChangingName="SuperBillsLookUpRowChanging" msprop:Generator_RowEvHandlerName="SuperBillsLookUpRowChangeEventHandler" msprop:Generator_RowDeletedName="SuperBillsLookUpRowDeleted" msprop:Generator_RowClassName="SuperBillsLookUpRow" msprop:Generator_UserTableName="SuperBillsLookUp" msprop:Generator_RowEvArgName="SuperBillsLookUpRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SuperBillId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSuperBillId" msprop:Generator_ColumnPropNameInRow="SuperBillId" msprop:Generator_ColumnPropNameInTable="SuperBillIdColumn" msprop:Generator_UserColumnName="SuperBillId" type="xs:long" />
+              <xs:element name="ShortName" msprop:Generator_ColumnVarNameInTable="columnShortName" msprop:Generator_ColumnPropNameInRow="ShortName" msprop:Generator_ColumnPropNameInTable="ShortNameColumn" msprop:Generator_UserColumnName="ShortName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SuperBillsLookUp" />
+      <xs:field xpath="mstns:SuperBillId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

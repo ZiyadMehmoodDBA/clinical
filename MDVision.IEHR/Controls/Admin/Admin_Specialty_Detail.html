@@ -1,0 +1,49 @@
+﻿<div id="specialtyDetail">
+    <div id="actionPanAdminSpecialtyDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close"  onclick="specialtyDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Specialty</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblspecialtyDetail">
+                    <form method="post" id="frmSpecialtyDetail" onsubmit="return false">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-xs-4">
+                                <label class="control-label">Short Name <span class="required">*</span></label>
+                                <input class="form-control " name="shortname" id="txtShortName" type="text" maxlength="15" />
+                            </div>
+                            
+                            <div id="divSpecialty_Entity" class="col-xs-4">
+                                <label class="control-label">Entity <span class="required">*</span></label>
+                                <select id="ddlEntity" class="form-control" name="entity" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-xs-4 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="Active" id="chkActive">
+                                    <label for="chkActive">Active</label>
+                                </div>
+                            </div>
+                         </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Description</label>
+                                <input class="form-control" id="txtDescription" name="Description" type="text" maxlength="55" />
+                            </div>
+                            <div class="col-xs-12 mt-sm">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                                <!--<button id="btnHistorySpecialty" class="btn btn-primary btn-sm rightbtn" type="button" onclick="specialtyDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                                    
+                             
+                       
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

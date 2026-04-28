@@ -1,0 +1,143 @@
+﻿<div class="row" id="pnlMIPSAdminPreferenceGroupReportingDetail">
+    <div id="actionPanGroupReportingDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="iTrack_AdminPreferenceGroupReportingDetail.UnLoadTab();"></button>
+                <h4 class="modal-title" id="headerId">Add Measure - Group Reporting</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmiTrackAdminPreferenceIndividualReportingDetail" method="post" onsubmit="return false">
+                    <div class="col-sm-4 col-lg-1">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Active" name="IsActive" checked>
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+                    <div class="spacer5"></div>
+                    <div class="panel-body panel-featured">
+                        <div class="col-sm-4 col-md-3 col-lg-2" id="divPerformanceyear">
+                            <label class="control-label">Performance Year <span class="required">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                <input type="text" class="form-control" id="dtpPerformanceYear" name="PerformanceYear" maxlength="4" data-plugin-datepicker />
+                            </div>
+                            <!--<select id="ddlSubmissionYear" name="SubmissionYear" class="form-control"><option value="">Select</option></select>-->
+                        </div>
+                        <div class="col-sm-4 col-md-3 col-lg-2 Practice LoadZero" id="PracticeDivReports">
+                            <label id="lblPractice" for="Practice" class="control-label">Practice <span class="required">*</span></label>
+                            <select id="ddlPractice" name="PracticeIds" multiple="multiple" class="form-control multiselect" ddlmultilist="GetPractice" data-bv-field="ddlPractice"></select>
+
+                        </div>
+                        <div class="col-sm-4 col-md-2">
+                            <label class="control-label">Entity</label>
+                            <select id="EntityID" name="Entity" class="form-control ValidateCriteria" disabled="disabled">
+                                <option value="100" selected="selected" >SHS</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-2 " id="DivGroupName">
+                            <label class="control-label" for="Group Name">Group Name <span class="required">*</span></label>
+                            <select class="form-control" id="ddlGroupName" name="MeasureGroupId" onchange="iTrack_AdminPreferenceGroupReportingDetail.loadGroupData();">
+                                <option selected="selected" value="">-Select-</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">TIN</label>
+                            <input id="txtTIN" name="TIN" class="form-control" type="text" placeholder="999999999" maxlength="9" onkeypress="return utility.ValidateZero(event, this);" onblur="utility.ValidateCtrlMask('frmProviderDetail', this); providerDetail.validateLength(this)" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Member Providers</label>
+                            <select id="ddlMemberProvider" multiple="multiple" ddlmultilist="GetProvider" name="MemberProvider" class="form-control">
+                                <!--<option selected="selected" value="">-Select-</option>
+            <option value="0">MD Vision EHR</option>
+            <option value="1">Sovereign Health Registry</option>
+            <option value="2">Sovereign QCDR</option>-->
+                            </select>
+                        </div>
+
+                        <div class="pull-right mt-md pr-default">
+                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                            <button type="button" onclick="iTrack_AdminPreferenceGroupReportingDetail.resetMeasureGroup();" class="btn btn-primary btn-sm">Reset</button>
+                        </div>
+                    </div>
+                    <div class="spacer20"></div>
+                    <div class="panel-body panel-featured">
+                        <section class="panel">
+                            <ul class="tabs-custom">
+                                <li id="litabCQMIndividualMeasures" class="active"><a id="tabCQMIndividualMeasures" class="custom-made-tabs" href="#CQMIndividualMeasures" onclick="iTrack_AdminPreferenceGroupReportingDetail.setGrid('CQM')" data-toggle="tab">eCQMs</a></li>
+                                <li id="litabVBPIndividualMeasures" class=""><a id="tabVBPIndividualMeasures" class="custom-made-tabs" href="#VBPIndividualMeasures" onclick="iTrack_AdminPreferenceGroupReportingDetail.setGrid('VBP')" data-toggle="tab">IA</a></li>
+                            </ul>
+                            <div class="tab-content tabs-custom-body pl-xxs pr-xxs">
+                                
+                                <div id="CQMIndividualMeasures" class="tab-pane active custom-made-tabs" >
+                                    <div class="red font-xss">
+                                        * Please note that you have to report at least 6 Quality Measures including 1 Outcome measure or 2 High-Priority measures
+                                    </div>
+                                    <span class="spacer5"></span>
+                                    <!--<input type="hidden" id="LetterTemplate_SelectedDataKeys" />-->
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvCQMMeasures">
+                                        <thead>
+                                            <tr>
+                                                <th class="sorting_1 center"><input type="checkbox" id="selectAllMeasures" onchange="iTrack_AdminPreferenceGroupReportingDetail.selectAllMeasures(this, 'dgvCQMMeasures');" /></th>
+                                                <th>Measure ID</th>
+                                                <th>Measure</th>
+                                                <th>NQS Domain</th>
+                                                <th>Measure Type</th>
+                                                <th>High Priority</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Measure ID</th>
+                                                <th>Measure</th>
+                                                <th>NQS Domain</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody></tbody>
+                                    </table>
+                                    <input type="hidden" id="CQMMeasureIds" name="CQMMeasureIds" />
+                                </div>
+                                <div id="VBPIndividualMeasures" class="tab-pane active custom-made-tabs" style="display:none">
+                                    <div class="red font-xss">
+                                        * Please note that you have to achieve 40 points in total for IA. Kindly choose activities accordingly that combine for niether less than nor more than 40 points
+                                    </div>
+                                    <span class="spacer5"></span>
+                                    <!--<input type="hidden" id="LetterTemplate_SelectedDataKeys" />-->
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVBPMeasures">
+                                        <thead>
+                                            <tr>
+                                                <th class="sorting_1 center"><input type="checkbox" id="selectAllMeasures" onchange="iTrack_AdminPreferenceGroupReportingDetail.selectAllMeasures(this, 'dgvVBPMeasures');" /></th>
+                                                <th>Activity ID</th>
+                                                <th>Activity Name</th>
+                                                <th>Activity Weighting</th>
+                                                <th>Activity Points</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Measure ID</th>
+                                                <th>Measure</th>
+                                                <th>NQS Domain</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody></tbody>
+                                    </table>
+                                    <input type="hidden" id="VBPMeasureIds" name="VBPMeasureIds" />
+                                    <input type="hidden" id="MeasureIds" name="MeasureIds" />
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿
+<div class="row" id="pnlBillOutOfOfficeVisits" style="display:none;">
+    <div id="actionPanBillOutOfOfficeVisits" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="OutOfOfficeVisits.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Out Of Office Visit</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="OutOfOfficeVisits.OOOVisitsAddEdit(-1);"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                </div>
+                <div class="spacer10"></div><div class="clearfix"></div>
+                <section class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="closebtn pull-right" onclick="OutOfOfficeVisits.UnLoad()"></a>
+                        </div>
+                        <h2 class="panel-title">Search Out Of Office Visit</h2>
+                    </header>
+                    <div class="panel-body" id="pnlOOOVisit_Search">
+                        <form class="form-bordered" method="post" onsubmit="return false" id="frmOOOVisit">
+
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label class="control-label">ICD Code</label>                                   
+                                    <div class="input-group ">
+                                        <input class="form-control" id="txtICDCode" maxlength="100" placeholder="Search test" type="text" name="ICD" oninput="OutOfOfficeVisits.bindICD9AutoComplete(this);" />
+                                        <div class="input-group-btn">
+                                            <!--Begin Edit by Fahad Malik 13-Dec-2016, Bug# EMR-2189-->
+                                            <button class="btn btn-primary btn-xs"  type="button" onclick="OutOfOfficeVisits.OpenSearchPopup('ICD', 'txtICDCode');"><i class="fa fa-search"></i></button>
+                                            <!--End Edit by Fahad Malik 13-Dec-2016, Bug# EMR-2189-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="control-label">CPT Code</label>
+                                    <div class="input-group ">
+                                        <input class="form-control" name="CPT" id="txtCPTCode" type="text" maxlength="30" oninput="OutOfOfficeVisits.bindAutoComplete(this);" />
+                                        <div class="input-group-btn">
+                                            <!--Begin Edit by Fahad Malik 13-Dec-2016, Bug# EMR-2189-->
+                                            <button class="btn btn-primary btn-xs" type="button" onclick="OutOfOfficeVisits.OpenSearchPopup('CPT', 'txtCPTCode');"><i class="fa fa-search"></i></button>
+                                            <!--End Edit by Fahad Malik 13-Dec-2016, Bug# EMR-2189-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2 ">                                    
+                                    <label class="control-label">Provider</label>
+                                    <select id="ddlProvider" class="form-control" name="ProviderId"></select>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Facility</label>
+                                    <select id="ddlFacility" class="form-control" name="FacilityId" ddlist=""></select>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Status </label>
+                                    <select id="ddlStatus" class="form-control" name="Status">
+                                        <option value="">-All-</option>
+                                        <option value="Draft">Draft</option>
+                                        <option value="Signed">Signed</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Date From</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" id="dpStartDate" name="ENMCPTDOSFrom" data-plugin-datepicker>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Date To</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" id="dpToDate" name="ENMCPTDOSTo" data-plugin-datepicker>
+                                    </div>
+                                </div>
+                                <div class="mt-md pr-default pull-right">
+                                    <button class="btn btn-primary btn-sm rightbtn" id="btnLabSearch" type="button" onclick="OutOfOfficeVisits.loadOOOVisit('0');">Search</button>
+                                    <!--<button class="btn btn-primary btn-sm rightbtn" id="btnProcedureReset" type="button" onclick="Clinical_LabOrder.OOOVisitsReset();">Reset</button>-->
+                                </div>
+                            </div>
+                            <input type="hidden" id="hfProvider" name="ProviderId" />
+                            <input type="hidden" id="hfCPTCode" name="CPTCode" />
+                            <input type="hidden" id="hfICDCode" name="ICDCode" />
+                            <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                        </form>
+                    </div>
+                </section>
+                <div id="pnlBillOOOVisits_Result" style="display: inline;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+
+                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOOOVisits">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">OOOVisitId</th>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size60 size-min60">Action</th>
+                                        <th class="size80 size-min80">DOS</th>
+                                        <th class="size80 size-min80">Time</th>
+                                        <th class="size80 size-min80">Provider</th>
+                                        <th class="size140 size-min140">Facility</th>
+                                        <th class="size140 size-min140">ICD Code(s)</th>
+                                        <th class="size140 size-min140">CPT Code(s)</th>
+                                        <th class="size140 size-min140">Status</th>
+                                        <th class="size140 size-min140">Signed by</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="dgvOOOVisit_Paging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

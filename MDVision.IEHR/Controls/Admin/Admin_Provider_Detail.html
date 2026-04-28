@@ -1,0 +1,363 @@
+﻿<div id="providerDetail">
+    <div id="actionPanProviderDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="providerDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Provider</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblproviderDetail">
+                    <form method="post" onsubmit="return false;" id="frmProviderDetail">
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label" for="shortname">Short Name  <span class="required">*</span></label>
+                                <input id="txtShortName" type="text" class="form-control" name="shortname" maxlength="10" />
+                            </div>
+
+
+                            <!--<div class="col-sm-2">
+                                <label class="control-label" for="shortname">Short Name<span class="required">*</span></label>
+                                <input class="form-control" id="txtShortName" name="shortname" type="text" maxlength="10">
+                            </div>-->
+
+
+                            <div class="col-sm-2">
+                                <label class="control-label ">Last Name</label> <span class="required">*</span>
+                                <input id="txtLastName" name="lastname" class="form-control" type="text" maxlength="60" />
+                            </div>
+                            <div class="col-sm-3 pl-none">
+                                <div class="pl-zip size60per pull-left">
+                                    <label class="control-label ">First Name</label> <span class="required">*</span>
+                                    <input id="txtFirstName" name="firstname" class="form-control" type="text" maxlength="35" />
+                                </div>
+                                <div class="size40per pl-sm pull-left">
+                                    <label class="control-label ">MiddIe Name</label>
+                                    <input id="txtMI" name="MI" class="form-control" type="text" /> <!--placeholder="a" data-mask="a" onblur="utility.ValidateCtrlMask('frmProviderDetail', this);" />-->
+                                </div>
+                            </div>
+                            <div class="visible-xs"><div class="clearfix"></div></div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Sex </label><span class="required">*</span>
+                                <select id="ddlSex" name="sex" class="form-control" ddlist="GetGender"></select>
+                            </div>
+                            <div class="col-sm-1">
+                                <label class="control-label ">Alias </label>
+                                <input id="txtAlias" name="Alias" class="form-control" type="text" maxlength="10" />
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label ">NPI</label> <span class="required">*</span>
+                                <input id="txtNPI" name="npi" class="form-control" type="text" placeholder="9999999999" maxlength="10" data-ProviderData="" onkeypress="return utility.ValidateZero(event, this);" onblur="utility.ValidateCtrlMask('frmProviderDetail', this); providerDetail.validateLength(this)" />
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label ">Taxonomy Code</label>
+                                <input id="txtTaxonomyCode" name="TaxonomyCode" class="form-control" type="text" maxlength="10" />
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Qualification </label><span class="required">*</span>
+                                <input type="text" class="form-control" name="qualification" id="txtQualification" maxlength="35">
+                            </div>
+                            <div class="col-sm-3" id="divProvider_Entity">
+                                <label class="control-label">Entity</label> <span class="required">*</span>
+                                <select id="ddlEntity" name="entity" class="form-control" onchange="providerDetail.LoadEntityBasedData(this.value)" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Specialty </label><span class="required">*</span>
+                                <select id="ddlSpecialty" name="speciality" class="form-control" ddlist="GetSpecialty"></select>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label">Profile Type </label> <span class="required">*</span>
+                                <select id="ddlProfileType" name="profiletype" class="form-control" ddlist="GetProfileType"></select>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label ">DEA</label>
+                                <input id="txtDEA" name="DEA" class="form-control" type="text" maxlength="9" />
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label ">CLIA</label>
+                                <input id="txtCLIA" name="CLIA" class="form-control" type="text" maxlength="10" />
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label class="control-label ">Social Security Number</label>
+                                <input id="txtSSN" name="SSN" class="form-control" type="text" placeholder="999-99-9999" data-mask="999-99-9999" onblur="utility.validateMasking(this);" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Provider Type</label> <span class="required">*</span>
+                                <select id="ddlProviderType" name="providertype" class="form-control" ddlist="GetProviderType"></select>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label">Basic Fee Group</label>
+                                <select id="ddlBasicFeeGroup" name="BasicFeeGroup" class="form-control" ddlist="GetBasicFeeGroup"></select>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-2">
+                                <label class="control-label ">Fee Group</label>
+                                <select id="ddlFeeGroup" name="FeeGroup" class="form-control" ddlist="GetFeeGroup"></select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Supervising Provider</label>
+                                <select id="ddlSupervisingProvider" name="SupervisingProvider" class="form-control" ddlist="GetProvider"></select>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label class="control-label ">Address <span class="required">*</span></label>
+                                <input id="txtOfficeAddress" class="form-control" type="text" name="Address" maxlength="55" />
+                            </div>
+                            <div class="col-sm-3 pl-none">
+                                <div class="size60per pl-default pr-default pull-left">
+                                    <label class="control-label ">City </label><span class="required">*</span>
+                                    <input id="txtCity" class="form-control" type="text" maxlength="30" name="city" />
+                                </div>
+                                <div class="size40per pl-default pull-left pl-sm">
+                                    <label class="control-label" for="state"> State </label><span class="required">*</span>
+                                    <input id="txtState" class="form-control" style="text-transform:uppercase" type="text" name="state" placeholder="AA" data-mask="aa" onblur="utility.ValidateCtrlMask('frmProviderDetail', this);" />
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-2 pl-none">
+                                <div class="size60per pl-default pull-left">
+                                    <label class="control-label">Zip </label><span class="required">*</span>
+                                    <input id="txtZip" name="zip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.ValidateCtrlMask('frmProviderDetail', this); utility.FillCityState('#providerDetail #frmProviderDetail', '#txtZip', '#txtCity', '#txtState');" />
+                                </div>
+                                <div class="size40per pull-left pl-sm pad-a-labelsize">
+                                    <input id="txtZipExt" name="ZipExt" class="form-control" type="text" data-mask="9999" placeholder="9999" onblur="utility.ValidateCtrlMask('frmProviderDetail', this);" />
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-2">
+                                <label class="control-label ">Email</label>
+                                <input id="txtEmail" name="email" class="form-control" placeholder="eg.: john@abc.com" type="text" maxlength="55" onblur="providerDetail.EnableValidation(this);" />
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label ">Website</label>
+                                <input id="txtWebSite" class="form-control" type="text" name="Website" maxlength="90" onblur="providerDetail.EnableValidation(this)" />
+                            </div>
+                            <div class="col-sm-3 ">
+                                <div class="row">
+                                    <div class="col-xs-8 pr-xs">
+                                        <label class=" control-label" for="inputDefault"> Telephone</label>
+                                        <input id="txtTelephone" class="form-control" name="Telephone" placeholder="(999) 999-9999" type="text" data-mask="(999) 999-9999" onblur="utility.ValidateCtrlMask('frmProviderDetail', this);" />
+                                    </div>
+                                    <div class="col-xs-4 pl-xs">
+                                        <label class="control-label">Ext</label>
+                                        <input id="txtExt" name="Ext" class="form-control" placeholder="99999" type="text" maxlength="5" onkeypress="return utility.ValidateZero(event, this);" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-none">
+                                <div class="col-sm-7">
+                                    <label class="control-label">Fax</label>
+                                    <input id="txtFax" name="Fax" class="form-control" placeholder="(999) 999-9999" type="text" onblur="utility.ValidateCtrlMask('frmProviderDetail', this);" data-mask="(999) 999-9999" />
+                                </div>
+                                <div class="col-sm-5">
+                                    <label class="control-label">TIN</label>
+                                    <input id="txtTIN" name="TIN" class="form-control" type="text" placeholder="999999999" maxlength="9" onkeypress="return utility.ValidateZero(event, this);" onblur="utility.ValidateCtrlMask('frmProviderDetail', this); providerDetail.validateLength(this)" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label">Cell</label>
+                                <input id="txtCell" name="Cell" class="form-control" placeholder="(999) 999-9999" type="text" onblur="utility.ValidateCtrlMask('frmProviderDetail', this);" data-mask="(999) 999-9999" />
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="col-sm-2">
+                                <label class="control-label ">Rcopia User Name</label>
+                                <input id="txtRcopiaUserName" name="RcopiaUserName" class="form-control" type="text" maxlength="60" />
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label">Visit Type Duration Group</label>
+                                <select id="ddlVisitTypeDurationGroup" name="VisitTypeDurationGroup" class="form-control" ddlist="GetVisitTypeDurationGroup"></select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label ">Header Template</label>
+                                <select id="ddlHeaderTemplate" name="HeaderTemplate" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label ">Meaningful Use</label>
+                                <select id="ddlMeaningfulUse" name="MeaningfulUse" class="form-control">
+                                    <option selected value="0" >- Select -</option>
+                                    <option value="1">NOT REPORTING</option>
+                                    <option value="2">REPORTING</option>
+
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label ">Bulk Sign</label>
+                                <select id="ddlBulkSign" name="BulkSign" class="form-control">
+                                    <!--<option selected value="">- Select -</option>-->
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2"  id="divBulkSignException">
+                                <label class="control-label">Bulk Sign Exception</label>
+                                <select id="ddlBulkSignException" name="BulkSignException" multiple="multiple" ddlist="GetBulkSignExceptionLookup" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-1 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="Active" id="chkActive">
+                                    <label for="Active">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-1 size-min80 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="Specialist" id="chkSpecialist">
+                                    <label for="Specialist">Specialist</label>
+                                </div>
+                            </div>
+                            <div id="div_ScrubClaim" class="col-sm-1 size-min100 pad-a-labelsize ml-md hidden">
+
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="ScrubClaim" id="chkScrubClaim">
+                                    <label for="ScrubClaim">Scrub Claim</label>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="col-sm-4 col-md-3 col-lg-3">
+                                <label class="control-label" for="Procedures">Procedures</label>
+                                <div class="input-group">
+                                    <input class="form-control" data-popupunload="false" id="txtProcedures" placeholder="Start typing to search" oninput="providerDetail.bindAutoComplete(this)" name="ProcedureName" type="text" value="">
+                                    <div class="input-group-btn">
+                                        <button id="btnProcedures" class="btn btn-primary btn-xs" type="button" onclick="providerDetail.openCPTCode()"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                                <ul id="ulProceduresList" name="ProceduresList" class="listPrimary NoRadius"></ul>
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-3" id="divProviderFacility">
+                                <label class="control-label" for="Facility">Facility To (Diagnostic Imaging)</label>
+                                <select id="ddlProviderDiagnosticImagingFacility" name="Facility" multiple="multiple" ddlist="GetFacility" class="form-control"></select>
+                            </div>
+
+                            <div id="" class="col-sm-2 pad-checkbox">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="bNoteSignCpt" id="chbxNoteSignCPT">
+                                    <label for="CheckeSignature">Note Sign Without CPT</label>
+                                </div>
+                            </div>
+                            <div id="" class="col-sm-2 pad-checkbox">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="bNoteSignICD" id="chbxNoteSignICD">
+                                    <label for="CheckeSignature">Note Sign Without ICD</label>
+                                </div>
+                            </div>
+                            <div id="div_eSginatureCheck" class="col-sm-1 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="CheckeSignature" id="chkeSignature" onchange=" providerDetail.change_eSignatured(); ">
+                                    <label for="CheckeSignature">eSignature</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label ">Comments</label>
+                                <textarea id="txtComments" name="Comments" class="form-control" maxlength="100" rows="5" spellcheck="true"></textarea>
+                            </div>
+                            <div id="eSignatureImageWrapperID" class="hidden col-sm-4 col-md-3">
+                                <a href="#" onclick="providerDetail.RemoveUploadedImage(); " class="pull-right">Remove</a>
+                                <div class="patientImageWrapper img-thumbnail " style="height: 90px; width: 315px">
+                                    <a class="removeIconHover" onclick=" providerDetail.RemoveUploadedImage(); " id="btnRemoveUploadedImage"><i class="fa fa-times"></i></a>
+                                    <img id="img_eSignature_Admin_Provider_Detail" class="img-responsive img-center" src="" alt="" />
+                                    <a href="#" class="" data-toggle="modal" data-target="#myModal" onclick=" providerDetail.change_eSignatured(); " id="btnAddImage">
+                                        <span><span>Update Signature</span></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="divPatientTypeColor" class="col-sm-4 col-md-3">
+                                <label class="control-label">Patient Type Color</label>
+                                <div class="panel-body">
+                                    <div class="col-sm-4 col-md-6">
+                                        <label class="control-label">New Patient</label>
+                                        <div class="input-group color demo2" data-plugin-colorpicker id="divNewPatColor">
+                                            <span class="input-group-addon" style="padding:1px 4px; padding-top:2px;"><i></i></span>
+                                            <input type="text" class="form-control" name="Color" id="txtNewPatColor">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-6">
+                                        <label class="control-label">Established Patient</label>
+                                        <div class="input-group color demo2" data-plugin-colorpicker id="divEstPatColor">
+                                            <span class="input-group-addon" style="padding:1px 4px; padding-top:2px;"><i></i></span>
+                                            <input type="text" class="form-control" name="Color" id="txtEstPatColor">
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="col-sm-2  pull-right pad-a-labelsize-btn">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                                <!--<button id="btnHistoryProvider" class="btn btn-primary btn-xs rightbtn" type="button" onclick="providerDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <!--<div><br /></div>
+                        <div id="gridform">
+                            <div id="grid_crud" style="margin:0 auto"></div>
+                            <div id="popup-dialog-statelicense" style="display:none; ">
+                                <form id="frmStateLicense">
+                                    <table align="center">
+                                        <tr>
+                                            <td class="control-label">State</td>
+                                            <td>
+                                                <input class="form-control" type=text name="state" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="control-label">License</td>
+                                            <td>
+                                                <input class="form-control" type=text name="license" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>-->
+                        <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                        <h4>Provider License Information</h4>
+
+                        <div class="clearfix"></div>
+                        <div id="pnlLicenseDetail">
+                            <section>
+                                <form>
+                                    <div class="panel-body panel-featured">
+                                        <table id="dgvStateLicense" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                                            <thead>
+                                                <tr>
+                                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size100">Action</th>
+                                                    <th controlid="txtState" controlname="State" controlwidth="custom-width-auto" oninput="utility.ValidateLenght(this, 2);" isoptional="0" coltype="textbox">State</th>
+                                                    <th controlid="txtLicense" controlname="License" controlwidth="custom-width-auto" oninput="utility.ValidateLenght(this, 50);" isoptional="0" coltype="textbox">License</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <a href="javascript:providerDetail.rowAdd()">Add Line Item</a>
+                                    </div>
+                                </form>
+                            </section>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(function () {
+        $(window).on('mousewheel', function () {
+            setTimeout(function () { $(".colorpicker-visible").css("top", $('#txtNewPatColor').offset().top+25); }, 100);
+
+    });
+    });
+</script>

@@ -1,0 +1,116 @@
+﻿<div class="row" id="pnlBatchClinicalQualityMeasureDetail" style="display:none;">
+    <div id="actionPanBatchClinicalQualityMeasureDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog" class="modal-dialog modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Batch_ClinicalQualityMeasureDetail.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="measureName" class="modal-title">Measures</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Batch_ClinicalQualityMeasureDetail.UnLoadTab();"></a>
+                                </div>
+                                <!--<h2 id="measureName1" class="panel-title">Search Insurance Plan </h2>-->
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlBatchClinicalQualityMeasureDetail_Search">
+                            <form class="form-bordered" onsubmit="return false" id="frmBatchClinicalQualityMeasureDetail" method="post">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label" for="Patient Account">Patient Account</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtPatientName" name="PatientName" type="text" oninput="Batch_ClinicalQualityMeasureDetail.BindPatientAccount(false);" onblur="utility.ValidateAutoCompletePatientAccount(this, 'frmBatchClinicalQualityMeasureDetail #hfPatientId', false, 0, null, null);">
+                                            <div id="divSearchPatient" class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Batch_ClinicalQualityMeasureDetail.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Denominator</label>
+                                        <select id="ddlDenominator" class="form-control">
+                                            <option value="All" selected="selected">All</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Numerator</label>
+                                        <select id="ddlNumerator" class="form-control">
+                                            <option value="All" selected="selected">All</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label" for="EntryFrom">Entry From</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input class="form-control" type="text" name="dpFrom" id="dpFrom" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label" for="EntryTo">Entry To</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input class="form-control" type="text" name="dpTo" id="dpTo" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <!--<div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Insurance</label>
+                                        <select id="ddlInsurance" class="form-control" ddlist="GetInsurance"></select>
+                                    </div>-->
+                                    
+                                    <div class="col-sm-2 pt-md pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnInsurancePlanSearch" type="submit" onclick="Batch_ClinicalQualityMeasureDetail.ClinicalQualityMeasuresSearch();">Search</button>
+                                    </div>
+                                    <div class="col-xs-12 text-right mt-default">
+                                        <button id="btnSearch" class="btn btn-primary btn-sm" onclick="Batch_ClinicalQualityMeasureDetail.ExportPatientData();" type="button">Export QRDA I</button>
+                                        <button id="btnExport" class="btn btn-primary btn-sm" onclick="Batch_ClinicalQualityMeasureDetail.BatchClinicalQualityMeasureExport();" type="button">Export QRDA III</button>
+                                        <!--<button id="btnSearch" class="btn btn-primary btn-sm" onclick="Batch_ClinicalQualityMeasureDetail.ExportPatientData('','','','',true);" type="button">Export Sample Data</button>-->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <input type="hidden" id="hfPatientId" value="-1" />
+                    </section>
+                </div>
+
+                <div id="pnlBatchClinicalQualityMeasureDetail_Result" >
+                    <div class="panel-body panel-featured">
+                        <input type="hidden" id="BatchClinicalQualityMeasureDetail_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvBatchClinicalQualityMeasureDetail">
+                            <thead>
+                                <tr>
+                                    <th style="display:none;">CQMID</th>
+                                    <th class="size80">Account #</th>
+                                    <th class="size80">Last Name</th>
+                                    <th class="size80">First Name</th>
+                                    <th class="size80">Population</th>
+                                    <th class="size80">Denominator</th>
+                                    <th class="size80">Numerator</th>
+                                    <th class="size80">Exclusion</th>
+                                    <th class="size80">Exception</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="divClinicalQualityMeasurePaging"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

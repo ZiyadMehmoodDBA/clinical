@@ -1,0 +1,53 @@
+﻿<div class="row" id="pnlBillFollowUpARCall" style="display:none;">
+    <div id="actionPanBillFollowUpARCall" class=" modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" onclick="Bill_FollowUpARCall.UnLoad();"></button>
+                <h4 class="modal-title">AR Call</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmBillFollowUpARCall" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-3 ">
+                            <label class="control-label">Call Type<span class="required">*</span></label>
+                            <select id="ddlCallType" name="callType" class="form-control" ddlist="GetARType"></select>
+                        </div>
+                        <div class="col-sm-3 ">
+                            <label class="control-label">Action<span class="required">*</span></label>
+                            <select id="ddlAction" name="action" class="form-control" ddlist="GetFollowUpAction"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Reason<span class="required">*</span></label>
+                            <select id="ddlReason" name="reason" class="form-control" ddlist="GetFollowUpReasons"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Status<span class="required">*</span></label>
+                            <select id="ddlStatus" name="status" class="form-control" ddlist="GetFollowUpCallStatus">
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Duration(Min)<span class="required">*</span></label>
+                            <input class="form-control" id="txtDuration" name="duration" type="text" onkeypress="utility.ValidateDecimal(event,0)">
+                        </div>
+                        <div class="col-sm-9">
+                            <label class="control-label pull-left">Comments</label>
+                            <textarea class="form-control" id="txtComments" name="comments" rows="2" spellcheck="true"></textarea>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="spacer10"></div>
+                        <button class="btn btn-primary btn-sm rightbtn">Save</button>
+
+                    </div>
+                    <input type="hidden" id="hfFacility" value="-1" />
+                    <input type="hidden" id="hfProvider" value="-1" />
+                    <input type="hidden" id="hfPatientId" value="-1" />
+                    <input type="hidden" id="hfVisitId" value="-1" />
+                    <input type="hidden" id="hfInsurancePlan" />
+                    <input type="hidden" id="hfPractice" value="-1" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

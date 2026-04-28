@@ -1,0 +1,470 @@
+﻿<div id="pnlPatientCaseDetail">
+    <div id="actionPanPatientCaseDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg mb-none">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_Case_Detail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Case Management</h4>
+            </div>
+            <div class="modal-body pt-default pb-default">
+                <div id="tblPatientCaseDetail" class="col-md-12">
+
+                    <form method="post" onsubmit="return false" id="frmPatientCaseDetail">
+                        <div class="tabs">
+                            <ul id="ulTabs" class="nav nav-tabs">
+                                <li class="active" id="liCaseDetails"><a href="#CaseDetails" data-toggle="tab">Case Details</a></li>
+                                <li id="liUBDetails" class="disableAll"><a href="#UBDetails" data-toggle="tab">UB Details</a></li>
+                                <li id="liWCDetails" class="disableAll"><a href="#WCDetails" data-toggle="tab">WC/NF</a></li>
+                                <li class="pull-right">
+                                    <button type="button" id="btnAddDocument" style="margin-right:0.2em;" class="btn btn-success btn-xs" onclick="Patient_Case_Detail.AddCaseDocument();" disabled><i class="fa fa-plus-circle"></i> Document</button>
+                                    <button type="button" id="btnViewDocument" class="btn btn-success btn-xs" onclick="Patient_Case_Detail.OpenDocumentDetail();" disabled><i class="fa fa-eye"></i> View Document</button>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content tab-content-featured pl-sm pr-sm mb-default">
+                                <div id="CaseDetails" class="tab-pane active">
+                                    <span class="spacer10"></span>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Case Type<span class="required">*</span></label>
+                                            <select class="form-control" name="CaseType" id="ddlCaseType" ddlist="GetCaseType"></select>
+
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <!--<label id="lblInsurancePlan" class="control-label">Plan</label>
+                                            <a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="Patient_Case_Detail.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Plan</a>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtInsurancePlan" name="InsurancePlan" placeholder="Start typing to search" onblur="utility.ValidateAutoComplete(this, 'hfInsurancePlan', false);" type="text">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Case_Detail.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>-->
+                                            <label class="control-label">Plan</label>
+                                            <select id="ddlPatientInsuranceId" class="form-control"></select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                            <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Patient_Case_Detail.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                            <div class="input-group">
+                                                <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Patient_Case_Detail.OpenFacility();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Hospital Case#</label>
+                                            <input class="form-control " name="HospitalCaseNo" id="txtHospitalCaseNo" type="text" maxlength="10" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <div class="col-sm-3">
+                                            <label id="lblRefProvider" for="Ref Provider" class="control-label">Referring Provider</label>
+                                            <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="Patient_Case_Detail.OpenRefProviderDetail();" title="Edit Ref Provider">Referring Provider</a>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtRefProvider" name="RefProvider" customname="Ref Provider" placeholder="Start typing to search" type="text" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Case_Detail.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label id="lblCaseNumber" for="Ref Provider" class="control-label">Case Number</label>
+                                            <input id="txtCaseId" type="text" name="CaseId" disabled class="form-control" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label id="lblProvider" class="control-label">Operating Provider</label>
+                                            <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Patient_Case_Detail.OpenProviderDetail();" title="Edit Provider">Operating Provider</a>
+                                            <div class="input-group">
+                                                <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Case_Detail.OpenProvider();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 pad-a-labelsize">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input id="chkActive" name="Active" checked="checked" type="checkbox">
+                                                <label class="control-label" for="Active">Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="spacer20"></div>
+                                    <!--<button id="btnSaveCaseDetails" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>-->
+                                    <!--<div class="clearfix"></div>-->
+                                </div>
+                                <div id="UBDetails" class="tab-pane">
+                                    <span class="spacer10"></span>
+                                    <div class="form-group">
+                                        <div class="col-xs-7 col-sm-2">
+                                            <label class="control-label">Frequency Code<span class="required">*</span></label>
+                                            <input class="form-control size-max90" name="FrequencyCode" maxlength="1" id="txtFrequencyCode" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-2">
+                                            <label class="control-label">Source of Admit</label>
+                                            <input class="form-control size-max120" name="SourceofAdmit" maxlength="1" id="txtSourceofAdmit" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-2">
+                                            <label class="control-label">Patient Status<span class="required">*</span></label>
+                                            <input class="form-control size-max90" name="PatientStatus" maxlength="2" id="txtPatientStatus" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-2">
+                                            <label class="control-label">Type of Admission</label>
+                                            <input class="form-control size-max120" name="TypeofAdmission" maxlength="1" id="txtTypeofAdmission" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-2">
+                                            <label class="control-label">Admit Dx Code</label>
+                                            <input class="form-control size-max90" name="AdmitDxCode" maxlength="6" id="txtAdmitDxCode" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Condition Code1<span class="required">*</span></label>
+                                            <select class="form-control" id="ddlConditionCode1" ddlist="GetConditionCode" name="ConditionCode1"></select>
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Condition Code2</label>
+                                            <select class="form-control" id="ddlConditionCode2" ddlist="GetConditionCode" name="ConditionCode2"></select>
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Condition Code3</label>
+                                            <select class="form-control" id="ddlConditionCode3" ddlist="GetConditionCode" name="ConditionCode3"></select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Condition Code4</label>
+                                            <select class="form-control" id="ddlConditionCode4" ddlist="GetConditionCode" name="ConditionCode4"></select>
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Occurrence Code 1</label>
+                                            <input class="form-control" id="txtOccurrenceCode1" name="OccurrenceCode1" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Occurrence Date 1</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="text" id="dtpOccurrenceDate1" name="OccurrenceDate1" class="form-control" data-plugin-datepicker="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Occurrence Code 2</label>
+                                            <input class="form-control" id="txtOccurrenceCode2" name="OccurrenceCode2" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Occurrence Date 2</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="text" id="dtpOccurrenceDate2" name="OccurrenceDate2" class="form-control" data-plugin-datepicker="">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Occurrence Code 3</label>
+                                            <input class="form-control" id="txtOccurrenceCode3" name="OccurrenceCode3" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Occurrence Date 3</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="text" id="dtpOccurrenceDate3" name="OccurrenceDate3" class="form-control" data-plugin-datepicker="">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Occurrence Code 4</label>
+                                            <input class="form-control" id="txtOccurrenceCode4" name="OccurrenceCode4" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Occurrence Date 4</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="text" id="dtpOccurrenceDate4" name="OccurrenceDate4" class="form-control" data-plugin-datepicker="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Value Code1</label>
+                                            <input class="form-control" id="txtValueCode1" name="ValueCode1" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Value Code 1 Amount</label>
+                                            <input class="form-control" id="txtValueCode1Amount" name="ValueCode1Amount" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Value Code2</label>
+                                            <input class="form-control" id="txtValueCode2" name="ValueCode2" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Value Code 2 Amount</label>
+                                            <input class="form-control" id="txtValueCode2Amount" name="ValueCode2Amount" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Value Code3</label>
+                                            <input class="form-control" id="txtValueCode3" name="ValueCode3" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Value Code 3 Amount</label>
+                                            <input class="form-control" id="txtValueCode3Amount" name="ValueCode3Amount" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Value Code4</label>
+                                            <input class="form-control" id="txtValueCode4" name="ValueCode4" type="text">
+                                        </div>
+                                        <div class="col-xs-7 col-sm-4">
+                                            <label class="control-label">Value Code 4 Amount</label>
+                                            <input class="form-control" id="txtValueCode4Amount" name="ValueCode4Amount" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="spacer20"></div>
+
+                                </div>
+                                <div id="WCDetails" class="tab-pane">
+                                    <div class="col-xs-12 pl-xs pr-xs"><div class="splitter mb-none">Case Information</div></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label id="lblCaseAdjuster" for="Case Adjuster" class="control-label">Case Adjuster</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtCaseAdjuster" name="CaseAdjuster" placeholder="Start typing to search" type="text" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkCaseAdjuster" class="btn btn-primary btn-xs " type="button" onclick="Patient_Case_Detail.OpenCaseAdjusterPanel()"><i class="glyphicon glyphicon-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label" for="Telephone">Telephone</label>
+                                            <input type="text" class="form-control" id="txtTelephone" name="Telephone" data-mask="(999) 999-9999" placeholder="(999) 999-9999">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label" for="Fax">Fax</label>
+                                            <input type="text" class="form-control" id="txtFax" name="Fax" data-mask="(999) 999-9999" placeholder="(999) 999-9999">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label" for="Email">Email</label>
+                                            <input type="text" class="form-control" id="txtEmail" name="Email">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label" for="PreAuth">Pre Auth</label>
+                                            <input type="text" class="form-control" id="txtPreAuth" name="PreAuth">
+                                        </div>
+                                    </div>
+                                    <span class="spacer10"></span>
+                                    <div class="col-xs-12 pl-xs pr-xs"><div class="splitter">Claim Information</div></div>
+
+                                    <div class="col-sm-6 col-lg-6 has-feedback">
+                                        <label class="control-label">Injury Date </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input type="text" id="dtpInjuryDate" name="InjuryDate" class="form-control" data-plugin-datepicker="" data-bv-field="InjuryDate" maxlength="10">
+                                        </div><i class="form-control-feedback bv-icon-input-group" data-bv-icon-for="InjuryDate" style="display: none;"></i>
+                                        <small class="help-block" data-bv-validator="stringLength" data-bv-for="InjuryDate" data-bv-result="NOT_VALIDATED" style="display: none;">Please enter a value with valid length</small>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-6">
+                                        <label class="control-label">Referral </label>
+                                        <input type="text" id="txtReferral" name="Referral" class="form-control">
+                                    </div>
+                                    <div class="col-sm-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Cause of Accident </label>
+                                            <input type="text" id="txtAccidentCause" name="AccidentCause" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-3 pad-a-labelsize col-xs-12">
+                                                <label for="AccidentState" class="control-label bold">Accident State</label>
+                                            </div>
+
+                                            <div class="col-xs-3">
+                                                <label for="State">State</label>
+                                                <input type="text" class="form-control" id="txtState" name="State" data-mask="aa">
+                                            </div>
+                                            <div class="col-xs-3" id="Zipctrl">
+                                                <label for="State">Zip</label>
+                                                <input type="text" class="form-control" id="txtZip" name="Zip" data-mask="99999" onblur="utility.FillCityState('#pnlPatientCaseDetail #frmPatientCaseDetail #WCDetails', '#txtZip', null, '#txtState')">
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <label for="Time(Hr)">Time(Hr)</label>
+                                                <input type="text" class="form-control" name="Hour" id="txthour" maxlength="2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="control-label bold">Employment Related </label>
+                                            </div>
+                                            <div class="">
+                                                <div class="col-sm-6">
+
+                                                    <div class="checkbox-custom">
+                                                        <input type="checkbox" id="chkYes" name="EmployementRelate" onclick="Patient_Case_Detail.changeYesNoSelection(this, 'chkNo')">
+                                                        <label for="EmployementRelate">Yes</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="checkbox-custom">
+                                                        <input type="checkbox" id="chkNo" name="EmployementRelated" onclick="Patient_Case_Detail.changeYesNoSelection(this,'chkYes')">
+                                                        <label for="chkNo">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-sm-4">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label for="Accident" class="control-label bold">Accident</label>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="pull-left ">
+                                                    <div class="checkbox-custom">
+                                                        <input type="checkbox" id="chkAuto" name="Accident" onclick="Patient_Case_Detail.changeYesNoSelection(this, 'chkNonAuto', 'chkAccidentNo')">
+                                                        <label for="chkAuto">Auto</label>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-left pl-default">
+                                                    <div class="checkbox-custom">
+                                                        <input type="checkbox" id="chkNonAuto" name="Accident" onclick="Patient_Case_Detail.changeYesNoSelection(this, 'chkAuto', 'chkAccidentNo')">
+                                                        <label for="chkNonAuto">Non Auto</label>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-left pl-default pr-default">
+                                                    <div class="checkbox-custom">
+                                                        <input type="checkbox" id="chkAccidentNo" name="Accident" onclick="Patient_Case_Detail.changeYesNoSelection(this, 'chkAuto', 'chkNonAuto')">
+                                                        <label for="chkAccidentNo">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="spacer10"></span>
+                                    <div class="col-xs-12 pl-xs pr-xs"><div class="splitter">Dates Patient Unable to work in Current Occupation</div></div>
+                                    <div class="pull-left pr-default bold">
+                                        HCFA-1500 Form Field 16
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-3">From</div>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="text" id="dtpHCFAField16DateFrom" name="HCFAField16DateFrom" class="form-control" data-plugin-datepicker="" data-bv-field="HCFAField16DateFrom" maxlength="10">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-3">To</div>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="text" id="dtpHCFAField16DateTo" name="HCFAField16DateTo" class="form-control" data-plugin-datepicker="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <span class="spacer10"></span>
+                                    <div class="col-xs-12 pl-xs pr-xs"><div class="splitter">Hospitalization Dates Related to Current Service</div></div>
+
+
+                                    <div class="pull-left pr-default bold">
+                                        HCFA-1500 Form Field 18
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-3">From</div>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="text" id="dtpHCFAField18DateFrom" name="HCFAField18DateFrom" class="form-control" data-plugin-datepicker="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-3">To</div>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="text" id="dtpHCFAField18DateTo" name="HCFAField18DateTo" class="form-control" data-plugin-datepicker="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                            <button id="btnSaveDetails" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                            <div class="clearfix"></div>
+                        </div>
+                        <input type="hidden" id="hfProvider" />
+                        <input type="hidden" id="hfRefProvider" />
+                        <input type="hidden" id="hfFacility" />
+                        <input type="hidden" id="hfInsurancePlan" />
+                        <input type="hidden" id="hfCaseNumber" />
+                        <input type="hidden" id="hfCaseAdjusterId" />
+                    </form>
+                </div>
+                <div class="spacer10"></div>
+                <div id="claimDetail">
+                    <div class="splitter">Linked Visit</div>
+                    <div id="dvControls" class="mb-xs disableAll">
+                        <a class="btn btn-success btn-xs" onclick="Patient_Case_Detail.OpenChargeCapture();">
+                            <i class="fa fa-plus-circle"></i> Create New Claim
+                        </a>
+                        <a class="btn btn-success btn-xs" onclick="Patient_Case_Detail.OpenPatientCharges();">
+                            <i class="fa fa-check white"></i> Link Visit
+                        </a>
+                    </div>
+                    <div id="pnlPatientCaseDetail_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body panel-featured">
+                                <input type="hidden" id="PatientCaseDetail_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientCaseDetail">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">ClaimId</th>
+                                            <th id="ColumnAction" class="size-min95" style="display:none;">Action</th>
+                                            <th class="size120">Claim Number</th>
+                                            <th class="size120">Submit</th>
+                                            <th class="size120">Charges</th>
+                                            <th class="size120">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

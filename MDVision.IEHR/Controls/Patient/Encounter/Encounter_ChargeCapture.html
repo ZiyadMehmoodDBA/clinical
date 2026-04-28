@@ -1,0 +1,1279 @@
+﻿<div id="pnlEncounterChargeCapture" style="display:none;">
+    <div id="actionPanEncounterChargeCapture" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog" id="containerModalDialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="EncounterChargeCapture.UnLoad(); "><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="titleChargeCapture" class="modal-title">Claim Detail</h4>
+            </div>
+            <div class="panel-body tabs-custome-panel-body pt-none" id="modalbody">
+                <div id="tblEncounterChargeCapture">
+                    <form method="post" onsubmit="return false" id="frmEncounterChargeCapture">
+                        <div class="form-group">
+                            <div id="ClaimVoidinfo"> </div>
+                            <div class="pull-left mt-xs mb-sm">
+                                <a id="aHistory" class="btn btn-success btn-xs font-xxs disableAll" onclick="EncounterChargeCapture.ShowHistory('pnlEncounterChargeCapture', false);"><i class="fa fa-history"></i> History</a>
+                                <a id="aClaimSummary" class="btn btn-success btn-xs font-xxs" onclick="EncounterChargeCapture.LoadClaimSummary();"><i class="fa"></i> Claim Summary</a>
+                                <a id="aLetter" class="btn btn-success btn-xs font-xxs disableAll" onclick=""><i class="fa fa-envelope"></i> Letter</a>
+                                <a id="aEncounter" class="btn btn-success btn-xs font-xxs disableAll" onclick="EncounterChargeCapture.OpenEncounter();"><i class="fa"></i> Patient's Visits</a>
+                                <a id="aClinicalNotes" class="btn btn-success btn-xs font-xxs" onclick="EncounterChargeCapture.LoadClinicalNotes();"><i class="fa"></i> Provider Note</a>
+                                <a id="aClaimDocuments" class="btn btn-success btn-xs font-xxs disableAll" onclick="EncounterChargeCapture.ClaimDocumentsLoad();"><i id="DocAttached" class="fa"></i> Documents</a>
+                                <a id="aPaymentPosting" class="btn btn-success btn-xs font-xxs disableAll" onclick="EncounterChargeCapture.OpenPaymentPosting();"><i class="fa fa-dollar"></i> Payments</a>
+                                <a id="aEOB" class="btn btn-success btn-xs font-xxs disableAll" onclick="EncounterChargeCapture.OpenElectronicEOB();"><i class="fa fa-umbrella"></i> ERA</a>
+                                <a id="aPrintClaim" class="btn btn-success btn-xs font-xxs disableAll" onclick="EncounterChargeCapture.Claim_Print(false, false, true);"><i class="fa fa-eye"></i> HCFA</a>
+                                <a id="aReCalculateFee" class="btn btn-success btn-xs font-xxs" onclick="EncounterChargeCapture.Re_CalculateCPTFee()"><i class="fa fa-calculator"></i> Recalculate Fee</a>
+                                <a id="aSplitClaim" class="btn btn-success btn-xs font-xxs disableAll" onclick="EncounterChargeCapture.Split_Claim();"><i class="fa fa-scissors"></i> Split Claim</a>
+                                <a id="aVoidReCreate" class="btn btn-success btn-xs font-xxs disableAll" onclick="EncounterChargeCapture.Claim_VoidReCreate();"><i class="glyphicon glyphicon-retweet"></i> Void and ReCreate</a>
+                                <a id="aReSubmit" class="btn btn-success btn-xs font-xxs disableAll" onclick="EncounterChargeCapture.DisableEditableGrid(false,true);"><i class="fa fa-repeat"></i> Resubmit</a>
+                                <a class="btn btn-success btn-xs font-xxs" onclick="EncounterChargeCapture.Scrub_Claims();"><i class="glyphicon glyphicon-filter"></i> Scrub</a>
+                            </div>
+
+                            <div class="row" id="claimStatus">
+                                <div class="col-xs-6 col-sm-3 col-lg-2 p-none pull-right ">
+                                    <label class="control-label text-bold">Status</label>
+                                    <select id="ddlSubmitStatus" class="form-control" name="SubmitStatus"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="divVisitPlans" class="col-lg-2 col-xs-12 claim-sortable-cont font-xxs pull-right p-none">
+                                <div class="col-xs-12 p-none mt-xxs">
+                                    <div class="col-xs-12 p-none own-scroll height-max200 height-min100 Of-a">
+
+                                        <ul id="lstVisitPlans" class="sortable p-none"></ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 p-none mt-xs">
+                                    <div class="checkbox-custom pull-left mb-none checkboxTiny">
+                                        <!--<input type="checkbox" disabled="disabled" id="chkBillToPatientForIns" name="BillToPatientForIns">-->
+                                        <input type='checkbox' id='chkBillToPatient' name="BillToPatient" onclick="EncounterChargeCapture.BilledToPatient(this); EncounterChargeCapture.CheckUnChekInsPlans(this);" />
+                                        <label for="chkBillToPatientForIns" class="control-label pl-xxs">Bill to Patient</label>
+                                    </div>
+                                    <button id="btnsync" class="btn btn-xs btn-success pull-right" type="button" data-toggle="tooltip" data-placement="left" title="Sync with Patient Demos" onclick="javascript:EncounterChargeCapture.UpdatePatientInsurancesDetail()"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                </div>
+                                <div class="col-xs-12 p-none mt-xs">
+                                    <div class="checkbox-custom pull-left mb-none checkboxTiny ">
+                                        <input type="checkbox" id="chkInCollections" name="InCollections">
+                                        <label for="chkInCollections" class="control-label pl-xxs">In Collections</label>
+                                    </div>
+                                    <div class="col-xs-6 pull-right p-none" style="width:132px;">
+                                        <label class="control-label col-xs-5 pl-none noWordBreak pr-tiny text-right">Hold Till</label>
+                                        <div class="col-xs-7 p-none">
+                                            <div class="input-group">
+                                                <span class="input-group-addon pl-xxs pr-xxs font-xxs"><i class="fa fa-calendar"></i></span>
+                                                <input id="dtpHoldTill" type="text" class="form-control p-tiny" data-plugin-datepicker="" maxlength="10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 p-none mt-sm">
+                                    <label class="control-label">Open Tab</label>
+                                    <select id="ddlTablist" class="form-control" onchange="EncounterChargeCapture.ExpandCollapseTabsByDropdown()">
+                                        <option>-Select-</option>
+                                        <option value="divToggleAnesthesiaDetail" style="display:none;">Anesthesia Details</option>
+                                        <option value="chargeDetailDiv"> Charge Details</option>
+                                        <option value="encounterInformation">Encounter  Information</option>
+                                        <option value="claimAdditionalInfoDiv">Claim Additional Information</option>
+                                        <option value="InsuranceAndPayments">Insurance & Payments</option>
+                                        <option value="ClaimError">Claim Error</option>
+                                        <option value="ClaimRejection">Claim Rejection</option>
+                                        <option value="followUpComments">Follow Up Comments</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-12 text-right p-none" style="margin-top: 45px;">
+                                    <button id="SaveVisit" class="btn btn-default btn-sm pl-lg pr-lg">Save</button>
+                                </div>
+
+                                <!--<div class="col-xs-11 p-none mt-tiny pull-left">
+                                    <label id="lblVisitPlans" class="control-label pull-left">Visit Plans</label>
+
+
+                                </div>-->
+
+
+
+
+                            </div>
+
+                            <div id="divChargeDetails" class="col-lg-10 pb-xs pr-lg col-xs-12">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label noWordBreak">Claim Number</label>
+                                        <input class="form-control" id="txtClaimNumber" name="Claim Number" type="text" readonly>
+                                    </div>
+                                    <div id="divPatientName" class="col-sm-4 col-md-3 col-lg-2">
+                                        <label id="lblPatientName" class="control-label">Patient Name</label>
+                                        <a id="lnkPatientNameEdit" class="hidden" href="#" onclick="EncounterChargeCapture.PatientDemographics($('#frmEncounterChargeCapture #hfPatientId').val());" title="Edit Patient">Patient Name</a>
+                                        <input class="form-control" id="txtPatientFullName" name="Patient Name" type="text" disabled>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <div class="row">
+                                            <div class="col-xs-7 pr-tiny pl-tiny">
+                                                <label id="lblDateOfBirth" class="control-label">Patient DOB</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input class="form-control" id="txtDOB" name="DOB" type="text" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-3 pr-tiny pl-tiny">
+                                                <label class="control-label">Age</label>
+                                                <input type="text" class="form-control text-capitalize" name="Age" id="txtAge" disabled>
+                                            </div>
+                                            <div class="col-xs-2 pr-tiny pl-tiny">
+                                                <label class="control-label">Sex</label>
+                                                <input type="text" class="form-control text-capitalize" name="Sex" id="txtSex" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label">Date of Service From<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpDOSFrom" name="DOSFrom" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label">Date of Service To<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpDOSTo" name="DOSTo" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenFacilityDetail('hfFacility');" title="Edit Facility">Facility<span class="required">*</span></a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label id="lblPAN" class="control-label">Prior Auth. Number</label>
+                                        <a id="lnkPANEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenPANDetail('frmEncounterChargeCapture #hfAuthorizeId');" title="Edit Prior Auth.">Prior Auth. Number</a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtPriorAuthNumber" type="text" placeholder="Start typing to search" name="PAN" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkPAN" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenPAN()"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenProviderDetail('frmEncounterChargeCapture #hfProvider', 'txtProvider');" title="Edit Provider">Provider<span class="required">*</span></a>
+                                        <!-- Start Anesthesia -->
+                                        <div class="pull-right ml-default" id="divRadAnesthesia">
+                                            <div class="radio-custom radio-small pull-left">
+                                                <input type="radio" id="radAnesthesiologist" name="RadAnesthesia" onclick="EncounterChargeCapture.SetAnesthesiaValidation(this);">
+                                                <label class="control-label" for="Anes">Anes</label>
+                                            </div>
+                                            <div class="radio-custom radio-small pull-left ml-default">
+                                                <input type="radio" id="radCRNA" name="RadAnesthesia" onclick="EncounterChargeCapture.SetAnesthesiaValidation(this);">
+                                                <label class=" control-label" for="CRNA">CRNA</label>
+                                            </div>
+                                        </div>
+                                        <!-- End Anesthesia -->
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenProvider('Search Provider', 'frmEncounterChargeCapture #txtProvider', 'frmEncounterChargeCapture #hfProvider', 'frmEncounterChargeCapture #lblProvider', 'frmEncounterChargeCapture #lnkProviderEdit');"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label id="lblRefProvider" class="control-label">Referring Provider</label>
+                                        <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenRefProviderDetail();" title="Edit Ref Provider">Referring Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtRefProvider" name="RefProvider" placeholder="Start typing to search" type="text" customname="Referring Provider" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label id="lblResourceProvider" for="ResourceProvider" class="control-label">Resource Provider<span class="required">*</span></label>
+                                        <a id="lnkResourceProviderEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenProviderDetail('frmEncounterChargeCapture #hfResourceProvider', 'txtResourceProvider');" title="Edit Ref Provider">Resource Provider<span class="required">*</span></a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtResourceProvider" customname="Resource Provider" name="ResourceProvider" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkResourceProvider" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenProvider('Search Resource Provider', 'frmEncounterChargeCapture #txtResourceProvider', 'frmEncounterChargeCapture #hfResourceProvider', 'frmEncounterChargeCapture #lblResourceProvider', 'frmEncounterChargeCapture #lnkResourceProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label id="lblSupervisingProvider" for="SupervisingProvider" class="control-label">Supervising Provider</label>
+                                        <a id="lnkSupervisingProviderEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenProviderDetail('frmEncounterChargeCapture #hfSupervisingProvider', 'txtSupervisingProvider');" title="Edit Ref Provider">Supervising Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtSupervisingProvider" name="SupervisingProvider" placeholder="Start typing to search" type="text" customname="Supervising Provider" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkSupervisingProvider" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenProvider('Search Supervising Provider', 'frmEncounterChargeCapture #txtSupervisingProvider', 'frmEncounterChargeCapture #hfSupervisingProvider', 'frmEncounterChargeCapture #lblSupervisingProvider', 'frmEncounterChargeCapture #lnkSupervisingProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label pull-left">Visit Copay</label>
+                                        <div class="pull-left ml-default">
+                                            <div class="radio-custom radio-small pull-left">
+                                                <input type="radio" id="radPCP" name="SpecialistPCP" onclick="EncounterChargeCapture.setVisitCopayment(this);">
+                                                <label class="control-label" for="PCP">P</label>
+                                            </div>
+                                            <div class="radio-custom radio-small pull-left ml-default">
+                                                <input type="radio" id="radSpecialist" name="SpecialistPCP" onclick="EncounterChargeCapture.setVisitCopayment(this);">
+                                                <label class="control-label" for="Specialist">S</label>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="size65per pull-left">
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtVisitCopayment" name="Visit Copayment" type="text">
+                                                <div id="divLoadCopayment" class="input-group-btn"><a class="btn btn-primary btn-xs" onclick="EncounterChargeCapture.LoadCopayment();"><i class="fa fa-dollar"></i></a></div>
+
+                                            </div>
+                                        </div>
+                                        <div class="size50 pl-xxs pull-left">
+                                            <div class='checkbox-custom checkbox-default'><input type='checkbox' id='chkPaid' disabled /><label class='control-label'>Paid</label></div>
+                                        </div>
+                                    </div>
+
+                                    <div id="pnlPatientOutstanding_Result" class="col-lg-4 col-md-6 col-xs-12 pad-a-labelsize">
+                                        <div class="table-responsive">
+                                            <input type="hidden" id="PatientOutstanding_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed" id="dgvPatientOutstanding">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display:none;">PatientId</th>
+                                                        <th class="noWordBreak"> <a href="#" onclick="EncounterChargeCapture.OpenPatientLedger()" style="color:white;" title="Patient Ledger">Patient Ledger</a></th>
+                                                        <th class="text-center">Patient</th>
+                                                        <th class="text-center">Insurance</th>
+                                                        <th class="text-center">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Charges</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtPatCharges" name="" type="text" class="form-control p-tiny text-bold" disabled="disabled">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtInsCharges" name="" type="text" class="form-control p-tiny text-bold" disabled="disabled">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtTotalCharges" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Payments</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtPatPayments" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtInsPayments" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtTotalPayments" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Adjustments</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtPatAdjust" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtInsAdjust" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtTotalAdjust" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Balance</td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtPatBalances" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtInsBalances" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon xxs-font pl-tiny pr-tiny"><i class="fa fa-dollar"></i></span>
+                                                                <input id="txtTotalBalances" name="" type="text" class="form-control p-tiny text-bold" disabled>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-xs-12 pad-a-labelsize">
+                                        <textarea class="form-control" disabled rows="6" maxlength="3000" id="txtNoteCommentsLoad" name="NoteCommentsLoad" spellcheck="true"></textarea>
+                                        <a id="btnNotesLog" class="btn btn-success btn-xs pl-default pr-default pull-left mt-default tab_space disableAll" onclick="EncounterChargeCapture.ShowHistory('pnlEncounterChargeCapture', true);">Notes Log</a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-xs-12">
+                                        <label class="control-label bold" for="Note">Note</label>
+                                        <textarea class="form-control" rows="6" maxlength="3000" id="txtNoteComments" name="NoteComments" spellcheck="true"></textarea>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div id="divToggleAnesthesiaDetail" class="toggle" data-plugin-toggle="">
+                            <section class="toggle active">
+                                <label>Anesthesia Details</label>
+                                <div class="toggle-content panel-body NoRadiusT" style="display: block;">
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblAnesthesiologist" class="control-label">Anesthesiologist</label>
+                                        <a id="lnkAnesthesiologistEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenProviderDetail('frmEncounterChargeCapture #hfAnesthesiologist', 'txtAnesthesiologist');" title="Edit Provider">Anesthesiologist</a>
+                                        <span class="required hidden ansreq">*</span>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtAnesthesiologist" type="text" placeholder="Start typing to search" name="Anesthesiologist" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkAnesthesiologist" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenAnesthesiaProvider('Search Provider', 'frmEncounterChargeCapture #txtAnesthesiologist', 'frmEncounterChargeCapture #hfAnesthesiologist', 'frmEncounterChargeCapture #lblAnesthesiologist', 'frmEncounterChargeCapture #lnkAnesthesiologistEdit');"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-sm-1 col-lg-1">
+                                        <label id="lblAnesthesiologistStartTime" class="control-label">Start Time</label>
+                                        <span class="required hidden ansreq">*</span>
+                                        <input class="form-control" id="txtAnesthesiologistStartTime" name="AnesthesiologistStartTime" type="text" data-plugin-timepicker data-plugin-options='{ "minuteStep": 5 }' maxlength="5">
+                                    </div>
+                                    <div id="" class="col-sm-1 col-lg-1">
+                                        <label id="lblAnesthesiologistEndTime" class="control-label">End Time</label>
+                                        <span class="required hidden ansreq">*</span>
+                                        <input class="form-control" id="txtAnesthesiologistEndTime" name="AnesthesiologistEndTime" type="text" data-plugin-timepicker data-plugin-options='{ "minuteStep": 5 }' maxlength="5">
+                                    </div>
+
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblCRNA" class="control-label">CRNA</label>
+                                        <a id="lnkCRNAEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenProviderDetail('frmEncounterChargeCapture #hfCRNA', 'txtCRNA');" title="Edit Provider">CRNA</a>
+                                        <span class="required hidden crnareq">*</span>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtCRNA" type="text" placeholder="Start typing to search" name="CRNA" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkCRNA" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenCRNAProvider('Search Provider', 'frmEncounterChargeCapture #txtCRNA', 'frmEncounterChargeCapture #hfCRNA', 'frmEncounterChargeCapture #lblCRNA', 'frmEncounterChargeCapture #lnkCRNAEdit');"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="" class="col-sm-1 col-lg-1">
+                                        <label id="lblCRNAStartTime" class="control-label">Start Time</label>
+                                        <span class="required hidden crnareq">*</span>
+                                        <input class="form-control" id="txtCRNAStartTime" name="CRNAStartTime" type="text" data-plugin-timepicker data-plugin-options='{ "minuteStep": 5 }' maxlength="5">
+                                    </div>
+                                    <div id="" class="col-sm-1 col-lg-1">
+                                        <label id="lblCRNAEndTime" class="control-label">End Time</label>
+                                        <span class="required hidden crnareq">*</span>
+                                        <input class="form-control" id="txtCRNAEndTime" name="CRNAEndTime" type="text" data-plugin-timepicker data-plugin-options='{ "minuteStep": 5 }' maxlength="5">
+                                    </div>
+
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblAnesthesiaType" class="control-label">Anesthesia Type<span class="required">*</span></label>
+                                        <select id="ddlAnesthesiaType" ddlist="GetAnesthesiaType" name="AnesthesiaType" class="form-control"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblServiceType" class="control-label">Service Type<span class="required">*</span></label>
+                                        <select id="ddlServiceType" ddlist="GetAnesServiceType" name="AnesServiceType" onchange="EncounterChargeCapture.OnChangeServiceType(this)" class="form-control"></select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblASA" class="control-label">ASA<span class="required">*</span></label>
+                                        <select id="ddlASA" ddlist="GetAnesthesiaASA" name="AnesthesiaASA" class="form-control" onchange="EncounterChargeCapture.OnChangeASA(this);"></select>
+                                    </div>
+                                    <div class="col-sm-1 col-lg-1">
+                                        <label id="lblRiskUnits" class="control-label">Risk Units</label>
+                                        <input type="text" class="form-control" name="RiskUnits" onchange="EncounterChargeCapture.OnChangeRiskUnits(this)" id="txtRiskUnits" />
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblAnesthesiaComments" class="control-label">Comments</label>
+                                        <input type="text" class="form-control" name="AnesthesiaComments" id="txtAnesthesiaComments" />
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div id="chargeDetailDiv" divtype="ChargeDetail" class="toggle" data-plugin-toggle="">
+                            <section class="toggle active ch-section-toggle">
+                                <label>Charge Details</label>
+                                <div class="toggle-content panel-body NoRadiusT ch-NoRadiusT-div" style="display: block;">
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-1 pl-none panel mt-sm">
+                                            <!-- <header class="panel-heading"><h2 class="panel-title">Action</h2></header>-->
+                                            <div class="panel-body p-default btn-block">
+                                                <a id="aMoveDown" class="btn btn-success btn-xs size100per mb-xs" onclick="EncounterChargeCapture.MoveDownSelectedICD()" title="Down Record"><i class="fa fa-arrow-down"></i> Move</a>
+                                                <a id="aMoveUp" class="btn btn-success btn-xs size100per mb-xs" onclick="EncounterChargeCapture.MoveUpSelectedICD()" title="Up Record"><i class="fa fa-arrow-up"></i> Move</a>
+                                                <a id="aDelete" class="btn btn-success btn-xs size100per" onclick="EncounterChargeCapture.RemoveSelectedICD()" title="Remove Record"><i class="fa fa-remove red"></i> Remove</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-11 p-none" id="pnlICDs">
+                                            <!--ICD 1-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 1<span class="required" id="spnICD1Required" style="display:none">*</span></label>
+                                                <div class="input-group">
+                                                    <input id="txtICD1" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD1" placeholder="Start typing to search" value="" type="text" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD1,hfICDDescription1,hfICD101,txtICD10Description1,hfSNOMED1,hfSNOMEDDescription1' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD1,hfICDDescription1,hfICD101,txtICD10Description1,hfSNOMED1,hfSNOMEDDescription1' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD1" type="button" onclick="EncounterChargeCapture.OpenSearchPopup('ICD','txtICD1','hfICD1,hfICDDescription1,hfICD101,txtICD10Description1,hfSNOMED1,hfSNOMEDDescription1');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD1" />
+                                                <input type="hidden" id="hfICD101" />
+                                                <input type="hidden" id="hfICDDescription1" />
+                                                <input type="hidden" id="hfSNOMED1" />
+                                                <input type="hidden" id="hfSNOMEDDescription1" />
+                                                <input type="hidden" id="hfPVICDId1" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description1" maxlength="80" name="ICD10Description1" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 4-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 4</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD4" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD4" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD4,hfICDDescription4,hfICD104,txtICD10Description4,hfSNOMED4,hfSNOMEDDescription4' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD4,hfICDDescription4,hfICD104,txtICD10Description4,hfSNOMED4,hfSNOMEDDescription4' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD4" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD','txtICD4','hfICD4,hfICDDescription4,hfICD104,txtICD10Description4,hfSNOMED4,hfSNOMEDDescription4');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD4" />
+                                                <input type="hidden" id="hfICD104" />
+                                                <input type="hidden" id="hfICDDescription4" />
+                                                <input type="hidden" id="hfSNOMED4" />
+                                                <input type="hidden" id="hfSNOMEDDescription4" />
+                                                <input type="hidden" id="hfPVICDId4" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description4" maxlength="80" name="ICD10Description4" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 7-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 7</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD7" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD7" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD7,hfICDDescription7,hfICD107,txtICD10Description7,hfSNOMED7,hfSNOMEDDescription7' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD7,hfICDDescription7,hfICD107,txtICD10Description7,hfSNOMED7,hfSNOMEDDescription7' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD7" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD', 'txtICD7', 'hfICD7,hfICDDescription7,hfICD107,txtICD10Description7,hfSNOMED7,hfSNOMEDDescription7');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD7" />
+                                                <input type="hidden" id="hfICD107" />
+                                                <input type="hidden" id="hfICDDescription7" />
+                                                <input type="hidden" id="hfSNOMED7" />
+                                                <input type="hidden" id="hfSNOMEDDescription7" />
+                                                <input type="hidden" id="hfPVICDId7" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description7" maxlength="80" name="ICD10Description7" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 10-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 10</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD10" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD10" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD10,hfICDDescription10,hfICD1010,txtICD10Description10,hfSNOMED10,hfSNOMEDDescription10' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD10,hfICDDescription10,hfICD1010,txtICD10Description10,hfSNOMED10,hfSNOMEDDescription10' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD10" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD', 'txtICD10', 'hfICD10,hfICDDescription10,hfICD1010,txtICD10Description10,hfSNOMED10,hfSNOMEDDescription10');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD10" />
+                                                <input type="hidden" id="hfICD1010" />
+                                                <input type="hidden" id="hfICDDescription10" />
+                                                <input type="hidden" id="hfSNOMED10" />
+                                                <input type="hidden" id="hfSNOMEDDescription10" />
+                                                <input type="hidden" id="hfPVICDId10" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description10" maxlength="80" name="ICD10Description10" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 2-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 2</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD2" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD2" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD2,hfICDDescription2,hfICD102,txtICD10Description2,hfSNOMED2,hfSNOMEDDescription2' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD2,hfICDDescription2,hfICD102,txtICD10Description2,hfSNOMED2,hfSNOMEDDescription2' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD2" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD','txtICD2','hfICD2,hfICDDescription2,hfICD102,txtICD10Description2,hfSNOMED2,hfSNOMEDDescription2');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD2" />
+                                                <input type="hidden" id="hfICD102" />
+                                                <input type="hidden" id="hfICDDescription2" />
+                                                <input type="hidden" id="hfSNOMED2" />
+                                                <input type="hidden" id="hfSNOMEDDescription2" />
+                                                <input type="hidden" id="hfPVICDId2" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description2" maxlength="80" name="ICD10Description2" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 5-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 5</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD5" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD5" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD5,hfICDDescription5,hfICD105,txtICD10Description5,hfSNOMED5,hfSNOMEDDescription5' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD5,hfICDDescription5,hfICD105,txtICD10Description5,hfSNOMED5,hfSNOMEDDescription5' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD5" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD','txtICD5','hfICD5,hfICDDescription5,hfICD105,txtICD10Description5,hfSNOMED5,hfSNOMEDDescription5');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD5" />
+                                                <input type="hidden" id="hfICD105" />
+                                                <input type="hidden" id="hfICDDescription5" />
+                                                <input type="hidden" id="hfSNOMED5" />
+                                                <input type="hidden" id="hfSNOMEDDescription5" />
+                                                <input type="hidden" id="hfPVICDId5" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description5" maxlength="80" name="ICD10Description5" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 8-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 8</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD8" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD8" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD8,hfICDDescription8,hfICD108,txtICD10Description8,hfSNOMED8,hfSNOMEDDescription8' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD8,hfICDDescription8,hfICD108,txtICD10Description8,hfSNOMED8,hfSNOMEDDescription8' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD8" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD', 'txtICD8', 'hfICD8,hfICDDescription8,hfICD108,txtICD10Description8,hfSNOMED8,hfSNOMEDDescription8');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD8" />
+                                                <input type="hidden" id="hfICD108" />
+                                                <input type="hidden" id="hfICDDescription8" />
+                                                <input type="hidden" id="hfSNOMED8" />
+                                                <input type="hidden" id="hfSNOMEDDescription8" />
+                                                <input type="hidden" id="hfPVICDId8" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description8" maxlength="80" name="ICD8Description8" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 11-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 11</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD11" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD11" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD11,hfICDDescription11,hfICD1011,txtICD10Description11,hfSNOMED11,hfSNOMEDDescription11' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD11,hfICDDescription11,hfICD1011,txtICD10Description11,hfSNOMED11,hfSNOMEDDescription11' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD11" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD', 'txtICD11', 'hfICD11,hfICDDescription11,hfICD1011,txtICD10Description11,hfSNOMED11,hfSNOMEDDescription11');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD11" />
+                                                <input type="hidden" id="hfICD1011" />
+                                                <input type="hidden" id="hfICDDescription11" />
+                                                <input type="hidden" id="hfSNOMED11" />
+                                                <input type="hidden" id="hfSNOMEDDescription11" />
+                                                <input type="hidden" id="hfPVICDId11" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description11" maxlength="80" name="ICD10Description11" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 3-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 3</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD3" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD3" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD3,hfICDDescription3,hfICD103,txtICD10Description3,hfSNOMED3,hfSNOMEDDescription3' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD3,hfICDDescription3,hfICD103,txtICD10Description3,hfSNOMED3,hfSNOMEDDescription3' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD3" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD','txtICD3','hfICD3,hfICDDescription3,hfICD103,txtICD10Description3,hfSNOMED3,hfSNOMEDDescription3');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD3" />
+                                                <input type="hidden" id="hfICD103" />
+                                                <input type="hidden" id="hfICDDescription3" />
+                                                <input type="hidden" id="hfSNOMED3" />
+                                                <input type="hidden" id="hfSNOMEDDescription3" />
+                                                <input type="hidden" id="hfPVICDId3" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description3" maxlength="80" name="ICD10Description3" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 6-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 6</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD6" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD6" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD6,hfICDDescription6,hfICD106,txtICD10Description6,hfSNOMED6,hfSNOMEDDescription6' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD6,hfICDDescription6,hfICD106,txtICD10Description6,hfSNOMED6,hfSNOMEDDescription6' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD6" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD','txtICD6','hfICD6,hfICDDescription6,hfICD106,txtICD10Description6,hfSNOMED6,hfSNOMEDDescription6');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD6" />
+                                                <input type="hidden" id="hfICD106" />
+                                                <input type="hidden" id="hfICDDescription6" />
+                                                <input type="hidden" id="hfSNOMED6" />
+                                                <input type="hidden" id="hfSNOMEDDescription6" />
+                                                <input type="hidden" id="hfPVICDId6" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description6" maxlength="80" name="ICD10Description6" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 9-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 9</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD9" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD9" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD9,hfICDDescription9,hfICD109,txtICD10Description9,hfSNOMED9,hfSNOMEDDescription9' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD9,hfICDDescription9,hfICD109,txtICD10Description9,hfSNOMED9,hfSNOMEDDescription9' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD9" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD', 'txtICD9', 'hfICD9,hfICDDescription9,hfICD109,txtICD10Description9,hfSNOMED9,hfSNOMEDDescription9');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD9" />
+                                                <input type="hidden" id="hfICD109" />
+                                                <input type="hidden" id="hfICDDescription9" />
+                                                <input type="hidden" id="hfSNOMED9" />
+                                                <input type="hidden" id="hfSNOMEDDescription9" />
+                                                <input type="hidden" id="hfPVICDId9" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description9" maxlength="80" name="ICD10Description9" class="form-control " type="text" disabled />
+                                            </div>
+                                            <!--ICD 12-->
+                                            <div class="col-sm-6 col-lg-1">
+                                                <label class="control-label">ICD Code 12</label>
+                                                <div class="input-group">
+                                                    <input id="txtICD12" onmousedown="EncounterChargeCapture.SetFocusedICD(this);" class="form-control noWordBreak p-tiny" isoptional="0" name="ICD12" placeholder="Start typing to search" value="" type="text" oninput="utility.BindIMOAutoCompleteText(this, 'COMMON_IMO_CODE' , 'GET_IMO_ICDCODE' , '#hfICD12,hfICDDescription12,hfICD1012,txtICD10Description12,hfSNOMED12,hfSNOMEDDescription12' , '' , true, '' , 'ICD' , true, 'EncounterChargeCapture' , 'this' , true);" onchange="utility.ValidateIsEmpty(this, 'ICD' , 'hfICD12,hfICDDescription12,hfICD1012,txtICD10Description12,hfSNOMED12,hfSNOMEDDescription12' , 'EncounterChargeCapture' ); EncounterChargeCapture.ValidateICDCodeAndSetDesc(this); EncounterChargeCapture.RemoveSelectedICDOnBlur(this);" disabled>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs pl-xxs pr-xxs btnICD " id="btnICD12" type="button" disabled onclick="EncounterChargeCapture.OpenSearchPopup('ICD', 'txtICD12', 'hfICD12,hfICDDescription12,hfICD1012,txtICD10Description12,hfSNOMED12,hfSNOMEDDescription12');"><i class="glyphicon glyphicon-search tiny-font"></i></button>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="hfICD12" />
+                                                <input type="hidden" id="hfICD1012" />
+                                                <input type="hidden" id="hfICDDescription12" />
+                                                <input type="hidden" id="hfSNOMED12" />
+                                                <input type="hidden" id="hfSNOMEDDescription12" />
+                                                <input type="hidden" id="hfPVICDId12" />
+                                            </div>
+                                            <div class="col-sm-6 col-lg-2">
+                                                <label class="control-label">Description</label>
+                                                <input id="txtICD10Description12" maxlength="80" name="ICD10Description12" class="form-control " type="text" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="spacer5"></div>
+                                    <div id="pnlVisitCharge_Result" style="display: inline;">
+                                        <section class="panel ch-panel">
+                                            <div class="panel-body NoRadiusT ">
+                                                <input type="hidden" id="VisitCharge_SelectedDataKeys" />
+                                                <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvVisitCharge">
+                                                    <thead>
+                                                        <tr class="bg-gray">
+                                                            <th class="size20 p-none" coltype="Expand"><input type="checkbox" id="chkAllCharges" title="Select all" /></th>
+                                                            <th id="ColumnAction" actiontype="CheckBox,Save,Edit,Delete,Up,Down,Detail" coltype="Action" class="size90 size-min90">Action</th>
+                                                            <th controlid="dtpDOSFrom" controlwidth="size60" class="size-min50 size50 noWordBreak" coltype="datetime" isoptional="0">DOS From</th>
+                                                            <th controlid="dtpDOSTo" controlwidth="size60" class="size-min50 size50 noWordBreak" coltype="datetime" isoptional="0">DOS To</th>
+                                                            <th controlid="txtCPT" controlname="CPT" hfcontrolid="hfCPT,hfCPTDescription" controlwidth="p-tiny" class="size55" coltype="AutoComplete" isoptional="0" autocompletemethod="CPT" parentctrl="EncounterChargeCapture" searchmethod="EncounterChargeCapture.OpenSearchPopup('CPT');">CPT/HCPCS</th>
+                                                            <th subcols="4" controlid="txtModifier" controlname="ICD" controlwidth="size20 p-none" class="size100 size-min105" coltype="TextBox" autocompletemethod="Modifier">Modifiers</th>
+                                                            <th subcols="4" controlid="txtICDPointer" controlname="ICDPointer" controlwidth="size20 p-none" class="size100 size-min105" coltype="TextBox">ICD (Diagnosis)</th>
+                                                            <th controlid="txtPOS" class="size20" coltype="TextBox" isoptional="0" hfcontrolid="hfPOSId" autocompletemethod="POS" controlwidth="p-none size30" controlname="POS">POS</th>
+                                                            <th controlid="chkEMG" class="size10" coltype="CheckBox">E</th>
+                                                            <th controlid="txtTOS" class="size20" coltype="TextBox" isoptional="1" hfcontrolid="hfTOSId" autocompletemethod="TOS" controlwidth="p-none size30" controlname="TOS">TOS</th>
+                                                            <th id="ColumnPrimaryFee" controlwidth="" controlid="txtPrimaryFEE" disabled hfcontrolid="hfPrimaryFee" controlwidth="size-min60" class="noWordBreak size-min60 size60" coltype="TextBox" isoptional="1" style="display:none;">Pri. Fee</th>
+                                                            <th controlid="txtFEE" currencyicon="fa fa-dollar" hfcontrolid="hfFee,hfExpectedFee,hfTotalBalance,hfAssignBenefits,hfCurrentChargeCPT" controlwidth="size-min60 m-none" class=" size-min70 size70" coltype="TextBox" isoptional="0" onkeypress="utility.ValidateDecimal(event, 2);" onfocusout=" EncounterChargeCapture.CalculateUnitFee('txtUnits', 'txtTotalFEE' , 'txtFEE' , 'txtINSCharges' , 'txtPATCharges' , 'txtCOPAY' , 'fee' , 'hfUnits' , 'txtExpectedFee' , 'hfExpectedFee' );">Fee</th>
+                                                            <th controlid="txtUnits" hfcontrolid="hfUnits" class="size-min60 size60" coltype="TextBox" isoptional="0" onkeypress="utility.ValidateDecimal(event, 2);" onfocusout=" EncounterChargeCapture.CalculateUnitFee('txtUnits', 'txtTotalFEE' , 'txtFEE' , 'txtINSCharges' , 'txtPATCharges' , 'txtCOPAY' , 'fee' , 'hfUnits' , 'txtExpectedFee' , 'hfExpectedFee' );">Units</th>
+                                                            <th controlid="txtTotalFEE" currencyicon="fa fa-dollar" controlwidth="size-min75 p-tiny" disabled class=" size-minp60 size75 noWordBreak" coltype="TextBox" isoptional="0" onkeypress="utility.ValidateDecimal(event, 2);">Billed</th>
+                                                            <th controlid="txtINSCharges" currencyicon="fa fa-dollar" controlwidth="size-min75" class="noWordBreak  size-min75 size75" coltype="TextBox" onkeypress="utility.ValidateDecimal(event,2)">$ Ins</th>
+                                                            <th controlid="txtPATCharges" currencyicon="fa fa-dollar" controlwidth="size-min75" class="noWordBreak  size-min75 size75" coltype="TextBox" onkeypress="utility.ValidateDecimal(event,2)">$ Pat</th>
+                                                            <th controlid="txtCOPAY" currencyicon="fa fa-dollar" class="noWordBreak size30" onkeypress="utility.ValidateDecimal(event,2)" coltype="TextBox">Copay</th>
+                                                            <th controlid="txtChargeOrder" coltype="TextBox" style="display:none;">Charge Order</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                    <tfoot></tfoot>
+                                                </table>
+                                                <a class="btn btn-link btn-xs p-none" onclick="EncounterChargeCapture.AddNewChargeRow(null,'Add',this);">Add Line Item</a>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div id="encounterInformation" class="toggle" data-plugin-toggle style="display:block;">
+                            <section class="toggle">
+                                <label> Encounter Information</label>
+                                <div class="toggle-content panel-body NoRadiusT">
+
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Date Submitted</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpSubmittedDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Submitted By</label>
+                                        <input type="text" id="txtSubmittedBy" name="Submitted By" class="form-control" disabled>
+                                    </div>
+
+                                    <div id="divCaseNumber" class="col-sm-3 col-lg-2">
+                                        <label id="lblCaseNumber" class="control-label">Case Number<span id="spcase" class="spcase required" style="display:none">*</span></label>
+                                        <a id="lnkCaseNumberEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenCaseDetail('hfCaseId');" title="Edit Case">Case Number<span id="spcase" class="spcase required" style="display:none">*</span></a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtCaseNumber" type="text" placeholder="Start typing to search" name="CaseNumber" maxlength="35" customname="Case Number" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkCaseNumber" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenCase('Search Case', 'txtCaseNumber', 'hfCaseId', 'lblCaseNumber', 'lnkCaseNumberEdit');"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblAppointmentDate" class="control-label">Appointment Date</label>
+                                        <a id="lnkAppointmentDateEdit" role="button" class="hand-cursor hidden" onclick="EncounterChargeCapture.PatientEditAppointment();" title="Edit Appointment">Appointment Date</a>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpAppointmentDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Encounter Sign Off Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpEncounterSignOffDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Claim Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="dtpClaimDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblReferralNumber" class="control-label">Referral Number</label>
+                                        <a id="lnkReferralNumberEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenPatientReferralDetail('frmEncounterChargeCapture #hfReferralNumerId');" title="Edit Referral">Referral Number</a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtReferralNumber" type="text" placeholder="Start typing to search" name="ReferralNumber" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkReferralNumber" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenPatientReferral()"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Charge Batch Number</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtBatchNumber" name="Batch Number" type="text">
+                                            <div id="divSearchBatch" class="input-group-btn">
+                                                <button id="lnkClaimBatch" type="button" class="btn btn-primary btn-xs" onclick="EncounterChargeCapture.OpenClaimBatchSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="divAccount" class="col-sm-3 col-lg-2">
+                                        <label id="lblAccount" class="control-label">Account<span class="required">*</span></label>
+                                        <a id="lnkAccountEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.PatientDemographics($('#frmEncounterChargeCapture #hfPatientId').val());" title="Edit Patient">Account<span class="required">*</span></a>
+                                        <div class="input-group" id="divAccountNo">
+                                            <input class="form-control" id="txtPatientName" name="PatientName" customname="Patient Name" type="text" onblur="EncounterChargeCapture.ClearFields();" oninput="EncounterChargeCapture.enablePatientControls();" />
+                                            <div id="divSearchPatient" class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="EncounterChargeCapture.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblPlan" class="control-label">Billing Provider</label>
+                                        <select id="ddlBillingProvider" ddlist="GetBillingProviders" class="form-control"></select>
+                                    </div>
+
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Amount Received">Claim Type<span class="required">*</span></label>
+                                        <select id="ddlClaimType" onchange="EncounterChargeCapture.ValidateCaseNumber(this); EncounterChargeCapture.EnableAnesthesiaDiv();" class="form-control" name="ClaimType"></select>
+                                    </div>
+
+
+
+
+
+                                    <!--<div class="prev-data hidden">
+                                        <div class="col-xs-12">
+                                            <div class="col-lg-5 col-xs-12">
+                                                <label class="control-label" for="Comments">Follow Up Comments</label>
+
+                                                <div class="form-control editable" style="height:100px; font-size: 12px; overflow-y:auto" maxlength="3000" id="txtClaimComments" name="Comments" contenteditable="true" spellcheck="true">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 pull-right" style="display:none">
+                                            <label class="control-label">Copy Last Visit</label>
+                                            <select id="ddlLastVisits" onchange="EncounterChargeCapture.FillVisitCharges(this)" class="form-control"></select>
+                                        </div>
+                                    </div>-->
+                                    <!--<div class="col-sm-3 col-lg-2">
+                                               <label class="control-label">Referral Number</label>
+                                               <input class="form-control" type="text" ddsuggestionlist="GetPatientReferral" list=" ddlreferralnumber" name="ReferralNumber" id="txtReferralNumber" />
+                                               <datalist id="ddlReferralNumber" name="ReferralNumber">
+                                                   <option value=" - select -"></option>
+                                                   <option value="test"></option>
+                                               </datalist>
+                                           </div>-->
+                                    <!--<div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Referral Number</label>
+                                        <input class="form-control" id="txtReferralNumber" maxlength="30" name="Referral Number" type="text">
+                                    </div>-->
+
+
+
+
+
+
+                                </div>
+                            </section>
+                        </div>
+
+                        <div id="claimAdditionalInfoDiv" class="toggle" data-plugin-toggle>
+                            <section class="toggle">
+                                <label> Claim Additional Information</label>
+                                <div class="toggle-content panel-body NoRadiusT" style="display:none;">
+                                    <div class="form-group">
+
+
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">Unable to work From</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input id="dtpUnableToWorkFrom" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label" for="Unable to work To">Unable to work To</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input id="dtpUnableToWorkTo" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">LMP Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input id="dtpLMPDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">Delay Reason</label>
+                                            <select id="ddlDelayReason" name="delayReason" ddlist="GetVisitDelayReason" class="form-control"></select>
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label id="lblOrderingProvider" for="OrderingProvider" class="control-label">Ordering Provider</label>
+                                            <a id="lnkOrderingProviderEdit" style="display:none;" href="#" onclick="EncounterChargeCapture.OpenProviderDetail('frmEncounterChargeCapture #hfOrderingProvider', 'txtOrderingProvider');" title="Edit Ref Provider">Ordering Provider</a>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtOrderingProvider" name="OrderingProvider" placeholder="Start typing to search" type="text" customname="Ordering Provider" onblur="EncounterChargeCapture.UpdatehfOrderingProvider()" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkOrderingProvider" class="btn btn-primary btn-xs " type="button" onclick="EncounterChargeCapture.OpenProvider('Search Ordering Provider', 'frmEncounterChargeCapture #txtOrderingProvider', 'frmEncounterChargeCapture #hfOrderingProvider', 'frmEncounterChargeCapture #lblOrderingProvider', 'frmEncounterChargeCapture #lnkOrderingProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">Current Illness Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input id="dtpCurrentIllnessDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">Claim Frequency</label>
+                                            <select id="ddlClaimFrequency" ddlist="GetVisitClaimFrequency" class="form-control"></select>
+                                        </div>
+
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label" for="ICN/DCN">Resubmission Ref No/ICN</label>
+                                            <input class="form-control" maxlength="50" type="text" id="txtICN_DCN">
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">Admission Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input id="dtpAdmissionDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" name="AdmissionDate">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">Discharge Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input id="dtpDischargeDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" name="DischargeDate">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">Last Seen Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input id="dtpLastSeenDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-2 pad-a-labelsize">
+                                            <div class="checkbox checkbox-custom">
+                                                <input type="checkbox" id="chkAssgBenefits">
+                                                <label class="control-label pl-none" for="chkAssgBenefits">Accept Assignment</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label ">Box 24 'I' & 'J' Shaded</label>
+                                            <select id="ddlBox24IJShaded" name="Box24IJShaded" class="form-control">
+                                                <option value="0"> -Select-</option>
+                                                <option value="1">Print Tax ID</option>
+                                                <option value="2">Print Taxonomy Code</option>
+                                                <option value="3">Do not Print</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label ">Box 33 'b' Shaded</label>
+                                            <select id="ddlBox24BShaded" name="Box24BShaded" class="form-control">
+                                                <option value="0"> -Select-</option>
+                                                <option value="1">Print Tax ID</option>
+                                                <option value="2">Print Rendering Provider Taxonomy Code</option>
+                                                <option value="3">Print Billing Provider Taxonomy Code</option>
+                                                <option value="4">Do not Print</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="size200">
+                                                <label class="control-label pull-left" for="Comments">Comments</label>
+                                                <div class="checkbox checkbox-custom pull-right">
+                                                    <input type="checkbox" id="chkPrintonHCFAF19">
+                                                    <label class="control-label pl-none" for="chkPrintonHCFAF19">Print on HCFA F-19</label>
+                                                </div>
+                                            </div>
+                                            <textarea class="form-control" maxlength="150" id="txtComments" rows="1" spellcheck="true"></textarea>
+                                        </div>
+
+
+                                        <div class="col-sm-3 col-md-2 pad-a-labelsize">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" name="IsReportNPI" id="chkIsReportNPI">
+                                                <label for="chkIsReportNPI">Print NPI in Box 24J</label>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-sm-12 p-xs mt-sm">
+                                            <div class="splitter">Is Patient's Condition Related To</div>
+                                            <div class="col-sm-3 col-md-2">
+                                                <label class="control-label">Accident Date</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input id="dtpInjuryDate" name="InjuryDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                </div>
+
+                                            </div>
+                                            <div class="pull-left size150">
+                                                <label class="control-label">Employment Status</label>
+                                                <div class="clearfix"></div>
+                                                <div class="size50 pull-left radio-custom radio-small">
+                                                    <input type="radio" id="RadEmploymentYes" name="RadEmployment">
+                                                    <label id="lblRadYes" class="control-label" for="">Yes</label>
+                                                </div>
+                                                <div class="size50 pull-left radio-custom radio-small">
+                                                    <input type="radio" id="RadEmploymentNo" name="RadEmployment" checked="checked">
+                                                    <label id="lblRadNo" class="control-label" for="">No</label>
+                                                </div>
+                                            </div>
+                                            <div class="pull-left size120">
+                                                <label class="control-label">Auto Accident</label>
+                                                <div class="clearfix"></div>
+                                                <div class="size50 pull-left radio-custom radio-small">
+                                                    <input type="radio" id="RadAutoYes" name="RadAuto">
+                                                    <label id="lblRadYes" class="control-label" for="">Yes</label>
+                                                </div>
+                                                <div class="size50 pull-left radio-custom radio-small">
+                                                    <input type="radio" id="RadAutoNo" name="RadAuto" checked="checked">
+                                                    <label id="lblRadNo" class="control-label" for="">No</label>
+                                                </div>
+                                            </div>
+                                            <div class="pull-left size60 pr-md">
+                                                <label class="control-label">State</label>
+                                                <input id="txtState" name="State" class="form-control" type="text" onkeypress="return utility.ValidateState(event, this)" maxlength="2">
+                                            </div>
+                                            <div class="pull-left size120">
+                                                <label class="control-label">Other Accident</label>
+                                                <div class="clearfix"></div>
+                                                <div class="size50 pull-left radio-custom radio-small">
+                                                    <input type="radio" id="RadOtherYes" name="RadOther">
+                                                    <label id="lblRadYes" class="control-label" for="">Yes</label>
+                                                </div>
+                                                <div class="size50 pull-left radio-custom radio-small">
+                                                    <input type="radio" id="RadOtherNo" name="RadOther" checked="checked">
+                                                    <label id="lblRadNo" class="control-label" for="">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-sm-12 p-xs mt-sm">
+                                            <div class="splitter">Attachment</div>
+                                            <div class="col-sm-3 col-md-2">
+                                                <label class="control-label">Report Type Code<span id="spnReportTypeCode" style="display:none" class="required">*</span></label>
+                                                <select id="ddlReportTypeCode" ddlist="GetReportTypeCode" name="ReportTypeCode" class="form-control"></select>
+                                            </div>
+                                            <div class="col-sm-3 col-md-2">
+                                                <label class="control-label">Transmission Code<span id="spnTransmissionCode" style="display:none" class="required">*</span></label>
+                                                <select id="ddlTransmissionCode" ddlist="GetTransmissionCode" name="TransmissionCode" class="form-control"></select>
+                                            </div>
+                                            <div class="col-sm-3 col-md-2">
+                                                <label class="control-label">Attachment Control No<span id="spnControlNumber" style="display:none" class="required">*</span></label>
+                                                <input id="txtControlNumber" maxlength="80" name="ControlNumber" class="form-control" type="text">
+                                            </div>
+                                            <div class="col-sm-3 col-md-2">
+                                                <label class="control-label">Document Sent Date<span id="spnDocumentSentDate" style="display:none" class="required">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input id="dtpDocumentSentDate" name="DocumentSentDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div id="InsuranceAndPayments" class="toggle" data-plugin-toggle>
+                            <section class="toggle">
+                                <label> Insurances & Payments</label>
+                                <div class="toggle-content panel-body NoRadiusT" style="display:none;">
+                                    <div class="col-sm-12 p-xs mt-sm" id="insuranceandpayments">
+                                        <!--<div class='checkbox-custom checkbox-default'><input type='checkbox' id='chkBillToPatient' name="BillToPatient" onclick="EncounterChargeCapture.BilledToPatient(this); EncounterChargeCapture.CheckUnChekInsPlans(this);" /><label for="BillToPatient" class='control-label'>Bill to Patient</label></div>-->
+                                        <table class="table table-bordered table-hover mb-none table-condensed" id="dgvPatientInsurances">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none;">InsuranceId</th>
+                                                    <th class="size10" style="display:none">Bill To</th>
+                                                    <th style="display:none;">Priority</th>
+                                                    <th class="size10">Priority</th>
+                                                    <th class="size10">Insurance Plan</th>
+                                                    <th class="size10">State</th>
+                                                    <th class="size10">Subscriber ID</th>
+                                                    <th class="size10">Relation</th>
+                                                    <th class="size10">Insured Name</th>
+                                                    <th class="size10">Group Number</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-sm-12 p-xs mt-sm">
+                                        <div class="splitter">Payments</div>
+                                        <div id="pnlClaimPayments_Result">
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPayments">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="size10">Check No </th>
+                                                        <th class="size10">Check Date </th>
+                                                        <th class="size10">Payer </th>
+                                                        <th class="size10">Allowed </th>
+                                                        <th class="size10">Deduct</th>
+                                                        <th class="size10">Coins </th>
+                                                        <th class="size10">Copay </th>
+                                                        <th class="size10">Paid </th>
+                                                        <th class="size10">Adj </th>
+                                                        <th class="size10">Patient Responsibility </th>
+                                                        <!--commented by Azeem Raza Tayyab for Bug#:PMS-5472 <th class="size10">W/held </th>-->
+                                                        <th class="size10">Code </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="divClaimPaymentsSearch"></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </section>
+                        </div>
+                        <div id="ClaimError" class="toggle" data-plugin-toggle>
+                            <section class="toggle">
+                                <label> Claim Error</label>
+                                <div class="toggle-content panel-body NoRadiusT" style="display:none;">
+                                    <div class="checkbox-custom">
+                                        <input type="checkbox" disabled="disabled" id="chkIsCleanclaim" name="IsCleanClaim">
+                                        <label for="chkIsCleanclaim" class="control-label">Mark as Clean Claim</label>
+                                    </div>
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvClaimError">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">ErrorId</th>
+                                                <th class="size10">Error Code</th>
+                                                <th class="size300">Description</th>
+                                                <th class="size10">Suggested Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+
+
+                        <div id="ClaimRejection" class="toggle" data-plugin-toggle>
+                            <section class="toggle">
+                                <label> Claim Rejection</label>
+                                <div class="toggle-content panel-body NoRadiusT" style="display:none;">
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvClaimRejection">
+                                        <thead>
+                                            <tr>
+                                                <th class="size10">Patient Control#</th>
+                                                <th class="size120">Claim Charge Amount</th>
+                                                <th class="size120">Claim Payment Amount</th>
+                                                <th class="size10">Entity</th>
+                                                <th class="size300">Claim Status Category Code</th>
+                                                <th class="size120">Claim Status Code</th>
+                                                <th class="size120 noWordBreak">Rejection Reason</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div id="followUpComments" class="toggle" data-plugin-toggle>
+                            <section class="toggle">
+                                <label> Follow Up Comments</label>
+                                <div class="toggle-content panel-body NoRadiusT" style="display:none;">
+
+                                    <a class="btn btn-link btn-xs disableAll" id="followUpCommentlnk" href="javascript:EncounterChargeCapture.OpenFollowUpComments(0)">Add</a>
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvClaimFollowUpComments">
+                                        <thead>
+                                            <tr>
+                                                <th class="size70">Action</th>
+                                                <th class="size-max300">Follow Up Comments</th>
+                                                <th class="size130">Date - Time</th>
+                                                <th class="size90">User</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!--<div class="col-sm-4 pull-right mt-md mb-md">
+                            <button id="SaveVisit" class="btn btn-primary btn-sm rightbtn">Save</button>
+
+                        </div>-->
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="AppointmentId" />
+                        <input type="hidden" id="hfPatientId" />
+                        <input type="hidden" id="hfSelfPay" />
+                        <input type="hidden" id="hfProvider" />
+                        <input type="hidden" id="hfPractice" />
+                        <input type="hidden" id="hfRefProvider" />
+                        <input type="hidden" id="hfOrderingProvider" />
+                        <input type="hidden" id="hfSupervisingProvider" />
+                        <input type="hidden" id="hfResourceProvider" />
+                        <input type="hidden" id="hfFacility" />
+                        <input type="hidden" id="hfFacilityCLIA" />
+                        <input type="hidden" id="hfInsurancePlan" />
+                        <input type="hidden" id="hfCaseId" />
+                        <input type="hidden" id="hfPOS" />
+                        <input type="hidden" id="hfIsSubmitted" />
+                        <input type="hidden" id="hfBatchId" />
+                        <input type="hidden" id="hfChargeRowId" />
+                        <input type="hidden" id="hfPOSId" />
+                        <input type="hidden" id="hfVisitDate" />
+                        <input type="hidden" id="hfMasterVisitId" />
+                        <input type="hidden" id="hfPatientReferralId" />
+                        <input type="hidden" id="hfReferralNumerId" />
+                        <input type="hidden" id="hfAuthorizeId" />
+                        <input type="hidden" id="hfPVICDIdsLength" />
+                        <input type="hidden" id="hfAnesthesiologist" />
+                        <input type="hidden" id="hfCRNA" />
+                        <input type="hidden" id="hfIsAnesthesiaBilling" />
+                        <input type="hidden" id="hfNoteId" />
+                        <input type="hidden" id="hfDOB" />
+                        <input type="hidden" id="hfProviderCLIA" />
+                        <input type="hidden" id="hftxtClaimComments" />
+                        <input type="hidden" id="hfIsCommnetsChanged" />
+                        <!--/*Added by Azeem Raza Tayyab*/-->
+
+                        <div id="pnlClaimDocuments" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:1049">
+                            <div id="docModelDialog">
+                                <div id="docModel">
+                                    <div id="docHeader" class="modal-header">
+                                        <button id="CloseCD" type="button" class="close" onclick="EncounterChargeCapture.UnLoadClaimDocument();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">Claim Documents</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a id="aPatientDocuments" class="btn btn-success btn-xs" onclick="EncounterChargeCapture.OpenPatientDocument();"> Patient Documents</a>
+                                        <div id="ContainerClaimDocuments" style="display: inline;">
+                                            <section class="panel">
+                                                <div class="panel-body pb-none noBorder">
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvClaimDocuments">
+                                                        <thead>
+                                                            <tr>
+                                                                <th id="ColumnAction" class="size40">Action</th>
+                                                                <th class="size70">Account #</th>
+                                                                <th class="size70">DOS</th>
+                                                                <th class="size100">Folder Name</th>
+                                                                <th class="size70">File Name</th>
+                                                                <th class="size70">File Type</th>
+                                                                <th class="size70">Pages</th>
+                                                                <th class="size180">Comments</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

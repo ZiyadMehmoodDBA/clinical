@@ -1,0 +1,85 @@
+﻿<div id="pnlLawyer" style="display:none;">
+    <div id="actionPanLawyer" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>
+    <button type="button" class=" btn btn-success btn-sm" id="btnLawyerAdd" onclick="Patient_Lawyer.LawyerAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>-->
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_Lawyer.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Lawyer</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Patient_Lawyer.LawyerAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <!--<header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="closebtn pull-right" onclick="Patient_Lawyer.UnLoadTab();"></a>
+                            </div>
+                            <h2 class="panel-title">Search Lawyer </h2>
+                        </header>-->
+                        <div class="panel-body" id="pnlLawyer_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Lawyer Name</label>
+                                        <input class="form-control" id="txtLawyerName" type="text" maxlength="20" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Firm Name</label>
+                                        <input class="form-control" id="txFirmName" type="text" maxlength="20" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Address</label>
+                                        <input class="form-control" id="txtAddress" type="text" maxlength="55" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">City</label>
+                                        <input class="form-control" id="txtCity" type="text" maxlength="25" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Active?</label>
+                                        <select id="chkIsActice" class="form-control size130">
+                                            <option value="" selected="selected">- All -</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="pad-a-labelsize-btn pull-right pr-default">
+                                       <button class="btn btn-primary btn-sm" id="btnSpecialtySearch" type="button" onclick="Patient_Lawyer.LawyerSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <div id="pnlLawyer_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <input type="hidden" id="Lawyer_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLawyer">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">LawyerId</th>
+                                        <th class="size-min120 size120">Action</th>
+                                        <th>Lawyer</th>
+                                        <th>Firm</th>
+                                        <th>License #</th>
+                                        <th>Contact</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Zip</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

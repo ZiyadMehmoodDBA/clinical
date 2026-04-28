@@ -1,0 +1,110 @@
+﻿<div class="row" id="pnlScheduling_UnallocatedCopayment_Search" style="display:none;">
+    <div id="actionPanScheduling_UnallocatedCopayment_Search" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Scheduling_UnallocatedCopayment_Search.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Copay Receipt</h4>
+            </div>
+            <div id="modalbody">
+                <div class="spacer10"></div><div class="clearfix"></div>
+                <section class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions">
+                            <a href="#" class="closebtn pull-right" onclick="Scheduling_UnallocatedCopayment_Search.UnLoad()"></a>
+                        </div>
+                        <h2 class="panel-title">Search Copay Receipt</h2>
+                    </header>
+                    <div class="panel-body" id="pnlCopaymentReceipt_Search">
+                        <form class="form-bordered" method="post" onsubmit="return false" id="frmCopaymentReceipt">
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label class="control-label" for="Patient Account">Patient Account</label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtPatientName" name="Patient Account" type="text" />
+                                        <div id="divSearchPatient" class="input-group-btn">
+                                            <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Scheduling_UnallocatedCopayment_Search.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Receipt Date From</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" id="dpStartDate" name="FromDate" data-plugin-datepicker>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2">
+                                    <label class="control-label">Receipt Date To</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" id="dpToDate" name="ToDate" data-plugin-datepicker>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label id="lblReceiptNumber" class="control-label" for="Receipt Number">Receipt Number</label>
+                                    <input type="text" class="form-control" id="txtReceiptNumber" name="Receipt Number">
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label id="lblProvider" class="control-label">Provider</label>
+                                    <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Scheduling_UnallocatedCopayment_Search.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_UnallocatedCopayment_Search.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-2">
+                                    <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                    <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Scheduling_UnallocatedCopayment_Search.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_UnallocatedCopayment_Search.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-md pr-default pull-right">
+                                    <button class="btn btn-primary btn-sm rightbtn" id="btnCopaySearch" type="button" onclick="Scheduling_UnallocatedCopayment_Search.CopayReceiptSearch()">Search</button>
+                                    <button class="btn btn-primary btn-sm rightbtn" id="btnCopayRest" type="button" onclick="Scheduling_UnallocatedCopayment_Search.ResetForm()">Reset</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="hfFacility" value="-1" />
+                            <input type="hidden" id="hfProvider" value="-1" />
+                            <input type="hidden" id="hfPatientId" value="-1" />
+                        </form>
+                    </div>
+                </section>
+                <div id="pnlCopaymentReceipt_Result" style="display: inline;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <input type="hidden" id="CopaymentReceipt_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvCopaymentReciept">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">ReceiptID</th>
+                                        <th class="size40">Action</th>
+                                        <th class="size100 size-min100">Receipt Number</th>
+                                        <th class="size100 size-min100">Receipt Date</th>
+                                        <th class="size100 size-min100">Patient Account#</th>
+                                        <th class="size100 size-min100">Patient Name</th>
+                                        <th class="size100 size-min100">Provider </th>
+                                        <th class="size100 size-min100">Facility </th>
+                                        <th class="size100 size-min100">Amount Received</th>
+                                        <th class="size100 size-min100">Entry Date</th>
+                                        <th class="size100 size-min100">Entry By</th>
+                                        <th class="size100 size-min100">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="dgvCopaymentReciept_Paging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

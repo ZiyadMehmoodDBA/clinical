@@ -1,0 +1,81 @@
+﻿<div id="pnlCCMAgreement" style="display:none;">
+    <div id="actionPanCCMAgreement" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div>
+        <!--AGREEMENT TO RECEIVE MEDICARE CHRONIC CARE MANAGEMENT SERVICES-->
+        <div class="modal-dialog modal-dialog-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="CCMAgreement.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">AGREEMENT TO RECEIVE MEDICARE CHRONIC CARE MANAGEMENT SERVICES</h4>
+                </div>
+                <div id="divToPrint" class="modal-body">
+                    <form role="form">
+                        <div class="col-xs-12">
+                            <p>
+                                I understand that I am eligible for a new Medicare program that enables you, as my primary care physician, to provide me with around-the-clock services to oversee my chronic conditions and improve my overall wellness.  Chronic conditions are ongoing medical problems like diabetes, high blood pressure, heart disease, depression, osteoporosis, and many others.  I understand that these conditions are managed most effectively in partnership between myself and my healthcare team in order to maintain the best possible overall health and wellness.
+                            </p>
+                            <p>As part of my Chronic Care Management Services I will receive:</p>
+                            <ul>
+                                <li>A personalized and comprehensive care management plan, a copy of which will be provided to me</li>
+                                <li>The ability to get successive, routine appointments with my designated primary care physician or member of my care team</li>
+                                <li>Coordination of visits with my doctors, facilities, labs, radiology, and other service providers</li>
+                                <li>Access to around-the-clock (24/7) services from my care team</li>
+                                <li>Assistance with management of medications</li>
+                                <li>Coordination with scheduling preventive care services and home and community based providers of clinical services, many of which are covered by Medicare</li>
+                            </ul>
+                            <p class="text-justify">
+                                <strong>
+                                    I hereby indicate by my signature on this agreement, that I agree to participate in the Chronic Care Management plan and that ________
+                                </strong>
+                                <span id="spnProvideName"></span>
+                                <strong>
+                                    ____ is designated as my primary care physician for purposes of providing these Medicare chronic care management services to me and billing for them. I acknowledge and agree that I have not provided such authorization to any other physician or healthcare professional.
+                                </strong>
+                            </p>
+                            <p>
+                                I understand that Medicare will allow you to bill approximately $42 for these services during any month for at least 20 minutes of non-in person chronic care management services.  I also understand that these non-in person chronic care management services are subject to the usual Medicare deductible and coinsurance applied to physician services.  By signing below I agree to pay all Medicare co-insurance amounts related to my CCM plan management and I understand that your office will have a record of when and how the 20 minutes were spent, if I ever have questions.
+                            </p>
+                            <p>
+                                As a part of this program, my medical information, including Protected Health Information (PHI), will be shared electronically between treating providers as part of the care coordination involved in my CCM plan. By signing below I authorize such electronic communication of my medical information and PHI.
+                            </p>
+
+                            <p>
+                                I understand that I have the right to revoke this agreement at any time (effective at the end of the calendar month in which I sign my revocation) and can choose instead to receive these services from another healthcare professional after the conclusion of such month. I understand that Medicare will only pay one physician or health care professional to furnish CCM plan services to me within any calendar month. If I wish to revoke my agreement to these services, I will request a CCM termination form.
+                            </p>
+                        </div>
+                        <div class="col-xs-8">
+                            <strong>Print Name: </strong>
+                            <span id="spnPatientName"></span>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                            <strong>Date:</strong>
+                            <span id="spnDate"></span>
+                        </div>
+                        <div class="spacer20"></div>
+                        <div class="col-xs-6">
+                            <strong>Signature:</strong>
+                            <img id="imgPatientSignature" src="">
+                        </div>
+
+                        <div class="form-group">
+
+                            <div id="btnSign" class="col-xs-4 pl-xs pr-none pt-lg size-min125 ">
+
+                                <a href="#" class="btn btn-primary btn-sm rightbtn" data-toggle="tooltip" title="e-signature" data-placement="top" onclick="CCMAgreement.OpenSignDevice();" data-original-title="Signature "><img class="scan-icon" src="Content/images/scan.svg"></a>
+                            </div>
+                        </div>
+
+                        <span class="spacer10"></span>
+                        <button type="button" id="btnCancel" class="btn btn-primary btn-sm rightbtn" onclick="CCMAgreement.UnLoad();">Cancel</button>
+                        <button type="button" id="btnIAgree" class="btn btn-success btn-sm rightbtn" onclick="CCMAgreement.IAgree();">I, Agree</button>
+
+
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <!--/AGREEMENT TO RECEIVE MEDICARE CHRONIC CARE MANAGEMENT SERVICES-->
+    </div>
+</div>
+

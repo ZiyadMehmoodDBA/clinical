@@ -1,0 +1,205 @@
+﻿<div id="pnlPatientEligibility">
+    <div id="actionPanPatientEligibility" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <section id="ScreenSection">
+        <div class="modal-dialog modal-dialog-full">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="Patient_Eligibility.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Patient Eligibility</h4>
+                </div>
+                <div id="parentdiv" class="modal-body">
+                    <div id="tblPatientEligibility">
+                        <section class="panel panel-featured">
+                            <header id="formpanelheading" style="display: none;" class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Patient_Eligibility.UnLoad();"></a>
+                                </div>
+                                <h2 class="panel-title">Patient Eligibility</h2>
+                            </header>
+                            <div class="panel-body NoRadiusT">
+                                <form method="post" onsubmit="return false" id="frmPatientEligibility">
+                                    <!--start - CONTENTS-->
+                                    <div class="form-group">
+                                        <div id="divAccountNumber" class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label">Account Number</label>
+                                            <div class="input-group">
+                                                <input class="form-control ValidateCriteria " title="Account Number" name="Account Number" id="txtAccount" type="text" disabled="disabled" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" disabled="disabled" onclick="Patient_Eligibility.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label">Last Name</label>
+                                            <input class="form-control ValidateCriteria" name="LastName" id="txtLastName" type="text" disabled="disabled" />
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label">First Name</label>
+                                            <input class="form-control ValidateCriteria" name="FirstName" id="txtFirstName" type="text" disabled="disabled" />
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label"><span id="dosfield">DOS From</span><span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="text" id="dtpDOSFrom" name="FromDateOfService" data-plugin-datepicker="" class="form-control ValidateCriteria">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 col-md-3 col-lg-2 hidden only-screen">
+                                            <label class="control-label">DOS To</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="text" id="dtpDOSTo" name="ToDateOfService" data-plugin-datepicker="" class="form-control ValidateCriteria">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label">Insurance Plan<span class="required">*</span></label>
+                                            <select id="ddlPatientInsurancePlan" onchange="Patient_Eligibility.GetInsuranceEligibility(this)" class="form-control only-dialog" name="InsurancePlan"></select>
+                                            <div id="div_insurancePlans" class="input-group hidden">
+                                                <input class="form-control" id="txtInsurancePlan" name="InsurancePlan" placeholder="Start typing to search" type="text" />
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Eligibility.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 only-dialog">
+                                            <label class="control-label">EDI Eligibility Insurance</label>
+                                            <input class="form-control ValidateCriteria" name="EligibilityInsurance" id="txtEligibilityInsurance" type="text" disabled="disabled" />
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label">Service Type Code<span class="required">*</span></label>
+                                            <select id="ddlServiceTypeCode" class="form-control ValidateCriteria" ddlist="GetServiceType" name="ServiceTypeCode"></select>
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2 hidden only-screen">
+                                            <label class="control-label">Eligibility Status<span class="required">*</span></label>
+                                            <select id="ddlStatus" class="form-control " name="Status">
+                                                <option value="">-- Select -- </option>
+                                                <option value="Active" selected>Active</option>
+                                                <option value="Inactive">Inactive</option>
+                                                <option value="Waiting">Waiting</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label">Provider<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control ValidateCriteria" id="txtProvider" name="Provider" placeholder="Start typing to search" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Eligibility.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label"><span id="dosfield">Eligibility Date From</span><span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="text" id="dtpEligibiltyFrom" name="FromDateOfEligibilty" data-plugin-datepicker="" class="form-control ValidateCriteria">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 col-md-3 col-lg-2 hidden only-screen">
+                                            <label class="control-label">Eligibility Date To</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="text" id="dtpEligibiltyTo" name="ToDateOfEligibilty" data-plugin-datepicker="" class="form-control ValidateCriteria">
+                                            </div>
+                                        </div>
+                                        <div class="mt-md pull-right pr-default">
+                                            <button id="btnEligibility" class="btn btn-primary btn-sm rightbtn" type="submit">Check Eligibility</button>
+                                            <button id="btnSearch" class="btn btn-primary btn-sm rightbtn hidden" onclick="Patient_Eligibility.SearchEligibility();" type="button">Search</button>
+                                            <button id="btnReset" class="btn btn-primary btn-sm rightbtn hidden" type="button" onclick="Patient_Eligibility.ClearEligibilitySearch()">Reset</button>
+                                            <button id="btnExport" class="btn btn-primary btn-sm rightbtn hidden" type="button" onclick="Patient_Eligibility.ExportData(event)">Export</button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="hfProvider" />
+                                    <input type="hidden" id="hfPatientId" />
+                                    <input type="hidden" id="hfInsurancePlanId" />
+                                    
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div id="EligibilityhistoryDiv" divtype="Eligibilityhistory" class="toggle" data-plugin-toggle style="display: none;">
+                        <section class="toggle active">
+                            <label> Eligibility History</label>
+                            <div class="toggle-content panel-body NoRadiusT">
+                                <div id="pnlEligibility_Result" style="display: inline;">
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvEligibility">
+                                        <thead>
+                                            <tr class="bg-gray">
+                                                <th><input type="checkbox" class="pull-right" id="chkSelectAll"> </th>
+                                                <th class="size-min110 size90 ">Action</th>
+                                                <th class="noWordBreak size-min90 size80">Patient Name</th>
+                                                <th class="noWordBreak size-min90 size80">Account Number</th>
+                                                <th class="noWordBreak size-min150">DOB</th>
+                                                <th class="noWordBreak size-min90 size80">Subscriber ID</th>                                               
+                                                <th>Status</th>
+                                                <th class="size-max60 size50">DOS</th>
+                                                <th class="noWordBreak size110">Insurance Plan</th>
+                                                <th>Service Type</th>
+                                                <th>Priority</th>
+                                                <th class="noWordBreak size-min150">Eligibility Date</th>
+                                                <th>Copay</th>
+                                                <th class="size60">Deductible</th>
+                                                <th>Provider</th>
+                                                <th>User</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="divEligibilityPaging"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="spacer10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="DialogSection">
+        <div id="viewEligibilityFile" style="display:none">
+            <div class="modal-dialog modal-dialog-sm">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <button type="button" class="close" onclick="Patient_Eligibility.UnLoadFileViewer();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                        <h4 id="lblFileHeading" class="modal-title">View File</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="frmviewEligibilityFile" class="form-bordered" method="post" onsubmit="return false">
+                            <div id="EligibilityTextView" class="tab-pane">
+                                <div class="col-xs-12">
+                                    <textarea class="form-control" rows="25" cols="50" id="txtEligibilityTextView" readonly="readonly" name="textViewedi" spellcheck="true"></textarea>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+
+    });
+</script>
+

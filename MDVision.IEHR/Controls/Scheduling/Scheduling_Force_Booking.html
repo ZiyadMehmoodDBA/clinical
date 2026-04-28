@@ -1,0 +1,893 @@
+﻿<div id="PnlSchedulingForceBooking">
+    <div id="actionPanSchedulingForceBooking" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Scheduling_Force_Booking.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="headingTitle">Add Appointment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="appointmentpanel">
+                    <form method="post" onsubmit="return false" id="frmSchedulingForceBooking">
+
+                        <div class="form-group">
+
+                            <div class="col-sm-3" id="dvPatientName">
+                                <label for="Patient Name" class="control-label">Patient Name</label><span class="required">*</span>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtFullName" customname="Patient Name" name="FullName" type="text" oninput="Scheduling_Force_Booking.BindPatientName();" onblur="Scheduling_Force_Booking.FillReferralPatientName()">
+                                    <div class="input-group-btn">
+                                        <button id="lnkPatientName" type="button" class="btn btn-primary btn-xs" onclick="Scheduling_Force_Booking.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" id="divPatNameAccount">
+                                <label for="Patient Account" class="control-label">Patient Account</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtAccountNo" customname="Patient Name" type="text" name="patientAccount" oninput="Scheduling_Force_Booking.BindPatientAccount();" onblur="Scheduling_Force_Booking.FillReferralNumber()">
+                                    <div class="input-group-btn">
+                                        <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Scheduling_Force_Booking.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Patient DOB</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input id="dtpDOB" name="DOB" type="text" data-plugin-datepicker="" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Patient Balance" class="control-label">Patient Balance</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input class="form-control" id="txtPatientBalance" name="PatientBalance" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Insurance Balance" class="control-label">Insurance Balance</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input class="form-control" id="txtInsuranceBalance" name="InsuranceBalance" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Advance Balance" class="control-label">Advance Balance</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input class="form-control" id="txtAdvanceBalance" name="AdvanceBalance" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="Appointment Date" class="control-label">Appointment Date <span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input class="form-control" id="txtScheduleDate" name="ScheduleDate" type="text" data-plugin-datepicker="" maxlength="10" onchange="Scheduling_Force_Booking.RevalidateFieds()">
+                                </div>
+                            </div>
+                            <div id="totimefrmtime">
+                                <div class="col-sm-2">
+                                    <label class="control-label">From Time<span class="required">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input type="text" id="txtFromTime" name="FromTime" data-plugin-timepicker class="form-control " data-plugin-options='{ "minuteStep": 15 }'   onchange="Scheduling_Force_Booking.AddTime(this); Scheduling_Force_Booking.RevalidateFieds();">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="To Time" class="control-label">To Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                        <input class="form-control" id="txtToTime" name="ToTime" type="text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="spacer15"></div>
+                        <div class="col-md-12">
+                            <div class="toggle" data-plugin-toggle data-plugin-options='{ "isAccordion": true }'>
+                                <section class="toggle active">
+                                    <label>Appointment Detail</label>
+                                    <div class="toggle-content panel-body NoRadiusT">
+                                        <div class="form-group">
+                                            <div class="col-sm-3">
+                                                <label for="Provider" class="control-label">Provider <span class="required">*</span> </label>
+                                                <!--<div class="clearfix"></div>
+                                                <input class="form-control" id="txtProvider" name="Provider" type="text" disabled>-->
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" type="text" oninput="Scheduling_Force_Booking.BindProvider();" onblur="utility.ValidateAutoComplete(this, 'frmSchedulingForceBooking #hfProviderId', true);">
+                                                    <div class="input-group-btn">
+                                                        <button id="lnkProviderEdit" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Force_Booking.OpenProviderDetail('Search Provider', 'txtProvider', 'hfProviderId', 'lblProvider', 'lnkProviderEdit')"><i class="glyphicon glyphicon-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label for="Resource" class="control-label">Resource</label>
+                                                <div class="clearfix"></div>
+                                                <input class="form-control" id="txtResource" name="Resource" type="text" disabled>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                              
+                                                <div class="input-group">
+                                                    <input class="form-control"  id="txtFacility" customname="Facility" name="Facility" type="text" oninput="Scheduling_Force_Booking.BindFacility();" autocomplete="off" onblur="utility.ValidateAutoComplete(this, 'frmSchedulingForceBooking hfFacilityId', false);">
+                                                    <div class="input-group-btn">
+                                                        <button id="lnkFacilityEdit" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Force_Booking.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 ">
+                                                <label id="lblRefProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                                                <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="Scheduling_Force_Booking.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtRefProvider" customname="Ref Provider" name="RefProvider" placeholder="Search Ref Provider" type="text" oninput="Scheduling_Force_Booking.BindRefProvider();" onblur="utility.ValidateAutoComplete(this, 'frmSchedulingForceBooking #hfRefProvider', false);">
+                                                    <div class="input-group-btn">
+                                                        <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Force_Booking.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <label for="Insurance Plan" class="control-label">Plan</label>
+                                                <div class="clearfix"></div>
+                                                <div class="row">
+                                                    <div class="col-xs-10 col-sm-9">
+                                                        <select id="ddlInsurancePlan" name="InsurancePlan" class="form-control" onchange="Scheduling_Force_Booking.FillInsuranceData('#frmSchedulingForceBooking #ddlInsurancePlan', '#frmSchedulingForceBooking #CoPayment'); Scheduling_Force_Booking.OpenPatReferralSearch(this.value);"></select>
+                                                    </div>
+                                                    <div class="col-xs-2 col-sm-3">
+                                                        <input class="form-control" id="txtPriority" name="Priority" type="text" disabled="disabled">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Patient Type</label><span class="required">*</span>
+                                                <select id="ddlPatientType" name="PatientType" class="form-control" ddlist="GetPatientType" onchange="Scheduling_Force_Booking.BindVisitType(this);"></select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Visit Type</label><span class="required">*</span>
+                                                <select id="ddlVisitType" name="PatientVisitType" class="form-control" ddlist="GetPatientVisitType" disabled="disabled" onchange="Scheduling_Force_Booking.setDurationOnVisitType(this);"></select>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Duration<span class="required">*</span></label>
+                                                <input class="form-control" id="Duration" name="Duration" type="text" maxlength="3" placeholder="999" onchange="Scheduling_Force_Booking.changeFunction();" onkeypress="return utility.ValidateZero(event, this);" onblur="Scheduling_Force_Booking.AddTime(this);">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Status</label><span class="required">*</span>
+                                                <select id="ddlStatus" class="form-control" ddlist="GetAppointmentStatus" name="Status"></select>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label" for="Copayment">Copayment</label>
+                                                <div class=" input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                                    <input type="text" class="form-control" id="CoPayment" name="CoPayment" disabled="">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3 pad-a-labelsize">
+                                                <div class="size100 pull-left">
+                                                    <div class="radio-custom radio-dafault">
+                                                        <input type="radio" id="rdPCP" name="SpecialistPCP">
+                                                        <label class="control-label" for="PCP">PCP</label>
+                                                    </div>
+                                                </div>
+                                                <div class="size80 pull-left">
+                                                    <div class="radio-custom radio-dafault">
+                                                        <input type="radio" id="rdSpecialist" name="SpecialistPCP">
+                                                        <label class="control-label" for="Specialist">Specialist</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="control-label" for="Comments">Reason</label>
+                                                <div class="input-group col-sm-12">
+                                                    <div class="radio-custom col-sm-6">
+                                                        <input id="radioProblem" type="radio" name="radioFreetext" checked="checked" onchange="Scheduling_Force_Booking.changeICDField();" value="procedure">
+                                                        <label for="rdFreeText">ICD</label>
+                                                    </div>
+                                                    <div class="radio-custom col-sm-6">
+                                                        <input id="radioFreetext" type="radio" name="radioFreetext" onchange="Scheduling_Force_Booking.changeICDField();" value="freetext">
+                                                        <label for="rdFreeText">Custom</label>
+                                                    </div>
+                                                    <div class="input-group col-sm-12">
+                                                        <input class="form-control" id="txtComplaintsICD" data-popupunload="false" oninput="Scheduling_Force_Booking.bindICD9AutoComplete(this);" name="ComplaintName" type="text" value="">
+                                                        <div class="input-group-btn" id="btnSearchCPT">
+                                                            <button id="btnComplaints" class="btn btn-primary btn-xs" type="button" onclick="Scheduling_Force_Booking.OpenSearchPopup('txtComplaintsICD', 'txtComplaintsICD,hfICDCode,hfICDCode9,hfICDDescription9,hfICDCode10,hfICDDescription10,hfSNOMEDCode,hfSNOMEDDescription')"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group col-sm-12">
+                                                        <input class="form-control hidden" maxlength="500" spellcheck="true" type="text" id="txtReasonComments" name="ReasonComments" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label id="lblReferralNumber" class="control-label" style="display: inline;">Prior Authorization/ Referral Number</label>
+                                                <a id="lnkReferralNumberEdit" style="display:none;" href="#" onclick="Scheduling_Force_Booking.OpenPatientReferralDetail('frmSchedulingForceBooking #hfReferralNumerId');" title="Edit Referral">PAN/Referral Number</a>
+                                                <div class="input-group">
+                                                    <input class="form-control " id="txtReferralNo" type="text" placeholder="Start typing to search" name="ReferralNo" maxlength="30" disabled="disabled">
+                                                    <div class="input-group-btn">
+                                                        <button id="lnkReferralNumber" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_Force_Booking.OpenPatientReferral()"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 pad-a-labelsize">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkNonBilable" class="form-control" name="NonBilabale" type="checkbox" onchange="Scheduling_Force_Booking.changeIsNonBilable(this);">
+                                                    <label class="control-label" for="Paid">Non-billable visit</label>
+                                                </div>
+                                            </div>
+                                            <div class="clerfix"></div>
+                                            <div class="col-sm-12">
+                                                <label class="control-label" for="Comments">Comments</label>
+                                                <textarea id="txtComments" maxlength="500" name="Comments" class="form-control" rows="2" spellcheck="true"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="toggle recpatt" style="display:none">
+                                    <label>Appointment Recurrence Pattern</label>
+                                    <div class="toggle-content">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="spacer20"></div>
+                                                <div class="tabs tabs-vertical tabs-left">
+                                                    <ul class="nav nav-tabs col-md-2 col-xs-2 ">
+                                                        <li class="active"> <a href="#Daily" data-toggle="tab">Daily</a> </li>
+                                                        <li class=""> <a href="#Weekly" data-toggle="tab">Weekly</a> </li>
+                                                        <li class=""> <a href="#Monthly" data-toggle="tab">Monthly</a> </li>
+                                                    </ul>
+                                                    <div id="myTabContent" class="tab-content">
+                                                        <div id="Daily" class="tab-pane active">
+                                                            <p style="display: none">Daily</p>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size60 pull-left">
+                                                                        <input type="radio" id="Every" name="03">
+                                                                        <label for="Every">Every</label>
+                                                                    </div>
+                                                                    <div class=" size35 pull-left">
+                                                                        <input id="txtevrydays" name="DailyEveryDays" class="form-control size30 " type="text">
+                                                                    </div>
+                                                                    <div class=" size75 pull-left">
+                                                                        <label class="control-label" id="txtDays">Day(s) </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="radio-custom ">
+                                                                        <input type="radio" id="rdEveryWeekdays" name="03">
+                                                                        <label for="Every Weekday">Every Weekday</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size95 pull-left">
+                                                                        <input type="radio" id="rdEveryEndByDate" name="02">
+                                                                        <label for="End By Date">End By Date</label>
+                                                                    </div>
+                                                                    <div class="search-size150">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="text" id="dailyEndDate" name="DailyEndByDate" data-plugin-datepicker="" class="form-control ">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size70 pull-left">
+                                                                        <input type="radio" id="rdEveryEndByAppointment" name="02">
+                                                                        <label for="End By">End By</label>
+                                                                    </div>
+                                                                    <div class=" size35 pull-left">
+                                                                        <input type="text" id="txtDailyAppointment" class="form-control size30 " name="DailyAppointment">
+                                                                    </div>
+                                                                    <div class=" size75 pull-left">
+                                                                        <label class="control-label"> Appointment(s)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="Weekly" class="tab-pane">
+                                                            <p style="display: none">Weekly</p>
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="radio-custom">
+                                                                        <input type="radio" id="rdEveryWeekdayOn" name="02">
+                                                                        <label for="Every Weekday On:">Every Week On:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size60 pull-left">
+                                                                        <input type="radio" id="rdEveryweekely" name="02">
+                                                                        <label for="Every">Every</label>
+                                                                    </div>
+                                                                    <div class=" size35 pull-left ">
+                                                                        <input id="txtactiveweek" class="form-control size30 " type="text" name="txtactiveweek">
+                                                                    </div>
+                                                                    <div class=" size75 pull-left">
+                                                                        <label class="control-label">Week(s) On:</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="row">
+                                                                <div class="col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekSunday" name="weekdays[]" data-bv-feedbackicons="false" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Sunday">Sunday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekMonday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Monday">Monday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekTuesday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Tuesday">Tuesday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekWednesday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Wednesday">Wednesday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekThursday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Thursday">Thursday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekFriday" name="weekdays[]" class="form-control" type="checkbox">
+                                                                        <label class="control-label" for="Friday">Friday</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-3 col-sm-4">
+                                                                    <div class="checkbox-custom checkbox-default">
+                                                                        <input id="chkwekSaturday" class="form-control" type="checkbox" name="weekdays[]">
+                                                                        <label class="control-label" for="Saturday">Saturday</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size95 pull-left">
+                                                                        <input type="radio" id="rdWeeklyEndByDate" name="03">
+                                                                        <label for="End By Date">End By Date</label>
+                                                                    </div>
+                                                                    <div class="search-size150">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="text" id="weeklyEndDate" name="WeeklyEndByDate" data-plugin-datepicker="" class="form-control ">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size70 pull-left">
+                                                                        <input type="radio" id="rdWeeklyEndByAppointment" name="03">
+                                                                        <label for="End By">End By</label>
+                                                                    </div>
+                                                                    <div class=" size35 pull-left">
+                                                                        <input id="txtWeeklyAppointment" name="WeeklyAppointment" class="form-control size30 " type="text">
+                                                                    </div>
+                                                                    <div class=" size75 pull-left">
+                                                                        <label class="control-label"> Appointment(s)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="Monthly" class="tab-pane">
+                                                            <p style="display: none">Monthly</p>
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <div class="radio-custom size50 pull-left">
+                                                                        <input type="radio" id="rdmntdaay" name="01">
+                                                                        <label for="Day01">Day</label>
+                                                                    </div>
+                                                                    <div class="size35 pull-left">
+                                                                        <input type="text" id="txtmntActive" class="form-control size30 pull-left" name="txtmntActive">
+                                                                    </div>
+                                                                    <div class="size160 pull-left">
+                                                                        <div class="size50 pull-left">
+                                                                            <label class="control-label" for="of every">of every</label>
+                                                                        </div>
+                                                                        <div class="size35 pull-left">
+                                                                            <input type="text" class="form-control size30" id="txtmntofevry" name="txtmntofevry">
+                                                                        </div>
+                                                                        <label class="control-label pull-left" for="Month(s)">Month(s)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-2 col-sm-12">
+                                                                    <div class="radio-custom">
+                                                                        <input type="radio" id="rdmntthe" name="01">
+                                                                        <label for="The01">The</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-10 nested">
+                                                                    <div class="themonthsVD">
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntFirst" name="themonths[]" data-bv-feedbackicons="false">
+                                                                                <label class="control-label" for="First">First</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntSecond" name="themonths[]">
+                                                                                <label class="control-label" for="Second">Second</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntThird" name="themonths[]">
+                                                                                <label class="control-label" for="Third">Third</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntFourth" name="themonths[]">
+                                                                                <label class="control-label" for="Fourth">Fourth</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntLast" name="themonths[]">
+                                                                                <label class="control-label" for="Last">Last</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                    <hr>
+                                                                    <div class="theweeksmVD">
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntSunday" name="theweeksM[]" data-bv-feedbackicons="false">
+                                                                                <label class=" control-label" for="Sunday">Sunday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntMonday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Monday">Monday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntTuesday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Tuesday">Tuesday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntWednesday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Wednesday">Wednesday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntThursday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Thursday">Thursday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntFriday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Friday">Friday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2 col-sm-4">
+                                                                            <div class="checkbox-custom checkbox-default">
+                                                                                <input type="checkbox" class="form-control" id="chkmntSaturday" name="theweeksM[]">
+                                                                                <label class="control-label" for="Saturday">Saturday</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                    <hr>
+                                                                    <div class="col-md-2 col-sm-6">
+                                                                        <div class="size160 pull-left">
+                                                                            <div class="size50 pull-left">
+                                                                                <label class="control-label" for="of every">of every</label>
+                                                                            </div>
+                                                                            <div class="size35 pull-left">
+                                                                                <input type="text" class="form-control size30" id="txtmnttheofevery" name="txtmntofevry">
+                                                                            </div>
+                                                                            <label class="control-label size40 pull-left" for="Month(s)">Month(s)</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size95 pull-left">
+                                                                        <input type="radio" id="rdMonthlyEndByDate" name="03">
+                                                                        <label for="End By Date">End By Date</label>
+                                                                    </div>
+                                                                    <div class="search-size150">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="text" id="monthlyEndDate" name="MonthlyEndByDate" data-plugin-datepicker="" class="form-control ">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="radio-custom size70 pull-left">
+                                                                        <input type="radio" id="rdMonthlyEndByAppointment" name="03">
+                                                                        <label for="End By">End By</label>
+                                                                    </div>
+                                                                    <div class=" size35 pull-left">
+                                                                        <input id="txtMonthlyAppointment" class="form-control size30 " type="text" name="MonthlyAppointment">
+                                                                    </div>
+                                                                    <div class=" size75 pull-left">
+                                                                        <label class="control-label"> Appointment(s)</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <span class="spacer10"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+
+                        <div class="spacer20"></div>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnsave" type="submit">Save & Exit</button>
+                         <div class="clearfix"></div>
+                        <input type="hidden" id="hfProviderId" />
+                        <input type="hidden" id="hfFacilityId" />
+                        <input type="hidden" id="hfResourceId" />
+                        <input type="hidden" id="hfProviderName" />
+                        <input type="hidden" id="hfFacilityName" />
+                        <input type="hidden" id="hfResourceName" />
+                        <input type="hidden" id="hfSchReasonId" />
+                        <input type="hidden" id="hfRefProvider" />
+                        <input type="hidden" id="hfpatientid" />
+                        <input type="hidden" id="insuranceid" />
+                        <input type="hidden" id="hfSlottimeid" />
+                        <input type="hidden" id="hfSlottimedtlid" />
+                        <input type="hidden" id="hfWaitListId" />
+                        <input type="hidden" id="hfAppointmentDate" />
+                        <input type="hidden" id="hfPatientVisitStatus" />
+                        <input type="hidden" id="hfReferralNumerId" />
+                        <input type="hidden" id="hfIsPatientActive" />
+                        <input type="hidden" id="hfReferralId" />
+                        <input type="hidden" id="isRequestFromPortal" value="0" />
+                        <input type="hidden" id="PortalAppRequestId" />
+                        <input type="hidden" id="hfPracticeId" />
+                        <input type="hidden" id="hfPortalSchDate" />
+                        <input type="hidden" id="hfPatientFirstLastName" />
+                        <input type="hidden" id="hfSlotDuration" />
+                        <input type="hidden" id="hfICDCode" name="ICDCode" />
+                        <input type="hidden" id="hfICDCode9" name="ICDCode9" />
+                        <input type="hidden" id="hfICDDescription9" name="ICDDescription9" />
+                        <input type="hidden" id="hfICDCode10" name="ICDCode10" />
+                        <input type="hidden" id="hfICDDescription10" name="ICDDescription10" />
+                        <input type="hidden" id="hfSNOMEDCode" name="hfSNOMEDCode" />
+                        <input type="hidden" id="hfSNOMEDDescription" name="SNOMEDDescription" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //-----------Radio Specialist/PCP---------
+
+        $('#PnlSchedulingForceBooking #frmSchedulingForceBooking input:radio[name=SpecialistPCP]').change(function () {
+
+            Scheduling_Force_Booking.FillInsuranceData('#PnlSchedulingForceBooking #frmSchedulingForceBooking #ddlInsurancePlan', '#PnlSchedulingForceBooking #frmSchedulingForceBooking #CoPayment');
+
+        });
+        $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtFromTime').timepicker({
+            defaultTime: '12:00 AM',
+            minuteStep: 15,
+        });
+        $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtToTime').timepicker({
+            
+        }).val('12:15 AM');
+        //----------------------------------------
+
+        $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtAccountNo').keyup(function () {
+            var AccountValue = $('#frmSchedulingForceBooking #txtAccountNo').val();
+            if (AccountValue.length < 4) {
+                $('#frmSchedulingForceBooking #ddlInsurancePlan').val("");
+                $('#frmSchedulingForceBooking #txtPriority').val("");
+                $('#frmSchedulingForceBooking #CoPayment').val("");
+            }
+        });
+
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtAccountNo").change(function () {
+            $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #ddlInsurancePlan').val("");
+            $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #CoPayment').val("");
+            $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #ddlInsurancePlan').val("");
+        });
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            }
+        });
+
+        $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #dailyEndDate').datepicker({
+        }).on('changeDate', function (e) {
+            $(this).datepicker('hide');
+            $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').bootstrapValidator('revalidateField', 'DailyEndByDate');
+        });
+
+        $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #monthlyEndDate').datepicker({
+        }).on('changeDate', function (e) {
+            $(this).datepicker('hide');
+            $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').bootstrapValidator('revalidateField', 'MonthlyEndByDate');
+        });
+
+        $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #weeklyEndDate').datepicker({
+        }).on('changeDate', function (e) {
+            $(this).datepicker('hide');
+            $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').bootstrapValidator('revalidateField', 'WeeklyEndByDate');
+        });
+
+
+
+        //*****************************Daily Checks***********************************//
+
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #Every").click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyEndByDate', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyAppointment', true);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtevrydays").attr("disabled", false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', true);
+            }
+            else {
+            }
+        });
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdEveryWeekdays").click(function () {
+            if ($(this).is(':checked')) {
+
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtevrydays').val("");
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyEndByDate', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyAppointment', true);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtevrydays").attr("disabled", true);
+            }
+            else {
+            }
+        });
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdEveryEndByDate").click(function () {
+            if ($(this).is(':checked')) {
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtDailyAppointment').val("");
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyAppointment', false);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #dailyEndDate").attr("disabled", false);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtDailyAppointment").attr("disabled", true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyEndByDate', true);
+            }
+            else {
+            }
+        });
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdEveryEndByAppointment").click(function () {
+            if ($(this).is(':checked')) {
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #dailyEndDate').val("");
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyEveryDays', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyEndByDate', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('DailyAppointment', true);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #dailyEndDate").attr("disabled", true);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtDailyAppointment").attr("disabled", false);
+            }
+            else {
+            }
+        });
+        //*****************************Weekely Checks***********************************//
+
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdEveryWeekdayOn").click(function () {
+            if ($(this).is(':checked')) {
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtactiveweek').val("");
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('WeeklyEndByDate', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('WeeklyAppointment', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('txtactiveweek', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdEveryweekely').attr('checked', false);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtactiveweek").attr("disabled", true);
+
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekSunday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekMonday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekTuesday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekWednesday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekThursday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekFriday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekSaturday').attr('checked', false);
+
+            }
+            else {
+
+            }
+        });
+
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdEveryweekely").click(function () {
+            if ($(this).is(':checked')) {
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('WeeklyEndByDate', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('WeeklyAppointment', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('txtactiveweek', true);
+                $('#rdEveryWeekdayOn').attr('checked', false);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtactiveweek").attr("disabled", false);
+
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekSunday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekMonday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekTuesday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekWednesday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekThursday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekFriday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkwekSaturday').attr('checked', false);
+            }
+            else {
+            }
+        });
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdWeeklyEndByDate").click(function () {
+            if ($(this).is(':checked')) {
+                $('#txtWeeklyAppointment').val("");
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('txtactiveweek', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('WeeklyAppointment', false);
+                $("#weeklyEndDate").attr("disabled", false);
+                $("#txtWeeklyAppointment").attr("disabled", true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('WeeklyEndByDate', true);
+            }
+            else {
+            }
+        });
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdWeeklyEndByAppointment").click(function () {
+            if ($(this).is(':checked')) {
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #weeklyEndDate').val("");
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('WeeklyEndByDate', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('WeeklyAppointment', true);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #weeklyEndDate").attr("disabled", true);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtWeeklyAppointment").attr("disabled", false);
+            }
+            else {
+            }
+        });
+        //*****************************Monthly Checks***********************************//
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdmntdaay").click(function () {
+            if ($(this).is(':checked')) {
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('MonthlyEndByDate', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('MonthlyAppointment', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('txtmntActive', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('txtmntofevry', true);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtmntActive").attr("disabled", false);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtmntofevry").attr("disabled", false);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtmnttheofevery").attr("disabled", true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntFirst').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntFirst').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntSecond').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntSecond').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntThird').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntThird').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntFourth').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntFourth').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntLast').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntLast').attr('disabled', true);
+
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntSunday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntMonday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntTuesday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntWednesday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntThursday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntFriday').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntSaturday').attr('checked', false);
+
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntSunday').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntMonday').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntTuesday').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntWednesday').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntThursday').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntFriday').attr('disabled', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntSaturday').attr('disabled', true);
+
+
+            }
+            else {
+            }
+        });
+        $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #rdmntthe").click(function () {
+            if ($(this).is(':checked')) {
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('MonthlyEndByDate', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('MonthlyAppointment', true);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('txtmntActive', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking').data('bootstrapValidator').enableFieldValidators('txtmntofevry', false);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtmntActive").attr("disabled", true);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtmntofevry").attr("disabled", true);
+                $("#PnlSchedulingForceBooking #frmSchedulingForceBooking #txtmnttheofevery").attr("disabled", false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntFirst').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntFirst').attr('disabled', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntSecond').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntSecond').attr('disabled', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntThird').attr('checked', false);
+                $('#PnlSchedulingForceBooking #frmSchedulingForceBooking #chkmntThird').attr('disabled', false);
+                $('#Scheduling_Force_Booking #chkmntFourth').attr('checked', false);
+                $('#Scheduling_Force_Booking #chkmntFourth').attr('disabled', false);
+                $('#Scheduling_Force_Booking #chkmntLast').attr('checked', false);
+                $('#Scheduling_Force_Booking #chkmntLast').attr('disabled', false);
+
+                $('#Scheduling_Force_Booking #chkmntSunday').attr('checked', false);
+                $('#Scheduling_Force_Booking #chkmntMonday').attr('checked', false);
+                $('#Scheduling_Force_Booking #chkmntTuesday').attr('checked', false);
+                $('#Scheduling_Force_Booking #chkmntWednesday').attr('checked', false);
+                $('#Scheduling_Force_Booking #chkmntThursday').attr('checked', false);
+                $('#Scheduling_Force_Booking #chkmntFriday').attr('checked', false);
+                $('#Scheduling_Force_Booking #chkmntSaturday').attr('checked', false);
+
+                $('#Scheduling_Force_Booking #chkmntSunday').attr('disabled', false);
+                $('#Scheduling_Force_Booking #chkmntMonday').attr('disabled', false);
+                $('#Scheduling_Force_Booking #chkmntTuesday').attr('disabled', false);
+                $('#Scheduling_Force_Booking #chkmntWednesday').attr('disabled', false);
+                $('#Scheduling_Force_Booking #chkmntThursday').attr('disabled', false);
+                $('#Scheduling_Force_Booking #chkmntFriday').attr('disabled', false);
+                $('#Scheduling_Force_Booking #chkmntSaturday').attr('disabled', false);
+            }
+            else {
+            }
+        });
+        $("#Scheduling_Force_Booking #rdMonthlyEndByDate").click(function () {
+            if ($(this).is(':checked')) {
+                $('#Scheduling_Force_Booking #txtMonthlyAppointment').val("");
+                $('#frmScheduling_Force_Booking').data('bootstrapValidator').enableFieldValidators('txtmntActive', true);
+                $('#frmScheduling_Force_Booking').data('bootstrapValidator').enableFieldValidators('txtmntofevry', true);
+                $('#frmScheduling_Force_Booking').data('bootstrapValidator').enableFieldValidators('MonthlyAppointment', false);
+                $("#Scheduling_Force_Booking #monthlyEndDate").attr("disabled", false);
+                $("#Scheduling_Force_Booking #txtMonthlyAppointment").attr("disabled", true);
+                $('#frmScheduling_Force_Booking').data('bootstrapValidator').enableFieldValidators('MonthlyEndByDate', true);
+            }
+            else {
+            }
+        });
+        $("#rdMonthlyEndByAppointment").click(function () {
+            if ($(this).is(':checked')) {
+                $('#monthlyEndDate').val("");
+                $('#frmScheduling_Force_Booking').data('bootstrapValidator').enableFieldValidators('txtmntActive', true);
+                $('#frmScheduling_Force_Booking').data('bootstrapValidator').enableFieldValidators('txtmntofevry', true);
+                $('#frmScheduling_Force_Booking').data('bootstrapValidator').enableFieldValidators('MonthlyEndByDate', false);
+                $('#frmScheduling_Force_Booking').data('bootstrapValidator').enableFieldValidators('MonthlyAppointment', true);
+                $("#monthlyEndDate").attr("disabled", true);
+                $("#txtMonthlyAppointment").attr("disabled", false);
+            }
+            else {
+            }
+        });
+    });
+</script>

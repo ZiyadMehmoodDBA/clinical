@@ -1,0 +1,341 @@
+﻿<!--
+    Author: Muhammad Azhar Shahzad
+    Creation Date: November 18,2015
+    OverView:This File Is created for Clinical Notes
+-->
+<div class="row" id="pnlClinicalNotes" style="display:none;">
+    <div id="actionPanClinicalNotes" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <form method="post" id="frmClinicalNotes" onsubmit="return false">
+        <section class="panel panel-featured ">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Clinical_Notes.UnLoad();"></a>
+                </div>
+                <h2 class="panel-title">Add Note</h2>
+            </header>
+            <div class="panel-body ">
+                <div class="form-group">
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label" for="VisitDate">Visit Date<span class="required">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                            <input type="text" class="form-control" id="dtpVisitDate" name="VisitDate" data-plugin-datepicker autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label" for="VisitTime">Visit Time<span class="required">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                            <input type="text" class="form-control" id="VisitTime" name="VisitTime" data-plugin-timepicker>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 GetDDLOnLoad" id="divVisitReason">
+                        <label class="control-label" for="VisitReason">Visit Reason<span class="required">*</span></label>
+                        <input class="form-control" id="txtVisitReason" name="VisitReason" customname="Visit Reason" type="text">
+                        <!--<select class="form-control" id="VisitReason" name="VisitReason" ddlist="GetBlockReasons">
+                <option selected="selected" value="">-Select-</option>
+            </select>-->
+                        <!--<div class="input-group">
+                <input class="form-control" id="txtVisitReason" name="VisitReason" customname="Visit Reason" placeholder="Start typing to search" type="text" onblur="utility.ValidateAutoComplete(this, 'frmClinicalNotes #hfVisitReason', true);" oninput="Clinical_Notes.BindBlockReason();">
+                <div class="input-group-btn">
+                    <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+            </div>-->
+                    </div>
+                    <div class="col-sm-4 col-md-2" id="providerDiv">
+                        <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Clinical_Notes.OpenProviderDetail('frmClinicalNotes #hfProvider', 'txtProvider');" title="Edit Provider">Provider</a>
+                        <div class="input-group">
+                            <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" customname="Provider" onblur="Clinical_Notes.GetNotesTemplates(); Clinical_Notes.HideProviderLink(this.value);" maxlength="100" />
+                            <div class="input-group-btn">
+                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Clinical_Notes.OpenProvider();"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 NoteTemplate disableAll" id="NoteTemplateDiv">
+                        <label id="lblNoteTemplateView" class="control-label" for="NoteTemplate">Note Template </label>
+                        <a id="lnkNoteTemplateView" data-templateid="0" data-refvalue="0" style="display:none;" href="#" onclick="Clinical_Notes.TemplateDetail(this)" title="View Template">Note Template</a>
+                        <select class="form-control" id="NoteTemplate" name="NoteTemplate" ddlist="" onchange="Clinical_Notes.GetNoteTemplateType(this);">
+                            <option selected="selected" value="">-Select-</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 NoteType disableAll" id="NoteTypeDiv">
+                        <label class="control-label" for="NoteType">Note Type<span class="required">*</span></label>
+                        <select class="form-control" id="NoteType" name="NoteType" ddlist="" onchange="Clinical_Notes.GetNotesTemplates('false');">
+                            <option selected="selected" value="">-Select-</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 VisitType" id="divPatientVisityType">
+                        <label class="control-label">Visit Type</label>
+                        <select id="ddlVisitType" name="PatientVisitType" class="form-control" data-bv-field="PatientVisitType"></select>
+                    </div>
+
+                    <div class="col-sm-4 col-md-2">
+                        <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Clinical_Notes.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                        <div class="input-group">
+                            <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" customname="Facility" onblur="Clinical_Notes.HideFacilityLink(this.value);" maxlength="100" />
+                            <div class="input-group-btn">
+                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Clinical_Notes.OpenFacility();"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 col-lg-2 GetDDLRooms" id="divRoomNo">
+                        <label class="control-label" for="RoomNo">Room No.<!--<span class="required">*</span>--></label>
+                        <select class="form-control" id="RoomNo" name="RoomNo" ddlist="GetRooms">
+                            <option selected="selected" value="">-Select-</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-2">
+                        <label id="lblRefProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                        <a id="lnkRefProviderEdit" style="display:none;" href="#" onclick="Clinical_Notes.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                        <div class="input-group">
+
+                            <input class="form-control" id="txtRefProvider" name="RefProvider" customname="Ref Provider" placeholder="Start typing to search" type="text" onblur="Clinical_Notes.HideRefProviderLink(this.value);" maxlength="100" />
+                            <div class="input-group-btn">
+                                <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="Clinical_Notes.OpenRefProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2" id="ResourceDiv">
+                        <label for="Resource" class="control-label">Resource</label>
+                        <input class="form-control" id="txtResource" name="Resource" type="text" disabled>
+                    </div>
+                    <div class="col-sm-3 col-lg-2">
+                        <label id="lblResourceProvider" for="ResourceProvider" class="control-label">Resource Provider</label>
+                        <a id="lnkResourceProviderEdit" style="display:none;" href="#" onclick="Clinical_Notes.OpenProviderDetail('frmClinicalNotes #hfResourceProvider', 'txtResourceProvider');" title="Edit Ref Provider">Resource Provider</a>
+                        <div class="input-group">
+                            <input class="form-control" id="txtResourceProvider" customname="Resource Provider" name="ResourceProvider" placeholder="Start typing to search" type="text" maxlength="100" />
+                            <div class="input-group-btn">
+                                <button id="lnkResourceProvider" class="btn btn-primary btn-xs " type="button" onclick="Clinical_Notes.OpenResourceProvider('Search Resource Provider', 'frmClinicalNotes #txtResourceProvider', 'frmClinicalNotes #hfResourceProvider', 'frmClinicalNotes #lblResourceProvider', 'frmClinicalNotes #lnkResourceProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2">
+                        <a id="lnkLinkedAppointment" href="javascript:void(0);" onclick="Clinical_Notes.GetLinkedAppointment('#pnlClinicalNotes #actionPanClinicalNotes');">Linked Appointment</a>
+                        <label id="lblLinkedAppointment" for="LinkedAppointment" style="display:none" class="control-label">Linked Appointment</label>
+                        <div class="clearfix"></div>
+                        <div class="pull-left size15per">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="ChkBox_LinkedAppointment" name="IsLinkedAppointment" onchange="Clinical_Notes.UnlinkAppointment(this, 'pnlClinicalNotes',true);" type="checkbox" disabled>
+                                <label class="control-label"></label>
+                            </div>
+                        </div>
+                        <div class="pull-left size85per pl-xxs">
+                            <input class="form-control" id="txtLinkedAppointment" name="LinkedAppointment" type="text" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 OrderSet ">
+                        <label class="control-label">Order Set</label>
+                        <select class="form-control" id="OrderSet" name="OrderSetId" ddlist="" onchange="Clinical_Notes.CheckNoteTemplate(this);">
+
+                        </select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize">
+                        <div class="checkbox-custom checkbox-default IsNonBilable" id="IsNonBilableDiv">
+                            <input id="ChkBox_IsNonBilable" name="IsNonBilable" type="checkbox" onchange="Clinical_Notes.changeIsNonBilable(this);">
+                            <label class="control-label" for="IsNonBilable">Non-billable visit</label>
+                        </div>                                      
+                     </div>
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize hidden" id="divchkPrevComplaints">
+                        <div class="checkbox-custom checkbox-default" id="chkPrevComplaints">
+                            <input id="chkPrevComplaints" type="checkbox" checked="" class="autoPopulate">
+                            <label class="control-label" for="chkPrevComplaints">Previous Note Complaints</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize hidden" id="divchkPrevROS">
+                        <div class="checkbox-custom checkbox-default" id="chkPrevNoteROS">
+                            <input id="chkPrevNoteROS" type="checkbox" checked="" class="autoPopulate">
+                            <label class="control-label" for="chkPrevNoteROS">Previous Note ROS</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize hidden" id="divchkPrevPE">
+                        <div class="checkbox-custom checkbox-default" id="chkPrevNotePE">
+                            <input id="chkPrevNotePE" type="checkbox" checked="" class="autoPopulate">
+                            <label class="control-label" for="chkPrevNotePE">Previous Note PE</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize hidden" id="divchkPrevProblems">
+                        <div class="checkbox-custom checkbox-default" id="chkPrevNoteProblems">
+                            <input id="chkPrevNoteProblems" type="checkbox" checked="" class="autoPopulate">
+                            <label class="control-label" for="chkPrevNoteProblems">Previous Note Problems</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2" id="PreviousNotediv" hidden>
+                        <label id="lblPreviousNote" for="PreviousNote" style="display:none" class="control-label">Copy Previous Note</label>
+                        <a id="lnkPreviousNote" class="disableAll" href="javascript:void(0);" onclick="Clinical_Notes.GetPreviousNotePatient();">Copy Previous Note</a>
+                        <div class="clearfix"></div>
+                        <div class="pull-left size15per">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkCopayPreviousNote" name="IsCopayPreviousNote" type="checkbox" onchange="Clinical_Notes.UnLinkPreviousNotePatient(this, 'pnlClinicalNotes');" disabled>
+                                <label class="control-label"></label>
+                            </div>
+                        </div>
+                        <div class="pull-left size85per pl-xxs">
+                            <input class="form-control" id="txtCopayPreviousNote" name="CopayPreviousNote" type="text">
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pull-right pad-a-labelsize-btn">
+                        <button class="btn btn-success btn-xs rightbtn" type="submit">Create Note</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- div to used hidden change of html in Progress note-->
+        <div id="ProgressnoteHTML" style="display:none"></div>
+        <input type="hidden" id="hfProvider" name="ProviderId" />
+        <input type="hidden" id="hfFacility" name="FacilityId" />
+        <input type="hidden" id="hfResourceId" name="ResourceId" />
+        <input type="hidden" id="hfResourceProvider" name="ResourceProviderId" />
+        <input type="hidden" id="hfRefProvider" name="RefProviderId" />
+        <input type="hidden" id="hfVisitReason" name="VisitReasonId" />
+        <input type="hidden" id="hfVisitId" name="VisitId" />
+        <input type="hidden" id="hfPatientId" name="PatientId" />
+        <input type="hidden" id="hfAppointmentId" name="AppointmentId" />
+        <input type="hidden" id="hfNoteId" name="NoteId" />
+        <input type="hidden" id="hfNoteText" name="NoteText" />
+        <input type="hidden" id="hfPrevNotesId" name="PrevNotesId" />
+        <input type="hidden" id="hfROSDataTemptId" name="ROSDataTemptId" />
+        <input type="hidden" id="hfbMedReconciled" name="bMedReconciled" />
+        <input type="hidden" id="hfMedReconciledId" name="MedReconciledId" />
+        <div id="CopyNoteText" hidden></div>
+    </form>
+
+    <div id="pnlNotes_Result" style="display: inline;">
+        <div class="panel-body panel-featured">
+            <ul id="ulTabs" class="tabs-custom">
+                <li class="liDraftNotes custom-made-tabs" id="liDraftNotes" onclick="Clinical_Notes.NoteGridTabChange('Draft');"><a href=".DraftNotes" data-toggle="tab">Draft <span id="draftNotesCount" class="badge"></span></a></li>
+                <li class="liSignedNotes active custom-made-tabs" id="liSignedNotes" onclick="Clinical_Notes.NoteGridTabChange('Signed');"><a href=".SignedNotes" data-toggle="tab">Signed <span id="signedNotesCount" class="badge"></span></a></li>
+            </ul>
+            <div class="tab-content tabs-custom-body">
+                <div class="DraftNotes tab-pane">
+                    <span class="spacer10"></span>
+                    <input type="hidden" id="Notes_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvClinicalDraftNotes">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">NotesId</th>
+                                <th class="size140">Action</th>
+                                <!-- <th>Short Name</th>
+                                <th>Description</th>-->
+                                <th class="size80">Visit Date</th>
+                                <th class="size80">Visit Time</th>
+                                <th class="size120">Visit Type</th>
+                                <th class="size120">Note Type</th>
+                                <th>Provider</th>
+                                <th>Created By</th>
+                                <th>Facility</th>
+                                <th class="size70">Room</th>
+                                <th style="display:none;">Comments</th>
+                                <th>Visit Reason</th>
+
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <!--This div is used for pagination purpose-->
+                    <div id="divClinicalDraftNotesPaging"></div>
+                    <span class="spacer10"></span>
+                </div>
+                <div class="SignedNotes tab-pane active">
+                    <input type="hidden" id="Notes_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvClinicalSignedNotes">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">NotesId</th>
+                                <th class="size100">Action</th>
+                                <!-- <th>Short Name</th>
+                                <th>Description</th>-->
+                                <th class="size80">Visit Date</th>
+                                <th class="size80">Visit Time</th>
+                                <th class="size120">Visit Type</th>
+                                <th class="size120">Note Type</th>
+                                <th>Provider</th>
+                                <th>Signed By</th>
+                                <th>Facility</th>
+                                <th class="size70">Room</th>
+                                <th style="display:none;">Comments</th>
+                                <th>Visit Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <!--This div is used for pagination purpose-->
+                    <div id="divClinicalSignedNotesPaging"></div>
+                    <span class="spacer10"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--<div class="hidden" id="progressnotesign"></div>-->
+<!--Panel to show linked appointment in Notes Forum-->
+<div id="pnlLinekdAppointment_Result" style="display: none;">
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" id="unload_LinkAppointment_btn" class="close" onclick="Clinical_Notes.UnLoadLinkedAppointmentList();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Appointment List</h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvLinekdAppointment">
+                    <thead>
+                        <tr>
+                            <th style="display: none;">AppointmentId</th>
+                            <th class="size100">Action</th>
+                            <th>Appointment</th>
+                            <th>DOS</th>
+                            <th>Provider</th>
+                            <th>Facility</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divLinekdAppointmentPaging"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

@@ -1,0 +1,33 @@
+﻿<div id="pnlAdminHPIFindingsDetail">
+    <div id="actionPanAdminHPIFindingsDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_HPIFindingsDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Findings</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmHPIFindingsDetail" onsubmit="return false">
+                    <div class="col-sm-8">
+                        <label class="control-label" for="Name">Findings<span class="required">*</span></label>
+                        <input class="form-control" id="txtName" name="Name" maxlength="500" type="text">
+                    </div>
+                    <div class="col-sm-4 mt-md pull-right text-right">
+                        <button type="submit" class="btn btn-default btn-sm">Save</button>
+                        <button onclick="Clinical_HPIFindingsDetail.SetforExit()" type="submit" class="btn btn-default btn-sm">Save & Exit</button>
+                    </div>
+                    <div class="col-sm-2 mt-lg hidden">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="chkActive" checked="checked" name="IsActive">
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+                <div class="spacer10"></div>
+                <ul id="ulFinding" name="Findings" class="listPrimary own-scroll height-150 overflowY p-default"></ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

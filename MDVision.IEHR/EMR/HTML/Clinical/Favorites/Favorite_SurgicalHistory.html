@@ -1,0 +1,60 @@
+﻿<div id="pnlFavoriteSurgicalHistory">
+    <div id="actionPanFavoriteSurgicalHistory" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modaldialog">
+        <div class="modalcontent">
+            <button type="button" class="btn btn-default btn-sm tab_space" title="Family Hx" id="adminMenuFavoritesFamilyHistory" onclick="SelectTab('adminTabFavoritesFamilyHistory', 'false')">Family Hx</button>
+            <button type="button" class="btn btn-default btn-sm tab_space" title="Medical Hx" id="adminMenuFavoritesMedicalHistory" onclick="SelectTab('adminTabFavoritesMedicalHistory','false')">Medical Hx</button>
+            <button type="button" class="btn btn-default btn-sm tab_space" title="Family Hx" id="adminMenuFavoritesSurgicalHistory" onclick="SelectTab('adminTabFavoritesSurgicalHistory','false')">Surgical Hx</button>
+            <button type="button" class="btn btn-default btn-sm tab_space" title="Family Hx" id="adminMenuFavoritesHospitalizationHistory" onclick="SelectTab('adminTabFavoritesHospitalizationHistory','false')">Hospitalization Hx</button>
+            <div class="mainScrollPan pt-md" id="mainScrollPan">
+                <button type="button" class="btn btn-success btn-sm" onclick="Favorite_SurgicalHistory.addFavoriteSurgicalHistoryDetail()"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div>
+                <div class="panel panel-featured">
+                    <div class="panel-body">
+                        <form id="frmFavoriteSurgicalHistory" role="form">
+                            <div class="spacer10"></div>
+                            <div class="panel-featured panel-body">
+                                <div class="col-sm-3" id="divSwitch">
+                                    <span class="pr-xs">Inactive</span>
+                                    <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                        <input id="switchVisit" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: none;" onchange="Favorite_SurgicalHistory.activeFavoritesSearch(this);">
+                                    </div>
+                                    <span class="pl-xs">Active</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-3">
+                                    <div class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Favorites List</h2>
+                                        </header>
+                                        <div class="panel-body p-none">
+                                            <ul class="listPrimary height200 overflowY own-scroll" id="ulFavoritiesList"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-9">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-condensed table-striped table-hover mb-none" id="dgvFavoritiesListCPT">
+                                            <thead>
+                                                <tr>
+
+                                                    <!--<th class="size110 size-min120">SNOMEDID</th>-->
+                                                    <th class="size300 size-min400">DESCRIPTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="spacer10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,309 @@
+﻿<div id="pnlClinicalLabResultDetail">
+    <div id="actionPanClinicalLabResultDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ClinicalLabResultDetail.UnLoad();">
+                    <span class="red">&nbsp;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 id="headingTitle" class="modal-title">Add Lab Result</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmClinicalLabResultDetail" onsubmit="return false">
+
+
+                    <div class="col-md-12" id="divLabResultInformation">
+                        <input type="hidden" id="hfProvider" name="ProviderId" />
+                        <input type="hidden" id="hfFacility" name="FacilityId" />
+                        <input type="hidden" id="hfAssigneeId" name="AssigneeId" />
+                        <input type="hidden" id="hfLaboratoryId" name="LabId" />
+                        <input type="hidden" id="hfCodeSystemTypeId" name="CodeSystemType" />
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Order Information</h2>
+                        </header>
+                        <div class="panel-body">
+                            <div id="dvLocation" class="col-sm-3">
+                                <div class="Order-label-control">
+                                    <label class="control-label bold" name="lblLaboratory">Laboratory</label>
+                                    <br />
+                                    <label id="lblLaboratory" class="control-label" name="Laboratory"></label>
+                                </div>
+
+                                <!-- Laboratory ddl -->
+                                <div class="editable-control hidden">
+                                    <label class="control-label">Laboratory<span class="required">*</span></label>
+                                    <br />
+                                    <select id="ddlLabId" name="LabId" class="form-control" ddlist="" onchange="ClinicalLabResultDetail.SetFavSearch()"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="Facility">Facility<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-xs" type="button" onclick="ClinicalLabResultDetail.OpenFacility();">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="Location">Location</label>
+                                <input class="form-control" id="txtLocation" name="Location" type="text" disabled="disabled" />
+                            </div>
+
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="Provider">Provider<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" type="text" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="ClinicalLabResultDetail.OpenProvider();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <!--<div class="Order-label-control">
+                                    <label class="control-label" name="lblAssignee">Assignee</label>
+                                    <br />
+                                    <label class="control-label" name="Assignee"></label>
+                                </div>-->
+                                <!--class="editable-control hidden"-->
+                                <!-- Assignee ddl -->
+                                <label class="control-label bold" name="lblAssignee">Assignee</label>
+                                <br />
+                                <!--<select id="ddlAssigneeId" name="AssigneeId" class="form-control" ddlist="GetUsers" />-->
+
+                                <input class="form-control" id="txtAssignee" name="Assignee" type="text" placeholder="Start typing to search" value="" />
+                                <!--<input class="form-control ui-autocomplete-input" id="txtAssignee" type="text" placeholder="Start typing to search" name="Assignee" onblur="utility.ValidateAutoComplete(this, 'frmClinicalLabResultDetail #hfAssigneeId', true);" autocomplete="off">-->
+                                <!--<div class="input-group-btn">
+                                    <button id="lnkAssignee" class="btn btn-primary btn-xs " type="button" onclick="ClinicalLabResultDetail.OpenAssignee();"><i class="fa fa-search"></i></button>
+                                </div>-->
+
+                            </div>
+                            <div id="dvDateAndTime" class="col-sm-3">
+                                <div class="Order-label-control">
+                                    <label class="control-label bold" name="lblDate">Date & Time</label>
+                                    <br />
+                                    <label id="lblDate" class="control-label" name="DateAndTime"></label>
+                                </div>
+                                <!-- Date dtp -->
+                                <div class="editable-control hidden">
+                                    <label class="control-label" for="Date">Date</label>
+                                    <br />
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" id="txtOrderDate" class="form-control" name="OrderDate" data-plugin-datepicker="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="dvOrderNumber" class="col-sm-3">
+                                <div class="Order-label-control">
+                                    <label class="control-label bold" name="lblOrderNumber">Order Number</label>
+                                    <br />
+                                    <label id="lblOrderNo" class="control-label" name="OrderNo"></label>
+                                </div>
+                                <!-- Time Picker -->
+                                <div class="editable-control hidden">
+                                    <label class="control-label" for="">Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input type="text" id="txtOrderTime" name="OrderTime" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label bold">Status<span class="required">*</span></label>
+                                <select id="ddlStatus" name="Status" class="form-control" ddlist="">
+                                    <option value="">Select</option>
+                                    <option value="Final">Final</option>
+                                    <option value="Partial">Partial</option>
+                                </select>
+                            </div>
+
+                            <!--<div class="col-sm-3 has-feedback">
+                                <label class="control-label bold">Organisms:</label>
+                                <label id="lblOrganisms" class="control-label bold">none</label>
+                            </div>-->
+                            <!--<a id="btnAddCPT" href="javascript:EditableGrid.rowAdd()">Add Line Item</a>-->
+                            <div class="col-sm-3">
+                                <!--<a class="btn btn-link btn-xs p-none hidden" id="btnScanResult" href="#" onclick="ClinicalLabResultDetail.documentScan()">Scan</a>-->
+                                <div class="dropdown">
+                                    <a id="btnScanResult" href="#" class="dropdown-toggle btn btn-link btn-xs p-none hidden" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attach</a>
+                                    <ul id="menuAttach" class="dropdown-menu" aria-labelledby="btnScanResult">
+                                        <li><a href="#" onclick="ClinicalLabResultDetail.documentScan()">Scan</a></li>
+                                        <li><a href="#" onclick="ClinicalLabResultDetail.documentImport()">Upload</a></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="dropdown">
+                                    <a id="btnViewAttachment" href="#" class="dropdown-toggle btn btn-link btn-xs p-none hidden" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="ClinicalLabResultDetail.loadAttachments()">View Attachment</a>
+                                    <ul id="menuViewAttachment" class="dropdown-menu" aria-labelledby="btnViewAttachment"></ul>
+                                </div>
+                                <div class="clearfix"></div>
+                                <a class="btn btn-link btn-xs p-none hidden" id="btnViewPDF" href="#" onclick="ClinicalLabResultDetail.printLabResult();">View Result PDF</a>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visible-sm visible-xs"><div class="spacer15"></div></div>
+
+                    <!-- Start Irfan Code for Editable Grid portion  -->
+                    <div id="divResultInformation" class="col-sm-12">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Result Information</h2>
+                        </header>
+                        <div class="panel-body pl-none pr-none">
+                            <!--toggleHorDefault toggle-->
+                            <div id="favSectionDiv" class="toggleHorSmallLeft toggled">
+                                <section>
+                                    <h2>Favorites<i class="fa fa-chevron-down"></i></h2>
+                                </section>
+                                <div class="toggle-content">
+                                    <div class="col-xs-12 pb-sm">
+                                        <span class="pull-left">Favorites List</span>
+                                        <!--<a class="btn btn-link btn-xs pull-right" onclick="Clinical_ProblemLists.BindAllFavComplaints()">Select All</a>-->
+                                        <div class="clearfix"></div>
+                                        <select id="ddlFavLabResult" name="FaLabResult" class="form-control" ddlist="" onchange="ClinicalLabResultDetail.loadfavoriteListContent(this)"></select>
+                                        <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="ClinicalLabResultDetail.AutoSearchFavLabresultDetail(this)" />
+                                    </div>
+                                    <ul class="listPrimary height-max150 overflowY" id="ulFavLabResult" name="favLabResult"></ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 toggleHorSmContainer overflowY" style="position:sticky;">
+                                <div class="col-sm-12 col-md-4 pl-none pb-tiny">
+                                    <label class="control-label">Test</label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtLabCPTCode" placeholder="Search test" type="text" name="LabCPTCode" oninput="ClinicalLabResultDetail.bindAutoComplete(this)">
+                                        <div class="input-group-btn">
+                                            <!--<button class="btn btn-primary btn-xs " type="button" onclick="ClinicalLabResultDetail.openCPTCode();"><i class="fa fa-search"></i></button>-->
+                                            <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div id="pnlLab_ResultDetail" class="table-responsive">
+                                    <input type="hidden" id="Lab_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvLabResultDetail">
+                                        <thead>
+                                            <tr class="">
+                                                <th class="size40" coltype="Expand">Action</th>
+                                                <th controlid="dtpDateAndTime" controlname="DateAndTime" class="noWordBreak size65" coltype="datetime">Date</th>
+                                                <th controlid="tpTime" controlname="Time" class="noWordBreak size45" coltype="time">Time</th>
+                                                <th controlid="txtObservation" iscontroldisabled="1" controlname="Observation" class="noWordBreak size300 size-min400">Observation</th>
+                                                <th controlid="txtConditionalStatement" iscontroldisabled="1" controlname="ConditionalStatement" class="noWordBreak size100">Conditional Statement</th>
+                                                <th controlid="txtResult" iscontroldisabled="1" controlname="Result" class="noWordBreak size180">Result</th>
+                                                <th controlid="txtUoM" iscontroldisabled="1" controlname="UoM" class="noWordBreak size100">UoM</th>
+                                                <th controlid="txtFlag" iscontroldisabled="1" controlname="Flag" class="noWordBreak size100">Flag</th>
+                                                <th controlid="txtRange" iscontroldisabled="1" controlname="Range" class="noWordBreak size100">Range</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+
+                                    </table>
+                                    <div id="divLabResultPaging"></div>
+                                    <!-- Final Interpretation panel start -->
+                                    <div id="dvQuestionnaire" class="col-sm-12 col-md-12 pt-sm">
+                                        <section id="sectionQuestionnaire" class="panel panel-featured">
+                                            <header class="panel-heading">
+                                                <h2 class="panel-title pull-left">Final Interpretations by Antimicrobials</h2>
+                                                <div class="clearfix"></div>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none own-scroll  height-150 overflowY" style="min-height: 100px;">
+                                                <a class="btn btn-link btn-xs p-none pull-right" onclick="ClinicalLabResultDetail.AddNewFinalInterpretation();">Add New Interpretation</a>
+                                                <table class="table table-condensed mb-none table-noBorder" id="dgvFinalInterpretation"></table>
+                                            </div>
+                                        </section>
+
+                                        <!-- Row Template to be cloned -->
+                                        <table id="divFinalInterpretationTemplate" class="hidden">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="size10per">
+                                                        <label class="control-label"> Antimicrobial</label>
+                                                    </td>
+                                                    <td class="size40per">
+                                                        <!--<label class="control-label"> Antimicrobial</label>-->
+                                                        <select id="ddlTestAntimicrobial" name="TestAntimicrobial" onchange="ClinicalLabResultDetail.onAntimicrobialChange(this)" class="form-control">
+                                                            <option value="">- Select -</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="size10per">
+                                                        <label class="control-label">Final Interpretation</label>
+                                                    </td>
+                                                    <td class="size40per">
+
+                                                        <select id="ddlFinalInterpretation" name="FinalInterpretation" class="form-control"></select>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#">
+                                                            <span class="removeIconListHover" onclick="ClinicalLabResultDetail.deleteFinalInterpretation($($(this).parent()).parent(), event);"><i class="fa fa-times"></i></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- Final Interpretation panel end -->
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                        <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                    </div>
+                    <!-- Start Abid, hidden fields for LabResult  -->
+                    <input type="hidden" id="hfLabOrderId" name="LabOrderId" value="-1" />
+                    <input type="hidden" id="hfLabOrderResultId" name="LabOrderResultId" value="-1" />
+                    <input type="hidden" id="hfOrderNo" name="OrderNo" value="-1" />
+                    <input type="hidden" id="hfPatientId" name="PatientId" value="-1">
+                    <input type="hidden" id="hfAssigneeId" name="AssigneeId" value="-1">
+
+                    <input type="hidden" id="hfIsSentToPortal" name="IsSentToPortal" value="-1" />
+                    <input type="hidden" id="hfLabId" name="hfLabId" value="-1">
+
+                    <!-- End Abid, hidden fields for LabResult  -->
+
+                    <div class="spacer15"></div>
+
+                    <div id="comments-remarks">
+                        <div class="col-xs-6">
+                            <label class="control-label">Remarks</label>
+                            <textarea id="txtRemarks" name="Remarks" rows="3" class="form-control" maxlength="500" spellcheck="true"></textarea>
+                        </div>
+                        <div id="divLabAssociatedProblems" class="col-xs-6">
+                            <label class="control-label">Comments</label>
+                            <!--<textarea id="txtComments" onkeypress="ClinicalLabResultDetail.validateSpecialCharacters(event);" maxlength="500" name="Comments" rows="3" class="form-control" spellcheck="true"></textarea>-->
+                            <div id="MacroDescDetails" class="tinymce-autocomplete" hidden>
+                                <ul id="MacroDescriptions" class="list-unstyled list-underlined"></ul>
+                            </div>
+                            <!--<textarea id="txtComments" name="Comments" maxlength="5000" class="form-control hidden" spellcheck="true"></textarea>-->
+                            <input type="hidden" id="txtComments" name="Comments" />
+                            <div class="form-control editable" style="height:60px; font-size: 12px; overflow-y:auto" maxlength="3000" id="txtComment" name="Comments" contenteditable="true" spellcheck="true" onkeypress="ClinicalLabResultDetail.validateSpecialCharacters(event);"></div>
+                        </div>
+                    </div>
+                    <div class="pull-right pt-md pr-default">
+                        <!--<button class="btn btn-cancel btn-sm  mr-sm" type="button" id="btnResetPhysicalExam">Reset</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right mr-sm" type="button" id="btnPhysicalExamSave">Save</button>-->
+                        <div class="pull-left mr-default pt-xs">
+                            <div class="checkbox-custom ">
+                                <input type="checkbox" id="chkMarkAsReviewedDetailed" name="MarkAsReviewed">
+                                <label class="control-label">Mark as Reviewed</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveResult">Save</button>
+                        <button type="button" class="btn btn-sm btn-primary" id="btnPrintResult" onclick="ClinicalLabResultDetail.printLabResult();">Print</button>
+                        <!--<button type="submit" class="btn btn-sm btn-primary" id="btnAcknowledge">Acknowledge</button>-->
+                        <button type="submit" class="btn btn-sm btn-primary hidden" id="btnSendToPortal">Send to Portal</button>
+                        <!--<button type="button" class="btn btn-sm" id="btnResetLabResult">Reset</button>-->
+                        <button type="button" class="btn btn-sm hidden" onclick="ClinicalLabResultDetail.openLOINCSearch();" id="btnOpenLOINCSearh">LOINC Search</button>
+                    </div>
+
+                    <!-- End Irfan Code for Editable Grid portion -->
+                </form>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

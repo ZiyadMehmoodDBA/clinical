@@ -1,0 +1,79 @@
+﻿<div class="row" id="pnlClinicalLab" style="display:none;">
+    <div id="actionPanClinicalLab" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<form method="post" id="frmClinicalLab" onsubmit="return false">-->
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_Lab.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Laboratory</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_Lab.LabAddEdit(-1);"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="closebtn pull-right" onclick="Clinical_Lab.UnLoadTab()"></a>
+                            </div>
+                            <h2 class="panel-title">Search Laboratory </h2>
+                        </header>
+                        <div class="panel-body" id="pnlLab_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalLab">
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <label class="control-label">Name</label>
+                                        <input class="form-control" name="LabName" id="txtLabName" type="text" maxlength="30" />
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <label class="control-label">Type </label>
+                                        <select id="ddlLabType" class="form-control" name="LabType" ddlist="GetLabType"></select>
+                                    </div>
+                                    <div class="mt-md pr-default pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnLabSearch" type="button" onclick="Clinical_Lab.LabSearch('0');">Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnProcedureReset" type="button" onclick="Clinical_Lab.LabReset();">Reset</button>
+                                    </div>
+                                </div>                                                         
+                            </form>
+                        </div>
+                    </section>
+                    <input type="hidden" id="hfLabId" value="-1" />
+                </div>
+
+                <div id="pnlLab_Result" style="display: inline;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+
+                            <div class="col-sm-3" id="divSwitch">
+                                <span class="pr-xs">Inactive</span>
+                                <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                    <input id="switchVisit" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: none;" onchange="Clinical_Lab.activeClincialLabSearch(this);">
+                                </div>
+                                <span class="pl-xs">Active</span>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="spacer5"></div>
+                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLab">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none">LabId</th>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                        <th class="size75 size-min75" >Name</th>
+                                        <th class="size75 size-min75" >Type</th>
+                                        <th class="size250">Last Updated</th>                                      
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="dgvLab_Paging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</form>-->
+</div>

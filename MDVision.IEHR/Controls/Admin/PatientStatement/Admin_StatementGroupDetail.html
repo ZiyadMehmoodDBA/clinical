@@ -1,0 +1,223 @@
+﻿<div id="StatementGroupDetail">
+    <div id="actionPanStatementGroupDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="StatementGroupDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Statement Group</h4>
+            </div>
+            <div class="modal-body ">
+
+                <form method="post" onsubmit="return false" id="frmStatementGroup">
+                    <div class="form-group">
+
+                        <div class="col-sm-3">
+                            <label class="control-label" for="Name">Name<span class="required">*</span></label>
+                            <input class="form-control" id="txtName" name="name" type="text" maxlength="50">
+                        </div>
+                        <div class="col-sm-5">
+                            <label class="control-label" for="Description">Description</label>
+                            <textarea class="form-control" rows="1" id="txtDescription" name="description" type="text" maxlength="100" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Cycle Days">Cycle Days</label>
+                            <input class="form-control" id="txtCycleDays" name="cycleDays" type="text" maxlength="4" onkeypress="return utility.ValidateZero(event, this);" oninput="return utility.ValidateZero(event, this);">
+                        </div>
+                        <div class="col-sm-2 pad-a-labelsize">
+                            <div class="checkbox-default checkbox-custom">
+                                <input type="checkbox" id="chkActive" checked="checked">
+                                <label class="control-label" for="Active">Active</label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-9" data-provides="fileinput">
+                            <div class="row">
+                                <div class="col-xs-8 pl-md pr-sm">
+                                    <img src="" id="imgGroupImage" style="display:none" />
+                                    <label class="control-label" for="uploadFilePH">File</label>
+                                    <input type="text" class="form-control size100per ellipses disableAll" name="fileupload" id="uploadFilePH" placeholder="No File Selected" />
+                                </div>
+                                <div class="col-xs-4 pl-xs pr-none pt-lg size-min125 ">
+                                    <span class="btn btn-default btn-xs ml-xxs mr-sm btn-file">
+                                        <i class="fa fa-folder-open"></i>
+                                        <span>Browse</span>
+                                        <input type="file" name="Upload_Import_file" accept="application/pdf,image/jpg,image/bmp,image/png,image/jpeg,image/gif" id="Upload_Import_file" multiple onchange="StatementGroupDetail.BufferFile(this);" />
+                                    </span>
+
+                                    <label class="control-label" id="totalFiles">0 file(s) selected</label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <span class="spacer20"></span>
+                        <div class="splitter text-center">Messages</div>
+                        <div id="messagesContainer">
+                            <div class="col-sm-4">
+                                <label class="control-label" for="1st Message">1st Message</label>
+                                <select id="ddlMessage1" name="message1" class="form-control" ddlist="GetStatementMessage"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" for="Above 30">Above 30</label>
+                                <select id="ddlMessage2" name="message2" class="form-control" ddlist="GetStatementMessage"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" for="Above 60">Above 60</label>
+                                <select id="ddlMessage3" name="message3" class="form-control" ddlist="GetStatementMessage"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" for="Above 90">Above 90</label>
+                                <select id="ddlMessage4" name="message4" class="form-control" ddlist="GetStatementMessage"></select>
+                                <!-- <input class="form-control" type="text" list="ddlMessage4" name="PriorAuthorization" id="txtMessage4" />
+                                <datalist id="ddlMessage4" name="PriorAuthorization" ddsuggestionlist="GetStatementMessage">
+                                     <option value=" - select -"></option>
+                                 </datalist>-->
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" for="Above 120">Above 120</label>
+                                <select id="ddlMessage5" name="message5" class="form-control" ddlist="GetStatementMessage"></select>
+                            </div>
+                            <div class="col-sm-12">
+                                <label class="control-label">Message</label>
+                                <textarea rows="3" class="form-control" id="txtMessage" spellcheck="true"></textarea>
+                            </div>
+                        </div>
+                     
+                        <span class="spacer20"></span>
+                        <div class="splitter text-center">Patient Statement From</div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="Name">Name<span class="required">*</span></label>
+                            <input class="form-control" name="FromName" id="txtFromName" type="text">
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="Address">Address<span class="required">*</span></label>
+                            <input class="form-control" name="FromAddress" id="txtFromAddress" type="text">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="City">City<span class="required">*</span></label>
+                            <input class="form-control" name="FromCity" id="txtFromCity" type="text">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="State">State<span class="required">*</span></label>
+                            <input class="form-control" name="FromState" id="txtFromState" type="text" placeholder="aa" data-mask="aa">
+                        </div>
+                        <div class="col-sm-1">
+                            <label class="control-label" for="Zip">Zip<span class="required">*</span></label>
+                            <input class="form-control" name="FromZip" id="txtFromZip" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#frmStatementGroup', '#txtFromZip', '#txtFromCity', '#txtFromState')">
+                        </div>
+                        <div class="col-sm-1 pad-a-labelsize">
+                            <input class="form-control" name="FromZipExt" id="txtFromZipExt" type="text" placeholder="9999" data-mask="9999">
+                        </div>
+
+                        <span class="spacer20"></span>
+                        <div class="splitter text-center">Make Check payable and Remit To</div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="Remit Name">Name<span class="required">*</span></label>
+                            <input class="form-control" name="RemitToName" id="txtRemitToName" type="text">
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="Remit Address">Address<span class="required">*</span></label>
+                            <input class="form-control" name="RemitToAddress" id="txtRemitToAddress" type="text">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Remit City">City<span class="required">*</span></label>
+                            <input class="form-control" name="RemitToCity" id="txtRemitToCity" type="text">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Remit State">State<span class="required">*</span></label>
+                            <input class="form-control" name="RemitToState" id="txtRemitToState" type="text" placeholder="aa" data-mask="aa">
+                        </div>
+                        <div class="col-sm-1">
+                            <label class="control-label" for="Remit Zip">Zip<span class="required">*</span></label>
+                            <input class="form-control" name="RemitToZip" id="txtRemitZip" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#frmStatementGroup', '#txtRemitZip', '#txtRemitToCity', '#txtRemitToState')">
+                        </div>
+                        <div class="col-sm-1 pad-a-labelsize">
+                            <input class="form-control" name="RemitToZipExt" id="txtRemitToZipExt" type="text" placeholder="9999" data-mask="9999">
+                        </div>
+                     
+                        <div class="col-md-2">
+                            <label class="control-label">Office Hours From</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                <input type="text" id="txtOfficeHoursFrom" data-plugin-timepicker class="form-control " data-plugin-options='{ "minuteStep": 5 }' name="OfficeHoursFrom">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Office Hours To</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                <input type="text" id="txtOfficeHoursTo" data-plugin-timepicker class="form-control " data-plugin-options='{ "minuteStep": 5 }' name="OfficeHoursTo" >
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Tele Phone">TelePhone #</label>
+                            <input class="form-control" name="TelePhone" id="txtTelePhone" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);" value="">
+                        </div>
+                        <div class="col-sm-1">
+                            <label class="control-label" for="Phone Ext">Phone Ext</label>
+                            <input class="form-control" name="PhoneExt" id="txtPhoneExt" type="text" placeholder="99999" data-mask="99999" onblur="utility.validateMasking(this);" >
+                        </div>
+
+                        <span class="spacer20"></span>
+                        <div class="splitter text-center">Send to AR after following criteria</div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="Outstanding Days">Outstanding Days<span class="required">*</span></label>
+                            <input class="form-control" name="outstandingDays" id="txtOutstandingDays" type="text" maxlength="4" onkeypress="return utility.ValidateZero(event, this);" oninput="return utility.ValidateZero(event, this);">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="Number of Statements">Number of Statements<span class="required">*</span></label>
+                            <input class="form-control" name="numberOfStatements" id="txtNumberOfStatements" type="text" maxlength="4" onkeypress="return utility.ValidateZero(event, this);" oninput="return utility.ValidateZero(event, this);">
+                        </div>
+
+
+                        <div class="col-xs-8 col-sm-4 pull-right mt-md">
+                            <button class="btn btn-primary btn-sm rightbtn">Save & Exit</button>
+                            <!--<button id="btnHistoryStatementGroup" class="btn btn-primary btn-sm rightbtn" type="button" onclick="StatementGroupDetail.ShowHistory();">History</button>-->
+                        </div>
+                    </div>
+                    <div class="spacer10"></div>
+
+                    <input type="hidden" id="hfStatementGroupId" />
+                </form>
+
+
+                <div class="clearfix"></div>
+
+                <div class="clearfix"></div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+        $('#frmStatementGroup #txtOfficeHoursFrom').timepicker({
+            defaultTime: '12:00 AM',
+            minuteStep: 1,
+        });
+        $('#frmStatementGroup #txtOfficeHoursTo').timepicker({
+            minuteStep: 1,
+            defaultTime: '12:00 PM',
+        });
+
+        $('#frmStatementGroup #txtOfficeHoursFrom').timepicker().on('changeTime.timepicker', function (e) {
+            disableFocus: false
+            if ($('#frmStatementGroup').data('bootstrapValidator') != null && typeof $('#frmStatementGroup').data('bootstrapValidator') != 'undefined') {
+                $('#frmStatementGroup').bootstrapValidator('revalidateField', 'txtOfficeHoursFrom');
+            }
+
+        });
+
+        $('#frmStatementGroup #txtOfficeHoursFrom').timepicker().on('changeTime.timepicker', function (e) {
+            disableFocus: false
+            if ($('#frmStatementGroup').data('bootstrapValidator') != null && typeof $('#frmStatementGroup').data('bootstrapValidator') != 'undefined') {
+                $('#frmStatementGroup').bootstrapValidator('revalidateField', 'txtOfficeHoursFrom');
+            }
+        
+        });
+        
+    });
+</script>s

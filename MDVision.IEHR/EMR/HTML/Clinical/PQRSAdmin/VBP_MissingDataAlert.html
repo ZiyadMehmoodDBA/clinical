@@ -1,0 +1,113 @@
+﻿<div class="row" id="pnlVBP_MissingDataAlert">
+    <div id="actionPanVBP_MissingDataAlert" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="VBP_MissingDataAlert.UnLoad('cancel');"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Value Based Program Missing Data</h4>
+            </div>
+            <div id="modalbody" class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form id="frmPatientList" method="post" name="frmVBP_MissingDataAlert" onsubmit="return false">
+                        <div id="divMainPatientList">
+                            <section id="sectionPatientList" class="panel panel-featured">
+                                <header class="panel-heading">
+
+                                    <h2 class="panel-title">Patient List</h2>
+                                </header>
+                                <div class="panel-body">
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientList">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none">PatientId</th>
+                                                <th>Account#</th>
+                                                <th>Last Name</th>
+                                                <th>First Name</th>
+                                                <th id="thDOB">DOB</th>
+                                                <th>Age</th>
+                                                <th>Sex</th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+
+                        <ul id="ulTabs" class="tabs-custom">
+                            <li class="active"><a data-toggle="tab" href=".VBP">VBP</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body">
+                            <div class="VBP tab-pane active">
+                                <section id="PHQ2detailTable">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th class="size75per"> <h2 class="panel-title white">Patient Health Questionaire - 2</h2></th>
+                                                <th> <h2 class="panel-title white">Reasoning</h2></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="divQuestionGroup1"></tbody>
+                                    </table>
+
+                                    <div class="pull-right mt-md text-right" id="divPHQ2btns">
+                                        <button class="btn btn-success btn-sm" onclick="VBP_MissingDataAlert.saveCurrentScorePHQ2(); " type="button" id="btnPHQ2Save"> Save</button>
+                                        <button class="btn btn-default btn-sm" onclick="VBP_MissingDataAlert.UnLoad('Cancel');" type="button" id="btnPHQ2Cancel"> Cancel</button>
+                                    </div>
+                                </section>
+                                <div class="spacer10"></div>
+
+                                <section id="PHQ9detailTable">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th class="size75per"> <h2 class="panel-title white">Patient Health Questionaire - 9</h2></th>
+                                                <th> <h2 class="panel-title white">Reasoning</h2></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="divQuestionGroup1"></tbody>
+                                    </table>
+                                    <div id="divQuestionGroup2">
+                                    </div>
+                                    <div class="pull-right mt-md text-right" id="divPHQ9btns">
+
+                                        <button class="btn btn-success btn-sm" onclick="VBP_MissingDataAlert.saveCurrentScorePHQ9('Save'); " type="button" id="btnPHQ9Save"> Save</button>
+                                        <button class="btn btn-default btn-sm" onclick="VBP_MissingDataAlert.UnLoad('Cancel');" type="button" id="btnPHQ9Cancel"> Cancel</button>
+                                    </div>
+                                </section>
+                                <section id="DepressiondetailTable">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th class="size75per"> <h2 class="panel-title white">Depression Screening Activity Questionnaire</h2></th>
+                                                <th> <h2 class="panel-title white">Reasoning</h2></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="divQuestionGroup1"></tbody>
+                                    </table>
+                                    <div id="divQuestionGroup3">
+                                    </div>
+                                    <div>
+                                        <label class="label"><span style="color:black;font-size:12px;">Additional Notes</span></label>
+                                        <textarea id="Comments" spellcheck="true" class="form-control" cols="30"></textarea>
+                                    </div>
+                                    <div class="pull-right mt-md text-right" id="divDepressionbtns">
+                                        <!--saveCurrentScoreDepression-->
+                                        <button class="btn btn-success btn-sm" onclick="VBP_MissingDataAlert.saveCurrentScoreDepression('Save'); " type="button" id="btnPHQ9Save"> Save</button>
+                                        <button class="btn btn-default btn-sm" onclick="VBP_MissingDataAlert.UnLoad('Cancel');" type="button" id="btnDepressionCancel"> Cancel</button>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+                        <input type="hidden" name="PatientId" id="hfPatientId" />
+                    </form>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+﻿<div class="row" id="pnlAddLetterTemplate">
+    <div id="actionPanAddLetterTemplate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-full mt-default">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Add_Letter_Template.UnLoadTab();"></button>
+                <h4 class="modal-title" id="headerId">Letter Template</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmAddLetterTemplate" method="post" onsubmit="return false">
+                    <div class="col-sm-3 col-lg-4">
+                        <label class="control-label">Name <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="Name" maxlength="100" onkeypress="utility.ValidateForwardSlash(event, this);" />
+                    </div>
+                    <div class="col-sm-3 col-lg-4">
+                        <label class="control-label">Description</label>
+                        <input type="text" class="form-control" name="Description" maxlength="100" />
+                    </div>
+                    <div class="col-sm-3 col-lg-4">
+                        <label class="control-label">Category <span class="required">*</span></label>
+                        <select id="ddlCategory" name="CategoryId" class="form-control" ddlist="GetLetterCategory"></select>
+                    </div>
+                    <div class="col-sm-3 col-md-4" id="divLetterSpecialty">
+                        <label class="control-label">Specialty </label>
+                        <select id="ddlLetterSpecialty" multiple="multiple" name="LetterSpecialty" class="form-control"></select>
+                    </div>
+                    <div class="col-sm-3 col-md-4" id="divLetterProvider">
+                        <select class="form-control" style="display:none;" name="hiddenLetterProvider" id="ddlHiddenLetterProvider"></select>
+                        <label class="control-label">Provider</label>
+                        <select class="form-control" multiple="multiple" name="LetterProvider" id="ddlLetterProvider"></select>
+                    </div>
+                    <div class="col-sm-3 col-lg-1 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Active" name="IsActive" checked>
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 pull-right mt-md pr-default"><button type="submit" class="btn btn-primary btn-sm">Save</button></div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-sm-4" id="divEntity" hidden>
+                        <label class="control-label">Entity<span class="required">*</span></label>
+                        <select id="lstEntityId" class="form-control" ddlist="GetEntity" name="EntityId" onchange="Add_Letter_Template.loadDropDowns();"></select>
+                    </div>
+                    <!--<div class="pull-right mt-md pr-default"><button type="submit" class="btn btn-primary btn-sm">Save</button></div>-->
+                    <div class="spacer20"></div>
+
+                    <div class="panel-body panel-featured pl-none pr-none">
+                        <div class="col-sm-4 col-lg-3">
+                            <label class="control-label">Tag Category</label>
+                            <select id="ddlTagCategory" name="Letter_TagCategoryId" class="form-control" ddlist="GetLetterTagCategory" onchange="Add_Letter_Template.TagCategoryChange()"></select>
+                        </div>
+                        <div class="col-sm-4 col-lg-6 TagName" id="TagNameDiv">
+                            <label class="control-label">Tag Name</label>
+                            <select id="TagName" name="Letter_TagNameId" class="form-control" disabled>
+                                <option selected="selected" value="">-Select-</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-1 pad-a-labelsize pr-default"><button type="button" class="btn btn-success btn-xs" onclick="Add_Letter_Template.InsertTag()">Insert</button></div>
+                        <div class="spacer20"></div>
+
+                    </div>
+                    <div class="spacer10"></div>
+
+                    <div class="form-group">
+                        <textarea cols="400" id="elm1" name="TemplateData" spellcheck="true"></textarea>
+                        <input type="hidden" id="EncodedImageString" value="" />
+                        <input type="file" id="ImageUploaderTinymce" style="display:none">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

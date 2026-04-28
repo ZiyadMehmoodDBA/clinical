@@ -1,0 +1,174 @@
+﻿<div class="row" id="pnlClinicalProcedures">
+    <div id="actionPanClinicalProcedures" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_Procedures.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Procedures</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_Procedures.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Add Procedures</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body NoRadiusT" id="pnlSection_Search">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle active">
+                                    <label>Add Procedures</label>
+                                    <div class="toggle-content panel-body NoRadiusT p-none">
+                                        <form id="frmClinicalProcedures" method="post" onsubmit="return false">
+                                            <div class="col-sm-8 col-md-6 col-lg-4 Diagnosis" id="DiagnosisDiv" hidden>
+                                                <select id="ddlDiagnosis" name="ProblemListId" class="form-control"></select>
+                                            </div>
+                                            <div class="col-sm-2 col-md-2" id="SurgicalDiv" hidden>
+                                                <select id="ddlSurgical" name="Surgical" class="form-control">
+                                                    <option value="1" refvalue="" refname="">Yes</option>
+                                                    <option value="0" refvalue="" refname="" selected="selected">No</option>
+                                                </select>
+                                            </div>
+                                            <div style="height:260px;">
+                                                <div id="favSectionDiv" class="toggleHorDefault" data-title="Favorites">
+                                                    <div class="col-xs-12 pb-sm">
+                                                        <span class="pull-left">Favorites List</span>
+                                                        <a href="#" onclick="Clinical_Procedures.selectAllFavoriteListContent()" class="btn btn-link btn-xs pull-right">Select All</a>
+                                                        <div class="clearfix"></div>
+                                                        <select id="ddlFavoriteListProcedure" name="FavoriteListProcedure" onchange="Clinical_Procedures.loadfavoriteListContent(this)" class="form-control"></select>
+                                                        <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="Clinical_Procedures.AutoSearchFavProcedure()" />
+                                                    </div>
+                                                    <ul id="ulFavoriteListProcedureContent" name="FavoriteListProcedureContent" class="listPrimary height-max200 overflowY"></ul>
+                                                </div>
+                                                <div id="FormDiv" class="col-sm-12" style="position:sticky;">
+                                                    <div class="col-sm-12 col-md-4 pl-none pb-tiny">
+                                                        <label class="control-label">Procedure</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" id="txtProcedureCPTCode" placeholder="search" type="text" name="ProcedureCPTCode" oninput="Clinical_Procedures.bindAutoComplete(this)" />
+                                                            <div class="input-group-btn">
+                                                                <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_Procedures.openCPTCode();"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div id="pnlProcedure_ResultAdd">
+                                                        <div class="table-responsive overflowX">
+                                                            <table class="table table-bordered table-striped table-condensed table-hover tablePaddingAdjst " id="dgvProcedureAdd">
+                                                                <thead>
+                                                                    <tr class="">
+                                                                        <th class="size20 p-none" coltype="Expand"></th>
+                                                                        <th id="ColumnAction" actiontype="Delete" coltype="Action" class="size60 size-min60">Action</th>
+                                                                        <th id="thStartDate" controlid="dtpStartDate" iscontroldisabled="0" controlname="StartDate" controlwidth="" class="size-min90 size90 " coltype="datetime">Start Date</th>
+                                                                        <th id="thEndDate" controlid="dtpEndDate" iscontroldisabled="0" controlname="EndDate" controlwidth="" class="size-min90 size90" coltype="datetime">End Date</th>
+                                                                        <th hfcontrolid="ProcedureOrderTestId" hfcontrolname="ProcedureOrderTestId" controlid="ProcedureProcedure" iscontroldisabled="1" controlname="ProcedureProcedure" coltype="TextBox" isoptional="0">Procedure</th>
+                                                                        <th id="txtSurgical" controlid="txtSurgical" controlname="Surgical" coltype="dropdown" class="size100">Surgical</th>
+                                                                        <th id="txtUnit" controlid="txtUnit" controlname="Unit" coltype="TextBox" class="noWordBreak size50">Unit</th>
+                                                                        <th controlid="txtModifier" controlname="Modifier" controlwidth="size20 p-none" class="size20 size-min50" coltype="TextBox" autocompletemethod="Modifier">Modifiers</th>
+                                                                        <th controlid="ProblemListId" class="size-min230 size230 noWordBreak" controlname="ProblemListId" coltype="dropdown">Diagnosis</th>
+                                                                        <th controlid="ReasonId" class="size-min150 size150 noWordBreak" controlname="ReasonId" coltype="dropdown" ddlist="GetVaccineRefusalReason">Negation Reason</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+
+                                                            </table>
+                                                            <input type="hidden" name="ProcedureTestIdsa" id="hfProcedureTestIds" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1 pull-right mt-md">
+                                                        <button class="btn btn-success btn-sm rightbtn" type="button" onclick="Clinical_Procedures.ProceduresSave();" id="btnAddProbList">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="PatientId" id="hfPatientId" />
+                                            <input type="hidden" name="gridComments" id="hfGridComments" />
+                                            <input type="hidden" name="IMOProblem" id="hfIMOProblem" />
+                                        </form>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="pnlProcedures_Result" style="display: inline;">
+                    <form>
+                        <div class="panel-body panel-featured">
+                            <!--<div class="col-sm-3" id="divSwitch">
+                                <span class="pr-xs">Inactive</span>
+                                <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                    <input id="switchActive" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="Clinical_Procedures.ActiveProblemSearch(this);">
+                                </div>
+                                <span class="pl-xs">Active</span>
+                            </div>-->
+                            <div class="clearfix"></div>
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvProcedures">
+                                <thead>
+                                    <tr>
+                                        <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active,History" coltype="Action" class="size80 size-min80">Action</th>
+                                        <th controlid="txtProcedures" iscontroldisabled="1" controlname="Procedures" class="noWordBreak size30">Procedures</th>
+                                        <th id="txtSurgical" controlname="Surgical" coltype="dropdown" class="size120">Surgical</th>
+                                        <th id="txtUnit" controlname="Unit" coltype="TextBox" class="noWordBreak size50">Unit</th>
+                                        <th controlid="txtModifier" controlname="Modifier" controlwidth="size20 p-none" class="size60 size-min105" coltype="TextBox" autocompletemethod="Modifier">Modifiers</th>
+                                        <th controlid="LookupProblemLists" controlname="Procedure_Diagnosis" class="noWordBreak size200" coltype="dropdown" ddlist="LookupProblemLists">ICD (Diagnosis)</th>
+                                        <th controlid="dtpFromProcedureDate" controlname="StartDate" class="noWordBreak size30" coltype="datetime">Start Date</th>
+                                        <th controlid="dtpToProcedureDate" controlname="EndDate" class="noWordBreak size30" coltype="datetime">End Date</th>
+                                        <th controlid="txtLastUpdated" iscontroldisabled="1" controlname="LastUpdatedDate" coltype="LastModifyDate" class="noWordBreak size30">Last Updated</th>
+                                        <th controlid="txtComments" controlname="Comments" class="noWordBreak size30" coltype="btncommentsprocedures">Comments</th>
+                                        <th controlid="ReasonId" controlname="ReasonId" class="noWordBreak size200" coltype="dropdown" ddlist="GetVaccineRefusalReason">Negation Reason</th>
+                                        <th id="CQMEncounterTypeId" controlid="CQMEncounterTypeId" controlname="CQMEncounterTypeId" class="noWordBreak size200" coltype="dropdown" ddlist="GetCQMEncounterType">CQM Encounter Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="dgvProcedures_Paging"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-footer"></div>
+        </div>
+
+    </div>
+</div>
+<div id="FaceSheetPager"></div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    //$(document).ready(function () {
+
+    //    //(function ($) {
+    //    //    'use strict';
+    //    //    $(function () {
+    //    //        $('[data-plugin-ios-switch]').each(function () {
+    //    //            var $this = $(this);
+
+    //    //            $this.themePluginIOS7Switch();
+    //    //        });
+    //    //    });
+    //    //}).apply(this, [jQuery]);
+
+
+    //});
+
+</script>

@@ -1,0 +1,91 @@
+﻿<div class="row" id="pnlClinicalPatientEducation" style="display:none;">
+    <div id="actionPanClinicalPatientEducation" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_PatientEducation.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Patient Education</h4>
+            </div>
+            <div id="modalbody">
+                <div class="spacer10"></div><div class="clearfix"></div>
+                <div id="pnlPatientEducation_Result" style="display: inline;">
+                    <section class="panel">
+                        <ul class="tabs-custom">
+                            <li class="active"><a class="custom-made-tabs" href="#Info" onclick="Clinical_PatientEducation.SetGrid('Info') " data-toggle="tab">Info Button</a></li>
+                            <li class=""><a class="custom-made-tabs" href="#NonInfo" onclick="Clinical_PatientEducation.SetGrid('NonInfo') " data-toggle="tab">Non Info Button</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body">
+                            <div id="Info" class="tab-pane active custom-made-tabs">
+                                <span class="spacer10"></span>
+                                <div class="panel panel-featured">
+                                    <span class="spacer10"></span>
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvInfoDocument">
+                                        <thead>
+                                            <tr>
+                                                <th id="ColumnAction" class="size-min120 size120 size-max120">Action</th>
+                                                <th class="size-min130">Document Name</th>
+                                                <th class="noWordBreak">Entry Date</th>
+                                                <th class="noWordBreak">Entered By</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="divInfoPaging"></div>
+                                </div>
+                                <div class="pull-right mt-sm">
+                                    <button class="btn btn-success btn-sm" type="button" onclick="Clinical_PatientEducation.addInfoDocsToNotes();" id="btnAddInfoDocsToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div id="NonInfo" class="tab-pane custom-made-tabs">
+                                <span class="spacer10"></span>
+                                <div class="panel-body">
+                                    <div class="panel panel-featured" id="AddDocument" style="display: none;">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">
+                                                Add Document
+                                            </h2>
+                                        </header>
+                                    </div>
+                                    <form id="frmClinicalPatientEducation" method="post" onsubmit="return false">
+
+                                        <div class="col-sm-6 col-lg-2">
+                                            <label class="control-label" for="Documents">Document</label>
+                                            <input class="form-control" id="txtDocument" name="DocumentName" placeholder="Start typing to search" customname="Document Name" type="text" value="" />
+                                        </div>
+                                        <div class="pull-left pt-lg">
+                                            <button class="btn btn-success btn-sm" type="submit" id="btnAddDocument">Add</button>
+                                        </div>
+                                        <input type="hidden" name="DocumentId" id="hfDocumentId" />
+                                    </form>
+                                </div>
+                                <span class="spacer10"></span>
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvNonInfoDocument">
+                                    <thead>
+                                        <tr>
+                                            <th id="ColumnAction" class="size-min100">Action</th>
+                                            <th class="size-min130">Document Name</th>
+                                            <th class="noWordBreak">Entry Date</th>
+                                            <th class="noWordBreak">Entered By</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divNonInfoPaging"></div>
+                                <div class="pull-right mt-sm">
+                                    <button class="btn btn-success btn-sm" type="button" onclick="Clinical_PatientEducation.addDocsToNotes();" id="btnAddDocsToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <input type="hidden" id="helperPDF" />
+                <object id="OpenDocumentIF" class="col-sm-12  panel-body panel-featured" data="Scripts/js/pdf/web/viewer.html" style="display: none; height: 1000px;"></object>
+                <div id="info_button">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

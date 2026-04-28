@@ -1,0 +1,495 @@
+﻿@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>*@
+
+
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    @Styles.Render("~/bundles/CCM/themes")
+    @Styles.Render("~/bundles/CCM/blue")
+
+    @Scripts.Render("~/bundles/CCM/scripts")
+    @RenderSection("scripts", required: false)
+
+    <title ng-bind="helloAngular"></title>
+</head>
+
+<body>
+
+    @RenderBody()
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+
+
+
+    <ng-form>
+        <section class="body">
+            <header class="header">
+                <section class="hidden-sm hidden-xs hidden-md pt-lg pull-left size5per">
+                    <img src="../../Content/images/logo-tiny.png" height="65" class="ml-sm" alt="MDVision Pvt Ltd." />
+                </section>
+                <section class="mainSec profile-small">
+
+                    <section>
+                        <div class="pprofile-adjust">
+                        </div>
+                        <div class="mr-sm pull-right">
+                            <span>Tue Nov 15 2016 5:14:10 AM</span>
+                            <div class="clearfix"></div>
+                            <div class="userbox">
+                                <a href="#" data-toggle="dropdown">
+                                    <figure class="profile-picture">
+                                        <i class="fa fa-user fa-2x blue"></i>
+                                    </figure>
+                                    <div class="profile-info">
+                                        <span class="name">
+                                            User Name
+                                        </span>
+                                        <span class="role">
+                                            SHS
+                                        </span>
+                                    </div>
+                                    <i class="fa custom-caret"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <ul class="list-unstyled">
+                                        <li class="divider"></li>
+
+                                        <li id="dassett">
+                                            <a href="#" title="DashBoardSetting" onclick="">
+                                                <i class="fa fa-wrench"></i>
+                                                My Settings
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="ChangePassword">
+                                                <i class="fa fa-lock mr-xs"></i>
+                                                Change Password
+                                            </a>
+                                        </li>
+                                        <li class="dropdown dropdown-custom">
+                                            <button type="button"><i class="fa fa-exchange"></i> Switch Entity</button>
+                                        </li>
+                                        <li>
+                                            <button type="button"><i class="fa fa-exchange"></i> Logout</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="clearfix"></div>
+                    <section class="controls-xs">
+                        <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened"><i class="fa fa-bars" aria-label="Toggle sidebar"></i></div>
+                        <div id="pnlTab1" class="pull-left">
+                            <div class="tabs">
+                                <ul class="nav nav-tabs">
+                                    @*<li ng-repeat="item in tabMenuItems">
+                                            <a href="#" data-toggle="tooltip" title="" onclick=""><span>{{item.name}}</span><i class="fa fa-dashboard"></i></a>
+                                        </li>*@
+
+                                    <li class="active"><a href="#" data-toggle="tooltip" title="DashBoard" onclick=""><span>DashBoard</span><i class="fa fa-dashboard"></i></a> </li>
+                                    <li><a href="#" data-toggle="tooltip" title="Patient" onclick=""><span>Patient</span><i class="fa fa-user"></i></a> </li>
+                                    <li><a href="#" data-toggle="tooltip" title="Scheduler" onclick=""><span>Scheduler</span><i class="fa fa-calendar"></i></a> </li>
+                                    <li><a href="#" data-toggle="tooltip" title="Clinical" onclick=""><span>Clinical</span><i class="fa fa-user"></i></a> </li>
+                                    <li><a href="#" data-toggle="tooltip" title="Billing" onclick=""><span>Billing</span><i class="fa fa-book"></i></a> </li>
+                                    <li><a href="#" data-toggle="tooltip" title="Batch" onclick=""><span>Batch</span><i class="fa fa-cubes"></i></a> </li>
+                                    <li><a href="#" data-toggle="tooltip" title="Reports" onclick=""><span>Reports</span><i class="fa fa-bar-chart"></i></a> </li>
+                                    <li><a href="#" data-toggle="tooltip" title="Admin" onclick=""><span>Admin</span><i class="fa fa-cogs"></i></a> </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="pull-right hidden-xs">
+                            <ul class="notifications">
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="CDS Alert" onclick="">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="Documents" onclick="">
+                                        <i class="fa fa-files-o"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="Immunization Alert" onclick="">
+                                        <i class="fa fa-bell"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="Prescriptions Refill" onclick="">
+                                        <i class="fa fa-refresh"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="Pending Prescriptions" onclick="">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="All Notes" onclick="">
+                                        <i class="fa fa-file"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="Appointments" onclick="">
+                                        <i class="fa fa-calendar"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="Patient Alerts" onclick="">
+                                        <i class="fa fa-bell"></i>
+                                        <span class="badge">3</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="Faxes" onclick="">
+                                        <i class="fa fa-print"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="Messages" onclick="">
+                                        <i class="fa fa-envelope"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" style="display: inline-block;" data-toggle="tooltip" data-placement="bottom" title="Tasks" onclick="">
+                                        <i class="fa fa-tasks"></i>
+                                        <span class="badge"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" onclick="" data-toggle="tooltip" data-placement="bottom" title="Quick Add Patient">
+                                        <i class="fa fa-user-plus"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="notification-icon" onclick="" name="btnPatientSearch" data-toggle="tooltip" data-placement="bottom" title="Search&nbsp;Patient">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </li>
+
+
+
+                            </ul>
+                        </div>
+                    </section>
+                </section>
+            </header>
+            <div class="inner-wrapper" style="width:auto !important">
+                <div id="pnlTab2">
+                    <aside id="sidebar-left" class="sidebar-left">
+                        <div class="sidebar-header">
+                            <div class="sidebar-title">
+                                <a class="btn btn-link btn-lg menuBackBtn" href="#" onclick="">
+                                    <span data-toggle="tooltip" data-placement="right" title="" class="oi oi-account-logout pull-right" data-original-title="Back to Main Menu"></span>
+                                </a>
+                            </div>
+                            <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle"><i class="fa fa-bars" aria-label="Toggle sidebar"></i></div>
+                        </div>
+                        <div class="nano">
+                            <div class="nano-content">
+                                <nav class="nav-main" role="navigation">
+                                    <ul class="nav nav-main">
+                                        <li class="nav-parent" ng-click="">
+                                            <a class="nav-parent" href="#">
+                                                <i class="fa fa-dashboard"></i><span>DashBoard</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-parent">
+                                            <a data-toggle="tab" href="#" title="Patient" onclick="">
+                                                <i class="fa fa-user" aria-hidden="true"></i><span>Patient</span>
+                                            </a>
+                                            <ul class="nav nav-children">
+                                                <li class="nav-active"><a href="#" title="Demographic">Demographics</a></li>
+                                                <li><a href="#" title="Insurance">Insurance</a> </li>
+                                                <li><a href="#" title="Documents">Documents</a> </li>
+                                                <li><a href="#" title="Tasks">Tasks</a> </li>
+                                                <li><a href="#" title="Messages">Messages</a></li>
+                                                <li><a href="#" title="Case Management">Case Management</a> </li>
+                                                <li><a href="#" title="Audit Log">Audit Log</a></li>
+                                                <li><a href="#" title="Referrals">Referrals</a></li>
+                                                <li><a href="#" title="Encounter">Encounter</a></li>
+                                                <li><a href="#;" title="Letter">Letter</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-parent">
+                                            <a href="#" data-toggle="tab" title="Scheduler" onclick="">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i><span>Scheduler</span>
+                                            </a>
+                                            <ul class="nav nav-children">
+                                                <li class="nav-active"><a href="#" title="Schedule Calendar">Calendar</a></li>
+                                                <li><a href="#" title="Schedule Search">Search</a></li>
+                                                <li><a href="#" title="Multiple View">Multiple View</a></li>
+                                                <li><a href="#" title="Wait List">Wait List</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-parent">
+                                            <a class="noContentAfter" href="#" data-toggle="tab" title="Clinical" onclick="">
+                                                <i class="fa fa-user" aria-hidden="true"></i><span>Clinical</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-parent">
+                                            <a href="#" data-toggle="tab" title="Billing" onclick="">
+                                                <i class="fa fa-book" aria-hidden="true"></i><span>Billing</span>
+                                            </a>
+                                            <ul class="nav nav-children">
+                                                <li><a href="#" title="Unclaimed Appointments">Unclaimed Appointments</a></li>
+                                                <li><a href="#" title="Charges">Charges</a></li>
+                                                <li><a href="#" title="Out of Office Visits">Out of Office Visits</a></li>
+                                                <li><a href="#" title="Charge Batch">Charge Batch</a></li>
+                                                <li><a href="#" title="Claim Submission">Claim Submission</a></li>
+                                                <li><a href="#" title="Payment Posting">Payment Posting</a></li>
+                                                <li><a href="#" title="Patient Statement">Patient Statement</a></li>
+                                                <li><a href="#" title="Payment Batch">Payment Batch</a></li>
+                                                <li><a href="#" title="EDI Reports">EDI Reports</a></li>
+                                                <li><a href="#" title="ERA">ERA</a></li>
+                                                <li class="nav-parent">
+                                                    <a>Follow Up</a>
+                                                    <ul class="nav nav-children">
+                                                        <li><a href="#" title="Patient AR">Patient AR</a></li>
+                                                        <li><a href="#" title="Insurance AR">Insurance AR</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-parent">
+                                            <a href="#" data-toggle="tab" title="Batch" onclick="">
+                                                <i class="fa fa-cubes " aria-hidden="true"></i>
+                                                <span>Batch</span>
+                                            </a>
+                                            <ul class="nav nav-children">
+                                                <li><a href="#" title="Documents">Documents</a></li>
+                                                <li><a href="#" title="Tasks">Tasks</a></li>
+                                                <li><a href="#" title="Patient Eligibility">Patient Eligibility</a></li>
+                                                <li><a href="#" title="Encounter">Encounter</a></li>
+                                                <li><a href="#" title="Faxes">Faxes</a></li>
+                                                <li><a href="#" title="Clinical Quality Measure">Clinical Quality Measure</a></li>
+                                                <li><a href="#" title="Izenda Report Test">Izenda Report Test</a></li>
+                                                <li><a href="#" title="Patient List">Patient List</a></li>
+                                                <li><a href="#" title="Import CCDA">Import CCDA</a></li>
+                                                <li><a href="#" title="Import HL7 Lab Results">Import HL7 Lab Results</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-parent">
+                                            <a class="nav-parent" href="#" onclick="">
+                                                <i class="fa fa-bar-chart" aria-hidden="true"></i><span>Reports</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-parent">
+                                            <a href="#" data-toggle="tab" title="Admin" onclick="">
+                                                <i class="fa fa-cogs " aria-hidden="true"></i>
+                                                <span>Admin</span>
+                                            </a>
+                                            <ul class="nav nav-children">
+                                                <li class="nav-parent">
+                                                    <a>Security</a>
+                                                    <ul class="nav nav-children">
+                                                        <li><a href="#" title="User">User</a></li>
+                                                        <li><a href="#" title="Security Roles">Security Roles</a></li>
+                                                        <li><a href="#" title="Security Entity Group">Security Entity Group</a></li>
+                                                        <li><a href="#" title="Password Configuration">Password Configuration</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-parent">
+                                                    <a>Profiles</a>
+                                                    <ul class="nav nav-children">
+                                                        <li><a href="#" title="Provider">Provider</a></li>
+                                                        <li><a href="#" title="Practice">Practice</a></li>
+                                                        <li><a href="#" title="Facility">Facility</a></li>
+                                                        <li><a href="#" title="Resources">Resources</a></li>
+                                                        <li><a href="#" title="Electronic Fax Setup">Electronic Fax Setup</a></li>
+                                                        <li><a href="#" title="Specialty">Specialty</a></li>
+                                                        <li><a href="#" title="Additional Billing Provider">Additional Billing Provider</a></li>
+                                                        <li><a href="#" title="Billing Provider"> Billing Provider</a></li>
+                                                        <li><a href="#" title="Referring Provider">Referring Provider</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-parent">
+                                                    <a>Schedule Setup</a>
+                                                    <ul class="nav nav-children">
+                                                        <li><a href="#" title="Provider Schedule">Provider Schedule</a></li>
+                                                        <li><a href="#" title="Resource Schedule">Resource Schedule</a></li>
+                                                        <li><a href="#" title="Schedule Reason">Schedule Reason</a></li>
+                                                        <li><a href="#" title="Holidays">Holidays</a></li>
+                                                        <li><a href="#" title="Block Hours">Block Hours</a></li>
+                                                        <li><a href="#" title="Appointment Status">Appointment Status</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-parent">
+                                                    <a>Codes</a>
+                                                    <ul class="nav nav-children">
+                                                        <li><a href="#" title="CPT Code">CPT</a></li>
+                                                        <li><a href="#" title="ICD">ICD</a></li>
+                                                        <li><a href="#" title="Modifier">Modifier</a></li>
+                                                        <li><a href="#" title="Revenue Code">Revenue Code</a></li>
+                                                        <li><a href="#" title="Procedure Category">Procedure Category</a></li>
+                                                        <li><a href="#" title="Place Of Service">Place Of Service</a></li>
+                                                        <li><a href="#" title="Type Of Service">Type Of Service</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-parent">
+                                                    <a>Insurance Setup</a>
+                                                    <ul class="nav nav-children">
+                                                        <li><a href="#" title="Insurance">Insurance</a></li>
+                                                        <li><a href="#" title="Plan Category">Plan Category</a></li>
+                                                        <li><a href="#" title="Insurance Plan">Insurance Plan</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-parent">
+                                            <a href="#" data-toggle="tab" title="Help">
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                <span>Help</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                <section role="main" class="content-body">
+                    <div>
+                        <div class="row">
+                            <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel  panel-featured-bottom">
+                                        <div class="panel-body">
+                                            <div class="slider-wrapper">
+                                                <div class="slider-container pl-xlg pr-xlg">
+                                                    <div class="slide-ul ul slick-initialized slick-slider">
+                                                        <div class="slick-list draggable" tabindex="0">
+                                                            <div class="slick-track" style="opacity: 1; width: 375px; transform: translate3d(0px, 0px, 0px);">
+                                                                <div class="li active slick-slide slick-active" onclick="" index="0" style="width: 115px;">
+                                                                    <span class="slide-title">Appointments</span>  <span class="icon"><i class="fa fa-calendar"></i><span class="badge" style="display:block">1</span></span>
+                                                                </div>
+                                                                <div class="li slick-slide slick-active" onclick="" index="1" style="width: 115px;">
+                                                                    <span class="slide-title">Documents</span><span class="icon"><i class="fa fa-files-o"></i><span class="badge" style="display:inline">12</span></span>
+                                                                </div>
+                                                                <div class="li slick-slide slick-active" onclick="" index="2" style="width: 115px;">
+                                                                    <span class="slide-title">Copayment</span>  <span class="icon"><i class="fa fa-money"></i><span class="badge" style="display:block">0</span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tabs-panel">                                              
+                                                <div style="min-height: 230px;">
+                                                    <section class="panel">
+                                                        <div class="panel-body">
+
+                                                            <div class="clearfix"></div>
+
+                                                            <div class="dataTables_wrapper no-footer">
+                                                                <div class="row datatables-header form-inline">
+                                                                    <div class="col-sm-12 col-md-6">
+                                                                        <div>
+                                                                            <div class="col-sm-6">
+                                                                                <span class="pr-xs">All</span>
+                                                                                <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                                                                    <div class="ios-switch on"><div class="on-background background-fill"></div><div class="state-background background-fill"></div><div class="handle"></div></div>
+                                                                                </div>
+                                                                                <span class="pl-xs">Checked In</span>
+                                                                            </div>
+
+                                                                            <div class="col-sm-6 text-right">
+                                                                                <a class="btn btn-link btn-xs" onclick=""><i class="fa fa-angle-double-left"></i></a> <a data-plugin-datepicker="" class="btn btn-link btn-xs"><span id="appDate">16/November/2016</span></a>  <a class="btn btn-link btn-xs" onclick=""><i class="fa fa-angle-double-right"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div><div class="col-sm-12 col-md-6"><div class="dataTables_filter pr-default"><label><input type="search" class="form-control" placeholder="Search"></label></div></div>
+                                                                </div><div class="table-responsive Of-a">
+                                                                    <table class="table table-bordered table-striped table-hover mb-none no-footer dataTable" role="grid">
+                                                                        <thead>
+                                                                            <tr role="row">
+                                                                                <th style="width: 57px;">Patient</th>
+                                                                                <th style="width: 65px;">Account</th>
+                                                                                <th style="width: 67px;">Provider</th>
+                                                                                <th style="width: 57px;">Facility</th>
+                                                                                <th style="width: 97px;">Patient Type</th>
+                                                                                <th style="width: 75px;">Visit Type</th>
+                                                                                <th style="width: 58px;">Reason</th>
+                                                                                <th style="width: 41px;">Time</th>
+                                                                                <th style="width: 70px;">Duration</th>
+                                                                                <th style="width: 67px;">Check In</th>
+                                                                                <th style="width: 38px;">Wait</th>
+                                                                                <th style="width: 52px;">Status</th>
+                                                                                <th style="width: 48px;">Room</th>
+                                                                                <th style="width: 53px;">Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr onclick="" role="row" class="odd">
+                                                                                <td class="ellip100" title="" data-toggle="tooltip" data-placement="right" data-original-title="Cantamessa, Joseph ">
+                                                                                    <a href="#" onclick="">Cantamessa, Joseph </a></td><td><a href="#" onclick="" title="View Patient">P00102827</a>
+                                                                                </td>
+                                                                                <td>Morteza, Shahamat </td>
+                                                                                <td>Mahwah sha</td>
+                                                                                <td>Established Patient</td>
+                                                                                <td>Unassigned</td>
+                                                                                <td>Check Up</td>
+                                                                                <td>09:30 AM</td>
+                                                                                <td class="size-max120 ellipses" data-toggle="tooltip" data-placement="left" title="" data-original-title="15(min)">15(min)</td>
+                                                                                <td>02:38 AM</td>
+                                                                                <td>0(min)</td>
+                                                                                <td>CheckIn</td>
+                                                                                <td>Lobby</td>
+                                                                                <td>
+                                                                                    <a href="javascript:void(0);" onclick="" title="Create Note">Create Note</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div><div class="row datatables-footer m-none mt-sm"><div class="col-sm-12 col-md-6 p-none"></div><div class="col-sm-12 col-md-6 p-none"></div></div>
+                                                            </div>
+                                                            <div style="display: inline;" class="col-sm-12 p-none"><div class="col-sm-6 p-none" >Showing 1 to 1 of 1 Record(s)</div><div class="col-sm-6 p-none"><ul class="pagination pull-right m-none"><li><a href="javascript:void(0);" title="Previous Pages" onclick="" class="disableAll"><i class="fa fa-angle-double-left"></i></a></li><li ><a href="javascript:void(0);" title="Previous Page" onclick="" class="disableAll"><i class="fa fa-angle-left"></i></a></li><li class="active"><a href="javascript:void(0);" onclick="">1</a></li><li><a href="javascript:void(0);" title="Next Page" onclick="" class="disableAll"><i class="fa fa-angle-right"></i></a></li><li><a href="javascript:void(0);" title="Next Pages" onclick="" class="disableAll"><i class="fa fa-angle-double-right"></i></a></li></ul></div></div>
+                                                        </div>
+                                                    </section>
+                                                </div>                                                                   
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div id="pnlTab3">
+                            <div class="tab-content full-tab-row">
+                                <div class="tab-pane active">
+                                </div>
+                            </div>
+                        </div>*@
+                    @*<div id="ctrlPanDashBoard">
+                        </div>
+                        <div id="actionPanHomeDashBoard" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>*@
+                </section>
+            </div>
+        </section>
+    </ng-form>
+</body>
+</html>

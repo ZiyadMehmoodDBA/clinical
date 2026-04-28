@@ -1,0 +1,74 @@
+﻿<div class="row" id="pnlAdminModifier" style="display:none;">
+    <div id="actionPanAdminModifier" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_Modifier.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Modifier Codes</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Admin_Modifier.ModifierAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_Modifier.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search Modifier </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlModifier_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Modifier Code</label>
+                                        <input class="form-control" id="txtModifierCode" name="ModifierCode" type="text" placeholder="ww" data-mask="ww" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Description</label>
+                                        <input class="form-control" id="txtDescription" name="Description" type="text" maxlength="55" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Active?</label>
+                                        <select id="ddlActive" class="form-control ">
+                                            <option value="">- All -</option>
+                                            <option value="1" selected="selected">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 pad-a-labelsize-btn">
+                                        <button class="btn btn-primary btn-sm pull-right" id="btnModifierSearch" type="button" onclick="Admin_Modifier.ModifierSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlModifier_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="hidden" id="Modifier_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvModifier">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">ModifierId</th>
+                                            <th class="size120">Action</th>
+                                            <th class="size150">Modifier Code</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divModifierPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>

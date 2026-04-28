@@ -1,0 +1,162 @@
+﻿<div class="col-xs-12 pl-none" id="pnliTrack_MUReport">
+    <div id="actionPaniTrack_MUReport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <!--<button type="button" class="close" onclick="iTrack_MUReport.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>-->
+                <h4 class="modal-title"> MU Stage 3 Report</h4>
+            </div>
+            <div id="modalbody">
+                <form method="post" id="frmiTrack_MUReport" onsubmit="return false">
+                    <div class="col-sm-12" id="MUStagePassedProgressBar" style="display: none;"></div>
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="spacer10"></div><div class="clearfix"></div>
+                        <section class="panel panel-featured">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <!--<a href="#" class="closebtn pull-right" onclick="iTrack_MUReport.UnLoadTab()"></a>-->
+                                </div>
+                                <h6 class="modal-title"> MU Stage 3 Report</h6>
+                            </header>
+                            <div class="panel-body NoRadiusT mb-xs" style="display: block;">
+                                <div class="col-sm-4 col-md-3">
+                                    <label id="lblProvider" class="control-label">Provider</label>
+                                    <!--<input type="checkbox" name="chkProvider" id="chkIncludeActiveProvider" onchange="iTrack_MUReport.ActiveInactiveProvider()" class="mt-none">-->
+                                    <!--<label class="control-label" for="ActiveProvider">Include Inactive</label>-->
+                                    <input class="form-control" id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" customname="Provider" maxlength="35" data-bv-field="Provider" />
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <label class="control-label" for="FromDate">From Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                        <input class="form-control datepickerStart" id="dtpFromDate" customid="From Date" type="text" data-plugin-datepicker="" maxlength="10">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-md-3  ToDate" style="">
+                                    <label class="control-label" for="ToDate">To Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                        <input class="form-control datepickerEnd" id="dtpToDate" customid="To Date" type="text" data-plugin-datepicker="" disabled="disabled" maxlength="10">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-md-3 QuarterlyReport" style="">
+
+                                    <div class="">
+                                        <label class="control-label" for="Quarter">Quarter</label>
+                                        <input class="mt-none" id="QuarterlyReport" customid="Quarterly Report" type="checkbox" onchange="iTrack_MUReport.checkQuarterly(this);">
+                                        <label class="control-label" for="ToDate">Quarterly Report</label>
+                                    </div>
+                                    <div class="col-xs-12 p-none disableAll" id="Quarter">
+                                        <select id="ddlQuarter" class="form-control" name="ddlQuarter" customid="Quarter" customname="Quarter" customval="Quarter">
+                                            <option value="1">1st</option>
+                                            <option value="2">2nd</option>
+                                            <option value="3">3rd</option>
+                                            <option value="4">4th</option>
+                                        </select>
+                                        <!--<div><button type="button" class="multiselect dropdown-toggle btn btn-white btn-block btn-xs" data-toggle="dropdown" title="1st"><span class="multiselect-selected-text">1st</span> <b class="caret pull-right mt-caret"></b></button><ul class="multiselect-container dropdown-menu"><li class="multiselect-item filter" value="0"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text" placeholder="Search"><span class="input-group-btn"><button class="btn btn-default btn-xs multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span></div></li><li class="active"><a tabindex="0"><label class="radio"><input type="radio" value="1"> 1st</label></a></li><li><a tabindex="0"><label class="radio"><input type="radio" value="2"> 2nd</label></a></li><li><a tabindex="0"><label class="radio"><input type="radio" value="3"> 3rd</label></a></li><li><a tabindex="0"><label class="radio"><input type="radio" value="4"> 4th</label></a></li></ul></div>-->
+                                        
+                                     
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-md-3 Year disableAll" id="Year" style="">
+                                    <label class="control-label " for="Year">Year</label>
+                                    <select id="ddlYear" class="form-control multiselect" name="ddlYear" customid="Year" customname="Year" customval="Year">
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                    </select>
+                                    <!--<div><button type="button" class="multiselect dropdown-toggle btn btn-white btn-block btn-xs" data-toggle="dropdown" title="2014"><span class="multiselect-selected-text">2014</span> <b class="caret pull-right mt-caret"></b></button><ul class="multiselect-container dropdown-menu"><li class="multiselect-item filter" value="0"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text" placeholder="Search"><span class="input-group-btn"><button class="btn btn-default btn-xs multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span></div></li><li class="active"><a tabindex="0"><label class="radio"><input type="radio" value="2014"> 2014</label></a></li><li><a tabindex="0"><label class="radio"><input type="radio" value="2015"> 2015</label></a></li><li><a tabindex="0"><label class="radio"><input type="radio" value="2016"> 2016</label></a></li><li><a tabindex="0"><label class="radio"><input type="radio" value="2017"> 2017</label></a></li><li><a tabindex="0"><label class="radio"><input type="radio" value="2018"> 2018</label></a></li></ul></div>-->
+                                </div>
+
+                                <div class="pr-default pull-right mt-sm mb-sm ActionsButtons col-md-12" style="display: block;">
+                                    <button class="btn btn-sm btn-primary rightbtn pull-right" type="button" id="btn-print" onclick="iTrack_MUReport.PrintReport();">Print Report</button>
+                                    <button class="btn btn-sm btn-primary rightbtn pull-right" type="button" id="btn-Run" onclick="iTrack_MUReport.generateMuStageReport();">Run Report</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="table-responsive Of-a" id="MuStageReportView" style="">
+                            <table class="table table-bordered table-hover table-striped mb-none">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;"></th>
+                                        <th style="min-width:345px; max-width:345px;width:345px;">Measure</th>
+                                        <th style="min-width:80px; max-width:80px;width:80px;">Num/Den</th>
+                                        <th style="min-width:46px; max-width:46px;width:46px;padding-left:2px;">Target</th>
+                                        <th style="min-width:83px; max-width:83px;width:83px;">Target Required</th>
+                                        <th style="min-width:128px; max-width:128px;width:128px;">Target Met %</th>
+                                        <th style="min-width:128px; max-width:128px;width:128px;">Non Compliance</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div>
+                                <table id="tblMUData" class="table table-bordered table-hover table-striped  mb-none">
+
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="hfProviderId" values="-1" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="x/kendo-template" id="page-templateLegacy">
+
+        <div class="page-template" id="legacyViewTemplateDiv">
+            #if(pageNum != 1) {#
+            <div id="patientHeaderInfo" style="position: absolute;left: 50px;right: 50px;font-size: 90%;top: 7px;font-size: 110%;" ul class="bluefgColor">
+                Patient Name: <span id="patientname" class="blackfgColor"></span><span class="whiteColorPrint" style="float:right;">Provider Name: <span id="providerName" class="blackfgColor"></span></span>
+            </div>
+            <div id="patientHeaderInfo" style="position: absolute;left: 50px;right: 50px;font-size: 90%;top: 28px;font-size: 110%;" ul class="bluefgColor">
+                DOB: <span id="patientDOB" class="blackfgColor"></span><span class="whiteColorPrint" style="float:right;">DOS: <span id="patientDOS" class="blackfgColor"></span></span>
+            </div>
+            #}#
+            <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                <div id="ClinicalReportsFooterTextLegacy" class="blueBgPrint" style="float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                    Generated by:<span id="ClinicalReportsFooterLegacy">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                </div>
+            </div>
+
+        </div>
+    </script>
+    <div id="printcall" class="hidden">
+        <div id="PatientInfo" class="">
+            <div class="col-sm-4 col-lg-2 pull-left">
+                <img src="content/images/SHS-nav-logo-small-100.png" class="img-responsive">
+            </div>
+
+            <ul class="list-unstyled pull-right line-height-fix" id="PracticeList"></ul>
+            <div class="clearfix"></div>
+            <div class="splitter m-none mt-xs"><div class="spacer3"></div></div>
+
+            <div class="spacer3"></div>
+            <ul class="list-unstyled pull-right line-height-fix" id="CurrentDate">
+
+                <li id="liCurrentDate"></li>
+            </ul>
+
+            <ul class="list-unstyled pull-left line-height-fix" id="ProviderList"></ul>
+        </div>
+        <div class="spacer5"></div>
+
+        <section class="panel panel-featured mt-lg">
+            <div class="panel-body bg-white" id="ulContent">
+                <div id="MeasureTitle">
+                    <span style="margin-left:40%" id="MeasureName"></span>
+                    <div class="clearfix"></div>
+                    <span style="margin-left:40%" id="ReportTitle"></span>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>

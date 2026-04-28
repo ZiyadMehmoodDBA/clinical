@@ -1,0 +1,172 @@
+﻿<div id="pnlScheduling_ProviderAppointmentPrint">
+    <div id="actionPanSchedulingPrint" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Scheduling_ProviderAppointmentPrint.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="titleId" class="modal-title">Print Preview Provider Appointments</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section class="panel">
+                        <form method="post" id="frmProviderAppointmentPrint" onsubmit="return false">
+                            <div id="pnlNotes_Search">
+                                <div class="btn-block">
+                                    <div class="pull-left">
+                                        <label class="control-label" for="statusMultiselectPrint">Select Appointments Status</label>
+                                    </div>
+                                    <div class="col-sm-3" style="height:28px;">
+                                        <select id="statusMultiselectPrint" multiple="multiple"></select>
+                                    </div>
+                                    <div class="pull-left">
+                                        <button id="btnReceiptPrint" type="button" class="btn btn-success btn-xs ml-xs" onclick="Scheduling_ProviderAppointmentPrint.updatePreview();"><i class="fa fa-print"></i> Preview</button>
+                                    </div>
+                                    <div class="pull-left">
+                                        <button id="btnReceiptPrint" type="button" class="btn btn-success btn-xs ml-xs" onclick="Scheduling_ProviderAppointmentPrint.PrintReceipt();"><i class="fa fa-print"></i> Print</button>
+                                    </div>
+                                </div>
+                                <div class="spacer5"></div>
+                                <div class="panel-body" id="PrintPdfControlDiv" style="display:block;">
+                                    <input type="hidden" id="helperPDF" />
+                                    <iframe id="PreviewPrintReceipt" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12" style="height:1066px;"></iframe>
+                                </div>
+
+                                <script>
+                                    kendo.pdf.defineFont({
+                                        "DejaVu Sans": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans.ttf",
+                                        "DejaVu Sans|Bold": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+                                        "DejaVu Sans|Bold|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+                                        "DejaVu Sans|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+                                    });
+                                </script>
+
+                                <div id="printcall" style="display:none;">
+                                    <style type="text/css" media="all">
+                                        .appointment-header {
+                                            float: left;
+                                            width: 100%;
+                                        }
+
+                                        .appointment-detail, .logo {
+                                            box-sizing: border-box;
+                                            width: 50%;
+                                            float: left;
+                                            padding: 15px;
+                                        }
+
+                                            .logo img {
+                                                max-width: 170px;
+                                            }
+
+                                        .appointment-detail {
+                                            text-align: right;
+                                        }
+
+                                            .appointment-detail h2, .appointment-detail h3, .appointment-detail p {
+                                                margin: 4px 0;
+                                                font-weight: 500;
+                                            }
+
+                                            .appointment-detail h2 {
+                                                color: #0066AE;
+                                            }
+
+                                            .appointment-detail h3, .appointment-detail p {
+                                                color: #616370;
+                                            }
+
+                                        .appointment-location {
+                                            background-color: #cfebff;
+                                            float: left;
+                                            padding-right: 15px;
+                                            width: 100%;
+                                            box-sizing: border-box;
+                                            text-align: right;
+                                            margin-top: -4px;
+                                        }
+
+                                            .appointment-location h3, .appointment-location h2 {
+                                                margin: 10px 0;
+                                                color: #5F636F;
+                                                font-weight: 400;
+                                                font-size: 18px;
+                                            }
+
+                                        .appointment-table {
+                                            width: calc(100% - 30px);
+                                            margin: 0 15px;
+                                            border-collapse: collapse;
+                                            box-sizing: border-box;
+                                            font-size: 12px;
+                                        }
+
+                                            .appointment-table tr {
+                                                border-bottom: 2px solid #BABABA;
+                                            }
+
+                                                .appointment-table tr > td {
+                                                    padding: 15px 0;
+                                                    line-height: 1.6;
+                                                    color: #5F636F;
+                                                }
+
+                                                    .appointment-table tr > td:nth-child(1) {
+                                                        width: 30%;
+                                                    }
+
+                                                    .appointment-table tr > td:nth-child(2) {
+                                                        width: 50%;
+                                                    }
+
+                                                    .appointment-table tr > td:nth-child(3) {
+                                                        width: 20%;
+                                                    }
+
+                                        .appointment-title strong {
+                                            display: inline-block;
+                                            min-width: 109px;
+                                        }
+
+                                        .appointment-table tr > td:nth-child(2) strong {
+                                            min-width: 142px;
+                                        }
+
+                                        tr > td:first-child .appointment-title strong {
+                                            width: 109px;
+                                            float: left;
+                                        }
+
+                                        tr > td:first-child .appointment-title span {
+                                            width: calc(100% - 111px);
+                                            display: inline-block;
+                                        }
+
+                                        .appointment-table tr td:last-child {
+                                            text-align: right;
+                                        }
+
+
+                                            .appointment-table tr td:last-child strong {
+                                                text-align: left;
+                                                min-width: 109px;
+                                                float: left;
+                                            }
+                                    </style>
+
+
+                                    <div id="AppointmentDetailOutter"></div>
+
+
+
+
+
+
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

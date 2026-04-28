@@ -1,0 +1,424 @@
+﻿<div id="pnlPatientInsurance" style="display:none;" class="row">
+    <div id="actionPanPatientInsurance" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Patient_Insurance.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 id="headingTitle" class="modal-title">Patient Insurance</h4>
+                </div>
+
+                <form method="post" id="frmPatientInsurance" onsubmit="return false">
+                    <div class="col-sm-3 pull-right">
+                        <section class="panel panel-featured ">
+                            <div class="panel-body pl-none pr-none">
+
+                                <div class="col-xs-12">
+                                    <div class="hidden-sm">
+                                        <div class="col-xs-12 center p-none">
+                                            <a href="#" class="btn btn-success btn-sm mb-sm" data-toggle="tooltip" data-placement="top" title="New Insurance Plan" onclick="Patient_Insurance.AddInsurancePlan(true);" id="lnkAddInsurance"><i class="fa fa-plus-circle"></i></a>
+                                            <a href="#" class="btn btn-primary btn-sm mb-sm" data-toggle="tooltip" data-placement="top" title="Authorization" onclick="Patient_Insurance.OpenPreAuthorization();" id="lnkAuthorization"><i class="fa fa-check-square-o"></i></a>
+                                            <a href="#" class="btn btn-primary btn-sm mb-sm" data-toggle="tooltip" data-placement="top" title="Copy Patient" onclick="Patient_Insurance.CopyPatient();" id="lnkCopyPatient"><i class="fa fa-files-o"></i></a>
+                                            <a href="#" class="btn btn-primary btn-sm mb-sm" data-toggle="tooltip" data-placement="top" title="Upload Insurance Card" onclick="Patient_Insurance.UploadCardImage();" id="lnkOpen"><i class="fa fa-folder-open"></i></a>
+                                            <!--<span id="overlayMenu" class="dropdown">
+                                                <a href="#" class="btn btn-primary btn-sm mb-sm  dropdown-toggle" onclick="Patient_Insurance.toggleOverlayMenu();"  title="Scan Insurance Card" id="lnkScan"><span class="icon-scan"></span></a>
+                                                <span class="dropdown-menu  panel-body size-min200" style="left:-100px;z-index:1" >
+                                                    <span class="input-group mt-sm">
+                                                        <input class="form-control" id="txtAccessKey" placeholder="Access Key" type="text">
+                                                        <span class="input-group-btn">
+                                                            <a class="btn btn-success btn-xs noWordBreak" onclick="Patient_Insurance.getProcessedData(false);">Fetch Data</a>
+                                                        </span>
+                                                    </span>
+                                                    <a class="btn btn-success btn-xs btn-block mt-xs" onclick="Patient_Insurance.getProcessedData(true);">Fetch Data With New Plan</a>
+                                                </span>
+                                            </span>-->
+
+                                            <a href="#" class="btn btn-primary btn-sm mb-sm" data-toggle="tooltip" data-placement="top" title="Scan Insurance Card" onclick="Patient_Insurance.OpenDocumentScan();" id="lnkScan">
+                                                <i class="fa fa-print"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-primary btn-sm mb-sm" data-toggle="tooltip" data-placement="left" title="Patient Eligibility" onclick="Patient_Insurance.OpenPatientEligibility();" id="lnkEligibility"><i class="fa fa-user"></i></a>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="visible-sm">
+                                        <div class="col-xs-12 center mb-sm">
+                                            <a href="#" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="New Insurance Plan" onclick="Patient_Insurance.AddInsurancePlan(true);" id="lnkAddInsurance"><i class="fa fa-plus-square"></i></a>
+                                            <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Authorization" onclick="Patient_Insurance.OpenPreAuthorization();" id="lnkAuthorization"><i class="fa fa-check-square-o"></i></a>
+                                            <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Copy Patient" onclick="Patient_Insurance.CopyPatient();" id="lnkCopyPatient"><i class="fa fa-files-o"></i></a>
+                                            <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Upload Insurance Card" onclick="Patient_Insurance.UploadCardImage();" id="lnkOpen"><i class="fa fa-folder-open"></i></a>
+                                            <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Scan Insurance Card" onclick="Patient_Insurance.OpenDocumentScan();" id="lnkScan"><span class="icon-scan"></span></a>
+                                            <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="left" title="Patient Eligibility" onclick="Patient_Insurance.OpenPatientEligibility();" id="lnkEligibility"><i class="fa fa-user"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-xs-1 pr-none pl-none pull-left">
+                                        <ul id="lstInsurancePriority" class="list-unstyled sortCount "></ul>
+                                    </div>
+                                    <div class="col-xs-11 pl-none pr-none pull-left">
+                                        <ul id="lstInsurances" class="sortable"></ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="spacer10"></div>
+                                <button class="fa fa-times noBorder pull-right" type="button" style="margin-right: 23px; display:none" onclick="Patient_Insurance.RemoveInsuranceImage();" id="btnRemoveInsurance"></button>
+                                <div id="scanImage" style="margin-top:15px !important;">
+                                    <img class="img-responsive img-center insurance-img-box" onclick="Patient_Insurance.OpenScannedImage();" id="image" src="Content/images/idcard1.png" alt="scaned img 1" />
+                                </div>
+
+                                <div id="scanBackImage">
+                                    <img class="img-responsive img-center insurance-img-box" onclick="Patient_Insurance.OpenScannedImage();" id="backimage" src="Content/images/idcard2.png" alt="scaned img 2">
+                                </div>
+                                <canvas id="myCanvas" style="display:none;"></canvas>
+                                <div class="clearfix"></div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-sm-9">
+                        <section class="panel panel-featured">
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-3">
+                                        <label id="lblInsurancePlan" class="control-label">Insurance Plan<span class="required">*</span></label>
+                                        <a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="Patient_Insurance.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance Plan<span class="required">*</span></a>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtInsurancePlan" name="InsurancePlan" customname="Insurance Plan" placeholder="Start typing to search" oninput="Patient_Insurance.BindInsurancePlan();" onblur="Patient_Insurance.ValidateInsuranceAutoComplete(); Patient_Insurance.ValidateSearchPatternForSelectedInsurancePlan();" type="text">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Insurance.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Subscriber ID<span class="required">*</span></label>
+                                        <!--<input class="form-control" id="txtSubscriberID" name="SubscriberID" type="text" maxlength="35" />-->
+                                        <input class="form-control" id="txtSubscriberID" name="SubscriberID" type="text" onblur="Patient_Insurance.OpenSubScriberInsurancePlan(this)" maxlength="35" />
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <div class="size45per pull-left">
+                                            <label class="control-label">Visit Copay</label>
+                                            <input class="form-control " id="txtVisitCopayment" name="VisitCopayment" onkeypress="utility.ValidateDecimal(event,2)" type="text" maxlength="10" placeholder="99999.99" />
+                                        </div>
+                                        <div class="size55per pull-left pl-xxs">
+                                            <label class="control-label">Specialist Copay</label>
+                                            <input class="form-control " id="txtSpecialistCopay" name="SpecialistCopay" onkeypress="utility.ValidateDecimal(event,2)" type="text" maxlength="10" placeholder="99999.99" />
+                                        </div>
+                                    </div>
+                                    <div class="visible-sm"><div class="clearfix"></div></div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Subscriber Group ID</label>
+                                        <input class="form-control" id="txtSubscriberGroupID" name="SubscriberGroupID" type="text" maxlength="35" />
+                                    </div>
+                                    <div class="hidden-sm"><div class="clearfix"></div></div>
+                                    <div class="col-sm-4 col-md-3" id="containerPlanAddress">
+                                        <label class="control-label">Plan Address<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <select id="ddlPlanAddress" name="PlanAddress" class="form-control" onchange="Patient_Insurance.FillPhoneNumber(this)">
+                                                <option value="">- SELECT -</option>
+                                            </select>
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Insurance.OpenInsurancePlanAddress();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label" for="Telephone">Telephone</label>
+                                        <input type="text" class="form-control" id="txtTelephone" name="Telephone" data-mask="(999) 999-9999" placeholder="(999) 999-9999" disabled>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Coverage Date From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control " name="CoverageDateFrom" type="text" id="dtpCoverageDateFrom" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Coverage Date To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control " name="CoverageDateTo" type="text" id="dtpCoverageDateTo" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Date Signed</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control " name="DateSigned" type="text" id="dtpDateSigned" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label id="lblLawyer" class="control-label">Lawyer</label>
+                                        <a id="lnkLawyerDetail" style="display:none;" href="#" onclick="Patient_Insurance.OpenLawyerDetail();" title="Edit Lawyer">Lawyer</a>
+                                        <div class="input-group">
+
+                                            <input class="form-control" id="txtLawyer" type="text" placeholder="Start typing to search" name="Lawyer" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Insurance.OpenLawyer();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="visible-sm"><div class="clearfix"></div></div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label id="lblEmployer" class="control-label">Employer</label>
+                                        <a id="lnkEmployerDetail" style="display:none;" href="#" onclick="Patient_Insurance.OpenEmployerDetail();" title="Edit Employer">Employer</a>
+                                        <div class="input-group">
+
+                                            <input class="form-control" id="txtEmployer" type="text" name="Employer" placeholder="Start typing to search" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Insurance.OpenEmployer();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">MSP Type</label>
+                                        <select id="ddlMSPType" class="form-control " name="MSPType" ddlist="GetMSPTypeDemographic"></select>
+                                    </div>
+
+
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label" for="Eligibility Date">Eligibility Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control " type="text" name="EligibilityDate" id="dtpEligibilityDate" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Eligibility Status</label>
+                                        <select id="ddlEligibilityStatus" name="EligibilityStatus" class="form-control">
+                                            <option value="">-- Select -- </option>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                            <option value="Waiting">Waiting</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-3 pad-a-labelsize-btn" style="display:none;">
+                                        <a href="#" class="btn btn-primary btn-xs" id="lnkSetEligibility">Set Eligibility</a>
+                                    </div>
+                                    <!--<div class="col-sm-4 col-md-3" style="display:none">
+                                        <label class="control-label">Insurance Type</label>
+                                        <select id="ddlInsuranceType" name="InsuranceType" class="form-control " ddlist="GetIsuranceTypeDemographic"></select>
+                                    </div>-->
+                                    <div class="col-sm-1 col-md-1 pad-a-labelsize">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="Active" id="chkActive" checked>
+                                            <label class="control-label" for="chkActive">Active</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-md-2 pad-a-labelsize">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="Unassigned" id="chkUnassigned" onchange="Patient_Insurance.UnassignedInsChange();">
+                                            <label class="control-label" for="chkUnassigned">Unassigned</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <div class="row">
+                                            <div class="col-sm-9 col-md-9">
+                                                <label class="control-label">PAR/NON PAR</label>
+                                                <select id="ddlParticipentStatus" class="form-control" name="PariticpantParticipentStatus" ddlist="GetProviderParticipentStatus"></select>
+                                            </div>
+                                            <div class="col-sm-2 col-md-2 pt-lg pl-none">
+                                                <input type="button" value="Validate" class="btn btn-primary btn-sm btn-xs" onclick="Patient_Insurance.OpenParticipantProvider('Provider Name', 'txtProvider', 'txtProviderName', 'ProviderName')" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 col-md-6">
+                                        <label class="control-label">Comments</label>
+                                        <input class="form-control" name="Comments" spellcheck="true" id="txtComments" type="text" maxlength="100">
+                                    </div>
+                                    <div class="col-sm-4 col-md-6 pad-a-labelsize">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="AssgBenefits" checked="checked" id="chkAssgBenefits">
+                                            <label class="control-label" for="chkAssgBenefits">Accept Assignment</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Relation<span class="required">*</span></label>
+                                        <select id="ddlRelation" class="form-control " name="Relation" onchange="Patient_Insurance.EnableValidation(this,true); Patient_Insurance.SetSelfRelation(this.value);" ddlist="GetRelationshipDemographic"></select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Last Name<span class="required">*</span></label>
+                                        <input type="text" class="form-control " id="txtLastName" name="LastName" maxlength="60">
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-3">
+                                        <div class="size60per pull-left">
+                                            <label class="control-label">First Name<span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="txtFirstName" name="FirstName" maxlength="50">
+                                        </div>
+                                        <div class="size40per pull-left pl-xxs">
+                                            <label class="control-label">M.I. / Name</label>
+                                            <input type="text" class="form-control" maxlength="25" name="MiddleInitial" id="txtMiddleInitial">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Date of Birth<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input class="form-control " type="text" id="dtpDOB" name="DOB" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Sex<span class="required">*</span></label>
+                                        <select id="ddlSex" class="form-control " name="Sex" ddlist="GetGenderDemographic"></select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">SSN</label>
+                                        <input class="form-control " id="txtSSNIns" name="SSN" type="text" placeholder="999-99-9999" data-mask="999-99-9999" onblur="utility.validateMasking(this);" />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label class="control-label">Address 1<span id="spnaddress1" class="required">*</span></label>
+                                    <a id="PatAddreeslnk" class="col-sm-offset-1" onclick="Patient_Insurance.LoadPatientAddress()" style="display:none; cursor:pointer;color:#0088cc !important;">Same as Patient</a>
+                                    <input type="text" class="form-control" id="txtAddress1" name="Address1" onblur="utility.ChangeNameCase(this);" maxlength="55">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Address 2</label>
+                                    <input type="text" class="form-control" id="txtAddress2" name="Address2" onblur="utility.ChangeNameCase(this);" maxlength="55">
+                                </div>
+                                <div class="col-sm-4 col-md-3 p-none">
+                                    <div class="col-xs-8">
+                                        <label class="control-label">City<span id="spncity" class="required">*</span></label>
+                                        <input class="form-control" id="txtCity" name="City" type="text" maxlength="25">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <label class="control-label">State<span id="spnstate" class="required">*</span></label>
+                                        <input class="form-control" id="txtState" name="State" type="text" placeholder="aa" data-mask="aa">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-3 p-none">
+                                    <div class="col-xs-8">
+                                        <label class="control-label pull-left "> Zip <span id="spnzip" class="required">*</span></label>
+                                        <input id="txtZip" class="form-control" type="text" name="Zip" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#pnlPatientInsurance #frmPatientInsurance', '#txtZip', '#txtCity', '#txtState')" />
+                                    </div>
+                                    <div class="col-xs-4 pad-a-labelsize">
+                                        <input id="txtZipExt" class="form-control" name="ZipExt" type="text" placeholder="9999" data-mask="9999" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <label class="control-label">Home Tel</label>
+                                    <input type="text" class="form-control" id="txtHomeTel" name="HomeTel" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                </div>
+                                <div class="col-sm-3 pad-a-labelsize-btn pull-right">
+                                    <button id="btnPrintInsurance" class="btn btn-primary btn-sm rightbtn" type="button" onclick="Patient_Insurance.PrintInsurance();">Print</button>
+                                    <button id="btnPatInsurance" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div id="divPatientReferrals" style="display:none;" class="toggle" data-plugin-toggle>
+                                    <section class="toggle ">
+                                        <label>Patient Referrals</label>
+                                        <div class="toggle-content panel-body NoRadiusT">
+                                            <button id="btnAddRefferal" class="btn btn-success btn-sm mt-sm mb-sm " type="button" onclick="Patient_Insurance.AddReferral();"><i class="fa fa-plus-circle"></i> Add</button>
+                                            <div class="clearfix"></div>
+                                            <div id="pnlReferral_Result">
+                                                <div class="panel-body panel-featured">
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvReferral">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="display:none;">ReferralId</th>
+                                                                <th class="size-min90 size90">Action</th>
+                                                                <th>Type</th>
+                                                                <th class="noWordBreak">Referring From</th>
+                                                                <th class="noWordBreak">From Date</th>
+                                                                <th class="noWordBreak">To Date</th>
+                                                                <th>Referral</th>
+                                                                <th>Allowed</th>
+                                                                <th>Used</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div id="dgvReferral_Paging"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <input type="hidden" id="hfInsurancePlan" />
+                                <input type="hidden" id="hfIsReferralRequired" />
+                                <input type="hidden" id="hfInsurancePlansearchPattern" />
+                                <input type="hidden" id="hfInsurancePlanPriority" />
+                                <input type="hidden" id="hfPlanAddress" />
+                                <input type="hidden" id="hfEmployer" />
+                                <input type="hidden" id="hfLawyer" />
+                                <input type="hidden" id="hfPatDocId" />
+                                <input type="hidden" id="hfParticipantStatus" />
+                                <input type="hidden" id="hfPriority" />
+                                <input type="hidden" id="hfClaimFlagDescription" />
+                                <input type="hidden" id="hfImageChange" name="ImageChange" value="false" />
+                            </div>
+                        </section>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    (function ($) {
+        'use strict';
+        if ($.isFunction($.fn['tooltip'])) {
+            $('[data-toggle=tooltip],[rel=tooltip]').tooltip({ container: 'body' });
+        }
+    }).apply(this, [jQuery]);
+
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+				opts = {};
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+            $this.themePluginToggle(opts);
+        });
+    });
+    //
+    $(document).ready(function () {
+
+        //$("#pnlPatientInsurance #lstInsurances").sortable({
+        //    out: function (event, ui) {
+        //        utility.myConfirm('5', function () {
+
+        //            //CacheManager.BindCodes('GetInsurancePlan', true);
+        //        }, function () {
+
+        //            $(ui.sender).sortable('cancel');
+        //        },
+        //            '5'
+        //        );
+        //    },
+        //});
+        //$("#lstInsurances").disableSelection();
+
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('pnlPatientInsurance #dtpEligibilityDate', function () {
+            //on-change callback method
+        });
+
+        utility.ValidateDOB('pnlPatientInsurance #frmPatientInsurance', 'pnlPatientInsurance #dtpDateSigned', new Date('1800-01-01'), new Date(), true);
+        utility.ValidateDOB('pnlPatientInsurance #frmPatientInsurance', 'pnlPatientInsurance #dtpDOB', new Date('1800-01-01'), new Date(), false);
+        utility.ValidateFromToDate('pnlPatientInsurance #frmPatientInsurance', 'dtpCoverageDateFrom', 'dtpCoverageDateTo', true);
+
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            },
+        });
+    });
+</script>

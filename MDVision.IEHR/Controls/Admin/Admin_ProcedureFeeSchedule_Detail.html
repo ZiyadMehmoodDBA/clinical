@@ -1,0 +1,102 @@
+﻿<div id="procedureFeeScheduleDetail">
+    <div id="actionPanprocedureFeeScheduleDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="procedureFeeScheduleDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Fee Group Plan CPT</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblprocedureFeeScheduleDetail" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmProcedureFeeScheduleDetail">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label class="control-label" for="Fee Group">Fee Group<span class="required">*</span></label>
+                                <select id="ddlFeeGroup" class="form-control" onchange="procedureFeeScheduleDetail.LoadEntityBasedData('#tblprocedureFeeScheduleDetail')" ddlist="GetFeeGroup" name="FeeGroup"></select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label" for="Plan Fee Link">Plan Fee Link<span class="required">*</span></label>
+                                <select id="ddlPlanFeeLink" class="form-control" ddlist="GetPlanFeeLink" name="PlanFeeLink"></select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label" for="CPT Code">CPT Code<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <!--<input class="form-control" id="txtCPTCode" type="text" maxlength="5" placeholder="99999" name="CPTCode" oninput="procedureFeeScheduleDetail.BindAutoComplete()" onblur="utility.ValidateAutoComplete(this, 'procedureFeeScheduleDetail #hfCPTCode', true, 1);" />-->
+                                    <input class="form-control" id="txtCPTCode" type="text" maxlength="5" placeholder="99999" name="CPTCode" onblur="procedureFeeScheduleDetail.ProcedureFeeScheduleValidateCode(this);" oninput="procedureFeeScheduleDetail.BindAutoComplete(this)" />
+                                    
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-xs " type="button" onclick="procedureFeeScheduleDetail.OpenCPTCode();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <label class="control-label" for="Fee">Fee<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input type="text" onkeypress="utility.ValidateDecimal(event,2)" class="form-control" id="txtFee" name="Fee" maxlength="10" placeholder="99999.99">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label" for="Fee">Expected Fee</label>
+                                <div class=" input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input type="text" class="form-control" onkeypress="utility.ValidateDecimal(event,2)" id="txtExpectedFee" name="ExpectedFee" maxlength="10" placeholder="99999.9">
+                                </div>
+                            </div>
+                            <div class="col-md-6 pad-a-labelsize">
+                                <div class="checkbox-custom  checkbox-default">
+                                    <input type="checkbox" name="AuthorizationRequired" id="chkAuthorizationRequired">
+                                    <label for="chkAuthorizationRequired">Prior Authorization Number Required</label>
+                                </div>
+                            </div>
+                            <div class=" col-md-2 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pull-right pad-a-labelsize-btn">
+                            <button type="submit" class="btn btn-primary btn-sm rightbtn">Save </button>
+                            <!--<button id="btnHistoryprocedureFeeSchedule" class="btn btn-primary btn-sm rightbtn" type="button" onclick="procedureFeeScheduleDetail.ShowHistory();">History</button>-->
+                            </div>
+                          
+                            </div>
+
+                        
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="hfCPTCode" />
+                        <div class="clearfix"></div>
+                    </form>
+                        
+                    
+                </div>
+                <div class="clearfix"></div>
+                <div id="pnlPFSPlanInfo">
+                    <section>
+                        <form>
+                        <div class="panel-body">
+                            <table id="dgvPFSPlanInfo" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size85 ">Action</th>
+                                        <th controlid="txtModifier" controlwidth="" isoptional="0" iscode="1" hfcontrolid="hfModifier" coltype="AutoComplete" autocompletemethod="Modifier" searchmethod="procedureFeeScheduleDetail.OpenModifierDetail(null)">Modifier</th>
+                                        <th controlid="txtModifierFee" onkeypress="utility.ValidateDecimal(event,2)" controlwidth="custom-width-auto" isoptional="0" coltype="textbox">Fee ($)</th>
+                                        <th controlid="txtModifierExpectedFee" onkeypress="utility.ValidateDecimal(event,2)" controlwidth="custom-width-auto" isoptional="1" coltype="textbox">Expected Fee ($)</th>
+                                        <th controlid="chkRequired"  coltype="checkbox">Required</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <a href="javascript:procedureFeeScheduleDetail.rowAdd()">Add Line Item</a>
+                        </div>
+                            </form>
+                    </section>
+                </div>
+                    <div class="clearfix"></div>
+            </div><div class="clearfix"></div>
+        </div>
+    </div>
+</div>

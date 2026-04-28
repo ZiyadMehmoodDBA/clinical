@@ -1,0 +1,42 @@
+﻿<div id="pnlEmergencyContact" style="display:none;">
+    <div id="actionPanEmergencyContact" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_EmergencyContact.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Emergency Contacts</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class=" btn btn-success btn-sm" id="btnAppointmentStatusAdd" onclick="Patient_EmergencyContact.EmergencyContractAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    
+
+                    <div id="pnlEmergencyContacts_Result" style="display: none;">
+                        <section class="panel panel-featured">
+                            <div class="panel-body">
+                                <input type="hidden" id="EmergencyContacts_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvEmergencyContacts">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">EmergencyContactId</th>
+                                            <th class="size100 size-min110">Action</th>
+                                            <th>Name</th>
+                                            <th>Address</th>
+                                            <th class="size100">Phone</th>
+                                            <th class="size100">Cell</th>
+                                            <th class="size100">Is Primary</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="dgvEmergencyContacts_Paging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

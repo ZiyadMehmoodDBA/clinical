@@ -1,0 +1,194 @@
+﻿<!--/*
+Author: Muhammad Arshad
+Date: 31/03/2016
+Overview: This function is created to show Clinical Summary
+*/-->
+<div class="row" id="CaseReports" style="display:none;">
+
+    <div id="actionPanCaseReports" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_CaseReports.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Case Reports</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmCaseReports">
+
+                    <div class="panel-heading  panel-blue">
+                        <h2 class="panel-title white">GENERATE YOUR CASE REPORT</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <label class="control-label">Clinical Visit<span class="required">*</span> </label>
+                            <select id="ddlClinicalVisit" class="form-control" name="ClinicalVisit">
+                                <option value="">--Select--</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="spacer15"></div>
+
+                    <div class="panel-heading  panel-blue">
+                        <h2 class="panel-title text-capitalize white">CUSTOMIZE YOUR CASE REPORT</h2>
+                    </div>
+
+                    <div class="panel-body">
+                        <p>Select which Data Elements to include in Case Reports Summary:</p>
+
+                        <header class="panel-heading pl-xs">
+                            <div class="checkbox  checkbox-custom">
+                                <input id="chkSelectAllDataElements" onclick="Clinical_CaseReports.selectAllDataElements(this)" name="SelectAllDataElements" type="checkbox" />
+                                <label class="control-label" for="chkSelectAllDataElements">Select All</label>
+                            </div>
+                        </header>
+                        <div id="divDataElements" class="panel-body p-none pb-xs table-responsive">
+                            <table id="ulDataElements" class="table table-condensed table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkDemographicDataElement" onclick="Clinical_CaseReports.selectDataElement(this)" name="DemographicDataElement" class="DemographicDataElement" type="checkbox" disabled="disabled" checked="checked" />
+                                                <label class="control-label" for="chkDemographicDataElement">Patient demographics</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkProviderDataElement" onclick="Clinical_CaseReports.selectDataElement(this)" name="ProviderDataElement" class="ProviderDataElement" type="checkbox" disabled="disabled" checked="checked" />
+                                                <label class="control-label" for="chkProviderDataElement" >Authoring Details</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkSmokingStatusDataElement" notecomponenttext="SocialHx" class="SocialHx" onclick="Clinical_CaseReports.selectDataElement(this)" name="SmokingStatusDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkSmokingStatusDataElement">Social History</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkHPIDataElement" notecomponenttext="HPI" class="HPI" onclick="Clinical_CaseReports.selectDataElement(this)" name="HPIDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkHPIDataElement" >History of present Illness</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkProblemDataElement" notecomponenttext="ProblemLists" class="ProblemLists" onclick="Clinical_CaseReports.selectDataElement(this)" name="ProblemDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkProblemDataElement">Problems</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkMedicationDataElement" notecomponenttext="Medications" class="Medications" onclick="Clinical_CaseReports.selectDataElement(this)" name="MedicationDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkMedicationDataElement" >Medications</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkAllergiesDataElement" notecomponenttext="Allergies" class="Allergies" onclick="Clinical_CaseReports.selectDataElement(this)" name="AllergiesDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkAllergiesDataElement" >Allergies</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkImmunizationDataElement" notecomponenttext="Immunization" class="Immunization" onclick="Clinical_CaseReports.selectDataElement(this)" name="ImmunizationDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkImmunizationDataElement" >Immunization</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkAssessmentDataElement" notecomponenttext="Assessment" class="Assessment" onclick="Clinical_CaseReports.selectDataElement(this)" name="AssessmentDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkAssessmentDataElement">Assessment</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkPlanofTreatmentDataElement" notecomponenttext="PlanofTreatment" class="PlanofTreatment" onclick="Clinical_CaseReports.selectDataElement(this)" name="PlanofTreatmentDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkPlanofTreatmentDataElement">Plan of Treatment</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkLabResultDataElement" notecomponenttext="LabResults" class="LabResults RadiologyResults" onclick="Clinical_CaseReports.selectDataElement(this)" name="LabResultDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkLabResultDataElement">Lab Orders/Result(s)</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkVitalSignDataElement" notecomponenttext="Vitals" class="Vitals" onclick="Clinical_CaseReports.selectDataElement(this)" name="VitalSignDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkVitalSignDataElement">Vital Signs</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <!--<td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkMedicalEquipmentDataElement" notecomponenttext="MedicalEquipment" class="MedicalEquipment" onclick="Clinical_CaseReports.selectDataElement(this)" name="MedicalEquipmentDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkMedicalEquipmentDataElement">Unique Device Identifier</label>
+                                            </div>
+                                        </td>-->
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkProceduresDataElement" notecomponenttext="Procedures" class="Procedures" onclick="Clinical_CaseReports.selectDataElement(this)" name="ProceduresDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkProceduresDataElement">Procedures</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkCareTeamMembersDataElement" notecomponenttext="CareTeamMembers" class="CareTeamMembers" onclick="Clinical_ReferralSummary.selectDataElement(this)" name="CareTeamMembersDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkCareTeamMembersDataElement">Care Team Members</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkVisitReasonDataElement" notecomponenttext="VisitReason" class="VisitReason" onclick="Clinical_CaseReports.selectDataElement(this)" name="VisitReasonDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkVisitReasonDataElement">Reason for visit</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkPlanOfCareDataElement" notecomponenttext="PlanOfCare" class="PlanOfCare" onclick="Clinical_CaseReports.selectDataElement(this)" name="PlanOfCareDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkPlanOfCareDataElement">Goals</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkPatientInstructionDataElement" notecomponenttext="HealthConcerns" class="HealthConcerns" onclick="Clinical_CaseReports.selectDataElement(this)" name="HealthConcernsDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkPatientInstructionDataElement">Health Concerns</label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-md pull-right">
+
+                        <div hidden>
+                            <input type="checkbox" id="chkConfidential" /><label class="control-label">Confidential</label>
+                        </div>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnDownloadCCDAXML" type="button" onclick="Clinical_CaseReports.downloadCaseReportsXMLData();">Download Case Report</button>
+                        <!--onclick="Clinical_CaseReports.displayCaseReportsHTML('CaseReportsHTML')"-->
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnDisplayCCDA" type="button" onclick="Clinical_CaseReports.displayCaseReportsHTML('CaseReportsHTML')">Display Case Report</button>
+                    </div>
+                    <input type="hidden" id="hfXMLData" />
+                    <input type="hidden" id="hfDataIsEncrypted" />
+                    <iframe name='CaseReportHTML' hidden id='frmCaseReportsHTML' height='700' width='100%' scrolling='auto' frameborder='0'></iframe>
+                    <input type="hidden" id="hbase64HTML" value="" />
+                    <input type="hidden" id="hbase64HTML2" value="" />
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,213 @@
+﻿<div id="pnlPatientAdvancePayment" style="display:none;">
+    <div id="actionPanPatientAdvancePayment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="advancePaymentDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Advance Payment</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <!--<div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions"><a href="#" class="closebtn pull-right" onclick="Patient_Preferences.UnLoadTab();"></a></div>
+                                <h4 class="panel-title">Patient Preferences</h4>
+                            </header>
+                        </div>-->
+                        <div class="panel-body pt-sm pb-sm">
+                            <form method="post" id="frmPatientAdvancePayment" onsubmit="return false">
+
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Patient Account">Patient Account<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtPatientName" name="PatientName" placeholder="Start typing to search" type="text" oninput="advancePaymentDetail.BindPatientAccount();" onblur="utility.ValidateAutoComplete(this, 'frmPatientAdvancePayment #hfPatientId', false);" disabled>
+                                            <div id="divSearchPatient" class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs disableAll" onclick="advancePaymentDetail.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Patient Name</label>
+                                        <input class="form-control" id="txtFullName" name="FullName" type="text" disabled="disabled">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="advancePaymentDetail.OpenFacilityDetail();" title="Edit Facility">Facility<span class="required">*</span></a>
+                                        <div class="input-group">
+                                            
+                                            <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="advancePaymentDetail.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                  
+                                    
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Paid">Paid</label><span class="required">*</span>
+                                        <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                            <input class="form-control" id="txtPaid" onkeypress="utility.ValidateDecimal(event,2)" onkeyup="utility.ValidateDecimal(event,2)" name="Paid" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Ledger Account">Paid A/C</label><span class="required">*</span>
+                                        <select class="form-control" id="ddlLedgerAccount" name="LedgerAccount"></select>
+                                    </div>
+                                   
+                                    <div class="col-sm-3 col-md-2">
+
+                                        <label class="control-label">Date Paid</label><span class="required">*</span>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="DatePaid" data-plugin-datepicker="" class="form-control" id="dtpDatePaid">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="Payment Type">Payment Type<span class="required">*</span></label>
+                                        <select class="form-control" id="ddlPaymentType" name="PaymentType" ddlist="GetPaymentType" onchange="advancePaymentDetail.PaymentTypeChanged()"></select>
+                                    </div>
+                                    
+                                    <div id="chequeDiv"  style="display:none;">
+
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label" for="cheque No">Check Number<!--<span class="required">*</span>--></label>
+                                            <input class="form-control" id="txtChequeNumber" name="checkNumber" type="text" maxlength="50">
+                                        </div>
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label" for="Cheque Date">Check Date<!--<span class="required">*</span>--></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input class="form-control" id="dtpChequeDate" name="checkDate" type="text" data-plugin-datepicker="">
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div id="cardDiv" style="display:none;">
+
+                                            <div class="col-sm-3 col-md-2">
+                                                <label class="control-label" for="CreditCardType">Credit Card Type<!--<span class="required">*</span>--></label>
+                                                <select class="form-control" id="ddlCreditCardType" name="creditCardType" ddlist="GetCreditCardType"></select>
+                                            </div>
+
+                                            <div class="col-sm-3 col-md-2">
+                                                <label class="control-label" for="Card No">Card Number<!--<span class="required">*</span>--></label>
+                                                <input class="form-control" id="txtCardNumber" name="cardNumber" type="text" onkeypress="return utility.ValidateZero(event, this);" />
+                                            </div>
+                                            <div class="col-sm-3 col-md-2">
+                                                <label class="control-label" for="Cheque Date">Exp. Date (mm/ccyy)<!--<span class="required">*</span>--></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input class="form-control" id="dtpExpiryDate" name="expiryDate" type="text" data-plugin-datepicker="" />
+                                                </div>
+
+
+                                            </div>
+
+                                           
+                                        </div>
+
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label" for="Entered By">Entered By</label>
+                                            <input class="form-control" id="txtEnteredBy" name="EnteredBy" type="text" disabled="disabled">
+                                        </div>
+                                   
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label" for="Entry Date">Entry Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input class="form-control" id="dtpEntryDate" name="EntryDate" type="text" data-plugin-datepicker="" disabled="disabled">
+                                            </div>
+                                        </div>
+                                   
+
+                                    <div class="col-sm-6">
+                                        <label class="control-label" for="Comments">Comments</label>
+                                        <textarea class="form-control" id="txtComments" name="Comments" rows="3" maxlength="250" spellcheck="true"></textarea>
+                                    </div>
+                                    <div class="col-sm-3 pull-right pad-a-labelsize-btn">
+                                        <div class="size185">
+                                            <button id="btnSave" class="btn btn-primary btn-sm rightbtn ml-xs mr-xs" type="submit">Save & Exit</button>
+                                            <button id="btnScan" class="btn btn-primary btn-sm rightbtn ml-xs mr-xs" onclick="advancePaymentDetail.DocumentScan(); return false; " style="display:none;">Scan</button>
+
+                                            <button id="btnBrowse" class="btn btn-primary btn-sm rightbtn ml-xs mr-xs" onclick="advancePaymentDetail.DocumentImport(); return false;" style="display:none;">Browse</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <input type="hidden" id="hfPatientId" value="-1" />
+                                <input type="hidden" id="hfFacility" value="-1" />
+                              
+
+
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+
+
+
+
+
+
+                
+                <div id="pnlPatientDocument_Result" style="display: none;">
+                    <section class="panel">
+
+                        <!--<ul class="nav nav-tabs">
+                            <li class="active"><a href="#Pending" onclick="advancePaymentDetail.SetGrid('Pending')" data-toggle="tab">Pending</a></li>
+                            <li class=""><a href="#Reviewed" onclick="advancePaymentDetail.SetGrid('Reviewed')" data-toggle="tab">Reviewed</a></li>
+                        </ul>-->
+                        <div class="tab-content tab-content-featured">
+                            <div id="Pending" class="tab-pane active">
+                                <span class="spacer10"></span>
+                                <input type="hidden" id="PatientDocument_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvAdvancePaymentDocument">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">DocumentId</th>
+                                            <!--<th class="size10"><input type="checkbox" id="chkMasterPatDoc" onclick="advancePaymentDetail.checkUncheckAll(this);" /></th>-->
+                                            <th id="ColumnAction" class="size120">Action</th>
+                                            <th class="size120">Folder</th>
+                                            <th class="size120">DOS</th>
+                                            <th class="size120">Entry Date</th>
+                                            <th class="size120">Entered By</th>
+                                            <th class="size120">Assigned To</th>
+                                            <th id="threviewd" class="size120">Reviewed By</th>
+                                            <th id="threviewddate" class="size120">Reviewed Date</th>
+                                            <th id="thsigned" class="size120">Signed By</th>
+                                            <th class="size120">Comments</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div id="Reviewed" class="tab-pane">
+                                <span class="spacer10"></span>
+
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

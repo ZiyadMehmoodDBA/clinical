@@ -1,0 +1,68 @@
+﻿<div id="letterDetail">
+    <div id="actionPanLetterDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header" style="">
+                <button type="button" class="close" onclick="letterDetail.UnLoad(); "><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Letter Detail</h4>
+            </div>
+            <div class="modal-body pt-xs" id="aaa">
+                <form method="post" onsubmit="return false" id="frmletterDetail">
+
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">Name</label><span class="required">*</span>
+                            <input class="form-control" id="txtLetterName" name="txtLetterName" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" name="Description" id="txtLetterDescription" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Category</label><span class="required">*</span>
+                            <select id="lstCategoryId" class="form-control" name="lstCategoryId" ddlist="LookupCategory"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Folder Type</label>
+                            <select id="lstFolderTypeId" name="lstFolderTypeId" class="form-control" ddlist="GetDocumentType"></select>
+                        </div>
+                        
+                        </div>
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">Entity</label><span class="required">*</span>
+                            <select id="lstEntityId" class="form-control" name="lstEntityId" ddlist="GetEntity"></select>
+                        </div>
+                        <div class="col-sm-1 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" name="chkLabel" id="chkLabel">
+                                <label class="control-label" for="chkLabel">Label</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" name="chkActive" id="chkActive" checked="checked">
+                                <label class="control-label" for="chkActive">Active</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 mt-xs pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnLetterSave" type="submit">Save</button>
+                        </div>
+                    </div>
+                    <div class="spacer10"></div>
+
+                    <div class="form-group">
+                        <textarea id="elm1" name="area" spellcheck="true"></textarea>
+                        <input type="hidden" id="EncodedImageString" value="" />
+                        <input type="file" id="ImageUploaderTinymce" style="display:none">
+                    </div>
+                    <input type="hidden" id="hfLetterId" value="-1" />
+                    <input type="hidden" id="hfInsertedFieldsId" value="" />
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

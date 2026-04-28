@@ -1,0 +1,40 @@
+﻿<div id="pnlPreAuthorization" style="display:none;">
+    <div id="actionPanPreAuthorization" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_PreAuthorization.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Authorization</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class=" btn btn-success btn-sm" id="btnAppointmentStatusAdd" onclick="Patient_PreAuthorization.PreAuthorizationAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                  
+                    <div id="pnlPreAuthorization_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="hidden" id="PreAuthorizations_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPreAuthorizations">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">PreAuthorizationId</th>
+                                            <th class="size100">Action</th>
+                                            <th>Plan</th>
+                                            <th>CPT</th>
+                                            <th class="size90">From Date</th>
+                                            <th class="size80">To Date</th>
+                                            <th class="size110 noWordBreak">Prior Authorization Number</th>
+                                            <th class="size130">Visits Allowed</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

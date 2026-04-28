@@ -1,0 +1,256 @@
+﻿<div class="row" id="pnlClinicalComplaints">
+    <div id="actionPanClinicalComplaints" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div id="modaldialog" class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--Begin 03/28/16  Edit By M Ahmad Imran Bug # EMR-491-->
+                <button type="button" id="btnClose" class="close" onclick="Clinical_Complaints.unLoadTab(event, false);"></button>
+                <!--End 03/28/16  Edit By M Ahmad Imran Bug # EMR-491-->
+                <h4 class="modal-title">Complaints</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmClinicalComplaints" method="post" onsubmit="return false">
+                    <div class="panel-featured pb-none panel-body mb-sm pl-none pr-none">
+                        <div class="col-sm-4 col-md-3 col-lg-2">
+                            <label class="control-label" for="Date">Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                <input type="text" class="form-control" id="dtComplaintDate" name="DateCaptured" data-plugin-datepicker autocomplete="off">
+                                <!--<input type="text" class="form-control" id="dtMedicalHxDate" name="MedicalHxDate" data-plugin-datepicker>-->
+                            </div>
+                        </div>
+                        <div class="spacer10"></div>
+                        <div style="height:420px" class="borderT">
+                            <div id="favSectionDiv" class="toggleHorDefault toggled" data-title="Favorites">
+                                <div class="col-xs-12 pb-sm">
+                                    <span class="pull-left">Favorites List</span>
+                                    <a class="btn btn-link btn-xs pull-right" onclick="Clinical_Complaints.BindAllFavComplaints()">Select All</a>
+                                    <div class="clearfix"></div>
+                                    <select id="ddlFavComplaint" name="FavComplaintId" class="form-control" onchange="Clinical_Complaints.BindFavComplaints()"></select>
+                                    <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="Clinical_Complaints.AutoSearchFavComplaints()" />
+                                </div>
+                                <ul class="listPrimary overflowY own-scroll scroll-2x" id="ulFavCompliantDisease" name="favCompliantDisease"></ul>
+                            </div>
+                            <div id="FormDiv" class="col-xs-12 pt-default">
+
+                                <div class="col-md-4 col-lg-3">
+                                    <section class="panel panel-featured mb-none">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Complaint</h2>
+                                        </header>
+                                        <div class="panel-body pl-none pr-none">
+                                            <div class="col-xs-12 mb-sm">
+
+
+                                                <div class="radio-custom col-sm-6">
+                                                    <input id="radioProcedure" type="radio" name="radioFreetext" checked="checked" onchange="Clinical_Complaints.changeICDField();" value="procedure">
+                                                    <label for="rdFreeText">ICD</label>
+                                                </div>
+                                                <div class="radio-custom col-sm-6">
+                                                    <input id="radioFreetext" type="radio" name="radioFreetext" onchange="Clinical_Complaints.changeICDField();" value="freetext">
+                                                    <label for="rdFreeText">Custom</label>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtComplaints" data-popupunload="false" oninput="Clinical_Complaints.BindICD9AutoComplete(this)" name="ComplaintName" type="text" value="">
+                                                    <div class="input-group-btn" id="btnSearchCPT">
+                                                        <button id="btnComplaints" class="btn btn-primary btn-xs" type="button" onclick="Clinical_Complaints.OpenSearchPopup('ICD', 'txtDisease', 'hfCPTCode,hfCPTDescription')"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group col-xs-12">
+                                                    <input class="form-control hidden" placeholder="enter free text" type="text" id="txtFreeText" name="Disease" onblur="Clinical_Complaints.createFreeTextLi();" />
+                                                </div>
+
+                                            </div>
+                                            <ul id="ulCompliantDisease" name="CompliantDisease" class="listPrimary height-max285 height285  own-scroll"></ul>
+                                        </div>
+
+                                    </section>
+                                </div>
+                                <div class="col-md-8 col-lg-9">
+                                    <section id="sectionComplaintDetails" class="panel panel-featured mb-none disableAll">
+
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Details</h2>
+                                        </header>
+                                        <div class="panel-body pb-sm">
+
+                                            <div class="col-sm-8">
+                                                <label class="control-label">Previous History</label>
+                                                <input class="form-control" type="text" id="txtPreviousHistory" name="PreviousHistory" maxlength="150">
+                                            </div>
+                                            <div class="col-sm-4 pad-checkbox">
+                                                <div class="checkbox-custom">
+                                                    <input type="checkbox" id="chkChiefComplaints" name="IsChiefComplaint" value="0">
+                                                    <label class="control-label">Chief Complaint</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Case</label>
+                                                <select id="ddlCase" name="Complaint_CaseId" class="form-control" ddlist="GetCase"></select>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Location</label>
+                                                <!--<select id="ddlLocation" name="Complaint_LocationIds" class="form-control" ddlist="GetLocation">-->
+                                                <select id="ddlLocation" name="Complaint_LocationIds" multiple="multiple" ddlmultilist="GetLocation" class="form-control"></select>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Radiation</label>
+                                                <select id="ddlRadiation" name="Complaint_RadiationId" class="form-control" ddlist="GetRadiation"></select>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Quality</label>
+                                                <select id="ddlQuality" name="Complaint_QualityId" class="form-control" ddlist="GetQuality"></select>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Severity</label>
+                                                <select id="ddlSeverity" name="Complaint_SeverityId" class="form-control" ddlist="GetSeverity"></select>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Onset</label>
+                                                <input class="form-control" type="text" id="txtOnset" name="Onset" maxlength="100">
+                                            </div>
+                                            <div class="col-sm-4 p-none">
+                                                <div class="col-xs-12">
+                                                    <label class="control-label">Duration</label>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <input class="form-control" type="text" id="txtDuration" name="Duration" maxlength="2" onblur="Clinical_Complaints.CheckDuration()" onfocus="Clinical_Complaints.ChangeClickId('txtDuration')">
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <select id="ddlDuration" name="Complaint_DurationId" class="form-control" ddlist="GetDuration" onchange="Clinical_Complaints.CheckDurationSelect()" onblur="Clinical_Complaints.CheckDurationSelectFocusOut()" onfocus="Clinical_Complaints.ChangeClickId('ddlDuration')"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Frequency</label>
+                                                <select id="ddlFrequency" name="Complaint_FrequencyId" class="form-control" ddlist="GetFrequency"></select>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Context</label>
+                                                <select id="ddlContext" name="Complaint_ContextId" class="form-control" ddlist="GetContext"></select>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Character</label>
+                                                <!--<select id="ddlCharacter" name="Complaint_CharacterIds" class="form-control" ddlist="GetCharacter"></select>-->
+                                                <select id="ddlCharacter" name="Complaint_CharacterIds" multiple="multiple" ddlmultilist="GetCharacter" class="form-control"></select>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Associated with</label>
+                                                <input class="form-control" type="text" id="txtAssociatedWith" name="AssociatedWith" maxlength="100">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Precipitated by</label>
+                                                <input class="form-control" type="text" id="txtPrecipitatedBy" name="PrecipitatedBy" maxlength="100">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Aggravated by</label>
+                                                <select id="ddlAggravatedBy" name="Complaint_AggravatedById" class="form-control" ddlist="GetAggravatedBy"></select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Relieved by</label>
+                                                <select id="ddlRevieledBy" name="Complaint_RelievedById" class="form-control" ddlist="GetRevieledBy"></select>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize">
+                                                <div class="checkbox-custom">
+                                                    <input type="checkbox" id="chkReported" name="IsReported" value="">
+                                                    <label class="control-label">Reported</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12">
+                                                <label class="control-label">Comments</label>
+                                                <div id="MacroDescDetails" class="tinymce-autocomplete" hidden>
+                                                    <ul id="MacroDescriptions" class="list-unstyled list-underlined"></ul>
+                                                </div>
+                                                <!--<textarea class="form-control" rows="3" id="txtComments" name="Comments" spellcheck="true" maxlength="5000"></textarea>-->
+                                                <input type="hidden" id="txtComments" name="Comments" />
+                                                <div class="form-control editable" style="height:60px; font-size: 12px; overflow-y:auto" maxlength="3000" id="txtComment" name="Comments" contenteditable="true" spellcheck="true"></div>
+                                            </div>
+
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        
+                     
+                        <!--<div class="col-md-4 col-lg-3">
+                            <section class="panel panel-featured">
+                                <header class="panel-heading">
+                                    <h2 class="panel-title">Favorities</h2>
+                                </header>
+                                <div class="panel-body pl-none pr-none">
+                                    <div class="col-xs-12 mb-sm">
+                                        <select id="ddlFavComplaint" name="FavComplaintId" class="form-control" ddlist="GetFavComplaint" onchange="Clinical_Complaints.BindFavComplaints()"></select>
+                                    </div>
+                                    <ul id="ulFavCompliantDisease" name="favCompliantDisease" class="listPrimary height300 height-max300 own-scroll"></ul>
+                                </div>
+
+                            </section>
+                        </div>-->
+
+                    </div>
+
+                    <div class="col-xs-9">
+                        <label class="control-label">Overall Comments</label>
+                        <textarea class="form-control" rows="3" id="txtOverallComments" name="OverallComments" maxlength="5000" spellcheck="true"></textarea>
+                    </div>
+                    <div class="pull-right pt-md pr-default">
+                        <!--<button class="btn btn-sm" onclick="Clinical_Complaints.ResetComplaint()"><i class="fa fa-refresh"></i> Reset</button>-->
+                        <button class="btn btn-success btn-sm" id="btnAdd" onclick=" Clinical_Complaints.AddCompalintsToNotes(); ">Add to Note</button>
+                    </div>
+                </form>
+                <div class="spacer15"></div>
+            </div>
+            <div id="Clinical_ComplaintHiddenfields">
+                <input type="hidden" id="txtComplaintId" name="ComplaintId" value="0" />
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div class="modal-footer"></div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

@@ -1,0 +1,30 @@
+﻿
+<div class="row" id="Clinical_CaseReportsHTML">
+    <div id="actionPanCaseReportsHTML" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_CaseReportsHTML.UnLoad();"><span class=" red" aria-hidden="true"></span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Case Reports: Consolidated CDA</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="mt-md pr-default pull-right">
+                    <button class="btn btn-primary btn-sm rightbtn" id="btnDownloadCCDAHTML" type="button" onclick="Clinical_CaseReportsHTML.DownloadCCDAHTML();">Download HTML</button>
+                </div>
+                <style type="text/css">
+                    table {
+                        display: table;
+                        border-collapse: separate;
+                        border-spacing: 2px;
+                    }
+                </style>
+                <!--<form method="post" onsubmit="return false" id="frmCaseReportsHTML"></form>-->
+                <iframe name='CaseReportHTML' id='frmCaseReportsHTML' height='700' width='100%' scrolling='auto' frameborder='0'></iframe>
+                <input type="hidden" id="hbase64HTML" value="" />
+                <input type="hidden" id="hbase64HTML2" value="" />
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

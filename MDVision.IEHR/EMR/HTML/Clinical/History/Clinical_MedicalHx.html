@@ -1,0 +1,262 @@
+﻿<div class="row" id="pnlClinicalMedicalHx">
+    <div id="actionPanClinicalMedicalHx" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_MedicalHx.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Medical Hx</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer5"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_MedicalHx.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Add Medical Hx</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body pl-none NoRadiusT" id="pnlSection_Search" style="height:345px">
+
+                            <div id="favSectionDiv" data-title="Favorites" class="toggleHorDefault">
+
+                                <div class="col-xs-12 pb-sm">
+                                    <span class="pull-left">Favorites List</span>
+                                    <a id="favSelectAllLink" href="#" onclick="Clinical_MedicalHx.selectAllFavoriteListContent()" class="btn btn-link btn-xs pull-right disableAll">Select All</a>
+                                    <div class="clearfix"></div>
+                                    <select id="ddlFavoriteListMedicalHx" name="FavoriteListMedicalHx" onchange="Clinical_MedicalHx.loadfavoriteListContent(this)" class="form-control"></select>
+                                    <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="Clinical_MedicalHx.AutoSearchFavMedicalHx()" />
+                                </div>
+                                <ul id="ulFavoriteListMedicalHxContent" name="FavoriteListMedicalHxContent" class="listPrimary height-max200 overflowY"></ul>
+
+                            </div>
+                            <div id="FormDiv" class="col-xs-12">
+                                <form id="frmClinicalMedicalHx" method="post" name="frmClinicalMedicalHx" onsubmit="return false">
+                                    <div class="spacer10"></div>
+                                    <div class="clearfix"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label" for="Date">Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input type="text" class="form-control" id="dtMedicalHxDate" name="MedicalHxDate" data-plugin-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                            <div class="checkbox-custom">
+                                                <input type="checkbox" id="chkMedicalHxUnremarkable" onclick="Clinical_MedicalHx.unRemarkableMedicalHx(this);" name="MedicalHxUnremarkable">
+                                                <label class="control-label">Unremarkable</label>
+                                            </div>
+                                        </div>
+                                        <div class="spacer5"></div>
+                                        <div id="MedicalHxDisease" class="tab-pane active">
+                                            <input id="hfTobaccoId" name="TobaccoId" type="hidden" value="-1" />
+                                            <div class="col-md-3">
+                                                <section class="panel panel-featured">
+                                                    <header class="panel-heading">
+                                                        <h2 class="panel-title">History</h2>
+                                                    </header>
+                                                    <div class="panel-body pl-none pr-none">
+                                                        <div class="col-xs-12 pb-xs">
+
+                                                            <div class="radio-custom col-sm-6">
+                                                                <input type="radio" id="rdSearchICD" name="SearchType" value="2" onchange="Clinical_MedicalHx.SearchTypeChange()">
+                                                                <label for="rdFreeText">ICD</label>
+                                                            </div>
+                                                            <div class="radio-custom col-sm-6">
+                                                                <input type="radio" id="rdSearchFreeText" name="SearchType" value="1" onchange="Clinical_MedicalHx.SearchTypeChange()">
+                                                                <label for="rdFreeText">Custom</label>
+                                                            </div>
+
+                                                            <div class="input-group" id="DivICDAutoComplete">
+                                                                <input class="form-control" id="txtDisease" data-popupunload="false" oninput="Clinical_MedicalHx.bindICD9AutoComplete(this)" onkeypress="Clinical_MedicalHx.disableEnterKey(event)" placeholder="Search Disease" name="Disease" type="text" value="">
+                                                                <div class="input-group-btn">
+                                                                    <button id="btnDisease" class="btn btn-primary btn-xs" type="button"
+                                                                            onclick="Clinical_MedicalHx.OpenSearchPopup('ICD', 'txtDisease', 'hfCPTCode,hfCPTDescription')">
+                                                                        <i class="glyphicon glyphicon-search"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="input-group col-xs-12 hidden" id="DivFreeText">
+                                                                <input class="form-control" id="txtFreeText" maxlength="500" name="FreeText" type="text" value="" onblur="Clinical_MedicalHx.BindDisease(this)" placeholder="Enter text">
+                                                            </div>
+                                                        </div>
+                                                        <ul id="ulMedicalDisease" name="MedicalDisease" class="listPrimary own-scroll overflowY" style="height:162px; max-height:162px;"></ul>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <section id="sectionDiseaseDetails" class="panel panel-featured disableAll">
+                                                    <header class="panel-heading">
+                                                        <h2 class="panel-title">Details</h2><input type="hidden" id="hfCPTSNOMEDCode" name="CPTSNOMEDCodeId" />
+                                                        <input type="hidden" id="hfCPTSNOMEDDescription" name="CPTSNOMEDDescription" />
+                                                    </header>
+                                                    <div class="panel-body pb-md">
+                                                        <div class="col-md-3">
+                                                            <label class="control-label" for="Date">From</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dtMedicalDiseaseFromDate" name="MedicalDiseaseFromDate" data-plugin-datepicker>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label" for="Date">To</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dtMedicalDiseaseToDate" name="MedicalDiseaseToDate" data-plugin-datepicker>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Onset</label>
+
+                                                            <input type="text" class="form-control" id="txtMedicalDiseaseOnset" maxlength="50" name="MedicalDiseaseOnset">
+
+                                                        </div>
+                                                        <div class="col-md-3 p-none">
+                                                            <div class="col-xs-12">
+                                                                <label class="control-label" id="lblDuration">Duration</label>
+                                                            </div>
+                                                            <div class="col-xs-4">
+                                                                <input class="form-control" type="text" id="txtMedicalDiseaseDurationLength" maxlength="2" name="MedicalDiseaseDurationLength" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onblur="Clinical_MedicalHx.enableDurationValidation()">
+                                                            </div>
+                                                            <div class="col-xs-8">
+                                                                <select id="ddlMedicalDiseaseDurationPeriod" name="MedicalDiseaseDurationPeriod" class="form-control" ddlist="GetMedicalHxDurationPeriod" onchange="Clinical_MedicalHx.enableDurationValidation()"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Procedure</label>
+                                                            <div class="input-group ">
+                                                                <input class="form-control" id="txtCPTCode" maxlength="100" placeholder="Search Procedure" type="text" name="CPTCode" oninput="Clinical_MedicalHx.bindAutoComplete(this);" onblur="Clinical_MedicalHx.validateProcedure();" />
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_MedicalHx.openCPTCode();"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Test Result</label>
+                                                            <select id="ddlMedicalDiseaseTestResult" name="MedicalDiseaseTestResult" ddlist="GetMedicalHxTestResults" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Status</label>
+                                                            <select id="ddlMedicalDiseaseStatus" name="MedicalDiseaseStatus" ddlist="GetMedicalHxStatus" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Location</label>
+                                                            <input class="form-control" type="text" id="txtMedicalDiseaseLocation" name="MedicalDiseaseLocation">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Severity</label>
+                                                            <select id="ddlMedicalDiseaseSeverity" name="MedicalDiseaseSeverity" ddlist="GetMedicalHxSeverity" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Pattern</label>
+                                                            <select id="ddlMedicalDiseasePattern" name="MedicalDiseasePattern" ddlist="GetMedicalHxPattern" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Aggravated By</label>
+                                                            <select id="ddlMedicalDiseaseAgggravatedBy" name="MedicalDiseaseAgggravatedBy" ddlist="GetMedicalHxAggravatedBy" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <div class="clearfix"></div>
+                                                            <label class="control-label">Comments</label>
+                                                            <textarea id="txtMedicalDiseaseComments" name="MedicalDiseaseComments" maxlength="500" rows="3" class="form-control" spellcheck="true"></textarea>
+                                                        </div>
+                                                        <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                            <button id="aHistory" type="button" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                            <!--<button class="btn btn-sm" type="button" onclick="Clinical_MedicalHx.ResetFormData();" id="btnreset">Reset</button>-->
+                                                            <button id="btnTobaccoSave" type="submit" class="btn btn-sm btn-success">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <!--/Tabacco-->
+
+                                        <div class="col-md-12">
+                                            <label class="control-label">Overall Comments</label>
+                                            <textarea id="txtMedicalHxComments" name="MedicalHxComments" maxlength="5000" rows="3" class="form-control" spellcheck="true"></textarea>
+                                        </div>
+                                        <div class="pull-right pad-a-labelsize-btn pr-default">
+                                            <button class="btn btn-success btn-sm pull-right mr-sm" style="display:none;" type="button" onclick="Clinical_MedicalHx.addMedicalHxToNotes();" id="btnAddVitalsOnNote">Add on Note</button>
+                                            <button class="btn btn-success btn-sm pull-right mr-sm" type="button" style="display:none" onclick="Clinical_MedicalHx.MedicalHxSave('disease');" id="btnMedicalHxSave">Save</button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <!-- /Medical Hx -->
+                                    </div>
+                                    <input type="hidden" name="PatientId" id="hfPatientId" />
+                                    <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                    <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+
+                                    <input type="hidden" name="MedicalHxId" id="hfMedicalHxId" value="-1" />
+                                    <input type="hidden" name="MedicalHxType" id="hfMedicalHxType" value="tobacco" />
+                                    <input type="hidden" name="MedicalHxSoapText" id="hfMedicalHxSoapText" value="" />
+                                    <input type="hidden" name="gridComments" id="hfGridComments" />
+                                    <input type="hidden" name="selectedDisease" id="hfSelectedDisease" />
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div id="pnlMedicalHx_Result" style="display: inline;">
+                <div class="spacer10"></div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="spacer10"></div>
+                    <div class="col-sm-6" id="divSwitch">
+                        <span class="pr-xs">All</span>
+                        <div id="tglMedicalHx" class="btnWidgetSwitch switch switch-xs switch-success">
+                            <input id="switchVisit" type="checkbox" status="1" checked="" name="Switch" data-plugin-ios-switch="" style="display: inline;" onchange="Clinical_MedicalHx.ChangeCurrentPast(this);">
+                        </div>
+                        <span class="pl-xs">Current</span>
+                    </div>
+                </div>
+                <section class="panel" id="pnlCurrent">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvMedicalHx">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">HxId</th>
+
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvMedicalHx_Paging"></div>
+                    </div>
+                </section>
+
+                <section class="panel hidden" id="pnlPast">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPastMedicalHx">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">HxId</th>
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvPastMedicalHx_Paging"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

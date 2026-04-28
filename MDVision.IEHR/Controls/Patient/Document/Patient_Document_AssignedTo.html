@@ -1,0 +1,45 @@
+﻿<div id="pnlDocumentAssignedTo">
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Document_AssignedTo.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="Lettertitle">Assign document to review</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblDocumentAssignedTo" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmDocumentAssignedTo">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label class="control-label" id="lblAssignUser">Assign User to Review <span class="required">*</span></label>
+                                <select class="form-control" id="ddlAssignUserto" name="AssignedUserTo" ddlist="GetCoWorkerGroupUsersFullName"></select>
+                            </div>
+                            <div class="col-xs-6" id="ddlFoldergroup">
+                                <label class="control-label">Folder</label>
+                                <select class="form-control" id="ddlFolder" name="Folder" ddlist="GetDocument"></select>
+                            </div>
+                            <!--<div class="col-xs-6" id="PriorityDropDown"style="display:none">
+                                <label class="control-label">Priority</label>
+                                <select class="form-control" name="Priority" id="ddlPriority" ddlist="GetMessagesPriority">
+                                    <option value="" refvalue="" refname="">- Select -</option>
+                                    <option value="1" refvalue="" refname="">High</option>
+                                    <option value="2" refvalue="" refname="">Medium</option>
+                                    <option value="3" refvalue="" refname="">Low</option>
+                                </select>
+                            </div>-->
+                            <div class="col-xs-10">
+                                <label class="control-label ">Comments</label>
+                                <textarea id="txtComments" class="form-control" rows="3" spellcheck="true"></textarea>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="spacer20"></div>
+                                <div class="spacer20"></div>
+                                <button id="btnDocumentAssignedTo" type="submit" class="btn btn-primary rightbtn btn-sm  pull-right">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

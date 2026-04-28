@@ -1,0 +1,414 @@
+﻿<div id="pnlPatientLedger" style="display:none;">
+    <div id="actionPanPatientLedger" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_Ledger.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Patient Ledger Search</h4>
+            </div>
+
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="clearfix"></div>
+                    <form id="frmPatientLedger" method="post" onsubmit="return false">
+
+                        <div class="clearBoth"></div>
+
+                        <div class="btn-block" id="PrintReport">
+                            <a class="btn btn-success btn-xs" onclick="Patient_Ledger.OpenPatientDemographics();">Demographics</a>
+                            <a class="btn btn-success btn-xs" onclick="Patient_Ledger.PrintReport();">Print Report</a>
+                            <a class="btn btn-success btn-xs" onclick="Patient_Ledger.OpenPatientPayment();">Patient Payments</a>
+                        </div>
+                        <div class="spacer10"></div>
+                        <div class="col-md-9">
+                            <div class="panel panel-featured ">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="col-lg-5" style="padding-left:0px !important;padding-right:0px !important">
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="Name">Patient Account</label>
+                                                <label class="control-label lblPatientInfo hidden" id="lblPatientName" style="display: none;">: P00330543</label>
+                                                <input class="form-control disableAll txtPatientInfo" readonly="" id="txtPatientName" name="Name" type="text" style="display: block;">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="Name">Last Name</label>
+                                                <label class="control-label lblPatientInfo hidden" id="lblPatLastName" style="display: none;">: Previous</label>
+                                                <input class="form-control disableAll txtPatientInfo" id="txtPatLastName" name="Name" type="text" style="display: block;">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="Name">First Name</label>
+                                                <label class="control-label lblPatientInfo hidden" id="lblPatFirstName" style="display: none;">: Note</label>
+                                                <input class="form-control disableAll txtPatientInfo" id="txtPatFirstName" name="Name" type="text" style="display: block;">
+                                            </div>
+
+                                            <div class="clearfix"></div>
+
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="Appointment Date">Date of Birth</label>
+                                                <label class="control-label lblPatientInfo hidden" id="lblDOB" style="display: none;">: 09/30/2018</label>
+                                                <div class="input-group disableAll">
+                                                    <span class="input-group-addon txtPatientInfo" style="display: table-cell;"><i class="fa fa-calendar"></i></span>
+                                                    <input id="dtpDOB" class="form-control txtPatientInfo" type="text" data-plugin-datepicker="" style="display: block;" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4">
+                                                <label class="control-label" for="Name">Age</label>
+                                                <label class="control-label lblPatientInfo hidden" id="lblAge" style="display: none;">:  0 Year(s), 0 Month(s), 12 Day(s)  </label>
+                                                <input class="form-control disableAll txtPatientInfo" id="txtAge" name="Name" type="text" style="display: block;">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="pull-left size30per pr-xs">
+                                                    <label class="control-label" for="Name">Sex</label>
+                                                    <label class="control-label lblPatientInfo hidden" id="lblSex" style="display: none;">: Female</label>
+                                                    <input class="form-control disableAll txtPatientInfo" id="txtSex" name="Name" type="text" style="display: block;">
+                                                </div>
+                                                <div class="pull-left size70per">
+                                                    <label class="control-label" for="Name">Home Tel.</label>
+                                                    <label class="control-label lblPatientInfo hidden" id="lblHomeTel" style="display: none;">: (121) 212-1212</label>
+                                                    <input class="form-control disableAll txtPatientInfo" id="txtHomeTel" name="Name" type="text" style="display: block;">
+                                                </div>
+                                            </div>
+                                            <!--<div class="col-sm-3 col-lg-2">
+                                                <label class="control-label" for="Name">Sex</label>
+                                                <input class="form-control disableAll" id="txtSex" name="Name" type="text" disabled>
+                                            </div>
+
+                                            <div class="col-sm-3 col-lg-2">
+                                                <label class="control-label" for="Name">Home Tel.</label>
+                                                <input class="form-control disableAll" id="txtHomeTel" name="Name" type="text" disabled>
+                                            </div>-->
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <div class="visible-md visible-sm visible-xs"><span class="spacer15"></span></div>
+                                            <div id="pnlPatientOutstanding_Result" style="display: inline;">
+                                                <div class="table-responsive">
+                                                    <!--<input type="hidden" id="PatientOutstanding_SelectedDataKeys">-->
+                                                    <div id="dgvPatientOutstanding_wrapper" class="dataTables_wrapper no-footer">
+                                                        <div class="row datatables-header form-inline"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="table-responsive">
+                                                            <table class="table table-bordered table-striped table-condensed no-footer dataTable" id="dgvPatientOutstanding" role="grid" aria-describedby="dgvPatientOutstanding_info">
+                                                                <thead>
+                                                                    <tr role="row">
+                                                                        <th style="display: none; width: 40px;" class="sorting_asc" tabindex="0" aria-controls="dgvPatientOutstanding" rowspan="1" colspan="1" aria-label="PatientId: activate to sort column ascending" aria-sort="ascending">PatientId</th>
+                                                                        <th class="sorting_disabled" tabindex="0" aria-controls="dgvPatientOutstanding" rowspan="1" colspan="1" aria-label="&amp;nbsp;" style="width: 18px;">&nbsp;</th>
+                                                                        <th class="text-center sorting" tabindex="0" aria-controls="dgvPatientOutstanding" rowspan="1" colspan="1" aria-label="Total Balance: activate to sort column ascending" style="width: 110px;">Total Balance</th>
+                                                                        <th class="text-center sorting" tabindex="0" aria-controls="dgvPatientOutstanding" rowspan="1" colspan="1" aria-label="0-30: activate to sort column ascending" style="width: 52px;">0-30</th>
+                                                                        <th class="text-center sorting" tabindex="0" aria-controls="dgvPatientOutstanding" rowspan="1" colspan="1" aria-label="31-60: activate to sort column ascending" style="width: 63px;">31-60</th>
+                                                                        <th class="text-center sorting" tabindex="0" aria-controls="dgvPatientOutstanding" rowspan="1" colspan="1" aria-label="61-90: activate to sort column ascending" style="width: 63px;">61-90</th>
+                                                                        <th class="text-center sorting" tabindex="0" aria-controls="dgvPatientOutstanding" rowspan="1" colspan="1" aria-label="91-120: activate to sort column ascending" style="width: 75px;">91-120</th>
+                                                                        <th class="text-center sorting" tabindex="0" aria-controls="dgvPatientOutstanding" rowspan="1" colspan="1" aria-label="&amp;gt;&amp;nbsp;120: activate to sort column ascending" style="width: 63px;">&gt;&nbsp;120</th>
+                                                                    </tr>
+                                                                </thead>
+
+                                                                <tbody>
+                                                                    <tr id="gvPatientOutstanding_row533882" chargeid="533882" role="row" class="odd">
+                                                                        <td style="display: none;" class="sorting_1">0</td>
+                                                                        <th class="rowHeading">Insurance</th>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                    </tr>
+                                                                    <tr id="gvPatientOutstanding_row533882" chargeid="533882" role="row" class="even">
+                                                                        <td style="display: none;" class="sorting_1">$0.0</td>
+                                                                        <th class="rowHeading">Patient</th>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                        <td style="">$0.00</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div><div class="row datatables-footer m-none mt-sm"><div class="col-sm-12 col-md-6 p-none"></div><div class="col-sm-12 col-md-6 p-none"></div></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="divSearchCharges" style="display: block;">
+                                <div class="splitter mt-sm text-center m-none">Patient Ledger</div>
+                                <div class="panel-body NoRadiusT">
+                                    <div class="col-md-2">
+                                        <label id="lblProviderLedger" class="control-label">Provider</label>
+                                        <a id="lnkProviderEditLedger" style="display:none;" href="#" onclick="Patient_Ledger.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                        <div class="input-group">
+                                            <span tabindex="-1" role="presentation" class="k-widget k-autocomplete k-header form-control k-state-default" style=""><input type="text" class="form-control k-input" id="txtProvider" name="Provider" data-role="autocomplete" autocomplete="off" role="textbox" aria-haspopup="true" aria-disabled="false" aria-readonly="false" aria-owns="txtProvider_listbox" aria-autocomplete="list" style="width: 100%;"><span class="k-icon k-loading" style="display:none"></span></span>
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Ledger.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label id="lblFacilityLedger" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEditLedger" style="display:none;" href="#" onclick="Patient_Ledger.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+                                            <span tabindex="-1" role="presentation" class="k-widget k-autocomplete k-header form-control k-state-default" style=""><input class="form-control k-input" id="txtFacility" name="Facility" type="text" data-role="autocomplete" autocomplete="off" role="textbox" aria-haspopup="true" aria-disabled="false" aria-readonly="false" aria-owns="txtFacility_listbox" aria-autocomplete="list" style="width: 100%;"><span class="k-icon k-loading" style="display:none"></span></span>
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Patient_Ledger.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">DOS From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="DatePaid" data-plugin-datepicker="" class="form-control" id="dpDOSFrom" maxlength="10" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">DOS To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="DatePaid" data-plugin-datepicker="" class="form-control" id="dpDOSTo" disabled="disabled" maxlength="10" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-xs-12 col-sm-4 col-lg-3">
+                                        <label class="control-label" for="Amount Received">Billed To</label>
+                                        <select id="ddlBilledTo" class="form-control">
+                                            <option value="" selected="selected">All</option>
+                                            <option value="2">Patient Only</option>
+                                            <option value="1">Insurance only </option>
+                                        </select>
+                                    </div>-->
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="Amount Received">Claim Balance</label>
+                                        <select id="ddlLedgerClaimType" class="form-control" onchange="Patient_Ledger.ClaimTypeOnChange();">
+                                            <option value="" selected="selected">All</option>
+                                            <option value="1">Not equall to zero</option>
+                                            <!--<option value="2">Secondary</option>-->
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label id="lblInsurancePlan" class="control-label">Insurance Plan</label>
+                                        <div class="input-group">
+                                            <span tabindex="-1" role="presentation" class="k-widget k-autocomplete k-header form-control k-state-default" style=""><input class="form-control k-input" id="txtInsurancePlan" name="InsurancePlan" placeholder="Start typing to search" type="text" data-role="autocomplete" autocomplete="off" role="textbox" aria-haspopup="true" aria-disabled="false" aria-readonly="false" aria-owns="txtInsurancePlan_listbox" aria-autocomplete="list" style="width: 100%;"><span class="k-icon k-loading" style="display:none"></span></span>
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Ledger.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2 pad-a-labelsize">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" id="chkVoidedClaims">
+                                            <label class="control-label">Voided Claims</label>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-xs-12 col-sm-4 col-lg-2 pad-a-labelsize">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" checked="checked" onclick="Patient_Ledger.TogglingCPTPayments();" id="chkCPTPayments">
+                                            <label class="control-label">CPT Payments</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-lg-2 pad-checkbox">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" id="chkPatPaymentTotal" onclick="Patient_Ledger.TogglingSubTotalCPTPayments();">
+                                            <label class="control-label">CPT Payments Total</label>
+                                        </div>
+                                    </div>-->
+
+                                    <div class="col-md-3 pad-a-labelsize" id="divIncudeCollection">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" id="chkInculdeCollectionBal">
+                                            <label class="control-label">Include Collection Balance</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-lg-3 pad-a-labelsize" id="divOtherBalance">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" id="chkOtherBalance">
+                                            <label class="control-label">Show Other Balance</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 pad-a-labelsize" id="divDetails">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" onclick="Patient_Ledger.ShowClaimDetail();" id="chkDetails">
+                                            <label class="control-label">Show Details</label>
+                                        </div>
+                                    </div>
+                                    <!--<div class="pull-left pad-a-labelsize pl-default pr-default">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input checked="checked" type="checkbox" id="chkStatement">
+                                            <label class="control-label">Statement</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="pull-left pad-a-labelsize pl-default pr-default">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input checked="checked" type="checkbox" id="chkSubmit">
+                                            <label class="control-label">Submit</label>
+                                        </div>
+                                    </div>-->
+
+                                    <div class="col-md-4 pull-right mt-md">
+                                        <button id="btnSearchCharges" class="btn btn-primary btn-sm rightbtn" onclick="Patient_Ledger.LoadCharges(null,null,true);" type="button">Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnSearchReset" type="button" onclick="Patient_Ledger.PatientLedgerReset();">Reset</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="margin-top:-9px !important">
+                            <table id="AccountNote" style="width: 100%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="splitter mt-sm text-center m-none">Account Note</div>
+                                            <div class="panel-body NoRadiusT">
+                                                <div class="col-xs-12">
+                                                    <textarea class="form-control" rows="6" maxlength="3000" id="txtAccountComments" name="AccountComments" spellcheck="true" style="display: block;"></textarea>
+                                                    <button type="button" class="btn btn-success btn-xs pull-right mt-tiny" onclick="Patient_Ledger.SaveAccountNote();" style="display: block;">OK</button>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <button type="button" class="btn btn-success btn-xs mb-tiny" onclick="Patient_Ledger.OpenAccountNotesLog();" style="display: inline-block;">View Notes</button>
+                                                    <textarea class="form-control" disabled="" rows="5" maxlength="3000" id="txtAccountCommentsLoad" name="AccountCommentsLoad" style="width: 100%; margin-left: 0%; margin-right: 0%;"></textarea>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <!--start - CONTENTS-->
+
+                        <div class="spacer20"></div>
+                        <div id="pnlPatientLedger_Result" style="display: inline;">
+                            <section class="panel">
+                                <div class="panel-body panel-featured">
+
+                                    <!--<div class="col-xs-2 pl-xxs pr-none">
+
+                                        <span class="color-reference-box bg-info"></span>
+                                        <label class="control-label " for="color-reference-box">Primary Charge</label>
+
+                                    </div>-->
+                                    <input type="hidden" id="PatientLedger_SelectedDataKeys" />
+
+
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientLedger">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">ChargeId</th>
+                                                <th class="size120">Claim No</th>
+                                                <th class="size120">DOS</th>
+                                                <th class="size120">Transaction Date</th>
+                                                <th class="size120">Description</th>
+                                                <th class="size120">Total Charges</th>
+                                                <th class="size120">Total Payment</th>
+                                                <th class="size120">Total Adjustment</th>
+                                                <th class="size120">Outstanding Balance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <tfoot></tfoot>
+                                    </table>
+
+
+
+
+                                    <!--<table class="table table-bordered table-condensed table-hover mb-none" id="dgvPatientLedger">
+                                                    <thead>
+                                                        <tr>
+                                                            <th rowspan="2" style="display:none;">ChargeId</th>
+                                                            <th rowspan="2" class="size120 noWordBreak va-middle">Claim #</th>
+                                                            <th rowspan="2" class="size120 va-middle">Date</th>
+                                                            <th rowspan="2" class="size120 va-middle">Entry Date</th>
+                                        <th rowspan="2" class="size120 va-middle">Plan</th>
+                                                            <th rowspan="2" class="size120 va-middle">Description</th>
+                                                            <th rowspan="2" class="size-min70  va-middle">Charges</th>
+
+                                                            <th colspan="2" class="size120 text-center">Payments</th>
+                                                            <th colspan="2" class="size120 text-center">Adjustments</th>
+                                                            <th colspan="2" class="size120 text-center">Patient Balance</th>
+                                                            <th colspan="2" class="size120 text-center">Insurance Balance</th>
+                                                            <th colspan="4" class="size120 text-center">Patient</th>
+                                        <th colspan="4" class="size120 text-center">Copayment</th>
+
+                                        <th rowspan="2" class="size120 va-middle">Total Balance</th>
+                                        <th rowspan="2" class="size120 va-middle noWordBreak">Entry Type</th>
+                                        <th rowspan="2" class="size120 va-middle">Facility</th>
+                                        <th rowspan="2" class="size120 va-middle">Provider</th>
+                                        <th rowspan="2" class="size120 va-middle">Entered By</th>
+                                                        </tr>
+                                                        <tr>
+                                        <th class="size120">Charge</th>
+                                        <th class="size120">Paid</th>
+                                        <th class="size120 noWordBreak">WriteOff</th>
+                                        <th class="size120">Balance</th>
+
+                                        <th class="size120">Charge</th>
+                                        <th class="size120">Paid</th>
+                                        <th class="size120">Discount</th>
+                                        <th class="size120">Balance</th>
+
+                                        <th class="size120">Charge</th>
+                                        <th class="size120">Paid</th>
+                                        <th class="size120">Discount</th>
+                                        <th class="size120">Balance</th>
+                                    </tr>
+                                                    </thead>
+
+
+
+
+                                                    <tbody></tbody>
+                                                </table>-->
+
+                                </div>
+                            </section>
+                        </div>
+
+                        <div id="pnlPatientLedger_Detail_Result" style="display: none;">
+                            <section class="panel">
+                                <div class="panel-body panel-featured">
+
+                                    <input type="hidden" id="PatientLedger_Detail_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientLedger_Detail">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">ChargeId</th>
+                                                <th class="size120">Claim No</th>
+                                                <th class="size120">DOS</th>
+                                                <th class="size120">Transaction Date</th>
+                                                <th class="size90">Transaction Type</th>
+                                                <th class="size180">Description</th>
+                                                <th class="size120">Primary Ins</th>
+                                                <th class="size120">Secondary Ins</th>
+                                                <th class="size120">Tertiary Ins</th>
+                                                <th class="size120">Patient</th>
+                                                <th class="size120">Outstanding Balance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <!--<tfoot></tfoot>-->
+                                    </table>
+
+                                </div>
+                            </section>
+                        </div>
+
+
+                        <input type="hidden" id="hfPatientId" />
+                        <input type="hidden" id="hfFacilityId" value="" />
+                        <input type="hidden" id="hfProviderId" value="" />
+                        <input type="hidden" id="hfInsurancePlan" />
+
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

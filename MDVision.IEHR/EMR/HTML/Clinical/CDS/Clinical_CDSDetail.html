@@ -1,0 +1,464 @@
+﻿<div id="ClinicalCDSDetail">
+    <div id="actionPanClinicalCDSDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ClinicalCDSDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">CDS Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblClinicalCDSDetail">
+                    <form method="post" onsubmit="return false;" id="frmClinicalCDSDetail">
+                        <div class="form-group">
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label" for="shortname">Title  <span class="required">*</span></label>
+                                <input id="txtCDSTitle" type="text" class="form-control" name="CDSTitle" maxlength="200" />
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label ">Developer</label>
+                                <input id="txtCDSDeveloper" name="CDSDeveloper" class="form-control" type="text" value="MD Vision" maxlength="60" />
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label ">Funding Source</label>
+                                <input id="txtCDSFundingSource" name="CDSFundingSource" class="form-control" type="text" value="Sovereign Medical Services" maxlength="35" />
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label ">Bibliography</label>
+                                <input id="txtCDSReferenceURL" class="form-control" type="text" name="CDSReferenceURL" maxlength="90" onblur="ClinicalCDSDetail.EnableValidation(this)" />
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label">Release Date </label>
+                                <!--<input id="txtCDSRelease" name="CDSRelease" class="form-control" type="text" maxlength="35" />-->
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input type="text" class="form-control" id="txtCDSRelease" name="CDSRelease" data-plugin-datepicker>
+                                    </div>
+                                </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label" for="Date">Revision Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input type="text" class="form-control" id="dtCDSRevisionDate" name="CDSRevisionDate" data-plugin-datepicker>
+                                </div>
+                            </div>
+
+                            <!--<div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label">Trigger Location </label>
+                                <select id="ddlCDSTriggerLocation" name="CDSTriggerLocation" multiple="multiple" ddlmultilist="getCDSTriggerLocation" class="form-control"></select>
+                            </div>-->
+                            <!--<div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label">Role </label>
+                                <select id="lstCDSUserRoles" name="CDSUserRole" multiple="multiple" ddlmultilist="GetRoles" class="form-control"></select>
+                            </div>-->
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label">Rule Type </label>
+                                <select id="ddlCDSRuleType" name="CDSRuleType[]" multiple="multiple" ddlmultilist="getCDSRuleType" class="form-control">
+                                    <!--<option selected="selected">- Selected -</option>
+                                    <option value="p1">Practice 1</option>
+                                    <option value="p2">Practice 2</option>-->
+                                </select>
+                                <!--<select id="ddlCDSRuleType" name="CDSRuleType" class="form-control" ddlist="getCDSRuleType"></select>-->
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label for="Sex" class="control-label">Gender</label>
+                                <select id="ddlCDSSex" name="CDSSex" multiple="multiple" ddlmultilist="GetGender" class="form-control"></select>
+                                <!--<select id="ddlCDSSex" class="form-control" name="CDSSex" ddlist="GetGender"></select>-->
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label for="Ethnicity" class="control-label">Ethnicity</label>
+                                <select id="ddlCDSEthnicity" name="CDSEthnicity" multiple="multiple" ddlmultilist="GetEthnicityForDemographics" class="form-control"></select>
+                                <!--<select id="ddlCDSEthnicity" name="CDSEthnicity" class="form-control" ddlist="GetEthnicity"></select>-->
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label for="Race" class="control-label">Race</label>
+                                <select id="ddlCDSRace" name="CDSRace" multiple="multiple" ddlmultilist="GetRaceForDemographics" class="form-control"></select>
+                                <!--<select id="ddlCDSRace" name="CDSRace" class="form-control" ddlist="GetRace"></select>-->
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label">Age Condition</label>
+                                <select id="ddlCDSAgeCondition" name="CDSAgeCondition" class="form-control" ddlist="getCDSAgeCondition" onchange="ClinicalCDSDetail.addAgeConditionValues()"></select>
+                            </div>
+                            <div id="ageConditionValue" class="col-sm-4 col-md-3 col-lg-2 pad-a-labelsize pl-none pr-none hidden">
+                                <div class="col-xs-6">
+                                    <input class="form-control" type="text" id="txtCDSAgeValue" name="CDSAgeValue" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" maxlength="3">
+                                </div>
+                            </div>
+                            <div id="ageConditionRange" class="col-sm-4 col-md-3 col-lg-2 pl-none pr-none hidden">
+                                <div class="col-xs-6">
+                                    <label class="control-label">From</label>
+                                    <input class="form-control" type="text" id="txtCDSAgeFrom" name="CDSAgeFrom" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" maxlength="3" onblur="ClinicalCDSDetail.validateAge(this, null);" onfocus="ClinicalCDSDetail.setKeypad(this);">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="control-label">To</label>
+                                    <input class="form-control" type="text" id="txtCDSAgeTo" name="CDSAgeTo" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" maxlength="3" onblur="ClinicalCDSDetail.validateAge(null, this);" onfocus="ClinicalCDSDetail.setKeypad(this);">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label">Order Sets</label>
+                                <select id="lstCDOrderSet" name="CDSOrderSetIds" multiple="multiple" ddlmultilist="getOrderSets" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                <label for="Preferred Language" class="control-label">Language</label>
+                                <select id="ddlCDSLanguage" name="CDSLanguage" multiple="multiple" ddlmultilist="GetLanguages" class="form-control"></select>
+                                <!--<select id="ddlCDSLanguage" name="CDSLanguage" class="form-control" ddlist="GetLanguages"></select>-->
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2" id="divCDSProvider">
+                                <select class="form-control" style="display:none;" name="hiddenCDSProvider" id="ddlHiddenCDSProvider"></select>
+                                <label class="control-label">Provider<span class="required">*</span></label>
+                                <select class="form-control" multiple="multiple" name="ProviderIds" id="ddlCDSProviders"></select>
+                            </div>
+                            <div id="divReminder" class="col-sm-4 col-md-3 col-lg-2 p-none">
+                                <div class="col-xs-12">
+                                    <label class="control-label" id="lblDuration">Reminder</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input class="form-control" type="text" id="txtCDSReminderLength" min="1" maxlength="4" name="CDSReminderLength" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onblur="ClinicalCDSDetail.enableReminderValidation()">
+                                </div>
+                                <div class="col-xs-8">
+                                    <select id="ddlCDSReminderPeriod" name="CDSReminderPeriod" class="form-control" ddlist="getCDSReminderPeriod" onchange="ClinicalCDSDetail.enableReminderValidation()"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2 p-none hidden">
+                                <div class="col-xs-12">
+                                    <label class="control-label" id="lblRecursive">Recursive</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input class="form-control" type="text" id="txtCDSRecursiveLength" maxlength="4" name="CDSRecursiveLength" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onblur="ClinicalCDSDetail.enableRecursiveValidation()">
+                                </div>
+                                <div class="col-xs-8">
+                                    <select id="ddlCDSRecursivePeriod" name="CDSRecursivePeriod" class="form-control" ddlist="getCDSRecursivePeriod" onchange="ClinicalCDSDetail.enableRecursiveValidation()"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3 col-lg-2 pad-a-labelsize pl-none pr-none">
+                                <div class="col-sm-4 col-md-3 col-lg-2 p-none">
+                                    <div class="checkbox-custom pl-lg">
+                                        <input type="checkbox" id="chkCDSActive" checked name="IsActive">
+                                        <label class="control-label">Active</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-sm-4 col-md-3 col-lg-2">
+                                <label class="control-label">Status</label>
+                                <input class="form-control" type="text" id="txtCDSStatus" name="CDSStatusValue"  value="Due" readonly>
+                            </div>-->
+
+
+                            <div class="spacer10"></div>
+                            <div id="dvProblemList" class="col-sm-12 col-md-6 pt-sm hidden comList">
+                                <section id="sectionProblemList" class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="pull-left size80 pr-sm">
+                                            <select id="ddlProblemList" name="CDSProblemList" class="form-control">
+
+                                                <option value="AND">AND</option>
+                                                <option value="OR">OR</option>
+                                            </select>
+                                        </div>
+                                        <h2 class="panel-title pull-left">Problem List</h2>
+                                        <div class="clearfix"></div>
+                                    </header>
+                                    <div class="panel-body pl-none pr-none">
+                                        <div class="col-xs-12 pb-xs">
+                                            <div class="input-group">
+                                                <input class="form-control" data-popupunload="false" id="txtCDSProblemList" oninput="ClinicalCDSDetail.bindICD9AutoComplete(this)" name="CDSProblemList" type="text" value="">
+                                                <div class="input-group-btn">
+                                                    <button id="btnCDSProblemList" class="btn btn-primary btn-xs" type="button"
+                                                            onclick="ClinicalCDSDetail.OpenSearchPopup('ICD', 'txtCDSProblemList', 'hfCPTCode,hfCPTDescription')">
+                                                        <i class="glyphicon glyphicon-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul id="ulCDSProblemList" name="CDSProblemList" class="listPrimary own-scroll height-150 overflowY p-default"></ul>
+                                    </div>
+                                </section>
+                            </div>
+                            <div id="dvAllergies" class="col-sm-12 col-md-6 pt-sm hidden comList">
+                                <section id="sectionAllergies" class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="pull-left size80 pr-sm">
+                                            <select id="ddlAllergies" name="CDSAllergies" class="form-control">
+
+                                                <option value="AND">AND</option>
+                                                <option value="OR">OR</option>
+                                            </select>
+                                        </div>
+                                        <h2 class="panel-title pull-left">Allergies</h2>
+                                        <div class="clearfix"></div>
+                                    </header>
+                                    <div class="panel-body pl-none pr-none">
+                                        <div class="col-xs-12 pb-xs">
+                                            <input class="form-control" id="txtCDSAllergies" data-popupunload="false" name="CDSAllergies" type="text" value="">
+                                        </div>
+                                        <ul id="ulCDSAllergies" name="CDSAllergies" class="listPrimary own-scroll height-150 overflowY p-default"></ul>
+                                    </div>
+                                </section>
+                            </div>
+                            <div id="dvMedications" class="col-sm-12 col-md-6 pt-sm hidden comList">
+                                <section id="sectionMedications" class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="pull-left size80 pr-sm">
+                                            <select id="ddlMedications" name="CDSMedications" class="form-control">
+
+                                                <option value="AND">AND</option>
+                                                <option value="OR">OR</option>
+                                            </select>
+                                        </div>
+                                        <h2 class="panel-title pull-left">Medications</h2>
+                                        <div class="clearfix"></div>
+                                    </header>
+                                    <div class="panel-body pl-none pr-none">
+                                        <div class="col-xs-12 pb-xs">
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtCDSMedications" data-popupunload="false" name="CDSMedications" type="text" value="">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary btn-xs" type="button">
+                                                        <i class="glyphicon glyphicon-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul id="ulCDSMedications" name="CDSMedications" class="listPrimary own-scroll  height-150 overflowY p-default"></ul>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div id="dvLabTests" class="col-sm-12 col-md-6 pt-sm hidden comList">
+                                <section id="sectionLabResults" class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="pull-left size80 pr-sm">
+                                            <select id="ddlLabResults" name="CDSLabResults" class="form-control">
+
+                                                <option value="AND">AND</option>
+                                                <option value="OR">OR</option>
+                                            </select>
+                                        </div>
+                                        <h2 class="panel-title pull-left">Lab Tests</h2>
+                                        <div class="clearfix"></div>
+                                    </header>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Laboratory<span class="required">*</span></label>
+                                        <br />
+                                        <select id="ddlLabId" name="LabId" class="form-control" ddlist=""></select>
+                                    </div>
+
+                                    <div class="col-sm-9">
+                                        <label class="control-label">Test</label>
+                                        <input class="form-control" id="txtLabCPTCode" placeholder="Search test" type="text" name="LabCPTCode" oninput="ClinicalCDSDetail.bindAutoComplete(this)">
+                                        <!---- <div class="input-group">
+                                             <input class="form-control" id="txtLabCPTCode" placeholder="Search test" type="text" name="LabCPTCode" oninput="ClinicalCDSDetail.bindAutoComplete(this)">
+                                             <div class="input-group-btn">
+                                                 <!--<button class="btn btn-primary btn-xs " type="button" onclick="ClinicalLabResultDetail.openCPTCode();"><i class="fa fa-search"></i></button>--
+                                                 <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                             </div>
+                                         </div>-->
+                                    </div>
+                                    <div class="panel-body pl-none pr-none">
+                                        <!--<div class="col-xs-12 pb-xs">
+                                            <input class="form-control" id="txtCDSLabResults" data-popupunload="false" name="CDSLabResults" type="text" value="">
+                                        </div>-->
+                                        <ul id="ulCDSLabResults" name="CDSLabResultsUl" class="listPrimary own-scroll height-150 overflowY p-default"></ul>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div id="dvVitals" class="col-xs-12 col-lg-6 pt-sm hidden comList">
+                                <section id="sectionVitals" class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="pull-left size80 pr-sm">
+                                            <select id="ddlVitals" name="CDSVitals" class="form-control">
+                                                <option value="AND">AND</option>
+                                                <option value="OR">OR</option>
+                                            </select>
+                                        </div>
+                                        <h2 class="panel-title pull-left">Vitals</h2>
+                                        <div class="clearfix"></div>
+                                    </header>
+                                    <div id="divVitalsTemplate" data-vital-template-id="1" class="panel-body pl-none pr-none">
+                                        <div id="divVitalsLogic" class="col-sm-2">
+                                            <select id="ddlVitalsLogic" name="CDSVitalsLogic" class="form-control hidden">
+                                                <option value="AND">AND</option>
+                                                <option value="OR">OR</option>
+                                            </select>
+                                        </div>
+                                        <div id="divVitalType" class="col-sm-3">
+                                            <select id="ddlVitalType" name="CDSVitalType" class="form-control" onchange="ClinicalCDSDetail.VitalTypeChange(this);">
+                                                <option value="" selected="">- Select -</option>
+                                                <option value="Weight">Weight</option>
+                                                <option value="Height">Height</option>
+                                                <option value="BMI">BMI</option>
+                                                <option value="Systolic">Systolic</option>
+                                                <option value="Diastolic">Diastolic</option>
+                                                <option value="RespiratoryRate">Respiratory Rate</option>
+                                                <option value="Temprature">Temprature</option>
+                                                <option value="Pulse">Pulse/Heart Rate</option>
+                                                <option value="OxygenSaturation">Oxygen Saturation</option>
+                                            </select>
+                                        </div>
+                                        <div id="divVitalLogicalOperator" class="col-sm-2">
+                                            <select id="ddlVitalLogicalOperator" name="VitalLogicalOperator" ddlist="getCDSAgeCondition" class="form-control" onchange="ClinicalCDSDetail.VitalLogicalOperatorChange(this);"></select>
+                                        </div>
+                                        <div id="VitalValue" class="col-sm-2 hidden">
+                                            <input class="form-control" placeholder="Value" type="text" id="txtVitalValue" name="VitalValue" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" maxlength="5">
+                                        </div>
+                                        <div id="VitalValueRange" class="col-sm-2 pl-none pr-none hidden">
+                                            <div class="col-xs-6 pr-tiny">
+                                                <input class="form-control pl-tiny pr-tiny" type="text" id="txtVitalValueFrom" name="VitalValueFrom" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" maxlength="5" onblur="ClinicalCDSDetail.validateAge(this, null);" onfocus="ClinicalCDSDetail.setKeypad(this);">
+                                            </div>
+                                            <div class="col-xs-6 pl-tiny">
+                                                <input class="form-control pl-tiny pr-tiny" type="text" id="txtVitalValueTo" name="VitalValueTo" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" maxlength="5" onblur="ClinicalCDSDetail.validateAge(null, this);" onfocus="ClinicalCDSDetail.setKeypad(this);">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <select id="ddlVitalUnit" name="VitalUnit" class="form-control" disabled>
+                                                <option value="" selected=""></option>
+                                                <option value="kg/m2">Kg/m2</option>
+                                                <option value="lbs">lbs.</option>
+                                                <option value="Feet">Feet</option>
+                                                <option value="mmHg">mmHg</option>
+                                               
+                                                <option value="bpm">bpm</option>
+                                                <option value="F">F</option>
+                                                <option value="rpm">rpm</option>
+                                                <option value="LMin">L/min</option>
+                                            </select>
+                                        </div>
+                                        <div id="divDeleteButton" class="col-sm-1 hidden">
+                                            <a href="#">
+                                                <span class="removeIconListHover" onclick="ClinicalCDSDetail.deleteVital(this, event);">
+                                                    <i class="fa fa-times"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div class="spacer10"></div>
+                                    </div>
+
+                                    <div class="clearfix "></div>
+                                    <div class="col-sm-2 pull-right text-right">
+                                        <a class="btn btn-link btn-sm" onclick="ClinicalCDSDetail.AddNewVitalRow();">Add</a>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div id="dvInsurance" class="col-sm-12 col-md-6 pt-sm hidden comList">
+                                <section id="sectionInsurance" class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="pull-left size80 pr-sm">
+                                            <select id="ddlInsurance" name="CDSInsurance" class="form-control">
+
+                                                <option value="AND">AND</option>
+                                                <option value="OR">OR</option>
+                                            </select>
+                                        </div>
+                                        <h2 class="panel-title pull-left">Insurance</h2>
+                                        <div class="clearfix"></div>
+                                    </header>
+                                    <div class="panel-body pl-none pr-none">
+                                        <div class="col-xs-12 pb-xs">
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtCDSInsurance" data-popupunload="false" name="CDSInsurance" type="text" value="">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary btn-xs" type="button">
+                                                        <i class="glyphicon glyphicon-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul id="ulCDSInsurance" name="CDSInsurance" class="listPrimary own-scroll  height-150 overflowY p-default"></ul>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div id="dvQuestionnaire" class="col-sm-12 col-md-12 pt-sm">
+                                <section id="sectionQuestionnaire" class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <h2 class="panel-title pull-left">Questionnaire</h2>
+                                        <div class="clearfix"></div>
+                                    </header>
+                                    <div class="panel-body pl-none pr-none own-scroll  height-150 overflowY" style="min-height: 100px;">
+                                        <table class="table table-condensed mb-none table-noBorder" id="dgvQuestionnaire"></table>
+                                        <a class="btn btn-link btn-xs p-none pull-right" onclick="ClinicalCDSDetail.AddNewQuestion();">Add New Question</a>
+                                        <div class="hidden">
+                                            <select id="ddlControlType" name="ControlTypeId" onchange="ClinicalCDSDetail.QuestionnaireControlTypeChanged(this);" class="form-control" ddlist="getCDSQuestionnaireControlType"></select>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="col-md-11">
+                                <label class="control-label">Alert Note</label>
+                                <textarea id="txtCDSAlertNote" name="CDSAlertNote" rows="3" class="form-control" spellcheck="true"></textarea>
+                            </div>
+                            <div class="pull-right  pr-default pad-a-labelsize-btn">
+                                <button id="btnSaveCDS" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                                <button id="btnResetCDS" class="btn btn-primary btn-sm rightbtn" type="button" onclick="ClinicalCDSDetail.resetControlValue();">Reset</button>
+                            </div>
+                        </div>
+
+                        <div class="spacer15"></div>
+
+                        <input type="hidden" name="PatientId" id="hfPatientId" />
+                        <input type="hidden" name="CDSId" id="hfCDSID" value="-1" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <ul class="hidden">
+        <li id="LabResultMarkupTemplate" data-lab="">
+            <span id="spnLabName"></span>
+            <ul>
+                <li id="LabTestMarkupTemplate" data-test="">
+                    <span id="spnTestName"></span>
+                    <a href="#" class="rightbtn">
+                        <span class="removeIconListHover" onclick="ClinicalCDSDetail.deleteLabResult($($(this).parent()).parent(), event);">
+                            <i class="fa fa-times"></i>
+                        </span>
+                    </a>
+                    <ul id="testing">
+                        <li id="LabTestAttributeTemplate" data-attribute="">
+                            <div id="divLabResultLogic" class="col-sm-2">
+                                <select id="ddlLabResultsOperator" name="CDSLabResultsOperator" class="form-control">
+                                    <option value="OR">OR</option>
+                                    <option value="AND">AND</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-5">
+                                <input class="form-control" type="text" id="txtLabResultName" name="LabResultName" value="" disabled="">
+                            </div>
+                            <div class="col-sm-2 pl-none pt-tiny">
+                                <select id="ddlLabResultLogicalOperator" name="LabResultLogicalOperator" class="form-control" onchange="ClinicalCDSDetail.LabResultsLogicalOperatorChange(this)">
+                                    <option value="" selected="">- Select -</option>
+                                    <option value="1">=</option>
+                                    <option value="2">&gt;</option>
+                                    <option value="3">&gt;=</option>
+                                    <option value="4">&lt;</option>
+                                    <option value="5">&lt;=</option>
+                                    <option value="6">Between</option>
+                                </select>
+                            </div>
+                            <div id="LabResultValue" class="col-sm-2 hidden">
+                                <input class="form-control" type="text" id="txtLabResultValue" name="LabResultValue">
+                            </div>
+                            <div id="LabResultValueRange" class="col-sm-2 pl-none pr-none hidden">
+                                <div class="col-xs-6 p-none">
+                                    <input class="form-control" type="text" id="txtLabResultValueFrom" name="LabResultValueFrom">
+                                </div>
+                                <div class="col-xs-6">
+                                    <input class="form-control" type="text" id="txtLabResultValueTo" name="LabResultValueTo">
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+
+        </li>
+    </ul>
+
+</div>

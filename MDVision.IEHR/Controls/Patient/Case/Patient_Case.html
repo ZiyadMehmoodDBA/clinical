@@ -1,0 +1,149 @@
+﻿<div id="pnlPatientCase" style="display:none;" class="row">
+    <div id="actionPanPatientCase" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Patient_Case.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 id="headingTitle" class="modal-title">Search Cases</h4>
+                </div>
+                <div id="modalbody">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <button type="button" id="btnPatientCaseAdd" class="btn btn-success btn-sm" onclick="Patient_Case.CaseAddEdit('-1', 'Add');"><i class="fa fa-plus-circle"></i> Add</button>
+                        <div class="spacer10"></div><div class="clearfix"></div>
+                        <form method="post" id="frmPatientCase" onsubmit="return false">
+                            <section class="panel panel-featured">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="col-xs-2">
+                                            <label class="control-label">Case Type </label>
+                                            <select class="form-control" id="ddlType" ddlist="GetCaseType"></select>
+                                        </div>
+                                        <!--<div class="col-xs-2">
+                                            <label class="control-label">Plan</label>
+                                            <select id="ddlPatientInsuranceId" class="form-control"></select>
+
+
+                                        </div>-->
+                                        <div class="col-sm-2" id="DivPatientInsurance" style="display:none">
+                                            <label id="lblinsuranceplan" class="control-label">
+                                                Plan
+                                            </label>
+                                            <select id="ddlPatientInsuranceId" class="form-control"></select>
+
+                                        </div>
+                                        <!--<div class="col-sm-2" id="DivPatientInsuranceAutoComplete" style="display:inline">
+                                            <label id="lblInsurancePlan" class="control-label">Plan</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtInsurancePlan" name="InsurancePlan" placeholder="Start typing to search" onblur="utility.ValidateAutoComplete(this, 'pnlPatientCase #hfInsurancePlan', false);" type="text">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Case.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div class="col-xs-2">
+                                            <label id="lblProvider" for="Ref Provider" class="control-label">Ref Provider</label>
+                                            <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Patient_Case.OpenRefProviderDetail();" title="Edit Ref Provider">Ref Provider</a>
+                                            <div class="input-group">
+                                                <input class="form-control " id="txtRefProvider" type="text" placeholder="Start typing to search" name="Provider" customname="Ref Provider" maxlength="35" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Case.OpenRefProvider('Search Provider', 'txtRefProvider', 'hfProvider', 'lblProvider', 'lnkProviderEdit');"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                            <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Patient_Case.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                            <div class="input-group">
+                                                <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Patient_Case.OpenFacility();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="divCaseNumber" class="col-xs-2">
+                                            <label id="lblCaseNumber" class="control-label">Case Number<span id="spcase" class="spcase required" style="display:none">*</span></label>
+
+                                            <input class="form-control " id="txtCaseNumber" type="text" name="CaseNumber" maxlength="35" customname="Case Number" />
+
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <label class="control-label">Active?</label>
+                                            <select id="ddlActive" class="form-control">
+                                                <option value="" selected="selected">- All -</option>
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                        </div>
+                                        <div id="divAccount" class="col-sm-3 col-lg-2 ">
+                                            <label class="control-label">Patient Account</label>
+                                            <div class="input-group">
+
+                                                <input class="form-control" id="txtPatientName" name="PatientAccount" type="text" placeholder="Start typing to search" />
+
+                                                <div id="divSearchPatient" class="input-group-btn">
+                                                    <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Patient_Case.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-lg-2" id="divClaimNumber">
+                                            <label class="control-label" for="Case Number">Claim Number</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text" placeholder="Start typing to search" />
+                                                <div id="divsearchclaim" class="input-group-btn">
+                                                    <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="Patient_Case.OpenEncounter();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="pull-right pr-default pad-a-labelsize-btn">
+                                            <button class="btn btn-primary btn-sm rightbtn" id="btnPatientCaseSearch" type="button" onclick="Patient_Case.SearchPatientCase();">Search</button>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </section>
+                            <input type="hidden" id="hfProvider" />
+                            <input type="hidden" id="hfFacility" />
+                            <input type="hidden" id="hfPatientId" />
+                            <input type="hidden" id="hfCaseId" value="" />
+                            <input type="hidden" id="hfVisitId" value="" />
+                            <input type="hidden" id="hfInsurancePlan" />
+                            <input type="hidden" id="hfInsurancePlansearchPattern" />
+
+                        </form>
+                    </div>
+                    <div class="spacer10"></div>
+                    <div id="pnlPatientCase_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body panel-featured">
+                                <input type="hidden" id="PatientCase_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientCase">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">PatientCaseId</th>
+                                            <th id="ColumnAction" class="size100">Action</th>
+                                            <th>Case</th>
+                                            <th class="noWordBreak">Case Type</th>
+                                            <th>Plan</th>
+                                            <th>Account</th>
+                                            <th>Provider</th>
+                                            <th>Facility</th>
+                                            <th class="noWordBreak">Ref Provider</th>
+                                            <th class="noWordBreak">Operating Provider</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divPatientCasePaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

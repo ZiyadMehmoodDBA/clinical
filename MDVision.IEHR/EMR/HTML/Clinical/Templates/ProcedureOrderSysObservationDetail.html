@@ -1,0 +1,86 @@
+﻿<div id="pnlProcedureOrderSysObservationDetail">
+    <div id="actionPanProcedureOrderSysObservationDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ProcedureOrderSysObservationDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">ProcedureOrder Template </h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblProcedureOrderSysObservationDetail">
+                    <form method="post" onsubmit="return false;" id="frmProcedureOrderSysObservationDetail" name="frmProcedureOrderSysObservationDetail">
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <section id="sectionProcedureOrder" class="panel-body tab-content-featured toggleVertical">
+                                <div id="ProcedureOrder">
+                                    <div class="col-xs-4">
+                                        <section id="ProcedureOrderSystemSections" class="panel panel-featured size100per  hidden">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title pull-left">Observations</h2>
+                                                <div class="pull-right" id="divAddNewSubSystem" onclick="ProcedureOrderSysObservationDetail.addNewItem('subsystem')"><button class="btn-link white btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                                <div class="clearfix"></div>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none">
+                                                <div class="demo-section k-content pl-default pr-default">
+                                                    <input id="Observations" class="form-control" />
+                                                </div>
+                                                <div id="divProcedureOrderSystemSection" class="height330 height-max330 own-scroll overflowY">
+                                                    <ul id="ulProcedureOrderSystemSection" name="ProcedureOrderSystemSection" class="listPrimary"></ul>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <section id="SystemPreview" class="panel panel-featured size100per">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title">Preview</h2>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none height330 height-max330 own-scroll overflowY">
+                                                <div class="col-xs-12 borderB pb-sm">
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <label class="control-label">Delimator</label>
+                                                    </div>
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <select id="delimator" class="form-control">
+                                                            <option id="comma" value=",">,</option>
+                                                            <option id="fullstop" value=".">.</option>
+                                                            <option id="collon" value=":">:</option>
+                                                            <option id="terminator" value=";">;</option>
+                                                            <option id="hiphen" value="-">-</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <button class="btn btn-xs btn-success" onclick="ProcedureOrderSysObservationDetail.applyStyle('bold');">B</button>
+                                                        <button class="btn btn-xs btn-success" onclick="ProcedureOrderSysObservationDetail.applyStyle('italic');"><i>I</i></button>
+                                                        <button class="btn btn-xs btn-success" onclick="ProcedureOrderSysObservationDetail.applyStyle('underline');"><u>U</u></button>
+                                                        <button class="btn btn-xs btn-success" onclick="ProcedureOrderSysObservationDetail.applyStyle('reset');">C</button>
+                                                        <button class="btn btn-xs btn-success" onclick="ProcedureOrderSysObservationDetail.applyStyle('clear');">Clear All</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="spacer20">
+                                                        <textarea id="ProcedureOrderobservationContent" rows="15" name="ProcedureOrderobservationContent" spellcheck="true" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="col-xs-12 mt-sm text-center">
+                                <button class="btn btn-primary btn-sm tab_space" type="button" onclick="ProcedureOrderSysObservationDetail.switchNextPrevious('Previous')" id="btnPrevious">Previous</button>
+                                <button class="btn btn-primary btn-sm" type="button" onclick="ProcedureOrderSysObservationDetail.switchNextPrevious('Next')" id="btnNext">Next</button>
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" name="TemplateId" id="hfTemplateId" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

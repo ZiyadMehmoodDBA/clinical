@@ -1,0 +1,39 @@
+﻿<div id="Bill_ClaimHcfaForm">
+    <div id="actionPanBill_ClaimHcfaForm" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Bill_ClaimHcfaForm.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Health Insurance Claim Form</h4>
+            </div>
+            <div class="modal-body">
+                <div class="spacer10"></div>
+                <div class="clearfix"></div>
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="clearfix"></div>
+                    <a id="btnprint" class="btn btn-success btn-xs" onclick="Bill_ClaimHcfaForm.PrintClaimForm();">
+                        <i class="fa fa-print pull-left" style="font-size:20px"></i>
+                        Print
+                    </a>
+                    <a id="btnprintandhistory" class="btn btn-success btn-xs hidden" onclick="Bill_ClaimHcfaForm.Print_Claim_History();">
+                        <i class="fa fa-print pull-left" style="font-size:20px"></i>
+                        Print
+                    </a>
+                    <a id="btnprintnsubmit" class="btn btn-success btn-xs hidden" onclick="Bill_ClaimHcfaForm.SubmitClaimForm();">
+                        <i class="fa fa-print pull-left" style="font-size:20px"></i>
+                        Print and Submit Claim
+                    </a>
+                    <div class="spacer10"></div>
+                </div>
+                <section class="panel panel-featured">
+                    <div class="panel-body" id="hcfa_claim_form">
+                        <input type="hidden" id="helperPDF"  />
+                        <object id="PreviewClaimFormIF" data="Scripts/js/pdf/web/viewer.html" class="col-sm-12" style="height:1066px;"></object>
+                    </div>
+                </section>
+                <!--<object id="PrintClaimFormIF" class="col-sm-12  panel-body panel-featured" type="application/pdf" style="display:none;height:1000px;"></object>-->
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿<div class="row" id="pnlClinicalAllergies">
+    <div id="actionPanClinicalAllergies" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_Allergies.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Allergies</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+
+                    <div id="pnlSection_Search">
+                        <div class="pull-left tab_space">
+                            <button class="btn btn-success btn-sm left-btn" type="button" onclick="Clinical_Allergies.openDrFirst()" id="btnOpenDrFirst"><i class="fa fa-plus-circle"></i> Manage</button>
+                        </div>
+                        
+                        <div class="pull-left  mt-default">
+                            <label class="control-label" id="reviewedByTop"></label>
+                        </div>
+                        <!--By Babur on 1/14/2016, due to DrFirst integration, this check box is not required-->
+                        <!--<div class="checkbox-custom pull-left  mt-default">
+                            <input type="checkbox" name="BadAddress" id="chkNoKnownAllergies" onchange="Clinical_Allergies.AddNoKnownAllergies()">
+                            <label class="control-label" for="chkBadAddress">No Known Allergies</label>
+                        </div>-->
+                       
+                    </div>
+                    <div class="spacer3"></div>
+                    <div id="pnlAllergies_Result">
+                        <!--<section class="panel">-->
+                        <form>
+                            <div class="panel-body panel-featured">
+                                <!--<div class="col-sm-3" id="divSwitch">
+                                    <span class="pr-xs">Inactive</span>
+                                    <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                        <input id="switchActive" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="Clinical_Allergies.activeAllergySearch(this);">
+                                    </div>
+                                    <span class="pl-xs">Active</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div><a id="btnNoKnownAllergies" class="btn btn-link btn-xs" style="display:none" onclick="Clinical_Allergies.noKnownAllergy();">No Known Allergies</a></div>-->
+
+
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvAllergies">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="size20 p-none" coltype="Expand"></th>
+                                            <th id="ColumnAction" actiontype="History" coltype="Action" class="size90 size-min90">Action</th>
+                                            <th controlid="txtAllergen" iscontroldisabled="1" controlname="Allergen" class="noWordBreak size120 size-min120">Allergy</th>
+                                            <th controlid="txtReaction" iscontroldisabled="1" controlname="Reaction" class="noWordBreak size120 size-min120">Reaction(s)</th>                                           
+                                            <th controlid="dtpOnsetDate" controlname="OnSetDate" controlwidth="size120" class="size-min120 size120 noWordBreak" coltype="datetime">Onset Date</th>
+                                            <th controlid="txtLastModified" iscontroldisabled="1" controlname="LastModified" class="noWordBreak size120 size-min120">Updated On</th>
+                                            <th controlid="txtSeverity" iscontroldisabled="1" controlname="Severity" class="noWordBreak size120 size-min120">Severity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divAllergies_Paging"></div>
+                                <div class="pull-right pad-a-labelsize-btn pr-default" id="actionsBtnAddToNotes" style="display:none;">
+                                    <button class="btn btn-success btn-sm pull-right mr-default" type="button" onclick="Clinical_Allergies.addAllergyToNotes();" id="btnAddAllergyToNotes"><i class="fa fa-plus"></i> Add on Note</button>
+                                    <!--<button class="btn btn-cancel btn-sm pull-right mr-sm" type="button" onclick="Clinical_Allergies.resetAllergies();" id="btnAllergiesReset"><i class="fa fa-refresh"></i> Reset</button>-->
+                                    
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+

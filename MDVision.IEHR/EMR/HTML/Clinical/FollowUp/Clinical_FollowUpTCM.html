@@ -1,0 +1,117 @@
+﻿<div id="pnlClinicalFollowUpTCM">
+    <div id="actionPanClinicalFollowUpTCM" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_FollowUpTCM.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titleBlockReason">Follow Up Appointment</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmClinicalFollowUpTCM">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Date<span class="required conditional-required">*</span></label>
+                            <div class="input-group">
+                                <!--<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="fromDate" name="Date" data-plugin-datepicker="" onfocus="Clinical_FollowUpTCM.SetUserChangeFocus(true)" class="form-control datepicker">-->
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="Date" data-plugin-datepicker="" class="form-control ValidateCriteria" id="fromDate">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="control-label">Time</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                <input type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 5 }' id="fromTime" name="Time">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="Provider" class="control-label" id="lblProvider">Provider<span class="required conditional-required">*</span></label>
+                            <select id="Provider" name="Provider" class="form-control" ddlist="GetProvider" onchange="Clinical_FollowUpTCM.AvailableAppointmentFill();"></select>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="Facility" class="control-label" id="lblFacility">Facility</label>
+                            <select id="Facility" name="Facility" class="form-control" ddlist="GetFacility" onchange="Clinical_FollowUpTCM.AvailableAppointmentFill();"></select>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="control-label" for="Block Reason">Reason</label>
+                            <!--<select id="ddlschreason" name="schreason" class="form-control " ddlist="GetBlockReasons"></select>-->
+                            <input class="form-control" id="txtReasonComments" name="schreason" type="text" maxlength="500">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="control-label">Duration<span class="required  conditional-required">*</span></label>
+                            <input class="form-control" id="Duration" name="Duration" type="text" maxlength="3" placeholder="999" onkeypress="return utility.ValidateZero(event, this);">
+                        </div>
+                        <div class="spacer10"></div>
+
+                        <div class="TCM-Section col-sm-4">
+                            <div class="col-sm-5">
+                                <label class="control-label">Follow up Appointment</label>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" id="txtScheduleAfter" name="ScheduleAfter" type="number" min="0" max="999" onblur="Clinical_FollowUpTCM.changeDate();" onchange="Clinical_FollowUpTCM.SetValue(this);">
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="ddlScheduleAfter" name="ddlScheduleAfter" class="form-control">
+                                    <option selected="selected">Day(s)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <textarea id="txtFreetext" name="FreeText" class="form-control" maxlength="100" rows="4" spellcheck="true"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="TCM-Section">
+                        <div class="spacer10"></div>
+                        <div class="col-sm-4">
+                            <label class="control-label">Available Slots<span class="required">*</span></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label id="ChooseSchedule" class="control-label red hidden">PLEASE CHOOSE A SLOT TO SCHEDULE</label>
+                        </div>
+                        <div class="spacer5"></div>
+                        <div id="dvSlotsDetail" class="panel-body">
+                            <label id="lblError" style="padding: inherit;margin-left: 38%;color: red; display:none">SCHEDULER NOT AVAILABLE</label>
+                            <div id="dvisPatientScheduled" class="hidden">
+                                <!--<input type="checkbox" name="Slot" onclick="Clinical_FollowUpTCM.changeTime(this);" id="chkisPatientScheduled">-->
+                                <!--<label class="blue" id="lblisPatientScheduled"></label>-->
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="table-responsive height-max200 Of-a" id="dvSlots">
+                                    <table class="table table-bordered table-condensed table-striped table-hover" id="ulSlots">
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-8">
+                        <label class="control-label ">Comments</label>
+                        <textarea id="txtComments" name="Comments" class="form-control" maxlength="100" rows="4" spellcheck="true"></textarea>
+                    </div>
+                    <!--</div>-->
+                    <div class="spacer5"></div>
+                    <div class="pr-default mt-sm pull-right">
+                        <button class="btn btn-primary btn-sm submitbtns" id="btnSave" type="submit">Save</button>
+                        <button class="btn btn-primary btn-sm submitbtns" id="btnSchedule" type="submit">Schedule</button>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <input type="hidden" name="PatientId" id="hfPatientId" />
+                    <input type="hidden" name="PatientScheduleTime" id="hfPatientScheduleTime" />
+
+
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

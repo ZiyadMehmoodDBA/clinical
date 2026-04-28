@@ -1,0 +1,61 @@
+﻿<div class="row" id="pnlAdminPlaceOfService" style="display:none;">
+    <div id="actionPanAdminPlaceOfService" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-target=""></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_PlaceOfService.PlaceOfServiceAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_PlaceOfService.UnLoadTab()"></a>
+                </div>
+                <h2 class="panel-title">Search Place Of Service </h2>
+            </header>
+            <div class="panel-body" id="pnlPlaceOfService_Search">
+                <form class="form-bordered" method="post" onsubmit="return false">
+                    <!--start - CONTENTS-->
+                    <div class="form-group">
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Code</label>
+                            <input class="form-control" id="txtCode" type="text" data-mask="ww" placeholder="ww" />
+                        </div>
+                        <div class="col-sm-5 col-md-6">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" id="txtDiscription" type="text" maxlength="55" />
+                        </div>
+                        <div class="col-sm-2  col-md-2">
+                            <label class="control-label">Active?</label>
+                            <select id="ddlActive" class="form-control ">
+                                <option value="">- All -</option>
+                                <option value="1" selected="selected">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 pad-a-labelsize-btn pull-right">
+                            <button class="btn btn-primary btn-sm" id="btnPlaceOfServiceSearch" type="button" onclick="Admin_PlaceOfService.PlaceOfServiceSearch();">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div id="pnlPlaceOfService_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="PlaceOfService_SelectedDataKeys" />
+                <table class="table table-bordered table-condensed table-striped table-hover mb-none" id="dgvPlaceOfService">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">PlaceOfServiceId</th>
+                            <th class="size100">Action</th>
+                            <th class="size60">Code</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divPlaceOfServicePaging"></div>
+            </div>
+        </section>
+    </div>
+</div>

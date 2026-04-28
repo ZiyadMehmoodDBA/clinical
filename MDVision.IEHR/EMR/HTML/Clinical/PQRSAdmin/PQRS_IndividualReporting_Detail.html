@@ -1,0 +1,143 @@
+﻿<div class="row" id="pnlPQRS_IndividualReporting_Detail">
+    <div id="actionPanPQRS_IndividualReporting_Detail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="PQRS_IndividualReporting_Detail.UnLoadTab();"></button>
+                <h4 class="modal-title" id="headerId">Add Measure</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmPQRS_IndividualReporting_Detail" method="post" onsubmit="return false">
+                    <div class="col-sm-4 col-lg-1">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="Active" name="IsActive" checked>
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div>
+                    <div class="spacer5"></div>
+                    <div class="panel-body panel-featured">
+                        <div class="col-sm-4 col-md-3 col-lg-2" id="divsubmissionyear">
+                            <label class="control-label">Submission Year <span class="required">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                <input type="text" class="form-control" id="dtpSubmissionYear" name="SubmissionYear" maxlength="4" data-plugin-datepicker />
+                            </div>
+                            <!--<select id="ddlSubmissionYear" name="SubmissionYear" class="form-control"><option value="">Select</option></select>-->
+                        </div>
+                        <div class="col-sm-4 col-md-3 col-lg-2 Practice LoadZero" id="PracticeDivReports">
+                            <label id="lblPractice" for="Practice" class="control-label">Practice <span class="required">*</span></label>
+                            <select id="ddlPractice" name="PracticeIds" multiple="multiple" class="form-control multiselect" ddlmultilist="GetPractice" data-bv-field="ddlPractice"></select>
+
+                        </div>
+                        <div class="col-sm-4 col-md-3 col-lg-2" id="divNotesTemplateProvider">
+                            <label class="control-label">Provider <span class="required">*</span></label>
+                            <select id="ddlProviderId" name="ProviderId" class="form-control" ddlist="GetProvider" data-bv-field="ddlProviderId"></select>
+                        </div>
+                        <div class="col-sm-4 col-md-3 col-lg-2" id="divNotesTemplateSpecialty">
+                            <label class="control-label">Specialty <span class="required">*</span></label>
+                            <select id="ddlSpecialtyId" name="SpecialityId" class="form-control" ddlist="GetSpecialty" data-bv-field="ddlSpecialtyId" />
+                        </div>
+
+                        <div class="pull-right mt-md pr-default">
+                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                            <button type="button" onclick="PQRS_IndividualReporting_Detail.resetMeasureIndividual();" class="btn btn-primary btn-sm">Reset</button>
+                        </div>
+                    </div>
+                    <div class="spacer20"></div>
+                    <div class="panel-body panel-featured">
+                        <section class="panel">
+                            <ul class="tabs-custom">
+                                <li id="litabPQRSIndividualMeasures" class="active"><a id="tabPQRSIndividualMeasures" class="custom-made-tabs" href="#PQRSIndividualMeasures" onclick="PQRS_IndividualReporting_Detail.setGrid('PQRS')" data-toggle="tab">PQRS</a></li>
+                                <li id="litabCQMIndividualMeasures" class=""><a id="tabCQMIndividualMeasures" class="custom-made-tabs" href="#CQMIndividualMeasures" onclick="PQRS_IndividualReporting_Detail.setGrid('CQM')" data-toggle="tab">CQM</a></li>
+                                <li id="litabVBPIndividualMeasures" class=""><a id="tabVBPIndividualMeasures" class="custom-made-tabs" href="#VBPIndividualMeasures" onclick="PQRS_IndividualReporting_Detail.setGrid('VBP')" data-toggle="tab">VBP</a></li>
+                            </ul>
+                            <div class="tab-content tabs-custom-body pl-xxs pr-xxs">
+                                <div id="PQRSIndividualMeasures" class="tab-pane active custom-made-tabs">
+                                    <span class="spacer10"></span>
+                                    <!--<input type="hidden" id="LetterTemplate_SelectedDataKeys" />-->
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvMeasures">
+                                        <thead>
+                                            <tr>
+                                                <th class="sorting_1 center"><input type="checkbox" id="selectAllMeasures" onchange="PQRS_IndividualReporting_Detail.selectAllMeasures(this, 'dgvMeasures');" /></th>
+                                                <th>Measure ID</th>
+                                                <th>Measure</th>
+                                                <th>NQS Domain</th>
+                                                <th>Display CMS Specification</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Measure ID</th>
+                                                <th>Measure</th>
+                                                <th>NQS Domain</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody></tbody>
+                                    </table>
+                                    <input type="hidden" id="MeasureIds" name="MeasureIds" />
+                                </div>
+                                <div id="CQMIndividualMeasures" class="tab-pane active custom-made-tabs" style="display:none">
+                                    <span class="spacer10"></span>
+                                    <!--<input type="hidden" id="LetterTemplate_SelectedDataKeys" />-->
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvCQMMeasures">
+                                        <thead>
+                                            <tr>
+                                                <th class="sorting_1 center"><input type="checkbox" id="selectAllMeasures" onchange="PQRS_IndividualReporting_Detail.selectAllMeasures(this, 'dgvCQMMeasures');" /></th>
+                                                <th>Measure ID</th>
+                                                <th>Measure</th>
+                                                <th>NQS Domain</th>
+                                                <th>Display CMS Specification</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Measure ID</th>
+                                                <th>Measure</th>
+                                                <th>NQS Domain</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody></tbody>
+                                    </table>
+                                    <input type="hidden" id="CQMMeasureIds" name="CQMMeasureIds" />
+                                </div>
+                                <div id="VBPIndividualMeasures" class="tab-pane active custom-made-tabs" style="display:none">
+                                    <span class="spacer10"></span>
+                                    <!--<input type="hidden" id="LetterTemplate_SelectedDataKeys" />-->
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVBPMeasures">
+                                        <thead>
+                                            <tr>
+                                                <th class="sorting_1 center"><input type="checkbox" id="selectAllMeasures" onchange="PQRS_IndividualReporting_Detail.selectAllMeasures(this, 'dgvVBPMeasures');" /></th>
+                                                <th>Measure ID</th>
+                                                <th>Measure</th>
+                                                <th>NQS Domain</th>
+                                                <th>Display CMS Specification</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Measure ID</th>
+                                                <th>Measure</th>
+                                                <th>NQS Domain</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody></tbody>
+                                    </table>
+                                    <input type="hidden" id="VBPMeasureIds" name="VBPMeasureIds" />
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

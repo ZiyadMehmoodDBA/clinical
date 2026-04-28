@@ -1,0 +1,86 @@
+﻿<div id="pnlScheduleMuliView" style="display:none;" class="row">
+    <div id="actionPanScheduleMuliView" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <form class="form-bordered" method="post" id="frmSchedulingMuliView" onsubmit="return false">
+        <div class="clearfix"></div>
+        <div class="spacer10"></div>
+
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <h4 class="panel-title">Multiple View</h4>
+            </header>
+            <div class="panel-body">
+                <div class="col-sm-4">
+                    <label class="control-label" for="Fee">Group<span class="required">*</span></label>
+                    <div class="input-group">
+                        <select id="Group" name="Group" class="form-control" ddlist="GetScheduleGroup"></select>
+                        <div class="input-group-btn">
+                            <button id="lnkGroup" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_MuliView.OpenGroup()"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3" id="facilitydiv" style="display:none">
+                    <label for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                    <select id="Facility" class="form-control" ddlist="GetFacility"></select>
+                </div>
+                <div class="col-sm-3" id="datediv">
+                    <label for="searchdate" class="control-label">Search Date<span class="required">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input type="text" id="searchdate" name="Date" placeholder="Date" maxlength="10" data-plugin-datepicker="" class="form-control ">
+                    </div>
+                </div>
+                <div class="col-sm-2 pad-a-labelsize-btn">
+                    <button id="btnsearch" type="submit" class="btn btn-default btn-sm ">Search</button>
+                </div>
+                <div class="spacer10"></div>
+            </div>
+        </section>
+        <div class="col-sm-12 p-none" style="overflow:auto;">
+            <div id="maincontainer">  </div>
+        </div>
+        <select id="Provider" class="form-control" ddlist="GetProvider" style="display:none"></select>
+        <select id="Resource" class="form-control" ddlist="GetResources" style="display:none"></select>
+    </form>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#pnlScheduleMuliView #searchdate').val($.datepicker.formatDate('mm/dd/yy', new Date()));
+        $('#pnlScheduleMuliView #searchdate').datepicker({
+            format: "mm/dd/yyyy",
+            todayHighlight: true
+
+        }).on('changeDate', function (e) {
+
+            $(this).datepicker('hide');
+            $('#frmSchedulingMuliView').bootstrapValidator('revalidateField', 'Date');
+
+
+        });
+        
+
+        $(document).on('click', '.bdate', function () {
+            var providerid = $(this).attr('providerid');
+            var facilityid = $(this).attr('facilityid');
+            var resourceid = $(this).attr('resourceid');
+            var tableid = $(this).attr('tableid');
+            var add = -1;
+            var clickid = $(this).attr('id');
+            Scheduling_MuliView.BackDate(clickid, providerid, resourceid, facilityid, add);
+
+
+        });
+        $(document).on('click', '.fdate', function () {
+            var providerid = $(this).attr('providerid');
+            var facilityid = $(this).attr('facilityid');
+            var resourceid = $(this).attr('resourceid');
+            var tableid = $(this).attr('tableid');
+            var add = 1;
+            var clickid = $(this).attr('id');
+            //alert(clickid);
+            Scheduling_MuliView.BackDate(clickid, providerid, resourceid, facilityid, add);
+
+
+        });
+    });
+</script>

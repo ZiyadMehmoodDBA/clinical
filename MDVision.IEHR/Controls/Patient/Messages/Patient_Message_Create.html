@@ -1,0 +1,202 @@
+﻿<div id="pnlPatientMessageCreate" style="display:none;" class="row">
+    <div id="actionPanPatientMessageCreate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Patient_MessageCreate.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="titleMessage">Message</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="frmPatientMessageCreate" onsubmit="return false">
+
+                        <!--   -->
+                        <!--<div class="col-sm-6" id="divSwitch">
+                            <span class="pr-xs">Patient</span>
+                            <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                <input id="switchVisit" type="checkbox" status="1" checked="" name="Switch" data-plugin-ios-switch="" style="display: inline;" onchange="Patient_MessageCreate.ChangeStatus(this);">
+                            </div>
+                            <span class="pl-xs">Provider</span>
+                        </div>-->
+                        <div class="col-sm-12 p-none">
+                            <div id="divProvider" class="col-sm-12 provider">
+                                <div class="" id="txttopractice">
+                                    <label for="" class="control-label" id="lblMessageToProv">To Practice/User<span class="required">*</span></label>
+                                    <input id="txtTo" type="text" name="MessageTo" customname="To" class="form-control green bold" />
+                                </div>
+
+                            </div>
+                            <div id="divPatient" class="col-sm-12 patient" style="display:none">
+                                <div class="">
+                                    <label for="" class="control-label" id="lblMessageToPat">To Patient<span class="required">*</span></label>
+                                    <div class="input-group col-md-12 col-lg-12">
+                                        <input id="txtAttatchPatient" customname="Patient" name="toattachptn" type="text" class="form-control blue bold" />
+                                        <!--<div class="input-group-btn">
+                                                                            <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick=" Patient_MessageCreate.OpenPatientAccount(); "><i class="fa fa-search"></i></button>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="divphiMailAddress" class="phiMail">
+                                <div class="">
+                                    <label for="" class="control-label" id="lblMessageToProv">To<span class="required">*</span></label>
+                                    <input id="phiMAilAddress" type="text" name="phiMAilAddress" customname="From" class="form-control green bold" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--  -->
+
+                        <div class="col-sm-12">
+                            <label for="" class="control-label">Subject<span class="required">*</span></label>
+                            <input id="txtSubject" name="Subject" type="text" class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="pull-left" id="divAttachPatientwithPractice">
+                                <label for="" class="control-label" id="lblMessageToPat">Attach Patient</label>
+                                <div class="input-group" id="Patientinputtext">
+                                    <input id="txtAttatchPatient" customname="Patient" placeholder="Start typing to search" name="AttatchPatient" type="text" class="form-control blue bold" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Patient_MessageCreate.OpenPatientAccount(); "><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <div id="Patientlink" style="display:none">
+                                    <!--<a href="#" onclick="utility.PatientDemographics(332991, Patient_MessageCreate, event);" title="View Patient">Patient name</a>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Priority</label>
+                            <select class="form-control" name="Priority" id="ddlPriority" ddlist="GetMessagesPriority"></select>
+                        </div>
+                        <div class="col-sm-8 p-none" id="divAttatchFile">
+                            <div class="col-sm-10" style="display:none">
+                                <label class="control-label" for="uploadFilePH">Attach File</label>
+                                <input type="hidden" class="form-control size100per ellipses" disabled name="fileupload" id="uploadFilePH" placeholder="No File Selected" />
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-2 pt-lg">
+                                <div class="clearfix"></div>
+                                <span class="btn-default btn-xs btn-file">
+                                    <i class="fa fa-folder-open"></i>
+                                    <span>Attach File</span>
+                                    <input type="file" id="Upload_Import_file" name="Upload_Import_file" accept="application/pdf,application/xml,image/jpg,image/bmp,image/png,image/jpeg,image/gif" multiple="multiple" onchange="Patient_MessageCreate.BufferFile(this);" />
+                                </span>
+                                <!--<label class="control-label" id="totalFiles">0 file(s) selected</label>-->
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 pt-lg" id="divfilesicons">
+
+                        </div>
+
+                        <div id="divDownloadLink" class="col-sm-4 pt-lg">
+                            <a class="btn btn-success btn-xs" id="linkDownload" download="" href="" title="Download File"><i class="fa fa-download"></i> Download</a>
+                        </div>
+
+                        <div id="divDownloadLinkHTML" class="col-sm-4 pt-lg">
+                            <a class="btn btn-success btn-xs" id="linkDownloadHTML" download="" href="" title="Download File"><i class="fa fa-download"></i> Download</a>
+                        </div>
+
+                        <div id="divPrintLink" class="col-sm-1 pt-lg pull-right">
+                            <a class="btn btn-success btn-xs" id="linkPrint" href="#" title="Print Mesage" onclick="Patient_MessageCreate.PrintMessage();"><i class="fa fa-print"></i>Print</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-12">
+                            <label class="control-label" for="comments">Message<span class="required">*</span></label>
+                            <textarea id="txtMessageDtl" name="MessageDtl" class="form-control" rows="15" spellcheck="true"></textarea>
+                        </div>
+
+                        <div class="pull-left col-sm-6 mt-md " id="divButtons">
+                            <button type="submit" id="btnSend" class="btn btn-sm btn-success">Send</button>
+                            <button type="button" id="btnReply" class="btn btn-sm btn-success" onclick="Patient_MessageCreate.ReplyMessage();">Reply</button>
+                            <button type="button" id="btnForward" class="btn btn-sm btn-warning" onclick="Patient_MessageCreate.ForwardMessage();">Forward</button>
+                            <button type="button" id="btnTask" class="btn btn-sm btn-primary" onclick="Patient_MessageCreate.AddTask();">Add Task</button>
+                            <button type="button" id="btnViewTask" class="btn btn-sm btn-primary" onclick="Patient_MessageCreate.ViewUserTask();">View Task</button>
+                            <button type="button" id="btnViewLetter" style="display:none" class="btn btn-sm btn-info" onclick="Patient_MessageCreate.ViewUserLetter();">View Letter</button>
+                        </div>
+
+                        <input type="hidden" id="hftxtTo" name="hfMessageTo" />
+                        <input type="hidden" id="hfPatientId" name="AttatchedPatientId" />
+                        <input type="hidden" id="hfPatientId" name="PracticeId" />
+                        <input type="hidden" id="hfFileType" name="FileTypeName" />
+                        <input type="hidden" id="hfFileStream" name="FileStreamName" />
+                        <input type="hidden" id="hfFileName" name="FilePathName" />
+                        <input type="hidden" id="isPatSelected" />
+                        <input type="hidden" id="hfRace" />
+                        <input type="hidden" id="hfEthnicity" />
+                        <input type="hidden" id="txtaccountnumber" />
+                        <input type="hidden" id="txtnewPatientName" />
+                        <!--<div id="divPrintMessage" style="display:none"></div>-->
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+
+
+
+        $(document).ready(function () {
+
+            $('#txtTo').keyup(function () {
+                if ($('txtTo').val()) {
+                    // $('#pnlPatientMessageCreate #btnSend').prop("disabled", false);
+                } else {
+                    $('#pnlPatientMessageCreate #btnSend').prop("disabled", true);
+
+                }
+            });
+
+            $('#divPatient #txtAttatchPatient').keyup(function () {
+                if ($('#divPatient #txtAttatchPatient').val()) {
+                    //$('#pnlPatientMessageCreate #btnSend').prop("disabled", false);
+                } else {
+                    $('#pnlPatientMessageCreate #btnSend').prop("disabled", true);
+
+                }
+            });
+
+
+
+            //$('#pnlPatientMessageCreate #divPatient').hide();
+
+            //$('#pnlPatientMessageCreate #rdProvider').click(function () {
+            //    if ($(this).is(':checked')) {
+
+            //        $('#pnlPatientMessageCreate #divPatient').hide();
+            //        $('#pnlPatientMessageCreate #divProvider').show();
+            //        //$('#frmPatientMessageCreate').data('bootstrapValidator').enableFieldValidators('AttatchPatient', false);
+            //        //$('#frmPatientMessageCreate').data('bootstrapValidator').enableFieldValidators('MessageTo', true);
+            //    }
+            //    else {
+
+            //    }
+            //});
+
+            //$('#pnlPatientMessageCreate #rdPatient').click(function () {
+            //    if ($(this).is(':checked')) {
+
+            //        $('#pnlPatientMessageCreate #divPatient').show();
+            //        $('#pnlPatientMessageCreate #divProvider').hide();
+
+            //        //$('#frmPatientMessageCreate').data('bootstrapValidator').enableFieldValidators('AttatchPatient', true);
+            //        //$('#frmPatientMessageCreate').data('bootstrapValidator').enableFieldValidators('MessageTo', false);
+            //    }
+            //    else {
+
+            //    }
+            //});
+
+
+
+        });
+    </script>
+</div>

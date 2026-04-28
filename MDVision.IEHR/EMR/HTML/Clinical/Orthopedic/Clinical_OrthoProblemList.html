@@ -1,0 +1,84 @@
+﻿<div class="row" id="pnlOrthoProblemList" style="display:none">
+    <div id="actionPanOrthoProblemList" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_OrthoProblemList.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Problems</h4>
+            </div>
+            <form method="post" id="frmOrthopedicChartDetail" onsubmit="return false">
+                <div id="modalbody" class="modal-body bg-white">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="right-panel">
+                            <section id='pnlOrthoProblem' class="panel panel-featured">
+                                <div>
+                                    <header class="panel-heading">
+                                        <h2 class="panel-title">Problems</h2>
+                                    </header>
+                                </div>
+                                <div>
+                                    <div class="spacer10"></div>
+                                    <div class="panel-featured panel-body">
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-3">
+                                                <header class="panel-heading ortho-flist-heading">
+                                                    <h2 class="panel-title">Favorites Lists</h2>
+                                                </header>
+                                                <div>
+                                                    <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="Clinical_ProblemLists.BindFavProblems()" />
+                                                </div>
+                                                <div class="panel-body p-none">
+                                                    <ul class="listPrimary height200 overflowY own-scroll" id="ulFavoritiesListProblems"></ul>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="panel-body panel-featured">
+                                                <ul id="ulBodyPartsProblemTabs" class="tabs-custom">
+                                                    <!--<li class="liDraftNotes custom-made-tabs" id="liDraftNotes" onclick="Clinical_Notes.NoteGridTabChange('Draft');"><a href=".DraftNotes" data-toggle="tab">Draft <span id="draftNotesCount" class="badge"></span></a></li>
+                                                    <li class="liSignedNotes active custom-made-tabs" id="liSignedNotes" onclick="Clinical_Notes.NoteGridTabChange('Signed');"><a href=".SignedNotes" data-toggle="tab">Signed <span id="signedNotesCount" class="badge"></span></a></li>-->
+                                                </ul>
+                                                <div class="tab-content tabs-custom-body" id="divOrthoProblemTabsBody">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="control-label">Overall Comments</label>
+                                    <textarea id="txtCarePlanComments" name="CarePlanComments" maxlength="5000" rows="3" class="form-control" spellcheck="true"></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-sm-1 pull-left mt-md">
+                                    <button class="btn btn-danger btn-sm" type="submit" id="btnAddProbList">Delete</button>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="table-responsive" id="pnlProblemLists_Result">
+                                    <table class="table table-bordered table-condensed table-striped table-hover mb-none" id="dgvProblemLists">
+                                        <thead>
+                                            <tr>
+                                                <th class="size110 size-min120">ICD Diagnosis</th>
+                                                <th class="size110 size-min60">Body Part</th>
+                                                <th class="size110 size-min60">Chronicity Level</th>
+                                                <th class="size110 size-min80">Severity</th>
+                                                <th class="size110 size-min160">Start Date</th>
+                                                <th class="size110 size-min120">End Date</th>
+                                                <th class="size110 size-min120">Added</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

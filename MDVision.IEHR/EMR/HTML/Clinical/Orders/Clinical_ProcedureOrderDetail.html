@@ -1,0 +1,173 @@
+﻿<div id="pnlClinicalProcedureOrderDetail">
+    <div id="actionPanClinicalProcedureOrderDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ClinicalProcedureOrderDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Add Procedure Order</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmClinicalProcedureOrderDetail" onsubmit="return false">
+                    <div id="divProcedureOrderInformation" class="col-md-12 disableAll">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Order Information</h2>
+                        </header>
+                        <div class="panel-body">
+
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="Date">Provider<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="ClinicalProcedureOrderDetail.OpenProvider();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="Date">Assignee Provider</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtAssignee" name="Assignee" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkAssignee" class="btn btn-primary btn-xs " type="button" onclick="ClinicalProcedureOrderDetail.OpenAssignee();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3 p-none">
+                                <div class="col-xs-6">
+                                    <label class="control-label" for="Date">Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" data-plugin-datepicker="" name="OrderDate" id="OrderDate">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="control-label" for="">Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input type="text" class="form-control" name="OrderTime" id="OrderTime" data-plugin-timepicker="" data-plugin-options='{ "minuteStep": 5 }'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <label for="" class="control-label">Order Number</label>
+                                <input type="text" placeholder="QD000174" class="form-control" id="OrderNo" name="OrderNo" disabled />
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="visible-sm visible-xs"><div class="spacer15"></div></div>
+
+
+                    <div class="spacer15"></div>
+                    <div id="tblClinicalProcedureOrderDetail">
+                        <input type="hidden" name="PatientId" id="hfPatientId" />
+                        <input type="hidden" name="ProcedureOrderId" id="hfProcedureOrderID" value="-1" />
+                        <input type="hidden" id="hfProvider" name="ProviderId" />
+                        <input type="hidden" id="hfAssignee" name="AssigneeId" />
+                        <input type="hidden" id="hfFacility" name="FacilityId" />
+
+
+
+                        <!-- Start Irfan Code for Editable Grid portion  -->
+                        <div id="divProcedureTestInformation" class="col-sm-12 disableAll">
+                            <header class="panel-heading panel-blue">
+                                <h2 class="panel-title white">Procedure Information</h2>
+                            </header>
+                            <div class="panel-body pl-none pr-none">
+                                <div id="favSectionDiv" class="toggleHorSmallLeft toggled ">
+                                    <section>
+                                        <h2>Favorites<i class="fa fa-chevron-down"></i></h2>
+                                    </section>
+                                    <div class="toggle-content">
+                                        <div class="col-xs-12 pb-sm">
+                                            <span class="pull-left">Favorites List</span>
+                                            <div id="divSelectAllProcedureOrderFavorites" class="disableAll">
+                                                <a id="favSelectAllLink" href="#" onclick="ClinicalProcedureOrderDetail.selectAllFavoriteList()" class="btn btn-link btn-xs pull-right disableAll">Select All</a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <select id="ddlFavoriteListProcedureOrder" name="FavoriteListProcedureOrder" onchange="ClinicalProcedureOrderDetail.loadfavoriteListContent(this)" class="form-control"></select>
+                                            <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="ClinicalProcedureOrderDetail.AutoSearchFavProcedureOrder()" />
+                                        </div>
+                                        <ul id="ulFavoriteListProcedureOrderContent" name="FavoriteListProcedureOrderContent" class="listPrimary height-max150 overflowY own-scroll"></ul>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-12 toggleHorSmContainer overflowY" style="position:sticky;">
+                                    <div class="col-sm-12 col-md-4 pl-none pb-tiny">
+                                        <label class="control-label">Procedure</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="txtProcedureCPTCode" placeholder="search Procedure" type="text" name="ProcedureCPTCode" oninput="ClinicalProcedureOrderDetail.bindAutoComplete(this)" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary btn-xs " type="button" onclick="ClinicalProcedureOrderDetail.openCPTCode();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div id="pnlProcedure_Result" class="table-responsive">
+                                        <input type="hidden" id="Procedure_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvProcedure">
+                                            <thead>
+                                                <tr class="">
+                                                    <th class="size20 p-none" coltype="Expand"></th>
+                                                    <th id="ColumnAction" actiontype="Delete" coltype="Action" class="size40">Action</th>
+                                                    <th id="thProcedureDate" controlid="dtpProcedureDate" iscontroldisabled="0" controlname="ProcedureDate" class="size50" coltype="datetime">Date</th>
+                                                    <th id="thProcedureTime" controlid="tpProcedureTime" iscontroldisabled="0" controlname="ProcedureTime" class="size50" coltype="time">Time</th>
+                                                    <th class="size300" hfcontrolid="ProcedureOrderTestId" hfcontrolname="ProcedureOrderTestId" controlid="ProcedureProcedure" iscontroldisabled="1" controlname="ProcedureProcedure" coltype="TextBox" isoptional="0" listcptid="-1">Procedure</th>
+                                                    <th controlid="Urgency" class="size80" controlname="Urgency" coltype="dropdown" ddlist="GetUrgency">Urgency</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+                                        <input type="hidden" name="ProcedureTestIdsa" id="hfProcedureTestIds" />
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="hfCPTCode" name="CPTCodeId" value="" />
+                            <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                            <!--<input type="hidden" id="hfCPTSNOMEDCode" name="CPTSNOMEDCodeId" value="" />
+                            <input type="hidden" id="hfCPTSNOMEDDescription" name="CPTSNOMEDDescription" />-->
+                        </div>
+
+
+
+                    </div>
+                    <!-- End Irfan Code for Editable Grid portion -->
+                    <div class="spacer15"></div>
+
+
+                    <div id="divProcedureAssociatedProblems" class="col-xs-12">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white pull-left">Associated Problems</h2>
+                            <a href="#" onclick="ClinicalProcedureOrderDetail.addProblem()" class="btn btn-xs"><i class="fa fa-plus-circle white"></i></a>
+                        </header>
+                        <div class="panel-body">
+                            <div class="col-xs-12">
+                                <div class="table-responsive Of-a">
+                                    <table class="table table-bordered table-condensed table-striped table-hover" id="ulProblemLists">
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <!--<ul id="ulProblemLists"></ul>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right pt-md pr-default">
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveOrder">Save</button>
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSignPrintOrder">Sign Order & Print Requisition</button>
+                        <button type="submit" class="btn btn-sm btn-primary hidden" id="btnPrintOrder">Print Requisition</button>
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSignOrder">Sign Order</button>
+                        <!--<button type="button" id="btnResetProcedureOrder" onclick="ClinicalProcedureOrderDetail.resetProcedureOrderDetail()" class="btn btn-sm">Reset</button>-->
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

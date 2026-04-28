@@ -1,0 +1,95 @@
+﻿<div class="row" id="pnlCaseAdjuster" style="display:none;">
+    <div id="actionPanCaseAdjuster" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_CaseAdjuster.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Case Adjuster</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Patient_CaseAdjuster.CaseAdjusterAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div class="panel-body" id="pnlCaseAdjuster_Search">
+                            <form  class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                
+                                    <div class="col-sm-3">
+                                        <label class="control-label">First Name</label>
+                                        <input class="form-control" name="FirstName" id="txtFirstName" type="text" maxlength="50" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Last Name</label>
+                                        <input class="form-control" name="LastName" id="txtLastName" type="text" maxlength="50" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Address</label>
+                                        <input class="form-control" name="Address" id="txtAddress" type="text" maxlength="200" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">City</label>
+                                        <input class="form-control" name="City" id="txtCity" type="text" maxlength="25" />
+                                    </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-sm-1">
+                                        <label class="control-label">State</label>
+                                        <input class="form-control" name="State" id="txtState" type="text"  data-mask="aa" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label class="control-label">Zip</label>
+                                        <input class="form-control" name="Zip" id="txtZip" type="text"  data-mask="99999" onblur="utility.FillCityState('#pnlCaseAdjuster #pnlCaseAdjuster_Search', '#txtZip', '#txtCity', '#txtState')"/>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <label class="control-label">Ext</label>
+                                        <input class="form-control" name="Extention" id="txtExtention" type="text"  data-mask="99999" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Active?</label>
+                                        <select id="ddlActive" name="Active" class="form-control">
+                                            <option value="">- All -</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="pad-a-labelsize-btn pull-right pr-default">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnReferringProviderSearch" type="submit" onclick="Patient_CaseAdjuster.CaseAdjusterSearch('0');" >Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" type="reset" value="Reset"> Reset</button>
+                                    </div>
+                                </div>
+                               
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="pnlCaseAdjuster_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="ReferringProvider_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvCaseAdjuster">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">CaseAdjusterId</th>
+                                        <th class="size130">Action</th>
+                                        <th class="size110">Last Name</th>
+                                        <th class="size120">First Name</th>
+                                        <th class="size110">Address</th>
+                                        <th class="size100">City</th>
+                                        <th class="size100">State</th>
+                                        <th class="size100">Zip</th>
+                                        <th class="size100">Ext</th>
+                                        <th class="size100">Telephone</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divCaseAdjusterPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

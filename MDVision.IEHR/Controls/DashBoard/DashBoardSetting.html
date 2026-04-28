@@ -1,0 +1,1153 @@
+﻿<div class="row" id="pnldashboardsetting" style="display:none;">
+    <div id="actionPanDashboardboardsetting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog size50per">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="DashBoardSetting.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">My Settings</h4>
+            </div>
+            <div class="modal-body pl-xs pr-xs">
+                <form method="post" onsubmit="return false" id="frmdashboardsetting">
+                    <ul id="tabsdashboardsetting" class="tab-default" data-tabs="tabs">
+                        <li class="active"><a href="#setdashboard" data-toggle="tab">Dashboard</a></li>
+                        <li><a href="#setdefault" data-toggle="tab">Default</a></li>
+                        <li style="display:none;"><a href="#setprinter" data-toggle="tab">Printer</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <div id="my-tab-content" class="tab-content tab-default-featured pt-md pr-default">
+                        <div class="tab-pane active" id="setdashboard">
+                            <div class="col-sm-6" id="WidgetContainer">
+                                <div class="panel panel-featured">
+                                    <div class="text-center panel-blue NoRadius">Widgets</div>
+                                    <div id="pwidget"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" id="KPIContainer">
+                                <div class="panel panel-featured">
+                                    <div class="text-center panel-blue NoRadius">KPI</div>
+                                    <div id="pkpi"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <button class="btn btn-primary btn-sm rightbtn " onclick="DashBoardSetting.DashBoardSettingSave();">Save & Exit</button>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="tab-pane" id="setdefault">
+                            <div id="divPreferredScreenAfterLogin" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Preferred Module</label>
+                                <select id="ddlPreferredScreenAfterLogin" name="PreferredScreenAfteLogin" class="form-control"></select>
+                            </div>
+                            <div id="dynamicDD">
+                                <div id="divDefaultProvider" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Default Provider</label>
+                                    <!--Begin Edit by Fahad Malik 06-Dec-2016, Bug# PMS-885-->
+                                    <select id="ddlDefaultProvider" name="DefaultProvider" class="form-control" ddlist="GetProvider" onchange="DashBoardSetting.GetNotesTemplates();"></select>
+                                    <!--End Edit by Fahad Malik 06-Dec-2016, Bug# PMS-885-->
+                                </div>
+
+                                <div id="divDefaultBillingProvider" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Default Billing Provider</label>
+                                    <select id="ddlDefaultBillingProvider" name="BillingProvider" ddlist="GetBillingProviders" class="form-control"></select>
+                                </div>
+
+                                <div id="divDefaultFacility" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Default Facility</label>
+                                    <select id="ddlDefaultFacility" name="DefaultFacility" class="form-control" ddlist="GetFacility"></select>
+                                </div>
+                                <div id="divDefaultResource" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Default Resource</label>
+                                    <select id="ddlDefaultResource" name="DefaultResource" class="form-control" ddlist="GetResources"></select>
+                                </div>
+                                <div id="divDefaultTheme" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Default Theme</label>
+                                    <select id="ddlDefaultTheme" name="DefaultTheme" class="form-control" ddlist="GetThemes"></select>
+                                </div>
+                                <div id="divDefaultSuperBill" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Default Super Bill</label>
+                                    <select id="ddlDefaultSuperBill" name="Default Super Bill" class="form-control" ddlist="GetSupperBill"></select>
+                                </div>
+                                <div id="divEMCodeTypes" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">E&M Type</label>
+                                    <select class="form-control" multiple="multiple" name="EMCodeTypeIds" id="ddlEMCodeType" ddlist="GetBillingInfoType"></select>
+                                </div>
+                                <div id="divDocumentPriority" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Document Priority</label>
+                                    <select id="ddlDocumentPriority" name="DocumentPriority" class="form-control" ddlist="GetDocumentPriority"></select>
+                                </div>
+                                <div id="divRace" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Race</label>
+                                    <select class="form-control" multiple="multiple" name="RaceIds" id="ddlRaceIds" ddlist="GetRaceByDescription"></select>
+                                </div>
+                            </div>
+                            <!--Begin Edit by Fahad Malik 06-Dec-2016, Bug# PMS-885-->
+                            <div id="divDefaultTemplate" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Default Note Template</label>
+                                <select id="ddlDefaultTemplate" name="DefaultTemplate" class="form-control" ddlist=""></select>
+                                <!--End Edit by Fahad Malik 06-Dec-2016, Bug# PMS-885-->
+                            </div>
+                            <div id="divPreferredSchedulerScreen" class="col-xs-12 col-sm-6 col-lg-4 hide">
+                                <label class="control-label">Preferred Scheduler Screen</label>
+                                <select id="ddlPreferredSchedulerScreen" name="PreferredSchedulerScreen" class="form-control"></select>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Refresh Time</label>
+                                <input class="form-control " id="txtRefreshTime" name="txtRefreshTime" onkeypress="utility.ValidateDecimal(event,2)" type="text" maxlength="5" placeholder="9.99" />
+                            </div>
+                            <div id="divRecentPatients" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Recent Patients</label>
+                                <select id="ddlRecentPatients" name="Recent Patients" class="form-control">
+                                    <!--<option value="">- Select -</option>-->
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                </select>
+                            </div>
+                            <!--<div class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">E&M Codes Time</label>
+                                <select id="ddlENMCodesTime" name="E&M Codes Time" class="form-control">
+                                    <option value="1">Show</option>
+                                    <option value="2">Hide</option>
+                                </select>
+                            </div>-->
+
+                            <div class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Appointment Status</label>
+                                <select id="ddlAppointmentStatus" name="AppointmentStatus" class="form-control">
+                                    <option value="0">All</option>
+                                    <option value="1">Checked in</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Select Comp. on Print Note</label>
+                                <select id="ddlSelectNoteComponents" name="SelectNoteComponents" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Font Size on Note</label>
+                                <select id="ddlNoteFontSize" name="NoteFontSize" class="form-control">
+                                    <option value="10">10</option>
+                                    <option value="12">12</option>
+                                    <option value="14">14</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Note Preview Style</label>
+                                <select id="ddlNotePreviewStyle" name="NotePreviewStyle" class="form-control">
+                                    <option value="Default Style">Default Style</option>
+                                    <option value="Classic Style">Classic Style</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">History of present illness</label>
+                                <select id="ddlIsDefaultHPI" name="IsDefaultHPI" class="form-control">
+                                    <option value="0">Default</option>
+                                    <option value="1">Updated</option>
+                                </select>
+                            </div>
+
+                            <!--<div class="col-xs-12 col-sm-6 col-lg-4" >
+                                <label class="control-label">Only show ICD-10</label>
+                                <div class="checkbox-default">
+                                    <input type="checkbox" name="ShowICD10" id="chkshowICD10">
+                                    <label class="control-label" for="chkshowICD10">Self Pay</label>
+                                </div>
+                            </div>-->
+
+                            <div id="divPreferredBillingScreen" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Preferred Billing Screen</label>
+                                <select id="ddlPreferredBillingScreen" name="PreferredBillingScreen" class="form-control"></select>
+                            </div>
+                            <div id="divIsExpand" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Show Order Set Expand</label>
+                                <select id="ddlIsExpand" name="IsExpand" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                            <div id="divIsSearchCriteriaExpand" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Search Criteria Expand</label>
+                                <select id="ddlIsSearchCriteriaExpand" name="IsSearchCriteriaExpand" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                            <div id="divchkSchedulerTiemInterval" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Scheduler Time Intervals</label>
+                                <select id="ddlIsSchedulerTiemInterval" name="ddlIsSchedulerTiemInterval" class="form-control">
+                                    <option value="">- Select -</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="60">60</option>
+                                </select>
+                            </div>
+                            <div id="divSchedulerWorkWeekDays" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Work Week Days</label>
+
+
+                                <select id="ddlSchedulerWorkWeekDays" name="ddlSchedulerWorkWeekDays" multiple="multiple" class="form-control">
+                                    <option value="1">Sunday</option>
+                                    <option value="2">Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesday</option>
+                                    <option value="5">Thursday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                </select>
+                            </div>
+                            <div id="divOrdersExpand" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Expand Lab Order on Dashboard</label>
+                                <select id="ddlOrdersExpand" name="IsOrdersExpand" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                            <div id="divResultsExpand" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Expand Results on Dashboard</label>
+                                <select id="ddlResultsExpand" name="IsResultsExpand" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                            <!--ASt-322-->
+                            <div id="divIsSelectCompOnCopyNote" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Select Comp. on Copy Note</label>
+                                <select id="ddlIsSelectCompOnCopyNote" name="IsSelectCompOnCopyNote" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                            <!--PRD-31 by:MAHMAD-->
+                            <div id="divIsExpandFolderTree" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Expand Folder Tree</label>
+                                <select id="ddlIsExpandFolderTree" name="IsExpandFolderTree" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                            <div id="diviTrackDashboard" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">iTrack Dashboard</label>
+                                <select id="ddliTrackDashboard" name="ddliTrackDashboard" multiple="multiple" class="form-control">
+                                    <option value="1">Meanigfull Use</option>
+                                    <option value="2">MIPS</option>
+                                </select>
+                            </div>
+                            <div id="divDefTabMedications" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Default Tab on Medications</label>
+                                <select id="ddlDefTabMedications" name="ddlDefTabMedications" class="form-control">
+                                    <option value="Medications">Medications</option>
+                                    <option value="Prescriptions">Prescriptions</option>
+                                </select>
+                            </div>
+                            <div id="divBlueButtonNote" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Blue button action on Note</label>
+                                <select id="ddlBlueButtonNote" name="ddlBlueButtonActionNote" class="form-control">
+                                    <option value="">- Select -</option>
+                                    <option value="1">Open selected Component</option>
+                                    <option value="2">Land on selected Component</option>
+                                </select>
+                            </div>
+                            <div id="divDefaultTabMessages" class="col-xs-12 col-sm-6 col-lg-4">
+                                <label class="control-label">Default tab Messages</label>
+                                <select id="ddlDefaultTabMessages" name="ddlDefaultTabMessages" class="form-control">
+                                    <option value="1">Recent Messages</option>
+                                    <option value="2">Patient</option>
+                                    <option value="3">Practice</option>
+                                    <option value="4">Log</option>
+                                </select>
+                            </div>
+                            <!--END ASt-322-->
+                            
+                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize23" id="divchkSendBillingInquiry">
+                                <div class="checkbox-custom checkbox-default" id="dvSendBillingInquiry">
+                                    <input id="chkSendBillingInquiry" type="checkbox">
+                                    <label class="control-label">Send Billing Inquiry</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-4  pad-a-labelsize23" id="divchkshowICD10">
+                                <div class="checkbox-custom checkbox-default" id="chkshowICD10">
+                                    <input id="chkshowICD10" type="checkbox" checked="">
+                                    <label class="control-label">Only show ICD-10</label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xs-12 col-sm-6 col-lg-4  pad-a-labelsize23" id="divchkShowSuccessMessages">
+                                <div class="checkbox-custom checkbox-default" id="dvShowSuccessMessages">
+                                    <input id="chkShowSuccessMessages" type="checkbox">
+                                    <label for="chkShowSuccessMessages" class="control-label">Show Success Messages</label>
+                                </div>
+                            </div>
+                            <!--ASt-322-->
+                            <div class="col-xs-12 col-sm-6 col-lg-4  pad-a-labelsize23" id="divchkFacilityShortName">
+                                <div class="checkbox-custom checkbox-default" id="dvFacilityShortName">
+                                    <input id="chkFacilityShortName" type="checkbox">
+                                    <label class="control-label">Scheduler-Facility Short Name</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-4  pad-a-labelsize23" id="divchkReferralRequired">
+                                <div class="checkbox-custom checkbox-default" id="dvchkReferralRequired">
+                                    <input id="chkreferralRequired" type="checkbox">
+                                    <label class="control-label">Referral Required</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-4  pad-a-labelsize23" id="divchkbxPETemplateName">
+                                <div class="checkbox-custom checkbox-default" id="dvchkbxPETemplateName">
+                                    <input id="chkbxPETemplateName" type="checkbox">
+                                    <label class="control-label">PE Name on Note</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-4  pad-a-labelsize23">
+                                <button id="btnResetAlerts" class="btn btn-default btn-circle btn-xs pl-xs pr-xs" type="button" onclick="DashBoardSetting.resetAlerts();"><i class="fa fa-refresh"></i></button>
+                                <label class="control-label">Reset Alerts</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkIsNoteCompExpanded">
+                                <div class="checkbox-custom checkbox-default" id="IsNoteCompExpanded">
+                                    <input id="chkIsNoteCompExpanded" type="checkbox" checked="" class="autoPopulate">
+                                    <label class="control-label" for="chkIsNoteCompExpanded">Keep Note Components sections expanded</label>
+                                </div>
+                            </div>
+                            <!--End ASt-322-->
+                            <!--PRD-31 by:MAHMAD-->
+                            <div class="clearfix"></div>
+                            <div id="divPatientBanner" class="toggle localImage" data-plugin-toggle="">
+                                <section class="toggle">
+                                    <label>Patient Banner</label>
+                                    <div class="toggle-content" style="display: none;">
+
+                                        <!--<div class="spacer15"></div>
+                                        <div class="splitter">Patient Banner</div>
+                                        <div class="clearfix"></div>-->
+                                        <!--<div id="divPhoneNumber1" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">Phone Number 1</label>
+                                            <select id="ddlPhoneNumber1" name="PhoneNumber1" class="form-control">
+                                                <option value="">- Select -</option>
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <div id="divPhoneNumber2" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">Phone Number 2</label>
+                                            <select id="ddlPhoneNumber2" name="PhoneNumber2" class="form-control">
+                                                <option value="">- Select -</option>
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>-->
+                                        <div id="divPreferredPhone" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">Phone Preferred</label>
+                                            <select id="ddlPreferredPhone" name="PreferredPhone" class="form-control">
+                                                <option value="">- Select -</option>
+                                                <option value="1">Home Tel</option>
+                                                <option value="2">Cell</option>
+                                                <option value="3">Work Tel</option>
+                                            </select>
+                                        </div>
+                                        <div id="divPCP" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">PCP</label>
+                                            <select id="ddlPCP" name="PCP" class="form-control">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <div id="divReferringProvider" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">Referring Provider</label>
+                                            <select id="ddlReferringProvider" name="ReferringProvider" class="form-control">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+
+                                        <div id="divPlanBalance" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">Plan Balance</label>
+                                            <select id="ddlPlanBalance" name="PlanBalance" class="form-control">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <div id="divPatientBalance" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">Patient Balance</label>
+                                            <select id="ddlPatientBalance" name="PatientBalance" class="form-control">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+
+                                        <div id="divPrimary Insurance" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">Primary Insurance</label>
+                                            <select id="ddlPrimaryInsurance" name="PrimaryInsurance" class="form-control">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+
+                                        <div id="divAdvanceBalance" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">Advance Balance</label>
+                                            <select id="ddlAdvanceBalance" name="AdvanceBalance" class="form-control">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <div id="divCollectionBalance" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">Collection Balance</label>
+                                            <select id="ddlCollectionBalance" name="CollectionBalance" class="form-control">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                        <div id="divCCMTimer" class="col-xs-12 col-sm-6 col-lg-4">
+                                            <label class="control-label">CCM Timer</label>
+                                            <select id="ddlCCMTimer" name="CCMTimer" class="form-control">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div id="divQuickLinks" class="toggle localImage" data-plugin-toggle="">
+                                <section class="toggle">
+                                    <label>Quick Links</label>
+                                    <div class="toggle-content" style="display: none;">
+
+                                        <!--<div class="spacer15"></div>
+                                        <div class="splitter">Quick Links</div>
+                                        <div class="clearfix"></div>-->
+
+                                        <div id="divButtonOptions" class="table-responsive">
+                                            <table class="table table-bordered table-condensed">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            Search Patient
+                                                        </td>
+                                                        <td id="divSwitchSearchPat">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchSearchPatient">
+                                                                <input id="switchSearchPatient" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" data-toggle="toggle" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            Quick Add Patient
+                                                        </td>
+                                                        <td id="divSwitchQuickPat">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchQuickPat">
+                                                                <input id="switchQuickPat" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Messages</td>
+                                                        <td id="divSwitchMessages">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchMessages">
+                                                                <input id="switchMessages" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                        <td>Appointments</td>
+                                                        <td id="divSwitchAppointments">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchAppointments">
+                                                                <input id="switchAppointments" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Notes</td>
+                                                        <td id="divSwitchNotes">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchNotes">
+                                                                <input id="switchNotes" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                        <td>Tasks</td>
+                                                        <td id="divSwitchTasks">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchTasks">
+                                                                <input id="switchTasks" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!--Author: Muhammad Azhar Shahzad
+                                                    Date: Januray 18, 2016
+                                                    Reason: To show Prescriptions Refill and Pending Prescriptions Quick Links-->
+                                                    <tr>
+                                                        <td>Prescriptions Refill</td>
+                                                        <td id="divSwitchPrescriptionsRefill">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchPrescriptionsRefill">
+                                                                <input id="switchPrescriptionsRefill" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                        <td>Pending Prescriptions</td>
+                                                        <td id="divSwitchPendingPrescriptions">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchPendingPrescriptions">
+                                                                <input id="switchPendingPrescriptions" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Immunization Alert</td>
+                                                        <td id="divSwitchImmunizationAlert">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchImmunizationAlert">
+                                                                <input id="switchImmunizationAlert" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                        <td>Assigned Results</td>
+                                                        <td id="divSwitchAssignedResults">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchAssignedResults">
+                                                                <input id="switchAssignedResults" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Documents</td>
+                                                        <td id="divSwitchDocumentsAlert">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchDocumentsAlert">
+                                                                <input id="switchDocumentsAlert" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Fax</td>
+                                                        <td id="divSwitchFax">
+                                                            <div class="btnWidgetSwitch switch switch-xs switch-success" id="switchFax">
+                                                                <input id="switchFax" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: inline;">
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                    <!-- end Change BY Azhar
+                                                    Date: Januray 18, 2016 -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
+
+                            <div id="divAutoPopulateNote" class="toggle localImage hidden" data-plugin-toggle="">
+                                <section class="toggle">
+                                    <label>Auto-population on Note</label>
+                                    <div class="toggle-content" style="display: none;">
+                                        <div class="spacer15"></div>
+                                        <!--<div class="splitter">Auto-population on Note</div>-->
+                                        <div class="clearfix"></div>
+
+                                        <div id="divButtonOptions">
+
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkSelectAll">
+                                                <div class="checkbox-custom checkbox-default" id="chkSelectAll">
+                                                    <input id="chkSelectAll" type="checkbox" onclick="DashBoardSetting.SelectAllChange(this)">
+                                                    <label class="control-label">Select All</label>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkCurrentMedications">
+                                                <div class="checkbox-custom checkbox-default" id="chkCurrentMedications">
+                                                    <input id="chkCurrentMedications" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Current Medications</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkActiveProblems">
+                                                <div class="checkbox-custom checkbox-default" id="chkActiveProblems">
+                                                    <input id="chkActiveProblems" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Active Problems</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkFamilyHistory">
+                                                <div class="checkbox-custom checkbox-default" id="chkFamilyHistory">
+                                                    <input id="chkFamilyHistory" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Family History</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkBirthHistory">
+                                                <div class="checkbox-custom checkbox-default" id="chkBirthHistory">
+                                                    <input id="chkBirthHistory" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Birth History</label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkPastMedications">
+                                                <div class="checkbox-custom checkbox-default" id="chkPastMedications">
+                                                    <input id="chkPastMedications" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Past Medications</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkInActiveProblems">
+                                                <div class="checkbox-custom checkbox-default" id="chkInActiveProblems">
+                                                    <input id="chkInActiveProblems" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Inactive Problems</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkSocialHistory">
+                                                <div class="checkbox-custom checkbox-default" id="chkSocialHistory">
+                                                    <input id="chkSocialHistory" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Social History</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkHospitalHistory">
+                                                <div class="checkbox-custom checkbox-default" id="chkHospitalHistory">
+                                                    <input id="chkHospitalHistory" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Hospitalization History</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkActiveAllergies">
+                                                <div class="checkbox-custom checkbox-default" id="chkActiveAllergies">
+                                                    <input id="chkActiveAllergies" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Active Allergies</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkVitals">
+                                                <div class="checkbox-custom checkbox-default" id="chkVitals">
+                                                    <input id="chkVitals" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Vitals</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkMedicalHistory">
+                                                <div class="checkbox-custom checkbox-default" id="chkMedicalHistory">
+                                                    <input id="chkMedicalHistory" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Medical History</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkInActiveAllergies">
+                                                <div class="checkbox-custom checkbox-default" id="chkInActiveAllergies">
+                                                    <input id="chkInActiveAllergies" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Inactive Allergies</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkImmunizations">
+                                                <div class="checkbox-custom checkbox-default" id="chkImmunizations">
+                                                    <input id="chkImmunizations" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Immunizations</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkSurgicalHistory">
+                                                <div class="checkbox-custom checkbox-default" id="chkSurgicalHistory">
+                                                    <input id="chkSurgicalHistory" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Surgical History</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkActiveProcedures">
+                                                <div class="checkbox-custom checkbox-default" id="chkActiveProcedures">
+                                                    <input id="chkActiveProcedures" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Active Procedures</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkInActiveProcedures">
+                                                <div class="checkbox-custom checkbox-default" id="chkInActiveProcedures">
+                                                    <input id="chkInActiveProcedures" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Inactive Procedures</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkSocPsyandBehaviorHx">
+                                                <div class="checkbox-custom checkbox-default" id="chkSocPsyandBehaviorHx">
+                                                    <input id="chkSocPsyandBehaviorHx" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label">Social, Psychological and Behavior History</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </section>
+                            </div>
+                            <div id="divTransferDatatoNewNote" class="toggle localImage hidden" data-plugin-toggle="">
+                                <section class="toggle">
+                                    <label>Transfer Data To New Note</label>
+                                    <div class="toggle-content" style="display: none;">
+                                        <div class="spacer15"></div>
+                                        <div class="clearfix"></div>
+                                        <div id="divButtonOptions">
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkPrevComplaints">
+                                                <div class="checkbox-custom checkbox-default" id="dPrevComplaints">
+                                                    <input id="chkPrevComplaints" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label" for="chkPrevComplaints">Complaints</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkPrevROS">
+                                                <div class="checkbox-custom checkbox-default" id="PrevNoteROS">
+                                                    <input id="chkPrevNoteROS" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label" for="chkPrevNoteROS">ROS</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkPrevPE">
+                                                <div class="checkbox-custom checkbox-default" id="PrevNotePE">
+                                                    <input id="chkPrevNotePE" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label" for="chkPrevNotePE">PE</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkPrevProblmes">
+                                                <div class="checkbox-custom checkbox-default" id="PrevNoteProblems">
+                                                    <input id="chkPrevNoteProblems" type="checkbox" checked="" class="autoPopulate">
+                                                    <label class="control-label" for="chkPrevNoteProblems">Problems</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divPrevNoteTreatmentPlanComments">
+                                                <div class="checkbox-custom checkbox-default" id="PrevNoteTreatmentPlanComments">
+                                                    <input id="chkPrevNoteTreatmentPlanComments" type="checkbox" class="autoPopulate">
+                                                    <label class="control-label" for="chkPrevNoteTreatmentPlanComments">Treatment Plan Comments</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </section>
+                            </div>
+                            <div id="divDemographicLabel" class="toggle localImage" data-plugin-toggle="">
+                                <section class="toggle">
+                                    <label>Demographics Label</label>
+                                    <div class="toggle-content" style="display: none;">
+                                        <div class="spacer15"></div>
+                                        <!--<div class="splitter">Auto-population on Note</div>-->
+                                        <div class="clearfix"></div>
+
+                                        <div id="divDemographicButtonOptions">
+
+
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkPatientName">
+                                                <div class="checkbox-custom checkbox-default" id="chkPatientName">
+                                                    <input id="chkPatientName" type="checkbox" checked="">
+                                                    <label class="control-label">Patient Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkDateOfBirth">
+                                                <div class="checkbox-custom checkbox-default" id="chkDateOfBirth">
+                                                    <input id="chkDateOfBirth" type="checkbox" checked="">
+                                                    <label class="control-label">Date of Birth</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkAddress">
+                                                <div class="checkbox-custom checkbox-default" id="chkAddress">
+                                                    <input id="chkAddress" type="checkbox" checked="">
+                                                    <label class="control-label">Address</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkInsurancePlan">
+                                                <div class="checkbox-custom checkbox-default" id="chkInsurancePlan">
+                                                    <input id="chkInsurancePlan" type="checkbox" checked="">
+                                                    <label class="control-label">Insurance Plan</label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkSubscriberID">
+                                                <div class="checkbox-custom checkbox-default" id="chkSubscriberID">
+                                                    <input id="chkSubscriberID" type="checkbox" checked="">
+                                                    <label class="control-label">Subscriber ID</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkPatientAccountNo">
+                                                <div class="checkbox-custom checkbox-default" id="chkPatientAccountNo">
+                                                    <input id="chkPatientAccountNo" type="checkbox" checked="">
+                                                    <label class="control-label">Patient Account #</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-lg-4 pad-a-labelsize" id="divchkProvider">
+                                                <div class="checkbox-custom checkbox-default" id="chkProvider">
+                                                    <input id="chkProvider" type="checkbox" checked="">
+                                                    <label class="control-label">Provider</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div id="divMeaningfulUse" class="toggle localImage" data-plugin-toggle="">
+                                <section class="toggle">
+                                    <label>Meaningful Use</label>
+                                    <div class="toggle-content">
+                                        <div class="spacer15"></div>
+                                        <div class="clearfix"></div>
+                                        <div>
+                                            <div class="col-sm-4 pad-a-labelsize">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkSelectAllMU3" type="checkbox" onclick="DashBoardSetting.SelectAllChangeMU3(this)" />
+                                                    <label for="chkSelectAllMU3" class="control-label">Select All</label>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkDemographics">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Fields:<br>Gender Identity<br>Sexual Orientation<br>Birth Sex">
+                                                    <input id="chkDemographics" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkDemographics" class="control-label">Demographics</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkMU3FamilyHistory">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Tool Tips:<br>Patient > Clinical > <br>Histoy > FamilyHx <br> <b>Family Members<br>History</b>">
+                                                    <input id="chkMU3FamilyHistory" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkMU3FamilyHistory" class="control-label">Family History</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkTransmissionkHealthCareSurveys">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Values:<br>Patient > Clinical > Face Sheet > <br>Export CCDA > <b>Health Care Survey</b><br>Fields:<br> Patient > Demographics > <b>Country,<br> Preferred Phone Preferred Address</b>">
+                                                    <input id="chkTransmissionkHealthCareSurveys" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkTransmissionkHealthCareSurveys" class="control-label">Transmission to Public Health Agencies - Healthcare Surveys</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkTransmitImmunizationRegistries">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Tab:<br>Patient > Clinical > Medical<br>Immunization > <b>Evaluate <br>History and Forecast</b><br>Section:<br> Patient > Clinical > Medical<br>> Immunization > Hx > <br><b>Evaluate <br>History and Forecast</b> ">
+                                                    <input id="chkTransmitImmunizationRegistries" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkTransmitImmunizationRegistries" class="control-label">Transmit to Immunization Registries</label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkPatientHealthInformationCapture">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Button:<br> Patient Portal > Health Records ><b> Upload Documents</b><br>Button:<br>Patient  > Documents > <b>Uploaded by Patient</b><br>Button:<br>Batch > Documents> <b>Uploaded by Patient</b><br>Fields:<br>Import Document > <b>Document Provided By > Source > Received On</b><br>Section<br>Import Document > <b>Document Reference Details</b><br>">
+                                                    <input id="chkPatientHealthInformationCapture" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkPatientHealthInformationCapture" class="control-label">Patient Health Information Capture</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkTransimissionCaseReporting">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="top"
+                                                     data-original-title="Section:<br>Patient > Clinical > History > Social Hx ><br>Miscellaneous > <b>Travel</b> <br>Fields:<br>Patient > Clinical > History > Social Hx ><br>Miscellaneous > Occupation > Occupation Status > <br>Past > <b>From/To</b> > <b>Grid</b> <br>Button: <br>Patient > Clinical > History > Social Hx ><br>Miscellaneous > Occupation > Occupation Status > <br><b>Cancel </b> <br>Fields: <br>Patient > Clinical > Order & Results > Results ><br>Add/Edit > Add Observation > <b>Reference Range <br>Interpretation </b> >  <b>Reference Range Description,<br> Organism </b><br>Patient > Clinical > Order & Results > Results > <br>Add/Edit > Add Observation > <br>Organism</b> > <b>Result <br>(Search Field) </b><br>Patient > Clinical > Clinical Summary > <b>Generate Case Report</b>">
+                                                    <input id="chkTransimissionCaseReporting" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkTransimissionCaseReporting" class="control-label">Transmission to Public Health Agencies - Case Reporting</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkTransitionCareDirectProject">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="top" data-original-title="Tab:<br>Dashboard > Message > <b>Direct(Outgoing)<br>Button:<br> Patient > Clinical > Clinical Summary<br>> Export C-CDA > Referral Note > <br><b>Transmit Referral Note</b><br> Button: <br>  Patient > Clinical > Clinical Summary<br>> Export C-CDA > Continuity of Care Document <br> <b>Transmit CCDA</b>">
+                                                    <input id="chkTransitionCareDirectProject" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkTransitionCareDirectProject" class="control-label">Transition of Care/Direct Project</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkPrivacyDataSegment">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom" data-original-title="Tab:<br>Batch > Import CCDA > <b>Import <br>Privacy Segmented Document</b><br>Check Box:<br> Admin > Security > User<br>> Add/Edit <br> User > <b>Data Privacy</b> ">
+                                                    <input id="chkPrivacyDataSegment" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkPrivacyDataSegment" class="control-label">Data Segmentation for privacy - Send/Receive</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkImplantableDevices" data-toggle="tooltip" data-html="true" data-placement="bottom" data-original-title="Button:<br>Patient > Clinical > Medical > <br><b>Implantable Devices</b><br> Option:<br> Patient > Clinical > Notes > <br> Create Note > Miscellaneous > <b>Implantable Devices</b> ">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkImplantableDevices" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkImplantableDevices" class="control-label">Implantable Devices</label>
+                                                </div>
+                                            </div>
+                                            <div class="visible-lg">
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkTransitCancerRegistries">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="top" data-original-title="Button:<br>Patient > Clinical > Notes > <br>Create ><b>Cancer Report</b><br> Values:<br> Patient > Clinical > Notes > Create <br> Note > Visit Type > <b>Cancer Care - <br> Established Patient, Cancer Care - <br> New Patient</b> ">
+                                                    <input id="chkTransitCancerRegistries" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkTransitCancerRegistries" class="control-label">Transmission to Cancer Registries</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkConsolidatedCDACreationPreformance">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="top"
+                                                     data-original-title="Fields:<br>Batch > Import CCDA > <b>Validation</b> <br><b>Objective, Reference Filename</b><br>HyperLink:<br>Batch > Import CCDA > <b>Validate,</b><br><b>Error Report, CCD Data</b><br> Button: <br> Batch >Import CCDA > <b>Save</b> <br><b>Preference</b>Values:<br>Batch > Import CCDA > Type of <br>Record > <b>CCD V3, Referral Note, </b><br><b>Care Plan, C32</b><br> Option:<br>Patient > Clinical > Medical > <br><b>Functional Cognitive and Mental </b><br><b>Status</b>">
+                                                    <input id="chkConsolidatedCDACreationPreformance" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkConsolidatedCDACreationPreformance" class="control-label">Consolidated CDA Creation Performance</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkTransimissionAntimicobialUse">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="top"
+                                                     data-original-title="Fields:<br>Patient > Clinical > Order & Results > Lab > Pending<br>Orders > Add/Edit > Test Name Details > <b>Specimen <b><br><b>Source , Alternative Specimen Source, Organism, </b><br><b>Antimicrobials</b><br>Patient > Clinical > Order & Results > Lab > Results ><br> Add/Edit > <b>Conditional Statement</b><br>Patient > Clinical > Order & Results > Lab > Results ><br> Add/Edit > Add Observation > <b>Antimicrobial</b><br>Sections: <br>Patient > Clinical > Order & Results > Lab > Results ><br> Add/Edit > Final Interpretations by antimicrobials <br>Values: <br>Patient > Clinical > Order & Results > Lab > Pending <br>Orders > Add/Edit > Test Name Details > Prefer <br>Specimen > <b>CSF, LRI</b><br>Patient > Clinical > Order & Results > Lab > Results ><br> Add/Edit > Add Observation > Flag > <b>S = Susceptible,</b><br><b>S-DD = Susceptible-Dose Dependent, I = </b><br><b>Intermediate, R = Resistant, NS = None-Susceptible, N</b><br><b>= Not Tested, S = Susceptible/Synergistic, R =  </b><br><b>Resistant/Not Synergistic</b><br>Column:<br>Patient > Clinical > Medical > Medications > <b>Route</b>">
+                                                    <input id="chkTransimissionAntimicobialUse" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkTransimissionAntimicobialUse" class="control-label">Transmission to Public Health Agencies - Antimicrobial Use</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkSocPsyBehaviourHx">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="top" data-original-title="Option:<br>Patient > Clinical > History > <b>Social,<br> Psychological and Behavioral Hx</b> <br>Button: <br> Patient > Clinical > Notes > Create <br> Note > Subjective > History > <br><b>Social, Psychological and <br>Behavioral Hx</b>">
+                                                    <input id="chkSocPsyBehaviourHx" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkSocPsyBehaviourHx" class="control-label">Social, Psychological and Behavior Hx</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkDataExport">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom" data-original-title="Option:<br>Batch > <b>Export CCDA</b>">
+                                                    <input id="chkDataExport" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkDataExport" class="control-label">Data Export</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkCarePlan">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Care Plan">
+                                                    <input id="chkCarePlan" type="checkbox" checked="" class="chkMU3" />
+                                                    <label for="chkCarePlan" class="control-label">Care Plan</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div id="divMIPSAlerts" class="toggle localImage" data-plugin-toggle="">
+                                <section class="toggle">
+                                    <label>MIPS Alerts</label>
+                                    <div class="toggle-content">
+                                        <div class="spacer15"></div>
+                                        <div class="clearfix"></div>
+                                        <div>
+                                            <div class="col-sm-12 pad-a-labelsize"> <span class="text-primary text-bold">Promoting Interoperability (Formerly ACI)</span></div>
+                                            <div class="col-sm-4 pad-a-labelsize">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkSelectAllMIPSPI" type="checkbox" checked="" onclick="DashBoardSetting.SelectAllChangMIPS(this,'PI')" />
+                                                    <label for="chkSelectAllMIPSPI" class="control-label">Select All</label>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkePrescribing">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="e-Prescribing">
+                                                    <input id="chkePrescribing" type="checkbox" checked="" class="chkMIPSPI" />
+                                                    <label for="chkePrescribing" class="control-label">e-Prescribing </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkeAccess">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Provider Patient Access">
+                                                    <input id="chkeAccess" type="checkbox" checked="" class="chkMIPSPI" />
+                                                    <label for="chkeAccess" class="control-label">Provider Patient Access</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkInCorporateSummaryOfCare">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Request/Accept Summary of Care">
+                                                    <input id="chkInCorporateSummaryOfCare" type="checkbox" checked="" class="chkMIPSPI" />
+                                                    <label for="chkInCorporateSummaryOfCare" class="control-label">Request/Accept Summary of Care</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkTransitionOfCare">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Send a Summary of Care">
+                                                    <input id="chkTransitionOfCare" type="checkbox" checked="" class="chkMIPSPI" />
+                                                    <label for="chkTransitionOfCare" class="control-label">Send a Summary of Care</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkReconciliation">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Clinical Information Reconciliation">
+                                                    <input id="chkReconciliation" type="checkbox" checked="" class="chkMIPSPI" />
+                                                    <label for="chkReconciliation" class="control-label">Clinical Information Reconciliation</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkPatientEducation">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Patient-Specific Education">
+                                                    <input id="chkPatientEducation" type="checkbox" checked="" class="chkMIPSPI" />
+                                                    <label for="chkPatientEducation" class="control-label">Patient-Specific Education</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkSecureMessaging">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Secure Messaging">
+                                                    <input id="chkSecureMessaging" type="checkbox" checked="" class="chkMIPSPI" />
+                                                    <label for="chkSecureMessaging" class="control-label">Secure Messaging</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkViewDownloadTransmit">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="View, Download and Transmit (VDT)">
+                                                    <input id="chkViewDownloadTransmit" type="checkbox" checked="" class="chkMIPSPI" />
+                                                    <label for="chkViewDownloadTransmit" class="control-label">View, Download and Transmit (VDT)</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkPatientDocument">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Patient-Generated health Data">
+                                                    <input id="chkPatientDocument" type="checkbox" checked="" class="chkMIPSPI" />
+                                                    <label for="chkPatientDocument" class="control-label">Patient-Generated health Data</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                            <hr /> 
+                                            <div class="col-sm-12 "> <span class="text-primary text-bold">Quality Measures (eCQMs)</span></div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-4 pad-a-labelsize">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkSelectAllMIPSCQM" type="checkbox" checked="" onclick="DashBoardSetting.SelectAllChangMIPS(this,'CQM')" />
+                                                    <label for="chkSelectAllMIPSCQM" class="control-label">Select All</label>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkCMS65v7">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="CMS65v7- Hypertension: Improvement in blood pressure">
+                                                    <input id="chkCMS65v7" type="checkbox" checked="" class="chkMIPSCQM" />
+                                                    <label for="chkCMS65v7" class="control-label">CMS65v7 </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkCMS69v6">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="CMS69v6- Preventive Care and Screening: Body Mass Index (BMI) Screening and Follow-Up Plan">
+                                                    <input id="chkCMS69v6" type="checkbox" checked="" class="chkMIPSCQM" />
+                                                    <label for="chkCMS69v6" class="control-label">CMS69v6 </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkCMS68v7">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="CMS68v7- Documentation of Current Medications in the Medical Record">
+                                                    <input id="chkCMS68v7" type="checkbox" checked="" class="chkMIPSCQM" />
+                                                    <label for="chkCMS68v7" class="control-label">CMS68v7 </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkCMS138v6">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="CMS138v6- Preventive Care and Screening: Tobacco Use: Screening and Cessation Intervention">
+                                                    <input id="chkCMS138v6" type="checkbox" checked="" class="chkMIPSCQM" />
+                                                    <label for="chkCMS138v6" class="control-label">CMS138v6 </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkCMS165v6">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="CMS165v6- Controlling High Blood Pressure">
+                                                    <input id="chkCMS165v6" type="checkbox" checked="" class="chkMIPSCQM" />
+                                                    <label for="chkCMS165v6" class="control-label">CMS165v6 </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkCMS22v6">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="CMS22v6- Preventive Care and Screening: Screening for High Blood Pressure and Follow-Up Documented">
+                                                    <input id="chkCMS22v6" type="checkbox" checked="" class="chkMIPSCQM" />
+                                                    <label for="chkCMS22v6" class="control-label">CMS22v6 </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                            <hr />
+                                            <div class="col-sm-12 "> <span class="text-primary text-bold">Improvement Activity</span></div>
+                                            <div class="col-sm-4 pad-a-labelsize">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input id="chkSelectAllMIPSIA" type="checkbox" checked="" onclick="DashBoardSetting.SelectAllChangMIPS(this,'IA')" />
+                                                    <label for="chkSelectAllMIPSIA" class="control-label">Select All</label>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkDepression">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Depression Screening">
+                                                    <input id="chkDepression" type="checkbox" checked="" class="chkMIPSIA" />
+                                                    <label for="chkDepression" class="control-label">Depression Screening </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkTobacco">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Tobacco Screening">
+                                                    <input id="chkTobacco" type="checkbox" checked="" class="chkMIPSIA" />
+                                                    <label for="chkTobacco" class="control-label">Tobacco Screening </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkPatientPortalDocument">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Using CEHRT to capture patient reported outcomes">
+                                                    <input id="chkPatientPortalDocument" type="checkbox" checked="" class="chkMIPSIA" />
+                                                    <label for="chkPatientPortalDocument" class="control-label">Using CEHRT to capture patient reported outcomes</label>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-4 pad-a-labelsize" id="divchkCDS">
+                                                <div class="checkbox-custom checkbox-default" data-toggle="tooltip" data-html="true" data-placement="bottom"
+                                                     data-original-title="Implementation of fall screening & assessment programs">
+                                                    <input id="chkCDS" type="checkbox" checked="" class="chkMIPSIA" />
+                                                    <label for="chkCDS" class="control-label">Implementation of fall screening & assessment programs</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="pull-right">
+                                <button class="btn btn-primary btn-sm rightbtn " onclick="DashBoardSetting.DefaultSettingSave();">Save & Exit</button>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="tab-pane" id="setprinter" style="display:none;">
+                                <div class="clearfix"></div>
+                                <div id="divClaimPrinter" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Claim Printer</label>
+                                    <select id="ddlclaimprinter" name="ClaimPrinter" class="form-control"></select>
+                                </div>
+                                <div id="divClaimTray" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Claim Tray</label>
+                                    <select id="ddlclaimtray" name="ClaimTray" class="form-control">
+                                        <option value="">- Select -</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                                <div id="divAttachmentPrinter" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Attachment Printer</label>
+                                    <select id="ddattachmentprinter" name="AttachmentPrinter" class="form-control"></select>
+                                </div>
+                                <div id="divAttachmentTray" class="col-xs-12 col-sm-6 col-lg-4">
+                                    <label class="control-label">Attachment Tray</label>
+                                    <select id="ddlattachmenttray" name="AttachmentTray" class="form-control">
+                                        <option value="">- Select -</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                                <div class="clearfix"></div>
+                                <button class="btn btn-primary btn-sm rightbtn " onclick="DashBoardSetting.DefaultSettingSave();">Save</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(function () {
+            $('[data-toggle=tooltip],[rel=tooltip]').tooltip({ container: 'body' });
+        });
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+    });
+
+</script>

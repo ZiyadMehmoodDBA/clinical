@@ -1,0 +1,75 @@
+﻿<div id="securityRoleDetail">
+
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close"  onclick="securityRoleDetail.UnLoad();"><span class=" red" >&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Add Security Roles</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblsecurityRoleDetail" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmRoleDetail">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div id="pnlFields">
+                                <div class="col-sm-2">
+                                    <label class="control-label">Short Name</label><span class="required">*</span>
+                                    <input class="form-control" id="txtShortName" name="ShortName" type="text" maxlength="10" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">Role Type</label>
+                                    <select id="roleType" class="form-control">
+                                        <option selected="selected" value="0">Regular</option>
+                                        <option value="1">Emergency Access</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-5 col-md-4">
+                                    <label class="control-label">Description</label>
+                                    <input class="form-control" id="txtDescription" name="Description" type="text" maxlength="55" />
+                                </div>
+                                <div class="col-sm-2 col-md-1 pad-a-labelsize">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" checked="" name="Active" id="chkActive">
+                                        <label for="chkActive">Active</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-2 pl-md">
+                                    <div class="col-sm-12 pad-a-labelsize" id="pnlIsAdmin">
+                                        <div class="checkbox-custom checkbox-default">
+                                            <input type="checkbox" name="IsAdmin" id="chkIsAdmin">
+                                            <label for="Bill to Practice">Is Admin</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-md-1 pad-a-labelsize-btn">
+                                    <button class="btn btn-primary btn-sm" type="submit" id="btnSave">Save</button>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div><div class="spacer20"></div>
+                            <div id="pnlRights" >
+                                <div class="col-sm-4 panel ">
+                                    <header class="panel-blue center">Modules</header>
+                                    <div class="panel-body height150" id="pnlModules">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 panel">
+                                    <header class="panel-blue center">Forms</header>
+                                    <div class="panel-body height150" id="pnlForms">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 panel">
+                                    <header class="panel-blue center">Privileges</header>
+                                    <div class="panel-body height150" id="pnlPrivileges">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

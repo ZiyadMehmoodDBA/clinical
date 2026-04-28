@@ -1,0 +1,30 @@
+﻿<div id="pnlClinicalLabTestAttributesResult">
+    <div id="actionPanLabTestAttributesResult" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" onclick="Clinical_LabTestAttributeResult.UnLoadTab()" class="close"></button>
+                <h4 id="lblHeading" class="modal-title">Lab Test Attributes Result</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmClinicalLabTestAttributesResult" method="post" onsubmit="return false">
+                    <div class="col-sm-10">
+                        <label class="control-label">Result Values<span class="required">*</span></label>
+                        <input  oninput="Clinical_LabTestAttributeResult.ValidateSpecialCharacters(this);" id="txtClinicalLabTestAttributesResult" maxlength="500" type="text" name="ClinicalLabTestAttributesResultName" class="form-control" />
+                    </div>
+                    <div class="col-sm-2 pull-right mt-md">
+                        <button type="submit" class="btn btn-primary btn-sm rightbtn">Save</button>
+                    </div>
+                    <div class="col-sm-10 panel-body col-xs-12 mt-sm tab-content-featured" id="divClinicalLabTestAttributesResultList">
+                        <div class="panel-heading panel-blue">
+                            <h5 class="modal-title">Result Values List</h5>
+                        </div>
+                        <ul id="ulClinicalLabTestAttributesResultList" name="LabTestAttributesResult" class="listPrimary height300 height-max300 own-scroll"></ul>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EC0B9643-4480-4A17-974E-788F8924CFB5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MDVision.Model</RootNamespace>
+    <AssemblyName>MDVision.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'debug web|AnyCPU'">
+    <OutputPath>bin\debug web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'web|AnyCPU'">
+    <OutputPath>bin\web\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\Codes\CPTNdcModel.cs" />
+    <Compile Include="Admin\Codes\TestTypeModel.cs" />
+    <Compile Include="Admin\Provider\ProviderModel.cs" />
+    <Compile Include="AuditableEvents\ActivityLog.cs" />
+    <Compile Include="Admin\Reminder\ReminderSetting.cs" />
+    <Compile Include="Batch\CQM\CQMProblemSearch.cs" />
+    <Compile Include="Batch\Fax\FaxOutboxDetailModel.cs" />
+    <Compile Include="Batch\ExportCCDA\ExportCCDAModel.cs" />
+    <Compile Include="Batch\HL7ImmunizationBatch\HL7ImmunizationBatchModel.cs" />
+    <Compile Include="Billing\ERA\EOBManualChargeLoad.cs" />
+    <Compile Include="Billing\ERA\EOBManualPaymentPost.cs" />
+    <Compile Include="Billing\ERA\ERAVoidedClaims.cs" />
+    <Compile Include="Billing\ERA\InsurancePaymentDetail.cs" />
+    <Compile Include="Billing\ERA\STC.cs" />
+    <Compile Include="Billing\FollowUp\FollowUpARComments.cs" />
+    <Compile Include="Billing\PatientStatement\ClaimInfo.cs" />
+    <Compile Include="Billing\PatientStatement\StatementDetail.cs" />
+    <Compile Include="Billing\PatientStatement\StatementFooter.cs" />
+    <Compile Include="Billing\PatientStatement\StatementHeader.cs" />
+    <Compile Include="Billing\PatientStatement\ViewModelPatientStatement.cs" />
+    <Compile Include="Billing\Payments\LedgerAccountModel.cs" />
+    <Compile Include="Billing\Payments\PaymentReceiptInfoModel.cs" />
+    <Compile Include="Billing\Payments\UnAllocatedCopayModel.cs" />
+    <Compile Include="CCDA\CCDAModels.cs" />
+    <Compile Include="CCDA\ICDLookupModel.cs" />
+    <Compile Include="CCDA\DiagnosisModel.cs" />
+    <Compile Include="CCDA\HistoriesModel.cs" />
+    <Compile Include="CCDA\LaboratoryTestsModelCQM.cs" />
+    <Compile Include="CCDA\PhysicalExamCQMModel.cs" />
+    <Compile Include="CCM\CCMEnrollmentInfoModel.cs" />
+    <Compile Include="CCM\CCMHub\CallDetailLookupModel.cs" />
+    <Compile Include="CCM\CCMHub\CarePlanModel.cs" />
+    <Compile Include="CCM\CCMHub\CCMCallDetailsModel.cs" />
+    <Compile Include="CCM\CCMHub\CCMProgramUpdateModel.cs" />
+    <Compile Include="CCM\CCMHub\CCMTaskTimerModel.cs" />
+    <Compile Include="CCM\CCMHub\HRAssessmentModel.cs" />
+    <Compile Include="CCM\CCMHub\PatientHubModel.cs" />
+    <Compile Include="CCM\Reports\CCM_ReportFillModel.cs" />
+    <Compile Include="CCM\Reports\CCM_ReportSearchModel.cs" />
+    <Compile Include="CCM\TemplateModel.cs" />
+    <Compile Include="Clinical\AOETemplates\AOETemplatesModel.cs" />
+    <Compile Include="Clinical\AOETemplates\ProcedureTemplatesModel.cs" />
+    <Compile Include="Clinical\BillingInformation\BillingInfoCPTModel.cs" />
+    <Compile Include="Clinical\BillingInformation\BillingInfoICDModel.cs" />
+    <Compile Include="Clinical\BillingInformation\BillingInformationModel.cs" />
+    <Compile Include="Clinical\CustomForms\GlobalQuestionGroupModel.cs" />
+    <Compile Include="Clinical\CustomForms\GlobalQuestionModel.cs" />
+    <Compile Include="Clinical\CustomForms\CustomFormModel.cs" />
+    <Compile Include="Clinical\CustomForms\PatientCustomFormModel.cs" />
+    <Compile Include="Clinical\DrFirst\DownloadResponseModel.cs" />
+    <Compile Include="Clinical\EMCodeGenerator\EMCodeGeneratorDataHolder.cs" />
+    <Compile Include="Clinical\EMCodeGenerator\EMCodeGeneratorExamModel.cs" />
+    <Compile Include="Clinical\EMCodeGenerator\EMCodeGeneratorHistoryModel.cs" />
+    <Compile Include="Clinical\EMCodeGenerator\EMCodeGeneratorMDMModel.cs" />
+    <Compile Include="Clinical\EMCodeGenerator\EMCodes.cs" />
+    <Compile Include="Clinical\Favorites\FavoriteListImmunizationModel.cs" />
+    <Compile Include="Clinical\Favorites\FavoriteListMedicationModel.cs" />
+    <Compile Include="Clinical\FollowUp\FollowUpAppointmentModel.cs" />
+    <Compile Include="Clinical\FollowUp\OrdertSetFollowUpModel.cs" />
+    <Compile Include="Clinical\History\FamilyHxDiseaseModel.cs" />
+    <Compile Include="Clinical\History\FamilyHxModel.cs" />
+    <Compile Include="Clinical\History\HistoryLookupModel.cs" />
+    <Compile Include="Clinical\History\HistoryModel.cs" />
+    <Compile Include="Clinical\History\HistorySummary\HistorySummary_Soap.cs" />
+    <Compile Include="Clinical\History\HistorySummary\SocPsyandBehaviorHxModel.cs" />
+    <Compile Include="Clinical\History\MedicalHxDiseaseModel.cs" />
+    <Compile Include="Clinical\HL7\ImmunizationHL7ResponseModel.cs" />
+    <Compile Include="Clinical\HL7\MSA.cs" />
+    <Compile Include="Clinical\HL7\MSH.cs" />
+    <Compile Include="Clinical\HL7\OBX.cs" />
+    <Compile Include="Clinical\HL7\PID.cs" />
+    <Compile Include="Clinical\HL7\QAK.cs" />
+    <Compile Include="Clinical\HL7\RXA.cs" />
+    <Compile Include="Clinical\HPI\HPIFindingsModel.cs" />
+    <Compile Include="Clinical\HPI\HPISymptomsModel.cs" />
+    <Compile Include="Clinical\Immunization\ImmunizationQueryModel.cs" />
+    <Compile Include="Clinical\Immunization\ImmunizationRegistery.cs" />
+    <Compile Include="Clinical\Immunization\ImmunizationQueryResponseModel.cs" />
+    <Compile Include="Clinical\LabTrends\LabResultDetailTrendsModel.cs" />
+    <Compile Include="Clinical\LabTrends\LabTrends.cs" />
+    <Compile Include="Clinical\LabTrends\PatPracticeModel.cs" />
+    <Compile Include="Clinical\LabTrends\ResultTestsTrends.cs" />
+    <Compile Include="Clinical\LabTrends\ResultValue.cs" />
+    <Compile Include="Clinical\LegacyNotes\AllergyHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\BirthHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\Complaints.cs" />
+    <Compile Include="Clinical\LegacyNotes\ConsultationOrder.cs" />
+    <Compile Include="Clinical\LegacyNotes\eSuperbill.cs" />
+    <Compile Include="Clinical\LegacyNotes\FamilyHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\FollowUp.cs" />
+    <Compile Include="Clinical\LegacyNotes\FunctionalCognitive.cs" />
+    <Compile Include="Clinical\LegacyNotes\HospitalizationHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\ImmunizationHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\LabOrder.cs" />
+    <Compile Include="Clinical\LegacyNotes\LabOrderResult.cs" />
+    <Compile Include="Clinical\LegacyNotes\LegacyNotesViewModel.cs" />
+    <Compile Include="Clinical\LegacyNotes\MedicalHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\MedicationHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\NoteHeaderData.cs" />
+    <Compile Include="Clinical\LegacyNotes\NotesComponent.cs" />
+    <Compile Include="Clinical\LegacyNotes\NotesComponents.cs" />
+    <Compile Include="Clinical\LegacyNotes\PatientEducation.cs" />
+    <Compile Include="Clinical\LegacyNotes\PatientLetter.cs" />
+    <Compile Include="Clinical\LegacyNotes\PhysicalExam.cs" />
+    <Compile Include="Clinical\LegacyNotes\Prescription.cs" />
+    <Compile Include="Clinical\LegacyNotes\ProblemHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\Procedure.cs" />
+    <Compile Include="Clinical\LegacyNotes\ProcedureOrder.cs" />
+    <Compile Include="Clinical\LegacyNotes\RadOrder.cs" />
+    <Compile Include="Clinical\LegacyNotes\RadOrderResult.cs" />
+    <Compile Include="Clinical\LegacyNotes\Referrals.cs" />
+    <Compile Include="Clinical\LegacyNotes\ReviewOfSystem.cs" />
+    <Compile Include="Clinical\LegacyNotes\SocialHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\SurgicalHx.cs" />
+    <Compile Include="Clinical\LegacyNotes\VitalSigns.cs" />
+    <Compile Include="Clinical\Immunization\Manufacturer.cs" />
+    <Compile Include="Clinical\Immunization\VaccineAndTerapuetic.cs" />
+    <Compile Include="Clinical\Macros\MacroModel.cs" />
+    <Compile Include="Clinical\Medical\Allergy\AllergyHistoryModel.cs" />
+    <Compile Include="Clinical\Medical\Allergy\AllergyReaderModel.cs" />
+    <Compile Include="Clinical\Medical\Allergy\AllergyReviewModel.cs" />
+    <Compile Include="Clinical\Medical\Allergy\AllergySoapModel.cs" />
+    <Compile Include="Clinical\Medical\CarePlan\CarePlanClinicalModel.cs" />
+    <Compile Include="Clinical\Medical\CarePlan\CarePlanGoalsModel.cs" />
+    <Compile Include="Clinical\Medical\CarePlan\CarePlanHealthConcernsModel.cs" />
+    <Compile Include="Clinical\Medical\CarePlan\CarePlanInterventionsModel.cs" />
+    <Compile Include="Clinical\Medical\CarePlan\CarePlanOutcomesModel.cs" />
+    <Compile Include="Clinical\Medical\CDS\CDSForAlerts.cs" />
+    <Compile Include="Clinical\Medical\ImplantableDevices\ImplantableModel.cs" />
+    <Compile Include="Clinical\Medical\OrderSetPatientEducationModel.cs" />
+    <Compile Include="Clinical\Medical\PatientEducation\PatientEducation.cs" />
+    <Compile Include="Clinical\Medical\ProblemLists\ProblemDetailModel.cs" />
+    <Compile Include="Clinical\Medical\ProblemLists\ProblemHistory.cs" />
+    <Compile Include="Clinical\Medical\ProblemLists\ProblemList.cs" />
+    <Compile Include="Clinical\Medical\ProblemLists\ProblemListModel.cs" />
+    <Compile Include="Clinical\Medical\ProceduresDetailModel.cs" />
+    <Compile Include="Clinical\Medical\ProceduresModel.cs" />
+    <Compile Include="Clinical\Medical\RcopiaModel.cs" />
+    <Compile Include="Clinical\Medical\Vitals\BloodPressureModel.cs" />
+    <Compile Include="Clinical\Medical\Vitals\PulseModel.cs" />
+    <Compile Include="Clinical\Medical\Vitals\RespirationModel.cs" />
+    <Compile Include="Clinical\Medical\Vitals\TemperatureModel.cs" />
+    <Compile Include="Clinical\Medical\Vitals\VitalSignsReader.cs" />
+    <Compile Include="Clinical\Medical\Vitals\VitalSignsBloodPressure.cs" />
+    <Compile Include="Clinical\Medical\Vitals\VitalSignsChild.cs" />
+    <Compile Include="Clinical\Medical\Vitals\VitalSignsLookup.cs" />
+    <Compile Include="Clinical\Medical\Vitals\VitalSignSoap.cs" />
+    <Compile Include="Clinical\Medical\Vitals\VitalSignsPulse.cs" />
+    <Compile Include="Clinical\Medical\Vitals\VitalSignsRespiration.cs" />
+    <Compile Include="Clinical\Medical\Vitals\VitalSignsTemprature.cs" />
+    <Compile Include="Clinical\Medical\Vitals\VitalModel.cs" />
+    <Compile Include="Clinical\Medication\ClinicalDrugModel.cs" />
+    <Compile Include="Clinical\Medication\ClinicalMedicationModel.cs" />
+    <Compile Include="Clinical\Medication\ClinicalMedicationCDSModel.cs" />
+    <Compile Include="Clinical\Medication\ClinicalMedicationHistoryModel.cs" />
+    <Compile Include="Clinical\Medication\ClinicalMedicationReviewModel.cs" />
+    <Compile Include="Clinical\Medication\ClinicalPatientsModel.cs" />
+    <Compile Include="Clinical\Medication\ClinicalPharmacyModel.cs" />
+    <Compile Include="Clinical\Medication\ClinicalPrescriptionModel.cs" />
+    <Compile Include="Clinical\Notes\ClinicalNotesInfo.cs" />
+    <Compile Include="Clinical\Notes\ClinicalNotesModel.cs" />
+    <Compile Include="Clinical\Notes\NoteComponentAuditModel.cs" />
+    <Compile Include="Clinical\Notes\NoteComponentModel.cs" />
+    <Compile Include="Clinical\Notes\NoteDocumentModel.cs" />
+    <Compile Include="Clinical\Notes\NoteSignPDF.cs" />
+    <Compile Include="Clinical\Notes\NotesModel.cs" />
+    <Compile Include="Clinical\Notes\Notes\Notes.cs" />
+    <Compile Include="Clinical\Notes\Notes\TemplateData.cs" />
+    <Compile Include="Clinical\Notes\PatientVisitTypeModel.cs" />
+    <Compile Include="Clinical\Notes\SyndromicSurveillance.cs" />
+    <Compile Include="Clinical\OrdersAndResults\ConsultationOrder\ConsultationOrderModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\ConsultationOrder\ConsultationOrderProblemModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\ConsultationOrder\ConsultationOrderTestModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\LabOrder\LabOrderModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\LabOrder\LabOrderProblemModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\LabOrder\LabOrderQuestionAnswerModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\LabOrder\LabOrderResultDetailModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\LabOrder\LabOrderResultLatestNoteModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\LabOrder\LabOrderTestModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\LabResult\LabOrderResultDetailModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\LabResult\LabOrderResultExternalPDFModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\LabResult\LabOrderResultModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\ProcedureOrder\ProcedureOrderModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\ProcedureOrder\ProcedureOrderProblemModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\ProcedureOrder\ProcedureOrderTestModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\RadiologyOrder\RadiologyOrderModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\RadiologyOrder\RadiologyOrderProblemModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\RadiologyOrder\RadiologyOrderTestModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\RadiologyResult\RadiologyOrderResultDetailModel.cs" />
+    <Compile Include="Clinical\OrdersAndResults\RadiologyResult\RadiologyOrderResultModel.cs" />
+    <Compile Include="Clinical\Orderset\OS_MedicationModel.cs" />
+    <Compile Include="Clinical\Orders\OrderFindingsModel.cs" />
+    <Compile Include="Clinical\Orthopedic\OrthopedicComplaintsModel.cs" />
+    <Compile Include="Clinical\Orthopedic\OrthopedicModel.cs" />
+    <Compile Include="Clinical\Procedures\BarCodeLabelPrint.cs" />
+    <Compile Include="Clinical\Procedures\ProcedureHistoryModel.cs" />
+    <Compile Include="Clinical\Procedures\ProceduresModel.cs" />
+    <Compile Include="Clinical\Reports\CAllergiesModel.cs" />
+    <Compile Include="Clinical\Reports\CImmunizationModel.cs" />
+    <Compile Include="Clinical\Reports\CMedicationModel.cs" />
+    <Compile Include="Clinical\Reports\COrdersModel.cs" />
+    <Compile Include="Clinical\Reports\CPhoneEncounterModel.cs" />
+    <Compile Include="Clinical\Reports\CPrescriptionOrderModel.cs" />
+    <Compile Include="Clinical\Reports\CProblemsModel.cs" />
+    <Compile Include="Clinical\Reports\CProceduresModelcs.cs" />
+    <Compile Include="Clinical\Reports\CProgressNoteReportModel.cs" />
+    <Compile Include="Clinical\Reports\CResultsModel.cs" />
+    <Compile Include="Clinical\Reports\LookupModel.cs" />
+    <Compile Include="Clinical\Reports\CVitalsModel.cs" />
+    <Compile Include="Clinical\ReviewOfSystem\ROSCharacteristics.cs" />
+    <Compile Include="Clinical\ROS\ROS_TemplateModel.cs" />
+    <Compile Include="Clinical\Templates\HPITemplateModel.cs" />
+    <Compile Include="Clinical\Templates\OrderSetModel.cs" />
+    <Compile Include="Clinical\Templates\OrderSets\OS_ImmunizationModel.cs" />
+    <Compile Include="Clinical\Templates\OrderSets\OS_LabOrderModel.cs" />
+    <Compile Include="Clinical\Templates\OrderSets\OS_NoteModel.cs" />
+    <Compile Include="Clinical\Templates\OrderSets\OS_ProblemListModel.cs" />
+    <Compile Include="Clinical\Templates\OrderSets\OS_ProceduresDetailModel.cs" />
+    <Compile Include="Clinical\Templates\OrderSets\OS_ProceduresModel.cs" />
+    <Compile Include="Clinical\Templates\OrderSets\OS_RadiologyOrderModel.cs" />
+    <Compile Include="Clinical\Treatment\TreatmentPlanModel.cs" />
+    <Compile Include="Common\ApplicationType.cs" />
+    <Compile Include="Common\CommonSearch.cs" />
+    <Compile Include="Common\IBaseModel.cs" />
+    <Compile Include="Common\GenericLookupModel.cs" />
+    <Compile Include="Common\ModelUtility.cs" />
+    <Compile Include="Common\SharedModel.cs" />
+    <Compile Include="Common\ToStringJsonConverter.cs" />
+    <Compile Include="Dashboard\ActiveAccountsModel.cs" />
+    <Compile Include="Dashboard\DashBoardModel.cs" />
+    <Compile Include="Dashboard\DCopaymentModel.cs" />
+    <Compile Include="Dashboard\DPaymentModel.cs" />
+    <Compile Include="Dashboard\DPatientChangeModel.cs" />
+    <Compile Include="Dashboard\DAppointmentModel.cs" />
+    <Compile Include="Dashboard\DAppointmentNoteModel.cs" />
+    <Compile Include="Dashboard\DTCMModel.cs" />
+    <Compile Include="Dashboard\DUserMessageModel.cs" />
+    <Compile Include="Dashboard\DUserTaskModel.cs" />
+    <Compile Include="Dashboard\DDocumentModel.cs" />
+    <Compile Include="Dashboard\MobileAppRequestModel.cs" />
+    <Compile Include="Dashboard\PatientPortalSignupModel.cs" />
+    <Compile Include="Document\DocumentActivity.cs" />
+    <Compile Include="Document\DocumentAnnotation.cs" />
+    <Compile Include="Document\DocumentTag.cs" />
+    <Compile Include="Document\PatientDocumentTag.cs" />
+    <Compile Include="Document\PatientVisitDOS.cs" />
+    <Compile Include="FaceSheet\FaceSheetOrderModel.cs" />
+    <Compile Include="FaceSheet\FileData.cs" />
+    <Compile Include="FaceSheet\FSAllergyModel.cs" />
+    <Compile Include="FaceSheet\FSAppointmentModel.cs" />
+    <Compile Include="FaceSheet\FSComplaintsModel.cs" />
+    <Compile Include="FaceSheet\FSHistoryModel.cs" />
+    <Compile Include="FaceSheet\FSImmunizationsModel.cs" />
+    <Compile Include="FaceSheet\FSImplantableDevicesModel.cs" />
+    <Compile Include="FaceSheet\FSLabOrdersModel.cs" />
+    <Compile Include="FaceSheet\FSLabResultsModel.cs" />
+    <Compile Include="FaceSheet\FSMedicationsModel.cs" />
+    <Compile Include="FaceSheet\FSNotesModel.cs" />
+    <Compile Include="FaceSheet\FSPatientDocumentModel.cs" />
+    <Compile Include="FaceSheet\FSProblemListModel.cs" />
+    <Compile Include="FaceSheet\FSProcedureOrderModel.cs" />
+    <Compile Include="FaceSheet\FSRadiologyOrdersModel.cs" />
+    <Compile Include="FaceSheet\FSReferralsModel.cs" />
+    <Compile Include="FaceSheet\FSVitalsModel.cs" />
+    <Compile Include="InsurancePlanTypeModel.cs" />
+    <Compile Include="iTrack\iTrackModel.cs" />
+    <Compile Include="Lookups\AllergyLookupModel.cs" />
+    <Compile Include="Lookups\CaseAdjusterLookup.cs" />
+    <Compile Include="Lookups\CategoryLookupModel.cs" />
+    <Compile Include="Lookups\ChronicityLookupModel.cs" />
+    <Compile Include="Lookups\CityLookupModel.cs" />
+    <Compile Include="Lookups\CustomFormLookupModel.cs" />
+    <Compile Include="Lookups\DiagnosisConfirmationModel.cs" />
+    <Compile Include="Lookups\EthnicityModel.cs" />
+    <Compile Include="Lookups\GenderModel.cs" />
+    <Compile Include="Lookups\ICDGroupLookupModel.cs" />
+    <Compile Include="Lookups\LabTestLookupModel.cs" />
+    <Compile Include="Lookups\LanguageAndCountriesModel.cs" />
+    <Compile Include="Lookups\MaritalStatusModel.cs" />
+    <Compile Include="Lookups\MedicationLookupModel.cs" />
+    <Compile Include="Lookups\NoteComponentsLookupModel.cs" />
+    <Compile Include="Lookups\OutgoingReferralsLookupModel.cs" />
+    <Compile Include="Lookups\PatientRepresentativeLookupModel.cs" />
+    <Compile Include="Lookups\PatientVisitTypeLookUpModel.cs" />
+    <Compile Include="Lookups\ProblemLookUpModel.cs" />
+    <Compile Include="Lookups\ProfileLookupModel.cs" />
+    <Compile Include="Lookups\ProviderParticipationStatusModel.cs" />
+    <Compile Include="Lookups\RaceModel.cs" />
+    <Compile Include="Lookups\RadiologyTestLookup.cs" />
+    <Compile Include="Lookups\ReactionLookupModel.cs" />
+    <Compile Include="Lookups\SeverityLookupModel.cs" />
+    <Compile Include="Lookups\SuffixModel.cs" />
+    <Compile Include="Lookups\TreatmentModel.cs" />
+    <Compile Include="MSPTypeModel.cs" />
+    <Compile Include="MU\MUAlertsModel.cs" />
+    <Compile Include="MU\MUModel.cs" />
+    <Compile Include="Native\ChangedColumnsNative.cs" />
+    <Compile Include="Native\Clinical\BirthHxGeneralModelNative.cs" />
+    <Compile Include="Native\Clinical\BirthHxMaternalDeliveryModelNative.cs" />
+    <Compile Include="Native\Clinical\BirthHxNewbornModelNative.cs" />
+    <Compile Include="Native\Clinical\FamilyHxModelNative.cs" />
+    <Compile Include="Native\Clinical\SocialHxModelNative.cs" />
+    <Compile Include="Native\Clinical\SocialHxTobaccoModelNative.cs" />
+    <Compile Include="Native\DataChangeRequest.cs" />
+    <Compile Include="Native\NativeBaseModel.cs" />
+    <Compile Include="Native\Patient\PatientConsentVM.cs" />
+    <Compile Include="Native\Patient\PatientDemographicModelNative.cs" />
+    <Compile Include="Native\Patient\PatientEmergencyContactModel.cs" />
+    <Compile Include="Native\Patient\PatientInsurancSave.cs" />
+    <Compile Include="Native\Patient\UploadPDFVM.cs" />
+    <Compile Include="Native\ResponseObject.cs" />
+    <Compile Include="Native\Scheduler\EmptySlotModel.cs" />
+    <Compile Include="Native\UserPrivileges.cs" />
+    <Compile Include="Patient\DemographicLabelModel.cs" />
+    <Compile Include="Patient\InsuranceLookupModel.cs" />
+    <Compile Include="Patient\LoadMuiltPatientAddress.cs" />
+    <Compile Include="Patient\OrderSetPatientReferralModel.cs" />
+    <Compile Include="Patient\PatientDemographicModel.cs" />
+    <Compile Include="Patient\PatientDemographicQuickModel.cs" />
+    <Compile Include="Patient\PatientDocumentModel.cs" />
+    <Compile Include="Patient\PatientDocumentPriorityModel.cs" />
+    <Compile Include="Patient\PatientFaxLog.cs" />
+    <Compile Include="Patient\PatientInsuranceModel.cs" />
+    <Compile Include="Patient\PatientLookupModel.cs" />
+    <Compile Include="Patient\PatientModel.cs" />
+    <Compile Include="Native\Patient\SavePatientNative.cs" />
+    <Compile Include="Patient\PatientPreferenceModel.cs" />
+    <Compile Include="Patient\PatientReminderLog.cs" />
+    <Compile Include="Patient\PatientViewModel.cs" />
+    <Compile Include="Patient\PracticeModel.cs" />
+    <Compile Include="Patient\ProviderModel.cs" />
+    <Compile Include="Patient\RptHdrTags.cs" />
+    <Compile Include="Patient\WCNFDetailModel.cs" />
+    <Compile Include="PMSSchedule\AppointmentModel.cs" />
+    <Compile Include="PMSSchedule\AppointmentStatusOptionModel.cs" />
+    <Compile Include="PMSSchedule\AppointmentTooltipModel.cs" />
+    <Compile Include="PMSSchedule\ResponseModel.cs" />
+    <Compile Include="PrefixModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationModel.cs" />
+    <Compile Include="Report\ProviderMonthlyPayment.cs" />
+    <Compile Include="Schedule\AppointmentCopayAlert.cs" />
+    <Compile Include="Schedule\PatientFutureAppointment.cs" />
+    <Compile Include="Schedule\ProviderAppointmentPrint.cs" />
+    <Compile Include="Schedule\VisitTypeDuartionsModel.cs" />
+    <Compile Include="Security\Client.cs" />
+    <Compile Include="Security\ClientGeoLocationModel.cs" />
+    <Compile Include="Security\SoftwareCustomerInfoModel.cs" />
+    <Compile Include="Security\LoginHelperModel.cs" />
+    <Compile Include="User\UserLoginModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

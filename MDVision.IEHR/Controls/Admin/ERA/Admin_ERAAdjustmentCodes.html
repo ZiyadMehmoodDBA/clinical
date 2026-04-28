@@ -1,0 +1,78 @@
+﻿<div class="row" id="pnlAdminERAAdjustmentCodes" style="display:none;">
+    <div id="actionPanAdminERAAdjustmentCodes" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_ERAAdjustmentCodes.ERAAdjustmentCodesAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_ERAAdjustmentCodes.UnLoadTab();"></a>
+                </div>
+                <h2 class="panel-title">Search ERA Adjustment Codes </h2>
+            </header>
+            <div class="panel-body" id="pnlERAAdjustmentCodes_Search">
+                <form class="form-bordered" method="post" onsubmit="return false">
+                    <!--start - CONTENTS-->
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Group Code</label>
+                            <select id="ddlClaimAdjustmentGroupCode" class="form-control" ddlist="GetAdjustmentGroupCode"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Reason Codes</label>
+                            <select id="ddlClaimAdjustmentReasonCodes" class="form-control" ddlist="GetAdjustmentReasonCode"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Clearinghouse</label>
+                            <select id="ddlClearinghouse" class="form-control" ddlist="GetClearingHouse"></select>
+                        </div>
+                       
+                        <div class="col-sm-2">
+                            <label class="control-label">Actions</label>
+                            <select id="ddlActions" class="form-control" ddlist="GetERAAction"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Active?</label>
+                            <select id="ddlActive" class="form-control">
+                                <option value="">- All -</option>
+                                <option value="1" selected="selected">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                      
+                        <div class="col-sm-2 pad-a-labelsize-btn pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnERAAdjustmentCodesSearch" type="button" onclick="Admin_ERAAdjustmentCodes.ERAAdjustmentCodesSearch();">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div id="pnlERAAdjustmentCodes_Result" style="display: none;">
+            <section class="panel">
+                <div class="panel-body">
+                    <input type="hidden" id="ERAAdjustmentCodes_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvERAAdjustmentCodes">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">ERAAdjustmentCodesId</th>
+                                <th class="size120">Actions</th>
+                                <th class="size120">Group Code</th>
+                                <th class="size120">Reason Code</th>
+                                <th class="size120">Practice</th>
+                                <th class="size120">Clearinghouse</th>
+                                <th class="size120">Ledger Account</th>
+                                <th class="size120">ERA Action</th>
+                                <th class="size120">Active</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div id="divERAAdjustmentCodesPaging"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+

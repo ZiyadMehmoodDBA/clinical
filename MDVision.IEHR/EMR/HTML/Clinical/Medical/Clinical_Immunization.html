@@ -1,0 +1,405 @@
+﻿<div class="row" id="pnlClinicalImmunization">
+    <div id="actionPanClinicalImmunization" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full mb-default">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_Immunization.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Immunization</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+
+                    <div id="pnlSection_Search">
+                        <!--class="panel-body NoRadiusT"-->
+                        <div>
+
+                            <!--<button id="AddButton" type="button" class="pull-left btn btn-success btn-sm mr-xs" id="btn-add" onclick=" Clinical_Immunization.ClickOnAddButtonFromSchedulerGrid('Add',null,null,'Hx'); "><i class="fa fa-plus-circle"></i> Add</button>-->
+
+                            <div class="dropdown pull-left" id="divPrint">
+                                <a id="btnPrint" href="#" class="dropdown-toggle btn btn-success btn-sm mr-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Print <span class="caret"></span> </a>
+                                <!--<button id="btnExportCCDA" type="button" class="btn btn-success btn-xs mr-xs pull-right"> Export C-CDA <span class="caret"></span></button>-->
+                                <ul id="menuPrint" class="dropdown-menu" aria-labelledby="btnPrint">
+                                    <li><a href="#" onclick="Clinical_Immunization.PreviewImmunization();">Preview Immunization</a></li>
+                                    <li><a href="#" onclick="Clinical_Immunization.OpenForPrint('0-18');">Scheduler for 0-18 year</a></li>
+                                    <li><a href="#" onclick="Clinical_Immunization.OpenCatchupScheduler();">Catchup Scheduler</a></li>
+
+                                </ul>
+                            </div>
+                            <!--<button type="button" class="btn btn-success btn-sm"  id="btnOpenDrFirst"><i class="fa fa-plus-circle"></i> Print</button>-->
+                            <button type="button"
+                                    class="pull-left btn btn-success btn-sm tab_space" onclick="Clinical_Immunization.Generate_HL7Immunization_Records();" id="btnHL7ImmunizationRecords">
+                                <i class="fa fa-plus-circle"></i> Generate Immunization Record (HL7)
+                            </button>
+                            <button type="button"
+                                    class="pull-left btn btn-success btn-sm tab_space" onclick="Clinical_Immunization.AddTherapeuticInjection();" id="btnAddTherapeuticInjection">
+                                <i class="fa fa-plus-circle"></i> Add Therapeutic Injection
+                            </button>
+                            <button type="button"
+                                    class="pull-left btn btn-success btn-sm tab_space" onclick="Clinical_Immunization.AddHistoryDose('Add');" id="btnAddHxHistory">
+                                <i class="fa fa-plus-circle"></i> Add History Dose
+                            </button>
+                            <!--<div class="btn btn-success btn-sm" style="cursor: pointer;">
+                                <span class="btn-xs ml-xxs btn-file" style="cursor: pointer;">
+                                    <i class="fa fa-folder-open"></i>
+                                    <span>Import Record (HL7)</span>
+                                    <input type="file" class="btn btn-success btn-xs" name="Import_ImmResponse_file" accept="application/txt" id="Import_edi_file" allowfiles="txt" onchange="Clinical_Immunization.SaveImportImmResponseHL7(this);">
+                                </span>
+                            </div>-->
+                            <div class="clearfix"></div>
+                            <div class="pull-left  mt-default">
+                                <label class="control-label" id="reviewedByTop"></label>
+                            </div>
+                            <!--By Babur on 1/14/2016, due to DrFirst integration, this check box is not required-->
+                            <!--<div class="checkbox-custom pull-left  mt-default">
+                                <input type="checkbox" name="BadAddress" id="chkNoKnownAllergies" onchange="Clinical_Immunization.AddNoKnownAllergies()">
+                                <label class="control-label" for="chkBadAddress">No Known Allergies</label>
+                            </div>-->
+
+                        </div>
+
+                        <!--  start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+
+                        <ul class="tabs-custom" id="ulSocialHxTabsItems">
+                            <li id="listHx" onclick="Clinical_Immunization.LoadSchedlerAndActiveTabData('Hx', true);"><a href=".tabHx" data-toggle="tab" id="VaccineBtn">Hx</a> </li>
+                            <li id="listBirth_2_years" onclick="Clinical_Immunization.LoadSchedlerAndActiveTabData('Birth - 2 Years', true);"> <a class="" href="#tab_Birth_2_years" data-toggle="tab">Birth - 2 years</a></li>
+                            <li id="list2_18_years" onclick="Clinical_Immunization.LoadSchedlerAndActiveTabData('2 - 18 Years', true);"> <a class="" href="#tab_2_18_years" data-toggle="tab">2 - 18 Years</a></li>
+                            <li id="listAdult" onclick="Clinical_Immunization.LoadSchedlerAndActiveTabData('Adult', true);"> <a class="" href="#tabAdult" data-toggle="tab">Adult</a></li>
+                            <li id="listRecurring" onclick="Clinical_Immunization.LoadSchedlerAndActiveTabData('Recurring', true);"> <a class="" href="#tabRecurring" data-toggle="tab">Recurring</a></li>
+                            <li id="listHistoryForecast" onclick="Clinical_Immunization.LoadSchedlerAndActiveTabData('HistoryForecast', true);"> <a class="" href="#tabHistoryForecast" data-toggle="tab">Evaluate History and Forecast</a></li>
+                            <li id="listTherapeuticInjection" onclick="Clinical_Immunization.LoadSchedlerAndActiveTabData('TherapeuticInjection', true);"> <a class="" href="#tabTherapeuticInjection" data-toggle="tab">Therapeutic Injection</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body pt-default">
+
+                            <div id="tab_Hx" class="tab-pane tabHx ">
+                                <div id="pnlVaccineHx_Result" style="display: inline;">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvImmunizationVaccineHx">
+                                        <thead>
+                                            <tr>
+                                                <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                                <th id="ColumnForPrintOrGenerate" class="center size40 "></th>
+                                                <th controlid="txtCategoryName" iscontroldisabled="1" controlname="CategoryName" class="size60 size-min105 sorting">Category</th>
+                                                <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Vaccine</th>
+                                                <th controlid="txtDose" iscontroldisabled="1" controlname="Dose" class="size20 sorting">Dose</th>
+                                                <th controlid="txtAdministrationDate" iscontroldisabled="1" controlname="AdministrationDate" class="size60 size-min105 sorting noWordBreak">Administration Date</th>
+                                                <th controlid="txtProviderName" iscontroldisabled="1" controlname="ProviderName" class="size60 size-min105 sorting">Provider</th>
+                                                <th controlid="txtGivenBy" iscontroldisabled="1" controlname="GivenBy" class="size60 size-min105 sorting">Given By</th>
+                                                <th controlid="txtLocation" iscontroldisabled="1" controlname="Location" class="size60 size-min105 sorting">Location</th>
+                                                <th controlid="txtLotNo" iscontroldisabled="1" controlname="LotNo" class="size60 size-min105 sorting">Lot No</th>
+                                                <th controlid="txtStatus" iscontroldisabled="1" controlname="Type" class="size60 size-min105 sorting">Message Type</th>
+                                                <th controlid="txtAcknowledgment" iscontroldisabled="1" controlname="Acknowledgment" class="size60 size-min105 sorting">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div class="spacer5"></div>
+                                    <div id="divImmunizationVaccineHx_Paging"></div>
+                                </div>
+                                <!--<h5 class="pr-lg bold pull-left">Therapeutic Injection</h5>
+                                <button type="button" class="btn btn-success btn-sm mt-tiny" onclick=" Clinical_Immunization.AddTherapeuticInjection();" id="btnAddTherapeuticInjection">
+                                    ADD
+                                </button>
+                                <div id="pnlTherapeutic_Result" class="col-xs-12 p-none">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvTherapeutic">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none" class="size20 p-none"></th>
+                                                <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Therapeutic Injection</th>
+                                                <th controlid="txtDose" iscontroldisabled="1" controlname="Dose" class="size20 sorting">Dose</th>
+                                                <th controlid="txtAdministrationDate" iscontroldisabled="1" controlname="AdministrationDate" class="size60 size-min105 sorting">Administration Date & Time</th>
+                                                <th controlid="txtProviderName" iscontroldisabled="1" controlname="ProviderName" class="size60 size-min105 sorting">Provider</th>
+                                                <th controlid="txtGivenBy" iscontroldisabled="1" controlname="GivenBy" class="size60 size-min105 sorting">Given By</th>
+                                                <th controlid="txtStatus" iscontroldisabled="1" controlname="Type" class="size60 size-min105 sorting">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div class="spacer5"></div>
+                                    <div id="divTherapeutic_Paging"></div>
+                                </div>-->
+                                <div class="pull-right pad-a-labelsize-btn pr-default">
+                                    <!--<button class="btn btn-success btn-sm pull-right mr-sm" type="button" onclick=" Clinical_ImmunizationDetail.addMedicationsToNotes(); " id="btnAddImmunizationToNotes"><i class="fa fa-plus"></i> Add to Note</button>-->
+                                    <!--<button class="btn btn-cancel btn-sm pull-right mr-sm" type="button" onclick=" Clinical_ImmunizationDetail.resetSelectedMedications(); " id="btnBirthHxReset"><i class="fa fa-refresh"></i> Reset</button>-->
+                                </div>
+                                <h5 id="HistoryForecastHxHeading" class="pr-lg bold pull-left">Evaluate History and Forecast</h5>
+                                <div id="pnlHxHistoryForecast_Result" class="col-xs-12 p-none">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvHxHistoryForecast">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none"></th>
+                                                <th>Action</th>
+                                                <th>Registry</th>
+                                                <th>Request Date/Time</th>
+                                                <th>Given By</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div class="spacer5"></div>
+                                    <div id="divHxHistoryForecast_Paging"></div>
+                                </div>
+                            </div>
+
+                            <div id="tab_Birth_2_years" class="tab-pane">
+                                <div id="pnlVaccineSchedule_Birth_2_years_Result" style="display: inline;">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVaccineSchedule_Birth_2_years">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:center;width: 194px;">Schedule</th>
+                                                <th style="text-align:center;width: 94px;">Vaccine</th>
+                                                <th style="text-align:center;width: 194px;">Dose</th>
+                                                <th style="text-align:center;width: 161px;" class="noWordBreak">Administration Date & Time</th>
+                                                <th style="text-align:center;width: 194px;">Given By</th>
+                                                <th style="text-align:center;width: 194px;">Status</th>
+                                                <th style="text-align:center;width: 94px;">Alert</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div id="tab_2_18_years" class="tab-pane">
+                                <div id="pnlVaccineSchedule_2_18_years_Result" style="display: inline;">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVaccineSchedule_2_18_years">
+                                        <thead>
+                                            <tr>
+                                                <th style="display: none;"></th>
+                                                <th style="text-align:center;width: 194px;">Schedule</th>
+                                                <th style="text-align:center;width: 94px;">Vaccine</th>
+                                                <th style="text-align:center;width: 194px;">Dose</th>
+                                                <th style="text-align:center;width: 161px;" class="noWordBreak">Administration Date & Time</th>
+                                                <th style="text-align:center;width: 194px;">Given By</th>
+                                                <th style="text-align:center;width: 194px;">Status</th>
+                                                <th style="text-align:center;width: 94px;">Alert</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <!--<tbody>
+                                        <tr>
+                                            <td>Birth</td>
+                                            <td>Hep B</td>
+                                            <td>
+                                                <div class="pull-right" id="divAddNewSystem" onclick="PhysicalExamTemplateDetail.addNewItem('system')"><button class="btn-success btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Refuse</td>
+                                            <td style="color: red">Overdue</td>
+                                        </tr>
+                                        </tbody>-->
+                                    </table>
+                                    <div class="spacer5"></div>
+                                    <div id="divPrescriptions_Paging"></div>
+                                </div>
+
+                            </div>
+
+                            <div id="tab_Adult" class="tab-pane">
+                                <div id="pnlVaccineSchedule_Adult_Result" style="display: inline;">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVaccineSchedule_Adult">
+                                        <thead>
+                                            <tr>
+                                                <th style="display: none;"></th>
+                                                <th style="text-align:center;width: 194px;">Schedule</th>
+                                                <th style="text-align:center;width: 94px;">Vaccine</th>
+                                                <th style="text-align:center;width: 194px;">Dose</th>
+                                                <th style="text-align:center;width: 161px;" class="noWordBreak">Administration Date & Time</th>
+                                                <th style="text-align:center;width: 194px;">Given By</th>
+                                                <th style="text-align:center;width: 194px;">Status</th>
+                                                <th style="text-align:center;width: 94px;">Alert</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+
+                                    </table>
+                                    <div class="spacer5"></div>
+                                    <div id="divPrescriptions_Paging"></div>
+                                </div>
+                            </div>
+
+                            <div id="tab_Recurring" class="tab-pane">
+
+                                <div id="pnlVaccineSchedule_Recurrinng_Result" style="display: inline;">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVaccineSchedule_Recurring">
+                                        <thead>
+                                            <tr>
+                                                <th style="display: none;"></th>
+                                                <th style="text-align:center;width: 194px;">Schedule</th>
+                                                <th style="text-align:center;width: 94px;">Vaccine</th>
+                                                <th style="text-align:center;width: 194px;">Dose</th>
+                                                <th style="text-align:center;width: 161px;" class="noWordBreak">Administration Date & Time</th>
+                                                <th style="text-align:center;width: 194px;">Given By</th>
+                                                <th style="text-align:center;width: 194px;">Status</th>
+                                                <!--<th style="text-align:center;width: 94px;">Alert</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        <!--<tbody>
+                                        <tr>
+                                            <td>Birth</td>
+                                            <td>Hep B</td>
+                                            <td>
+                                                <div class="pull-right" id="divAddNewSystem" onclick="PhysicalExamTemplateDetail.addNewItem('system')"><button class="btn-success btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Refuse</td>
+                                            <td style="color: red">Overdue</td>
+                                        </tr>
+                                        </tbody>-->
+                                    </table>
+                                    <div class="spacer5"></div>
+                                    <div id="divPrescriptions_Paging"></div>
+                                </div>
+
+                            </div>
+                            <div id="tab_HistoryForecast" class="tab-pane">
+                                <section class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="panel-actions">
+                                            <a href="#" class="closebtn pull-right" onclick="Clinical_Notes.UnLoad();"></a>
+                                        </div>
+                                        <h2 class="panel-title">Request History and Forecast</h2>
+                                    </header>
+                                    <div class="panel-body ">
+                                        <div class="form-group">
+                                            <div class="col-sm-4 col-md-3">
+                                                <label class="control-label">MRN / State ID / Birth Registry ID</label>
+                                                <select id="ddlMrnStateIDRegisteryId" name="MrnStateIDRegisteryId" class="form-control" onchange="Clinical_Immunization.MrnStateIDRegisteryChange(this)">
+                                                    <option value="">- Select -</option>
+                                                    <option value="1">MRN</option>
+                                                    <option value="2">State ID</option>
+                                                    <option value="3">Birth Registry ID</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2 hidden" id="MrnStateIDRegisteryDataDiv">
+                                                <label class="control-label"></label>
+                                                <input class="form-control" id="txtMrnStateIDRegisteryData" name="MrnStateIDRegisteryData" type="text">
+
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label">Birth Indicator</label>
+                                                <select id="ddlBirthIndicator" name="BirthIndicator" class="form-control">
+                                                    <option value="">- Select -</option>
+                                                    <option value="Y">Yes</option>
+                                                    <option value="N">No</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4 col-md-2">
+                                                <label class="control-label">Birth Order</label>
+                                                <input class="form-control" id="txtBirthOrder" type="number" name="BirthOrder" pattern="\d*" min="1" max="9" oninput="Clinical_Immunization.maxLengthCheck(event)" maxlength="1" >
+                                            </div>
+                                            <div class="col-sm-4 col-lg-2">
+                                                <label class="control-label">Time</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i> </span>
+                                                    <input type="text" class="form-control" id="tpHistoryForecastTime" name="HistoryForecastTime" data-plugin-timepicker>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-1 mt-md">
+                                                <button class="btn btn-success btn-sm rightbtn" type="button" onclick="Clinical_Immunization.SendQuery()">Send</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="panel-actions">
+                                            <a href="#" class="closebtn pull-right" onclick="Clinical_Notes.UnLoad();"></a>
+                                        </div>
+                                        <h2 class="panel-title">Query response</h2>
+                                    </header>
+                                    <div class="panel-body ">
+                                        <div id="pnlQueryResonse_HistoryForecast">
+                                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvQueryResonse_HistoryForecast">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display: none;">Id</th>
+                                                        <th>Action</th>
+                                                        <th>First name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Date and Time</th>
+                                                        <th>Date of Birth</th>
+                                                        <th>Response Status</th>
+                                                        <th>Option (Details)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div class="spacer5"></div>
+                                            <div id="divQueryResponseHistoryForecast_Paging"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div id="tab_TherapeuticInjection" class="tab-pane">
+                                <div id="pnlTherapeutic_Result" class="col-xs-12 p-none">
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvTherapeutic">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none" class="size20 p-none"></th>
+                                                <th controlid="txtVaccine" iscontroldisabled="1" controlname="Vaccine" class="size60 size-min105 sorting">Therapeutic Injection</th>
+                                                <th controlid="txtDose" iscontroldisabled="1" controlname="Dose" class="size20 sorting">Dose</th>
+                                                <th controlid="txtAdministrationDate" iscontroldisabled="1" controlname="AdministrationDate" class="size60 size-min105 sorting noWordBreak">Administration Date & Time</th>
+                                                <th controlid="txtProviderName" iscontroldisabled="1" controlname="ProviderName" class="size60 size-min105 sorting">Provider</th>
+                                                <th controlid="txtGivenBy" iscontroldisabled="1" controlname="GivenBy" class="size60 size-min105 sorting">Given By</th>
+                                                <th controlid="txtStatus" iscontroldisabled="1" controlname="Type" class="size60 size-min105 sorting">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div class="spacer5"></div>
+                                    <div id="divTherapeutic_Paging"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+
+                        <!--end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+
+                    </div>
+                </div>
+                <div id="FaceSheetPager"></div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+
+        $(document).ready(function () {
+
+            (function ($) {
+                'use strict';
+                $(function () {
+                    $('[data-plugin-ios-switch]').each(function () {
+                        var $this = $(this);
+
+                        $this.themePluginIOS7Switch();
+                    });
+                });
+            }).apply(this, [jQuery]);
+
+
+        });
+
+    </script>
+

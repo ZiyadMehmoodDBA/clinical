@@ -1,0 +1,102 @@
+﻿<div class="row" id="pnlEmployer" style="display:none;">
+    <div id="actionPanEmployer" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>
+    <button type="button" class=" btn btn-success btn-sm" id="btnSpecialityAdd" onclick="Patient_Employer.EmployerAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>-->
+
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_Employer.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Employer</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Patient_Employer.EmployerAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <!--<header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="fa fa-times pull-right moveRT" onclick="Patient_Employer.UnLoadTab();"></a>
+                            </div>
+                            <h2 class="panel-title">Search Employer </h2>
+                        </header>-->
+                        <div class="panel-body" id="pnlEmployer_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Name</label>
+                                        <input class="form-control" id="txtName" type="text" maxlength="20" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Address</label>
+                                        <input class="form-control" id="txtAddress" type="text" maxlength="55" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label">City</label>
+                                                <input class="form-control" id="txtCity" type="text" maxlength="30" />
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md">
+                                                <label class="control-label">State</label>
+                                                <input class="form-control" id="txtState" type="text" placeholder="aa" data-mask="aa" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label">Zip</label>
+                                                <input id="txtZip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#pnlEmployer', '#txtZip', '#txtCity', '#txtState')" />
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md">
+                                                <label class="control-label">Ext</label>
+                                                <input id="txtExt" class="form-control" type="text" placeholder="9999" data-mask="9999" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Active?</label>
+                                        <select id="chkIsActice" class="form-control">
+                                            <option value="" selected="selected">- All -</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 pad-a-labelsize-btn">
+                                        <button class="btn btn-primary btn-sm" id="btnEmployerSearch" type="button" onclick="Patient_Employer.EmployerSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <div id="pnlEmployer_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="Employer_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvEmployer">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">EmployerId</th>
+                                        <th class="size125">Action</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Zip</th>
+                                        <th>EXT</th>
+                                        <th>Telephone</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

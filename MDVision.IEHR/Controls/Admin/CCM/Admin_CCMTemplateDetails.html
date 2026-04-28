@@ -1,0 +1,85 @@
+﻿<div class="row" id="pnlAdminCCMTemplateDetails">
+    <div id="actionPanAdminCCMTemplateDetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog size95per">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Admin_CCMTemplateDetails.UnLoadTab();"></button>
+                <h4 class="modal-title" id="modalTitle">Care Plan Template</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form method="post" id="frmAdminCCMTemplateDetails" onsubmit="return false">
+                        <div class="form-group" id="templateDetails">
+                            <div class="col-sm-4 col-lg-2 has-feedback">
+                                <label class="control-label" for="Template Title">Template Title<span class="required">*</span></label>
+                                <input class="form-control" name="TemplateTitle" id="txtTemplateTitle" type="text" data-bv-field="TemplateTitle"><i class="form-control-feedback" data-bv-icon-for="TemplateTitle" style="display: none;"></i>
+                                <small class="help-block" data-bv-validator="notEmpty" data-bv-for="TemplateTitle" data-bv-result="NOT_VALIDATED" style="display: none;"></small>
+                            </div>
+                            <div class="col-sm-4 col-lg-4">
+                                <label class="control-label" for="Description">Description</label>
+                                <input class="form-control" id="txtDescription" name="Description" type="text">
+                            </div>
+                            <div class="col-sm-4 col-lg-2" id="divICDGroup">
+                                <label class="control-label" for="ICD group">Associate ICD Group(s)<span class="required">*</span></label>
+                                <select class="form-control" name="ICDgroupIds" multiple="multiple" id="ddlICDGroup"></select>
+                            </div>
+                            <div class="col-sm-1 mt-sm">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                            </div><div class="col-sm-1 mt-sm">
+                                      <button class="btn btn-primary btn-sm rightbtn" type="button" id="btnPreview" onclick="Admin_CCMTemplateDetails.previewTemplate();" disabled >Preview</button>
+                            </div>
+
+                            <div class="col-sm-4 col-lg-2 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default ">
+                                    <input type="checkbox" id="chkActive" name="IsActive" checked="" class="disableAll">
+                                    <label class="control-label" for="Active">Active</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spacer10"></div>
+                        <div id="pnlTemplateArea" class="col-xs-12 p-none hidden">
+                            <div class="col-md-3 col-lg-2">
+                                <div class="panel-blue NoRadiusT">Template Tools</div>
+                                <ul id="toolbarContainer" class="listPrimary listBordered listDragg panel-body p-xs NoRadiusT">
+                                    <li id="toolTextField" class="drageme">Text Field <span class="listIcon"><i class="border size40 pull-left mt-tiny">&nbsp;</i></span></li>
+                                    <li id="toolCheckBox" class="drageme">Check Box <span class="listIcon"><i class="fa fa-check-square"></i></span></li>
+                                    <li id="toolYesNo" class="drageme">Yes / No <span class="listIcon pt-xs"><i class="toggleIcoCustom active">Y</i><i class="toggleIcoCustom">N</i></span> </li>
+                                    <li id="toolSingleSelectDropdown" class="drageme">Single Select Dropdown <span class="listIcon"><i class="fa fa-check-square-o"></i></span></li>
+                                    <li id="toolMultipleSelectCombo" class="drageme">Multiple Select Combo <span class="listIcon"><i class="fa fa-check-square-o"></i><i class="fa fa-check-square-o"></i></span></li>
+                                    <li id="toolImage" class="drageme">Image <span class="listIcon"><i class="fa fa-image"></i></span></li>
+                                    <li id="toolFractionField" class="drageme">Fraction Field <span class="listIcon"><i class="fa fa-square-o"></i> / <i class="fa fa-square-o"></i></span></li>
+                                    <li id="toolFreeText" class="drageme">Free Text <span class="listIcon"><i class="border border-dash size40 pull-left mt-tiny">&nbsp;</i></span></li>
+                                    <li id="toolDateField" class="drageme">Date Field <span class="listIcon"><i class="fa fa-calendar"></i></span></li>
+                                    <li id="toolTimeField" class="drageme">Time Field <span class="listIcon"><i class="fa fa-clock-o"></i></span></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 col-lg-10">
+                                <div class="panel-blue NoRadiusT">
+                                    <a class="btn-xs btn-primary" id="lnkAddSection" href="#" onclick="Admin_CCMTemplateDetails.addSection(event);" title="Add Section"><i class="fa fa-plus-circle"></i></a>Section
+                                </div>
+                                <div id="divSection" class="Of-a height-max200 panel-body NoRadiusT" style="min-height: 200px;">
+                                    <ul id="lstSection" class="listPrimary"></ul>
+                                </div>
+                                <div class="panel-blue NoRadiusT">
+                                    <!--<a class="btn btn-xs" id="lnkEditFormName" href="#" onclick="Admin_CCMTemplateDetails.editFormName(this, event);" title="Add Question"><i class="fa fa-plus-circle"></i></a>-->Questions
+                                </div>
+                                <div id="divQuestion" class="Of-a height-max200 panel-body NoRadiusT">
+                                    <input class="form-control hidden disableAll mb-sm " id="txtQuestionHeader" />
+                                    <ul id="lstQuestion" class="list-unstyled dragableQest sortableQuest" style="width:100% !important; min-height:150px !important;"></ul>
+                                </div>
+                                <div class="panel-blue NoRadiusT">
+                                    <!--<a class="btn btn-xs" id="lnkEditFormName" href="#" onclick="Admin_CCMTemplateDetails.editFormName(this, event);" title="Add Sub Question"><i class="fa fa-plus-circle"></i></a>-->Sub Questions
+                                </div>
+                                <div id="divSubQuestion" class="Of-a height-max200 panel-body NoRadiusT">
+                                    <input class="form-control hidden disableAll mb-sm " id="txtSubQuestionHeader" />
+                                    <ul id="lstSubQuestion" class="list-unstyled dragableQest sortableSubQuest" style="width:100% !important; min-height:150px !important;"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

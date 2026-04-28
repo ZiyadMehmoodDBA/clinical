@@ -1,0 +1,119 @@
+﻿<div id="IMODetail">
+    <div id="actionPanIMODetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" onclick="IMODetail.UnLoad();"></button>
+                <h4 class="modal-title">IMO Search Details</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" onsubmit="return false" id="frmIMODetail">
+                    <div class="splitter" id="popTitle"></div>
+                    <div class="table-responsive">
+                        <!--<table class="table table-bordered table-striped table-condensed table-hover" id="dgvIMO">
+                            <thead>
+                                <tr>
+                                    <th>Encounter Type</th>
+                                    <th>Fracture Healing</th>
+                                    <th>Fracture Type</th>
+
+                                    <th>Laterality</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Encounter Type</td>
+                                    <td>Fracture Healing</td>
+                                    <td>Fracture Type</td>
+                                    <td>Laterality</td>
+                                </tr>
+                                <tr>
+                                    <td>Encounter Type</td>
+                                    <td>Fracture Healing</td>
+                                    <td>Fracture Type</td>
+                                    <td>Laterality</td>
+                                </tr>
+                                <tr>
+                                    <td>Encounter Type</td>
+                                    <td>Fracture Healing</td>
+                                    <td>Fracture Type</td>
+                                    <td>Laterality</td>
+                                </tr>
+                                <tr>
+                                    <td>Encounter Type</td>
+                                    <td>Fracture Healing</td>
+                                    <td>Fracture Type</td>
+                                    <td>Laterality</td>
+                                </tr>
+                            </tbody>
+                        </table>-->
+                        <div id="pnlIMO_Result" style="display: inline;">
+                            <section class="panel">
+                                <div class="panel-body tab-content-featured">
+                                    <input type="hidden" id="IMO_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvIMO">
+                                        <thead>
+                                            <!--<tr>
+                                                <th style="display:none;">IMoId</th>
+                                                <th>Encounter type</th>
+                                                <th>Fracture alignment</th>
+                                                <th>Fracture morphology</th>
+                                                <th>Laterality</th>
+                                                <th>Sublocation of acetabulum</th>
+                                            </tr>-->
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <label hidden="hidden" id="lblNoRecordFound" style="color:gray"> No problem found against particilar ICD </label>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <style>
+                        //add this to theme-custom located in content\blue\ .icd-li li {
+                            padding: 1px 0px 0px 8px;
+                        }
+
+                        .icd-description li a {
+                            max-width: 100%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+
+                        .icd-container {
+                            max-height: 100px;
+                            overflow-y: auto;
+                        }
+                    </style>
+                    <div class="row pl-sm pr-sm">
+                        <div class="col-xs-2 p-none">
+                            <div class="splitter text-center m-none pl-none">ICD10</div>
+                        </div>
+                        <div class="col-xs-10 pr-none">
+                            <div class="splitter text-center m-none pl-none">Description</div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="icd-container own-scroll">
+                            <div class="col-xs-2 p-none">
+                                <div class="splitter text-center m-none pl-none hidden">ICD10</div>
+                                <ul class="list-unstyled icd-li pl-xs" id="ICD10Id"></ul>
+                            </div>
+                            <div class="col-xs-10">
+                                <div class="splitter text-center m-none pl-none hidden">Description</div>
+                                <ul class="list-unstyled icd-description" id="ICD10Description"></ul>
+                            </div>
+                        </div>
+                        <div class="spacer15"></div>
+                        <div class="col-sm-3 col-md-2"><strong>Selected Code:</strong></div>
+                        <div class="col-sm-9 col-md-10">
+                            <span><strong>ICD9 </strong><label id="icd9"></label></span><br>
+                            <span><strong>ICD10 </strong> <label id="icd10"></label></span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

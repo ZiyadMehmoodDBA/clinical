@@ -1,0 +1,197 @@
+﻿<!--
+    Author: Muhammad Azhar Shahzad
+    Creation Date: November 18,2015
+    OverView:This File Is created for Clinical Notes Print View
+-->
+
+<div id="Clinical_NotesView">
+    <div id="actionPanNotesView" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="mt-xs mb-none">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_NotesView.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Notes</h4>
+            </div>
+            <div id="modalbody" class="modal-body pt-xs">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    
+                    <section class="panel">
+                        <form method="post" id="frmNotesView" onsubmit="return false">
+                            <div id="pnlNotes_Search">
+                                <div class="form-group">
+                                    <div class="btn-block">
+                                        <div class="pull-left">
+                                            <button id="noteButtonEdit" class="btn btn-success btn-xs" type="button" onclick="Clinical_NotesView.EditNotes();"><i class="fa fa-edit"></i> Edit</button>
+                                            <button id="noteButtonSign" class="btn btn-success btn-xs hidden" style="display:none !important" type="button" onclick="Clinical_NotesView.SignNotes();"><i class="fa fa-sign-in"></i> Sign</button>
+                                            <button id="noteButtonCoSign" class="btn btn-success btn-xs hidden" type="button" onclick="Clinical_NotesView.CoSignNotesOpen();"><i class="fa fa-sign-in"></i> Co-Sign</button>
+                                            <button id="noteButtonAmendment" class="btn btn-success btn-xs" type="button" onclick="Clinical_NotesView.AmendmentNotesOpen();"><i class="fa fa-sign-in"></i> Amendment</button>
+                                            <button id="noteButtonPrint" type="button" class="btn btn-success btn-xs ml-xs" onclick="Clinical_NotesView.PrintReports();"><i class="fa fa-print"></i> Print</button>
+                                            <button id="noteButtonFax" type="button" class="btn btn-success btn-xs ml-xs" onclick="Clinical_NotesView.sendAsFax();"><i class="fa fa-fax"></i> Fax</button>
+                                            <span id="noteChkReviewed" class="checkbox-custom ml-default">
+                                                <input type="checkbox" id="chkReviewed" name="IsReviewed" value="" onchange="Clinical_NotesView.MarkAsReviewedChange(this)">
+                                                <label class="control-label">Mark as reviewed</label>
+                                            </span>
+                                        </div>
+                                        <div class="dropdown dropdown-custom pull-left ml-xs" id="SyndromicSurveillance">
+                                            <button class="btn btn-success btn-xs" type="button" data-toggle="dropdown"> Syndromic Surveillance <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-submenu">
+                                                    <a href="#">Discharge</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#" onclick="Clinical_NotesView.SelectSyndromicSurveillance('01')">Discharged to home or self care</a></li>
+                                                        <li><a href="#" onclick="Clinical_NotesView.SelectSyndromicSurveillance('20')">Expired</a></li>
+                                                        <li><a href="#" onclick="Clinical_NotesView.SelectSyndromicSurveillance('09')">Admitted as an inpatient</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#" onclick="Clinical_NotesView.SelectSyndromicSurveillance('Admit')">Admit</a></li>
+                                                <li><a href="#" onclick="Clinical_NotesView.SelectSyndromicSurveillance('Register')">Register</a></li>
+                                                <li><a href="#" onclick="Clinical_NotesView.SelectSyndromicSurveillance('Update')">Update</a></li>
+                                            </ul>
+                                        </div>
+                                        <button class="btn btn-success btn-xs ml-xs " type="button" id="btnBillingInfo" onclick="Clinical_NotesView.BillingInfo();"><i class="fa fa-book"></i> eSuperbill</button>
+                                        <button class="btn btn-success btn-xs hidden" type="button" id="btnViewCharges" onclick="Clinical_NotesView.ViewCharges();"><i class="fa fa-pencil"></i> View Charge</button>
+                                        <button id="noteButtonUnsign" type="button" class="btn btn-success btn-xs ml-xs tab_space hidden" onclick="Clinical_NotesView.NoteUnSign();">Unsign Note</button>
+                                        <span class="label label-primary hidden"><label id="lblNoteBillStatus" /></span>
+
+                                        <label for="isPatientAccess" class="checkbox-inline bold">
+                                            <input type="checkbox" name="isPatientAccess" id="isPatientAccess" value="">
+                                            Portal Access
+                                        </label>
+                                        <label for="isAPIAccess" class="checkbox-inline bold hidden">
+                                            <input type="checkbox" name="isAPIAccess" id="isAPIAccess" value="">
+                                            API Access
+                                        </label>
+                                    </div>
+                                    <div class="spacer5"></div>
+                                    <div class="col-xs-12 p-none" id="PrintPdfControlDiv" style="display:block;">
+                                        <input type="hidden" id="helperPDF" />
+                                        <iframe id="PreviewReportPrint" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12 noBorder p-none" style="height:1066px;"></iframe>
+                                    </div>
+
+                                    <script>
+
+                                        kendo.pdf.defineFont({
+                                            "DejaVu Sans": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans.ttf",
+                                            "DejaVu Sans|Bold": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+                                            "DejaVu Sans|Bold|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+                                            "DejaVu Sans|Italic": "http://cdn.kendostatic.com/2016.2.714/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+                                        });
+                                    </script>
+                                    <style type="text/css">
+                                        .blueBgPrint {
+                                            background: #005da9 !important;
+                                            color: #fff !important;
+                                        }
+
+                                        .blueBorderPrint {
+                                            border-bottom: 2px solid #005da9;
+                                        }
+
+                                        .btn-link-print{
+                                            color: #000000 !important;
+                                            font-size: 16px;
+                                            font-weight: 700;
+                                        }
+
+                                        .line-height-fix {
+                                            font-size: 14px !important;
+                                        }
+
+                                        .bluefgColor {
+                                            color: #005da9 !important;
+                                        }
+
+                                        .blackfgColor {
+                                            color: black !important;
+                                        }
+                                    </style>
+
+                                 
+                           
+                                            <script type="x/kendo-template" id="page-templateLegacy">                                            
+
+                                                <div class="page-template" id="legacyViewTemplateDiv">                
+                                                        #if(pageNum != 1) {#
+                                                        <div id="patientHeaderInfo"  style="position: absolute;left: 50px;right: 50px;font-size: 90%;top: 7px;font-size: 110%;" ul  class="bluefgColor" >
+                                                            Patient Name: <span id="patientname" class="blackfgColor"></span><span class="whiteColorPrint" style="float:right;">Provider Name: <span id="providerName" class="blackfgColor"></span></span>
+                                                        </div>
+                                                      <div id="patientHeaderInfo" style="position: absolute;left: 50px;right: 50px;font-size: 90%;top: 28px;font-size: 110%;" ul class="bluefgColor">
+                                                        DOB: <span id="patientDOB" class="blackfgColor"></span><span class="whiteColorPrint" style="float:right;">DOS: <span id="patientDOS" class="blackfgColor"></span></span>
+                                                    </div>
+                                                    #}#
+                                                    <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                                                        <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                                                        <div id="ClinicalReportsFooterTextLegacy" class="blueBgPrint" style="float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                                                            Generated by:<span id="ClinicalReportsFooterLegacy">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                                                        </div>                                                   
+                                                     </div>
+
+                                                </div>
+                                            </script>
+                                            <div id="printcall">
+                                                <div id="PatientInfo" class="">
+                                                    <div class="col-sm-4 col-lg-2 pull-left">
+                                                        <img src="content/images/SHS-nav-logo-small-100.png" class="img-responsive">
+                                                    </div>
+                                                    <!--Begin Edited By Fahad Malik on 28-11-2016 to fix bug#: EMR-2090-->
+                                                    <ul class="list-unstyled pull-right line-height-fix" id="PracticeList">
+                                                        <li id="PracticeName" class="text-right"> </li>
+                                                        <li id="PracticeAddress" class="text-right"></li>
+                                                        <li id="PracticeCity" class="text-right"></li>
+                                                        <li id="PracticePhone" class="text-right"></li>
+                                                    </ul>
+                                                    <div class="clearfix"></div>
+                                                    <div class="splitter m-none mt-xs"><div class="spacer3"></div></div>
+
+                                                    <div class="spacer3"></div>
+                                                    <ul class="list-unstyled pull-left line-height-fix" id="PatientList">
+                                                        <li id="PatientName"></li>
+                                                        <li id="PatientAge"></li>
+                                                        <li id="PatientAccount"></li>
+                                                        <li id="PatientPhone"></li>
+                                                        <li id="PatientAddress"></li>
+                                                    </ul>
+
+                                                    <ul class="list-unstyled pull-right line-height-fix" id="ProviderList">
+                                                        <li id="ProviderName" class="text-right"></li>
+                                                        <li id="Specialty" class="text-right"></li>
+                                                        <li id="NoteDateTime" class="text-right"></li>
+                                                        <li id="VisitReason" class="text-right"></li>
+                                                        <!--END Edited By Fahad Malik on 28-11-2016 to fix bug#: EMR-2090-->
+                                                    </ul>
+                                                </div>
+                                                <div class="spacer5"></div>
+                                                <!--<div class="splitter m-none  pl-sm pt-xxs pb-xxs">Initial Office Visit</div>-->
+
+                                                <section class="panel panel-featured mt-lg">
+
+
+                                                    <div class="panel-body bg-white" id="ulContent">
+
+                                                    </div>
+
+
+                                                    <!--<div class="panel-body" id="hcfa_claim_form">
+                    <input type="hidden" id="helperPDF" />
+                    <iframe id="PreviewClaimFormIF" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12" style="height:1066px;"></iframe>
+
+                </div>-->
+                                                </section>
+                                            </div>
+
+                                    <div id="printcallClone" style="display:none">
+                                    </div>
+                                        </div>
+
+                            </div>
+                        </form>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

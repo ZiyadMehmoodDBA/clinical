@@ -1,0 +1,337 @@
+﻿<div id="pnlDemographicQuick" style="display:none;">
+    <div id="actionPanDemographicQuick" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_DemographicQuick.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Quick Add Patient</h4>
+            </div>
+            <div id="modalbody">
+                <div id="mainScrollPan">
+
+                    <!--<div id="formpanelheading">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                            <a href="#" class="closebtn pull-right " onclick="Patient_DemographicQuick.UnLoadTab();"></a></div>
+                            <h4 class="panel-title">Patient Demographics</h4>
+                        </header>
+                    </div>-->
+
+                    <form method="post" id="frmDemographicQuick" onsubmit="return false">
+                        <div class="form-group">
+                            <div class="col-sm-3 hidden">
+                                <label for="MotherMaidenName" class="control-label">Mother's Maiden</label>
+                                <input type="text" class="form-control " id="txtMotherMaidenName" onkeypress="return utility.checkSpecialChar(event)" name="MotherMaidenName" maxlength="50">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Last Name" class="control-label">Last Name<span class="required">*</span></label>
+                                <!--Not increase the Length bcz DrFirst Not except LastName more then 35 length-->
+                                <input type="text" class="form-control " oninput="utility.ValidateSpecialCharacters(this)" onblur="utility.ChangeNameCase(this);" id="txtLastName" name="LastName" maxlength="35">
+                            </div>
+                            <div class="col-sm-3 ">
+                                <label for="First Name" class="control-label">First Name<span class="required">*</span></label>
+                                <!--Not increase the Length bcz DrFirst Not except FirstName more then 35 length-->
+                                <input type="text" class="form-control " oninput="utility.ValidateSpecialCharacters(this)" onblur="utility.ChangeNameCase(this);" id="txtFirstName" name="FirstName" maxlength="35">
+                            </div>
+                            <div class="col-sm-3 ">
+                                <label class="control-label" for="Date of Birth">Date of Birth<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input class="form-control" type="text" id="dtpDOB" name="DOB" maxlength="10" data-plugin-datepicker="" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Sex" class="control-label">Sex</label>
+                                <select id="ddlSex" class="form-control " ddlist="GetGender" name="Gender"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 ">
+                                <label for="Marital Status" class="control-label">Marital Status</label>
+                                <select id="ddlMaritalStatus" name="MaritalStatus" class="form-control " ddlist="GetMaritalStatus"></select>
+                            </div>
+                            <div class="col-sm-3" id="divPatientEthnicity">
+                                <label for="Ethnicity" class="control-label">Ethnicity<span class="required hidden">*</span></label>
+                                <select id="ddlEthnicity" name="Ethnicity" multiple="multiple" class="form-control "></select>
+                            </div>
+                            <!--<div class="col-sm-3">
+                                <label for="Race" class="control-label">Race<span class="required">*</span></label>
+                                <select id="ddlRace" name="Race" class="form-control " ddlist="GetRace"></select>
+                            </div>-->
+                            <!--<div class="col-sm-3">
+                              
+                                <label for="Race" class="control-label">Race<span class="required">*</span></label>
+                                <select onchange="demographicDetail.multiselect_Validator(this)" class="form-control" multiple="multiple" name="PatientRaceIds" id="ddlPatientRace" ddlist="GetRace"></select>
+                                <i id="multiselectRace" class="form-control-feedback glyphicon glyphicon-remove has-error" style="color: #cc2724;display:none;" />
+                            </div>-->
+                            <div class="col-sm-3" id="divPatientRace">
+                                <!--<select class="form-control" style="display:none;" name="hiddenPatientRace" id="ddlHiddenPatientRace" ddlist="GetRace"></select>-->
+                                <label class="control-label">Race</label>
+                                <select class="form-control" multiple="multiple" name="PatientRaceIds" id="ddlPatientRace"></select>
+                                
+                               <!--<i id="multiselectRace" class="form-control-feedback glyphicon glyphicon-remove has-error" style="color: #cc2724;display:none;" />--> 
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="Preferred Language" class="control-label">Preferred Language<span class="required hidden">*</span></label>
+                                <select id="ddlPrefLanguage" name="PrefLanguage" class="form-control " ddlist="GetLanguages"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label class="control-label" for="Address 1">Address 1<span class="required hidden">*</span></label>
+                                <input type="text" class="form-control" oninput="utility.ValidateSpecialCharacters(this)" id="txtAddress1" onblur="utility.ChangeNameCase(this);" name="Address1" maxlength="55">
+                            </div>
+                            <div class="col-sm-3 pl-none">
+
+                                <div class="pl-default size60per pull-left">
+                                    <label class="control-label" for="City">City<span class="required hidden">*</span></label>
+                                    <input class="form-control" id="txtCity" name="city" type="text" maxlength="25" placeholder="Start typing to search">
+                                </div>
+                                <div class="size40per pl-sm pull-left">
+                                    <label class="control-label" for="State">State<span class="required hidden">*</span></label>
+                                    <input class="form-control" id="txtState" name="State" type="text" placeholder="aa" data-mask="aa" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="row">
+                                    <div class="col-xs-8 pr-xs">
+                                        <label class="control-label pull-left" for="Zip">Zip<span class="required hidden">*</span> </label>
+                                        <input id="txtZip" name="Zip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillDemographicCityState('#pnlDemographicQuick #frmDemographicQuick', '#txtZip', '#txtCity', '#hfCity', '#txtState', null, null, 'zip');" />
+                                    </div>
+                                    <div class="col-xs-4 pl-none pad-a-labelsize">
+                                        <input id="txtZipExt" name="ZipExt" class="form-control" type="text" placeholder="9999" data-mask="9999" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-sm-3 ">
+                                <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                                <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Patient_DemographicQuick.OpenProviderDetail();" title="Edit Provider">Provider<span class="required">*</span></a>
+                                <div class="input-group">
+
+                                    <input class="form-control" id="txtProvider" type="text" name="Provider" placeholder="Start typing to search" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_DemographicQuick.OpenProvider('Search Provider', 'txtProvider', 'hfProvider', 'lblProvider', 'lnkProviderEdit');"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Patient_DemographicQuick.OpenFacilityDetail();" title="Edit Facility">Facility<span class="required">*</span></a>
+                                <div class="input-group">
+
+                                    <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Patient_DemographicQuick.OpenFacility();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ">
+                                <label for="Practice" class="control-label">Practice<span class="required">*</span></label>
+                                <input class="form-control" id="txtPractice" name="Practice" type="text" disabled>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="IsCCDAAvailable" class="control-label">Summary of Care Available ?</label>
+                                <select id="ddlCCDAAvailable" class="form-control " name="IsCCDAAvailable"  onchange="utility.CCDANoteDisplayOnYes('#pnlDemographicQuick #frmDemographicQuick', this);">
+                                    <option value="1">Yes</option>
+                                    <option value="0" selected="selected">No</option>
+                                </select>
+                                <span id="txtYesCCDA" class="text-danger hidden">* Add patient by importing CCDA otherwise this patient won't be able to qualify for measure "Request/Accept Summary of Care".</span>
+                            </div>
+
+                            <div id="DivComments" class="col-sm-7">
+                                <label class="control-label" for="Comments">Comments</label>
+                                <textarea class="form-control" id="txtComments" name="Comments" rows="5" maxlength="3000" spellcheck="true"></textarea>
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label" for="Cell">Cell</label>
+                                <input type="text" class="form-control" name="Cell" id="txtCell" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this); Patient_Demographic.CheckCallTextPreferences();">
+                            </div>
+                            <div class="col-sm-3 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="checked" id="chkActive" name="Active">
+                                    <label class="control-label" for="chkActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-xs-6 pull-right pad-a-labelsize-btn">
+                                <button id="btnDemographicQuick" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                                <a href="#" class="btn btn-primary btn-sm rightbtn" data-toggle="tooltip" title="Scan Card" data-placement="top" onclick="Patient_DemographicQuick.OpenDocumentScan();"><img class="scan-icon" src="Content/images/scan.svg"> </a>
+                            </div>
+                        </div>
+
+                        <div class="spacer15"></div>
+
+                        <div class="col-sm-4">
+                            <label for="ddlHearFrom" class="control-label">How did the patient hear about us?</label>
+                            <select id="ddlHearFrom" name="HearFromId" class="form-control" onchange="Patient_DemographicQuick.hideShowTextbox();">
+                                <option value="">Select</option>
+                                <option value="1">Referring Provider / Physician</option>
+                                <option value="2">Hospital/ Emergency Room</option>
+                                <option value="3">Advertisement/ Mailer</option>
+                                <option value="4">Location</option>
+                                <option value="5">Online Search</option>
+                                <option value="6">Family Member/ Friend</option>
+                                <option value="7">ZocDoc</option>
+                                <option value="8">Healow</option>
+                                <option value="9">Referred by Insurance</option>
+                                <option value="10">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div id="divOtherText" class="col-sm-3 hidden">
+                            <label for="txtOtherText" class="control-label">Specify Resource</label>
+                            <input type="text" class="form-control" id="txtOtherText" name="HearFromOther" maxlength="50">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div id="incomingReferral" class="hidden">
+                            <div id="divIncomingReferralInfo">
+                                <div class="col-sm-3 col-md-3 p-none hidden">
+                                    <div class="col-xs-6">
+                                        <label class="control-label" for="Date">Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" data-plugin-datepicker name="Date" id="dtDate" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label class="control-label" for="">Time</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                            <input type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 5 }' id="tmTime" name="Time">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-md-3">
+                                    <label id="lblRefProviderReferral" for="Ref Provider" class="control-label">Referral From<span class="required">*</span></label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtRefProviderReferral" name="RefProviderReferral" placeholder="Search Ref Provider" type="text" customname="Referral From" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkRefProviderReferral" class="btn btn-primary btn-xs " type="button" onclick="Patient_DemographicQuick.OpenRefProviderReferral();"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-3">
+                                    <label class="control-label" for="Date" id="lblRefferingProviderReferral">Referral To</label>
+                                    <div class="input-group">
+                                        <input class="form-control " id="txtProviderReferral" type="text" placeholder="Start typing to search" name="ProviderReferral" maxlength="35" customname="Referral To" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkProviderReferral" class="btn btn-primary btn-xs " type="button" onclick="Patient_DemographicQuick.OpenProviderReferral();"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="" class="control-label">Reason</label>
+                                    <input id="txtReason" type="text" class="form-control" name="Reason" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="control-label">Visit Type</label>
+                                    <select id="ddlVisits" name="Visits" class="form-control">
+                                        <option value="">Select</option>
+                                        <option value="1">Follow Up</option>
+                                        <option value="2">New Patient</option>
+                                        <option value="3">Physical</option>
+                                        <option value="4">Surgical Clearance</option>
+                                        <option value="5">Consult</option>
+                                        <option value="6">Office Visit</option>
+                                        <option value="7">Immunization</option>
+                                        <option value="8">Injection</option>
+                                        <option value="9">Bloodwork</option>
+                                        <option value="10">Ultrasound</option>
+                                        <option value="11">Procedure</option>
+                                        <option value="12">Surgery</option>
+                                        <option value="13">Infusion</option>
+                                        <option value="14">Test</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="control-label">Insurance Plan</label>
+                                    <select class="form-control" id="ddlInsurance" name="PatientInsurance">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label id="lblStatus" class="control-label" for="Status">Status<span class="required">*</span></label>
+                                    <select id="ddlReferralStatus" name="Status" class="form-control">
+                                        <option value="">Select</option>
+                                        <option value="1">Not started</option>
+                                        <option value="2">In progress</option>
+                                        <option value="3">Completed</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label class="control-label" name="lblAssignee">Assignee</label>
+                                    <input class="form-control" id="txtAssignee" name="Assignee" placeholder="Start typing to search" type="text" />
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="dropdown" id="attachDiv">
+                                        <a id="btnScanResult" href="#" class="dropdown-toggle btn btn-link btn-xs p-none" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attach</a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="dropdown" id="attachmentDiv">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <!--<input type="hidden" name="PatientId" id="hfPatientId" value="-1" />-->
+                            <input type="hidden" name="ReferralId" id="hfReferralID" value="-1" />
+                            <input type="hidden" id="hfRefProviderReferral" name="RefProviderIdReferral" />
+                            <input type="hidden" id="hfProviderReferral" name="ProviderIdReferral" />
+                            <input type="hidden" id="hfAssignee" name="AssigneeId" value="-1">
+
+                            <div class="spacer15"></div>
+                            <div id="commentsReferral">
+                                <div id="" class="col-xs-12">
+                                    <label class="control-label">Comments</label>
+                                    <textarea id="txtCommentsReferral" name="CommentsReferral" rows="3" class="form-control" spellcheck="true"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <img id="myQuickCanvasUploadImg" style="display:none;" />
+                        <input type="hidden" id="hfProvider" name="ProviderID" />
+                        <input type="hidden" id="hfFacility" name="FacilityID" />
+                        <input type="hidden" id="hfPractice" name="PracticeID" />
+                        <input type="hidden" id="hfRaceIds" name="RaceIds" />
+                        <input type="hidden" id="hfCity" name="CityId" />
+                        <div class="clearfix"></div>
+                    </form>
+
+                    <div class="hidden">
+                        <img id="imageFromScanner" src="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    (function ($) {
+
+        'use strict';
+
+        if ($.isFunction($.fn['tooltip'])) {
+            $('[data-toggle=tooltip],[rel=tooltip]').tooltip({ container: 'body' });
+        }
+
+    }).apply(this, [jQuery]);
+
+    $(document).ready(function () {
+        utility.ValidateDOB('frmDemographicQuick', 'pnlDemographicQuick #dtpDOB', new Date('1800-01-01'), new Date(), false);
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            },
+        });
+    });
+</script>

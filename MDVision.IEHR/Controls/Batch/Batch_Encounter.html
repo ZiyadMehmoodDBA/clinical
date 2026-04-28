@@ -1,0 +1,137 @@
+﻿<div class="row" id="pnlBatchEncounter" style="display:none;">
+    <div id="actionPanBatchEncounter" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Batch_Encounter.UnLoadTab();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Encounter Visits</h4>
+            </div>
+
+            <div id="modalbody" class="panel-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="clearfix"></div>
+                    <form method="post" id="frmBatchEncounter" onsubmit="return false">
+                            <section class="panel panel-featured">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="closebtn pull-right" onclick="Batch_Encounter.UnLoadTab();"></a>
+
+                                    </div>
+                                    <h2 class="panel-title">Encounter Visits</h2>
+                                </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div id="divAccountNumber" class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Account">Account</label>
+                                        <div class="input-group">
+                                            <input class="form-control" title="Account Number" name="Account Number" id="txtAccountNumber" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Batch_Encounter.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label id="lblProvider" class="control-label">Provider</label>
+                                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Batch_Encounter.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Batch_Encounter.OpenProvider();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Batch_Encounter.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Batch_Encounter.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Appointment Date From </label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input type="text" id="dtpAppointmentDateFrom" class="form-control" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label class="control-label">Appointment Date To </label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input type="text" id="dtpAppointmentDateTo" class="form-control" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                           
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Case Number">Claim Number</label>
+                                        <div class="input-group">
+                                            <!--start -syed zia 04-02-2016, bug# 3669 , remove on blur-->
+                                            <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text" placeholder="Start typing to search" />
+                                            <!--end -syed zia 04-02-2016, bug# 3669-->
+                                            <div id="divsearchclaim" class="input-group-btn">
+                                                <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="Batch_Encounter.OpenEncounter();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Type</label>
+                                        <select id="ddlVisitType" class="form-control">
+                                            <option value="" selected="selected">- All -</option>
+                                            <option value="0">Open</option>
+                                            <option value="1">Close</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Active?</label>
+                                        <select id="ddlActive" class="form-control">
+                                            <option value="" selected="selected">- All -</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1 pull-right mt-md">
+                                        <button type="button" onclick="Batch_Encounter.VisitSearch();" id="btnPatientVisit" class="btn btn-primary rightbtn btn-sm">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="clearfix"></div>
+                        <div class="panel-body pt-sm panel-featured" id="pnlVisits_Result" style="display:none;">
+                                <div id="BatchVisits" class="tab-pane active">
+                                    <span class="spacer10"></span>
+                                    <input type="hidden" id="Batch_Encounter_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvVisitsDetail">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">VisitId</th>
+                                                <th id="ColumnAction" class="size95">Action</th>
+                                                <th class="size120">Claim Number</th>
+                                                <th class="size120">Appointment Date</th>
+                                                <th class="size120">Facility</th>
+                                                <th class="size120">Provider</th>
+                                                <th class="size120">Status</th>
+                                                <th class="size120">Checkin Time</th>
+                                                <th class="size120">Checkin By</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="divVisitsPaging"></div>
+                                    <span class="spacer10"></span>
+                                </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <input type="hidden" id="hfPatientId"/>
+                        <input type="hidden" id="hfProvider" />
+                        <input type="hidden" id="hfFacility" />
+                        <input type="hidden" id="hfVisitId" value="" name="HiddenFieldVisitId" />
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿<div class="row" id="pnlClinicalQuestion" style="display:none;">
+    <!------>
+    <div id="actionPanClinicalQuestion" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div> <!------>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Clinical_Question.QuestionAdd();"><i class="fa fa-plus-circle"></i> Add</button> <!------>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Clinical_Question.UnLoadTab()"></a>
+                </div>
+                <h2 class="panel-title">Search Question </h2>
+            </header>
+            <div class="panel-body" id="pnlQuestion_Search">
+                <form class="form-bordered" method="post" onsubmit="return false">
+
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Short Name</label>
+                            <input class="form-control" name="shortName" id="txtshortName" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Type </label>
+                            <select id="lstTypeId" class="form-control" name="questionType" ddlist="GetQuestionType"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Question</label>
+                            <input class="form-control" name="questionName" id="txtQuestiontName" type="text" maxlength="30" />
+                        </div>
+                        <!--<div class="col-sm-3">
+                            <label class="control-label">Last Name</label>
+                            <input class="form-control" id="txtLastName" type="text" maxlength="30" />
+                        </div>-->
+                        <div class="col-sm-2">
+                            <label class="control-label">Active?</label>
+                            <select id="chkIsActice" name="isActive" class="form-control">
+                                <option value="" selected="selected">- All -</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 mt-xs pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnQuestionSearch" type="button" onclick="Clinical_Question.QuestionSearch('0');">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <input type="hidden" id="hfQuestionId" value="-1" />
+    </div>
+    <div id="pnlQuestion_Result" style="display: inline;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="Question_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvQuestion">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">QuestionId</th>
+                            <th>Action</th>
+                            <th>Short Name</th>
+                            <th>Description</th>
+                            <th>Question Type</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divQuestionlistPaging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                    <!--<div class="col-sm-6 pl-none" id="divShowingEntries">Showing 0 to 0 of 0</div>
+                    <div id="pagerParent" class="col-sm-6 pr-none">
+                        <ul class="pagination pull-right m-none">
+                            <li id="preLink"><a id="lnkPrevPages" class="p-xs pt-none pb-none" href="#null" title="Previous Pages"><i class="fa fa-angle-double-left"></i></a></li>
+                            <li id="preLink"><a id="lnkPrev" class="p-xs pt-none pb-none" href="#null" title="Previous Page"><i class="fa fa-angle-left"></i></a></li>
+                            <li class="active"><a class="p-xs pt-none pb-none" href="#">1</a></li>
+                            <li><a class="p-xs pt-none pb-none" href="#">2</a></li>
+                            <li id="nextLink"><a class="p-xs pt-none pb-none" id="lnkNext" href="#null" title="Next Page"><i class="fa fa-angle-right"></i></a></li>
+                            <li id="nextLink"><a class="p-xs pt-none pb-none" id="lnkNextPages" href="#null" title="Next Pages"><i class="fa fa-angle-double-right"></i></a></li>
+                        </ul>
+                    </div>-->
+                </div>
+            </div>
+        </section>
+    </div>
+    <table id="products"></table>
+</div>

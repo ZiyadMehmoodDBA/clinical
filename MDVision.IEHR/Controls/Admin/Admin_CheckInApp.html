@@ -1,0 +1,120 @@
+﻿<div class="row" id="pnlAdminCheckInApp" style="display:none;">
+    <div id="actionPanAdminCheckInApp" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_Provider.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Provider</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_Provider.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search Profile</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlProvider_Search">
+                            <form class="form-bordered" id="frmCheckInApp" onsubmit="return false" method="post">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label size-min90">Username</label>
+                                        <input class="form-control" id="txtUsername" type="text" maxlength="25" />
+                                    </div>
+                                    <div class="col-sm-3 col-md-2">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Admin_CheckInApp.OpenFacilityDetail();" title="Edit Facility">Facility<span class="required">*</span></a>
+                                        <div class="input-group">
+
+                                            <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Admin_CheckInApp.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="divProvider_Entity" class="col-sm-2">
+                                        <label class="control-label">Entity</label>
+                                        <select id="ddlEntity" class="form-control" ddlist="GetEntity"></select>
+                                    </div>
+                                   
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Device ID</label>
+                                        <input class="form-control" id="txtDeviceId" type="text" maxlength="25" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Status</label>
+                                        <select id="chkActive" name="Active" class="form-control">
+                                            <option value="">- All -</option>
+                                            <option value="1" selected="selected">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-sm-2 pad-a-labelsize-btn pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnProviderSearch" type="submit" onclick="Admin_CheckInApp.UserSearch();">Search</button>
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="pnlProvider_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvUser">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">ProviderId</th>
+                                        <th>Action</th>
+                                        <th>Last Name</th>
+                                        <th>First Name</th>
+                                        <th>UserName</th>
+                                        <th class="text-center">Facility</th>
+                                        <th>Device ID</th>
+                                        <th class="text-center">Entity</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divUserPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+
+        'use strict';
+
+        if ($.isFunction($.fn['tooltip'])) {
+            $('[data-toggle=tooltip],[rel=tooltip]').tooltip({ container: 'body' });
+        }
+
+    }).apply(this, [jQuery]);
+
+
+    $(document).ready(function () {
+        //utility.ValidateDOB('frmDemographic', 'pnlDemographic #dtpDOB', new Date('1800-01-01'), new Date(), false);
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            },
+        });
+    });
+</script>

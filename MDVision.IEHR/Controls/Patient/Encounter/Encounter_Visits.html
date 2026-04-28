@@ -1,0 +1,144 @@
+﻿<div id="pnlEncounter" style="display:none;">
+    <div id="actionPanEncounter" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>
+
+    <div class="spacer10"></div><div class="clearfix"></div>-->
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Encounter_Visits.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Encounter Visits</h4>
+            </div>
+
+            <div id="modalbody" class="panel-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="clearfix"></div>
+                    <form method="post" id="frmVisits" onsubmit="return false">
+
+                        <section class="panel panel-featured">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label id="lblProvider" class="control-label">Provider</label>
+                                        <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Encounter_Visits.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Encounter_Visits.OpenProvider();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Encounter_Visits.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Encounter_Visits.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Appointment Date From </label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input type="text" id="dtpAppointmentDateFrom" class="form-control ValidateCriteria" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label class="control-label">Appointment Date To </label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input type="text" id="dtpAppointmentDateTo" class="form-control ValidateCriteria" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 ">
+                                        <label class="control-label">Claim Number</label>
+                                        <input class="form-control ValidateCriteria" id="txtClaimNumber" type="text">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-1 ">
+                                        <label class="control-label">Active?</label>
+                                        <select id="ddlActive" class="form-control">
+                                            <option value="" selected="selected">- All -</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 pull-right mt-md">
+                                        <button type="button" onclick="Encounter_Visits.VisitSearch(0);" id="btnPatientVisit" class="btn btn-primary rightbtn btn-sm">Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnBillChargeReset" type="button" onclick="Encounter_Visits.VisitReset();">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="clearfix"></div>
+                        <div class="panel-body pt-sm panel-featured" id="pnlVisits_Result">
+                            <!--<section class="panel">-->
+
+                            <ul id="ulTabs" class="tabs-custom">
+                                <li class="liOpenVisits active" id="liOpenVisits"><a href=".OpenVisits" data-toggle="tab">Open Visits</a></li>
+                                <li class="liCloseVisits" id="liCloseVisits"><a href=".CloseVisits" data-toggle="tab">Close Visits</a></li>
+                            </ul>
+                            <div class="tab-content tabs-custom-body">
+                                <div class="OpenVisits tab-pane active">
+                                    <span class="spacer10"></span>
+                                    <input type="hidden" id="Encounter_Open_Visits_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOpenVisitsDetail">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">VisitId</th>
+                                                <th id="ColumnAction" class="size95">Action</th>
+                                                <th class="size120">Claim Number</th>
+                                                <th class="size120">Appointment Date</th>
+                                                <th class="size120">Facility</th>
+                                                <th class="size120">Provider</th>
+                                                <th class="size120">Status</th>
+                                                <th class="size130">Checkin Time</th>
+                                                <th class="size120">Checkin By</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="divOpenVisitsPaging"></div>
+
+                                    <span class="spacer10"></span>
+                                </div>
+
+                                <div class="CloseVisits tab-pane">
+                                    <span class="spacer10"></span>
+                                    <input type="hidden" id="Encounter_Close_Visits_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvCloseVisitsDetail">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">VisitId</th>
+                                                <th id="ColumnAction" class="size95">Action</th>
+                                                <th class="size120">Claim Number</th>
+                                                <th class="size120">Appointment Date</th>
+                                                <th class="size120">Facility</th>
+                                                <th class="size120">Provider</th>
+                                                <th class="size120">Status</th>
+                                                <th class="size130">Checkout Time</th>
+                                                <th class="size120">Checkout by</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="divCloseVisitsPaging"></div>
+
+                                    <span class="spacer10"></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <!--</section>-->
+                        </div>
+
+                        <input type="hidden" id="hfProvider" />
+                        <input type="hidden" id="hfFacility" />
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

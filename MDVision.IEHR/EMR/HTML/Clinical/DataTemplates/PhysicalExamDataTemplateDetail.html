@@ -1,0 +1,309 @@
+﻿<div class="row" id="pnlClinicalPhysicalExamDataTemplateDetail">
+    <style type="text/css">
+        .green {
+            color: green !important;
+        }
+    </style>
+
+    <div id="actionPanClinicalPhysicalExamDataTemplateDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full modal-dialog">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header">
+                <button type="button" class="close" onclick="PhysicalExamDataTemplateDetail.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Add PE Data Template</h4>
+            </div>
+            <div id="modalbody" class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form id="frmPhysicalExamDataTemplateDetail" method="post" name="frmPhysicalExamDataTemplateDetail" onsubmit="return false">
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                        <div id="formpanelheading"></div>
+                        <!--<div class="panel-body NoRadiusT" id="pnlSection_Search">-->
+
+                            <div class="spacer10"></div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <ul class="tabBtn" role="tablist">
+                                    <li id="LiPhysicalExamDataTemplate" class="active">
+                                        <a onclick="PhysicalExamDataTemplateDetail.showPhysicalExamDataTemplatesTab('LiPhysicalExamDataTemplate');" data-target="#viewTemplates" role="tab" data-toggle="tab" class="btn btn-default btn-sm">PE Templates</a>
+                                    </li>
+                                    <li id="AddEditPhysicalExamDataTemplate" class="hidden">
+                                        <!--PhysicalExamDataTemplateDetail.showPhysicalExamTemplatesTab('AddEditPhysicalExamDataTemplate');-->
+                                        <a data-target="#addPhysicalExamDataTemplate" role="tab" data-toggle="tab" class="btn btn-default btn-sm" onclick="PhysicalExamDataTemplateDetail.showButtons();">Add</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="spacer20"></div>
+
+                                    <div role="tabpanel" class="tab-pane active" id="viewTemplates">
+                                        <div class="form-group">
+                                            <div class="col-sm-6 col-lg-6">
+                                                <div id="pnlSection_PhysicalExamDataTemplates" style="display: inline;">
+                                                    <div class="panel-body panel-featured height345 height-max345 overflowY own-scroll">
+                                                        <input type="hidden" id="Templates_SelectedDataKeys">
+                                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvPhysicalExamDataTemplates">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">TemplateId</th>
+                                                                    <th class="size40">Action</th>
+                                                                    <th>Templates</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-6"></div>
+                                        </div>
+                                    </div>
+                                    <!--Content for Add button-->
+                                    <div role="tabpanel" class="tab-pane" id="addPhysicalExamDataTemplate">
+                                        <!--<div class="spacer10"></div>-->
+                                        <div class="clearfix"></div>
+                                        <div class="form-group">
+                                            <div class="col-sm-3 col-md-3">
+                                                <label class="control-label">Template Name</label><span class="required">*</span>
+                                                <input type="text" class="form-control" id="txtDataTemplateName" name="DataTemplateName">
+                                            </div>
+                                            <!--<div class="col-sm-3 col-md-3">
+                                                <label class="control-label">Entity</label><span class="required">*</span>
+                                                <select id="ddlPhysicalExamDataTemplateEntity" name="PhysicalExamDataTemplateEntity" class="form-control" ddlist="GetEntity"></select>
+                                            </div>
+                                            <div class="col-sm-3 col-md-3" id="divPhysicalExamDataTemplatepecialty">
+                                                <label class="control-label">Specialty </label>
+                                                <select id="ddlPhysicalExamDataTemplatepecialty" multiple="multiple" name="PhysicalExamDataTemplatepecialty" class="form-control"></select>
+                                            </div>
+                                            <div class="col-sm-3 col-md-3" id="divPhysicalExamDataTemplateProvider">
+                                                <select class="form-control" style="display:none;" name="hiddenPhysicalExamDataTemplateProvider" id="ddlHiddenPhysicalExamDataTemplateProvider"></select>
+                                                <label class="control-label">Provider</label>
+                                                <select class="form-control" multiple="multiple" name="PhysicalExamDataTemplateProvider" id="ddlPhysicalExamDataTemplateProvider"></select>
+                                            </div>-->
+                                            <!--<div id="divNormalExams" class="col-sm-8 pad-a-labelsize hidden">
+                                                <button id="btnNormalExamDetails" onclick="PhysicalExamDataTemplateDetail.openNormalExamDetail(this);" class="btn btn-link btn-xs pull-left"><i class="fa fa-book"></i></button>
+                                                <div id="divNormalExamsDetail" class="size90per pull-left  hidden">
+                                                    <textarea id="txtNormalExamsDetail" name="NormalExamsDetail" rows="2" class="form-control"></textarea>
+                                                </div>
+                                            </div>-->
+                                            <!--<div class="col-sm-4 col-lg-2 size-max120 pad-a-labelsize">
+                                                <div class="checkbox-custom">
+                                                    <input type="checkbox" id="chkPhysicalExamsNormal" onclick="PhysicalExamDataTemplateDetail.AllSystemNormarl(this);" name="bNormal">
+                                                    <label class="control-label">Normal Exam</label>
+                                                </div>
+                                            </div>-->
+                                            <div id="divNormalExams" class="col-sm-12 col-lg-8 pad-a-labelsize hidden">
+                                                <div class="pull-left"><button id="btnNormalExamDetails" onclick="PhysicalExamDataTemplateDetail.openNormalExamDetail(this);" class="btn btn-link btn-xs"><i class="fa fa-book"></i></button></div>
+
+                                                <div id="divNormalExamsDetail" class="col-xs-11 hidden">
+                                                    <div class="rightInnerAddon">
+                                                        <textarea id="txtNormalExamsDetail" name="NormalExamsDetail" spellcheck="true" rows="2" class="pr-xlg height-max105 size100per textAreaScroll"></textarea>
+                                                        <div class="clearfix"></div>
+                                                        <div class="rightInnerAddonBtn"><a id="btnSaveNormalExam" onclick="PhysicalExamDataTemplateDetail.saveExamNormalDetail(this);" class="btn btn-link btn-xs"><i class="fa fa-save"></i></a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="spacer20"></div>
+                                            <section id="sectionPhysicalExam" class="panel-body tab-content-featured toggleVertical">
+                                                <div id="PhysicalExam" class="pull-left">
+                                                    <section class="panel panel-featured panel-xxs" id="System">
+                                                        <header class="panel-heading">
+                                                            <h2 id="headingFamilyMember" class="panel-title">Systems</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none">
+                                                            <div id="divPhysicalExamSystems" class="height330 height-max330 own-scroll overflowY">
+                                                                <ul id="ulPhysicalExamSystems" name="PhysicalExamSystems" class="listPrimary"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <!--<div id="SystemSections" class="col-sm-2 col-md-2 hidden">
+
+                                                    </div>-->
+                                                    <section id="SystemSections" class="panel panel-featured panel-xxs hidden">
+                                                        <header class="panel-heading">
+                                                            <h2 id="headingFamilyMember" class="panel-title">Sub systems</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none">
+                                                            <div id="divPhysicalExamSystemSection" class="height330 height-max330 own-scroll overflowY">
+                                                                <ul id="ulPhysicalExamSystemSection" name="PhysicalExamSystemSection" class="listPrimary"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <!--<div class="col-sm-2 col-md-2 hidden">
+
+                                                    </div>-->
+                                                    <section id="SectionCharacteristics" class="panel panel-featured panel-xs hidden">
+                                                        <header class="panel-heading">
+                                                            <h2 id="headingFamilyMember" class="panel-title">Characteristics</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none">
+                                                            <div id="divExamCharacteristics" class="height330 height-max330 own-scroll overflowY">
+                                                                <div class="col-xs-12 mt-xs mb-xs">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" id="txtSearchMember" oninput="PhysicalExamDataTemplateDetail.filterOptions(this, 'ulExamCharacteristics')" name="SearchMember" placeholder="Search" type="text" value="">
+                                                                        <div class="input-group-btn">
+                                                                            <button id="btnDisease" class="btn btn-primary btn-xs" type="button" onclick=""><i class="glyphicon glyphicon-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <ul id="ulExamCharacteristics" name="ExamCharacteristics" class="listPrimary"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <!--<div  class="col-sm-3 col-md-3 hidden">
+
+                                                    </div>-->
+                                                    <section id="CharacteristicsSubCharacteristics" class="panel panel-featured panel-xs hidden">
+                                                        <header class="panel-heading">
+                                                            <h2 id="headingFamilyMember" class="panel-title">Sub-characteristics</h2>
+                                                        </header>
+                                                        <div class="panel-body pl-none pr-none">
+                                                            <div id="divExamSubCharacteristics" class="height330 height-max330 own-scroll overflowY">
+                                                                <div class="col-xs-12 mt-xs mb-xs">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" id="txtSearchMember" oninput="PhysicalExamDataTemplateDetail.filterOptions(this, 'ulExamSubCharacteristics')" name="SearchMember" placeholder="Search" type="text" value="">
+                                                                        <div class="input-group-btn">
+                                                                            <button id="btnDisease" class="btn btn-primary btn-xs" type="button" onclick=""><i class="glyphicon glyphicon-search"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <ul id="ulExamSubCharacteristics" name="ExamSubCharacteristics" class="listPrimary"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <section id="sectionPhysicalExamDetails" class="panel panel-featured panel-md hidden mr-none hidden">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title" id="detailHeading">Detail</h2>
+                                                        </header>
+                                                        <div class="panel-body pr-none">
+                                                            <div id="CharacteristicsDetails" class="height330 height-max330 own-scroll overflowY pr-default">
+                                                                <input id="hfSystemId" name="SystemId" type="hidden" value="-1">
+                                                                <input id="hfSectionId" name="SectionId" type="hidden" value="-1">
+                                                                <input id="hfCharacteristicId" name="CharacteristicId" type="hidden" value="-1">
+                                                                <input id="hfSubCharacteristicId" name="SubCharacteristicId" type="hidden" value="-1">
+                                                                <input id="hfCharacteristicsDetailsId" name="CharacteristicsDetails" type="hidden" value="-1">
+                                                                <input id="hfIsCharacteristicPositive" name="IsCharacteristicPositive" type="hidden" value="-1">
+                                                                <input id="hfIsSubCharacteristicPositive" name="IsSubCharacteristicPositive" type="hidden" value="-1">
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label">Previous History</label>
+                                                                    <textarea id="txtPrevHistory" name="PrevHistory" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <label class="control-label">Status</label>
+                                                                    <select id="ddlStatus" name="Status" ddlist="GetMedicalHxStatus" class="form-control"></select>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Onset</label>
+                                                                    <input type="text" class="form-control" id="txtOnset" maxlength="10" name="Onset">
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4 p-none">
+                                                                    <div class="col-xs-12">
+                                                                        <label class="control-label">Duration</label>
+                                                                    </div>
+                                                                    <div class="col-xs-4 pr-xxs">
+                                                                        <input class="form-control" type="text" id="txtDurationLength" maxlength="2" name="DurationLength" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad">
+                                                                    </div>
+                                                                    <div class="col-xs-8 pl-xxs">
+                                                                        <select id="ddlDurationPeriod" name="DurationPeriod" class="form-control" ddlist="GetMedicalHxDurationPeriod"></select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Pattern</label>
+                                                                    <select id="ddlPattern" name="Pattern" ddlist="GetMedicalHxPattern" class="form-control"></select>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Severity</label>
+                                                                    <select id="ddlSeverity" name="Severity" ddlist="GetMedicalHxSeverity" class="form-control"></select>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Course</label>
+                                                                    <select id="ddlCourse" name="Course" ddlist="getPhysicalExamCourse" class="form-control"></select>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Radiation</label>
+                                                                    <select id="ddlRadiation" name="Radiation" class="form-control" ddlist="getPhysicalExamRadiation"></select>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Frequency</label>
+                                                                    <select id="ddlFrequency" name="Frequency" class="form-control" ddlist="getPhysicalExamFrequency"></select>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Context</label>
+                                                                    <select id="ddlContext" name="Context" ddlist="getPhysicalExamContext" class="form-control"></select>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Character-Color/Shape/Size</label>
+                                                                    <select id="ddlCharacter" name="Character" class="form-control" ddlist="getPhysicalExamCharacter"></select>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Aggravated by</label>
+                                                                    <select id="ddlAgggravatedby" name="Agggravatedby" ddlist="GetMedicalHxAggravatedBy" class="form-control"></select>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Relieved by</label>
+                                                                    <select id="ddlRelievedby" name="Relievedby" ddlist="getPhysicalExamRelievedBy" class="form-control"></select>
+                                                                </div>
+                                                                <div class="col-sm-8 col-md-8 col-lg-8">
+                                                                    <label class="control-label">Location</label>
+                                                                    <textarea id="txtLocation" name="Location" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+                                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                    <label class="control-label">Precipitated by</label>
+                                                                    <textarea id="txtPercipitatedby" name="Percipitatedby" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label">Associated with</label>
+                                                                    <textarea id="txtAssociatedwith" name="Associatedwith" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+
+                                                                <div class="pull-right pt-sm pr-default hidden">
+                                                                    <button id="btnPhysicalExamSave" type="button" onclick="PhysicalExamDataTemplateDetail.PhysicalExamSave('');" class="btn btn-sm btn-success">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <div id="divTogglePhysicalExamDetails" class="toggle hidden" data-plugin-toggle="">
+                                                        <section class="toggle">
+                                                            <label>Detail</label>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12">
+                                            <label class="control-label">Overall Comments</label>
+                                            <textarea id="txtComments" name="Comments" rows="3" class="form-control" spellcheck="true"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                        <!--</div>-->
+                        <div id="footerButtons" class="pull-right pt-md pr-default">
+
+                            <!--<button class="btn btn-sm" type="button" id="btnReset" onclick="PhysicalExamDataTemplateDetail.resetPhysicalExamDataTemplate();"><i class="fa fa-refresh"></i> Reset</button>-->
+                            <button class="btn btn-success btn-sm" type="submit" id="btnSave">Save</button>
+                            <button class="btn btn-success btn-sm hidden" type="submit" id="btnSaveAs">Save As</button>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </form>
+                    <!-- /Add PE Data Template -->
+                    <input type="hidden" name="PatientId" id="hfPatientId" value="">
+                    <input type="hidden" name="PhysicalExamSystemInfoID" id="hfPhysicalExamSystemInfoID" value="-1">
+                    <input type="hidden" name="PhysicalExamTemplateId" id="hfPhysicalExamTemplateId" value="-1">
+                    <input type="hidden" name="IsFormHasChange" id="hfIsFormHasChange" value="">
+                    <input type="hidden" name="PhysicalExamType" id="hfPhysicalExamType" value="">
+                    <input type="hidden" name="PhysicalExamId" id="hfPhysicalExamId" value="-1">
+                    <input type="hidden" name="DataTemplateId" id="hfDataTemplateId" value="-1">
+                    <input type="hidden" name="TemplateId" id="hfTemplateId" value="-1">
+                </div>
+            </div>
+            <!--<div class="modal-footer"></div>-->
+        </div>
+    </div>
+
+</div>

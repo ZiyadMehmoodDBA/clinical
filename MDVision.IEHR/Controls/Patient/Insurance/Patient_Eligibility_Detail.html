@@ -1,0 +1,143 @@
+﻿<div id="pnlPatientEligibilityDetail">
+    <div id="actionPanPatientEligibilityDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_Eligibility_Detail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Patient Eligibility Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="col-md-5">
+                        <h4 id="lblname" class="text-success text-bold"></h4>
+                        <p>
+                            <span class="text-bold">Gender: </span><span id="lblGender"></span><br />
+                            <span class="text-bold">DOB: </span><span id="lblDOBAge"></span><br />
+                            <span class="text-bold">Address: </span><span id="lblAddress">N/A</span><br />
+                            <span class="text-bold">Address2: </span><span id="lblAddress2">N/A</span><br />
+                            <span id="spREFContainer" >
+
+                            </span>
+                            <span class="text-bold">Relationship with Insured: </span><span id="lblRelationshipWithInsured">N/A</span><br />
+                            <span class="text-bold">Status: </span><span id="lblStatus">N/A</span><br />
+                            <span class="text-bold">Eligibility date: </span><span id="lblDOS"></span><br />
+                            <span class="text-bold">Eligibility Status: </span><span id="lblEligibilityStatus">N/A</span><br />
+                            <span class="text-bold">Copay: </span><span id="lblEligibilityCopay">N/A</span><br />
+                            <span class="text-bold">Deductible: </span><span id="lblEligibilityDeductible">N/A</span><br />
+                        </p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="col-xs-6">
+                            <ul class="list-unstyled panel-body tab-content-featured">
+                                <li><div class="splitter" style="margin-left: -10px;margin-right: -9px;">Primary Care Physician</div></li>
+                                <li><span class="col-sm-4">PCP:</span> <span id="lblPCP" class="col-sm-8 text-justify">N/A</span></li>
+                                <li><span class="col-sm-4">NPI:</span> <span id="lblNPI" class="col-sm-8 text-justify">N/A</span></li>
+                                <li><span class="col-sm-4">Contact:</span> <span id="lblContact" class="col-sm-8 text-justify">N/A</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-6">
+                            <ul class="list-unstyled panel-body tab-content-featured">
+                                <li><div class="splitter" style="margin-left: -10px;margin-right: -9px;">Subscriber</div></li>
+                                <li><span class="col-sm-6">Insurance Plan:</span> <span id="lblPlan" class="text-danger text-bold col-sm-6 text-justify">N/A</span></li>
+                                <li><span class="col-sm-6">Subscriber Name:</span> <span id="lblSubscriberName" class="col-sm-6 text-justify">N/A</span></li>
+                                <li><span class="col-sm-6">Subscriber ID:</span> <span id="lblSubscriberId" class="col-sm-6 text-justify">N/A</span></li>
+                                <li><span class="col-sm-6">Subscriber Group ID:</span> <span id="lblGroup" class="col-sm-6 text-justify">N/A</span></li>
+                            </ul>
+                        </div>
+                        <div class="spacer15"></div>
+                        <div class="col-xs-6">
+                            <ul class="list-unstyled panel-body tab-content-featured">
+                                <li><div class="splitter" style="margin-left: -10px;margin-right: -9px;">Provider</div></li>
+                                <li><span class="col-sm-6">Provider Name:</span> <span id="lblProviderName" class="col-sm-6 text-justify">N/A</span></li>
+                                <li><span class="col-sm-6">NPI:</span> <span id="lblProviderNPI" class="col-sm-6 text-justify">N/A</span></li>
+                                <li><span class="col-sm-6">Contact:</span> <span id="lblProviderContact" class="col-sm-6 text-justify">N/A</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-6">
+                            <ul class="list-unstyled panel-body tab-content-featured">
+                                <li><div class="splitter" style="margin-left: -10px;margin-right: -9px;">Payer</div></li>
+                                <li><span class="col-sm-6">Payer Name:</span> <span id="lblPayerName" class="col-sm-6 text-justify">N/A</span></li>
+                                <li><span class="col-sm-6">Payer Identification:</span> <span id="lblPayerId" class="col-sm-6 text-justify">N/A</span></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div id="div_topsection" class="hidden">
+                        <div class="spacer15"></div>
+                        <div class="splitter">Active Coverage</div>
+
+                        <div class="col-md-12">
+                            <ul id="lblActiveCoverageList" class="list-unstyled height-max200 pr-xs own-scroll"></ul>
+                        </div>
+                        <div class="spacer15"></div>
+                        <div class="splitter">Non Covered</div>
+
+                        <div class="col-md-12">
+                            <ul id="lblNonCoveredList" class="list-unstyled height-max200  pr-xs own-scroll"></ul>
+                        </div>
+
+                        <div class="spacer15"></div>
+                        <div class="splitter">Deductible</div>
+                        <div class="col-md-12">
+                            <ul id="lblDeductibleList" class="list-unstyled height-max200  pr-xs own-scroll"></ul>
+                        </div>
+                    </div>
+                    <div class="spacer15"></div>
+                    <div class="clearfix"></div>
+
+                    <div id="ErrorSummary" class="toggle" data-plugin-toggle="">
+                        <section class="toggle">
+                            <label id="ErrorSummaryHeading">Error Summary</label>
+                            <div id="lblErrorSummaryList" class="toggle-content panel-body pt-sm NoRadiusT"></div>
+                        </section>
+
+                        <div class="spacer15"></div>
+                    </div>
+
+                    
+                    <div class="clearfix"></div>
+
+                    <section class="panel-body tab-content-featured">
+                        <div class="splitter" style="margin-left: -10px;margin-right: -9px;">Service Type Benefits</div>
+                        <div id="Benifits_div">
+                            There is no Service Type Benefits
+                        </div>
+                    </section>
+
+                    <div class="spacer15"></div>
+                    <div class="clearfix"></div>
+
+                    <section class="panel-body tab-content-featured">
+                        <div class="splitter" style="margin-left: -10px;margin-right: -9px;">Other Benefits</div>
+                        <div id="AllBenifits_div">
+                            There is no Other Benefits
+                        </div>
+                    </section>
+
+
+                    <div class="spacer15"></div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+    });
+</script>
+
+

@@ -1,0 +1,41 @@
+﻿<div id="pnlOccupationStatusDetail">
+    <div id="actionOccupationStatusDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Admin_OccupationStatusDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Social Hx Occupation Status Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblOccupationStatusDetail" class="col-sm-12">
+                    <form method="post" onsubmit="return false" id="frmOccupationStatusDetail">
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label class="control-label">Code<!--<span class="required">*</span>--></label>
+                                <input class="form-control" name="ConceptCode" id="txtConceptCode" maxlength="10" type="text" />
+                            </div>
+                            <div class="col-sm-6 pl-none pad-a-labelsize" id="pnlIsActive">
+                                <!--<div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked>
+                                    <label for="chkIsActive">Is Occupation</label>
+                                </div>-->
+                                <label><input type="radio" value="True" id="chkOccupation" checked name="chkIsActive"> Occupation</label>
+                                <label><input type="radio" value="False" id="chkIndustry" name="chkIsActive"> Industry</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <label class="control-label">Description</label><span class="required">*</span>
+                                <input class="form-control" name="Description" id="txtDescription" type="text" />
+                            </div>
+                            <div class="col-sm-2 mt-md">
+                                <button class="btn btn-primary btn-sm rightbtn " type="submit">Save</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="hfStatusId" name="hfStatusId" value="" />
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

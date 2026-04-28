@@ -1,0 +1,110 @@
+﻿<div id="pnlClinicalLabResultTrends">
+    <div id="actionPanClinicalLabResultTrends" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full mb-none">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="ClinicalLabResultTrends.UnLoad();">
+                    <span class="red">&nbsp;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 id="headingTitle" class="modal-title">Lab Trending</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel-featured panel-body mb-default">
+                    <h5 class="font-xs bold m-xs text-primary" id="PatientDetails"></h5>
+                </div>
+                <div class="panel-featured panel-body">
+                    
+                    <div class="col-md-12 col-sm-12 p-none">
+                        <div class="col-xs-12 col-sm-3 editable-control">
+                            <label class="control-label">Filter</label>
+                            <select id="ddlFilterId" name="FilterName" class="form-control" onchange="ClinicalLabResultTrends.SearchTrends();"></select>
+                        </div>
+                        <div class="col-xs-12 col-sm-2">
+                            <label class="control-label">Date From</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                <input type="text" class="form-control" id="dptStartDate" name="OrderFromDate" data-plugin-datepicker="" maxlength="10" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-2">
+                            <label class="control-label">Date To</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                <input type="text" class="form-control" id="dptToDate" name="OrderToDate" data-plugin-datepicker="" maxlength="10" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="pull-left pr-default pad-a-labelsize">
+                            <label class="radio-inline"><input type="radio" name="radgroup" value="DOL">Date on left</label>
+                        </div>
+                        <div class="pull-left pad-a-labelsize pr-default">
+                            <label class="radio-inline"><input type="radio" name="radgroup" checked value="DOT">Date on top</label>
+                        </div>
+                        <div class="pull-left pad-a-labelsize pr-default">
+                            <a href="#" id="printLabLetter" class="btn btn-link btn-xs disableAll" onclick="ClinicalLabResultTrends.printLetter();"><i class="fa fa-edit"></i> Lab Letter</a>
+                        </div>
+                        <div class="pull-right mt-md">
+                            <button type="button" class="btn btn-sm btn-success pull-left tab_space" onclick="ClinicalLabResultTrends.SearchTrends();" id="btnSearchTrend">Search</button>
+                            
+                            <div class="dropdown pull-left ml-xs">
+                                <button type="button" class="btn btn-sm btn-success dropdown-toggle" id="btnPrintTrend" data-toggle="dropdown"><i class="fa fa-print"></i> Print <span class="caret"></span></button>
+                                <ul class="dropdown-menu size-min120">
+                                    <li><a class="dropdown-item" onclick="ClinicalLabResultTrends.printTrends('Trend');">Trend</a></li>
+                                    <li><a class="dropdown-item" onclick="ClinicalLabResultTrends.printTrends('Graph');">Graph</a></li>
+                                    <li> <a class="dropdown-item" onclick="ClinicalLabResultTrends.printTrends('Result');">Lab Result</a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 col-sm-12" style="margin-top:10px">
+                        <div id="dgvLabTrends" class="Of-a">
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12" >
+
+                            <div id="PrintPanel" hidden>
+                                <div id="PanelHead">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img style="width:240px;" src="\content\images\SHS-nav-logo.png">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div id="PracticePrintDetails"></div>
+
+                                        </div>
+                                        <div class="col-md-5">
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div id="PatientPrintDetails">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 pull-right">
+                                            <div id="ProviderPrintDetails">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div id="dgvTrendsGraphsPrint">
+
+                                </div>
+                                <div id="TrendsPrint">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

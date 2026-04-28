@@ -1,0 +1,30 @@
+﻿<div id="pnlPatientInformationDelete">
+    <div id="actionPanPatientInformationDelete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmPatientInformationSubmissionDelete" onsubmit="return false">
+                    <input type="hidden" name="Status" value="Deleted" />
+                    <div class="col-sm-12">
+                        <label class="control-label" for="Name">Reason<span class="required">*</span></label>
+                        <textarea id="txtReason" name="Reason" maxlength="255" class="form-control" rows="2" spellcheck="true"></textarea>
+                    </div>
+                    <div class="col-sm-6 mt-md pull-right text-right">
+                        <!--<button type="submit" class="btn btn-default btn-sm">Save</button>-->
+                        <!--<button onclick="Clinical_PhysicalExamObservationsDetail.SetforExit()" type="submit" class="btn btn-default btn-sm">Save & Exit</button>-->
+                        <button type="submit" id="btnYes" class="btn btn-success">Yes</button>
+                        <button type="button" id="btnNo" onclick="Patient_Information_Delete.UnLoad();" class="btn btn-danger">No</button>
+                    </div>
+                    <input type="hidden" name="Status" value="Deleted" />
+                </form>
+                <div class="clearfix"></div>
+                <div class="spacer10"></div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

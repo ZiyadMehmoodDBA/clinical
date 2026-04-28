@@ -1,0 +1,74 @@
+﻿<div id="EDIReviewReport">
+    <div id="actionPanEDIReviewReport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="">
+                <button type="button" class="close" onclick="EDIReviewReport.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Review EDI Report</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form method="post" id="frmEDIReviewReport" onsubmit="return false">
+                    <div id="pnlEDIReviewReport_Search">
+
+                        <div id="batchNumber_div" class="col-sm-3 col-md-2">
+                            <label class="control-label">Batch Number</label>
+                            <input class="form-control" id="txtBatchNo" type="text" name="BatchNumber">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Clearing house</label>
+                            <select id="ddlClearinghouse" ddlist="GetClearingHouse" name="ClearingHouse" class="form-control"></select>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <label class="control-label">Comments</label><span class="required">*</span>
+                            <input class="form-control " id="txtComments" spellcheck="true" name="Comments" type="text" />
+                        </div>
+                        <div class="col-sm-1 size-max70 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" name="Active" id="chkReviewed">
+                                <label for="chkReviewed">Reviewed</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 pull-right pad-a-labelsize-btn">
+                            <div class="btn-block">
+                                <button class="btn btn-primary btn-sm pull-right" id="btnEDIReviewReport" type="submit">Save</button>
+                                <div class="pl-xs pr-xs pull-right btn-sm ">
+                                    <a id="btnPrintClaim" class="btn btn-success btn-xs disableAll" onclick="EDIReviewReport.ERA_Print();">
+                                    <i class="fa fa-print"></i> Print ERA</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer20"></div>
+                    <div class="tabs">
+                        <ul class="tabs-custom">
+                            <li class="active"><a href="#tbHtmlView" data-toggle="tab">HTML View</a></li>
+                            <li><a href="#tbTextView" data-toggle="tab">Text View</a></li>
+                        </ul>
+                        <div id="tab_Container" class="tab-content tabs-custom-body">
+                            <div id="tbHtmlView" class="tab-pane active">
+
+                                <div class="col-xs-12">
+                                    <pre id="txtHTMLView" name="HtmlView" style="height:885px"></pre>
+                                </div>
+
+
+                            </div>
+                            <div id="tbTextView" class="tab-pane">
+                                <div class="col-xs-12">
+                                    <textarea class="form-control" rows="8" id="txtTextView" name="TextView" style="height:350px" spellcheck="true"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </form>
+            
+
+            </div>
+
+        </div>
+    </div>
+</div>

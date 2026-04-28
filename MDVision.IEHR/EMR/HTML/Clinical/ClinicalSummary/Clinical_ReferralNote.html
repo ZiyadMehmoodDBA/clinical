@@ -1,0 +1,199 @@
+﻿<!--/*
+Author: Sameer Ahmed
+Date: 9/11/2017
+Overview: This file is created to show Clinical Referral Note
+*/-->
+<div class="row" id="Clinical_ReferralNote" style="display:none;">
+
+    <div id="actionPanClinicalReferralNote" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_ReferralNote.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Referral Note</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmClinicalReferralNote">
+                    <div class="panel-heading  panel-blue">
+                        <h2 class="panel-title white">GENERATE YOUR REFERRAL NOTE</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <label class="control-label">Clinical Visit<span class="required">*</span> </label>
+                                <select id="ddlClinicalVisit" class="form-control" name="ClinicalVisit">
+                                    <option value="">--Select--</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer20"></div>
+
+                    <div class="panel-heading  panel-blue">
+                        <h2 class="panel-title text-capitalize white">CUSTOMIZE YOUR REFERRAL NOTE</h2>
+                    </div>
+
+                    <div class="panel-body">
+                        <p>Select which Data Elements to include in Referral Note:</p>
+
+                        <header class="panel-heading pl-xs">
+                            <div class="checkbox  checkbox-custom">
+                                <input id="chkSelectAllDataElements" onclick="Clinical_ReferralNote.selectAllDataElements(this)" name="SelectAllDataElements" type="checkbox" />
+                                <label class="control-label" for="chkSelectAllDataElements">Select All</label>
+                            </div>
+                        </header>
+                        <div id="divDataElements" class="panel-body p-none pb-xs table-responsive">
+                            <table id="ulDataElements" class="table table-condensed table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkDemographicDataElement" onclick="Clinical_ReferralNote.selectDataElement(this)" name="DemographicDataElement" class="DemographicDataElement" type="checkbox" disabled="disabled" checked="checked" />
+                                                <label class="control-label" for="chkDemographicDataElement">Patient demographics</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkProviderDataElement" onclick="Clinical_ReferralNote.selectDataElement(this)" name="ProviderDataElement" class="ProviderDataElement" type="checkbox" disabled="disabled" checked="checked" />
+                                                <label class="control-label" for="chkProviderDataElement">Provider and office contact</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkAllergiesandAdverseReactionsDataElement" notecomponenttext="AllergiesandAdverseReactionsData" class="AllergiesandAdverseReactionsData" onclick="Clinical_ReferralNote.selectDataElement(this)" name="AllergiesandAdverseReactionsDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkAllergiesandAdverseReactionsDataElement">Allergies and Adverse Reactions</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkMedicationsDataElement" notecomponenttext="Medications" class="Medications" onclick="Clinical_ReferralNote.selectDataElement(this)" name="MedicationsDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkMedicationsDataElement">Medications</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkSocialHistoryDataElement" notecomponenttext="SocialHistory" class="SocialHistory" onclick="Clinical_ReferralNote.selectDataElement(this)" name="SocialHistoryDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkSocialHistoryDataElement">Social History</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkAssessmentDataElement" notecomponenttext="Assessment" class="Assessment" onclick="Clinical_ReferralNote.selectDataElement(this)" name="AssessmentDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkAssessmentDataElement">Assessment</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkPlanOfTreatmentDataElement" notecomponenttext="PlanOfTreatment" class="PlanOfTreatment" onclick="Clinical_ReferralNote.selectDataElement(this)" name="PlanOfTreatmentDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkPlanOfTreatmentDataElement">Treatment Plan</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkPlanOfCareDataElement" notecomponenttext="PlanOfCare" class="PlanOfCare" onclick="Clinical_ReferralNote.selectDataElement(this)" name="PlanOfCareDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkPlanOfCareDataElement">Goals</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkCareTeamMembersDataElement" notecomponenttext="CareTeamMembers" class="CareTeamMembers" onclick="Clinical_ReferralNote.selectDataElement(this)" name="CareTeamMembersDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkCareTeamMembersDataElement">Care Team Members</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkCognitivesDataElement" notecomponenttext="Cognitives" class="Cognitives" onclick="Clinical_ReferralNote.selectDataElement(this)" name="CognitivesDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkCognitivesDataElement">Functional Status</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkImmunizationDataElement" notecomponenttext="Immunization" class="Immunization" onclick="Clinical_ReferralNote.selectDataElement(this)" name="ImmunizationDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkImmunizationDataElement">Immunization</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkMedicalEquipmentDataElement" notecomponenttext="MedicalEquipment" class="MedicalEquipment" onclick="Clinical_ReferralNote.selectDataElement(this)" name="MedicalEquipmentDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkMedicalEquipmentDataElement">Medical Equipment/Implants</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkMentalStatusDataElement" notecomponenttext="MentalStatus" class="MentalStatus" onclick="Clinical_ReferralNote.selectDataElement(this)" name="MentalStatusDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkMentalStatusDataElement">Mental Status</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkProceduresDataElement" notecomponenttext="Procedures" class="Procedures" onclick="Clinical_ReferralNote.selectDataElement(this)" name="ProceduresDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkProceduresDataElement">Procedures</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkProblemsDataElement" notecomponenttext="Problems" class="Problems" onclick="Clinical_ReferralNote.selectDataElement(this)" name="ProblemsDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkProblemsDataElement">Problems</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chLabResultsDataElement" notecomponenttext="LabResults" class="LabResults" onclick="Clinical_ReferralNote.selectDataElement(this)" name="LabResultsDataElement" type="checkbox" />
+                                                <label class="control-label" for="chLabResultsDataElement">Results</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkVitalSignDataElement" notecomponenttext="Vitals" class="Vitals" onclick="Clinical_ReferralNote.selectDataElement(this)" name="VitalSignDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkVitalSignDataElement">Vital Signs</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkHealthConcernstDataElement" notecomponenttext="HealthConcerns" class="HealthConcerns" onclick="Clinical_ReferralNote.selectDataElement(this)" name="HealthConcernsDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkHealthConcernstDataElement">Health Concerns</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox  checkbox-custom">
+                                                <input id="chkRefferral" notecomponenttext="Refferral" class="Refferral" onclick="Clinical_ReferralNote.selectDataElement(this)" name="RefferralDataElement" type="checkbox" />
+                                                <label class="control-label" for="chkRefferral">Reason For Referral</label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                    <div class="mt-md pull-right">
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnTransmitCCDA" type="button" onclick="Clinical_ReferralNote.Transmit();">Transmit Referral Note</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnDownloadCCDAXML" type="button" onclick="Clinical_ReferralNote.downloadReferralNoteXMLData();">Download Referral Note</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnDisplayCCDA" type="button" onclick="Clinical_ReferralNote.displayReferralNoteHTML('clinicalsummaryHTML')">Display Referral Note</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnSavePreferenceDisplayCCDA" type="button" onclick="Clinical_ReferralNote.SavePreferenceDisplayCCDA()">Save Preference</button>
+
+                        <!--onclick="Clinical_ReferralNote.displayClinicalSummaryHTML('clinicalsummaryHTML')"-->
+
+                    </div>
+                    <input type="hidden" id="hfXMLData" />
+                    <input type="hidden" id="hfDataIsEncrypted" />
+
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿<div id="schoolDetail">
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="schoolDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">School</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblschoolDetail">
+                    <form method="post" id="frmSchoolDetail" onsubmit="return false">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">School Name<span class="required">*</span></label>
+                                <input class="form-control" id="txtSchoolName" name="SchoolName" type="text" maxlength="50">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Contact Name</label>
+                                <input class="form-control" id="txtContactName" type="text" maxlength="50">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" >Address</label>
+                                <input class="form-control" id="txtAddress1" type="text" maxlength="55">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-xs-8 pl-md pr-xs">
+                                        <label class="control-label">City</label>
+                                        <input class="form-control" id="txtCity" type="text" maxlength="25">
+                                    </div>
+                                    <div class="col-xs-4 pl-none pr-md">
+                                        <label class="control-label" >State</label>
+                                        <input class="form-control" id="txtState" type="text" placeholder="aa" data-mask="aa">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-xs-8 pl-md pr-xs">
+                                        <label class="control-label">Zip </label>
+                                        <input id="txtZip" class="form-control" name="Zip" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#schoolDetail #frmSchoolDetail', '#txtZip', '#txtCity', '#txtState')" />
+                                    </div>
+                                    <div class="col-xs-4 pl-none pr-md pad-a-labelsize">
+                                        <input id="txtZipExt" class="form-control" type="text" placeholder="9999" data-mask="9999" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label class="control-label">Telephone</label>
+                                <input class="form-control" id="txtTelephone" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label" >Email</label>
+                                <input class="form-control" id="txtEmail" type="text" name="Email" maxlength="100">
+                            </div>
+                            <div class="col-sm-4 col-xs-6 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" id="chkActive" checked>
+                                    <label class="control-label" for="chkActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-6 pull-right pad-a-labelsize-btn">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            </div>
+                        </div>
+                        
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

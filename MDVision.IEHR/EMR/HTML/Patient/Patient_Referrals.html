@@ -1,0 +1,262 @@
+﻿<div class="row" id="pnlPatientReferrals">
+    <div id="actionPanPatientReferrals" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_Referrals.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="headingTitle">Referrals</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section class="panel">
+
+                        <ul class="tabs-custom" id="ulReferralTabs">
+                            <li class="active" onclick="Patient_Referrals.SelectTab('Incoming');"><a class="" href="#Incoming" data-toggle="tab">Incoming</a></li>
+                            <li onclick="Patient_Referrals.SelectTab('Outgoing');"><a class="" href="#Outgoing" data-toggle="tab">Outgoing</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body pt-default">
+                            <div id="Incoming" class="tab-pane active">
+                                <button type="button" class="btn btn-sm btn-success" onclick="Patient_Referrals.AddIncomingReferrals()"><i class="fa fa-plus-circle"></i> Add</button>
+                                    <div class="panel panel-featured mt-default">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Search Incoming Referral</h2>
+                                        </header>
+                                        <div class="panel-body">
+                                            <form id="IncomingReferralSearch">
+                                                <div class="col-sm-4 col-md-2 ">
+                                                    <label class="control-label">Source</label>
+                                                    <select id="ddlSource" class="form-control" name="Source">
+                                                        <option value="">- Select -</option>
+                                                        <option value="MDV"> MDVision </option>
+                                                        <option value="MED"> MedText </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-4 col-md-2 ">
+                                                    <label class="control-label">Referral From</label>
+                                                    <select id="ddlReferralFrom" class="form-control" name="RefferalFrom"></select>
+                                                </div>
+                                                <div class="col-sm-4 col-md-2 ">
+                                                    <label class="control-label">Referral To</label>
+                                                    <select id="ddlReferralTo" class="form-control" name="RefferalTo"></select>
+                                                </div>
+                                                <div class="col-sm-4 col-md-2 ">
+                                                    <label class="control-label">Insurance Plan</label>
+                                                    <select id="ddlInsurancePlan" class="form-control" name="InsurancePlan"></select>
+                                                </div>
+                                                <div class="col-sm-3 col-md-2">
+                                                    <label class="control-label">Visit Type</label>
+                                                    <select id="ddlVisitType" name="VisitType" class="form-control">
+                                                        <option value="0">Select</option>
+                                                        <option value="1">Follow Up</option>
+                                                        <option value="2">New Patient</option>
+                                                        <option value="3">Physical</option>
+                                                        <option value="4">Surgical Clearance</option>
+                                                        <option value="5">Consult</option>
+                                                        <option value="6">Office Visit</option>
+                                                        <option value="7">Immunization</option>
+                                                        <option value="8">Injection</option>
+                                                        <option value="9">Bloodwork</option>
+                                                        <option value="10">Ultrasound</option>
+                                                        <option value="11">Procedure</option>
+                                                        <option value="12">Surgery</option>
+                                                        <option value="13">Infusion</option>
+                                                        <option value="14">Test</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3 col-md-2">
+                                                    <label class="control-label">Status</label>
+                                                    <select id="ddlStatus" name="Status" class="form-control">
+                                                        <option value="0">Select</option>
+                                                        <option value="1">Not started</option>
+                                                        <option value="2">In progress</option>
+                                                        <option value="3">Completed</option>
+                                                    </select>
+                                                </div>
+                                                <div class="pull-right pt-md pr-default">
+                                                    <button type="button" class="btn btn-sm btn-primary" onclick="Patient_Referrals.ReferralSearchByType(this)">Search</button>
+                                                </div>
+                                                <input type="hidden" id="hfRefProvider" name="RefProviderId" />
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                
+                                    <div id="pnlInComingReferal_Result" style="display: inline;">
+                                        <form>
+                                            <div class="panel-body panel-featured">
+
+                                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvInComingReferral">
+                                                    <thead>
+                                                        <tr>
+                                                            <th id="ColumnAction" actiontype="Delete,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                            <th class="size90 size-min90">Source</th>
+                                                            <th controlid="dtpVitalSignDate" controlname="StartDate" class="noWordBreak size30">Date & Time</th>
+                                                            <th controlid="ddlVisitType" controlname="Visits" class="noWordBreak size40">Type</th>
+                                                            <th controlid="ddlInsurancePlan" controlname="InsurancePlan" class="noWordBreak size30">Insurance Plan</th>
+                                                            <th controlid="ddlReferralFrom" controlname="ReferralFrom" class="size90 size-min90">Referral From</th>
+                                                            <th controlid="ddlReferralTo" controlname="ReferralTo" class="size90 size-min90">Referral To</th>
+                                                            <th controlid="ddlStatus" controlname="Status" class="noWordBreak size30">Status</th>
+                                                            <th controlid="txtAssignedTo" controlname="AssignedTo" class="size90 size-min90">Assigned To</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div id="dgvInComingReferral_Paging"></div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            <div id="Outgoing" class="tab-pane">
+                                <button type="button" class="btn btn-sm btn-success" onclick="Patient_Referrals.AddOutgoingReferrals()"><i class="fa fa-plus-circle"></i> Add</button>
+                                <div class="splitterBody mt-xs" id="splitterBody">
+                                    <div class="panel panel-featured mt-default">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Search Outgoing Referral</h2>
+                                        </header>
+                                        <div class="panel-body">
+                                            <form id="OutgoingReferralSearch">
+                                                <div class="col-sm-4 col-md-2 ">
+                                                    <label class="control-label">Source</label>
+                                                    <select id="ddlSource" class="form-control" name="Source">
+                                                        <option value="">- Select -</option>
+                                                        <option value="MDV"> MDVision </option>
+                                                        <option value="MED"> MedText </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-4 col-md-2 ">
+                                                    <label class="control-label">Referral From</label>
+                                                    <select id="ddlReferralFrom" class="form-control" name="RefferalFrom"></select>
+                                                </div>
+                                                <div class="col-sm-4 col-md-2 ">
+                                                    <label class="control-label">Referral To</label>
+                                                    <select id="ddlReferralTo" class="form-control" name="RefferalTo"></select>
+                                                </div>
+                                                <div class="col-md-4 col-md-2">
+                                                    <label class="control-label">Procedure Code/Description</label>
+                                                    <div class="input-group ">
+                                                        <input class="form-control" id="txtCPTCode" onkeypress="Patient_Referrals.validateSpecialCharacters(event);" maxlength="100" placeholder="Search Procedure" type="text" name="CPTCode" oninput="Patient_Referrals.bindAutoComplete(this);">
+                                                        <div class="input-group-btn">
+                                                            <button class="btn btn-primary btn-xs " type="button" onclick="Patient_Referrals.openCPTCode();"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 col-md-2">
+                                                    <label class="control-label">Visit Type</label>
+                                                    <select id="ddlVisitType" name="VisitType" class="form-control">
+                                                        <option value="0">Select</option>
+                                                        <option value="1">Follow Up</option>
+                                                        <option value="2">New Patient</option>
+                                                        <option value="3">Physical</option>
+                                                        <option value="4">Surgical Clearance</option>
+                                                        <option value="5">Consult</option>
+                                                        <option value="6">Office Visit</option>
+                                                        <option value="7">Immunization</option>
+                                                        <option value="8">Injection</option>
+                                                        <option value="9">Bloodwork</option>
+                                                        <option value="10">Ultrasound</option>
+                                                        <option value="11">Procedure</option>
+                                                        <option value="12">Surgery</option>
+                                                        <option value="13">Infusion</option>
+                                                        <option value="14">Test</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 col-md-2">
+                                                    <label class="control-label">Status</label>
+                                                    <select id="ddlIsDraft" name="IsDraft" class="form-control">
+                                                        <option value="">- Select -</option>
+                                                        <option value="0">Sent</option>
+                                                        <option value="1">Draft</option>
+                                                    </select>
+                                                </div>
+                                                <div class="pull-right pt-md pr-default">
+                                                    <button type="button" class="btn btn-sm btn-primary" onclick="Patient_Referrals.ReferralSearchByType(this)">Search</button>
+                                                </div>
+                                                <input type="hidden" id="hfProvider" name="ProviderId" />
+                                                <input type="hidden" id="hfReferralFrom" name="ReferralFromId" />
+                                                <input type="hidden" id="hfReferralTo" name="ReferralToId" />
+                                                <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                                                <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                                            </form>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="splitterBtn mb-none"></div>
+                                    <div id="pnlOutgoingReferal_Result" style="display: inline;">
+                                        <form>
+                                            <div class="panel-body panel-featured">
+
+                                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOutgoingReferral">
+                                                    <thead>
+                                                        <tr>
+                                                            <th id="ColumnAction" actiontype="Delete,Active" coltype="Action" class="size90 size-min90">Action</th>
+                                                            <th class="size90 size-min90">Source</th>
+                                                            <th controlid="dtpVitalSignDate" controlname="StartDate" class="noWordBreak size30">Date & Time</th>
+                                                            <th controlid="txtCPTCode" controlname="CPTCode" class="noWordBreak size40">Procedure</th>
+                                                            <th controlid="ddlReferralTo" controlname="ReferralTo" class="size90 size-min90">Referral To</th>
+                                                            <th controlid="ddlReferralToSpecialty" controlname="ReferralToSpecialty" class="noWordBreak size90 size-min90">Referral To Specialty</th>
+                                                            <th controlid="ddlReferralFrom" controlname="ReferralFrom" class="size90 size-min90">Referral From</th>
+                                                            <th controlid="ddlVisitTypeDescription" controlname="VisitTypeDescription" class="size90 size-min90">Visit Type</th>
+                                                            <th controlid="txtAssignedTo" controlname="AssignedTo" class="size90 size-min90">Assigned To</th>
+                                                            <th class="size90 size-min90">Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div id="dgvOutgoingReferral_Paging"></div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            
+                            
+
+                        </div>
+                    </section>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                </div>
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

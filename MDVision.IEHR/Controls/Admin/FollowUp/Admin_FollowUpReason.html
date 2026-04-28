@@ -1,0 +1,70 @@
+﻿<div class="row" id="pnlAdminFollowUpReason" style="display:none;">
+    <div id="actionPanAdminFollowUpReason" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_FollowUpReason.ReasonAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_FollowUpReason.UnLoadTab()"></a>
+                </div>
+                <h2 class="panel-title">Search Reason</h2>
+            </header>
+            <div class="panel-body" id="pnlReason_Search">
+                <form method="post" id="tmpid" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Short Name</label>
+                            <input class="form-control" id="txtShortName" name="txtShortName" type="text" maxlength="30" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" id="txtDiscription" name="txtDiscription" type="text" maxlength="100" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">AR Type</label>
+                            <select id="ddlARType" class="form-control" ddlist="GetARType"></select>
+                        </div>
+                        <div class="col-sm-2" id="divEntity">
+                            <label class="control-label">Active?</label>
+                            <select id="ddlActive" class="form-control">
+                                <option value="">- All -</option>
+                                <option value="1" selected="selected">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 mt-xs pull-right">
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnDataFieldsSave" type="button" onclick="Admin_FollowUpReason.ReasonSearch('0');">Search</button>
+                    </div>
+                    <input type="hidden" id="hfReasonId" value="-1" />
+                </form>
+            </div>
+        </section>
+    </div>
+    <div id="pnlReason_Result" style="display: inline;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="Reason_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvReason">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">ReasonId</th>
+                            <th>Action</th>
+                            <th>Short Name</th>
+                            <th>Description</th>
+                            <th>AR Type</th>
+                            <th>Active</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divReasonPaging"></div>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+
+

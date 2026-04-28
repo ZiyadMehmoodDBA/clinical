@@ -1,0 +1,668 @@
+﻿<div id="pnlClinicalImmunizationDetail">
+    <div id="actionPanClinicalImmunizationDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog modal-dialog-full mb-none">
+        <div id="modalcontent">
+
+            <div id="modalheader">
+                <button type="button" class="close" onclick="Clinical_ImmunizationDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Immunization Detail</h4>
+            </div>
+
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div id="pnlSection_Search">
+                        <input type="hidden" id="hfVaccineHx" name="VaccineHxId" />
+
+                        <div class="tabs-custom-body panel-body" id="VaccineSchedulerDiv">
+                            <div class="col-sm-4">
+                                <label class="control-label">Age Group<span class="required">*</span></label>
+                                <select id="ddlAgeGroup" name="MainAgeGroup" class="form-control" ddlist="GetImmunizationScheduleType" onchange="Clinical_ImmunizationDetail.BindSchedule(this, 'ddlSchedule')"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Schedule</label>
+                                <select id="ddlSchedule" name="MainSchedule" class="form-control" ddllist="ddlSchedule" onchange="Clinical_ImmunizationDetail.BindCategory(this, 'ddlCategory')">
+                                    <option value="">- select -</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4" id="CategoryDiv">
+                                <label class="control-label">Category</label>
+                                <select id="ddlCategory" name="MainCategory" class="form-control" onchange="Clinical_ImmunizationDetail.CategoryChange(this)">
+                                    <option value="">- select -</option>
+                                </select>
+                            </div>
+                            <div class="spacer10"></div>
+                        </div>
+
+
+                       
+
+
+                        <div id="ClinicalVaccineTabsDiv" class="col-xs-12 panel-body p-none" style="height:405px;">
+
+                            <div id="favSectionDiv" class="toggleHorDefault toggled" data-title="Favorites">
+                                <div class="col-xs-12 pb-sm Favorites" id="favoritesdiv">
+                                    <span class="pull-left">Favorites List</span>
+                                    <!--<a class="btn btn-link btn-xs pull-right" onclick="Clinical_ProblemLists.BindAllFavComplaints()">Select All</a>-->
+                                    <div class="clearfix"></div>
+                                    <select id="ddlFavorites" name="FavoritesId" class="form-control" onchange="Clinical_ImmunizationDetail.FavVaccineChange(this)">
+                                        <option selected="selected" value=""> -Select- </option>
+                                    </select>
+                                    <input class="form-control mt-default" maxlength="500" type="text" id="FavSearchBox" placeholder="Search" onkeyup="Clinical_ImmunizationDetail.AutoSearchFavVaccine()" />
+                                </div>
+
+                                <ul class="listPrimary height-max200 overflowY own-scroll" id="ulFavVaccine" name="FavVaccine"></ul>
+                            </div>
+                            <div id="FormDiv" class="col-xs-12">
+                                <ul class="tabs-custom" id="ulmmunizationDetailTabsItems">
+                                    <li id="listAdministerVaccine" class="active" onclick="Clinical_ImmunizationDetail.ChangeTab(this)"><a href="#tabAdministerVaccine" data-toggle="tab">Administer Vaccine</a> </li>
+                                    <li id="listDocumentHxDose" onclick="Clinical_ImmunizationDetail.ChangeTab(this)"> <a class="" href="#tabDocumentHxDose" data-toggle="tab">Document Hx Dose</a></li>
+                                    <li id="listRecordRefusal" onclick="Clinical_ImmunizationDetail.ChangeTab(this)"> <a class="" href="#tabRecordRefusal" data-toggle="tab">Record Refusal</a></li>
+                                </ul>
+                                <div class="tab-content tabs-custom-body pt-default">
+                                    <div id="tabAdministerVaccine" class="tab-pane active">
+                                        <form id="frmVaccineHxAdministerTabDetail" method="post" onsubmit="return false">
+                                            <div>
+                                                <div id="sectionGeneral">
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">
+                                                            Category
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <select id="ddlAdministerVaccine_Category" name="AdministerVaccine_Category"
+                                                                class="form-control" ddlist="GetAdministerVaccine_CategoryOp" onchange="Clinical_ImmunizationDetail.PopulateVaccineDropDown(this.value, 'ADMINISTER' ); "></select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Visit Date</label>
+                                                        <select id="ddlAdministerVaccine_VisitDate" name="AdministerVaccine_VisitDate" class="form-control"></select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Provider<span class="required">*</span></label>
+                                                        <select id="ddlAdministerVaccine_Provider" name="AdministerVaccine_Provider" ddlist="GetProvider" class="form-control" onchange="Clinical_ImmunizationDetail.LoadFavVaccine()"></select>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">
+                                                            Vaccine
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <select id="ddlAdministerVaccine_Vaccine" name="AdministerVaccine_Vaccine" class="form-control"
+                                                                onchange="Clinical_ImmunizationDetail.PopulateVISDate_VISURL_and_ManufacturerDropDown(this.value, 'ADMINISTER' ); "></select>
+                                                    </div>
+                                                    <div class="col-sm-4 p-none">
+                                                        <div class="col-xs-6 pr-xs">
+                                                            <label class="control-label">
+                                                                Administration Date
+                                                                <span class="required">*</span>
+                                                            </label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpAdministerVaccine_AdministrationDate" name="AdministerVaccine_AdministrationDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 pr-xs">
+                                                            <label class="control-label" for="tpAdministerVaccine_AdministrationTime">Time</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                                <input type="text" class="form-control" id="tpAdministerVaccine_AdministrationTime" name="AdministerVaccine_AdministrationTime" data-plugin-timepicker>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="col-sm-6 col-sm-4">
+                                                        <label class="control-label">
+                                                            Given By
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <button class="pull-right btn btn-default btn-tiny mt-tiny" type="button" style="display: none;"
+                                                                onclick=" Clinical_ImmunizationDetail.PopulateUserME('ddlAdministerVaccine_GivenBy'); ">
+                                                            Me
+                                                        </button>
+
+                                                        <select id="ddlAdministerVaccine_GivenBy" name="AdministerVaccine_GivenBy" class="form-control" ddlist="GetVaccineGivenBy"></select>
+                                                    </div>-->
+                                                    <div class="col-sm-4 p-none">
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="txtAdministerVaccine_Dose">
+                                                                Dose
+                                                                <span class="required">*</span>
+                                                            </label>
+                                                            <input class="form-control" name="AdministerVaccine_Dose" id="txtAdministerVaccine_Dose" type="text" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad">
+                                                            <!--<input class="form-control" name="WorkTel" id="txtWorkTel" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur=" utility.validateMasking(this); " value="">-->
+
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="ddlAdministerVaccine_Amount">Amount</label>
+                                                            <select class="form-control" id="ddlAdministerVaccine_Amount" name="AdministerVaccine_Amount" ddlist="GetVaccineAmountForClinicalSide"></select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <!--<label id="lblAdministerVaccine_LotNo" class="control-label">Lot No<span class="required">*</span></label>-->
+                                                        <a id="lnklblAdministerVaccine_LotNo" class="btn btn-link pull-left btn-xs"
+                                                           target="_blank" title="View Document" onclick="Clinical_ImmunizationDetail.OpenLotNumber();">Lot Number<span class="required">*</span></a>
+                                                        <select id="ddlAdministerVaccine_LotNumber" name="AdministerVaccine_LotNumber" class="form-control" onchange="Clinical_ImmunizationDetail.LotNumberChange(this.value)"></select>
+                                                    </div>
+
+                                                    <!--<div class="col-sm-4">
+                                                        <label class="control-label">Manufacturer</label>
+                                                        <select id="ddlAdministerVaccine_Manufacturer" name="AdministerVaccine_Manufacturer"
+                                                                class="form-control" disabled></select>
+                                                    </div>-->
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Manufacturer</label>
+                                                        <div class="">
+                                                            <input class="form-control" id="txtAdministerTabManufacturer" type="text" name="AdministerTabManufacturer" customname="Manufacturer" oninput="Clinical_ImmunizationDetail.BindAutocomplete();" onblur="utility.ValidateAutoComplete(this, 'frmVaccineHxAdministerTabDetail #hfAdministerTabManufacturer', false, false, false);">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Route</label>
+                                                        <select id="ddlAdministerVaccine_Route" name="AdministerVaccine_Route" class="form-control" ddlist="GetVaccineRoute"></select>
+
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Site</label>
+                                                        <select id="ddlAdministerVaccine_Site" name="AdministerVaccine_Site" class="form-control" ddlist="GetVaccineSite"></select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Expiry Date</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" id="dpAdministerVaccine_ExpiryDate" name="AdministerVaccine_ExpiryDate" data-plugin-datepicker />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 ">
+                                                        <label class="control-label">VFC</label>
+                                                        <select id="ddlAdministerVaccine_VFC" name="AdministerVaccine_VFC" class="form-control" ddlist="GetVaccineVFC" disabled></select>
+                                                    </div>
+                                                    <div class="col-sm-4 ">
+                                                        <label class="control-label">VIS Date</label>
+                                                        <a id="lnklblAdministerVaccine_VISURL" class="btn btn-link pull-right btn-xs" href="#"
+                                                           target="_blank" title="View Document" disabled>View Document</a>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" id="dpAdministerVaccine_VISDate" name="AdministerVaccine_VISDate" disabled data-plugin-datepicker />
+                                                            <a id="lnklblAdministerVaccine_VISDate" href="#" title="View Document"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Reaction</label>
+                                                        <select id="ddlAdministerReaction" name="AdministerReaction" class="form-control" ddlist="GetVaccineReaction"></select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Registry</label>
+                                                        <select id="ddlAdministerRegistery" name="AdministerRegistery" class="form-control" ddlist="GetRegistery"></select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label for="Facility" class="control-label">Facility</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                                            <input type="hidden" id="hfFacility" name="FacilityId" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Clinical_ImmunizationDetail.OpenFacility('frmVaccineHxAdministerTabDetail');"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Entered By</label>
+                                                        <select id="ddlAdministerEnteredBy" name="AdministerEnteredBy" class="form-control" ddlist="GetUsersFullName"></select>
+                                                    </div>
+                                                    <div class="col-sm-2 pad-a-labelsize">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkAdministerVoidDose" name="AdministerVoidDose" onchange="Clinical_ImmunizationDetail.ChangeVoidDoes(this, 'ddlAdministerVaccine_Vaccine')" disabled>
+                                                            <label class="control-label">Void Dose</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2 pad-a-labelsize">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkAdministerOverrideRule" name="AdministerOverrideRule">
+                                                            <label class="control-label">Override Rule</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <label class="control-label">Comments</label>
+                                                        <textarea id="txtAreaAdministerVaccine_Comments" name="AdministerVaccine_Comments" rows="3" class="form-control" maxlength="500" spellcheck="true"></textarea>
+                                                    </div>
+                                                    <div class="col-sm-4 col-lg-1 pad-a-labelsize" id="IsActivediv">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="Active" name="AdministerVaccine_IsActive" checked>
+                                                            <label class="control-label">Active</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="pt-sm col-sm-4 align-left">
+                                                        <a href="#chkAdministerVaccine_ProtectionIndicator" class="toggleMeBtn btn btn-link btn-xs pull-left" onclick="Clinical_ImmunizationDetail.toggleMeAdministered(this);"><span class="toggleMe hidden">Show Less</span><span class="toggleMe">Show All</span></a>
+
+                                                        <!-- <button class="btn btn-success btn-sm pull-left mr-sm" style="display: none;" type="button" onclick=" Clinical_ImmunizationDetail.addBirthHxToNotes(); " id="btnAddVitalsOnNote">Add on Note</button>-->
+                                                        <button class="pull-right btn btn-primary btn-sm mr-default" type="submit" id="AdministerVaccine btnsave">Save</button> <!--onclick="Clinical_ImmunizationDetail.VaccineSave('ADMINISTER');"-->
+                                                        <!--<button class="btn btn-cancel btn-sm pull-left mr-sm" type="button" onclick=" Clinical_ImmunizationDetail.resetImmunizationDetail('tabAdministerVaccine'); " id="AdministerVaccinebtnReset"> Reset</button>-->
+                                                        <!-- <button class="btn btn-success btn-sm pull-left mr-sm" type="button" style="display:none" onclick="Clinical_ImmunizationDetail.saveBirthHx('');" id="AdministerVaccine btnBirthHxSave"> Save</button>-->
+
+                                                    </div>
+                                                    <div class="clearfix"></div>
+
+
+
+                                                    <div id="AdministerHiddenField" class="toggleMe hidden col-sm-8 p-none">
+                                                        <div class="col-sm-6">
+                                                            <label class="control-label">Publicity Code</label>
+                                                            <select name="AdministerVaccine_PublicityCode" id="ddlAdministerVaccine_PublicityCode" ddlist="GetPublicityCode" class="form-control" onchange="Clinical_ImmunizationDetail.SetDate(this,'dpAdministerVaccine_PublicityExpiryDate')"></select>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label class="control-label">Publicity Code Expiry Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpAdministerVaccine_PublicityExpiryDate" name="AdministerVaccine_PublicityExpiryDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-sm-6">
+                                                            <label class="control-label">IRS</label>
+                                                            <select name="AdministerVaccine_IRS" id="ddlIRS" ddlist="GetRegistryStatus" class="form-control" onchange="Clinical_ImmunizationDetail.SetDate(this,'dpAdministerVaccine_IRSEffectiveDate')"></select>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label class="control-label">IRS Effective Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpAdministerVaccine_IRSEffectiveDate" name="AdministerVaccine_IRSEffectiveDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 pad-a-labelsize clearBoth">
+                                                            <div class="checkbox-custom">
+                                                                <input type="checkbox" name="AdministerVaccine_ProtectionIndicator" id="chkAdministerVaccine_ProtectionIndicator" onchange="Clinical_ImmunizationDetail.SetDate(this,'dpAdministerVaccine_PIEffectiveDate')">
+                                                                <label class="control-label" for="">Protection Indicator</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label class="control-label">PI Effective Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpAdministerVaccine_PIEffectiveDate" name="AdministerVaccine_PIEffectiveDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--<div class="col-sm-4">
+                                                        <label class="control-label">Completion Status</label>
+                                                        <select name="AdministerVaccine_CompletionStatus" id="ddlAdministerVaccine_Dose" class="form-control">
+                                                            <option code="" value="">- Select -</option>
+                                                            <option code="CP" value="CP">Complete</option>
+                                                            <option code="RE" value="RE">Refused</option>
+                                                            <option code="NA" value="NA">Not Administered</option>
+                                                            <option code="PA" value="PA">Partially Administered</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Refusal Reason</label>
+                                                        <select name="AdministerVaccine_RefusalReason" id="ddlAdministerVaccine_RefusalReason" class="form-control">
+                                                            <option id="" value="">- Select -</option>
+                                                            <option id="00" value="00">Parental decision</option>
+                                                            <option id="01" value="01">Religious exemption</option>
+                                                            <option id="02" value="02">Other</option>
+                                                            <option id="03" value="03">Patient decision</option>
+                                                        </select>
+                                                    </div>
+
+
+
+
+
+
+
+
+                                                    <div class="col-sm-4 toggleMe hidden">
+                                                        <label class="control-label">Immunization Registry Status</label>
+                                                        <select name="AdministerVaccine_ImmunizationRegistryStatus" id="ddlAdministerVaccine_ImmunizationRegistryStatus" class="form-control">
+                                                            <option code="" value="">- Select -</option>
+                                                            <option code="A" value="A">Active</option>
+                                                            <option code="I" value="I">Inactive--Unspecified</option>
+                                                            <option code="L" value="L">Inactive-Lost to follow-up (cannot contact)</option>
+                                                            <option code="M" value="M">Inactive-Moved or gone elsewhere (transferred)</option>
+                                                            <option code="P" value="P">Inactive-Permanently inactive</option>
+                                                            <option code="U" value="U">Unknown</option>
+                                                        </select>
+                                                    </div>-->
+
+
+
+
+
+
+                                                    
+                                                </div>
+
+                                                <div class="clearfix"></div>
+                                                <input hidden type="text" value="" id="hfAdministerTabManufacturer" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="tabDocumentHxDose" class="tab-pane">
+                                        <form id="frmVaccineHxDocumentHxDoseTabDetail" method="post" onsubmit="return false">
+                                            <div>
+                                                <!--class="panel-body pb-md"-->
+                                                <div id="sectionGeneral">
+                                                    <!--<input type="hidden" name="GeneralId" id="DocumentHxDose hfBirthHxGeneralId" value="-1"/>-->
+                                                    <div class="col-sm-6 col-sm-4">
+                                                        <label class="control-label">
+                                                            Category
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <select id="ddlDocumentHxDose_Category" name="DocumentHxDose_Category" class="form-control"
+                                                                ddlist="GetAdministerVaccine_CategoryOp" onchange="Clinical_ImmunizationDetail.PopulateVaccineDropDown(this.value, 'DOCUMENTHX' ); "></select>
+                                                    </div>
+                                                    <div class="col-sm-6 col-sm-4">
+                                                        <label class="control-label">Source Of Hx</label>
+                                                        <select id="ddlDocumentHxDose_SourceOfHx" name="DocumentHxDose_SourceOfHx" class="form-control" ddlist="GetVaccineSourceOfHx"></select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Provider</label>
+                                                        <select id="ddlDocumentHxDose_Provider" name="DocumentHxDose_Provider" ddlist="GetProvider" class="form-control" onchange="Clinical_ImmunizationDetail.LoadFavVaccine()"></select>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+
+                                                    <div class="col-sm-6 col-sm-4">
+                                                        <label class="control-label">
+                                                            Vaccine
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <select id="ddlDocumentHxDose_Vaccine" name="DocumentHxDose_Vaccine" class="form-control"
+                                                                onchange="Clinical_ImmunizationDetail.PopulateVISDate_VISURL_and_ManufacturerDropDown(this.value, 'DOCUMENTHX' );"
+                                                                disabled></select>
+                                                    </div>
+
+                                                    <div class="col-sm-4 p-none">
+                                                        <div class="col-xs-6 pr-xs">
+                                                            <label class="control-label">Administration Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpDocumentHxDose_AdministrationDate" name="DocumentHxDose_AdministrationDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6 pr-xs">
+                                                            <label class="control-label" for="tpDocumentHxDose_AdministrationTime">Time</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                                <input type="text" class="form-control" id="tpDocumentHxDose_AdministrationTime" name="DocumentHxDose_AdministrationTime" data-plugin-timepicker>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="col-sm-6 col-sm-4">
+                                                        <label class="control-label">
+                                                            Given By
+
+                                                        </label>
+
+                                                        <button class="pull-right btn btn-default btn-tiny mt-tiny" type="button" style="display: none;"
+                                                                onclick=" Clinical_ImmunizationDetail.PopulateUserME('ddlDocumentHxDose_GivenBy'); ">
+                                                            Me
+                                                        </button>
+
+                                                        <select id="ddlDocumentHxDose_GivenBy" name="DocumentHxDose_GivenBy" class="form-control" ddlist="GetVaccineGivenBy"></select>
+                                                    </div>-->
+                                                    <!--<div class="col-sm-6 col-sm-4">
+                                                        <label id="lblDocumentHxDose_LotNo" class="control-label">Lot No</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" id="txtDocumentHxDose_LotNo" type="text" placeholder="Start typing to search" name="DocumentHxDose_LotNo" maxlength="35" />
+                                                            <div class="input-group-btn">
+                                                                <button id="DocumentHxDose lnkProvider" class="btn btn-primary btn-xs" type="button"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="col-sm-4 p-none">
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="txtDocumentHxDose_Dose">Dose</label>
+                                                            <input class="form-control" name="DocumentHxDose_Dose" id="txtDocumentHxDose_Dose" type="text" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad">
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="ddlDocumentHxDose_Amount">Amount</label>
+                                                            <select class="form-control" id="ddlDocumentHxDose_Amount" name="DocumentHxDose_Amount" ddlist="GetVaccineAmountForClinicalSide"></select>
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+                                                    <div class="col-sm-6 col-sm-4">
+                                                        <label class="control-label">Route</label>
+                                                        <select id="ddlDocumentHxDose_Route" name="DocumentHxDose_Route" class="form-control" ddlist="GetVaccineRoute"></select>
+
+
+                                                    </div>
+
+                                                    <div class="col-sm-6 col-sm-4">
+                                                        <label class="control-label">Site</label>
+                                                        <select id="ddlDocumentHxDose_Site" name="DocumentHxDose_Site" class="form-control" ddlist="GetVaccineSite"></select>
+
+                                                    </div>
+
+
+                                                    <div class="col-sm-4 pad-a-labelsize">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkDocumentHxVoidDose" name="DocumentHxVoidDose" onchange="Clinical_ImmunizationDetail.ChangeVoidDoes(this, 'ddlDocumentHxDose_Vaccine')" disabled>
+                                                            <label class="control-label">Void Dose</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <label class="control-label">Comments</label>
+                                                        <textarea id="txtAreaDocumentHxDose_Comments" name="DocumentHxDose_Comments" rows="3" class="form-control" maxlength="500" spellcheck="true"></textarea>
+                                                    </div>
+                                                    <div class="col-sm-4 col-lg-1 pad-a-labelsize">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="Active" name="DocumentHxDose_IsActive" checked>
+                                                            <label class="control-label">Active</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div id="DocumentHiddenField">
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">Publicity Code</label>
+                                                            <select name="DocumentVaccine_PublicityCode" id="ddlDocumentVaccine_PublicityCode" ddlist="GetPublicityCode" class="form-control" onchange="Clinical_ImmunizationDetail.SetDate(this,'dpDocumentVaccine_PublicityExpiryDate')"></select>
+                                                        </div>
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">Publicity Code Expiry Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpDocumentVaccine_PublicityExpiryDate" name="DocumentVaccine_PublicityExpiryDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 pad-a-labelsize text-center">
+                                                            <a href="#" class="toggleMeBtn btn btn-link btn-xs" onclick="Clinical_ImmunizationDetail.toggleMe(this);"><span class="toggleMe hidden">Show Less</span><span class="toggleMe">Show All</span></a>
+                                                        </div>
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">IRS</label>
+                                                            <select name="DocumentVaccine_IRS" id="ddlDocumentIRS" ddlist="GetRegistryStatus" class="form-control" onchange="Clinical_ImmunizationDetail.SetDate(this,'dpDocumentVaccine_IRSEffectiveDate')"></select>
+                                                        </div>
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">IRS Effective Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpDocumentVaccine_IRSEffectiveDate" name="DocumentVaccine_IRSEffectiveDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 pad-a-labelsize clearBoth toggleMe hidden">
+                                                            <div class="checkbox-custom">
+                                                                <input type="checkbox" name="DocumentVaccine_ProtectionIndicator" id="chkDocumentVaccine_ProtectionIndicator" onchange="Clinical_ImmunizationDetail.SetDate(this,'dpDocumentVaccine_PIEffectiveDate')">
+                                                                <label class="control-label" for="">Protection Indicator</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">PI Effective Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpDocumentVaccine_PIEffectiveDate" name="DocumentVaccine_PIEffectiveDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                        <!-- <button class="btn btn-success btn-sm pull-left mr-sm" style="display: none;" type="button" onclick=" Clinical_ImmunizationDetail.addBirthHxToNotes(); " id="DocumentHxDosebtnAddVitalsOnNote">Add on Note</button>-->
+                                                        <button class="btn btn-primary btn-sm pull-left mr-sm" type="submit" id="DocumentHxDosebtnsave">Save</button>
+                                                        <!--<button class="btn btn-cancel btn-sm pull-left mr-sm" type="button" onclick=" Clinical_ImmunizationDetail.resetImmunizationDetail('tabDocumentHxDose'); " id="DocumentHxDosebtnReset"> Reset</button>-->
+                                                        <!-- <button class="btn btn-success btn-sm pull-left mr-sm" type="button" style="display:none" onclick="Clinical_ImmunizationDetail.saveBirthHx('');" id="DocumentHxDosebtnBirthHxSave"> Save</button>-->
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="spacer15"></div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <div id="tabRecordRefusal" class="tab-pane">
+                                        <form id="frmVaccineRecordRefusalTabDetail" method="post" onsubmit="return false">
+                                            <div>
+                                                <!--class="panel-body pb-md"-->
+                                                <div id="sectionGeneral">
+                                                    <!--<input type="hidden" name="GeneralId" id="DocumentHxDose hfBirthHxGeneralId" value="-1"/>-->
+                                                    <div class="col-sm-6 col-sm-4">
+                                                        <label class="control-label">
+                                                            Category
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <select id="ddlRecordRefusal_Category" name="RecordRefusal_Category" class="form-control"
+                                                                ddlist="GetAdministerVaccine_CategoryOp" onchange="Clinical_ImmunizationDetail.PopulateVaccineDropDown(this.value, 'RECORDREFUSAL' );"></select>
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Provider<span class="required">*</span></label>
+                                                        <select id="ddlRecordRefusal_Provider" name="RecordRefusal_Provider" ddlist="GetProvider" class="form-control" onchange="Clinical_ImmunizationDetail.LoadFavVaccine()"></select>
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Reason<span class="required">*</span></label>
+                                                        <select id="ddlRecordRefusalReason" name="RecordRefusalReason" class="form-control" ddlist="GetVaccineRefusalReason"></select>
+                                                    </div>
+
+                                                    <div class="col-sm-6 col-sm-4">
+                                                        <label class="control-label">
+                                                            Vaccine
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <select id="ddlRecordRefusal_Vaccine" name="RecordRefusal_Vaccine" class="form-control"
+                                                                onchange="Clinical_ImmunizationDetail.PopulateVISDate_VISURL_and_ManufacturerDropDown(this.value, 'RecordRefusal' );"
+                                                                disabled></select>
+                                                    </div>
+
+
+
+
+
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Expiry Date</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" id="dpRecordRefusalVaccine_ExpiryDate" name="RecordRefusalVaccine_ExpiryDate" data-plugin-datepicker />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Registry</label>
+                                                        <select id="ddlRecordRefusalRegistery" name="RecordRefusalRegistery" class="form-control" ddlist="GetRegistery"></select>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label for="Facility" class="control-label">Facility</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                                            <input type="hidden" id="hfFacility" name="FacilityId" />
+                                                            <div class="input-group-btn">
+                                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Clinical_ImmunizationDetail.OpenFacility('frmVaccineRecordRefusalTabDetail');"><i class="fa fa-search"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="control-label">Entered By</label>
+                                                        <select id="ddlRecordRefusalEnteredBy" name="RecordRefusalEnteredBy" class="form-control" ddlist="GetUsersFullName"></select>
+                                                    </div>
+                                                    <div class="col-sm-4 pad-a-labelsize">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkRecordRefusalVoidDose" name="RecordRefusalVoidDose" onchange="Clinical_ImmunizationDetail.ChangeVoidDoes(this, 'ddlRecordRefusal_Vaccine')" disabled>
+                                                            <label class="control-label">Void Dose</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <label class="control-label">Comments</label>
+                                                        <textarea id="txtAreaRecordRefusal_Comments" name="RecordRefusal_Comments" rows="3" class="form-control" maxlength="500" spellcheck="true"></textarea>
+                                                    </div>
+                                                    <div class="col-sm-4 col-lg-1 pad-a-labelsize">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="Active" name="RecordRefusal_IsActive" checked>
+                                                            <label class="control-label">Active</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="RefusalHiddenField">
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">Publicity Code</label>
+                                                            <select name="RefusalVaccine_PublicityCode" id="ddlRefusalVaccine_PublicityCode" ddlist="GetPublicityCode" class="form-control" onchange="Clinical_ImmunizationDetail.SetDate(this, 'dpRefusalVaccine_PublicityExpiryDate')"></select>
+                                                        </div>
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">Publicity Code Expiry Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpRefusalVaccine_PublicityExpiryDate" name="RefusalVaccine_PublicityExpiryDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 pad-a-labelsize text-center">
+                                                            <a href="#" class="toggleMeBtn btn btn-link btn-xs" onclick="Clinical_ImmunizationDetail.toggleMe(this);"><span class="toggleMe hidden">Show Less</span><span class="toggleMe">Show All</span></a>
+                                                        </div>
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">IRS</label>
+                                                            <select name="RefusalVaccine_IRS" id="ddlRefusalIRS" ddlist="GetRegistryStatus" class="form-control" onchange="Clinical_ImmunizationDetail.SetDate(this, 'dpRefusalVaccine_IRSEffectiveDate')"></select>
+                                                        </div>
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">IRS Effective Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpRefusalVaccine_IRSEffectiveDate" name="RefusalVaccine_IRSEffectiveDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 pad-a-labelsize clearBoth toggleMe hidden">
+                                                            <div class="checkbox-custom">
+                                                                <input type="checkbox" name="RefusalVaccine_ProtectionIndicator" id="chkRefusalVaccine_ProtectionIndicator" onchange="Clinical_ImmunizationDetail.SetDate(this, 'dpRefusalVaccine_PIEffectiveDate')">
+                                                                <label class="control-label" for="">Protection Indicator</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 toggleMe hidden">
+                                                            <label class="control-label">PI Effective Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpRefusalVaccine_PIEffectiveDate" name="RefusalVaccine_PIEffectiveDate" data-plugin-datepicker />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                        <!-- <button class="btn btn-success btn-sm pull-left mr-sm" style="display: none;" type="button" onclick=" Clinical_ImmunizationDetail.addBirthHxToNotes(); " id="DocumentHxDosebtnAddVitalsOnNote">Add on Note</button>-->
+                                                        <button class="btn btn-primary btn-sm pull-left mr-sm" type="submit" id="RecordRefusalbtnsave">Save</button>
+                                                        <!--<button class="btn btn-cancel btn-sm pull-left mr-sm" type="button" onclick=" Clinical_ImmunizationDetail.resetImmunizationDetail('tabRecordRefusal'); " id="DocumentHxDosebtnReset"> Reset</button>-->
+                                                        <!-- <button class="btn btn-success btn-sm pull-left mr-sm" type="button" style="display:none" onclick="Clinical_ImmunizationDetail.saveBirthHx('');" id="DocumentHxDosebtnBirthHxSave"> Save</button>-->
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="spacer15"></div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!--</form>-->
+                    </div>
+                    <div class="modal-footer hidden"></div>
+                    <input type="hidden" id="VisDateId" value="0">
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

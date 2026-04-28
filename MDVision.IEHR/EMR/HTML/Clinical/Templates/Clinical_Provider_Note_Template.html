@@ -1,0 +1,106 @@
+﻿<div id="pnlClinicalProviderNoteTemplate">
+    <div id="actionPanClinicalProviderNoteTemplate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div class="mainScrollPan" id="mainScrollPan">
+                <button type="button" class="btn btn-success btn-sm" onclick="Clinical_Provider_Note_Template.AddProviderNoteTemplate()"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div>
+                <div class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions"><a class="closebtn pull-right" onclick="Clinical_Provider_Note_Template.UnLoadTab()"></a></div>
+                        <h2 class="panel-title">Search Provider Note Template</h2>
+                    </header>
+                    <div class="panel-body">
+                        <form id="frmClinicalProviderNoteTemplate" method="post" onsubmit="return false">
+                            <div class="col-sm-4 col-lg-4">
+                                <label class="control-label">Name</label>
+                                <input type="text" id="NoteTemplateName" name="NoteTemplateName" class="form-control" maxlength="100" />
+                            </div>
+                            <div id="entityDDL" class="col-sm-4 col-lg-2">
+                                <label class="control-label">Entity</label>
+                                <select class="form-control" ddlist="GetEntity" id="ddlEntity" name="EntityId" onchange="Clinical_Provider_Note_Template.isEntitySelected();">
+                                    <option selected>-Select-</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 col-md-3" id="divNotesTemplateSpecialty">
+                                <label class="control-label">Specialty </label>
+                                <select id="ddlNotesTemplateSpecialty" multiple="multiple" name="SpecialtyIds" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-3 col-md-3" id="divNotesTemplateProvider">
+                                <select class="form-control" style="display:none;" name="hiddenPhysicalExamTemplateProvider" id="ddlHiddenNotesTemplateProvider"></select>
+                                <label class="control-label">Provider</label>
+                                <select class="form-control" multiple="multiple" name="ProviderIds" id="ddlNotesTemplateProvider"></select>
+                            </div>
+
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label">Note Type</label>
+                                <select id="ddlTemplateTypeId" name="TemplateTypeId" class="form-control" ddlist="GetNoteTemplateType"></select>
+                            </div>
+                            <div class="pull-right mt-md pr-default"><button class="btn btn-primary btn-sm" onclick="Clinical_Provider_Note_Template.notesTemplateSearch();" type="button">Search</button></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="spacer10"></div>
+                <!--<div class="panel-body panel-featured">
+                </div>-->
+            </div>
+
+        </div>
+    </div>
+    <div id="pnlNoteTemplate_Result" style="display: inline;">
+        <form>
+            <div class="panel-body">
+                <!--<input type="hidden" id="LetterTemplate_SelectedDataKeys" />-->
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvNotesTemplate">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Name</th>
+                            <th>Specialty</th>
+                            <th>Note Type</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="dgvNotesTemplate_Paging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

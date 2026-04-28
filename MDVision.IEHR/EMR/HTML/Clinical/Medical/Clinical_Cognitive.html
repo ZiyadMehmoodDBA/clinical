@@ -1,0 +1,179 @@
+﻿<div id="pnlClinicalCognitive">
+    <div id="actionPanClinicalCognitive" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" class="modal-header" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_Cognitive.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Functional, Cognitive and Mental Status</h4>
+            </div>
+            <div id="modalbody" class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section id="sectionCognitive" class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_Cognitive.UnLoad();"></a>
+                                </div>
+                                <h2 class="panel-title">Functional, Cognitive and Mental Status</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body NoRadiusT" id="pnlSection_Search">
+                            <form method="post" onsubmit="return false" id="frmCognitive">
+                                <div class="col-md-3">
+                                    <section class="panel panel-featured mb-default">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Cognitive Status</h2>
+                                        </header>
+                                        <div class="panel-body pl-none pr-none">
+                                            <div class="col-xs-12 pb-xs">
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtCognitiveStatus" data-popupunload="false" oninput="Clinical_Cognitive.bindICD9AutoComplete(this)" name="CognitiveStatus" type="text" value="">
+                                                    <div class="input-group-btn">
+                                                        <button id="btnCognitiveStatus" class="btn btn-primary btn-xs" type="button" onclick="Clinical_Cognitive.OpenSearchPopup('ICD', 'txtCognitiveStatus', 'hfCPTCode,hfCPTDescription',this)">
+                                                            <i class="glyphicon glyphicon-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ul id="ulCognitiveStatus" name="CognitiveStatus" class="listPrimary own-scroll overflowY" style="height:140px; max-height:140px;"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="col-sm-12 col-md-9">
+                                    <section id="sectionCognitiveDetail" class="panel panel-featured mb-default">
+                                        <header class="panel-heading">
+                                            <h2 id="headingFamilyMemberDetail" class="panel-title">Details</h2>
+                                        </header>
+                                        <div id="CognitiveDetails" class="panel-body own-scroll overflowY disableAll" style="height:184px; max-height:184px;">
+
+                                            <label class="control-label">Note</label>
+                                            <textarea onblur="Clinical_Cognitive.bindtextareavalue(this,event,'Status')" id="txtCognitiveStatusNote" name="CognitiveStatusNote" rows="8" maxlength="5000" class="form-control" spellcheck="true"></textarea>
+
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="spacer5"></div>
+
+                                <div class="col-md-3">
+                                    <section class="panel panel-featured mb-default">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Functional Status</h2>
+                                        </header>
+                                        <div class="panel-body pl-none pr-none">
+                                            <div class="col-xs-12 pb-xs">
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtFunctionalStatus" data-popupunload="false" oninput="Clinical_Cognitive.bindICD9AutoComplete(this)" name="FunctionalStatus" type="text" value="">
+                                                    <div class="input-group-btn">
+                                                        <button id="btnFunctionalStatus" class="btn btn-primary btn-xs" type="button" onclick="Clinical_Cognitive.OpenSearchPopup('ICD', 'txtFunctionalStatus', 'hfCPTCode,hfCPTDescription', this)">
+                                                            <i class="glyphicon glyphicon-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ul id="ulFunctionalStatus" name="FunctionalStatus" class="listPrimary own-scroll overflowY" style="height:140px; max-height:140px;"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="col-sm-12 col-md-9">
+                                    <section id="sectionFunctionalDetail" class="panel panel-featured mb-default">
+                                        <header class="panel-heading">
+                                            <h2 id="headingFunctionalDetail" class="panel-title">Details</h2>
+                                        </header>
+                                        <div id="FunctionalDetails" class="panel-body own-scroll overflowY disableAll" style="height:184px; max-height:184px;">
+
+
+                                            <label class="control-label">Note</label>
+                                            <textarea id="txtFunctionalStatusNote" name="FunctionalStatusNote" onblur="Clinical_Cognitive.bindtextareavalue(this, event, 'FunctionalStatus')" rows="8" maxlength="5000" spellcheck="true" class="form-control"></textarea>
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="spacer5"></div>
+                                <!--Mental portion-->
+                                <div class="col-md-3">
+                                    <section class="panel panel-featured mb-default">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Mental Status</h2>
+                                        </header>
+
+                                        <div class="panel-body pl-none pr-none">
+                                            <div class="col-xs-12 pb-xs">
+                                                <div class="radio-custom col-sm-6">
+                                                    <input id="rdoprocedure" type="radio" name="rdoprocedure" checked="checked" onchange="Clinical_Cognitive.changeProcedureField();" value="2">
+                                                    <label for="rdFreeText">ICD</label>
+                                                </div>
+                                                <div class="radio-custom col-sm-6">
+                                                    <input id="rdofreetext" type="radio" name="rdoprocedure" onchange="Clinical_Cognitive.changeProcedureField();" value="1">
+                                                    <label for="rdFreeText">Custom</label>
+                                                </div>
+                                                <div class="input-group" id="DivICDAutoComplete">
+                                                    <input class="form-control" id="txtMentalStatus" placeholder="" type="text" name="MentalStatus" oninput="Clinical_Cognitive.bindICD9AutoComplete(this)" value="" />
+                                                    <div id="btnsearchICD" class="input-group-btn">
+                                                        <button class="btn btn-primary btn-xs " id="btnMentalStatus" type="button" onclick="Clinical_Cognitive.OpenSearchPopup('ICD', 'txtMentalStatus', 'hfCPTCode,hfCPTDescription', this)"><i class="fa fa-search"></i></button>
+                                                    </div>
+
+                                                </div>
+                                                <div class="input-group col-xs-12 hidden" id="DivFreeText">
+                                                    <input class="form-control" id="txtFreeText" placeholder="" onblur="Clinical_Cognitive.bindFreeText()" onkeypress="Clinical_HospitalizationHx.disableEnterKey(event)" name="DiseaseFreeText" type="text" value="" maxlength="500">
+                                                </div>
+                                            </div>
+
+
+
+                                            <ul id="ulMentalStatus" name="MentalStatus" class="listPrimary own-scroll scroll-2x overflowY" style="height:125px; max-height:125px;"></ul>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="col-sm-12 col-md-9">
+                                    <section id="sectionMentalDetail" class="panel panel-featured mb-default">
+                                        <header class="panel-heading">
+                                            <h2 id="headingMentalDetail" class="panel-title">Details</h2>
+                                        </header>
+                                        <div id="MentalDetails" class="panel-body own-scroll overflowY disableAll" style="height:195px; max-height:195px;">
+
+
+                                            <label class="control-label">Note</label>
+                                            <textarea id="txtMentalStatusNote" onblur="Clinical_Cognitive.bindtextareavalue(this, event, 'MentalStatus')" name="MentalStatusNote" rows="8" maxlength="500" spellcheck="true" class="form-control"></textarea>
+
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="mt-default pr-default pull-right">
+                                    <!--<button id="aHistory" class="ml-sm btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>-->
+                                    <button id="btnCognitiveSave" type="button" onclick="Clinical_Cognitive.CognitiveSave(false,'cognitive');" class="btn btn-sm btn-success pull-left">Save</button>
+                                    <button id="btnAddToNote" type="button" onclick="Clinical_Cognitive.CognitiveSave(true, 'cognitive');"  class="btn btn-sm btn-success pull-left ml-default hidden">Add to Note</button>
+                                </div>
+
+
+                                <input type="hidden" id="hfCtrl" name="CtrlId" />
+
+                                <input type="hidden" id="hfCognitiveStatusId" name="CognitiveStatusId" />
+                                <input type="hidden" id="hfFunctionalStatusId" name="FunctionalStatusId" />
+                                <input type="hidden" id="hfMentalStatusId" name="MentalStatusId" />
+                                <input type="hidden" id="hfCognitiveStatusCPTCode" name="CognitiveStatusCPTCodeId" />
+                                <input type="hidden" id="hfCognitiveStatusCPTDescription" name="CognitiveStatusCPTDescription" />
+                                <input type="hidden" id="hfFunctionalStatusCPTCode" name="FunctionalStatusCPTCodeId" />
+                                <input type="hidden" id="hfFunctionalStatusCPTDescription" name="FunctionalStatusCPTDescription" />
+                                <input type="hidden" id="hfMentalStatusCPTCode" name="MentalStatusCPTCodeId" />
+                                <input type="hidden" id="hfMentalStatusCPTDescription" name="MentalStatusCPTDescription" />
+
+                                <input type="hidden" name="PatientId" id="hfPatientId" />
+                                <input type="hidden" name="CognitiveId" id="hfCognitiveId" value="-1" />
+                                <input type="hidden" name="CognitiveSoapText" id="hfCognitiveSoapText" value="" />
+                                <input type="hidden" name="selectedCognitive" id="hfSelectedCognitiveStatus" />
+
+                            </form>
+                        </div>
+                        <div class="clearfix"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

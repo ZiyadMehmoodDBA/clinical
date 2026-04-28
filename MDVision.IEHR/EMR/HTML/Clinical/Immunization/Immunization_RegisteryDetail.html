@@ -1,0 +1,101 @@
+﻿<div id="pnlImmunization_RegisteryrDetail">
+    <div id="actionPanImmunization_RegisteryDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog-md">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Immunization_RegisteryDetail.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Provider Configuration</h4>
+            </div>
+            <div id="modalbody" class="panel-body">
+                <form id="frmRegisteryDetail">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <label class="control-label">Provider<span class="required">*</span></label>
+                        <select id="ddlprovider" name="ProviderId" class="form-control " ddlist="GetProvider"></select>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <label class="control-label">Sending Application</label>
+                        <input class="form-control" id="txtSendingApplication" type="text" name="SendingApplication" maxlength="25">
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input class="form-control" type="checkbox" id="IsActive" name="IsActive" checked>
+                            <label class="control-label" for="IsActive">Active</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <label class="control-label">Receiving Application<span class="required">*</span></label>
+                        <select id="ddlReceievingApplication" name="ReceivingApplicationId" class="form-control " ddlist="GetRegistery"></select>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <label class="control-label">Provider/Facility ID<span class="required">*</span></label>
+                        <input class="form-control" id="txtFacilityID" type="text" name="PoviderFacilityId" maxlength="25">
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <label class="control-label">Sending Facility</label>
+                        <input class="form-control" id="txtSendingFacility" type="text" name="SendingFacility" maxlength="25">
+                    </div>
+
+                    <div class="spacer15"></div>
+                    <div class="splitter">Submission Type</div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <label class="control-label">Submission<span class="required">*</span></label>
+                        <select id="ddlSubmission" name="RegistrySubmissionId" class="form-control " ddlist="GetRegistrySubmission" onchange="Immunization_RegisteryDetail.DdlSubmissionType_Change(this)"></select>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4" id="divFilesPerBatch">
+                        <label class="control-label">Files Per Batch</label>
+                        <input class="form-control" id="txtFilesPerBatch" type="number" name="FilesPerBatch" pattern="\d*" min="1" max="999" oninput="Immunization_RegisteryDetail.maxLengthCheck(event)" maxlength="3">
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-2" id="divTimeSlot">
+                        <label class="control-label">Timeslot</label>
+                        <input class="form-control" id="txtTimeslot" type="number" name="Timeslot" pattern="\d*" min="1" max="999" oninput="Immunization_RegisteryDetail.maxLengthCheck(event)" maxlength="3">
+                    </div>
+
+                    <div class="spacer15"></div>
+                    <div class="splitter">Message Type</div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 mt-xs">
+                        <div class="checkbox-custom">
+                            <input class="form-control" type="checkbox" id="chkbxIsAdministered" name="IsAdministered">
+                            <label for="chkbxIsAdministered" class="control-label">Administered</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-8  mt-xs">
+                        <div class="checkbox-custom">
+                            <input class="form-control" type="checkbox" id="chkbxIsRefusal" name="IsRefusal">
+                            <label class="control-label" for="chkbxIsRefusal">Refusal</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4  mt-xs">
+                        <div class="checkbox-custom">
+                            <input class="form-control" type="checkbox" id="chkbxIsHistoryDose" name="IsHistoryDose">
+                            <label class="control-label" for="chkbxIsHistoryDose">HistoryDose</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-8  mt-xs">
+                        <div class="checkbox-custom">
+                            <input class="form-control" type="checkbox" id="IsDeleted" name="IsDeleted">
+                            <label class="control-label" for="IsDeleted">Delete</label>
+                        </div>
+                    </div>
+                    <div class="spacer15"></div>
+                    <div class="splitter">Testing</div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="radio-custom">
+                            <input type="radio" class="form-control" id="rdobtnTesting" name="status" value="Testing" checked>
+                            <label for="rdobtnTesting" class="control-label">Testing</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="radio-custom">
+                            <input type="radio" class="form-control" id="rdobtnProduction" name="status" value="Production">
+                            <label for="rdobtnProduction" class="control-label">Production</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 pull-right">
+                        <button class="btn btn-default btn-sm rightbtn" type="submit" id="btnAdd">Save & Exit</button>
+                    </div>
+                    <input type="hidden" id="txtRegistryConfigurationId" name="RegistryConfigurationId" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

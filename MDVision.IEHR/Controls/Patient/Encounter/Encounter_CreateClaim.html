@@ -1,0 +1,108 @@
+﻿<div id="pnlEncounterCreateClaim" style="display:none;">
+    <div id="actionPanEncounterCreateClaim" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Encounter_CreateClaim.UnLoad(); "><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="titleChargeCapture" class="modal-title">Create Claim</h4>
+            </div>
+            <div class="modal-body" id="modalbody">
+                <div id="tblEncounter_CreateClaim">
+                    <form method="post" onsubmit="return false" id="frmEncounterCreateClaim">
+                        <div id="divChargeDetails" class="col-sm-12 pb-xs">
+                            <div id="divAccount" class="col-lg-3">
+                                <label id="lblAccount" class="control-label">Account<span class="required">*</span></label>
+                                <a id="lnkAccountEdit" style="display:none;" href="#" onclick="Encounter_CreateClaim.PatientDemographics($('#frmEncounterCreateClaim #hfPatientId').val());" title="Edit Patient">Account<span class="required">*</span></a>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtPatientName" name="PatientName" customname="Patient Name" type="text" onblur="Encounter_CreateClaim.ClearFields();" />
+                                    <div id="divSearchPatient" class="input-group-btn">
+                                        <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Encounter_CreateClaim.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divPatientName" class="col-lg-3">
+                                <label id="lblPatientName" class="control-label">Patient Name</label>
+                                <a id="lnkPatientNameEdit" class="hidden" href="#" onclick="Encounter_CreateClaim.PatientDemographics($('#frmEncounterCreateClaim #hfPatientId').val());" title="Edit Patient">Patient Name</a>
+                                <input class="form-control" id="txtPatientFullName" name="PatientName" customname="Patient Name" type="text" disabled>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <label class="control-label">Date of Service From<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input id="dtpDOSFrom" name="DOSFrom" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 ">
+                                <label class="control-label">Date of Service To<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input id="dtpDOSTo" name="DOSTo" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <label id="lblProvider" class="control-label">Provider<span class="required">*</span></label>
+                                <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Encounter_CreateClaim.OpenProviderDetail('frmEncounterCreateClaim #hfProvider', 'txtProvider');" title="Edit Provider">Provider<span class="required">*</span></a>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Encounter_CreateClaim.OpenProvider('Search Provider', 'frmEncounterCreateClaim #txtProvider', 'frmEncounterCreateClaim #hfProvider', 'frmEncounterCreateClaim #lblProvider', 'frmEncounterCreateClaim #lnkProviderEdit');"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <label id="lblFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Encounter_CreateClaim.OpenFacilityDetail('hfFacility');" title="Edit Facility">Facility<span class="required">*</span></a>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Encounter_CreateClaim.OpenFacility();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <label id="lblResourceProvider" for="ResourceProvider" class="control-label">Resource Provider<span class="required">*</span></label>
+                                <a id="lnkResourceProviderEdit" style="display:none;" href="#" onclick="Encounter_CreateClaim.OpenProviderDetail('frmEncounterCreateClaim #hfResourceProvider', 'txtResourceProvider');" title="Edit Ref Provider">Resource Provider<span class="required">*</span></a>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtResourceProvider" name="ResourceProvider" placeholder="Start typing to search" type="text" customname="Resource Provider" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkResourceProvider" class="btn btn-primary btn-xs " type="button" onclick="Encounter_CreateClaim.OpenProvider('Search Resource Provider', 'frmEncounterCreateClaim #txtResourceProvider', 'frmEncounterCreateClaim #hfResourceProvider', 'frmEncounterCreateClaim #lblResourceProvider', 'frmEncounterCreateClaim #lnkResourceProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <label id="lblBillingProvider" for="BillingProvider" class="control-label">Billing Provider</label>
+                                <a id="lnkBillingProviderEdit" style="display:none;" href="#" onclick="Encounter_CreateClaim.OpenBillingProviderDetail('frmEncounterCreateClaim #hfBillingProvider', 'txtBillingProvider');" title="Edit Ref Provider">Billing Provider</a>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtBillingProvider" name="BillingProvider" placeholder="Start typing to search" type="text" customname="Billing Provider" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkBillingProvider" class="btn btn-primary btn-xs " type="button" onclick="Encounter_CreateClaim.OpenBillingProvider('Search Billing Provider', 'frmEncounterCreateClaim #txtBillingProvider', 'frmEncounterCreateClaim #hfBillingProvider', 'frmEncounterCreateClaim #lblBillingProvider', 'frmEncounterCreateClaim #lnkBillingProviderEdit');"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="control-label" for="Amount Received">Claim Type<span class="required">*</span></label>
+                                <select id="ddlClaimType" class="form-control" name="ClaimType" ddlist="GetClaimType"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 pull-right mb-sm">
+                            <button id="SaveVisit" class="btn btn-primary btn-sm rightbtn">Next</button>
+                            <button id="btnCancelCreateClaim" type="button" class="btn btn-primary btn-sm rightbtn" onclick="Encounter_CreateClaim.UnLoad(); ">Cancel</button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="hfPatientId" />
+                        <input type="hidden" id="hfProvider" />
+                        <input type="hidden" id="hfOrderingProvider" />
+                        <input type="hidden" id="hfBillingProvider" />
+                        <input type="hidden" id="hfResourceProvider" />
+                        <input type="hidden" id="hfFacility" />
+                        <input type="hidden" id="hfSpecialityName" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

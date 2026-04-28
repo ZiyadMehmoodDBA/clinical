@@ -1,0 +1,57 @@
+﻿<div id="pnlFavoriteMedication">
+    <div id="actionPanFavoriteMedication" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modaldialog">
+        <div class="modalcontent">
+            <div class="mainScrollPan" id="mainScrollPan">
+                <button type="button" class="btn btn-success btn-sm" onclick="Favorite_Medication.AddFavoriteMedicationDetail()"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div>
+                <div class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions"><a class="closebtn pull-right" onclick="Favorite_Medication.UnLoadTab()"></a></div>
+                        <h2 class="panel-title">Medication</h2>
+                    </header>
+                    <div class="panel-body">
+                        <form id="frmFavoriteProblems" role="form">
+                            <div class="spacer10"></div>
+                            <div class="panel-featured panel-body">
+                                <div class="col-sm-3" id="divSwitch">
+                                    <span class="pr-xs">Inactive</span>
+                                    <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                        <input id="switchActive" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: none;" onchange="Favorite_Medication.favoriteListSearch();">
+                                    </div>
+                                    <span class="pl-xs">Active</span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-3">
+                                    <div class="panel panel-featured">
+                                        <header class="panel-heading">
+                                            <h2 class="panel-title">Favorites List</h2>
+                                        </header>
+                                        <div class="panel-body p-none">
+                                            <ul class="listPrimary height200 overflowY own-scroll" id="ulFavoritiesListMedication">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-condensed table-striped table-hover mb-none" id="dgvFavoritiesListMedication">
+                                            <thead>
+                                                <tr>
+                                                    <th class="size110 size-min120">Medication</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="spacer10"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

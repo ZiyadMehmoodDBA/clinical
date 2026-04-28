@@ -1,0 +1,140 @@
+﻿<div class="row" id="pnlClinical_LabResultTrendsLetter">
+    <div id="actionPanClinical_LabResultTrendsLetter" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_LabResultTrendsLetter.UnLoad();"></button>
+                <h4 class="modal-title">Letter</h4>
+            </div>
+            <div class="modal-body">
+
+                <section class="panel">
+                    <form id="frmClinical_LabResultTrendsLetter" method="post" onsubmit="return false">
+
+
+                        <div class="splitter m-none" id="LetterName"></div>
+                        <div class="panel-body NoRadiusT">
+
+                            <button class="btn btn-xs btn-success pull-right" id="btnPrintPatientLetter" onclick="Clinical_LabResultTrendsLetter.printPatientLetter()"><i class="fa fa-print"></i> Print</button>
+                            <div class="col-md-4">
+                                <label class="control-label">Template</label>
+                                <br />
+                                <select id="ddlTemplateId" name="TemplateName" class="form-control" onchange="Clinical_LabResultTrendsLetter.LoadTemplateLetter();"></select>
+                            </div>
+                            <div class="spacer15"></div>
+                            <div class="form-group">
+                                <textarea id="elm1" name="TemplateData" spellcheck="true"></textarea>
+                                <input type="hidden" id="EncodedImageString" value="" />
+                                <input type="file" id="ImageUploaderTinymce" style="display:none">
+                            </div>
+                            <div class="spacer15"></div>
+                            <div id="sendHtml"></div>
+                        </div>
+                    </form>
+                    <div class="panel-body" id="PrintPdfControlDiv" style="display:none;">
+                        <input type="hidden" id="helperPDF" />
+                        <iframe id="PreviewReportPrint" src="Scripts/js/pdf/web/viewer.html" class="col-sm-12" style="height:1066px;"></iframe>
+                    </div>
+                    <script>
+
+                        kendo.pdf.defineFont({
+                            "DejaVu Sans": "../fonts/DejaVuSans.ttf",
+                            "DejaVu Sans|Bold": "../fonts/DejaVuSans-Bold.ttf",
+                            "DejaVu Sans|Bold|Italic": "../fonts/DejaVuSans-Oblique.ttf",
+                            "DejaVu Sans|Italic": "../fonts/DejaVuSans-Oblique.ttf"
+                        });
+                    </script>
+                    <style type="text/css">
+                        .blueBgPrint {
+                            background: #005da9 !important;
+                            color: #fff !important;
+                        }
+
+                        .blueBorderPrint {
+                            border-bottom: 2px solid #005da9;
+                        }
+
+                        .line-height-fix li {
+                            line-height: 18px !important;
+                        }
+                    </style>
+
+                    <script type="x/kendo-template" id="page-template">
+                        <div class="page-template">
+                            <div class="blueBorderPrint" style="position:absolute;left:20px; right: 20px;font-size: 90%;height: 100%;top: 15px; padding:2px 5px 0 5px;">
+                                <div class="col-sm-12 col-lg-12">
+                                    <div class="col-sm-5 col-lg-5 pull-left">
+                                        <img id="ClinicalReportsHeaderLogo" src="content/images/SHS-nav-logo-small-100.png" class="img-responsive" style="max-width: 350px;max-height:140px;" />
+                                    </div>
+
+                                    <div class="pull-right col-sm-5 col-lg-5" id="PracticeDiv"></div>
+                                </div>
+                                <div class='clearfix'></div><div class='splitter m-none mt-xs'>
+                                    <div class='spacer3'></div>
+                                </div>
+                                <div class="col-sm-12 col-lg-12">
+                                    <div class="pull-left col-sm-5 col-lg-5" id="PatientDiv"></div>
+                                    <div class="pull-right col-sm-5 col-lg-5" id="ProviderDiv"></div>
+                                </div>
+                                <div class='clearfix'></div><div class='splitter m-none mt-xs'>
+                                    <div class='spacer3'></div>
+                                </div>
+                            </div>
+                            <div style="position: absolute;left: 20px;right: 20px;font-size: 90%;bottom: 20px;">
+                                <div class="blueBgPrint" style=" float:left; width:100%; height:3px;margin-bottom:3px;"></div>
+                                <div id="ClinicalReportsFooterText" class="blueBgPrint" style=" float:left; width:100%;padding:2px 5px 0 5px;height:22px;">
+                                    Generated by:<span id="ClinicalReportsFooter">MDVISION PM EMR</span><span class="whiteColorPrint" style="float:right;"> Page #:pageNum# of #:totalPages#</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </script>
+
+                    <div id="printLetter" style="display:none;">
+                        <div id="PanelHead">
+
+                        </div>
+                        <div id="PanelBody">
+
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

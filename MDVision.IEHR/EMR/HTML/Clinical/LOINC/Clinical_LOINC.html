@@ -1,0 +1,72 @@
+﻿<div id="pnlClinicalLOINC" style="display:none;">
+    <div id="actionPanClinicalLOINC" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div id="modalcontent" class=" modal-content">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_LOINC.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="heading-title modal-title">LOINC Codes</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="modal-header">
+                                <button type="button" class="close" onclick="Clinical_LOINC.UnLoadTab();">
+                                    <span class=" red">&nbsp;</span><span class="sr-only">Close</span>
+                                </button>
+                                <h2 class="heading-title panel-title">Search LOINC</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlClinicalLOINC_Search">
+                            <form method="post" id="frmClinicalLOINC" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div id="loinic-control" class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="control-label" id="lblLOINCAndDescription">LOINC Code / Description</label><span class="required">*</span>
+                                        <input class="form-control" id="txtLOINCAndDescription" name="LOINCAndDescription" oninput="Clinical_LOINC.BindLOINCCodes();" type="text" placeholder="Search LOINC Code / Description" value="">
+                                    </div>
+                                </div>
+                                <div id="cpt-control" class="hidden">
+                                    <label class=" control-label">Test</label>
+                                    <div class="col-sm-12 input-group">
+                                        <input class="form-control" id="txtCPTCode" placeholder="Search test" type="text" name="LabCPTCode" oninput="Clinical_LOINC.bindAutoComplete(this)">
+                                        <div class="input-group-btn">
+                                            <!--<button class="btn btn-primary btn-xs " type="button" onclick="ClinicalLabOrderDetail.openCPTCode();"><i class="fa fa-search"></i></button>-->
+                                            <!--<button class="btn btn-primary btn-xs " type="button" onclick="return false"><i class="fa fa-search"></i></button>-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+                    <input type="hidden" id="hfCPTCode" name="CPTCode" value="-1" />
+                    <input type="hidden" id="hfCPTDescription" name="CPTDescription" value="-1">
+                    <div id="pnlLOINC_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="hidden" id="LOINC_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLOINC">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">LOINCId</th>
+                                            <th>LOINC / HCPCS</th>
+                                            <th>LOINC Description</th>
+                                            <th>SNOMED</th>
+                                            <th>SNOMED Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divLOINCPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

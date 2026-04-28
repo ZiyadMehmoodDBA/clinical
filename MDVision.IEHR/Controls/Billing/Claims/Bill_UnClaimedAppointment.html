@@ -1,0 +1,157 @@
+﻿<div class="row" id="pnlBillUnClaimedAppointment" style="display:none;">
+    <div id="actionPanBillUnClaimedAppointment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Bill_UnClaimedAppointment.OpenPatientSearchForClaim();"><i class="fa fa-plus-circle"></i> Create New Claim</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Bill_UnClaimedAppointment.UnLoadTab();"></a>
+
+                </div>
+                <h2 class="panel-title">Unclaimed Appointments </h2>
+            </header>
+            <div class="panel-body" id="pnlBillUnClaimedAppSearch">
+                <form class="form-bordered" method="post" id="frmUnClaimedAppointment" onsubmit="return false">
+                    <!--start - CONTENTS-->
+                    <div class="form-group">
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Patient Account">Patient Account</label>
+                            <div class="input-group">
+
+                                <input class="form-control ValidateCriteria" id="txtPatientName" name="Patient Account" placeholder="Start typing to search" type="text" />
+                                <div id="divSearchPatient" class="input-group-btn">
+                                    <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Bill_UnClaimedAppointment.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Last Name</label>
+                            <input class="form-control ValidateCriteria" id="txtLastName" name="Last Name" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">First Name</label>
+                            <input class="form-control ValidateCriteria" id="txtFirstName" name="First Name" type="text">
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                            <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Bill_UnClaimedAppointment.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                            <div class="input-group">
+                                <input class="form-control ValidateCriteria" id="txtUnclaimedFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                <div class="input-group-btn">
+                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Bill_UnClaimedAppointment.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label id="lblProvider" class="control-label">Provider</label>
+                            <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Bill_UnClaimedAppointment.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                            <div class="input-group">
+                                <input type="text" class="form-control ValidateCriteria" id="txtUnClaimedProvider" name="Provider" placeholder="Start typing to search" />
+                                <div class="input-group-btn">
+                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Bill_UnClaimedAppointment.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <!--<label class="control-label">Insurance Plan</label>
+                            <select id="ddlInsurancePlan" class="form-control" ddlist="GetInsurancePlan"></select>-->
+
+                            <label id="lblInsurancePlan" class="control-label">Insurance Plan</label>
+                            <a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="Bill_UnClaimedAppointment.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance Plan</a>
+                            <div class="input-group">
+                                <input class="form-control ValidateCriteria" id="txtInsurancePlan" name="InsurancePlan" placeholder="Start typing to search" type="text" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary btn-xs " type="button" onclick="Bill_UnClaimedAppointment.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">DOS From</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="DatePaid" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dpUnclaimedDOSFrom" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">DOS To</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="DatePaid" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dpUnclaimedDOSTo" autocomplete="off">
+                            </div>
+                        </div>
+
+
+                        <!--<div class="col-sm-3 col-md-2">
+                            <label class="control-label">Submit Status</label>
+                            <select id="ddlSubmitStatus" ddlist="GetAllSubmitStatus" class="form-control"></select>
+                        </div>-->
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label">Appointment Status</label>
+                            <select id="ddlAppointmentStatus" ddlist="GetAppointmentStatus" class="form-control ValidateCriteria"></select>
+                        </div>
+
+                        <div class="col-sm-3 col-md-2">
+                            <label class="control-label" for="Case Number">Claim Number</label>
+                            <div class="input-group">
+                                <input class="form-control ValidateCriteria" id="txtClaimno" name="ClaimNumber" type="text" />
+                                <div id="divSearchClaim" class="input-group-btn">
+                                    <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="Bill_UnClaimedAppointment.OpenEncounter();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 col-md-2 col-lg-1">
+                            <label class="control-label">Check In</label>
+                            <select id="ddlClaimed" class="form-control">
+                                <option value="All" selected="selected">All</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-3 col-md-2 pull-right mt-md mb-md">
+
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnUnClaimedAppSearch" type="button" onclick="Bill_UnClaimedAppointment.ValidateSearchCriteria();">Search</button>
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnUnClaimedAppReset" type="button" onclick="Bill_UnClaimedAppointment.UnClaimedAppReset();">Reset</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="hfFacility" value="-1" />
+                    <input type="hidden" id="hfProvider" value="-1" />
+                    <input type="hidden" id="hfPatientId" value="-1" />
+                    <input type="hidden" id="hfInsurancePlan" />
+                </form>
+            </div>
+        </section>
+
+        <div id="pnlBillUnClaimedApp_Result" style="display: none;">
+            <section class="panel">
+                <div class="panel-body  panel-featured">
+                    <input type="hidden" id="UnClaimedApp_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvUnClaimedApp">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">AppointmentId</th>
+                                <th class="size60">Action</th>
+                                <th class="size120">Patient Name</th>
+                                <th class="size120">Patient Account</th>
+                                <th class="size120">Claim No</th>
+                                <th class="size120">DOS From</th>
+                                <th class="size120">DOS To</th>
+                                <th class="size120">Status</th>
+                                <th class="size120">Facility</th>
+                                <th class="size120">Provider</th>
+                                <th class="size120">Insurance Plan</th>
+                                <th class="size80">Check In</th>
+                                <th class="size80">Submit Status</th>
+                                <th class="size80">Claim Status</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div id="divUnClaimAppPaging"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

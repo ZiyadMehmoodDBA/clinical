@@ -1,0 +1,237 @@
+﻿<div class="row" id="pnlUnallocatedCopayment" style="display:none;">
+    <div id="actionPanUnallocatedCopayment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Scheduling_UnallocatedCopayment.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Unallocated Copayment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="unallocatedCopaymentPanel">
+                    <form method="post" onsubmit="return false" id="frmUnallocatedCopayment">
+                        <div class="form-group">
+
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="ddlPaymentType">Payment Type</label><span class="required">*</span>
+                                <select id="ddlPaymentType" class="form-control" ddlist="GetPaymentType" name="PaymentType"></select>
+
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="dpReceiptDate">Receipt Date</label><span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" name="ReceiptDate" data-plugin-datepicker="" class="form-control" id="dpReceiptDate">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 col-md-2 col-xs-5">
+                                <label for="txtReceiptNumber" class="control-label">Receipt Number</label>
+                                <input class="form-control" id="txtReceiptNumber" name="ReceiptNumber" type="text" disabled>
+                            </div>
+                            <div class="pull-right pl-sm" id="divAdvanceBalance">
+                                <span>Total Unallocated Amount: $</span>
+                                <span class="" id="lblTotalUnallocatedAmount">00.00</span>
+                            </div>
+
+                            <!--<div class="col-sm-3 pad-a-labelsize">
+                                <div class="radio-custom radio-dafault">
+                                    <input type="radio" id="rdPCP" name="SpecialistPCP">
+                                    <label class="control-label" for="rdPCP">PCP</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 pad-a-labelsize">
+                                <div class="radio-custom radio-dafault">
+                                    <input type="radio" id="rdSpecialist" name="SpecialistPCP">
+                                    <label class="control-label" for="rdSpecialist">Specialist</label>
+                                </div>
+                            </div>-->
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-sm-4 col-md-3" id="divCheckNumber">
+                                <label class="control-label" for="txtCheckNumber">Check Number</label>
+                                <input type="text" class="form-control" name="CheckNumber" id="txtCheckNumber">
+                            </div>
+                            <div class="col-sm-4 col-md-3" id="divCheckDate">
+                                <label for="dpCheckDate" class="control-label">Check Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" name="CheckDate" data-plugin-datepicker="" class="form-control" id="dpCheckDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-md-3" id="divCreditCadType">
+                                <label class="control-label" for="ddlCardType">Card Type</label>
+                                <select name="creditCardType" id="ddlCardType" class="form-control" ddlist="GetCreditCardType"></select>
+
+                            </div>
+                            <div class="col-sm-4 col-md-3" id="divCardNumber">
+                                <label class="control-label" for="txtCardNumber">Card Number</label>
+                                <input type="text" class="form-control" name="CardNumber" id="txtCardNumber" maxlength="16">
+                            </div>
+                            <div class="col-sm-4 col-md-3" id="divExpiryDate">
+                                <label class="control-label" for="dpExpiryDate">Expiry Date (mm/yyyy)</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" data-plugin-datepicker="" name="ExpiryDate" class="form-control" id="dpExpiryDate">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-md-3">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <label for="txtPaid" class="control-label">Paid</label><span class="required">*</span>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                            <input class="form-control" name="Paid" id="txtPaid" type="text" maxlength="10" placeholder="99999.99">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <label for="ddlPaidLedger" class="control-label">Paid A/C</label><span class="required">*</span>
+                                        <select id="ddlPaidLedger" name="PaidAC" class="form-control "></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divAdvancePayment" class="col-sm-4  col-md-3" style="display:none;">
+                                <label id="lblAdvancePayment" for="txtAdvancePayment" class="control-label">Advance Payment<span class="required">*</span></label>
+                                <!--<a id="lnkAdvancePaymentEdit" style="display:none;" href="#" onclick="" title="Edit Advance Payment">Advance Payment<span class="required">*</span></a>-->
+                                <div class="input-group">
+                                    <input class="form-control" id="txtAdvancePayment" name="AdvancePayment" placeholder="" type="text" onblur="utility.ValidateAutoComplete(this, 'hfAdvancePaymentId', false); ">
+                                    <div class="input-group-btn">
+                                        <button id="lnkAdvancePayment" class="btn btn-primary btn-xs " type="button" onclick="Scheduling_UnallocatedCopayment.OpenAdvancePayment();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right mt-md">
+                                <button id="btnSavePrint" class="btn btn-primary btn-sm rightbtn" type="submit">Save & Print Receipt</button>
+                                <button id="btnsave" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="pull-left mr-md">
+                                    <label for="txtComments" class="control-label">Comments</label>
+                                </div>
+                                <textarea class="form-control" rows="2" maxlength="2500" id="txtComments" name="Comments" spellcheck="true"></textarea>
+                            </div>
+                            <!--<div class="pull-right pl-sm pr-default" id="divCopayBalance">
+                                <span>Total Paid: $</span>
+                                <span id="lblTotalPaid">00.00</span>
+                            </div>-->
+                            <span class="spacer10"></span>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="hfAppointmentId" />
+                        <input type="hidden" id="hfPatientId" />
+                        <input type="hidden" id="hfProviderId" />
+                        <input type="hidden" id="hfFacilityId" />
+                        <input type="hidden" id="hfAdvancePaymentId" value="" />
+                    </form>
+                    <div class="clearfix"></div>
+                    <div id="pnlCopayment_Result" style="display: none;">
+                        <div class="panel-body panel-featured">
+                            <input type="hidden" id="Copayment_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-hover mb-none" id="dgvCopayment">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">PaymentId</th>
+                                        <th class="size30 text-center va-middle">Action</th>
+                                        <th class="size30 text-center va-middle">Receipt Number</th>
+                                        <th class="size60 text-center va-middle">Receipt Paid</th>
+                                        <th class="size40 text-center va-middle">Amount Paid</th>
+                                        <th class="size60 text-center va-middle">Payment Type</th>
+                                        <th class="size60 text-center va-middle noWordBreak">Check/Card #</th>
+                                        <th class="size100 text-center va-middle">Account</th>
+                                        <th class="size140 text-center va-middle">Entry Date</th>
+                                        <th class="size50 text-center va-middle">Entered By</th>
+                                        <th class="size30 text-center va-middle">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#pnlUnallocatedCopayment #txtPaid').keypress(function (event) {
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                if (event.keyCode != 9 && event.keyCode != 8)
+                    event.preventDefault();
+            }
+        });
+
+        $('#pnlUnallocatedCopayment #dpReceiptDate').val($.datepicker.formatDate('mm/dd/yy', new Date()));
+
+        utility.CreateDatePicker('pnlUnallocatedCopayment #dpReceiptDate', function () {
+            //on-change callback method
+            $('#frmUnallocatedCopayment').bootstrapValidator('revalidateField', 'ReceiptDate');
+        });
+
+        utility.CreateDatePicker('pnlUnallocatedCopayment #dpCheckDate', function () {
+            //on-change callback method
+            $('#frmUnallocatedCopayment').bootstrapValidator('revalidateField', 'CheckDate');
+        });
+
+        $('#pnlUnallocatedCopayment #divCheckNumber').hide();
+        $('#pnlUnallocatedCopayment #divCheckDate').hide();
+        $('#pnlUnallocatedCopayment #divCardNumber').hide();
+        $('#pnlUnallocatedCopayment #divExpiryDate').hide();
+        $('#pnlUnallocatedCopayment #divCreditCadType').hide();
+
+        $("#pnlUnallocatedCopayment #ddlPaymentType").change(function () {
+            if ($("#pnlUnallocatedCopayment #ddlPaymentType option:selected").text() == "Cash") {
+                $('#pnlUnallocatedCopayment #divCheckNumber').hide();
+                $('#pnlUnallocatedCopayment #divCheckDate').hide();
+                $('#pnlUnallocatedCopayment #divCardNumber').hide();
+                $('#pnlUnallocatedCopayment #divExpiryDate').hide();
+                $('#pnlUnallocatedCopayment #divCreditCadType').hide();
+                $('#pnlUnallocatedCopayment #divAdvancePayment').hide();
+            }
+            if ($("#pnlUnallocatedCopayment #ddlPaymentType option:selected").text() == 'Check') {
+                $('#pnlUnallocatedCopayment #divCheckNumber').show();
+                $('#pnlUnallocatedCopayment #divCheckDate').show();
+                $('#pnlUnallocatedCopayment #divCardNumber').hide();
+                $('#pnlUnallocatedCopayment #divExpiryDate').hide();
+                $('#pnlUnallocatedCopayment #divCreditCadType').hide();
+                $('#pnlUnallocatedCopayment #divAdvancePayment').hide();
+            }
+            if ($("#pnlUnallocatedCopayment #ddlPaymentType option:selected").text() == 'Credit Card') {
+                $('#pnlUnallocatedCopayment #divCheckNumber').hide();
+                $('#pnlUnallocatedCopayment #divCheckDate').hide();
+                $('#pnlUnallocatedCopayment #divCardNumber').show();
+                $('#pnlUnallocatedCopayment #divExpiryDate').show();
+                $('#pnlUnallocatedCopayment #divCreditCadType').show();
+                $('#pnlUnallocatedCopayment #divAdvancePayment').hide();
+            }
+            if ($("#pnlUnallocatedCopayment #ddlPaymentType option:selected").text() == 'Advance Payment') {
+                $('#pnlUnallocatedCopayment #divCheckNumber').hide();
+                $('#pnlUnallocatedCopayment #divCheckDate').hide();
+                $('#pnlUnallocatedCopayment #divCardNumber').hide();
+                $('#pnlUnallocatedCopayment #divExpiryDate').hide();
+                $('#pnlUnallocatedCopayment #divCreditCadType').hide();
+                $('#pnlUnallocatedCopayment #divAdvancePayment').show();
+            }
+        });
+
+        $("#pnlUnallocatedCopayment #txtPaid").focusout(function () {
+            if ($('#pnlUnallocatedCopayment #txtPaid').val() != '') {
+                $('#frmUnallocatedCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+                $('#frmUnallocatedCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+            }
+        });
+    });
+
+</script>

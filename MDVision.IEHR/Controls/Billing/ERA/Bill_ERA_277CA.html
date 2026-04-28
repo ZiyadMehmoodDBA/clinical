@@ -1,0 +1,197 @@
+﻿<div id="pnlReport_ERA_277CA">
+    <div id="actionPanReport_ERA_277CA" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Bill_ERA_277CA.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Claim Status 277CA Report</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div id="rpt277header" class="panel-body tab-content-featured pt-sm">
+                        <div class="col-md-7 col-lg-8">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <span class="col-sm-3 text-bold p-none">Submitter ID# :</span>
+                                    <span id="spSubmitterId" class="col-sm-9">N/A</span>
+                                </li>
+                                <li>
+                                    <span class="col-sm-3 text-bold p-none">Submitter Name :</span>
+                                    <span id="spSubmitterName" class="col-sm-9">N/A</span>
+                                </li>
+                                <li>
+                                    <span class="col-sm-3 text-bold p-none">File Control #:</span>
+                                    <!--<span id="spFileControlNumber" class="col-sm-9">N/A</span>-->
+                                    <div id="spFileControlNumber" class="col-sm-9"></div>
+                                </li>
+                                <li>
+                                    <span class="col-sm-3 text-bold p-none">Report Date :</span>
+                                    <span id="spReportDate" class="col-sm-9">N/A</span>
+                                </li>
+                                <li>
+                                    <span class="col-sm-3 text-bold p-none">Test/ Prod :</span>
+                                    <span id="spTestPro" class="col-sm-9">N/A</span>
+                                </li>
+                                <li>
+                                    <span class="col-sm-3 text-bold p-none">Receiver Name :</span>
+                                    <span id="spReceiverName" class="col-sm-9">N/A</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-8 col-md-5 col-lg-4">
+                            <div class="Of-a table-responsive">
+                                <table class=" table-condensed table-hover  table text-center table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="size150 noBorder">Claim Information</th>
+                                            <th class="text-center noBorder">Claim Count</th>
+                                            <th class="text-center noBorder">Charges</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-left noBorder">Accepted</td>
+                                            <td id="tdReportAcceptedCount" class="noBorder">0</td>
+                                            <td id="tdReportAcceptedCharges" class="noBorder">$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left noBorder">Rejected</td>
+                                            <td id="tdReportRejectedCount" class="noBorder">0</td>
+                                            <td id="tdReportRejectedCharges" class="noBorder">$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-left noBorder">Total Submitted</td>
+                                            <td id="tdReportTotalCount" class="noBorder">0</td>
+                                            <td id="tdReportTotalCharges" class="noBorder">$0.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="rpt277body">
+
+                    </div>
+                    <ReportCA>
+                        <div id="rptProviderTemplate" class="panel-body tab-content-featured mt-md pt-sm hidden">
+                            <div class="col-md-7 col-lg-8">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <span class="col-sm-3 text-bold p-none">NPI :</span>
+                                        <span id="spNPI" class="col-sm-9">N/A</span>
+                                    </li>
+                                    <li>
+                                        <span class="col-sm-3 text-bold p-none">Provider Name :</span>
+                                        <span id="spProviderName" class="col-sm-9">N/A</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="col-sm-8 col-md-5 col-lg-4">
+                                <div class="Of-a table-responsive">
+                                    <table class=" table-condensed table-hover  table text-center table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="size150 noBorder">Claim Information</th>
+                                                <th class="text-center noBorder">Claim Count</th>
+                                                <th class="text-center noBorder">Charges</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left noBorder">Accepted</td>
+                                                <td id="tdAcceptedCount" class="noBorder">0</td>
+                                                <td id="tdAcceptedCharges" class="noBorder">$0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left noBorder">Rejected</td>
+                                                <td id="tdRejectedCount" class="noBorder">0</td>
+                                                <td id="tdRejectedCharges" class="noBorder">$0.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left noBorder">Total Submitted</td>
+                                                <td id="tdTotalCount" class="noBorder">0</td>
+                                                <td id="tdTotalCharges" class="noBorder">$0.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle">
+                                    <label>Accepted</label>
+                                    <div class="toggle-content panel-body NoRadiusT pt-sm">
+                                        <div class="Of-a table-responsive">
+                                            <table class="tblAcceptedSTC table-condensed table-hover table-striped table  table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="size120 ">Patient Control #</th>
+                                                        <th class="noWordBreak">Claim Charge Amount</th>
+                                                        <th class="noWordBreak">Claim Payment Amount</th>
+                                                        <th class="size70">Entity</th>
+                                                        <th>Claim Status Category Code</th>
+                                                        <th class="noWordBreak">Claim Status Code</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle">
+                                    <label>Rejected</label>
+                                    <div class="toggle-content panel-body NoRadiusT pt-sm">
+                                        <div class="Of-a table-responsive">
+                                            <table class="tblRejectedSTC table-condensed table-hover table-striped table  table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="size120 ">Patient Control #</th>
+                                                        <th class="noWordBreak">Claim Charge Amount</th>
+                                                        <th class="noWordBreak">Claim Payment Amount</th>
+                                                        <th class="noWordBreak">Entity</th>
+                                                        <th>Claim Status Category Code</th>
+                                                        <th class="noWordBreak">Claim Status Code</th>
+                                                        <th class="noWordBreak">Rejection Reason</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </ReportCA>
+
+                    <div class="spacer15"></div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script type="text/javascript">
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+</script>-->

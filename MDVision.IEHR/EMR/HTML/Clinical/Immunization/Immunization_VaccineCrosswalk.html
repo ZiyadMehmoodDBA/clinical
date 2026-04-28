@@ -1,0 +1,149 @@
+﻿<div id="pnlImmunization_VaccineCrosswalk">
+    <div id="actionPanImmunization_VaccineCrosswalk" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Immunization_VaccineCrosswalk.UnLoadTab()"></a>
+            </div>
+            <h2 class="panel-title">Vaccine Crosswalk</h2>
+        </header>
+        <div class="panel-body">
+            <form class="form-bordered" role="form" id="frmImmunizationVaccineCrosswalk">
+                <div class="form-group" id="vaccineCrosswalkDetails">
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            Category
+                            <span class="required">*</span>
+                        </label>
+                        <select id="ddlCategory" name="VaccineGroupID" class="form-control" ></select>
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            <label id="lblVaccine" class="control-label">Vaccine<span class="required">*</span></label>
+                            <a id="lnkVaccine" class="hidden" href="#" onclick="Immunization_VaccineCrosswalk.OpenSearchPopup('0','#ddlCategory', 'txtVaccine', 'fVaccineId');" title="Edit Provider">Vaccine<span class="required">*</span></a>
+                        </label>
+                        <div class="input-group">
+                            <input class="form-control" id="txtVaccine" name="VaccineName" customname="Vaccine Name" type="text" oninput="    Immunization_VaccineCrosswalk.BindVaccineList(this, '#frmImmunizationVaccineCrosswalk #hfVaccineId', '#frmImmunizationVaccineCrosswalk #txtCVXCode', '#frmImmunizationVaccineCrosswalk #txtCPTode');" onblur="    Immunization_VaccineCrosswalk.ValidateAutoComplete(this, '#frmImmunizationVaccineCrosswalk #hfVaccineId', '#frmImmunizationVaccineCrosswalk #txtCVXCode', '#frmImmunizationVaccineCrosswalk #txtCVXCode');" />
+                            <div class="input-group-btn">
+                                <button id="lnkVaccineSearch" type="button" class="btn btn-primary btn-xs" onclick="Immunization_VaccineCrosswalk.OpenSearchPopup('0', 'txtVaccine', '#ddlCategory', 'frmImmunizationVaccineCrosswalk #txtVaccine', 'frmImmunizationVaccineCrosswalk #hfVaccineId', 'frmImmunizationVaccineCrosswalk #txtCVXCode', 'frmImmunizationVaccineCrosswalk #txtCVXCode');"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-1 has-feedback">
+                        <label class="control-label">
+                            CVX Code
+                        </label>
+                        <input id="txtCVXCode" class="form-control" type="text" disabled>
+                    </div>
+                    <div class="col-sm-6 col-lg-1 has-feedback">
+                        <label class="control-label">
+                            CPT Code
+                        </label>
+                        <input id="txtCPTode" class="form-control" type="text" disabled>
+                    </div>
+                    <div class="col-sm-1 col-md-3 col-lg-1 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="chkActive" name="IsActive" checked="checked">
+                            <label class="control-label">Active</label>
+                        </div>
+                    </div><div class="col-sm-1 col-md-3 col-lg-1 pad-a-labelsize">
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="chkDefault" name="IsDefault">
+                            <label class="control-label">Default</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 pull-right mt-md">
+                        <button class="btn btn-success btn-sm rightbtn" type="submit" id="btnAddVaccineCrosswalk">Add</button>
+                    </div>
+                </div>
+                <div class="spacer20"></div>
+
+                <header class="panel-heading">
+                    <h2 class="panel-title">Search Vaccine Crosswalk </h2>
+                </header>
+                <div class="panel-body" id="pnlVaccineCrosswalk_Search">
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label" for="Category">Category</label>
+                        <select id="ddlCategorySearch" class="form-control" ></select>
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label">
+                            Vaccine
+                        </label>
+                        <div class="input-group">
+                            <input class="form-control" id="txtVaccineSearch" name="VaccineNameSearch" customname="Vaccine Name" type="text" oninput="    Immunization_VaccineCrosswalk.BindVaccineList(this, '#hfVaccineIdSearch');" onblur="    utility.ValidateAutoComplete(this, 'frmImmunizationVaccineCrosswalk #hfVaccineId', false)" />
+                            <div class="input-group-btn">
+                                <button id="lnkVaccine_Search" type="button" class="btn btn-primary btn-xs" onclick="Immunization_VaccineCrosswalk.OpenSearchPopup(null, 'txtVaccineSearch', '#ddlCategorySearch', 'frmImmunizationVaccineCrosswalk #txtVaccineSearch', 'frmImmunizationVaccineCrosswalk #hfVaccineIdSearch');"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-sm-3 pad-a-labelsize" id="divSwitch">
+                        <span class="pr-xs">Inactive</span>
+                        <div class="btnWidgetSwitch switch switch-xs switch-success">
+                            <input id="switchActive" isactive="1" type="checkbox" checked="checked" data-plugin-ios-switch="" style="display: none;">
+                        </div>
+                        <span class="pl-xs">Active</span>
+                    </div>
+                    <div class="col-sm-2 mt-xs pull-right">
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnVaccineCrosswalkSearch" type="button" onclick="Immunization_VaccineCrosswalk.VaccineCrosswalkSearch();">Search</button>
+                    </div>
+                </div>
+                <input type="hidden" id="hfVaccineId" name="VaccineId" />
+                <input type="hidden" id="hfVaccineIdSearch" />
+            </form>
+            <div class="clearfix"></div>
+            <div id="pnlVaccineCrosswalk_Result" style="display: inline;">
+                <section class="panel">
+                    <div class="panel-body">
+                        <input type="hidden" id="VaccineCrosswalk_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvVaccineCrosswalk">
+                            <thead>
+                                <tr>
+                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,VacCrosswalkActive,Cancel" coltype="Action" class="size100">Action</th>
+                                    <th controlid="ddlCategoryLitem" controlname="VaccineGroupID" isoptional="0" coltype="dropdown" class="size100">Category</th>
+                                    <th controlid="txtVaccine" controlname="Vaccine" controlwidth="p-tiny" class="size100" coltype="AutoComplete" isoptional="0" oninput="Immunization_VaccineCrosswalk.BindVaccineListForGrid(this);" autocompletemethod="Immunization_VaccineCrosswalk.BindVaccineListForGrid(this);" hfcontrolname=" vaccineid" hfcontrolid="hfVaccineId" parentctrl="Immunization_VaccineCrosswalk" searchmethod="Immunization_VaccineCrosswalk.OpenSearchPopup('1',this);">Vaccine</th>
+                                    <th controlid="txtCVXCode" controlname="CVXCode" class="size100" isoptional="1" coltype="textbox" iscontroldisabled="1">CVX Code</th>
+                                    <th controlid="txtCPTCode" controlname="CPTCode" class="size100" isoptional="1" coltype="textbox" iscontroldisabled="1">CPT Code</th>
+                                    <th controlid="chkIsDefault" controlname="IsDefault" controlwidth="custom-width-auto" isoptional="1" coltype="CheckBox">Default</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="divVaccineCrosswalklistPaging">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+    });
+
+</script>

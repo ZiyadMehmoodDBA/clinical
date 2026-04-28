@@ -1,0 +1,39 @@
+﻿<div id="designLetterDataFieldsInsert">
+    <div class="modal-dialog modal-dialog-md">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header" style="">
+                <button type="button" class="close" onclick="designLetterDataFieldsInsert.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Data Fields Insert</h4>
+            </div>
+            <div class="modal-body pt-xs" id="aaa">
+                <form method="post" onsubmit="return false" id="frmdesignLetterDataFieldsInsert">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Category</label>
+                            <select id="lstCategoryId" class="form-control" ddlist="LookupCategory" disabled ></select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label">Field<span class="required">*</span></label>
+                            <select id="lstFieldId" class="form-control" ddlist="GetLetterfields" name="LetterFields"></select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label">Format</label><span class="required">*</span>
+                            <select id="lstFormatId" class="form-control" ddlist="LookupLetterFieldFormat" name="Format"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkIsActive" type="checkbox">
+                                <label class="control-label" for="Active">Active</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 mt-xs pull-right">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnDataFieldsInsert" type="submit">Done</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="hfLetterFieldsId" value="-1" />
+                    <!--<input type="hidden" id="hfInsertedFieldsId" value="" />-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

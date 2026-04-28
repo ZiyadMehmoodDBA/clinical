@@ -1,0 +1,144 @@
+﻿<div id="emergencyContactDetail">
+    <div id="actionPanEmergencyContractDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="emergencyContactDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Emergency Contacts Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mainScrollPan" id="tblemergencyContactDetail">
+                    <button type="button" class="btn btn-default btn-sm pull-right" id="btnPatientSearch" onclick="emergencyContactDetail.OpenPatientSearch();" name="btnPatientSearch">Search Existing Patients</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div class="panel-body">
+                            <form method="post" id="frmEmergencyContactDetail" onsubmit="return false">
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Last Name <span class="required">*</span></label>
+                                        <input type="text" class="form-control" id="txtLastName" name="LastName" maxlength="50">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label">First Name<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="txtFirstName" name="FirstName" maxlength="35">
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md">
+                                                <label class="control-label">M.I./Name</label>
+                                                <input type="text" class="form-control" name="MiddleInitial" maxlength="50" id="txtMiddleInitial">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label" for="Date of Birth">Date of Birth</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input class="form-control" id="dtpDOB" name="DOB" type="text" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Email</label>
+                                        <input type="text" class="form-control" id="txtEmail" name="Email" maxlength="55">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Address 1</label>&nbsp;<a id="lnkAddress1" href="#" class="blue" onclick="emergencyContactDetail.FillSameAsPatientInfo();">Same as patient</a>
+                                        <input type="text" class="form-control" id="txtAddress1" name="Address1" maxlength="55">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Address 2</label>
+                                        <input type="text" class="form-control" id="txtAddress2" name="Address2" maxlength="55">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label class="control-label">Relation</label>
+                                        <select id="ddlRelation" class="form-control " name="Relation"  ddlist="GetRelationship"></select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label">City</label>
+                                                <input class="form-control" id="txtCity" name="City" type="text" maxlength="25">
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md">
+                                                <label class="control-label">State</label>
+                                                <input class="form-control" id="txtState" name="State" type="text" placeholder="aa" data-mask="aa">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label pull-left "> Zip </label>
+                                                <input id="txtZip" name="Zip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#emergencyContactDetail', '#txtZip', '#txtCity', '#txtState')" />
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md pad-a-labelsize">
+                                                <input id="txtZipExt" name="ZipExt" class="form-control" type="text" placeholder="9999" data-mask="9999" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="control-label">Home Tel</label>
+                                        <input type="text" class="form-control" name="HomeTel" id="txtHomeTel" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-8 pl-md pr-xs">
+                                                <label class="control-label">Work Tel</label>
+                                                <input class="form-control" name="WorkTel" id="txtWorkTel" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                            </div>
+                                            <div class="col-xs-4 pl-none pr-md">
+                                                <label class="control-label">Ext</label>
+                                                <input class="form-control" id="txtExt" name="Ext" type="text" placeholder="99999" maxlength="5">
+                                            </div>
+                                        </div>
+               
+                                        
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-xs-6 pl-md pr-xs">
+                                                <label class="control-label">Cell</label>
+                                                <input type="text" class="form-control" id="txtCell" name="Cell" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                            </div>
+                                            <div class="col-xs-6 pl-none pr-xs">
+                                                <label class="control-label">Fax</label>
+                                                <input type="text" class="form-control" id="txtFax" name="Fax" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                                            </div>
+                                           </div>
+                                        </div>
+
+                                <div class="form-group">
+
+                                    <div class="col-sm-3 pad-a-labelsize-btn pull-right">
+                                        <button id="btnEmergencyContact" class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                                        <div class="clearfix"></div>
+                                        <input type="hidden" id="hfIsPrimary" value="False" />
+                                        <input type="hidden" id="hfIsActive" value="False" />
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        utility.ValidateDOB('frmEmergencyContactDetail', 'emergencyContactDetail #dtpDOB', new Date('1800-01-01'), new Date(), true);
+
+        //utility.CreateDatePicker('emergencyContactDetail #frmEmergencyContactDetail #dtpDOB',
+        //function (ev) {
+        //    //on-change callback method 
+        //}, false);
+        //$('#emergencyContactDetail #frmEmergencyContactDetail #dtpDOB').datepicker('setEndDate', new Date());
+    });
+</script>

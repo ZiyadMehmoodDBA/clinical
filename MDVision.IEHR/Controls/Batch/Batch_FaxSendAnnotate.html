@@ -1,0 +1,41 @@
+﻿<div id="Batch_FaxSendAnnotate">
+    <div id="actionPanBatch_FaxSendAnnotate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Batch_FaxSendAnnotate.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Annotate PDFS</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblBatch_FaxSendAnnotate" class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="scrollbar">
+                                <div class="handle">
+                                    <div class="mousearea"></div>
+                                </div>
+                            </div>
+                            <div class="frame smart" id="smart-pdf-thumbnail">
+                                <ul class="items" id="pdf-thumbnail"></ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-9">
+                            <canvas id="canvas" class="hidden"></canvas>
+                            <div id="editor"></div>
+                            <div class="clearfix"></div>
+                            <div id="pdf-container" class="pull-right mt-sm">
+                                <button class="btn btn-primary btn-sm" id="save">Download File</button>
+                                <!--<button type="button" id="Classify" class="btn btn-primary btn-sm" data-toggle="tooltip" title="" data-placement="top" onclick="Batch_FaxSendAnnotate.loadClassifyPages();">Move to documents</button>-->
+                                <button class="btn btn-primary btn-sm" type="button" id="reset" onclick="Batch_FaxSendAnnotate.Reset();">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

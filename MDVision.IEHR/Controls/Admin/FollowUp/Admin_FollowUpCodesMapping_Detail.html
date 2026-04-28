@@ -1,0 +1,49 @@
+﻿<div id="followUpCodesMappingDetail">
+    <div id="actionPanFollowUpCodesMapping" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="followUpCodesMappingDetail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Codes Mapping</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmfollowUpCodesMappingDetail" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label" for="Claim Status Code">Claim Status Code<span class="required">*</span></label>
+                            <select id="ddlCSCode" class="form-control" name="ClaimStatusCode" ddlist="GetClaimStatusCode"></select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="Claim Status Category Code">Claim Status Category Code<span class="required">*</span></label>
+                            <select id="ddlCSCategoryCode" class="form-control" name="ClaimStatusCategoryCode" ddlist="GetClaimStatusCategoryCode"></select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="Action">Action<span class="required">*</span></label>
+                            <select id="ddlAction" class="form-control" name="Action" ddlist="GetFollowUpAction"></select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="Reason">Reason<span class="required">*</span></label>
+                            <select id="ddlReason" class="form-control" name="Reason" ddlist="GetFollowUpReasons"></select>
+                        </div>
+                        <div class="col-sm-8">
+                            <label class="control-label pull-left" for="Comments">Description</label>
+                            <textarea class="form-control" id="txtDescription" name="Description" rows="2" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="checkbox-custom checkbox-default">
+                                <input checked="checked" type="checkbox" id="chkActive">
+                                <label class="control-label " for="Active">Active</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-6 pull-right">
+                        <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                        <!--<button id="btnHistoryFollowupCodesMapping" class="btn btn-primary btn-sm rightbtn" type="button" onclick="followUpCodesMappingDetail.ShowHistory();">History</button>-->
+                    </div>
+                    <div class="spacer5"></div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

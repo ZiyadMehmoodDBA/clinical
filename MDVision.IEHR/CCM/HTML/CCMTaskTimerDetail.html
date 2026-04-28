@@ -1,0 +1,82 @@
+﻿<div id="pnlCCMTaskTimerDetail" style="display:none;">
+    <div id="actionPanCCMTaskTimerDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div>
+        <div class="modal-dialog modal-dialog-sm" id="modaldialog">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="CCMTaskTimerDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 id="headingTitle" class="modal-title">Add Time</h4>
+                </div>
+                <div id="modalbody" class="modal-body">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="clearfix"></div>
+                        <form method="post" id="frmCCMTaskTimerDetail" onsubmit="return false" novalidate="novalidate" class="bv-form">
+                            <button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6 p-none">
+                                        <div id="divTaskReason" class="col-xs-12 has-feedback">
+                                            <label for="" class="control-label">Task Reason <span class="required">*</span></label>
+                                            <!--<input id="txtTaskReason" name="TaskReason" type="text" class="form-control" data-bv-field="TaskReason"><i class="form-control-feedback" data-bv-icon-for="TaskReason" style="display: none;"></i>
+                                            <small class="help-block" data-bv-validator="notEmpty" data-bv-for="TaskReason" data-bv-result="NOT_VALIDATED" style="display: none;"></small>-->
+                                            <select class="form-control" id="ddlTaskReason" ddlist="TaskReasonLookup" name="TaskReason" />
+                                        </div>
+                                        <div id="divAddedBy" class="col-xs-12 has-feedback">
+                                            <label for="" class="control-label">Added By <span class="required">*</span></label>
+                                            <input id="txtAddedBy" name="AddedBy" type="text" class="form-control" disabled="" data-bv-field="AddedBy"><i class="form-control-feedback" data-bv-icon-for="AddedBy" style="display: none;"></i>
+                                            <small class="help-block" data-bv-validator="notEmpty" data-bv-for="AddedBy" data-bv-result="NOT_VALIDATED" style="display: none;"></small>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label for="" class="control-label">Comment</label>
+                                            <input id="txtComments" name="Comments" type="text" spellcheck="true" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" id="divDetails_">
+                                        <div class="col-xs-12">
+                                            <label for="" class="control-label">Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input id="dtpCallDate" name="CallDate" type="text" class="form-control" data-plugin-datepicker="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label for="" class="control-label">Time</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                <input id="txtCallTime" name="CallTime" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <label for="" class="control-label">Duration</label>
+
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <input id="txtTaskDuration" name="Duration" type="number" min="0" class="form-control">
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    <select id="ddlTaskDurationUnit" name="DurationUnit" class="form-control">
+                                                        <option value="seconds">Second(s)</option>
+                                                        <option value="minutes">Minute(s)</option>
+                                                        <option value="hours">Hour(s)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <span class="spacer10"></span>
+                            <input type="hidden" id="hfPatientId">
+                            <button id="btnEnrollmentSaveAddMore" class="btn btn-primary btn-sm rightbtn" type="button" onclick="CCMTaskTimerDetail.SaveAndAddMore();">Save & Add more</button>
+                            <button id="btnEnrollmentSave" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                            <div class="clearfix"></div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

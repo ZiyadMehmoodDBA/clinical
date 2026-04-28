@@ -1,0 +1,161 @@
+﻿<div id="pnlPatientMessageAdd" style="display:none;">
+    <div id="actionPanPatientMessageAdd" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div>
+        <div id="modaldialog">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Patient_MessageAdd.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 id="headingTitle" class="modal-title">New Message</h4>
+                </div>
+                <div id="modalbody">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="clearfix"></div>
+                        <form method="post" id="frmPatientMessageAdd" onsubmit="return false">
+                            <div class="form-group">
+                                <div id="divCommonControls" style="display:none">
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Account Number<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <input class="form-control" title="Account Number" name="AccountNumber" customName="Account Number" oninput="Patient_MessageAdd.BindAutocomplete();" onblur="Patient_MessageAdd.ValidateAutoComplete(this);" id="txtAccountNumber" type="text">
+                                            <div class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Patient_MessageAdd.OpenPatientAccount();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Type</label>
+                                    <select class="form-control" id="ddlType" name="Type" onchange="Patient_Message.ShowHideControls('#pnlPatientMessageAdd', '#ddlType'); Patient_MessageAdd.AlertTypeSelection();" ddlist="GetMessageType"></select>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Account</label><span class="required" id="spanPatientName">*</span>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtPatientName" name="PatientName" customname="Patient Account" type="text" disabled />
+                                        <div id="divSearchPatient" style="display: none;" class="input-group-btn">
+                                            <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Patient_MessageAdd.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Called Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" id="dtpCalledDate" name="CalledDate" data-plugin-datepicker="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Date of Service</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" id="dtpDateOfService" name="DateOfService" data-plugin-datepicker="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="visible-md visible-sm"><div class="clearfix"></div></div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Status</label>
+                                    <select class="form-control" id="ddlStatus" name="Status" ddlist="GetMessageStatus"></select>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Assigned to</label>
+                                    <span class="required" id="spnAssignedTo" hidden>*</span>
+                                    <select class="form-control" id="ddlAssignedto" name="Assignedto" ddlist="GetCoWorkerGroupUsersFullName"></select>
+                                </div>
+                               <div class="hidden-md hidden-sm"><div class="clearfix"></div></div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Alert Type</label>
+                                    <span class="required" id="spanAlertType" hidden>*</span>
+                                    <select class="form-control" id="ddlAlertType" name="AlertType" ddlist="GetMsgAlertTypes" disabled></select>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Priority</label>
+                                    <select class="form-control" id="ddlPriority" name="Priority" ddlist="GetMsgPriority"></select>
+                                </div>
+                                <div class="visible-md visible-sm"><div class="clearfix"></div></div>
+                                <div id="divAmendment" class="col-sm-3 col-lg-2">
+                                    <label class="control-label">Amendment Source</label>
+                                    <select class="form-control" id="ddlAmendmentSource" name="AmendmentSource" ddlist="GetAmendmentSource" disabled></select>
+                                </div>
+                                <div class="col-sm-3 col-lg-2">
+                                    <div class="hidden-xs"><div class="spacer20"></div></div>
+                                    <div class="visible-xs"><span class="spacer10"></span></div>
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input id="chkVisibleToPatient" name="VisibleToPatient" type="checkbox">
+                                        <label class="control-label" for="chkVisibleToPatient"><!--<div class="size-max120 elips-text-rap pt-xs"> -->Visible to Patient<!--</div>--></label>
+                                    </div>
+                                </div>
+                                <div id="divMedication" style="display:none">
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Medication</label>
+                                        <select class="form-control" name="Medication" id="ddlMedication">
+                                            <option value="" selected="slected">-Select-</option>
+                                            <option value="P1">Practice 1</option>
+                                            <option value="P2">Practice 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Pharmacy</label>
+                                        <select class="form-control" name="Pharmacy" id="ddlPharmacy" disabled>
+                                            <option value="" selected="slected">-Select-</option>
+                                            <option value="P1">Practice 1</option>
+                                            <option value="P2">Practice 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Lab Order</label>
+                                        <select class="form-control" id="ddlLabOrder">
+                                            <option value="" onabort="LabOrder" selected="slected">-Select-</option>
+                                            <option value="P1">Practice 1</option>
+                                            <option value="P2">Practice 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Lab</label>
+                                        <select class="form-control" name="Lab" id="ddlLab">
+                                            <option value="" selected="slected">-Select-</option>
+                                            <option value="P1">Practice 1</option>
+                                            <option value="P2">Practice 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label class="control-label">Message<span class="required">*</span></label>
+                                    <textarea class="form-control" rows="3" id="txtMessage" name="msgDetail" spellcheck="true"></textarea>
+                                </div>
+                            </div>
+                            <span class="spacer10"></span>
+
+                            <button id="btnMessageAdd" class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            <div class="clearfix"></div>
+                            <input type="hidden" id="hfPatientId" value="" />
+                            <input type="hidden" id="hfUserMessagesId" value="" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        //initialization of date-pickers.
+        utility.CreateDatePicker('pnlPatientMessageAdd #dtpCalledDate,#pnlPatientMessageAdd #dtpDateOfService', function () {
+            //on-change callback method
+        });
+
+
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _renderMenu: function (ul, items) {
+                var that = this;
+                $.each(items, function (index, item) {
+                    that._renderItemData(ul, item);
+                });
+                $(ul).wrap("<div></div>");
+            }
+        });
+    });
+</script>

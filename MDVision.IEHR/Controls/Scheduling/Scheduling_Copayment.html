@@ -1,0 +1,695 @@
+﻿<div class="row" id="schcopayment" style="display:none;">
+    <div id="actionPanCopayment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="schcopayment.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Copayment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="copaymentpanel">
+                    <form method="post" onsubmit="return false" id="frmCopayment">
+                        <div class="form-group">
+
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label" for="Payment Type">Payment Type</label><span class="required">*</span>
+                                <select id="ddlPaymentType" class="form-control" ddlist="GetPaymentType" name="PaymentType"></select>
+
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <label class="control-label">Date Paid</label><span class="required">*</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" name="DatePaid" data-plugin-datepicker="" class="form-control" id="dpDatePaid">
+                                </div>
+                            </div>
+
+                            <div id="divAdvancePayment" class="col-sm-4  col-md-3" style="display:none;">
+                                <label id="lblAdvancePayment" for="AdvancePayment" class="control-label">Advance Payment<span class="required">*</span></label>
+                                <!--<a id="lnkAdvancePaymentEdit" style="display:none;" href="#" onclick="" title="Edit Advance Payment">Advance Payment<span class="required">*</span></a>-->
+                                <div class="input-group">
+                                    <input class="form-control" id="txtAdvancePayment" name="AdvancePayment" placeholder="" type="text" onblur="utility.ValidateAutoComplete(this, 'hfAdvancePaymentId', false); ">
+                                    <div class="input-group-btn">
+                                        <button id="lnkAdvancePayment" class="btn btn-primary btn-xs " type="button" onclick="schcopayment.OpenAdvancePayment();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right pl-sm" id="divAdvanceBalance">
+                                <span>Advance Balance: <i class="fa fa-dollar text-success"></i></span>
+                                <span class="text-success" id="lblAdvanceBalance">00.00</span>
+                            </div>
+
+                            <!--<div class="col-sm-3 pad-a-labelsize">
+                                <div class="radio-custom radio-dafault">
+                                    <input type="radio" id="rdPCP" name="SpecialistPCP">
+                                    <label class="control-label" for="PCP">PCP</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 pad-a-labelsize">
+                                <div class="radio-custom radio-dafault">
+                                    <input type="radio" id="rdSpecialist" name="SpecialistPCP">
+                                    <label class="control-label" for="Specialist">Specialist</label>
+                                </div>
+                            </div>-->
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-sm-4 col-md-3" id="divCheckNumber">
+                                <label class="control-label" for="Check Number">Check Number</label>
+                                <input type="text" class="form-control" name="CheckNumber" id="txtCheckNumber">
+                            </div>
+                            <div class="col-sm-4 col-md-3" id="divCheckDate">
+                                <label class="control-label">Check Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" name="CheckDate" data-plugin-datepicker="" class="form-control" id="dpCheckDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-md-3" id="divCreditCadType">
+                                <label class="control-label" for="Payment Type">Card Type</label>
+                                <select name="creditCardType" id="ddlCardType" class="form-control" ddlist="GetCreditCardType"></select>
+
+                            </div>
+                            <div class="col-sm-4 col-md-3" id="divCardNumber">
+                                <label class="control-label" for="Card Number">Card Number</label>
+                                <input type="text" class="form-control" name="CardNumber" id="txtCardNumber" maxlength="16">
+                            </div>
+                            <div class="col-sm-4 col-md-3" id="divExpiryDate">
+                                <label class="control-label" for="Cheque Date">Expiry Date (mm/yyyy)</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" data-plugin-datepicker="" name="ExpiryDate" class="form-control" id="dpExpiryDate">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-md-3">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <label for="Paid" class="control-label">Paid</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                            <input class="form-control" name="Paid" id="txtPaid" type="text" maxlength="10" placeholder="99999.99">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <label class="control-label">Paid A/C</label>
+                                        <select id="ddlPaidLedger" name="PaidAC" class="form-control "></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <div class="row">
+                                    <div class="col-xs-5 pl-md pr-xs">
+                                        <label for="Discount1" class="control-label">Discount</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                            <input class="form-control" id="txtDiscount" name="Discount" type="text" maxlength="10" placeholder="99999.99">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7 pr-md pl-xs">
+                                        <label class="control-label">Discount A/C</label>
+                                        <select id="ddlDiscountLedger" class="form-control " name="DiscountAC"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <label for="Balance" class="control-label">Balance</label>
+                                <input class="form-control" id="txtBalance" name="Balance" type="text" disabled>
+                            </div>
+                            <div class="pull-right mt-md">
+                                <button id="btnsave" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                                <button id="btnsaveExit" class="btn btn-primary btn-sm rightbtn" type="submit" onclick="schcopayment.SaveAndExit(event)">Save & Exit</button>
+                            </div>
+                            <span class="spacer10"></span>
+                            <div class="col-sm-9">
+                                <div class="pull-left mr-md">
+                                    <label class="control-label">Comments</label>
+                                </div>
+                                <textarea class="form-control" rows="2" maxlength="2500" id="txtComments" name="Comments" spellcheck="true"></textarea>
+                            </div>
+                            <div class="pull-right pl-sm pr-default" id="divCopayBalance">
+                                <label class="control-label" for="Copay Paid">Total Paid: <i class="fa fa-dollar"></i></label>
+                                <label class="control-label" id="lblTotalPaid" for="00.00">00.00</label>
+                                <span class="clearfix"></span>
+                                <label class="control-label" for="Copay Discount">Total Discount: <i class="fa fa-dollar"></i></label>
+                                <label class="control-label" id="lblTotalDiscount" for="00.00">00.00</label>
+                            </div>
+                            <span class="spacer10"></span>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="txtAccountNo" />
+                        <input type="hidden" id="hfAppointmentId" />
+                        <input type="hidden" id="hfPatientId" />
+                        <input type="hidden" id="hfProviderId" />
+                        <input type="hidden" id="hfFacilityId" />
+                        <input type="hidden" id="hfAdvancePaymentId" value="" />
+                    </form>
+                    <div class="pull-right pr-default"><button id="btnPrint" type="button" class="btn btn-primary btn-sm pb-tiny" onclick="schcopayment.GetALLCheckedRecipts()" disabled >Print</button></div>
+                    <div class="spacer10"></div>
+                    <div id="pnlCopayment_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body panel-featured">
+                                <input type="hidden" id="Copayment_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-hover mb-none" id="dgvCopayment">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">PaymentId</th>
+                                            <th class="size30 text-center va-middle">Action</th>
+                                            <th class="size60 text-center va-middle">Date Paid</th>
+                                            <th class="size40 text-center va-middle">Amount Paid</th>
+                                            <th class="size60 text-center va-middle">Payment Type</th>
+                                            <th class="size60 text-center va-middle">Check/Card #</th>
+                                            <th class="size100 text-center va-middle">Account</th>
+                                            <th class="size140 text-center va-middle">Entry Date</th>
+                                            <th class="size50 text-center va-middle">Entered By</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //---------------Radio PCP/Specialist------------
+
+        $('#schcopayment input:radio[name=SpecialistPCP]').change(function () {
+            //if ($('#schcopayment #rdPCP').is(':checked')) {
+
+            var sum = planAppCopay - copaySum;
+            $("#schcopayment #txtBalance").val(sum.toFixed(Number(globalAppdata.DecimalPlaces)));
+            $("#schcopayment #txtPaid").val(sum.toFixed(Number(globalAppdata.DecimalPlaces)));
+
+            //}
+            //else if ($('#schcopayment #rdSpecialist').is(':checked')) {
+
+            //var sum = planSpecialistCopay - copaySum;
+            //$("#schcopayment #txtBalance").val(sum);
+            //$("#schcopayment #txtPaid").val(sum);
+
+            //}
+
+        });
+
+        //-----------------------------------------------
+        var txtpaid = 0;
+        var txtdiscount = 0;
+        $('#schcopayment #txtPaid').keypress(function (event) {
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                if (event.keyCode != 9 && event.keyCode != 8)
+                    event.preventDefault();
+            }
+        });
+        $('#schcopayment #txtDiscount').keypress(function (event) {
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                if (event.keyCode != 9 && event.keyCode != 8)
+                    event.preventDefault();
+            }
+        });
+        $('#schcopayment #txtPaid').change(function () {
+            if ($(this).val() != "") {
+                this.value = parseFloat(this.value).toFixed(2);
+            }
+
+            txtpaid = 0;
+            txtdiscount = 0;
+            var remaining = 0;
+            if ($(this).val() != "") {
+
+                txtpaid = parseFloat($(this).val());
+            }
+            if ($('#schcopayment #txtDiscount').val() != "")
+                txtdiscount = parseFloat($('#schcopayment #txtDiscount').val());
+
+            if ($(this).val() == "") {
+
+                txtpaid = 0;
+            }
+
+
+
+            var txtbalanc = 0;
+            if (copaySum == 0) {
+                //if ($('#schcopayment #rdPCP').is(':checked')) {
+                txtbalanc = parseFloat(planAppCopay);
+                //}
+                //else if ($('#schcopayment #rdSpecialist').is(':checked')) {
+
+                //    txtbalanc = parseFloat(planSpecialistCopay);
+                //}
+            }
+            else {
+                //if ($('#schcopayment #rdPCP').is(':checked')) {
+                txtbalanc = parseFloat(planAppCopay) - parseFloat(copaySum);
+                //}
+                //else if ($('#schcopayment #rdSpecialist').is(':checked')) {
+                //    txtbalanc = parseFloat(planSpecialistCopay) - parseFloat(copaySum);
+                //}
+            }
+
+            if (txtdiscount != "" && copaySum == 0)
+                remaining = txtbalanc - (txtpaid + txtdiscount);
+            if (copaySum == 0 && txtpaid != "")
+                remaining = txtbalanc - txtpaid;
+            if (copaySum != 0) {
+                if (txtpaid != "") {
+                    if (txtdiscount != "") {
+                        remaining = txtbalanc - (txtpaid + txtdiscount);
+                    }
+                    else {
+                        remaining = txtbalanc - (txtpaid);
+                    }
+
+                }
+                if (txtpaid == "") {
+                    if (txtdiscount == "") {
+                        remaining = txtbalanc;
+                    }
+                    else {
+                        remaining = txtbalanc - (txtdiscount);
+                    }
+                }
+            }
+           /* if (remaining < 0) {
+                utility.DisplayMessages('Paid Amount Exceeded Balance Amount.', 3);
+                $("#schcopayment #txtBalance").val(txtbalanc.toFixed(Number(globalAppdata.DecimalPlaces)));
+                $("#schcopayment #txtBalance").text(txtbalanc.toFixed(Number(globalAppdata.DecimalPlaces)));
+
+                $(this).val('');
+                $("#schcopayment #txtDiscount").val('');
+
+                $(this).text('');
+                $("#schcopayment #txtDiscount").text('');
+            }
+            else {*/
+                if (txtpaid == 0 && txtdiscount == 0) {
+                    $("#schcopayment #txtBalance").val(txtbalanc.toFixed(Number(globalAppdata.DecimalPlaces)));
+                    $("#schcopayment #txtBalance").text(txtbalanc.toFixed(Number(globalAppdata.DecimalPlaces)));
+                }
+                else {
+                    $("#schcopayment #txtBalance").val(remaining.toFixed(Number(globalAppdata.DecimalPlaces)));
+                    $("#schcopayment #txtBalance").text(remaining.toFixed(Number(globalAppdata.DecimalPlaces)));
+                }
+
+           // }
+        });
+        $('#schcopayment #txtDiscount').change(function () {
+            if ($(this).val() != "") {
+
+                this.value = parseFloat(this.value).toFixed(2);
+
+            }
+
+            txtpaid = 0;
+            txtdiscount = 0;
+            var remaining = 0;
+            if ($(this).val() != "")
+                txtdiscount = parseFloat($(this).val());
+
+            if ($(this).val() == "") {
+
+                txtdiscount = 0;
+            }
+
+            var txtbalanc = 0;
+            if (copaySum == 0) {
+                //if ($('#schcopayment #rdPCP').is(':checked')) {
+                txtbalanc = parseFloat(planAppCopay);
+                //}
+                //else if ($('#schcopayment #rdSpecialist').is(':checked')) {
+                //    txtbalanc = parseFloat(planSpecialistCopay);
+                //}
+            }
+            else {
+                //if ($('#schcopayment #rdPCP').is(':checked')) {
+                txtbalanc = parseFloat(planAppCopay) - parseFloat(copaySum);
+                //}
+                //else if ($('#schcopayment #rdSpecialist').is(':checked')) {
+                //    txtbalanc = parseFloat(planSpecialistCopay) - parseFloat(copaySum);
+                //}
+            }
+
+            if ($('#schcopayment #txtPaid').val() != "")
+                txtpaid = parseFloat($('#schcopayment #txtPaid').val());
+
+
+            if (txtpaid != "" && copaySum == 0)
+                remaining = txtbalanc - (txtpaid + txtdiscount);
+            if (copaySum == 0 && txtpaid == "")
+                remaining = txtbalanc - txtdiscount;
+
+            if (copaySum != 0) {
+                if (txtpaid != "") {
+                    if (txtdiscount != "") {
+                        remaining = txtbalanc - (txtpaid + txtdiscount);
+                    }
+                    else {
+                        remaining = txtbalanc - (txtpaid);
+                    }
+
+                }
+                if (txtpaid == "") {
+                    if (txtdiscount == "") {
+                        remaining = txtbalanc;
+                    }
+                    else {
+                        remaining = txtbalanc - (txtdiscount);
+                    }
+                }
+            }
+            if (remaining < 0) {
+                utility.DisplayMessages('Discount Amount Exceeded Balance Amount.', 3);
+                $("#schcopayment #txtBalance").val(txtbalanc.toFixed(Number(globalAppdata.DecimalPlaces)));
+                $("#schcopayment #txtBalance").text(txtbalanc.toFixed(Number(globalAppdata.DecimalPlaces)));
+                $(this).val('');
+                $("#schcopayment #txtPaid").val('');
+
+                $(this).text('');
+                $("#schcopayment #txtPaid").text('');
+
+            }
+            else {
+
+                $("#schcopayment #txtBalance").val(remaining.toFixed(Number(globalAppdata.DecimalPlaces)));
+                $("#schcopayment #txtBalance").text(remaining.toFixed(Number(globalAppdata.DecimalPlaces)));
+
+            }
+        });
+
+
+        //$('#schcopayment #dpDatePaid').datepicker({
+        //    todayHighlight: true
+        //}).on('changeDate', function (e) {
+        //    $(this).datepicker('hide');
+        //    $('#frmCopayment').bootstrapValidator('revalidateField', 'DatePaid');
+
+        //});
+
+        $('#schcopayment #dpDatePaid').val($.datepicker.formatDate('mm/dd/yy', new Date()));
+
+        utility.CreateDatePicker('schcopayment #dpDatePaid', function () {
+            //on-change callback method
+            $('#frmCopayment').bootstrapValidator('revalidateField', 'DatePaid');
+        });
+
+        utility.CreateDatePicker('schcopayment #dpCheckDate', function () {
+            //on-change callback method
+            $('#frmCopayment').bootstrapValidator('revalidateField', 'CheckDate');
+        });
+        //utility.CreateDatePicker('schcopayment #dpExpiryDate', function () {
+        //    //on-change callback method
+        //});
+
+        //$('#schcopayment #dpExpiryDate').datepicker({
+        //    format: 'mm/yyyy',
+        //}).on('changeDate', function (e) {
+        //    $(this).datepicker('hide');
+        //    $('#frmCopayment').bootstrapValidator('revalidateField', 'ExpiryDate');
+
+        //});
+
+        //-------------------------------------------------------------------------------------
+        $('#schcopayment #divCheckNumber').hide();
+        $('#schcopayment #divCheckDate').hide();
+        $('#schcopayment #divCardNumber').hide();
+        $('#schcopayment #divExpiryDate').hide();
+        $('#schcopayment #divCreditCadType').hide();
+
+        $("#schcopayment #ddlPaymentType").change(function () {
+
+
+
+            if ($("#schcopayment #ddlPaymentType option:selected").text() == "Cash") {
+
+
+                $('#schcopayment #divCheckNumber').hide();
+                $('#schcopayment #divCheckDate').hide();
+                $('#schcopayment #divCardNumber').hide();
+                $('#schcopayment #divExpiryDate').hide();
+                $('#schcopayment #divCreditCadType').hide();
+                $('#schcopayment #divAdvancePayment').hide();
+                $('#schcopayment #divAdvanceBalance').hide();
+            }
+            if ($("#schcopayment #ddlPaymentType option:selected").text() == 'Check') {
+
+
+                $('#schcopayment #divCheckNumber').show();
+                $('#schcopayment #divCheckDate').show();
+                $('#schcopayment #divCardNumber').hide();
+                $('#schcopayment #divExpiryDate').hide();
+                $('#schcopayment #divCreditCadType').hide();
+                $('#schcopayment #divAdvancePayment').hide();
+                $('#schcopayment #divAdvanceBalance').hide();
+
+                
+
+
+            }
+            if ($("#schcopayment #ddlPaymentType option:selected").text() == 'Credit Card') {
+
+
+                $('#schcopayment #divCheckNumber').hide();
+                $('#schcopayment #divCheckDate').hide();
+                $('#schcopayment #divCardNumber').show();
+                $('#schcopayment #divExpiryDate').show();
+                $('#schcopayment #divCreditCadType').show();
+                $('#schcopayment #divAdvancePayment').hide();
+                $('#schcopayment #divAdvanceBalance').hide();
+
+            }
+            if ($("#schcopayment #ddlPaymentType option:selected").text() == 'Advance Payment') {
+
+
+                $('#schcopayment #divCheckNumber').hide();
+                $('#schcopayment #divCheckDate').hide();
+                $('#schcopayment #divCardNumber').hide();
+                $('#schcopayment #divExpiryDate').hide();
+                $('#schcopayment #divCreditCadType').hide();
+                $('#schcopayment #divAdvancePayment').show();
+                $('#schcopayment #divAdvanceBalance').show();
+
+
+            }
+
+        });
+
+        //--------------------------------------------------------------------------------------------
+        ////// ********* Validation Functions ********* \\\\\\\\
+        //--------------------------------------------------------------------------------------------
+        //$('#schcopayment #txtPaid').keyup(function () {
+        //    if ($('#schcopayment #txtPaid').val != '') {
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', false);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', false);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+
+        //    }
+        //    else if ($('#schcopayment #txtDiscount').val != '') {
+
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', false);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', false);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+
+        //    }
+        //    else if ($('#schcopayment #txtDiscount').val == '' && $('#schcopayment #txtPaid').val == '') {
+
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+
+        //    }
+
+        //});
+
+        //$('#schcopayment #txtDiscount').keyup(function () {
+
+        //    if ($('#schcopayment #txtDiscount').val != '') {
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', false);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', false);
+
+        //    }
+        //    else if ($('#schcopayment #txtPaid').val != '') {
+
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', false);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', false);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+
+        //    }
+        //    else if ($('#schcopayment #txtDiscount').val == '' && $('#schcopayment #txtPaid').val == '') {
+
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+
+        //    }
+        //});
+
+
+        //$("#schcopayment #ddlPaidLedger").change(function () {
+        //    if ($('#schcopayment #ddlPaidLedger option:selected').text().toUpperCase() != '- SELECT -') {
+
+
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+        //    }
+        //});
+
+        //$("#schcopayment #ddlDiscountLedger").change(function () {
+        //    if ($('#schcopayment #ddlDiscountLedger option:selected').text().toUpperCase() != '- SELECT -') {
+
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+
+        //    }
+        //});
+
+        //$("#schcopayment #txtPaid").focusout(function () {
+        //    if ($("#schcopayment #txtPaid").val() == 0.00) {
+        //        //utility.DisplayMessages('Please enter Paid Amount greater than 0', 3);
+
+        //        $(this).val('');
+        //        $("#schcopayment #txtPaid").val('');
+
+        //        $(this).text('');
+        //        $("#schcopayment #txtPaid").text('');
+
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+        //    }
+        //});
+
+        //$("#schcopayment #txtDiscount").focusout(function () {
+        //    if ($("#schcopayment #txtDiscount").val() == 0.00) {
+        //        //utility.DisplayMessages('Please enter Discount Amount greater than 0', 3);
+
+        //        $(this).val('');
+        //        $("#schcopayment #txtDiscount").val('');
+
+        //        $(this).text('');
+        //        $("#schcopayment #txtDiscount").text('');
+
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+        //        $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+        //    }
+        //});
+        //---------------------------------------------------------------------------------------------
+
+        //New Validation
+
+        $("#schcopayment #txtPaid").focusout(function () {
+
+            if ($('#schcopayment #txtDiscount').val() == '' && $('#schcopayment #txtPaid').val() == '') {
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+            }
+
+            else if ($('#schcopayment #txtPaid').val() != '') {
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', false);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', false);
+            }
+
+
+        });
+
+        $("#schcopayment #txtDiscount").focusout(function () {
+
+            if ($('#schcopayment #txtDiscount').val() == '' && $('#schcopayment #txtPaid').val() == '') {
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+            }
+
+            else if ($('#schcopayment #txtDiscount').val() != '') {
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', false);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', false);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+            }
+
+            if ($('#schcopayment #txtPaid').val() != '' && $('#schcopayment #txtDiscount').val() == '') {
+
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', false);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', false);
+
+            }
+
+        });
+
+        $("#schcopayment #ddlPaidLedger").on("blur", function () {
+
+            if ($('#schcopayment #txtPaid').val() != '' && $('#schcopayment #txtDiscount').val() == '') {
+
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', false);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', false);
+
+            }
+
+            else if ($('#schcopayment #txtPaid').val() == '' && $('#schcopayment #txtDiscount').val() == '') {
+
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+            }
+
+
+        });
+
+        $("#schcopayment #ddlDiscountLedger").on("blur", function () {
+
+            if ($('#schcopayment #txtPaid').val() == '' && $('#schcopayment #txtDiscount').val() != '') {
+
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', false);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', false);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+
+            }
+
+            else if ($('#schcopayment #txtPaid').val() == '' && $('#schcopayment #txtDiscount').val() == '') {
+
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', true);
+            }
+
+            else if ($('#schcopayment #txtPaid').val() != '' && $('#schcopayment #txtDiscount').val() == '') {
+
+
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('PaidAC', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Paid', true);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('DiscountAC', false);
+                $('#frmCopayment').data('bootstrapValidator').enableFieldValidators('Discount', false);
+            }
+
+        });
+
+    });
+
+</script>

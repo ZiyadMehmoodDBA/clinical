@@ -1,0 +1,61 @@
+﻿<div id="pnlDocumentExport">
+    <div id="actionPanDocumentExport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Document_Export.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Export Document</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel-body">
+                    <form method="get">
+                        <div class="form-group">
+                            <div class="col-xs-8">
+                                <label for="FolderName" class="control-label">File Name<span class="required">*</span></label>
+                                <input class="form-control" name="FolderName" id="txtFolderName" type="text" maxlength="35">
+                            </div>
+                            <div class="col-xs-8 pt-xs" id="fileConverstion">
+                                <label class="control-label">Select Type</label>
+                                <br />
+                                <label class="radio-inline"><input name="converttype" type="radio" value="BMP">BMP</label>
+                                <label class="radio-inline"><input name="converttype" type="radio" value="JPEG">JPEG</label>
+                                <label class="radio-inline"><input name="converttype" type="radio" value="PNG">PNG  </label>
+                                <label class="radio-inline"><input name="converttype" type="radio" value="TIFF">TIFF</label>
+                                <label class="radio-inline"><input name="converttype" type="radio" value="PDF">PDF  </label>
+                            </div>
+                            <div class="col-xs-3 pull-right">
+                                <div class="spacer10"></div>
+                                <button class="btn btn-primary rightbtn btn-sm" onclick="Document_Export.ExportFile(this);">External Export</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <br />
+                <div class="panel-body">
+                    <form method="get" id="frmDocumentInternalExport">
+                        <div class="form-group">
+                            <div class="col-xs-8">
+                                <label for="FolderName" class="control-label">Patient Name</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtAccountNumber" customName="Patient Name" name="AccountNumber" type="text" oninput="Document_Export.BindPatientAccount();" onblur="utility.ValidateAutoCompletePatientName($('#pnlDocumentExport #frmDocumentInternalExport #txtAccountNumber'), 'pnlDocumentExport #frmDocumentInternalExport #hfPatientId', false, 0, null, null);">
+                                    <div id="divSearchPatient" class="input-group-btn">
+                                        <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Document_Export.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <label for="FolderName" class="control-label">Patient Folder</label>
+                                <select id="ddlFolder" name="Folder" multiple="multiple" customid="Folder" class="form-control multiselect" ddlmultilist="GetDocument" required></select>
+                            </div>
+                            <div class="col-xs-3 pull-right">
+                                <div class="spacer10"></div>
+                                <button class="btn btn-primary rightbtn btn-sm" onclick="Document_Export.InternalExportFiles(event);">Internal Export</button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="hfPatientId" value="-1" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

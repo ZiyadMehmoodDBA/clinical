@@ -1,0 +1,91 @@
+﻿<div class="row" id="pnlClinical_NotesAmendment">
+    <div id="actionPanClinical_NotesAmendment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div id="modelId" class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_NotesAmendment.UnLoadTab();"></button>
+                <h4 class="modal-title">Amendment</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmClinical_NotesAmendment" method="post" onsubmit="return false">
+
+                    <div class="col-sm-12 height-max300 Of-a own-scroll hidden" id="AmendmentData">
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none no-footer">
+                            <tbody>
+                                <tr id="Problems" class="hidden">
+                                    <td colspan="2"><h5 class="blue">Problems</h5></td>
+                                </tr>
+                                <tr id="Problemsheader" class="hidden">
+                                    <td><p><b>Previous State</b></p></td>
+                                    <td><p><b>Current State</b></p></td>
+                                </tr>
+                                <tr id="ProblemsDataRow" class="hidden">
+                                    <td class="disableAll opacity1"><ul class="list-unstyled" id="ProblemOld"></ul></td>
+                                    <td class="disableAll opacity1"><ul class="list-unstyled" id="ProblemCurrent"></ul></td>
+                                </tr>
+                                <tr id="Procedures" class="hidden">
+                                    <td colspan="2"><h5 class="blue">Procedures</h5></td>
+                                </tr>
+                                <tr id="Proceduresheader" class="hidden">
+                                    <td><p><b>Previous State</b></p></td>
+                                    <td><p><b>Current State</b></p></td>
+                                </tr>
+                                <tr id="ProceduresDataRow" class="hidden">
+                                    <td class="disableAll opacity1"><ul class="list-unstyled" id="ProcedureOld"></ul></td>
+                                    <td class="disableAll opacity1"><ul class="list-unstyled" id="ProcedureCurrent"></ul></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-sm-12 height-max300 Of-a own-scroll hidden" id="AmendmentReportData"></div>
+                    <div id="NoAmendmentsMsg" class="hidden">
+                        <h5 class="bold">No amended problem(s) and procedure(s) available</h5>
+                    </div>
+                    <div id="NoAmendmentsReportMsg" class="hidden">
+                        <h5 class="bold">No amendments available</h5>
+                    </div>
+                    <div class="col-sm-4" id="AmendmentRequestedBy">
+                        <label class="control-label">Requested By <span class="required">*</span></label>
+                        <select id="ddlAmendment" name="ddlAmendment" class="form-control">
+                            <!--<option value="0">Select</option>-->
+                            <option value="Provider" selected="selected">Provider</option>
+                            <option value="Patient">Patient</option>
+                            <option value="Referral">Referral</option>
+                        </select>
+
+
+                    </div>
+                    <div class="pull-left pad-a-labelsize" id=DivAmendforbilling>
+                        <div class="checkbox-custom">
+                            <input type="checkbox" id="chkAmendmentForBilling" name="AmendmentForBilling">
+                            <label class="control-label">Billing Alert</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" id="AmendmentComments">
+                        <label class="control-label">Comments </label>
+                        <textarea id="AmendmentComments" type="text" class="form-control" spellcheck="true" />
+                    </div>
+                    <div class="spacer5"></div>
+                    <div class="pull-right mt-md pr-default">
+                        
+                        <button id="btnAccepted" type="submit" class="btn btn-primary btn-sm" value="Accepted" onclick="Clinical_NotesAmendment.AmendmentNotes(this);">Accepted</button>
+                        <button id="btnDenied" type="submit" class="btn btn-primary btn-sm" value="Denied" onclick="Clinical_NotesAmendment.AmendmentNotes(this);">Denied</button>
+                    </div>
+                    <div class="spacer10"></div>
+                    <div id="OldSoap" hidden>
+                    </div>
+                    <div id="CurrentSoap" hidden>
+                    </div>
+                    <div id="AmendmentHistory" class="hidden">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

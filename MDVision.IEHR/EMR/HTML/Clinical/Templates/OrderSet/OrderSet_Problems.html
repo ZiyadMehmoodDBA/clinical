@@ -1,0 +1,198 @@
+﻿<div class="row" id="pnlOrderSetProblemLists">
+    <div id="actionPanOrderSetProblemLists" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="OrderSet_Problems.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Problem Lists</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="OrderSet_Problems.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Add Problem</h2>
+                            </header>
+                        </div>
+
+                        <div class="panel-body NoRadiusT" id="pnlSection_Search">
+                            <div class="toggle" data-plugin-toggle>
+                                <section class="toggle active">
+                                    <label>Add Problem</label>
+                                    <div class="toggle-content p-none panel-body NoRadiusT">
+                                        <form id="frmOrderSetProblemLists" method="post" onsubmit="return false">
+
+                                            <div style="height:260px;">
+                                                <!--toggleHorDefault toggle-->
+                                                <div id="favSectionDiv" class="toggleHorDefault toggled" data-title="Favorites">
+                                                    <div class="col-xs-12 pb-sm">
+                                                        <span class="pull-left">Favorites List</span>
+                                                        <div class="clearfix"></div>
+                                                        <select id="ddlFavProblems" name="FavProblemId" class="form-control" ddlist="GetFavProblems" onchange="OrderSet_Problems.BindFavProblems()"></select>
+                                                    </div>
+                                                    <ul class="listPrimary height-max200 overflowY own-scroll" id="ulFavCompliantDisease" name="favCompliantDisease"></ul>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                                            <label class="control-label" for="Problems">Problems</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtProblems" data-popupunload="false" onkeyup="OrderSet_Problems.ResetDiagnosis();" oninput="OrderSet_Problems.BindICD9AutoComplete(this)" name="ProblemName" type="text" value="">
+                                                                <div class="input-group-btn">
+                                                                    <button id="btnProblems" class="btn btn-primary btn-xs " type="button" onclick="OrderSet_Problems.OpenSearchPopup()"><i class="glyphicon glyphicon-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                                            <label class="control-label" for="Diagnosis">Diagnosis</label>
+                                                            <input class="form-control" id="txtDiagnosis" name="Description" type="text" disabled>
+                                                            <!--<select class="form-control" id="ddlDiagnosis" name="Diagnosis"></select>-->
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                                            <label class="control-label">Chronicity Level</label>
+                                                            <select id="ddlChronicityLevel" name="ChronicityLevel" class="form-control" ddlist="GetChronicityLevel" disabled></select>
+
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                                            <label class="control-label">Severity</label>
+                                                            <select id="ddlSeverity" name="Severity" class="form-control" ddlist="GetSeverityType" disabled></select>
+
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                                            <label class="control-label" for="Start Date">Start Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpStartDate" name="StartDate" data-plugin-datepicker disabled autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                                            <label class="control-label" for="End Date">End Date</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                <input type="text" class="form-control" id="dpEndDate" name="EndDate" data-plugin-datepicker disabled autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-8 col-md-6 col-lg-4">
+                                                            <label class="control-label" for="Comments">Comments</label>
+                                                            <textarea class="form-control" id="txtComments" maxlength="500" name="Comments" spellcheck="true" rows="3" disabled></textarea>
+                                                        </div>
+                                                        <div class="col-sm-1 pull-right mt-md">
+                                                            <button class="btn btn-success btn-sm rightbtn" type="submit" id="btnAddProbList">Add</button>
+                                                        </div>
+                                                        <div class=" pad-a-labelsize pr-default pull-right">
+                                                            <div id="chkCC" class="checkbox-custom hidden">
+                                                                <input type="checkbox" id="chkChiefComplaints" name="IsChiefComplaint" value="" checked="">
+                                                                <label class="control-label">Chief Complaint</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div id="divShowHistory" class="col-sm-2 pull-right mt-md hidden">
+                                                            <button class="btn btn-success btn-sm rightbtn" type="button" onclick="OrderSet_Problems.ShowHistory(null);" id="btnProbListHistory"><i class="fa fa-history"></i> History</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!--/toggleHorDefault toggle-->
+                                            </div>
+
+                                            <!----------------kr---------------->
+                                            <div class="clearfix"></div>
+
+                                            <input type="hidden" name="OrderSetId" id="hfOrderSetId" />
+                                            <input type="hidden" name="gridComments" id="hfGridComments" />
+                                            <input type="hidden" name="IMOProblem" id="hfIMOProblem" />
+                                            <ul hidden class="listPrimary height-max200 overflowY own-scroll" id="ulProblemDisease" name="favCompliantDisease">
+                                        </form>
+                                    </div>
+
+                                </section>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="hidden" id="hfICD1-1" value="">
+                            <input type="hidden" id="hfICDDescription1-1" value="">
+                            <input type="hidden" id="hfICD101-1" value="">
+                            <input type="hidden" id="hfICD10Description1-1" value="">
+                            <input type="hidden" id="hfSNOMED1-1" value="">
+                            <input type="hidden" id="hfSNOMEDDescription1-1" value="">
+                        </div>
+                    </section>
+
+                    <div id="pnlOrderSetProblemLists_Result" style="display: inline;">
+
+                        <div class="panel-body panel-featured">
+
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvOrderSetProblemLists">
+                                <thead>
+                                    <tr>
+                                        <th class="size20 p-none" coltype="Expand" bsortable="false"></th>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size60 size-min60">Action</th>
+                                        <th controlid="txtProblem" iscontroldisabled="1" controlname="ProblemName" class="noWordBreak size30">Problem</th>
+                                        <th controlid="ddlDiagnosis" controlname="Description" class="noWordBreak size200" coltype="dropdown">ICD (Diagnosis)</th>
+                                        <th controlid="ddlChronicityLevel" controlname="ChronicityLevel" class="noWordBreak size30" coltype="dropdown">Chronicity Level</th>
+                                        <th controlid="ddlSeverity" controlname="Severity" class="noWordBreak size30" coltype="dropdown">Severity</th>
+                                        <th controlid="dtpFromProblemDate" controlname="StartDate" class="noWordBreak size30" coltype="datetime">Start Date</th>
+                                        <th controlid="dtpToProblemDate" controlname="EndDate" class="noWordBreak size30" coltype="datetime">End Date</th>
+                                        <th controlid="txtLastUpdated" iscontroldisabled="1" controlname="LastUpdated" class="noWordBreak size30">Last Updated</th>
+                                        <th controlid="txtComments" controlname="Comments" class="noWordBreak size30" coltype="btnOSProblemComments">Comments</th>
+                                        <th style="display:none" controlid="txtComments" controlname="hfComments" class="noWordBreak size30" coltype="textbox">Comments</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="dgvOrderSetProblemLists_Paging"></div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+            <div>
+                <input type="hidden" id="hfICD1-1" value="">
+                <input type="hidden" id="hfICDDescription1-1" value="">
+                <input type="hidden" id="hfICD101-1" value="">
+                <input type="hidden" id="hfICD10Description1-1" value="">
+                <input type="hidden" id="hfSNOMED1-1" value="">
+                <input type="hidden" id="hfSNOMEDDescription1-1" value="">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+
+
+    (function ($) {
+        'use strict';
+        $(function () {
+            $('[data-plugin-ios-switch]').each(function () {
+                var $this = $(this);
+
+                $this.themePluginIOS7Switch();
+            });
+        });
+    }).apply(this, [jQuery]);
+
+
+
+</script>

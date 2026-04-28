@@ -1,0 +1,63 @@
+﻿<div class="row" id="pnlAdminIMOCPT" style="display:none;">
+    <div id="actionPanAdminIMOCPT" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_IMOCPT.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">CPT Codes</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_IMOCPT.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search CPT </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlIMOCPT_Search">
+                            <form method="post" id="frmCPTIMO" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="control-label" id="lblCPTAndDescription">CPT Code / Description</label><span class="required">*</span>
+                                        <input class="form-control" id="txtCPTAndDescription" name="CPTAndDescription" type="text" placeholder="Search CPT Code / Description" value="">
+                                    </div>
+                                    <div class="col-sm-2 mt-md pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnIMOCPTSearch" type="button" onclick="Admin_IMOCPT.CPTSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlIMOCPT_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="hidden" id="CPT_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvIMOCPT">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">CPTId</th>
+                                            <th>CPT / HCPCS</th>
+                                            <th>CPT Description</th>
+                                            <!--<th>SNOMED</th>
+                                            <th>SNOMED Description</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divIMOCPTPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

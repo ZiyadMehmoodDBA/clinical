@@ -1,0 +1,65 @@
+﻿<div class="row" id="pnlAdminEDIClaimStatusInsurance" style="display:none;">
+    <div id="actionPanAdminEDIClaimStatusInsurance" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <button type="button" class="btn btn-success btn-sm" onclick="Admin_EDIClaimStatusInsurance.EDIClaimStatusInsuranceAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>
+    <section class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Admin_EDIClaimStatusInsurance.UnLoadTab();"></a>
+            </div>
+            <h2 class="panel-title">Search Claim Status Insurance</h2>
+        </header>
+        <div class="panel-body" id="pnlEDIClaimStatusInsurance_Search">
+            <form class="form-bordered" method="post" onsubmit="return false">
+                <!--start - CONTENTS-->
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label class="control-label">Clearing House</label>
+                        <select id="ddlClearingHouse" class="form-control" ddlist="GetClearingHouse"></select>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="control-label">EDI Status Insurance</label>
+                        <input class="form-control" id="txtEDIStatusInsurance" type="text" maxlength="55" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="control-label">Payor ID</label>
+                        <input class="form-control" id="txtPayorId" type="text" maxlength="10" />
+                    </div>
+                    <div class="col-sm-2  ">
+                        <label class="control-label">Active?</label>
+                        <select id="ddlActive" class="form-control ">
+                            <option value="">- All -</option>
+                            <option value="1" selected="selected">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 pad-a-labelsize-btn">
+                        <button class="btn btn-primary btn-sm" id="btnEDIClaimStatusInsuranceSearch" type="button" onclick="Admin_EDIClaimStatusInsurance.EDIClaimStatusInsuranceSearch();">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <div id="pnlEDIClaimStatusInsurance_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="EDIClaimStatusInsurance_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvEDIClaimStatusInsurance">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">EDIClaimStatusInsuranceId</th>
+                            <th>Action</th>
+                            <th>Insurance Name</th>
+                            <th>Clearing House</th>
+                            <th>Payor ID</th>
+                            <th>Telephone</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divEDIClaimStatusInsurancePaging"></div>
+            </div>
+        </section>
+    </div>
+</div>

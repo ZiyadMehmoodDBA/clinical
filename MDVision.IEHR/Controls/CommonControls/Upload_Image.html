@@ -1,0 +1,155 @@
+﻿<div id="pnlUploadImage">
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader">
+                <button type="button" id="btnClose" class="close" onclick="uploadImage.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="headerTitle">Upload Picture</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form method="post" id="frmUploadImage" onsubmit="return false">
+                        <div class="form-group">
+                            <div class="col-xs-5 col-sm-2 pl-none">
+                                <div class="radio-custom">
+                                    <input type="radio" id="Picuture" name="03" value="Picture" onchange="uploadImage.CheckPictureMode();">
+                                    <label for="Picuture">Picture</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-2 pl-none" id="containerWebcam">
+                                <div class="radio-custom">
+                                    <input type="radio" id="Webcam" name="03" value="Webcam" onchange="uploadImage.CheckPictureMode();">
+                                    <label for="Webcam" style="white-space:nowrap;">Web Cam</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-2 pl-none" id="containerscaner">
+                                <div class="radio-custom">
+                                    <input type="radio" id="Scanner" name="03" checked="checked" value="Scanner" onchange="uploadImage.CheckPictureMode();">
+                                    <label for="Scanner" style="white-space:nowrap;">Scanner</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-lg">
+
+                            <div class="text-center" id="uploadContainer" style="display:none;">
+
+                                <span class="btn btn-default btn-xs btn-file pull-left">
+                                    <i class="fa fa-folder-open"></i>
+                                    Browse
+                                    <input type="file" accept="image/*" class="txtInput" id="Upload_Image_file" name="fileupload" onchange="uploadImage.BufferFile(this);" />
+                                </span>
+
+
+                                <div style="max-height:350px; overflow-y:auto;margin-top:15px;">
+                                    <img id="imgUploadImage" src="" alt="your image" style="display:none;" class="img-responsive img-center mt-lg img-thumbnail" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 p-none" id="webcamContainer" style="display:none;">
+
+
+
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-xs-7 mb-md mt-xxs">
+                                            <select class="form-control" id="cameraNames" size="1" onchange="uploadImage.changeCamera()"></select>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <button class="btn btn-sm btn-primary" id="btn2" onclick="uploadImage.base64_toimage()">Snapshot to image</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 text-center">
+                                    <div class="col-sm-6">
+                                        <div class="visible-xs"><span class="spacer10"></span></div>
+                                        <div id="webcam" class="img-center">
+                                        </div>
+                                        <div class="visible-xs"><span class="spacer10"></span></div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <img id="webCamImage" class="img-responsive img-thumbnail img-center" style="min-height:235px;" src="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 p-none" id="scanerContainer" style="display:none;">
+                                <div id="ediTextView" class="tab-pane">
+                                    <div class="col-xs-12">
+                                        <div class="clearfix"></div>
+                                        <iframe id="IFDocumentScan" target='_parent' class="col-lg-12 col-md-12 col-sm-12" height="570" style="border-style: none;"></iframe>
+                                    </div>
+                                </div>
+                                <div id="iframResponse">
+                                    <img id="img_frontImge" style="display:none" />
+                                    <img id="img_backImge" style="display:none" />
+                                    <!--<input id="hfIsNewInsurancePlan" type="hidden" />-->
+                                    <img id="scan_Imge" style="display:none" />
+                                    <button id="btn_close_uploadimage" type="button" style="display:none" class="close"         onclick="uploadImage.UnLoadUploadImage();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                                    <button id="btn_setkey_uploadimage" type="button" style="display:none" class="close" onclick="uploadImage.setImageUploadKey();"><span class="red">&nbsp;</span><span class="sr-only">SetKey</span></button>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="spacer20"></div>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnSaveImage" type="button" onclick="uploadImage.SavePictureNew();">Done</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #dwtcontrolContainer > .ds-dwt-container-box > div > :nth-child(2) {
+        display: none !important;
+    }
+</style>
+
+<script type="text/javascript" language="javascript">
+    //offCanvas
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+
+        if ($('#asideBtn').hasClass('asideBtn'))
+            $('#asideBtn').removeClass('asideBtn').addClass('asideBtn-toggled');
+        else if ($('#asideBtn').hasClass('asideBtn-toggled'))
+            $('#asideBtn').removeClass('asideBtn-toggled').addClass('asideBtn');
+
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+            $this.themePluginToggle(opts);
+        });
+    });
+
+
+
+    // Assign the page onload fucntion.
+    $(function () {
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('pnlDocumentScan #dtpDOS', function () {
+            //on-change callback method
+            $('#frmDocumentScan').bootstrapValidator('revalidateField', 'DOS');
+        });
+
+    });
+    $("ul.PCollapse li>div").click(function () {
+        if ($(this).next().css("display") == "none") {
+            $(".divType").next().hide("normal");
+            $(".divType").children(".mark_arrow").removeClass("expanded");
+            $(".divType").children(".mark_arrow").addClass("collapsed");
+            $(this).next().show("normal");
+            $(this).children(".mark_arrow").removeClass("collapsed");
+            $(this).children(".mark_arrow").addClass("expanded");
+        }
+    });
+</script>

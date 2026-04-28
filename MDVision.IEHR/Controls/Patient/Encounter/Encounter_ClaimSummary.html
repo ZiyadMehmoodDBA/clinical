@@ -1,0 +1,164 @@
+﻿<div id="pnlEncounterClaimSummary" style="display:none;">
+    <div id="actionPanEncounterClaimSummary" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="EncounterClaimSummary.UnLoad(); "><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="titleClaimSummary" class="modal-title">Claim Summary</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="clearfix"></div>
+                    <form id="frmPatientLedger" method="post" onsubmit="return false">
+
+                        <div class="clearBoth"></div>
+
+                        <div class="btn-block" id="PrintReport">
+                            <button type="button" class="btn btn-success btn-sm pull-right" onclick="EncounterClaimSummary.PrintReport();"><i class="fa fa-print"></i> Print</button>
+                        </div>
+                        <div class="spacer10"></div>
+                        <div class="panel panel-featured ">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="35%"><strong>Patient Name: </strong><span id="SpnPatientName"></span></td>
+                                                <td width="35%"><strong>DOB: </strong><span id="SpnDOB"></span></td>
+                                                <td width="30%"><strong>Phone No: </strong><span id="SpnPhoneNo"></span></td>
+                                            </tr>
+                                            <tr >
+                                                <td width="35%" colspan="3"><strong>Address: </strong><span id="SpnPatientAddress"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%"><strong>Claim Date: </strong><span id="SpnClaimDate"></span></td>
+                                                <td width="35%" colspan="2"><strong>DOS:</strong><span id="SpnDOSFrom"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%" colspan="3"><strong>Provider:</strong><span id="SpnProvider"></span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spacer10"></div>
+                        <div class="panel panel-featured ">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="35%"><strong>Total Amount: </strong><span id="lblTotalAmount"></span></td>
+                                                <td width="35%"><strong>Payments/Adjustments: </strong><span id="lblPaymentAdjustment"></span></td>
+                                                <td width="30%"><strong>Balance: </strong><span id="lblBalance"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="35%"><strong>Claim Number: </strong><span id="lblClaimNumber"></span></td>
+                                                <td width="35%" colspan="2"><strong>Status: </strong><span id="lblSubmitStatus"></span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="spacer20"></div>
+                                    <div class="col-lg-12">
+                                        <strong><u> ICD Codes:</u></strong><br/>
+                                        <div id="divICDDescription"></div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="spacer20"></div>
+                                        <strong><u><b> CPT Codes:</b></u></strong>
+                                        <div id="pnlEncounterClaimSummary_Result" style="display: inline;">
+                                            <section class="panel">
+                                                <div class="panel-body panel-featured">
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvCPTDetail">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Code</th>
+                                                                <th>Modifiers</th>
+                                                                <th>DOS From</th>
+                                                                <th>DOS To</th>
+                                                                <th>POS</th>
+                                                                <th>TOS</th>
+                                                                <th>Unit Fee</th>
+                                                                <th>Units</th>
+                                                                <th>Billed Fee</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+
+
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="spacer20"></div>
+                                        <strong><u><b>Insurance:</b></u></strong>
+                                        <div id="dgvPatientInsurances_Result" style="display: inline;">
+                                            <section class="panel">
+                                                <div class="panel-body panel-featured">
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientInsurances">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="size-min80">Name</th>
+                                                                <th class="size-min60">Group No</th>
+                                                                <th class="size-min70 va-middle">Subscriber No</th>
+                                                                <th class="size-min50">Claim Flag</th>
+                                                                <th class="size-min50">File Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+
+
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="spacer20"></div>
+                                        <strong><u><b>Payments:</b></u></strong>
+                                        <div id="dgvPayments_Result" style="display: inline;">
+                                            <section class="panel">
+                                                <div class="panel-body panel-featured">
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPayments">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="size-min80">From </th>
+                                                                <th class="size-min60">Date</th>
+                                                                <th class="size-min80">Type</th>
+                                                                <th class="size-min80 va-middle">Check No </th>
+                                                                <th class="size-min80 va-middle">Payment </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

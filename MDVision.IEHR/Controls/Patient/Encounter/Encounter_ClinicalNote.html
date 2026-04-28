@@ -1,0 +1,49 @@
+﻿<div id="pnlEncounterClinicalNote" style="display:none;" class="row">
+    <div id="actionPanEncounterClinicalNote" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Patient_Case_Detail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Case Management</h4>
+            </div>
+        </div>
+    </div>-->
+    <div class="modal-body">
+        <div id="tblEncounterClinicalNote" class="col-md-12">
+            <form method="post" onsubmit="return false" id="frmEncounterClinicalNote"></form>
+            <!--<div class="tabs-custome-panel" id="DivEncounterTabs">
+            <a href="#" title="Design View" id="tabDesignView" onclick="SelectTab('EncounterChargeCapture369','false','true','369','ChargeCapture');EncounterChargeCapture.ChangeSubTabStyle('EncounterChargeCapture369');" class="">Design View</a>
+            <a href="#" title="Sentence View" id="tabSentenceView" onclick="SelectTab('EncounterClinicalNote369','false','true','369','ClinicalNote');EncounterChargeCapture.ChangeSubTabStyle('EncounterClinicalNote369');" class="active">Sentence View</a>
+            </div>-->
+            <div class="tabs">
+                <ul id="ulTabs" class="nav nav-tabs">
+                    <li class="active"><a href="#DesignView" data-toggle="tab">Design View</a></li>
+                    <li id="liSentenceView"><a href="#SentenceView" data-toggle="tab">Sentence View</a></li>
+                    <li id="btnSave" class="pull-right"><button type="button" class="btn btn-default btn-sm" onclick="EncounterClinicalNote.Clinical_Template_DesignView_Save();" title="Save" id="btnSave">Save</button></li>
+                </ul>
+                <div class="tab-content tab-content-featured">
+                    <div id="DesignView" class="tab-pane active">
+                        <span class="spacer10"></span>
+                        <div id="HTMLTemplate" class="col-sm-12" style="min-height:100px;">
+
+                        </div>
+                    </div>
+                    <div id="SentenceView" class="tab-pane">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+                $(document).ready(function () {
+                    //$('#pnlPatientCaseDetail #dtpOccurrenceDate1,#dtpOccurrenceDate2,#dtpOccurrenceDate3,#dtpOccurrenceDate4').datepicker({
+                    //}).on('changeDate', function (e) {
+                    //    $(this).datepicker('hide');
+                    //});
+
+                    utility.CreateDatePicker('pnlPatientCaseDetail #dtpOccurrenceDate1,#dtpOccurrenceDate2,#dtpOccurrenceDate3,#dtpOccurrenceDate4', function () {
+                        //  on-change callback method
+                    }, true);
+                });
+</script>

@@ -1,0 +1,166 @@
+﻿<div class="row" id="pnlBillEOBManualPosting" style="display:none;">
+    <div id="actionPanBillEOBManualPosting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display: none;">
+                <button type="button" class="close" onclick="Bill_EOBManualPosting.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">EOB Posting Search</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Bill_EOBManualPosting.OpenInsurancePaymentDetail();"><i class="fa fa-plus-circle"></i> Insurance Payment</button>
+                    <div class="spacer10"></div>
+                    <div class="clearfix"></div>
+
+                    <section class="panel panel-featured">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="closebtn pull-right" onclick="Bill_EOBManualPosting.UnLoadTab();"></a>
+                            </div>
+                            <h2 class="panel-title">EOB Posting Search</h2>
+                        </header>
+                        <div class="panel-body" id="pnlBillEOBManualPosting_Search">
+                            <form id="frmBillEOBManualPosting" method="post" onsubmit="return false">
+                                <div id="divSearchEOBManualPosting" class="form-group">
+                                   
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="PayerName">Payer Name</label>
+                                        <input class="form-control" id="txtPayerName" name="PayerName" type="text">
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="CheckNumber">Check Number</label>
+                                        <input class="form-control" id="txtCheckNumber" name="CheckNumber" type="text">
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                                        <a id="lnkFacilityEdit" style="display: none;" href="#" onclick="Bill_EOBManualPosting.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+                                            <input class="form-control " id="txtFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Bill_EOBManualPosting.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="Status">Status</label>
+                                        <select id="ddlStatus" class="form-control" name="Status">
+                                            <option value="1">Posted</option>
+                                            <option value="2" selected>UnPosted</option>
+                                            <option value="3">Partially Posted</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="From Entry Date">From Entry Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="dpFrmEntryDate" name="FromEntryDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="To Entry Date">To Entry Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="dpToEntryDate" name="ToEntryDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="From Check Date">From Check Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="dpFrmCheckDate" name="FromCheckDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="To Check Date">To Check Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input class="form-control" id="dpToCheckDate" name="ToCheckDate" type="text" data-plugin-datepicker="">
+                                        </div>
+                                    </div>
+                                    <!--//PRD-281 by:MAHMAD-->
+                                    <div class="col-sm-2 col-lg-2">
+                                        <label class="control-label" for="Check Amount">Check Amount</label>
+                                        <input class="form-control" id="txtCheckAmount" name="CheckAmount" type="number">
+                                    </div>
+                                    <!--//PRD-281 by:MAHMAD-->
+                                    <div class="col-sm-2 col-md-2 pull-right mt-md">
+                                        <button id="btnSearchEOB" class="btn btn-primary btn-sm rightbtn" onclick="Bill_EOBManualPosting.SearchEOBManualPosting();" type="button">Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnResetEOB" type="button" onclick="Bill_EOBManualPosting.Bill_EOBReset();">Reset</button>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="spacer10"></div>
+                                <input type="hidden" name="FacilityID" id="hfFacility" />
+                                <input type="hidden" name="PracticeID" id="hfPractice" />
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlBillManualPosting_Result">
+                        <section class="panel">
+                            <div class="panel-body panel-featured">
+                               
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvManualPosting">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th class="size-min60">Action</th>
+                                            <th class="size-min140">Payer Name</th>
+                                            <th class="noWordBreak">Check #</th>
+                                            <th class="noWordBreak">Check Amount</th>
+                                            <th class="noWordBreak">Posted Amount</th>
+                                            <th class="noWordBreak">Status</th>
+                                            <th class="noWordBreak">Check Date</th>
+                                            <th class="noWordBreak">Entry Date</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divERAPaging">
+                                </div>
+
+                                <div id="divERATotalAmount" class="col-sm-8" style="margin-top:-31px;padding-left: 442px;display:none;">
+
+
+                                    <label class="control-label bold " for="Amount">Total Check Amount : <span id="totalAmt">111</span></label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <label class="control-label bold " for="Amount">Total Posted Amount : <span id="totalPostedAmt">222</span></label>
+
+
+                                </div>
+
+                            </div>
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(function () {
+            $('[data-plugin-toggle]').each(function () {
+                var $this = $(this),
+                    opts = {};
+
+                var pluginOptions = $this.data('plugin-options');
+                if (pluginOptions)
+                    opts = pluginOptions;
+
+                $this.themePluginToggle(opts);
+            });
+        });
+    });
+</script>
+

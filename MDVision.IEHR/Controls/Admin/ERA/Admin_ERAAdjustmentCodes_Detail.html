@@ -1,0 +1,81 @@
+﻿<div id="Admin_ERAAdjustmentCodesDetail">
+    <div id="actionPanAdminERAAdjustmentCodesDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header" style="">
+                
+                <button type="button" class="close" onclick="Admin_ERAAdjustmentCodesDetail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">ERA Adjustment Codes Mapping</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" onsubmit="return false;" id="frmAdmin_ERAAdjustmentCodesDetail">
+
+                    <div class="form-group">
+
+                        <div class="col-sm-3">
+                            <label class="control-label" for="ClaimAdjuGroupCodeID">Group Code</label><span class="required">*</span>
+                            <select id="ClaimAdjuGroupCodeID" class="form-control" name="ClaimAdjuGroupCodeID" ddlist="GetAdjustmentGroupCode">
+                                <option value="" selected="selected">- Select -</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="PracticeId">Practice</label>
+                            <select id="PracticeId" class="form-control" name="PracticeId" onchange="Admin_ERAAdjustmentCodesDetail.DisableControl('Practice', this);" ddlist="GetPractice">
+                                <option value="" selected="selected">- Select -</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="ClaimAdjReasonCodeID">Reason Codes</label><span class="required">*</span>
+                            <select id="ClaimAdjReasonCodeID" class="form-control" name="ClaimAdjReasonCodeID" ddlist="GetAdjustmentReasonCode">
+                                <option value="" selected="selected">- Select -</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="ClearingHouseId">Clearinghouse</label>
+                            <select id="ClearingHouseId" onchange="Admin_ERAAdjustmentCodesDetail.DisableControl('Clearinghouse', this);" class="form-control" name="ClearingHouseId" ddlist="GetClearingHouse">
+                                <option value="" selected="selected">- Select -</option>
+
+                            </select>
+                        </div>
+                        <div class="spacer20"></div>
+                        <div class="splitter text-center">Action</div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label" for="ERAActionId">Action</label><span class="required">*</span>
+                            <select id="ERAActionId" class="form-control" name="ERAActionId" ddlist="GetERAAction" >
+                                <option value="" selected="selected">- Select -</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="LedgerAccountId">Ledger Account</label><span id="lblLedgerAccount_req" style="display:none;" class="required">*</span>
+                            <select id="LedgerAccountId" class="form-control" name="LedgerAccountId" disabled>
+                                <option value="" selected="selected">- Select -</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label pull-left" for="LedgerEntryComments">Ledger Entry Comments</label>
+                            <textarea class="form-control" id="LedgerEntryComments" name="LedgerEntryComments" rows="2" maxlength="255" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-sm-2 pad-a-labelsize">
+
+                            <div class="checkbox checkbox-custom  ">
+                                <input type="checkbox" id="IsActive" checked>
+                                <label class="control-label " for="Active">Active</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 pull-right mt-md ">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            <!--<button id="btnHistoryAdminERAAdjustmentCodes" class="btn btn-primary btn-sm rightbtn" type="button" onclick="Admin_ERAAdjustmentCodesDetail.ShowHistory();">History</button>-->
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

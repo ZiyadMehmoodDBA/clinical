@@ -1,0 +1,75 @@
+﻿<div class="row" id="pnlAdminSupperBill" style="display:none;">
+    <!--<div id="actionPanAdminPractice" class="actionPan" style="padding-top:10px;"></div>-->
+    <div id="actionPanAdminSupperBill" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_SupperBill.SupperBillAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+           
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions"> <a href="#" class="closebtn pull-right" onclick="Admin_SupperBill.UnLoadTab()"></a> </div>
+                <h4 class="panel-title">Search Super Bill</h4>
+            </header>
+            
+            <div id="pnlSupperBill_Search" class="panel-body">
+                <form id="frmSupperBill" class="form-bordered" method="post" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label" for="txtShortName">Short Name</label>
+                            <input class="form-control" id="txtShortName" name="ShortName" type="text">
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label" for="txtDescription">Description</label>
+                            <input class="form-control" id="txtDescription" name="Description" type="text">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="ddlPractice">Practice</label>
+                            <select id="ddlPractice" name="Practice" class="form-control"  ddlist="GetPractice"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="ddlActive">Active?</label>
+                            <select id="ddlActive" name="Active" class="form-control" >
+                                <option >All</option>
+                                <option selected="selected">Active</option>
+                                <option>Inactive</option>
+
+                            </select>
+                        </div>
+                       
+                        <div class="col-sm-2 pad-a-labelsize-btn">
+                            <button class="btn btn-primary btn-sm rightbtn" id="btnUserSearch" type="button" onclick="Admin_SupperBill.SupperBillSearch();">Search</button>
+                        </div>
+
+                        <!---Hidden Fields--->
+                        <input type="hidden" id="hfbillId" />
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-body">
+                <div id="pnlSupperBill_Result" style="display: none;">
+                    <section class="panel row">
+                        <div class="panel-body">
+                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvSupperBill">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">BillId</th>
+                                        <th>Action</th>
+                                        <th>Short Name</th>
+                                        <th>Description</th>
+                                        <th>Practice</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divSupperBillPaging"></div>
+                        </div>
+                    </section>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </section>
+
+    </div>
+</div>

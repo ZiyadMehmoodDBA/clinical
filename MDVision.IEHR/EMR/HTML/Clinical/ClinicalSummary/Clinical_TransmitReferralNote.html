@@ -1,0 +1,72 @@
+﻿<div id="Clinical_TransmitReferralNote" class="row" style="display:none;">
+
+    <div id="actionPanTransmitReferralNote" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_TransmitReferralNote.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Transmit Referral Note</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmTransmitReferralNote">
+                    <div class="col-sm-12">
+                        <label class="control-label">Message Type</label>
+                        <div class="input-group">
+                            <select class="form-control ValidateCriteria" id="selectmsgType" name="msgType">
+                                <option selected value="direct">Direct</option>
+                                <option value="edge">Edge</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="txtTo">To:</label>
+                        <input type="text" name="txtTo" id="txtTo" class="form-control" />
+
+                    </div>
+                    <div class="col-xs-12">
+                        <label for="txtMessageDtl">Message:</label>
+                        <textarea id="txtMessageDtl" name="txtMessageDtl" class="form-control" rows="5" spellcheck="true"></textarea>
+                    </div>
+                    <div class="col-xs-12">
+                        <strong>File:</strong>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a id="xmlFile">XMLData.xml</a>
+                            </li>
+                            <li>
+                                <a id="htmlFile">HTMLData.html</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <strong>Attachment</strong>
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="checkbox-custom">
+                                    <input class="mr-xs ml-xs pull-left" type="checkbox" name="chkXML" id="chkXML">
+                                    <label class="control-label" for="chkXML">.XML</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox-custom">
+                                    <input class="mr-xs ml-xs pull-left" type="checkbox" name="chkHTML" id="chkHTML">
+                                    <label class="control-label" for="chkHTML">.HTML</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pull-right mt-sm pr-default">
+                        <button class="btn btn-success btn-sm" type="button" onclick="Clinical_TransmitReferralNote.Transmit();">Transmit</button>
+                        <button class="btn btn-sm" type="button" aria-hidden="true" onclick="Clinical_TransmitReferralNote.UnLoad();"> Cancel</button>
+                    </div>
+
+                    <input type="hidden" id="hfXMLData" />
+                    <input type="hidden" id="hfDataIsEncrypted" />
+
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿<div class="row" id="pnlProcedureTemplate" style="display:none;">
+    <div id="actionPanProcedureTemplate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_ProcedureTemplate.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Physical Exam Template</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <!--<button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="ProcedureTemplate.ProcedureTemplateAddEdit(-1);"><i class="fa fa-plus-circle"></i> Add</button>-->
+                    <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="ProcedureTemplate.OpenProcedureTemplateDetail();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                </div>
+
+                <div id="pnlProcedureTemplate_Result" style="display: inline;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <div class="col-sm-2">
+                                <span class="pr-xs">Inactive</span><div class="btnWidgetSwitch switch switch-xs switch-success success-on"><input id="switchActive" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: none;" onchange="ProcedureTemplate.changeSwitch(this);"></div><span class="pl-xs">Active</span>
+                            </div>
+                            <div class="spacer5"></div>
+                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                            <div id="dgvProcedureTemplates"></div>
+                            <div id="dgvProcedureTemplatesPaging"></div>
+                            <div id="divProviderPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

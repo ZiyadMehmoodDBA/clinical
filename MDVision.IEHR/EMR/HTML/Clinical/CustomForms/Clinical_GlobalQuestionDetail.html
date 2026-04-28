@@ -1,0 +1,916 @@
+﻿<div id="pnlGlobalQuestionDetail" class="row">
+    <div id="actionPanGlobalQuestionDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="GlobalQuestionDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Question Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmGlobalQuestionDetail">
+                    <div class="form-group">
+                        <div class="col-xs-4">
+                            <label class="control-label" for="Question Name">Question Name<span class="required">*</span></label>
+                            <input class="form-control" id="txtQuestionName" name="QuestionName" type="text">
+                        </div>
+                        <div class="col-xs-2 pad-a-labelsize" id="divIsNumeric">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkNumber" name="Number" type="checkbox" onclick="GlobalQuestionDetail.showHideNumericAnswer(this);">
+                                <label class=" control-label" for="chkNumber">Number</label>
+                            </div>
+                        </div>
+                        <!--<div class="col-xs-2 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkNewLine" name="NewLine" type="checkbox">
+                                <label class="control-label" for="chkNewLine">New Line</label>
+                            </div>
+                        </div>-->
+                        <div class="col-xs-2 pad-a-labelsize" id="divIsMandatory">
+                            <div class="checkbox-custom checkbox-default">
+                                <input id="chkMandatory" name="Mandatory" type="checkbox" onclick="GlobalQuestionDetail.showHideMandatory();">
+                                <label class="control-label" for="chkMandatory">Mandatory</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-2 pad-a-labelsize-btn">
+                            <button id="btnQuestionSave" class="btn btn-primary btn-sm rightbtn " type="submit">Save</button>
+                        </div>
+                        <div id="divQuestionDetailTitle" class="col-xs-12">
+                            <label class="control-label" for="Title">Title<span class="required" id="rfvTitle">*</span></label>
+                            <input class="form-control" id="txtTitle" name="Title" type="text" onblur="GlobalQuestionDetail.getText();">
+                        </div>
+
+                        <div id="divQuestionDetailLabel" class="col-xs-12 hidden">
+                            <label class="control-label" for="Label">Label<span class="required">*</span></label>
+                            <input class="form-control" id="txtLabel" name="Label" type="text" onblur="GlobalQuestionDetail.updatePreview();">
+                        </div>
+
+                        <div id="divQuestionDetailCheckBox" class="col-xs-12 pl-xs p-none hidden">
+                            <div id="divCheckBoxLabels">
+                                <div class="col-xs-3">
+                                    <label class="control-label" for="Label">Label 1</label>
+                                    <input class="form-control" value="Label 1" id="txtLabel" name="Label" type="text" onblur="GlobalQuestionDetail.updatePreview(this);">
+                                </div>
+                            </div>
+                            <div class="col-xs-3 pad-a-labelsize-btn">
+                                <button type="button" class="btn btn-success btn-sm" onclick="GlobalQuestionDetail.AddNewCheckBoxLabel(this);"><i class="fa fa-plus-circle"></i></button>
+                            </div>
+                        </div>
+
+
+                        <div id="divFractionFieldQuestion" style="display:none" class="col-xs-12 p-none">
+                            <div class="col-xs-2 pl-none pr-md">
+                                <label class="control-label" for="lblFarctionFieldLabelValue1">Label 1</label>
+                                <input name="FarctionFieldLabelValue1" type="text" id="txtFarctionFieldLabelValue1" class="form-control" onblur="GlobalQuestionDetail.getFractionLabel1ValueText();">
+                            </div>
+                            <div class="col-xs-2 pl-none pr-sm">
+                                <label class="control-label" for="lblFarctionFieldLabelValue2">Label 2</label>
+                                <input name="FarctionFieldLabelValue1" type="text" id="txtFarctionFieldLabelValue2" class="form-control" onblur="GlobalQuestionDetail.getFractionLabel2ValueText();">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divControls">
+                        <div id="divAnswerTextFieldAnswer" class="form-group mt-md">
+                            <div class="panel-blue NoRadiusT ">
+                                <h5 class="modal-title text-center">Answer Format</h5>
+                            </div>
+                            <div class="panel-body NoRadiusT ">
+                                <div class="col-xs-5">
+                                    <div class="row">
+                                        <p class="pl-xs pb-none mb-none">Field Type</p>
+                                        <div class="clearfix"></div>
+                                        <div class="col-xs-6 pl-xs pr-none">
+                                            <div class="radio-custom">
+                                                <input type="radio" id="radSingleLine" name="FieldType" checked="checked" onclick="GlobalQuestionDetail.setTextFieldPreview(); GlobalQuestionDetail.setTextFildAsMultiline(false);">
+                                                <label class="control-label" for="Single Line">Single Line</label>
+                                            </div>
+                                        </div>
+                                        <div class="radio-custom col-xs-6">
+                                            <input type="radio" id="radMultiLine" name="FieldType" onclick="GlobalQuestionDetail.setTextFieldPreview(); GlobalQuestionDetail.setTextFildAsMultiline(true);">
+                                            <label class="control-label" for="Multi Line">Multi Line</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div class="row">
+                                        <div class="col-xs-3 pl-xs pr-none">
+                                            <label class="control-label" for="Text Length">Text Length</label>
+                                            <input class="form-control" name="TextLength" id="txtTextLength" type="text" onblur="GlobalQuestionDetail.setTextFieldPreview();">
+                                        </div>
+                                        <div class="col-xs-4 pl-xs">
+                                            <label class="control-label" for="Text Case">Text Case</label>
+                                            <select name="textCase" class="form-control" id="ddlTextCase" onchange="GlobalQuestionDetail.setTextFieldPreview();">
+                                                <option value="">-Select-</option>
+                                                <option value="Upper">Upper</option>
+                                                <option value="Lower">Lower</option>
+                                                <option value="Sentence">Sentence</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <label class="control-label" for="DefaultValue">Default Value</label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <input class="form-control" name="DefaultValue" id="txtDefaultValue" type="text" onblur="GlobalQuestionDetail.setTextFieldPreview(this);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerYesNoAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-3 pl-xs">
+                                <label class="control-label" for="Default Value">Default Selection</label>
+                                <select name="defaultValue" class="form-control" id="chkDefaultSelectionYesNo" onchange="GlobalQuestionDetail.changeYesNoSelection(this)">
+                                    <option value="0">None</option>
+                                    <option value="1">Yes</option>
+                                    <option value="2">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="divAnswerToggleAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-3 pl-xs">
+                                <label class="control-label" for="Default Value">Default Selection</label>
+                                <select name="defaultValue" class="form-control" id="chkDefaultSelectionToggle" onchange="GlobalQuestionDetail.changeToggleSelection(this)">
+                                    <option value="0">ON</option>
+                                    <option value="1">OFF</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="divAnswerCheckBoxAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-3 pl-xs">
+                                <label class="control-label" for="Default Value">Selection Mode</label>
+                                <select name="defaultValue" class="form-control" id="chkSelectionMode" onchange="GlobalQuestionDetail.changeSelectionMode()">
+                                    <option value="0">Single Selection</option>
+                                    <option value="1">Multiple Selection</option>
+                                </select>
+                            </div>
+                            <div id="divChkDefaultSelection" class="col-xs-3 pl-xs">
+                                <label class="control-label" for="Default Value">Default Selection</label>
+                                <select name="defaultValue" class="form-control" id="chkDefaultSelectionChkBox" onchange="GlobalQuestionDetail.changeDefaultSelection(this)"></select>
+                                <select class="form-control hidden" name="DefaultSelectionChkBoxMultiple" multiple="multiple" id="chkDefaultSelectionChkBoxMultiple" onchange="GlobalQuestionDetail.changeDefaultSelection(this)"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerRadioFieldAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-2 pl-none pr-md">
+                                <label class="control-label" for="Label 1">Label 1</label>
+                                <input name="label1" type="text" id="questionRadioLabel1" class="form-control" onblur="GlobalQuestionDetail.getRadioLabel1Text();">
+                            </div>
+                            <div class="col-xs-2 pl-none pr-sm">
+                                <label class="control-label" for="Label 2">Label 2</label>
+                                <input name="label2" type="text" id="questionRadioLabel2" class="form-control" onblur="GlobalQuestionDetail.getRadioLabel2Text();">
+                            </div>
+                            <div class="col-xs-3 pl-xs">
+                                <label class="control-label" for="Default Value">Default Value</label>
+                                <select name="defaultValue" class="form-control" id="radDefaultValue">
+                                    <option value="">-Select-</option>
+                                    <option value="P1">Practice 1</option>
+                                    <option value="P2">Practice 2</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-3 mt-md">
+                                        <label class="control-label" for="Sentence For Label 1">Sentence For Label 1</label>
+                                    </div>
+                                    <div class="col-xs-9 mt-md pr-xs">
+                                        <div class="size100 pull-right">
+                                            <select name="predefined" class="form-control" id="radPredefinedTrue" onchange="GlobalQuestionDetail.GetLabelText(this, 'radSentenceForLabel1', 'radPredefinedTrue');">
+                                                <option value="Predefined">Predefined</option>
+                                                <option value="P1">Practice 1</option>
+                                                <option value="P2">Practice 2</option>
+                                            </select>
+                                        </div>
+                                        <!--<div class="size140 pull-right"> <a class="btn btn-link btn-xs" href="#" onclick="GlobalQuestionDetail.GetLabelText(this, 'radSentenceForLabel1', 'radPredefinedTrue'); return false;">Value</a> <a class="btn btn-link btn-xs" href="#" onclick="GlobalQuestionDetail.GetLabelText(this, 'radSentenceForLabel1', 'radPredefinedTrue'); return false;">Patient</a> <a class="btn btn-link btn-xs" href="#" onclick="GlobalQuestionDetail.GetLabelText(this, 'radSentenceForLabel1', 'radPredefinedTrue'); return false;">Date</a> </div>-->
+                                    </div>
+                                    <div class="col-xs-12 p-xs">
+                                        <textarea name="sentenceForLabel1" class="form-control" rows="2" id="radSentenceForLabel1" spellcheck="true"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-3 mt-md">
+                                        <label class="control-label" for="Sentence For Label 2">Sentence For Label 2</label>
+                                    </div>
+                                    <div class="col-xs-9 mt-md pr-xs">
+                                        <div class="size100 pull-right">
+                                            <select name="  " class="form-control" id="radPredefinedFalse" onchange="GlobalQuestionDetail.GetLabelText(this, 'radSentenceForLabel2', 'radPredefinedFalse');">
+                                                <option selected="selected" value="Predefined">Predefined</option>
+                                                <option value="P1">Practice 1</option>
+                                                <option value="P2">Practice 2</option>
+                                            </select>
+                                        </div>
+                                        <!--<div class="size140 pull-right"> <a class="btn btn-link btn-xs" href="#" onclick="GlobalQuestionDetail.GetLabelText(this, 'radSentenceForLabel2', 'radPredefinedFalse'); return false;">Value</a> <a class="btn btn-link btn-xs" href="#" onclick="GlobalQuestionDetail.GetLabelText(this, 'radSentenceForLabel2', 'radPredefinedFalse'); return false;">Patient</a> <a class="btn btn-link btn-xs" href="#" onclick="GlobalQuestionDetail.GetLabelText(this, 'radSentenceForLabel2', 'radPredefinedFalse'); return false;">Date</a> </div>-->
+                                    </div>
+                                    <div class="col-xs-12 p-xs">
+                                        <textarea name="sentenceForLabel2" class="form-control" rows="2" id="radSentenceForLabel2" spellcheck="true"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerDropdownFieldAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 pl-none pr-md">
+                                <div class="col-xs-3 p-none">
+                                    <label class="control-label" for="Values">Values</label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <p>(Press Enter key to separate each value )</p>
+                                </div>
+                                <div class="col-xs-3 p-none">
+                                    <label class="control-label" for="Values">Default Value</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 p-none">
+                                <textarea name="areaElements" id="txtareaElementsDropDown" onblur="GlobalQuestionDetail.ddlElementsFromTextArea();" class="form-control" rows="3" spellcheck="true"></textarea>
+                            </div>
+                            <div class="col-xs-4">
+                                <select name="predefined" class="form-control" id="ddlSingleSelectDefaultValues" onchange="GlobalQuestionDetail.changeDefaultValue()">
+                                    <option value=""> - Select - </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerMultiSelectDropdownFieldAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 pl-none pr-md">
+                                <div class="col-xs-3 p-none">
+                                    <label class="control-label" for="Values">Values</label>
+                                </div>
+                                <div class="col-xs-9">
+                                    <p>(Press Enter key to separate each value )</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 p-none">
+                                <textarea name="elementsdropdown" spellcheck="true" id="txtareaElementsDropDownMultiSelect" onblur="GlobalQuestionDetail.ddlMultiSelectFromTextArea(this);" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-3 mt-md">
+                                        <label class="control-label" for="Sentence">Default Value</label>
+                                    </div>
+                                    <div class="col-xs-3 mt-md pr-xs pull-right">
+                                        <select class="form-control" name="DefaultSelectionChkBoxMultiple" multiple="multiple" id="ddlMultiSelectComboDefaultValues" onchange="GlobalQuestionDetail.changeDefaultValueMultiSelectCombo()"></select>
+                                    </div>
+                                    <div class="col-xs-12 p-xs">
+                                        <textarea name="sentence" class="form-control" rows="2" id="defaultValuesCombo" spellcheck="true"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerFractionFieldAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-3 pl-none pr-md">
+                                <label class="control-label" for="txtFarctionFieldLabel1">Default Value 1</label>
+                                <input name="FarctionFieldLabel1" type="text" id="txtFarctionFieldDefaultValue1" class="form-control" onblur="GlobalQuestionDetail.getFractionDefaultValue1();">
+                            </div>
+                            <div class="col-xs-3 pl-none pr-sm">
+                                <label class="control-label" for="txtFarctionFieldLabel2">Default Value 2</label>
+                                <input name="FarctionFieldLabel2" type="text" id="txtFarctionFieldDefaultValue2" class="form-control" onblur="GlobalQuestionDetail.getFractionDefaultValue2();">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerDateFieldAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-4 pl-none pr-md">
+                                <label class="control-label" for="Format">Format</label>
+                                <select name="DateFormat" class="form-control" id="ddlDateFormat" onchange="GlobalQuestionDetail.updateDateFormat();">
+                                    <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                    <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-4 pl-none pr-sm">
+                                <label class="control-label" for="Default Value">Default Value</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input name="DefaultDate" id="dtpDefaultDate" maxlength="10" class="form-control" type="text" data-plugin-datepicker="" onblur="GlobalQuestionDetail.updateDateFieldPreview();">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerTimeFieldAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-7">
+                                <p class="pl-xs pb-none mb-none">Format</p>
+                                <div class="clearfix"></div>
+                                <div class="radio-custom col-xs-5">
+                                    <div class="radio-custom">
+                                        <input type="radio" id="rad24Hours" name="TimeFormat" onclick="GlobalQuestionDetail.changeTimeFormat(false);">
+                                        <label class="control-label" for="24 Hours">24 Hours</label>
+                                    </div>
+                                </div>
+                                <div class="radio-custom col-xs-4">
+                                    <input type="radio" id="rad12Hours" name="TimeFormat" checked="checked" onclick="GlobalQuestionDetail.changeTimeFormat(true);">
+                                    <label class="control-label" for="12 Hours">12 Hours</label>
+                                </div>
+                                <div class="col-xs-3" style="display:none">
+                                    <select name="questionTimeFormat" class="form-control" id="questionTimeFormat">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-3 pl-none">
+                                <label class="control-label" for="Default">Default</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                    <input name="DefaultTime" id="tpDefaultTime" type="text" data-plugin-timepicker="" data-plugin-options="" class="form-control" onblur="GlobalQuestionDetail.updateTimeFieldPreview();">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerImageFieldAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <!--<div class="col-sm-8" data-provides="fileinput">
+                                <div class="row">
+                                    <div class="col-xs-7 pl-md pr-md">
+                                        <label class="control-label" for="uploadFilePH">File(s)<span class="required">*</span></label>
+                                        <input type="text" class="form-control" name="fileupload" id="uploadFilePH" placeholder="No File Selected" disabled="disabled" />
+                                    </div>
+                                    <div class="col-xs-5 pl-xs pr-sm pad-a-labelsize">
+                                        <span class="btn btn-default btn-xs mr-sm btn-file">
+                                            <i class="fa fa-folder-open"></i>
+                                            <span>Browse</span>
+                                            <input type="file" name="Upload_Import_file" accept="application/pdf,image/jpg,image/bmp,image/png,image/jpeg,image/gif" id="Upload_Import_file" onchange="Document_Import.BufferFile(this);" />
+                                        </span>
+
+                                        <label class="control-label" id="totalFiles">0 file(s) selected</label>
+
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-sm-8" data-provides="fileinput">
+                                <div class="row">
+                                    <div class="col-xs-7 pl-md pr-md">
+                                        <label class="control-label" for="uploadFilePH">File(s)<span class="required">*</span></label>
+                                        <input type="text" class="form-control" name="uploadFile" id="uploadFilePH" placeholder="No File Selected" />
+                                    </div>
+                                    <div class="col-xs-5 pl-xs pr-sm pad-a-labelsize">
+                                        <span class="btn btn-default btn-xs mr-sm btn-file">
+                                            <i class="fa fa-folder-open"></i>
+                                            <span>Browse</span>
+                                            <input type="file" name="Upload_Import_file" accept="application/pdf,image/jpg,image/bmp,image/png,image/jpeg,image/gif" id="Upload_Import_file" onchange="GlobalQuestionDetail.BufferFile(this);" />
+                                        </span>
+
+                                        <label class="control-label" name="totalFiles" id="totalFiles">0 file(s) selected</label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="col-xs-6 pl-none pr-md">
+                            <label class="control-label" for="Browse">Browse</label>
+                            <div class="input-group">-->
+                            <!--<div class="col-xs-5 pl-xs pr-sm pad-a-labelsize">
+                                <span class="btn btn-default btn-xs mr-sm btn-file">
+                                    <i class="fa fa-folder-open"></i>
+                                    <span>Browse</span>
+                                    <input type="file" name="Upload_Import_file" accept="application/pdf,image/jpg,image/bmp,image/png,image/jpeg,image/gif" id="Upload_Import_file" multiple="multiple" onchange="Document_Import.BufferFile(this);">
+                                </span>
+
+                                <label class="control-label" id="totalFiles">0 file(s) selected</label>
+
+                            </div>-->
+                            <!--<input class="form-control" type="file" accept="application/pdf,image/jpg,image/bmp,image/png,image/jpeg,image/gif" id="Browse" onchange="readImageURL(this);">
+                            <img id="imdID" src="../../../favicon.png" alt="Image..." />-->
+                            <!--<div class="input-group-btn"> <a href="" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a> </div>-->
+                            <!--</div>
+                            </div>-->
+
+                        </div>
+                    </div>
+                    <div id="divAnswerNumberFieldAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-3">
+                                <label class="control-label" for="Min Length">Min Length</label>
+                                <input name="NumberMinLength" class="form-control" type="number" id="txtNumberMinLength" onblur="GlobalQuestionDetail.setNumericDefaultValue();">
+                            </div>
+                            <div class="col-xs-3">
+                                <label class="control-label" for="Max Length">Max Length</label>
+                                <input name="NumberMaxLength" class="form-control" type="number" id="txtNumberMaxLength" onblur="GlobalQuestionDetail.setNumericDefaultValue();">
+                            </div>
+                            <div class="col-xs-3 pr-none">
+                                <label class="control-label" for="Precision">Precision</label>
+                                <input name="questionNumberPrecision" class="form-control" type="number" id="questionNumberPrecisiontxt" onblur="GlobalQuestionDetail.setNumericDefaultValue();">
+                            </div>
+                            <div class="col-xs-12">
+                                <label class="control-label" for="Sentence">Default Value</label>
+                                <input name="NumberQuestionDefaultValue" class="form-control" type="number" id="txtNumberQuestionDefaultValue" onblur="GlobalQuestionDetail.setNumericDefaultValue();">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerHeader" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-7">
+                                <div class="row">
+                                    <div class="col-xs-3 pl-xs pr-none">
+                                        <label class="control-label" for="Text Length">Font Size</label>
+                                        <input class="form-control" name="TextLength" id="txtHeaderFontSize" type="number" onblur="GlobalQuestionDetail.setHeaderPreview();" onkeypress="utility.ValidateDecimal(event, 0,1,40);">
+                                    </div>
+                                    <div class="col-xs-4 pl-xs">
+                                        <label class="control-label" for="Text Case">Text Case</label>
+                                        <select name="HeadeFontCase" class="form-control" id="ddlHeadeFontCase" onchange="GlobalQuestionDetail.setHeaderPreview();">
+                                            <option value="">-Select-</option>
+                                            <option value="Upper">Upper</option>
+                                            <option value="Lower">Lower</option>
+                                            <option value="Sentence">Sentence</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <label class="control-label" for="DefaultValue">Header Text</label>
+                                <input class="form-control" name="HeaderText" id="txtHeaderText" type="text" onblur="GlobalQuestionDetail.setHeaderPreview();">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="divAnswerFreeFieldAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-7">
+                                <div class="row">
+                                    <div class="col-xs-3 pl-xs pr-none">
+                                        <label class="control-label" for="FreeText Length">Text Length</label>
+                                        <input class="form-control" name="FreeTextLength" id="txtFreeTextLength" type="text" onblur="GlobalQuestionDetail.setFreeFieldDefaultValue();">
+                                    </div>
+                                    <div class="col-xs-4 pl-xs">
+                                        <label class="control-label" for="Text Case">Text Case</label>
+                                        <select name="textCase" class="form-control" id="ddlFreeTextCase" onchange="GlobalQuestionDetail.setFreeFieldDefaultValue();">
+                                            <option value="">-Select-</option>
+                                            <option value="Upper">Upper</option>
+                                            <option value="Lower">Lower</option>
+                                            <option value="Sentence">Sentence</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <label class="control-label" for="DefaultValue">Default Value</label>
+                                <input class="form-control" name="FreeTextDefaultValue" id="txtFreeTextDefaultValue" type="text" onblur="GlobalQuestionDetail.setFreeFieldDefaultValue();">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerTable" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-3">
+                                <label class="control-label" for="Min Length">Width</label>
+                                <input name="TableWidth" class="form-control" type="number" id="txtTableWidth" onblur="GlobalQuestionDetail.setTableDefaultPreview();">
+                            </div>
+                            <div class="col-xs-3">
+                                <label class="control-label" for="Max Length">Height</label>
+                                <input name="TableHeight" class="form-control" type="number" id="txtTableHeight" onblur="GlobalQuestionDetail.setTableDefaultPreview();">
+                            </div>
+                            <div class="col-xs-3">
+                                <label class="control-label" for="Max Length">Cell Space</label>
+                                <input name="TabelCellSpace" class="form-control" type="number" id="txtTabelCellSpace" onblur="GlobalQuestionDetail.setTableDefaultPreview();">
+                            </div>
+                            <div class="col-xs-3">
+                                <label class="control-label" for="Max Length">Cell Padding</label>
+                                <input name="TabelPadding" class="form-control" type="number" id="txtTableCellPadding" onblur="GlobalQuestionDetail.setTableDefaultPreview();">
+                            </div>
+                            <div class="col-xs-3">
+                                <label class="control-label" for="Max Length">Border</label>
+                                <input name="TableBorder" class="form-control" type="number" id="txtTableBorder" onblur="GlobalQuestionDetail.setTableDefaultPreview();">
+                            </div>
+                            <div class="col-xs-3 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input id="chkCaption" name="Number" type="checkbox" onclick="GlobalQuestionDetail.setTableDefaultPreview(this);">
+                                    <label class=" control-label" for="chkCaption">Caption</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 pl-xs">
+                                <label class="control-label" for="ddlAlignment">Alignment</label>
+                                <select name="Alignment" class="form-control" id="ddlAlignment" onchange="GlobalQuestionDetail.setTableDefaultPreview();">
+                                    <option value="">-Select-</option>
+                                    <option value="left">Left</option>
+                                    <option value="right">Right</option>
+                                    <option value="center">Center</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="divAnswerProcedures" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-5">
+                                <div class="row">
+                                    <p class="pl-xs pb-none mb-none">Field Type</p>
+                                    <div class="clearfix"></div>
+                                    <div class="col-xs-6 pl-xs pr-none">
+                                        <div class="radio-custom">
+                                            <input type="radio" id="radSingleLineProcedures" name="FieldType" >
+                                            <label class="control-label" for="Single Line">Single Line</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="divAnswerProblems" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Answer Format</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-5">
+                                <div class="row">
+                                    <p class="pl-xs pb-none mb-none">Field Type</p>
+                                    <div class="clearfix"></div>
+                                    <div class="col-xs-6 pl-xs pr-none">
+                                        <div class="radio-custom">
+                                            <input type="radio" id="radSingleLineProblems" name="FieldType">
+                                            <label class="control-label" for="Single Line">Single Line</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divAnswerTinyMcEditorAnswer" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Edit Mode</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-sm-4 col-lg-3">
+                                <label class="control-label">Tag Category</label>
+                                <select id="ddlTagCategory" name="TagCategoryId" onchange="GlobalQuestionDetail.ChangeSelectionMode();" class="form-control">
+                                </select>
+                            </div>
+                            <div class="col-sm-4 col-lg-6 TagName" id="TagNameDiv">
+                                <label class="control-label">Tag Name</label>
+                                <select id="ddlTagName" name="TagNameId" class="form-control" disabled>
+                                </select>
+                            </div>
+                            <div class="col-sm-1 pad-a-labelsize pr-default"><button type="button" class="btn btn-success btn-xs" onclick="GlobalQuestionDetail.InsertTag()">Insert</button></div>
+                            <div class="spacer20"></div>
+                            <div class="col-xs-12 pl-xs">
+                                <textarea cols="50" id="txtTinyMCEditor" name="editor1" rows="10" spellcheck="true"></textarea>
+                                <!--<textarea cols="80" id="txtTinyMCEditor" spellcheck="true"></textarea>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="divPreviewTextFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none">
+                                <label id="lblTextFieldPreview" class="control-label" for=""></label>
+                            </div>
+                            <div class="col-xs-12 pr-none">
+                                <input name="TextFieldPreview" class="form-control" type="text" value="" id="txtTextFieldPreview">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewRadioFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none mt-xs">
+                                <div class="col-xs-4 p-none">
+                                    <label id="lblRadioFieldPreview" class="control-label" for=""></label>
+                                </div>
+                                <div class="radio-custom col-xs-2">
+                                    <input type="radio" id="Yes" name="r2" checked="checked">
+                                    <label id="lblRadioFieldPreview1" class="control-label" for=""></label>
+                                </div>
+                                <div class="radio-custom col-xs-2">
+                                    <input type="radio" name="r2" id="No">
+                                    <label id="lblRadioFieldPreview2" class="control-label" for=""></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewYesNoFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div id="divYesNoPreview" class="col-xs-12 p-none mt-xs">
+                                <div class="col-sm-12">
+                                    <label id="lblYesNoFieldPreview" class="control-label  ellipses size-max100per resetLineHeight" style="">Do you have pain in lungs?</label>
+                                </div>
+                                <div class="checkbox-custom checkbox-default pull-left mr-lg">
+                                    <input type="checkbox" id="chkYes" onchange="GlobalQuestionDetail.YesOrNo(this);" name="Yes">
+                                    <label class="control-label" for="chkYes">Yes</label>
+                                </div>
+                                <div class="checkbox-custom checkbox-default pull-left">
+                                    <input type="checkbox" name="No" onchange="GlobalQuestionDetail.YesOrNo(this);" id="chkNo">
+                                    <label class="control-label" for="chkNo">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div id="divPreviewToggleFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div id="divTogglePreview" class="col-xs-12 p-none mt-xs">
+                                <div class="col-sm-6">
+                                    <label id="lblToggleFieldPreview" class="control-label" style="">Do you have pain in lungs?</label>
+                                </div>
+                                <div id="divSwitchToggle">
+                                    <div class="btnWidgetSwitch switch switch-xs switch-success">
+                                        <input checked="checked" data-plugin-ios-switch="" id="switchActive" name="switch" onchange="GlobalQuestionDetail.changeToggleSwitch(this)" style="display: none;" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="divPreviewCheckBoxFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-sm-12">
+                                <label id="lblCheckBoxTitlePreview" class="control-label ellipses size-max100per resetLineHeight" style=""></label>
+                            </div>
+                            <div id="divCheckBoxPreview" class="col-xs-12 p-none mt-xs">
+                                <div class="checkbox-custom checkbox-default pull-left mr-lg">
+                                    <input type="checkbox" id="chkLabel1" name="chkLabel1">
+                                    <label id="txtLabel1" class="control-label" for="chkLabel1">Label 1</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewDropdownFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none mt-xs">
+                                <div class="col-xs-6 p-none">
+                                    <label id="lblDropdownFieldPreview" class="control-label" for=""></label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <select onchange="GlobalQuestionDetail.updateTextFieldVal(this);" name="elementss" class="form-control" id="ddlSingleSelectPreview"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewMultiSelectDropdownFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none mt-xs">
+                                <div class="col-xs-6 p-none">
+                                    <label id="lblMultiSelectDropdownFieldPreview" class="control-label" for=""></label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="DefaultSelectionChkBoxMultiple" multiple="multiple" id="ddlMultiSelectComboPreview"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewFractionFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-xs">
+                                <div class="col-xs-12 pl-none">
+                                    <label class="control-label" id="lblFractionTitlePreview" for=""></label>
+                                </div>
+                                <div class="col-xs-2 pl-none">
+                                    <label class="control-label" id="lblFractionFieldPreview1" for=""></label>
+                                    <input name="fractionpreview1" type="text" id="txtFractionFieldPreview1" class="form-control">
+                                </div>
+                                <div class="col-xs-2">
+                                    <label class="control-label" id="lblFractionFieldPreview2" for=""></label>
+                                    <input name="fractionpreview2" type="text" id="txtFractionFieldPreview2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewDateFieldPreview" style="display:none;" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none mt-xs">
+                                <div class="col-xs-4 p-none">
+                                    <label class="control-label" id="lblDateFieldPreview" for=""></label>
+                                </div>
+                                <div class="col-xs-4 pl-none pr-md">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input name="DateFieldPreview" id="dtpDateFieldPreview" maxlength="10" class="form-control" type="text" data-plugin-datepicker="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewTimeFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none mt-xs">
+                                <div class="col-xs-4 p-none">
+                                    <label class="control-label" id="lblTimeFieldPreview" for=""></label>
+                                </div>
+                                <div class="col-xs-3 pl-none pr-md">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input name="question" id="tpQuestion" type="text" data-plugin-timepicker="" data-plugin-options="" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewImageFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none mt-xs">
+                                <div class="col-xs-4 p-none">
+                                    <label class="control-label" id="lblImageFieldPreview" for=""></label>
+                                </div>
+                                <div class="col-xs-6"> <img id="customFormImagePreview" name="CustomFormImagePreview" class="img-responsive img-center img-thumbnail NoRadius p-xs" src="" alt="" /> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewNumberFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-4 p-none">
+                                <label id="lblNumberFieldPreview" class="control-label" for=""></label>
+                            </div>
+                            <div class="col-xs-8 pr-none">
+                                <input name="havepain" class="form-control" type="number" id="txtNumericDefaultPreview">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divHeaderPreview" class="form-group mt-md" style="display:none;">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none">
+                                <label id="lblHeaderPreview" for="" style=""></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewFreeFieldPreview" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none">
+                                <label id="lblFreeFieldPreview" class="control-label" for=""></label>
+                            </div>
+                            <div class="col-xs-12">
+                                <input name="FreeFieldPreview" class="form-control" type="text" value="" id="txtFreeFieldPreview">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPreviewTable" class="form-group mt-md" style="display:none;">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="panel-body NoRadiusT ">
+                            <div class="col-xs-12 p-none">
+                                <label id="lblTableTitlePreview" class="control-label" for=""></label>
+                            </div>
+                            <div class="col-xs-12 p-none Of-a">
+                                <table id="tblPreview"></table>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div id="divPreviewProcedures" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="col-sm-12">
+                            <label id="lblProceduresPreview" class="control-label">Procedures</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtProcedureCPTCode" placeholder="search" type="text" name="ProcedureCPTCode" oninput="Clinical_Procedures.bindAutoComplete(this)">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_Procedures.openCPTCode();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="divPreviewProblems" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="col-sm-12">
+                            <label id="lblProblemsPreview" class="control-label">Problems</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtProblems" placeholder="search" type="text" name="ProcedureCPTCode" oninput="Clinical_ProblemLists.BindICD9AutoComplete(this)">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary btn-xs " type="button" onclick="Clinical_Procedures.openCPTCode();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="divPreviewTinyMcEditor" class="form-group mt-md">
+                        <div class="panel-blue NoRadiusT ">
+                            <h5 class="modal-title text-center">Preview</h5>
+                        </div>
+                        <div class="col-sm-12" id="divPreviewTinymce">
+                        </div>
+                    </div>
+                    <input type="hidden" name="hiddenQuestionID" id="hfQuestionId" value="-1" />
+                    <div id="divSelectedQuestion" style="display:none"></div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#GlobalQuestionDetail #dtpQuestion').datepicker({
+        //}).on('changeDate', function (e) {
+        //    $(this).datepicker('hide');
+        //    $('#frmGlobalQuestionDetail').bootstrapValidator('revalidateField', 'DOS');
+        //});
+        utility.CreateDatePicker('GlobalQuestionDetail #dtpDateFieldPreview', false);
+        $('#tpQuestion').timepicker({
+            showMeridian: true,
+            //defaultTime: false
+        });
+        $('#tpDefaultTime').timepicker({
+            showMeridian: true,
+        }).on('changeTime.timepicker', function (e) {
+            //$(this).timepicker('hide');
+            $("#tpQuestion").val($("#tpDefaultTime").val());
+        });
+    });
+</script>

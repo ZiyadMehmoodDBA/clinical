@@ -1,0 +1,112 @@
+﻿<div id="Admin_CCMCareTeamDetail">
+    <div id="pnlAdmin_CCMCareTeamDetail">
+        <div id="actionPanAdmin_CCMCareTeamDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        </div>
+        <div class="modal-dialog modal-dialog-lg">
+            <div class="modal-content ">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Admin_CCMCareTeamDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Adding New Care Team</h4>
+                </div>
+                <div class="modalbody">
+                    <div class="panel panel-body">
+
+                        <form id="frmAdmin_CCMCareTeamDetail" method="post" onsubmit="return false;">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="control-label"> Care Team Name</label><span class="required">*</span>
+                                    <input class="form-control" id="txtName" type="text" name="careteam" />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label id="textPCP" for="TPCP" class="control-label">Primary Care Provider</label><!--<span class="required">*</span>-->
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtPCP" name="PCP" placeholder="Start typing to search" type="text" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkPCP" class="btn btn-primary btn-xs " type="button" onclick="Admin_CCMCareTeamDetail.OpenPCP();"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+
+                                    </div>
+                                    <table class="table table-condensed table-noBorder" id="dgvPCP">
+                                        <thead>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div class="col-sm-6 col-md-6" id="CMDropDown">
+                                    <label id="lblCM" for="CM" class="control-label">Care Manager</label><span class="required">*</span>
+                                    <!--<div class="input-group">
+                                        <input class="form-control" id="txtCM" name="CM" placeholder="Start typing to search" type="text" oninput="Admin_CCMCareTeamDetail.bindCM();" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkCM" class="btn btn-primary btn-xs " type="button" onclick="Admin_CCMCareTeamDetail.OpenUser('CM');"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+
+                                    </div>-->
+                                    <select id="txtCM" name="Active" ddlist="GetUsers" class="form-control"></select>
+                                    <table class="table table-condensed table-noBorder" id="dgvCM">
+                                        <thead>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div class="col-sm-6 col-md-6" id="CCDropDown">
+                                    <label id="lblCC" for="CC" class="control-label">Care Coordinator</label><span class="required">*</span>
+                                    <!--<div class="input-group">
+            <input class="form-control" id="txtCC" name="CC" placeholder="Start typing to search" type="text" oninput="Admin_CCCCareTeamDetail.bindCC();" />
+            <div class="input-group-btn">
+                <button id="lnkCC" class="btn btn-primary btn-xs " type="button" onclick="Admin_CCCCareTeamDetail.OpenUser('CC');"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+
+        </div>-->
+                                    <select id="txtCC" name="Active" ddlist="GetUsers" class="form-control"></select>
+                                    <table class="table table-condensed table-noBorder" id="dgvCC">
+                                        <thead>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-sm-6 col-md-6" id="CGDropDown">
+                                    <label id="lblCG" for="CG" class="control-label">Care Giver</label><span class="required">*</span>
+                                    <!--<div class="input-group">
+            <input class="form-control" id="txtCG" name="CG" placeholder="Start typing to search" type="text" oninput="Admin_CCGCareTeamDetail.bindCG();" />
+            <div class="input-group-btn">
+                <button id="lnkCG" class="btn btn-primary btn-xs " type="button" onclick="Admin_CCGCareTeamDetail.OpenUser('CG');"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+
+        </div>-->
+                                    <select id="txtCG" name="Active" ddlist="GetUsers" class="form-control"></select>
+                                    <table class="table table-condensed table-noBorder" id="dgvCG">
+                                        <thead>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-sm-6 col-md-6">
+                                    <label id="textProvider" for="Provider" class="control-label">Provider</label><span class="required">*</span>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" type="text" />
+                                        <div class="input-group-btn">
+                                            <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Admin_CCMCareTeamDetail.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+
+                                    </div>
+                                    <table class="table table-condensed table-noBorder" id="dgvProvider">
+                                        <thead>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-sm-2 mt-sm pull-right">
+                                    <button class="btn btn-primary rightbtn btn-sm" id="btnCCMCareTeamSave" type="submit">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

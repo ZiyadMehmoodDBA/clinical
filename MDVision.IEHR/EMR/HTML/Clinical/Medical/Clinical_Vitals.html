@@ -1,0 +1,453 @@
+﻿<div class="row" id="pnlClinicalVitals">
+    <div id="actionPanClinicalVitals" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_Vitals.unLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Vitals</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured mb-default">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_Vitals.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Vitals</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body NoRadiusT  pt-xxs" id="pnlSection_Search">
+                            <form id="frmClinicalVitals" method="post" onsubmit="return false">
+
+
+                                <div class="clearfix"></div>
+                                <div class="toggle" data-plugin-toggle>
+                                    <section class="toggle active">
+                                        <label id="lblVitalsHeading">Add Vitals</label>
+                                        <div class="toggle-content panel-body NoRadiusT">
+                                            <div class="btn-block">
+                                                <!--<a class="btn btn-success btn-xs " onclick="Clinical_Vitals.ImportToProgressNote();"><i class="glyphicon glyphicon-import"></i> Import To Progress Note</a>-->
+                                                <!--<a id="btnCopyVitals" class="btn btn-success btn-xs " style="display:none;" onclick="Clinical_Vitals.CopyVitals();"> Copy</a>-->
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-4 col-lg-2">
+                                                    <label class="control-label" for="Date">Date<span class="required">*</span></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input type="text" class="form-control" id="dpVitalsDate" name="VitalSignDate" data-plugin-datepicker autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-lg-2">
+                                                    <label class="control-label" for="Time">Time<span class="required">*</span></label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                        <input type="text" class="form-control" id="tpVitalsTime" name="VitalsTime" data-plugin-timepicker>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <section id="Structure">
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Weight</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" onkeypress="EMRUtility.ValidateLength(this, event,4);" name="Weight" id="txtWeight" type="text" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" oninput="EMRUtility.ValidateLength(this, event,4); Clinical_Vitals.calculateBMI2(null, null, null); Clinical_Vitals.calculateBSA2(null, null, null);" onblur=" EMRUtility.ValidateWeight(event, this);" />
+                                                            <div class="input-group-addon text-xs p-xxs">lbs</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Height</label>
+                                                        <div class="row">
+                                                            <div class="col-xs-6">
+                                                                <div class="input-group">
+                                                                    <input class="form-control" name="HeightFeet" id="txtHeightFeet" type="text" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onkeyup=" Clinical_Vitals.ValidateHeightFeet(event, this);" oninput="Clinical_Vitals.calculateBMI2(null, null, null); Clinical_Vitals.calculateBSA2(null, null, null);">
+                                                                    <div class="input-group-addon text-xs p-xxs">ft</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <div class="input-group">
+                                                                    <input class="form-control" name="HeightInches" id="txtHeightInches" type="text" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onkeyup=" Clinical_Vitals.ValidateHeightInches(event, this,'txtHeightFeet');" oninput="Clinical_Vitals.calculateBMI2(null, null, null); Clinical_Vitals.calculateBSA2(null, null, null);">
+                                                                    <div class="input-group-addon text-xs p-xxs">in</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">BMI</label><i id="bmiwarningicon" class="ml-xs fa fa-exclamation-triangle hidden red" style="border-radius:0px;" data-toggle="tooltip" data-html="true" title="" data-original-title="BMI recorded is higher than the normal parameters as per the standard defined under MIPS Reporting eCQMs applicable only for patients aged 18 years and older: <b></br>CMS69v6: [=> 18.5 kg/m<sup>2</sup> || < 25 kg/m<sup>2</sup></b>]"></i>
+                                                        <div class="input-group">
+                                                            <input class="form-control" disabled name="BMI" id="txtBMI" type="text">
+                                                            <div class="input-group-addon text-xs p-xxs">kg/m<sup>2</sup></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">BSA</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" name="BSA" disabled id="txtBSA" type="text">
+                                                            <div class="input-group-addon text-xs p-xxs">m<sup>2</sup></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Head Cir.</label>
+                                                        <div class="input-group">
+                                                            <input class="form-control" name="HeadCir" id="txtHeadCir" type="text" onkeypress="EMRUtility.ValidateLength(this, event, 3);" oninput="EMRUtility.ValidateLength(this, event, 3); utility.ValidateDecimal(event, 2);" data-plugin-keyboard-numpad >
+                                                            <div class="input-group-addon text-xs p-xxs">cm</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 col-md-2">
+                                                        <label class="control-label">Blood Group</label>
+                                                        <select id="ddlBloodType" name="BloodType" class="form-control">
+                                                            <option value="" selected="selected">- Select -</option>
+                                                            <option value="52"> A +</option>
+                                                            <option value="53"> A -</option>
+                                                            <option value="54"> B +</option>
+                                                            <option value="55"> B -</option>
+                                                            <option value="56"> O +</option>
+                                                            <option value="57"> O -</option>
+                                                            <option value="58"> AB +</option>
+                                                            <option value="59"> AB -</option>
+
+                                                        </select>
+                                                    </div>
+                                                </section>
+                                                <div class="clearfix"></div><hr>
+                                                <section id="BloodPressure">
+                                                    <input id="BloodPressureIds" name="BloodPressureIds" type="hidden" value="-1" />
+                                                    <div class="col-xs-12">
+                                                        <span class="text-primary text-bold">Blood Pressure</span><a href="#/" onclick="Clinical_Vitals.AddNewRow('BloodPressure', 'divTemplateBloodPressure', '-1', null, event); return false;" class="btn btn-link btn-xs"><i class="fa fa-plus-square"></i></a>
+                                                    </div>
+                                                    <div id="divTemplateBloodPressure" style="display:none">
+                                                        <input id="BPIdTemplate" name="BPIdTemplate" type="hidden" value="" />
+                                                        <div class="col-sm-4 col-md-2">
+                                                            <label class="control-label">Systolic</label><i id="systolicwarningicon" class="ml-xs fa fa-exclamation-triangle hidden red" style="border-radius:0px;" data-toggle="tooltip" data-html="true" title="" data-original-title="Blood Pressure recorded is higher than the normal parameters as per the standards defined under MIPS Reporting eCQMs applicable only for patients aged 18 years and older:</br></br>i) <b>CMS22V6:</B> [Systolic < 120mmHg || Diastolic < 80 mmHg] </br>ii) <b>CMS65v7:</B> [Systolic < 140 mmHg]</br>iii) <b>CMS165v6:</B> [Systolic < 140 mmHg || Diastolic < 90 mmHg]"></i>
+                                                            <div class="input-group">
+                                                                <input type="text" id="txtSystolicTemplate" max="255" name="SystolicTemplate" data-plugin-keyboard-numpad maxlength="3" class="form-control" onblur="utility.ValidateDecimal(event, 0); Clinical_Vitals.ValidateBP(this, null);">
+                                                                <div class="input-group-addon text-xs p-xxs">mmHg</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-2">
+                                                            <label class="control-label">Diastolic</label><i id="diastolicwarningicon" class="ml-xs fa fa-exclamation-triangle hidden red" style="border-radius:0px;" data-toggle="tooltip" data-html="true" title="" data-original-title="Blood Pressure recorded is higher than the normal parameters as per the standards defined under MIPS Reporting eCQMs applicable only for patients aged 18 years and older:</br></br>i) <b>CMS22V6:</B> [Systolic < 120mmHg || Diastolic < 80 mmHg] </br>ii) <b>CMS65v7:</B> [Systolic < 140 mmHg]</br>iii) <b>CMS165v6:</B> [Systolic < 140 mmHg || Diastolic < 90 mmHg]"></i>
+                                                            <div class="input-group">
+                                                                <input type="text" id="txtDiastolicTemplate" max="255" name="DiastolicTemplate" data-plugin-keyboard-numpad maxlength="3" class="form-control" onblur="utility.ValidateDecimal(event, 0); Clinical_Vitals.ValidateBP(null, this);">
+                                                                <div class="input-group-addon text-xs p-xxs">mmHg</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-2">
+                                                            <label class="control-label" for="Time">Time</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                                <input type="text" class="form-control" id="tpBloodPressureTimeTemplate" name="BloodPressureTimeTemplate" data-plugin-timepicker>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-2">
+                                                            <label class="control-label">Position</label>
+                                                            <select id="ddlPositionTemplate" name="PositionTemplate" class="form-control">
+                                                                <option value="" selected="selected">- Select -</option>
+                                                                <option value="1">Standing</option>
+                                                                <option value="2">Sitting</option>
+                                                                <option value="3">Laying Down</option>
+                                                                <option value="4">Other</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-2">
+                                                            <label class="control-label">Cuff Location</label>
+                                                            <select id="ddlCuffLocationTemplate" name="CuffLocationTemplate" class="form-control">
+                                                                <option value="" selected="selected">- Select -</option>
+                                                                <option value="5">Right Side</option>
+                                                                <option value="6">Left Side</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-2">
+                                                            <label class="control-label">Cuff Size</label>
+                                                            <select id="ddlCuffSizeTemplate" name="CuffSizeTemplate" class="form-control">
+                                                                <option value="" selected="selected">- Select -</option>
+                                                                <option value="7">Small</option>
+                                                                <option value="8">Standard</option>
+                                                                <option value="9">Large</option>
+                                                                <option value="10">Other</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                </section>
+
+                                                <div class="clearfix"></div><hr>
+                                                <section id="Pulse" class="col-md-6 p-none">
+                                                    <input id="PulseIds" name="PulseIds" type="hidden" value="-1" />
+                                                    <div class="col-xs-12">
+                                                        <span class="text-primary text-bold">Pulse</span><a onclick="Clinical_Vitals.AddNewRow('Pulse', 'divTemplatePulse', '-1', null, event); return false;" class="btn btn-link btn-xs"><i class="fa fa-plus-square"></i></a>
+                                                    </div>
+                                                    <div id="divTemplatePulse" style="display:none">
+                                                        <input id="PulsIdTemplate" name="PulsIdTemplate" data-plugin-keyboard-numpad type="hidden" value="" />
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label">Result</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" name="PulseResultTemplate" data-plugin-keyboard-numpad id="txtPulseResultTemplate" type="text" onkeypress="EMRUtility.ValidateLength(this, event, 3);" oninput=" EMRUtility.ValidateLength(this, event, 3);" onblur=" utility.ValidateDecimal(event, 0);">
+                                                                <div class="input-group-addon text-xs p-xxs">bpm</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label">Rhythm</label>
+                                                            <select id="ddlRythmTemplate" name="RythmTemplate" class="form-control">
+                                                                <option value="" selected="selected">- Select -</option>
+                                                                <option value="11">Regular Sinus Rhythm</option>
+                                                                <option value="12">Regularly Irregular</option>
+                                                                <option value="13">Irregularly Regular</option>
+                                                                <option value="14">Irregularly Irregular</option>
+                                                                <option value="15">Other</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label" for="Time">Time</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                                <input type="text" class="form-control" id="tpPulseTimeTemplate" name="PulseTimeTemplate" data-plugin-timepicker>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </section>
+                                                <section id="Temprature" class="col-md-6 p-none">
+                                                    <input id="TempratureIds" name="TempratureIds" type="hidden" value="-1" />
+                                                    <div class="col-xs-12">
+                                                        <span class="text-primary text-bold">Temperature</span><a onclick="Clinical_Vitals.AddNewRow('Temprature', 'divTemplateTemprature', '-1', null, event); return false;" class="btn btn-link btn-xs"><i class="fa fa-plus-square"></i></a>
+                                                    </div>
+                                                    <div id="divTemplateTemprature" style="display:none">
+                                                        <input id="TempIdTemplate" name="TempIdTemplate" type="hidden" value="" />
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label">Result</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" name="TemperatureResultTemplate" data-plugin-keyboard-numpad id="txtTemperatureResultTemplate" type="text" onkeypress="EMRUtility.ValidateLength(this, event, 5);" oninput=" EMRUtility.ValidateLength(this, event, 5);" onblur=" utility.ValidateDecimal(event, 2, 0, 9999999, '' );">
+                                                                <div class="input-group-addon text-xs p-xxs">F</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label">Method</label>
+                                                            <select id="ddlMethodTemplate" name="MethodTemplate" class="form-control">
+                                                                <option value="" selected="selected">- Select -</option>
+                                                                <!-- 26/11/2015 Muhammad Irfan Bug # EMR-71 -->
+                                                                <option value="16">Axillary</option>
+                                                                <option value="17">Ear</option>
+                                                                <option value="18">Oral</option>
+                                                                <option value="19">Rectal</option>
+                                                                <option value="20">Temporal</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label" for="Time">Time</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                                <input type="text" class="form-control" id="tpTempratureTimeTemplate" name="TemperatureTimeTemplate" data-plugin-timepicker>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <div class="clearfix"></div><hr>
+                                                <section id="Respiration" class="col-md-6 p-none">
+                                                    <input id="RespirationIds" name="RespirationIds" type="hidden" value="-1" />
+                                                    <div class="col-xs-12">
+                                                        <span class="text-primary text-bold">Respiration</span><a onclick="Clinical_Vitals.AddNewRow('Respiration', 'divTemplateRespiration', '-1', null, event); return false;" class="btn btn-link btn-xs"><i class="fa fa-plus-square"></i></a>
+                                                    </div>
+                                                    <div id="divTemplateRespiration" style="display:none">
+                                                        <input id="RespIdTemplate" name="RespIdTemplate" type="hidden" value="" />
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label">Result</label>
+                                                            <div class="input-group">
+                                                                <input class="form-control" name="RespirationResultTemplate" data-plugin-keyboard-numpad type="text" id="txtRespirationResultTemplate" onkeypress="EMRUtility.ValidateLength(this, event, 3);" oninput="EMRUtility.ValidateLength(this, event, 3);" onblur=" utility.ValidateDecimal(event, 0);">
+                                                                <div class="input-group-addon text-xs p-xxs">rpm</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label">Pattern</label>
+                                                            <select id="ddlPatternTemplate" name="PatternTemplate" class="form-control">
+                                                                <option value="" selected="selected">- Select -</option>
+                                                                <option value="21">Normal</option>
+                                                                <option value="22">Labored</option>
+                                                                <option value="23">Wheezing</option>
+                                                                <option value="24">Tachypnea</option>
+                                                                <option value="25">Hyperventilation</option>
+                                                                <option value="26">Bradypnea</option>
+                                                                <option value="27">Cheyne Strokes</option>
+                                                                <option value="28">Ataxic</option>
+                                                                <option value="29">Sighing</option>
+                                                                <!-- 26/11/2015 Muhammad Irfan Bug # EMR-72 -->
+                                                                <option value="51">Obstructive</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label" for="Time">Time</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                                                <input type="text" class="form-control" id="tpRespirationTimeTemplate" name="RespirationTimeTemplate" data-plugin-timepicker>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </section>
+                                                <section id="Oxygen" class="col-md-6 p-none">
+                                                    <!--<div class="col-xs-12">
+                                                        <span class="text-primary text-bold">Oxygen Saturation</span><a  onclick="Clinical_Vitals.AddNewRow('Oxygen', 'divTemplateOxygen', '-1',null,event);return false;" class="btn btn-link btn-xs"><i class="fa fa-plus-square"></i></a>
+                                                    </div>-->
+                                                    <div class="col-xs-12">
+                                                        <span class="text-primary text-bold">Oxygen Saturation</span>
+                                                    </div>
+                                                    <div id="divTemplateOxygen">
+
+                                                        <div class="col-sm-4">
+                                                            <div class="row">
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label">SPO2</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="txtSPO2" name="SPO2" maxlength="3" data-plugin-keyboard-numpad class="form-control" oninput="EMRUtility.setPercentage(event,this);" onblur="utility.ValidateDecimal(event, 2);">
+                                                                        <div class="input-group-addon text-xs p-xxs">%</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <label class="control-label" title="Inhaled O2 Concentration">Inhaled O2</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" id="txtInhaledO2Concentration" name="InhaledO2Concentration" maxlength="3" data-plugin-keyboard-numpad class="form-control" oninput="EMRUtility.setPercentage(event,this);" onblur="utility.ValidateDecimal(event, 2);">
+                                                                        <div class="input-group-addon text-xs p-xxs">%</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label">Oxygen Source</label>
+                                                            <input type="text" id="txtOxygenSource" name="OxygenSource" maxlength="10" class="form-control">
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label class="control-label" for="peakFlow">Peak Flow</label>
+                                                            <div class="input-group">
+                                                                <input type="text" id="txtPeakFlow" name="PeakFlow" maxlength="5" data-plugin-keyboard-numpad class="form-control" onblur="utility.ValidateDecimal(event, 2);">
+                                                                <div class="input-group-addon text-xs p-xxs">L/min</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <div class="clearfix"></div><hr>
+                                                <section id="General">
+                                                    <!--<div class="col-xs-12">
+                                                        <span class="text-primary text-bold">General</span>
+                                                    </div>
+                                                    <div class="col-sm-6 col-lg-2">
+                                                        <label class="control-label">Severity of pain</label>
+                                                        <select id="ddlSeverityofPain" name="SeverityofPain" class="form-control">
+                                                            <option value="" selected="selected">- Select -</option>
+                                                            <option value="30">Very Mild Pain</option>
+                                                            <option value="31">Discomforting Pain</option>
+                                                            <option value="32">Tolerable Pain</option>
+                                                            <option value="33">Distressing Pain</option>
+                                                            <option value="34">Very Distressing Pain</option>
+                                                            <option value="35">Intense Pain</option>
+                                                            <option value="36">Very Intense Pain</option>
+                                                            <option value="37">Horrible Pain</option>
+                                                            <option value="38">Excruciating Pain</option>
+                                                            <option value="50">Worst Pain Imaginable</option>
+                                                        </select>
+                                                    </div>-->
+                                                    <!--<div class="col-sm-6 col-lg-2">
+                                                        <label class="control-label">Smoking status</label>
+                                                        <select id="ddlSmokingStatus" name="SmokingStatus" class="form-control">
+                                                            <option value="" selected="selected">- Select -</option>
+                                                            <option value="39">Every day smoker</option>
+                                                            <option value="40">Smokes regularly not daily</option>
+                                                            <option value="41">Former smoker</option>
+                                                            <option value="42">Status unknown</option>
+                                                            <option value="43">Never smoker</option>
+                                                            <option value="44">Light use of other tobacco</option>
+                                                            <option value="45">Heavy use of other tobacco</option>
+                                                        </select>
+                                                    </div>-->
+                                                    <div class="col-sm-12 col-lg-8">
+                                                        <label class="control-label">Comments</label>
+                                                        <div id="MacroDescDetails" class="tinymce-autocomplete" hidden>
+                                                            <ul id="MacroDescriptions" class="list-unstyled list-underlined"></ul>
+                                                        </div>
+                                                        <!--<textarea id="txtComments" name="Comments" maxlength="5000" class="form-control hidden" spellcheck="true"></textarea>-->
+                                                        <input type="hidden" id="txtComments"name="Comments" />
+                                                        <div class="form-control editable" style="height:60px; font-size: 12px; overflow-y:auto" maxlength="3000" id="txtComment" name="Comments" contenteditable="true" spellcheck="true"></div>
+                                                    </div>
+                                                    
+                                                    <div class="col-xs-12 col-lg-4 mt-sm">
+                                                        <button class="btn btn-primary btn-sm rightbtn" type="submit" id="btnsave">Add</button>
+                                                        <button class="btn btn-primary btn-sm rightbtn hidden" id="btnAddNew" type="button" onclick="Clinical_Vitals.addNewVital();">Add New</button>
+                                                        <!--<button class="btn btn-primary btn-sm rightbtn" type="button" onclick="Clinical_Vitals.ResetFormData();" id="btnreset">Reset</button>-->
+                                                    </div>
+                                                </section>
+                                            </div>
+
+                                        </div>
+                                    </section>
+
+                                </div>
+                                <input type="hidden" id="hfIsFromNote" name="IsFromNote" />
+                                <input type="hidden" id="hfNoteId" name="NotesId" />
+                                <input type="hidden" name="PatientId" id="hfPatientId" />
+                                <div id="ProgressnoteHTML" style="display:none"></div>
+                            </form>
+                        </div>
+
+                    </section>
+
+                    <div id="pnlVitals_Result" style="display: inline;">
+
+                        <form>
+                            <div class="panel-body panel-featured ">
+                                <!--<input type="hidden" id="Vitals_SelectedDataKeys" />-->
+                                <table class="table table-bordered table-striped table-condensedWithControls table-hover mb-none" id="dgvVitals">
+                                    <thead>
+                                        <tr>
+                                            <th class="size20 p-none" coltype="Expand"></th>
+                                            <!--<th class="size10"><input type="checkbox" id="chkMasterClinicalVital" onchange="Clinical_Vitals.checkUncheckAll(this);" /></th>-->
+                                            <!--<th class="size140">Action</th>-->
+                                            <th id="ColumnAction" actiontype="Save,Edit,Delete,Detail,History" coltype="Action" class="size90 size-min95 text-center va-middle">Action</th>
+                                            <!--<th>Date</th>-->
+                                            <th id="thVitalSignDate" controlid="dtpVitalSignDate" iscontroldisabled="0" controlname="VitalSignDate" controlwidth="size60" class="size-min60 size60  text-center va-middle" coltype="datetime">Date</th>
+                                            <th id="thVitalSignTime" controlid="tpVitalSignTime" iscontroldisabled="0" controlname="VitalSignTime" controlwidth="size50" class="size-min50 size50  text-center va-middle" coltype="time">Time</th>
+                                            <!--<th>BP</th>-->
+                                            <th id="thSystolic" controlid="txtBPSystolic" iscontrolsecid="1" hfcontrolid="BloodPressureIds,BPId" hfcontrolname="BloodPressureIds,BPId" controlname="Systolic" appendidaftername="0" class="size30 text-center va-middle" coltype="TextBox" placeholder="Systolic mmHg">Systolic mmHg</th>
+                                            <th id="thDiastolic" controlid="txtBPDiastolic" iscontrolsecid="1" controlname="Diastolic" class="size30 text-center" coltype="TextBox" placeholder="Diastolic mmHg">Diastolic mmHg</th>
+                                            <th controlid="ddlBPNegationReason" controlname="BPNegationReason" class="size30 text-center sorting_disabled va-middle" coltype="dropdown" ddlist="GetVaccineRefusalReason">Blood Pressure Negation Reason</th>
+                                            <!--<th>Pulse</th>-->
+                                            <th controlid="txtPulseResult" hfcontrolid="PulseIds,PulsId" hfcontrolname="PulseIds,PulsId" controlname="PulseResult" class="size30 text-center va-middle" coltype="TextBox">Pulse bpm</th>
+                                            <!--<th>Temp.</th>-->
+                                            <th controlid="txtTemperatureResult" hfcontrolid="TempratureIds,TempId" hfcontrolname="TempratureIds,TempId" controlname="TemperatureResult" class="size30 text-center va-middle" coltype="TextBox">Temp. F</th>
+                                            <!--<th>Resp.</th>-->
+                                            <th controlid="txtRespirationRateResult" hfcontrolid="RespirationIds,RespId" hfcontrolname="RespirationIds,RespId" controlname="RespirationResult" class="size30 text-center va-middle" coltype="TextBox">Resp. rpm</th>
+                                            <!--<th>Weight</th>-->
+                                            <th controlid="txtWeight" controlname="Weight" class="size30 text-center va-middle" coltype="TextBox">Weight lbs</th>
+                                            <!--<th>Height</th>-->
+                                            <th id="thHeightFeet" controlid="txtHeightFeet" controlname="HeightFeet" iscontrolsecid="1" class="size30 text-center va-middle" coltype="TextBox">Height ft</th>
+                                            <th id="thHeightInches" controlid="txtHeightInches" controlname="HeightInches" iscontrolsecid="1" class="size30 text-center va-middle" coltype="TextBox">Height inches</th>
+                                            <!--<th>BSA</th>-->
+                                            <th controlid="txtBSA" controlname="BSA" class="size30 text-center va-middle" iscontroldisabled="1" coltype="TextBox">BSA m<sup>2</sup></th>
+                                            <!--<th>BMI</th>-->
+                                            <th controlid="txtBMI" controlname="BMI" class="size30 text-center va-middle" iscontroldisabled="1" coltype="TextBox">BMI kg/m<sup>2</sup></th>
+                                            <!--<th>SPO2</th>-->
+                                            <th controlid="txtSPO2" controlname="SPO2" class="size30 text-center va-middle" coltype="TextBox">SPO2 %</th>
+                                            <!--<th>Comments</th>-->
+                                            <th controlid="txtComments" controlname="Comments" class="noWordBreak size30 va-middle" coltype="TextBox">Comments</th>
+                                            <th controlid="txtVitalSignDate" controlname="VitalSignDate" iscontroldisabled="1" class="noWordBreak size30 va-middle" coltype="TextBox">Vital Date</th>
+                                            <th controlid="ddlVitalNegationReason" controlname="NegationReason" class="size-min100 size100 noWordBreak va-middle" coltype="dropdown" ddlist="GetVaccineRefusalReason">Negation Reason</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <a href="#pnlVitals_Result" class="btn btn-link btn-xs p-none" onclick="Clinical_Vitals.AddNewVitalRow(null,'Add',null,-1,-1,-1,-1,-1,-1,1);">Add New Vitals</a>
+
+                                <div id="divVitalsPaging"></div>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div class="modal-footer" style="margin-bottom: 80px;"></div>
+         
+        </div>
+    </div>
+</div>

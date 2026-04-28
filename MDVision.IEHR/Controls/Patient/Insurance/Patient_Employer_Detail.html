@@ -1,0 +1,89 @@
+﻿<div id="employerDetail">
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="employerDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Employer</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblemployerDetail">
+                    <form method="post" id="frmEmployerDetail" onsubmit="return false">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label" >Name<span class="required">*</span></label>
+                                <input class="form-control" id="txtName" type="text" name="Name" maxlength="20">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" >Contact</label>
+                                <input class="form-control" id="txtContact" name="Contact" type="text" maxlength="50">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" >Address 1</label>
+                                <input class="form-control" id="txtAddress1" name="Address1" type="text" maxlength="55">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label" >Address 2</label>
+                                <input class="form-control" id="txtAddress2" name="Address2" type="text" maxlength="55">
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-xs-8 pl-md pr-xs">
+                                        <label class="control-label" >City</label>
+                                        <input class="form-control" id="txtCity" name="City" type="text" maxlength="25">
+                                    </div>
+                                    <div class="col-xs-4 pl-none  pr-md">
+                                        <label class="control-label" >State</label>
+                                        <input class="form-control" id="txtState" name="State" type="text" placeholder="aa" data-mask="aa">
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-xs-8 pl-md pr-xs">
+                                        <label class="control-label pull-left "> Zip </label>
+                                        <input id="txtZip" name="Zip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#employerDetail', '#txtZip', '#txtCity', '#txtState')" />
+                                    </div>
+                                    <div class="col-xs-4 pr-md pl-none pad-a-labelsize">
+                                        <input id="txtZipExt" name="ZipExt" class="form-control" type="text" onblur="utility.validateMasking(this);" placeholder="9999" data-mask="9999" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label" >Telephone</label>
+                                <input class="form-control" id="txtTelephone" name="Telephone" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                            </div>
+                            <div class=" col-sm-4">
+                                <label class="control-label" >Fax</label>
+                                <input class="form-control" id="txtFax" name="Fax" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" >Email</label>
+                                <input class="form-control" id="txtEmail" name="Email" onblur="employerDetail.EnableValidation(this);" type="text" maxlength="55">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-1 col-xs-6">
+                                <span class="spacer10"></span>
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="Active" checked="checked" id="chkActive">
+                                    <label class="control-label" for="chkActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-6 mt-sm pull-right">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

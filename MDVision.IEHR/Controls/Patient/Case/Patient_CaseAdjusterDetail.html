@@ -1,0 +1,135 @@
+﻿
+<div id="CaseAdjusterDetail">
+    <div id="actionPanCaseAdjusterDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="CaseAdjusterDetail.UnloadPan();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Case Adjuster</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblParticipentDetail" class="col-md-12">
+                    <form method="post" id="frm_CaseAdjusterDetail" onsubmit="return false">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label id="lblProvider" class="control-label">First Name<span class="required">*</span></label>
+                                <input type="text" id="txtFirstName" name="FirstName" class="form-control" maxlength="50" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="control-label">Last Name <span class="required">*</span></label>
+                                <input type="text" id="txtLastName" name="LastName" class="form-control" maxlength="50" />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label">DOB </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text" id="dtpDOB" name="DOB" class="form-control" data-plugin-datepicker="" data-bv-field="DOB" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Address1 </label>
+
+                                <input type="text" id="txtAddress1" name="Address1" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label">Address2 </label>
+                                <input type="text" id="txtAddress2" name="Address2" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">City </label>
+
+                                <input type="text" id="txtCity" name="City" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="row">
+
+                                <div class="col-sm-4">
+                                    <label class="control-label">State </label>
+
+                                    <input type="text" id="txtState" name="State" class="form-control" data-mask="aa" >
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="control-label">Zip </label>
+                                    <input type="text" id="txtZip" name="Zip" class="form-control" data-mask="99999" onblur="utility.FillCityState('#CaseAdjusterDetail #frm_CaseAdjusterDetail', '#txtZip','#txtCity', '#txtState')">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label">Ext </label>
+
+                                    <input type="text" id="txtExt" name="Ext" class="form-control" maxlength="5" placeholder="99999" value="">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label class="control-label">Phone </label>
+
+                            <input type="text" id="txtPhone" name="Phone" class="form-control" data-mask="(999) 999-9999" placeholder="(999) 999-9999">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">Fax </label>
+
+                            <input type="text" id="txtFax" name="Fax" class="form-control" data-mask="(999) 999-9999" placeholder="(999) 999-9999">
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label class="control-label">Email </label>
+
+                            <input type="text" id="txtEmail" name="Email" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">Note </label>
+                            <textarea rows="4" cols="50" id="txtNote" class="form-control" name="Note" spellcheck="true"></textarea>
+                        </div>
+                        <div class="col-md-4 pad-a-labelsize">
+                            <label class="control-label pull-left">Preference </label>
+                            <div class="pull-left ml-default">
+                                <div class="pull-left radio-custom radio-small">
+                                    <input type="radio" id="RadCaseAdjusterPhone" name="RadPreference">
+                                    <label id="lblRadYes" class="control-label" for="">Phone</label>
+                                </div>
+                                <div class="pull-left  radio-custom radio-small ml-default">
+                                    <input type="radio" id="RadCaseAdjusterFax" name="RadPreference">
+                                    <label id="lblRadFax" class="control-label" for="">Fax</label>
+                                </div>
+                                <div class="pull-left radio-custom radio-small ml-default">
+                                    <input type="radio" id="RadCaseAdjusterEmail" name="RadPreference">
+                                    <label id="lblRadNo" class="control-label" for="">No</label>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-1 pad-a-labelsize">
+
+                            <div class="checkbox-custom">
+                                <input type="checkbox" id="chkActive" name="Active">
+                                <label class="control-label">Active </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 mt-sm">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                        </div>
+
+                        <input type="hidden" id="hfProvider" name="ProviderID" />
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

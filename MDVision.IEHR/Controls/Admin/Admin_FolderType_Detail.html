@@ -1,0 +1,44 @@
+﻿<div id="folderTypeDetail">
+    <div id="actionPanfolderTypeDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="folderTypeDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Folder Type</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblfolderTypeDetail" class="col-md-12">
+                    <form method="post" onsubmit="return false" id="frmfolderTypeDetail">
+
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label" for="Name">Name <span class="required">*</span></label>
+                                <input class="form-control" id="txtName" name="Name" type="text" maxlength="10">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label" for="Description">Description</label>
+                                <input class="form-control" id="txtDescription" name="Description" type="text" maxlength="250">
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Entity <span class="required">*</span></label>
+                                <select id="ddlEntity" name="entity" class="form-control" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-sm-1 col-xs-6">
+                                <div class="pad-a-labelsize"></div>
+                                <div class="checkbox-custom checkbox-default">
+                                    <input id="chkActive" name="Active" checked type="checkbox">
+                                    <label class="control-label" for="chkActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 pad-a-labelsize-btn pull-right">
+                                <button id="btnSavefolderType" type="submit" class="btn btn-primary rightbtn btn-sm">Save & Exit</button>
+                                <!--<button id="btnHistoryfolderType" class="btn btn-primary btn-sm rightbtn" type="button" onclick="folderTypeDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

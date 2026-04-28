@@ -1,0 +1,72 @@
+﻿<div class="row" id="pnlPatientList">
+    <div id="actionPanPatientList" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="PQRS_Patient_List.UnLoad('cancel');"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Patient List</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer5"></div><div class="clearfix"></div>
+
+                    <div class="col-xs-12">
+                        <form id="frmPatientList" method="post" name="frmPatientList" onsubmit="return false">
+                            <div id="divMainPatientList">
+                                <section id="sectionPatientList" class="panel panel-featured">
+                                    <header class="panel-heading">
+
+                                        <h2 class="panel-title">Patient List</h2>
+                                    </header>
+                                    <div class="panel-body">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientList">
+                                            <thead>
+                                                <tr>
+                                                    <th style="display:none">PatientId</th>
+                                                    <th>Account</th>
+                                                    <th>Name</th>
+                                                    <th id="thDOB">D.O.B</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+                            <div id="divSpacer1" class="spacer20"></div><div id="divClearFix1" class="clearfix"></div>
+                            <div id="divSpacer2" class="spacer20"></div><div class="clearfix"></div>
+                            <section id="detailTable" class="panel panel-featured hidden">
+                                <header id="headerMeasureEntry" class="panel-heading">
+
+                                    <h2 id="headingReasons" class="panel-title">Measure Entry</h2>
+                                </header>
+                                <div class="panel-body">
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvMeasureReasons">
+                                        <thead>
+                                            <tr>
+                                                <th id="thMeasure" class="col-sm-6">Measure</th>
+                                                <th id="thMissingValue" class="col-sm-6">Missing Value</th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </section>
+
+                            <div class="spacer10"></div>
+                            <button class="btn btn-default btn-sm pull-right mr-default disableAll" onclick="PQRS_Patient_List.openPrintView();" type="button" id="btnPrint">  Print</button>
+                            <button class="btn btn-default btn-sm pull-right mr-default" onclick="PQRS_Patient_List.UnLoad('cancel');" type="button" id="btnCancel">  Cancel</button>
+                            <button class="btn btn-default btn-sm pull-right mr-default disableAll" style="display:none" onclick="PQRS_Patient_List.saveMeasureReasoning();" type="button" id="btnSave">  Save</button>
+                            <input type="hidden" name="PatientId" id="hfPatientId" />
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+﻿<div id="guarantorDetail">
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="guarantorDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Guarantor</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblguarantorDetail">
+                    <form method="post" id="frmGuarantorDetail" onsubmit="return false">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">Relation<span class="required">*</span></label>
+                                <select class="form-control" id="ddlRelation" name="Relation" ddlist="GetRelationship" onchange="guarantorDetail.SetSelfRelation(this.value);"></select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Date of Birth</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input class="form-control" id="dtpDOB" name="DOB" type="text" data-plugin-datepicker="">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Last Name<span class="required">*</span></label>
+                                <input class="form-control" id="txtLastName" name="LastName" type="text" maxlength="20">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <label class="control-label">First Name<span class="required">*</span></label>
+                                <input class="form-control" id="txtFirstName" name="FirstName" type="text" maxlength="20">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Address 1<span class="required">*</span></label>
+
+
+
+                                <a id="lnklblSetAddressSameAsPatient" class="btn btn-link pull-right btn-xs"
+                                   target="_blank" title="Same As Patient" onclick=" guarantorDetail.SetAddressSameAsPatient();">Same as patient</a>
+                                <input class="form-control" id="txtAddress1" name="Address1" type="text" maxlength="55">
+                            </div>
+                            <!--<div class="col-sm-4">
+                                <div class="row pl-xs">
+                                    <div class="first-Input">
+                                        <label class="control-label">City<span class="required">*</span></label>
+                                        <input class="form-control" id="txtCity" name="City" type="text" maxlength="30">
+                                    </div>
+                                    <div class="second-Input">
+                                        <label class="control-label">State<span class="required">*</span></label>
+                                        <input class="form-control" id="txtState" name="State" type="text" placeholder="aa" data-mask="aa">
+                                    </div>
+                                </div>
+                            </div>-->
+
+                            <div class="col-sm-4 p-none">
+                                <div class="size60per pl-default pr-default pull-left">
+                                    <label class="control-label ">City <span class="required">*</span></label>
+                                    <input id="txtCity" class="form-control" type="text" maxlength="25" name="City" />
+                                </div>
+                                <div class="size40per pull-left pl-default pr-default ">
+                                    <label class="control-label" for="state"> State </label>
+                                    <input id="txtState" class="form-control" type="text" name="State" placeholder="aa" data-mask="aa" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <!--<div class="col-sm-4">
+                                <div class="row pl-xs">
+                                    <div class="first-Input">
+                                        <label class="control-label pull-left ">Zip<span class="required">*</span></label>
+                                        <input id="txtZip" class="form-control" name="Zip" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#guarantorDetail', '#txtZip', '#txtCity', '#txtState')" />
+                                    </div>
+                                    <div class="second-Input pad-a-labelsize">
+                                        <input id="txtZipExt" class="form-control" type="text" placeholder="9999" data-mask="9999" />
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-sm-4 p-none">
+                                <div class="size60per  pull-left pl-default pr-default ">
+                                    <label class="control-label">Zip </label>
+                                    <input id="txtZip" name="Zip" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#guarantorDetail #frmGuarantorDetail', '#txtZip', '#txtCity', '#txtState');" />
+                                </div>
+                                <div class="size40per pull-left pl-default pr-default  pad-a-labelsize">
+                                    <input id="txtZipExt" name="ZipExt" class="form-control" type="text" data-mask="9999" placeholder="9999" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Telephone</label>
+                                <input class="form-control" name="Telephone" id="txtTelephone" type="text" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="control-label">Email</label>
+                                <input class="form-control" id="txtEmail" name="Email" type="text">
+                            </div>
+                            <div class="col-sm-1 col-xs-6">
+                                <span class="spacer10"></span>
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="Active" id="chkActive" checked>
+                                    <label class="control-label" for="chkActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 mt-sm pull-right">
+                                <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        utility.ValidateDOB('frmGuarantorDetail', 'guarantorDetail #dtpDOB', new Date('1800-01-01'), new Date(), true);
+    });
+</script>

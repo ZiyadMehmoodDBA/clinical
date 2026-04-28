@@ -1,0 +1,90 @@
+﻿<div id="pnlPhysicalExamSysObservationDetail">
+    <div id="actionPanPhysicalExamSysObservationDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="PhysicalExamSysObservationDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Physical Examination</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblPhysicalExamSysObservationDetail">
+                    <form method="post" onsubmit="return false;" id="frmPhysicalExamSysObservationDetail" name="frmPhysicalExamSysObservationDetail">
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+                            <section id="sectionPhysicalExam" class="panel-body tab-content-featured toggleVertical">
+                                <div id="PhysicalExam">
+                                    <div class="col-xs-4">
+                                        <section id="SystemSections" class="panel panel-featured size100per  hidden">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title pull-left">Observations</h2>
+                                                <div class="pull-right" id="divAddNewSubSystem" onclick="PhysicalExamSysObservationDetail.addNewItem('subsystem')"><button class="btn-link white btn btn-xs" type="button"><i class="fa fa-plus-circle"></i></button></div>
+                                                <div class="clearfix"></div>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none">
+                                                <div class="demo-section k-content pl-default pr-default">
+                                                    <input id="Observations" class="form-control" />
+                                                </div>
+                                                <div id="divPhysicalExamSystemSection" class="height330 height-max330 own-scroll overflowY">
+                                                    <ul id="ulPhysicalExamSystemSection" name="PhysicalExamSystemSection" class="listPrimary"></ul>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <section id="SystemPreview" class="panel panel-featured size100per">
+                                            <header class="panel-heading">
+                                                <h2 id="headingFamilyMember" class="panel-title">Preview</h2>
+                                            </header>
+                                            <div class="panel-body pl-none pr-none height330 height-max330 own-scroll overflowY">
+                                                <div class="col-xs-12 borderB pb-sm">
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <label class="control-label">Delimator</label>
+                                                    </div>
+                                                    <div class="col-xs-3 col-lg-2">
+                                                        <select id="delimator" class="form-control">
+                                                            <option id="comma" value=",">,</option>
+                                                            <option id="fullstop" value=".">.</option>
+                                                            <option id="collon" value=":">:</option>
+                                                            <option id="terminator" value=";">;</option>
+                                                            <option id="hiphen" value="-">-</option>
+                                                        </select>
+                                                    </div>
+                                                   
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <div class="spacer20">
+                                                        <textarea id="observationContent" rows="15" name="observationContent" spellcheck="true" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<style type="text/css">
+    .cke_button__cut_icon {
+        display: none !important; /*without icon*/
+    }
+
+    .cke_button__cut_label {
+        display: inline !important; /*show the text label*/
+        font-size: 0px;
+    }
+
+        .cke_button__cut_label:before {
+            content: "Clear Selected";
+            font-size: 14px;
+            font-weight: bold;
+        }
+</style>

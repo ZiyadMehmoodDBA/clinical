@@ -1,0 +1,59 @@
+﻿<div id="appointmentStatusDetail">
+    <div id="actionPanappointmentStatusDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="appointmentStatusDetail.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Appointment Status</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmAppointmentStatusDetail" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <label class="control-label">Short Name<span class="required">*</span></label>
+                            <input class="form-control " name="name" id="txtShortName" type="text" maxlength="20" />
+                        </div>
+                        <div class="col-sm-8">
+                            <label class="control-label">Description</label>
+                            <input class="form-control " id="txtDescription" name="Description" type="text" maxlength="100" />
+                        </div>
+
+
+                        <div class="col-sm-4">
+                            <label class=" control-label">Color</label><span class="required">*</span>
+                            <div class="input-group color demo2" data-plugin-colorpicker>
+                                <span class="input-group-addon" style="padding:1px 4px; padding-top:2px;"><i></i></span>
+                                <input type="text" class="form-control" name="Color" id="txtColor">
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-6 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" checked="" name="Active" id="chkActive">
+                                <label for="chkActive">Active</label>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="clearBoth ">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            <!--<button id="btnHistoryApptStatus" class="btn btn-primary btn-sm rightbtn" type="button" onclick="appointmentStatusDetail.ShowHistory();">History</button>-->
+                        </div>
+                    <div class="spacer10"></div>
+                    
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.demo2').colorpicker();
+     
+        $('.demo2').colorpicker().on('changeColor.colorpicker', function (event) {
+            $('#frmAppointmentStatusDetail').bootstrapValidator('revalidateField', 'Color');
+            $('#frmAppointmentStatusDetail').bootstrapValidator('updateStatus', 'Color','NOT_VALIDATED');
+           
+        });
+
+    });
+</script>

@@ -1,0 +1,68 @@
+﻿<div id="pnlBatch_FaxClassifyPages">
+    <div id="actionPanBatch_FaxClassifyPages" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Batch_FaxClassifyPages.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titleDocument">Move to documents</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblDocumentAssignedTo" class="col-md-12 pl-xxs pr-xxs">
+                    <form method="post" onsubmit="return false" id="frmBatch_FaxClassifyPages">
+                        <div class="form-group">
+                            <div name="conditionalTag">
+                         
+                                       <div class="col-sm-3">
+                                    <label class="control-label">Folder</label>
+                                    <select class="form-control" id="ddlFolder" name="Folder" ddlist="GetDocument" onchange=""></select>
+                                </div>
+                                <div id="divDateOfService" name="conditionalTag" class="col-sm-3">
+                                    <label class="control-label">Date of Service</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        <input class="form-control" id="dtpDOS" name="DOS" type="text" data-plugin-datepicker="" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="control-label">Assign User to review </label>
+                                    <select class="form-control" id="ddlAssignUserto" name="AssignedUserTo" ddlist="GetUsers"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" name="conditionalTag">
+                                <label class="control-label ">Comments</label>
+                                <textarea id="txtComments" name="Comments" maxlength="256" class="form-control" rows="2" spellcheck="true"></textarea>
+                            </div>
+                            <div class="col-sm-2" style="padding-top:35px;">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" checked="" name="IsConfidential" id="chkIsConfidential">
+                                    <label for="IsConfidential">Is Confidential</label>
+                                </div>
+                                </div>
+                                <div class="col-sm-2 conditional pull-right pad-a-labelsize-btn">
+                                    <button id="btnBatch_FaxClassifyPages" type="submit" onclick="Batch_FaxClassifyPages.saveFaxDocument();" class="btn btn-primary btn-sm  rightbtn">Upload</button>
+                                  
+                                </div>
+                                <div class="spacer10"></div>
+                            </div>
+                        <input type="hidden" id="hfPatientId" value="-1" />
+                        <input type="hidden" id="hfVisitId" value="-1" />
+                        <input type="hidden" id="hfCaseId" value="-1" />
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //initialization of date-picker.
+        utility.CreateDatePicker('pnlBatch_FaxClassifyPages #dtpDOS', function () {
+            //on-change callback method
+        });
+
+    });
+</script>

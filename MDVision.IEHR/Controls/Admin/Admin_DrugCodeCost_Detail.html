@@ -1,0 +1,57 @@
+﻿<div id="DrugCodeCostDetail">
+    <div id="actionPanDrugCodeCostDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Admin_DrugCodeCost_Detail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Drug Code Cost</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblDrugCodeCostDetailDetail" class="col-md-12">
+                    <!--<div class="col-md-3 mt-sm pull-right">
+                        <a id="aHistory" class="btn btn-success btn-xs rightbtn" onclick="Admin_DrugCodeCost_Detail.ShowHistory('DrugCodeCostDetail');"><i class="fa fa-history"></i> History</a>
+                    </div>-->
+                    <form method="post" onsubmit="return false" id="frmDrugCodeCostDetailDetail">
+                      
+                        <div class="form-group">
+                          
+                                <div class="col-md-4">
+                                    <label class="control-label" for="CPT Code">CPT Code</label><span class="required">*</span>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtCPTCode" type="text" placeholder="99999" maxlength="5" name="CPTCode" oninput="Admin_DrugCodeCost_Detail.BindAutoComplete(this)" onblur="    Admin_DrugCodeCost_Detail.DrugCodeCostValidateCode(this);" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary btn-xs " type="button" onclick="Admin_DrugCodeCost_Detail.OpenCPTCode();"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label" for="Cost">Cost</label><span class="required">*</span>
+                                    <div class=" input-group">
+                                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                        <input type="text" class="form-control" onkeypress="utility.ValidateDecimal(event,2)" id="txtCost" name="Cost" maxlength="10" placeholder="99999.99">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 pad-a-labelsize">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                        <label for="chkIsActive">Active</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mt-sm pull-right">
+                                    <button type="submit" class="btn btn-primary btn-sm rightbtn">Save</button>
+                                    <!--<button id="btnHistoryDrugCodeCost" class="btn btn-primary btn-sm rightbtn" type="button" onclick="Admin_DrugCodeCost_Detail.ShowHistory('DrugCodeCostDetail');">History</button>-->
+                                </div>
+                            </div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="hfCPTCode" />
+                    </form>
+                   
+                </div>
+                <div class="clearfix"></div>
+                <div class="spacer10"></div>
+               
+            </div>
+        </div>
+    </div>
+</div>

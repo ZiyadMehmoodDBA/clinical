@@ -1,0 +1,100 @@
+﻿<div class="row" id="pnlClinicalQuestion_Group">
+      
+    <div id="actionPanClinicalQuestion_Group" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        <div class="clearfix"></div>
+        <div id="modaldialog">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Clinical_Question_Group.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Question Group</h4>
+                </div>
+                <div id="modalbody">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <button type="button" class="btn btn-success btn-sm" onclick="Clinical_Question_Group.QuestionGroupAdd();"><i class="fa fa-plus-circle"></i> Add</button> <!------>
+                        <div class="spacer10"></div><div class="clearfix"></div>
+
+                        <section class="panel panel-featured">
+                            <div id="formpanelheading">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="closebtn pull-right" onclick="Clinical_Question_Group.UnLoadTab();"></a>
+                                    </div>
+                                    <h2 class="panel-title">Search Question Group </h2>
+                                </header>
+                            </div>
+                            <div class="panel-body" id="pnlQuestionGroup_Search">
+                                <form class="form-bordered" method="post" onsubmit="return false">
+                                    <!--start - CONTENTS-->
+                                    <div class="form-group">
+                                        <div class="col-sm-3 col-md-2">
+                                            <label class="control-label">Short Name</label>
+                                            <input class="form-control" id="txtShortName" type="text" maxlength="10" />
+                                        </div>
+                                        <div class="col-sm-5 col-md-4">
+                                            <label class="control-label">Description</label>
+                                            <input class="form-control" id="txtDescription" type="text" maxlength="55" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="control-label">Specilty</label>
+                                            <select class="form-control" name="Specialty" ddlist="GetSpecialty" id="ddlSpecialityID">
+                                                SpecialityID: "190"
+                                                <option selected="selected" value="">-Select-</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2" id="divICDCode_Entity">
+                                            <label class="control-label">Body Systems</label>
+                                            <select class="form-control" name="BodySystems" ddlist="GetBodySystem" id="ddlBodySystemId">
+                                                <option selected="selected" value="">-Select-</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <label class="control-label">Active?</label>
+                                            <select id="ddlActive" class="form-control">
+                                                <option value="">- All -</option>
+                                                <option value="1" selected="selected">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        
+
+                                        <div class="col-sm-2 mt-md pull-right">
+                                            <button class="btn btn-primary btn-sm rightbtn" id="btnICDSearch" type="button" onclick="Clinical_Question_Group.QuestionGroupSearch();">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+
+                        <div id="pnlQuestionGroup_Result" >
+                            <section class="panel">
+                                <div class="panel-body">
+                                    <input type="hidden" id="CPTCode_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvQuestionGroup">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">QuestionGroupID</th>
+                                                <th id="ColumnAction" class="size95">Action</th>
+                                                <th class="size120">Short Name</th>
+                                                <th class="size150">Description</th>
+                                                <th class="size150">Specialty</th>
+                                                <th class="size150">Section Type</th>
+                                                <th class="size150">Body Systems Code</th>
+                                                <th class="size150">Active</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div id="divQuestionGroupPaging"></div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

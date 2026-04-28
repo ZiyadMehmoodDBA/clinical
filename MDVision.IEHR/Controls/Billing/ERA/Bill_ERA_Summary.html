@@ -1,0 +1,43 @@
+﻿<div id="pnlERASummary">
+    <div id="actionPanERASummary" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header" style="">
+                <button type="button" class="close" onclick="Bill_ERA_Summary.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">ERA Alert</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmERASummary" onsubmit="return false">
+                    <div class="btn-block mb-xs">
+                        <a class="btn btn-xs btn-success" onclick="Bill_ERA_Summary.PostPayment();" id="btnPaymentPosting"><i class="fa fa-money"></i> Post Payment</a>
+                    </div>
+
+                    <span class="spacer10"></span>
+                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvERASummary">
+                        <thead>
+                            <tr>
+                                <th class="size150" style="display:none;"></th>
+                                <th class="size20"><input type="checkbox" title="Select all" name="checkbox" id="chkAllVisits"></th>
+                                <th title="Actions" id="ColumnAction" class="size95">Action</th>
+                                <th title="Check Number" class="size120 noWordBreak">Check Number</th>
+                                <th title="Claim Number" class="size120">Claim Number</th>
+                                <th title="CPT Code" class="size220 noWordBreak">CPT Code</th>
+                                <th title="Future Balance" class="size200 noWordBreak">Future Balance</th>
+                                <th title="Paid Amount" class="size120">Paid</th>
+                                <th title="Write Off" class="size-min70 noWordBreak">W/Off</th>
+                                <th title="Deductible Amount" class="size140">Ded.</th>
+                                <th title="Co-Insurance" class="size200 noWordBreak">Co Ins</th>
+                                <th title="EOB Copay" class="size200 noWordBreak">EOB Copay</th>
+                                <th title="Charge Copay" class="size200 noWordBreak">Charge Copay</th>
+                                <th title="Patient Responsibility" class="size200 noWordBreak">Pat. Res</th>
+                                <th title="Comments" class="size200">Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <span class="spacer10"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

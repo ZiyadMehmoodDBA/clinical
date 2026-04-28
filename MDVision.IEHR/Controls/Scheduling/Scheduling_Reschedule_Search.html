@@ -1,0 +1,84 @@
+﻿<div id="pnlRescheduleSearch">
+    <div id="actionPanRescheduleSearch" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Scheduling_RescheduleSearch.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Reschedule Search</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form method="post" id="frmRescheduleSearch" onsubmit="return false">
+                        <section class="panel panel-featured">
+                            <div class="panel-body sc-header-container" id="pnlReschedule_Search">
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-2 disableAll" style="display:none" id="divProvider">
+                                        <label id="lblSearchProvider" class="control-label">Provider<span class="required">*</span></label>
+                                        <a id="lnkSearchProviderEdit" style="display:none;" href="#" onclick="Scheduling_RescheduleSearch.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs btn-xs-pad" type="button" onclick="Scheduling_RescheduleSearch.OpenProvider();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2 disableAll" style="display:none" id="divResource">
+                                        <label id="lblSearchProvider" class="control-label">Resource</label>
+                                        <a id="lnkSearchProviderEdit" style="display:none;" href="#" onclick="Scheduling_RescheduleSearch.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtResource" type="text" placeholder="Start typing to search" name="Provider" maxlength="35" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkProvider" class="btn btn-primary btn-xs btn-xs-pad" type="button" onclick="Scheduling_RescheduleSearch.OpenResource();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-2">
+                                        <label id="lblSearchFacility" for="Facility" class="control-label">Facility<span class="required">*</span></label>
+                                        <a id="lnkSearchFacilityEdit" style="display:none;" href="#" onclick="Scheduling_RescheduleSearch.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                        <div class="input-group">
+                                            <input class="form-control ValidateCriteria" id="txtSearchFacility" type="text" placeholder="Start typing to search" name="Facility" maxlength="35" oninput="Scheduling_RescheduleSearch.BindFacility()" autocomplete="off" onblur="utility.ValidateAutoComplete(this, 'frmRescheduleSearch hfFacilityId', false);" />
+                                            <div class="input-group-btn">
+                                                <button id="lnkFacility" class="btn btn-primary btn-xs  btn-xs-pad" type="button" onclick="Scheduling_RescheduleSearch.OpenFacility();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Date<span class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" data-plugin-datepicker="" maxlength="10" class="form-control" name="fromDate" id="dpfromDate">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label">Duration<span class="required">*</span></label>
+                                        <div class="">
+                                            <select id="appointmentDurationselectResch" class="form-control pl-none"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6 pull-right mt-sm">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="" type="submit"><i class="fa fa-search"></i>Schedule Search </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                        <input type="hidden" id="hfResource" />
+                        <input type="hidden" id="hfProvider" />
+                        <input type="hidden" id="hfFacilityId" />
+                    </form>
+                </div>
+                <div class="spacer10"></div>
+                <div id="tblReschedule_Search">
+                    <div id="forRescheduler"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

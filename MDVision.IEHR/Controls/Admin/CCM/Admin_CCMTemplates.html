@@ -1,0 +1,141 @@
+﻿<div class="row" id="pnlAdminCCMTemplates" style="display:none;">
+    <div id="actionPanAdminCCMTemplates" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_CCMTemplates.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+
+            </div>
+            <div id="modalbody">
+
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Admin_CCMTemplates.CCMTemplatesAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                    <div class="panel-body pt-sm panel-featured" id="pnl_CCMTemplates">
+                        <ul id="ulTabs" class="tabs-custom">
+                            <li class="licarePlanTemplate active" id="licarePlanTemplate"><a href=".carePlanTemplate" data-toggle="tab">Care Plan Template</a></li>
+                            <li class="lihealthRiskAssessment" id="lihealthRiskAssessment"><a href=".healthRiskAssessment" data-toggle="tab">Health Risk Assessment</a></li>
+                        </ul>
+                        <div class="tab-content tabs-custom-body">
+                            <div class="carePlanTemplate tab-pane active">
+
+                                <section class="panel panel-featured">
+                                    <div id="formpanelheading">
+                                        <header class="panel-heading">
+                                            <div class="panel-actions">
+                                                <a href="#" class="closebtn pull-right" onclick="Admin_Provider.UnLoadTab();"></a>
+                                            </div>
+                                            <h2 class="panel-title">Search Care Plan Template</h2>
+                                        </header>
+                                    </div>
+                                    <div class="panel-body" id="pnl_carePlan">
+
+                                        <form class="form-bordered" id="frmSearchCarePlanTemplate" method="post" onsubmit="return false">
+                                            <!--start - CONTENTS-->
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <label class="control-label"> Name</label>
+                                                    <input class="form-control" id="txtName" type="text" />
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="control-label"> Description</label>
+                                                    <input class="form-control" id="txtDescription" type="text" />
+                                                </div>
+                                                <div class="col-sm-2 mt-sm">
+                                                    <button class="btn btn-primary rightbtn btn-sm" id="btncarePlanTemplateSearch" type="submit" onclick="Admin_CCMTemplates.searchCarePlan();">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+                                </section>
+
+                                <div class="col-sm-2">
+
+                                    <span class="pr-xs">Inactive</span><div class="btnWidgetSwitch switch switch-xs switch-success success-on"><input id="switchActive" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: none;" onchange="Admin_CCMTemplates.changeSwitchCarePlan(this);"></div><span class="pl-xs">Active</span>
+                                </div>
+                                <span class="spacer10"></span>
+                                <div id="dgvcarePlanTemplate">
+                                    <!--<table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvcarePlanTemplateDetail">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none;">CCMTemplateId</th>
+                                                <th id="ColumnAction" class="size95">Action</th>
+                                                <th class="size120">Name</th>
+                                                <th class="size120">Description</th>
+                                                <th class="size120">Last updated</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>-->
+                                </div>
+                                <div id="divcarePlanTemplatePaging"></div>
+
+                                <span class="spacer10"></span>
+
+
+
+
+
+
+                            </div>
+
+                            <div class="healthRiskAssessment tab-pane">
+                                <section class="panel panel-featured">
+                                    <div id="formpanelheading">
+                                        <header class="panel-heading">
+                                            <div class="panel-actions">
+                                                <a href="#" class="closebtn pull-right" onclick="Admin_Provider.UnLoadTab();"></a>
+                                            </div>
+                                            <h2 class="panel-title">Search Health Risk Assessment Template</h2>
+                                        </header>
+                                    </div>
+                                    <div class="panel-body" id="pnl_carePlan">
+
+                                        <form class="form-bordered" id="frmSearchhealthRiskAssessment" method="post" onsubmit="return false">
+                                            <!--start - CONTENTS-->
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <label class="control-label"> Name</label>
+                                                    <input class="form-control" id="txtName" type="text" />
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label class="control-label"> Description</label>
+                                                    <input class="form-control" id="txtDescription" type="text" />
+                                                </div>
+                                                <div class="col-sm-2 mt-sm">
+                                                    <button class="btn btn-primary rightbtn btn-sm" id="btnhealthRiskAssessmentSearch" type="submit" onclick="Admin_CCMTemplates.searchHealthRiskAssessment();">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+                                </section>
+
+                                <div class="col-sm-2">
+
+                                    <span class="pr-xs">Inactive</span><div class="btnWidgetSwitch switch switch-xs switch-success success-on"><input id="switchActive" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display: none;" onchange="Admin_CCMTemplates.changeSwitchHealthRisk(this);"></div><span class="pl-xs">Active</span>
+                                </div>
+                                <span class="spacer10"></span>
+                                <div id="dgvHealthRiskAssessment">
+
+                                </div>
+                                <div id="divhealthRiskAssessmentPaging"></div>
+
+                                <span class="spacer10"></span>
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

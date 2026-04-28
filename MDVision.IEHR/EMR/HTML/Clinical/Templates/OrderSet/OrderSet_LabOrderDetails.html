@@ -1,0 +1,249 @@
+﻿<div id="pnlOrderSetLabOrderDetails">
+    <div id="actionPanOrderSetLabOrderDetails" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="OrderSet_LabOrderDetails.UnLoad();">
+                    <span class=" red">&nbsp;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 id="headingTitle" class="modal-title">Add Lab Order</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="frmOrderSetLabOrderDetails" onsubmit="return false">
+                    <div class="col-md-6 " id="divLabOrderInformation">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Order Information</h2>
+                        </header>
+                        <div class="panel-body">
+                            <div class="col-sm-4 col-md-6">
+                                <label class="control-label">Laboratory<span class="required">*</span></label>
+                                <select id="ddlLabId" name="LabId" class="form-control" ddlist="" onchange="OrderSet_LabOrderDetails.EnableDisableTestSearch(this)"></select>
+                            </div>
+                            <!--<div class="col-sm-4 col-md-6">
+                                <label class="control-label" for="Facility">Facility<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtFacility" placeholder="Start typing to search" type="text" name="Facility" onblur="utility.ValidateAutoComplete(this, 'pnlOrderSetLabOrderDetails #hfFacility', false);">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-xs" type="button" onclick="OrderSet_LabOrderDetails.OpenFacility();">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-6">
+                                <label class="control-label" for="Provider">Provider<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtProvider" type="text" placeholder="Start typing to search" name="Provider" onblur="utility.ValidateAutoComplete(this, 'pnlOrderSetLabOrderDetails #hfProvider', false);" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="OrderSet_LabOrderDetails.OpenProvider();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-sm-4 col-md-6">
+                                <label class="control-label" for="Date">Assignee</label>
+                                <!--<div class="input-group">
+                                    <input class="form-control" id="txttAssignee" name="Assignee" placeholder="Start typing to search" type="text">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-xs" type="button" onclick="OrderSet_LabOrderDetails.OpenAssignee()">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </div>
+                                </div>-->
+
+                                <select id="ddlAssigneeId" name="AssigneeId" class="form-control" />
+                            </div>
+                            <div class="col-sm-4 col-md-6 p-none">
+                                <div class="col-xs-6">
+                                    <label class="control-label" for="Date">Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" id="txtOrderDate" class="form-control" name="OrderDate" data-plugin-datepicker="">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="control-label" for="">Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input type="text" id="txtOrderTime" name="OrderTime" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-6">
+                                <label for="" class="control-label">Order Number</label>
+                                <input id="txtLabOrderNo" type="text" name="LabOrderNo" placeholder="QD000174" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visible-sm visible-xs"><div class="spacer15"></div></div>
+
+                    <div class="col-md-6 disableAll" id="divLabBillingInformation">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Billing Information</h2>
+                        </header>
+                        <div class="panel-body">
+                            <div class="col-sm-4 col-md-6">
+                                <label class="control-label">Billing Type</label>
+                                <select id="ddlBillingTypeId" name="BillingTypeId" class="form-control" ddlist="">
+                                    <option selected="selected">-Select-</option>
+                                    <option value="1">Patient</option>
+                                    <option value="2">Client</option>
+                                    <option value="3">Insurance</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4 col-md-6">
+                                <label class="control-label">Primary Insurance</label>
+                                <select id="ddlPrimaryInsuraceId" name="PrimaryInsuraceId" class="form-control" ddlist="" disabled></select>
+                            </div>
+                            <div class="col-sm-4 col-md-6">
+                                <label class="control-label">Secondary Insurance</label>
+                                <select id="ddlSecondaryInsuraceId" name="SecondaryInsuraceId" class="form-control" ddlist="" disabled></select>
+                            </div>
+                            <div class="col-sm-4 col-md-6">
+                                <label class="control-label">Tertiary Insurance</label>
+                                <select id="ddlTertiaryInsuraceId" name="TertiaryInsuraceId" class="form-control" ddlist="" disabled></select>
+                            </div>
+                            <div class="col-sm-4 col-md-6">
+
+                                <label id="lblGuarantor" for="Guarantor" class="control-label" style="display: inline;">Guarantor</label>
+                                <input type="text" id="txtGuarantor" name="Guarantor" class="form-control" disabled>
+                                <!--<a id="lnkGuarantorEdit" style="display: none;" href="#" onclick="OrderSet_LabOrderDetails.openGuarantorDetail();" title="Edit Guarantor">Guarantor</a>
+                                <div class="input-group">
+
+                                    <input class="form-control ui-autocomplete-input" id="txtGuarantor" name="Guarantor" placeholder="Start typing to search" type="text" oninput="OrderSet_LabOrderDetails.bindGuarantor();" onblur="utility.ValidateAutoComplete(this, 'frmOrderSetLabOrderDetails #hfLabGuarantorId', true);" autocomplete="off">
+                                    <div class="input-group-btn">
+                                        <button id="lnkGurantor" class="btn btn-primary btn-xs " type="button" onclick="OrderSet_LabOrderDetails.openGuarantor();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <!--<div>
+                                <label for="" class="control-label">Guarantor</label>
+                                <input id="txtLabGuarantorId" type="text" name="LabGuarantorId" placeholder="Paul Jebblekith" class="form-control" />
+                            </div>-->
+                            <div class="col-sm-4 col-md-6">
+                                <label class="control-label">Relation</label>
+                                <!--<select id="ddlRelationShipId" class="form-control " name="RelationShipId" ddlist="GetRelationship" disabled></select>-->
+                                <input id="txtLabRelationShipId" type="text" name="LabRelationShipId" class="form-control" disabled />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="spacer15"></div>
+
+
+                    <!-- Start Irfan Code for Editable Grid portion  -->
+                    <div id="divTestInformation" class="col-sm-12">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Test Information <span class="required">*</span></h2>
+                        </header>
+                        <div class="panel-body pl-none pr-none">
+                            <div id="favSectionDiv" class="toggleHorSmallLeft toggled disableAll">
+                                <section>
+                                    <h2>Favorites<i class="fa fa-chevron-down"></i></h2>
+                                </section>
+                                <div class="toggle-content">
+                                    <div class="col-xs-12 pb-sm">
+                                        <span class="pull-left">Favorites List</span>
+                                        <div id="divSelectAllLabOrderFavorites" class="disableAll">
+                                            <a href="#" onclick="OrderSet_LabOrderDetails.selectAllFavoriteListContent()" class="btn btn-link btn-xs pull-right">Select All</a>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <select id="ddlFavoriteListLabOrder" name="FavoriteListLabOrder" onchange="OrderSet_LabOrderDetails.loadfavoriteListContent(this)" class="form-control"></select>
+                                    </div>
+                                    <ul id="ulFavoriteListLabOrderContent" name="FavoriteListLabOrderContent" class="listPrimary height-max200 overflowY"></ul>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 toggleHorSmContainer overflowY">
+                                <div class="col-sm-12 col-md-4 pl-none pb-tiny">
+                                    <label class="control-label">Test</label>
+                                    <div class="input-group">
+                                        <input class="form-control disableAll" id="txtLabCPTCode" placeholder="Search test" type="text" name="LabCPTCode" oninput="OrderSet_LabOrderDetails.bindAutoComplete(this)" />
+                                        <div class="input-group-btn">
+                                            <!--<button class="btn btn-primary btn-xs " type="button" onclick="OrderSet_LabOrderDetails.openCPTCode();"><i class="fa fa-search"></i></button>-->
+                                            <button class="btn btn-primary btn-xs " type="button" onclick="return false;"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="clearfix"></div>
+                                <div id="pnlLab_ResultOrderDetail" class="table-responsive">
+                                    <input type="hidden" id="Lab_SelectedDataKeys" />
+                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none tablePaddingAdjst" id="dgvLabOrderDetail">
+                                        <thead>
+                                            <tr class="">
+                                                <th class="size20 p-none" coltype="Expand"></th>
+                                                <th id="ColumnAction" actiontype="Delete" coltype="Action" class="size50 size-min50">Action</th>
+                                                <th id="thLabDate" controlid="dtpLabDate" iscontroldisabled="0" controlname="LabDate" controlwidth="size70" class="size-min70 size70 text-center va-middle" coltype="datetime">Draw Date</th>
+                                                <th id="thLabTime" controlid="tpLabTime" iscontroldisabled="0" controlname="LabTime" controlwidth="size70" class="size-min70 size70  text-center va-middle" coltype="time">Draw Time</th>
+                                                <th class="size300 size-min400" hfcontrolid="LabOrderTestId" hfcontrolname="LabOrderTestId" controlid="LabProcedure" iscontroldisabled="1" controlname="LabProcedure" coltype="TextBox" isoptional="0">Test</th>
+                                                <th controlid="ClinicalLabOrderDiet" class="size-min130 size130 noWordBreak" controlname="ClinicalLabOrderDiet" coltype="dropdown" ddlist="getClinicalLabOrderDiet">Diet</th>
+                                                <th controlid="CollectedAt" class="size-min130 size130 noWordBreak" controlname="CollectedAt" coltype="dropdown" ddlist="GetCollectedAt">Collected At</th>
+                                                <th controlid="Urgency" class="size-min130 size130 noWordBreak" controlname="Urgency" coltype="dropdown" ddlist="GetUrgency">Urgency</th>
+                                                <!--<th controlid="LabOrderTestId" style="display:none" class=" size-minp60 size75 noWordBreak" controlname="LabOrderTestId" coltype="hidden">Urgency</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+
+                                    </table>
+                                    <input type="hidden" name="LabTestIdsa" id="hfLabTestIds" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="hfCPTCode" name="CPTCodeId" />
+                        <input type="hidden" id="hfCPTDescription" name="CPTDescription" />
+                    </div>
+                    <!-- Start Abid, hidden fields for LabOrder  -->
+
+                    <input type="hidden" id="hfLabOrderId" name="LabOrderId" value="-1" />
+                    <input type="hidden" id="hfPatientId" name="PatientId" value="-1">
+                    <input type="hidden" id="hfProvider" name="ProviderId" />
+                    <input type="hidden" id="hfOrderNumber" name="OrderNumber" />
+                    <input type="hidden" id="hfFacility" name="FacilityId" />
+                    <input type="hidden" id="hfGuarantorId" name="GuarantorId" />
+                    <input type="hidden" id="hfRalationId" name="RelationId" />
+                    <div class="spacer15"></div>
+                    <!-- End Abid, hidden fields for LabOrder  -->
+                    <div id="divLabAssociatedProblems" class="col-xs-12">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white pull-left">Associated Problems</h2> 
+                            <a href="#" onclick="OrderSet_LabOrderDetails.addProblem()" class="btn btn-xs"><i class="fa fa-plus-circle white"></i></a>
+                        </header>
+                        <div class="panel-body">
+                            <div class="col-xs-12">
+                                <div class="table-responsive Of-a">
+                                    <table class="table table-bordered table-condensed table-striped table-hover" id="ulProblemLists">
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <!--<ul id="ulProblemLists"></ul>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pull-right pt-md pr-default">
+                        <!--<button class="btn btn-cancel btn-sm  mr-sm" type="button" id="btnResetPhysicalExam">Reset</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right mr-sm" type="button" id="btnPhysicalExamSave">Save</button>-->
+
+                        <button type="submit" class="btn btn-sm btn-primary" id="btnSaveOrder">Save</button>
+                        <button type="submit" class="btn btn-sm btn-primary hidden" id="btnAddLabResult">Add Result</button>
+                        <button type="submit" class="btn btn-sm btn-primary hidden" id="btnEditLabResult">Edit Result</button>
+                    </div>
+
+
+                    <div id="barcodeTarget" style="display:none;"></div>
+                    <!-- End Irfan Code for Editable Grid portion -->
+
+                </form>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

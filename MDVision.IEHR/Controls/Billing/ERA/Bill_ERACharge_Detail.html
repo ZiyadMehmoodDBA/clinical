@@ -1,0 +1,221 @@
+﻿<div class="row" id="pnlBillERAChargeDetailSearch" style="display:none;">
+    <div id="actionPanBillERAChargeDetailSearch" class=" modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <div class="modal-dialog modal-dialog-full">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header">
+                <button class="close" type="button" onclick="Bill_ERACharge_Detail.UnLoad();"></button>
+                <h4 class="modal-title">ERA Charge Detail</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmERAdetail" onsubmit="return false;">
+                    <div class="col-sm-12 ">
+                        <button class="btn btn-xs btn-success" id="btnLinkChange" onclick="Bill_ERACharge_Detail.OpenERAChargeSearch();"><i class="fa fa-link"></i> Link Charge</button>
+                        <button class="btn btn-xs btn-success" id="btnLinkedChangeHistory" onclick="Bill_ERACharge_Detail.OpenERALinkedChargeHistory();"><i class="fa fa-link"></i> Linked Charge History</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="spacer10"></div>
+                    <div class="form-group">
+
+                        <div class="splitter text-center">Charge Detail</div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Claim Number">Claim Number</label>
+                            <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Patient First Name">Patient First Name</label>
+                            <input class="form-control" id="txtFirstName" name="FirstName" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Patient Last Name">Patient Last Name</label>
+                            <input class="form-control" id="txtLastName" name="LastName" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Practice">Date of Birth</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input class="form-control" id="txtDOB" name="DOB" type="text" data-plugin-datepicker="" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="ERA Claim Number">ERA Claim Number</label>
+                            <input class="form-control" id="txtERAClaimNumber" name="ERAClaimNumber" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Charge Number">Charge Number</label>
+                            <input class="form-control" id="txtChargeNumber" name="ChargeNumber" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="ERA Charge Number">ERA Charge Number</label>
+                            <input class="form-control" id="txtERAChargeNumber" name="ERAChargeNumber" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Subscriber ID">Subscriber ID</label>
+                            <input class="form-control" id="txtSubscriberID" name="SubscriberID" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Date of Service From">DOS From</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input class="form-control" id="dtpDOSFrom" name="DOSFrom" type="text" data-plugin-datepicker="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Date of Service To">DOS To</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input class="form-control" id="dtpDOSTo" name="DOSTo" type="text" data-plugin-datepicker="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="CPT">CPT</label>
+                            <input class="form-control" id="txtCPT" name="CPT" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Modifiers">Modifiers</label>
+                            <input class="form-control" id="txtModifiers" name="Modifiers" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Units Billed">Units Billed</label>
+                            <input class="form-control" id="txtUnits" name="Units" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Place of Service">Place of Service</label>
+                            <input class="form-control" id="txtPOS" name="POS" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Status">Status</label>
+                            <input class="form-control" id="txtStatus" name="Status" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="ICN">ICN</label>
+                            <input class="form-control" id="txtICN" name="ICN" type="text">
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <label class="control-label" for="Secondary Insurance As per ERA">Secondary Insurance As per ERA</label>
+                            <input class="form-control" id="txtSecondaryInsPerERA" name="SecondaryInsPerERA" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Secondary Subscriber ID">Secondary Subscriber ID</label>
+                            <input class="form-control" id="txtSecondarySubscriberID" name="SecondarySubscriberID" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="txtCrossedOver">Crossed over?</label>
+                            <input class="form-control" id="txtCrossedOver" name="CrossedOver" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="txtPaymentStatus">Payment Status</label>
+                            <input class="form-control" id="txtPaymentStatus" name="PaymentStatus" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="txtLinkedBy">Linked By</label>
+                            <input class="form-control" id="txtLinkedBy" name="LinkedBy" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="txtLinkedDate">Linked Date</label>
+                            <input class="form-control" id="txtLinkedDate" name="LinkedDate" type="text">
+                        </div>
+
+
+                        <div class="spacer10"></div>
+                        <div class="splitter text-center">Explanation of Benefits</div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Charged Amount">Charged Amount</label>
+                            <input class="form-control" id="txtChargedAmount" name="ChargedAmount" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Allowed Amount">Allowed Amount</label>
+                            <input class="form-control" id="txtAllowedAmount" name="AllowedAmount" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Paid Amount">Paid Amount</label>
+                            <input class="form-control" id="txtPaidAmount" name="PaidAmount" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Co Insurance Amount">Co Insurance Amount</label>
+                            <input class="form-control" id="txtCoInsuranceAmount" name="CoInsuranceAmount" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Deductible Amount">Deductible Amount</label>
+                            <input class="form-control" id="txtDeductibleAmount" name="DeductibleAmount" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Copayment">Copayment</label>
+                            <input class="form-control" id="txtCopayment" name="Copayment" type="text">
+                        </div>
+
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Late Filing Charges">Late Filing Charges</label>
+                            <input class="form-control" id="txtLateFilingCharges" name="LateFilingCharges" type="text">
+                        </div>
+                        <div class="col-sm-3 col-lg-2">
+                            <label class="control-label" for="Interest Amount">Interest Amount</label>
+                            <input class="form-control" id="txtInterestAmount" name="InterestAmount" type="text">
+                        </div>
+                    </div>
+                    <div class="spacer10"></div>
+                </form>
+
+                <div id="pnlERAAdjCode_Result">
+                    <section class="panel panel-featured">
+                        <div class="panel-heading"> <h2 class="panel-title text-center">Claim Adjustment Codes</h2></div>
+                        <div class="panel-body ">
+                            
+                            <input type="hidden" id="BillAdjCode_SelectedDataKeys" />
+                            <!--<div class="table-responsive">-->
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvERAClaimAdjCode">
+                                <thead>
+                                    <tr>
+                                        <th class="noWordBreak">Group</th>
+                                        <th class="noWordBreak size-min120">Group Description</th>
+                                        <th class="noWordBreak">Reason</th>
+                                        <th class="noWordBreak">Reason Description</th>
+                                        <th class="noWordBreak">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <!--</div>-->
+                        </div>
+                    </section>
+                </div>
+
+
+                <div id="pnlERAlinkedChargeDetail_Result">
+                    <section class="panel panel-featured">
+                        <div class="panel-heading"><h2 class="panel-title text-center">Linked Charge Detail</h2></div>
+                        <div class="panel-body">
+                            <input type="hidden" id="BillLinkedCharge_SelectedDataKeys" />
+                            <!--<div class="table-responsive">-->
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvLinkedChargeDetail">
+                                <thead>
+                                    <tr>
+                                        <th class="noWordBreak">DOS</th>
+                                        <th class="noWordBreak size-min120">CPT</th>
+                                        <th class="noWordBreak">Modifier</th>
+                                        <th class="noWordBreak">Insurance Plan</th>
+                                        <th class="noWordBreak">Provider</th>
+                                        <th class="noWordBreak">Facility</th>
+                                        <th class="noWordBreak">Plan Amount</th>
+                                        <th class="noWordBreak">Plan Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <!--</div>-->
+                        </div>
+                    </section>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

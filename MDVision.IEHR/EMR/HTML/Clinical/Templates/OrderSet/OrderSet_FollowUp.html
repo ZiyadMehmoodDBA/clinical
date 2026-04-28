@@ -1,0 +1,161 @@
+﻿<div id="pnlOrderSetFollowUpAppointment">
+    <div id="actionPanOrderSetFollowUpAppointment" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="OrderSet_FollowUp.UnLoad();"><span class="red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titleBlockReason">Follow Up Appointment</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false" id="frmOrderSetFollowUpAppointment">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" disabled="disabled" name="Date" data-plugin-datepicker="" class="form-control ValidateCriteria" id="fromDate" autocomplete="off">
+                            </div>
+                        </div>
+                        <div id="totimefrmtime">
+                            <div class="col-sm-2">
+                                <label for="From Time" class="control-label">From Time</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    <input class="form-control" id="txtFromTime" name="FromTime" type="text" data-plugin-timepicker onchange="OrderSet_FollowUp.AddTime(this);">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="To Time" class="control-label">To Time</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    <input class="form-control" id="txtToTime" data-plugin-timepicker name="ToTime" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="Facility" class="control-label" id="lblFacility">Facility</label>
+                            <select id="Facility" name="FacilityId" class="form-control disableAll" ddlist="GetFacility"></select>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="Provider" class="control-label" id="lblProvider">Provider</label>
+                            <select id="Provider" name="ProviderId" class="form-control disableAll" ddlist="GetProvider"></select>
+                        </div>
+
+                        <div id="pnlFollowupAppointments" class="col-sm-6">
+                            <p class="control-label mb-none">Follow up Appointment</p>
+
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="2" ctype="Ds" type="radio" id="r2" name="r1" title="two days">
+                                    <label class="control-label" for="r2">2 Ds</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="3" ctype="Ds" type="radio" id="r3" name="r1" title="three days">
+                                    <label class="control-label" for="r3">3 Ds</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="1" ctype="W" type="radio" id="w1" name="r1" title="one week">
+                                    <label class="control-label" for="w1">1 W</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="2" ctype="W" type="radio" id="w2" name="r1" title="two weeks">
+                                    <label class="control-label" for="w2">2 W</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="3" ctype="W" type="radio" id="w3" name="r1" title="three weeks">
+                                    <label class="control-label" for="w3">3 W</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="4" ctype="W" type="radio" id="w4" name="r1" title="four weeks">
+                                    <label class="control-label" for="w4">4 W</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="6" ctype="W" type="radio" id="w6" name="r1" title="six weeks">
+                                    <label class="control-label" for="w6">6 W</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="2" ctype="M" type="radio" id="m2" name="r1" title="two months">
+                                    <label class="control-label" for="m2">2 M</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="3" ctype="M" type="radio" id="m3" name="r1" title="three months">
+                                    <label class="control-label" for="m3">3 M</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="4" ctype="M" type="radio" id="m4" name="r1" title="four months">
+                                    <label class="control-label" for="m4">4 M</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="6" ctype="M" type="radio" id="m6" name="r1" title="six months">
+                                    <label class="control-label" for="m6">6 M</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="1" ctype="Y" type="radio" id="y1" name="r1" title="one year">
+                                    <label class="control-label" for="y1">1 Y</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 p-tiny">
+                                <div class="radio-custom">
+                                    <input class="form-control" cval="prn" type="radio" id="r12" name="r1" title="as needed">
+                                    <label class="control-label" for="r12">prn</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="followUpText" class="col-sm-6"></div>
+                        <div class="col-sm-6">
+                            <label class="control-label ">Comments</label>
+                            <textarea id="txtComments" name="Comments" class="form-control" maxlength="100" rows="4" spellcheck="true"></textarea>
+                        </div>
+
+                        <div class="spacer10"></div>
+                    </div>
+                    <!--</div>-->
+                    <div class="spacer5"></div>
+                    <!--<div class="pr-default mt-sm pull-right">
+                        <button class="btn btn-primary btn-sm" id="btnSave" type="button">Save</button>
+                    </div>-->
+                    <div class="pr-default mt-sm pull-right">
+                        <div class="checkbox-custom checkbox-default mt-sm pull-left pr-default">
+                            <input id="chkCreateAppointment" class="form-control" name="CreateAppointment" type="checkbox">
+                            <label class="control-label" for="Paid">Create Appointment</label>
+
+                        </div>
+                        <div class="pr-default mt-sm pull-right">
+                            <button class="btn btn-primary btn-sm" id="btnSave" type="submit">Save</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

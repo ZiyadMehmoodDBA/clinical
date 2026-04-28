@@ -1,0 +1,83 @@
+﻿<div id="basicFeeScheduleDetail">
+    <div id="actionPanbasicFeeScheduleDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="basicFeeScheduleDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Basic Fee Schedule</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblbasicFeeScheduleDetail" class="col-md-12">
+                   
+                    <form method="post" onsubmit="return false" id="frmBasicFeeScheduleDetail">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label class="control-label" for="Basic Fee Group">Basic Fee Group</label><span class="required">*</span>
+                                <select id="ddlBasicFeeGroup" class="form-control" ddlist="GetBasicFeeGroup" onchange="basicFeeScheduleDetail.LoadEntityBasedData()" name="BasicFeeGroup"></select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label" for="CPT Code">CPT Code</label><span class="required">*</span>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtCPTCode" type="text" placeholder="99999" maxlength="5" name="CPTCode" oninput="basicFeeScheduleDetail.BindAutoComplete(this)" onblur="basicFeeScheduleDetail.BasicFeeScheduleValidateCode(this);" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-primary btn-xs " type="button" onclick="basicFeeScheduleDetail.OpenCPTCode();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                              </div>
+                            <div class="col-md-3">
+                                <label class="control-label" for="Fee">Fee</label><span class="required">*</span>
+                                <div class=" input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input type="text" class="form-control" onkeypress="utility.ValidateDecimal(event,2)" id="txtFee" name="Fee" maxlength="10" placeholder="99999.99">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label" for="Fee">Expected Fee</label>
+                                <div class=" input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input type="text" class="form-control" onkeypress="utility.ValidateDecimal(event,2)" id="txtExpectedFee" name="ExpectedFee" maxlength="10" placeholder="99999.99">
+                                </div>
+                            </div>
+                            <div class=" col-md-3 pad-a-labelsize">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-sm pull-right">
+                                <button type="submit" class="btn btn-primary btn-sm rightbtn">Save</button>
+                                <!--<button id="btnHistorybasicFeeSchedule" class="btn btn-primary btn-sm rightbtn" type="button" onclick="basicFeeScheduleDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" id="hfCPTCode" />
+                    </form>
+                   
+                </div>
+                <div class="clearfix"></div>
+                <div class="spacer10"></div>
+                <div id="pnlBFSPlanInfo">
+                    <section>
+                        <form>
+                        <div class="panel-body">
+                            <table id="dgvBFSPlanInfo" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size100">Action</th>
+                                        <th controlid="txtModifier" controlwidth="" isoptional="0" iscode="1" hfcontrolid="hfModifier" coltype="AutoComplete" autocompletemethod="Modifier" searchmethod="basicFeeScheduleDetail.OpenModifierDetail(null)">Modifier</th>
+                                        <th controlid="txtModifierFee" onkeypress="utility.ValidateDecimal(event,2)" controlwidth="custom-width-auto" isoptional="0" coltype="textbox">Fee ($)</th>
+                                        <th controlid="txtModifierExpectedFee" onkeypress="utility.ValidateDecimal(event,2)" controlwidth="custom-width-auto" isoptional="1" coltype="textbox">Expected Fee ($)</th>
+                                        <th controlid="chkRequired" coltype="checkbox">Required</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <a href="javascript:basicFeeScheduleDetail.rowAdd()">Add Line Item</a>
+                        </div>
+                            </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

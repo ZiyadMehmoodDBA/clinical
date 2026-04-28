@@ -1,0 +1,921 @@
+﻿<div class="row" id="pnlClinicalSocialHx">
+    <div id="actionPanClinicalSocialHx" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_SocialHx.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Social Hx</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section id="sectionSocialHx" class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Clinical_SocialHx.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Add Social Hx</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body NoRadiusT" id="pnlSection_Search">
+                            <form id="frmClinicalSocialHx" method="post" name="frmClinicalSocialHx" onsubmit="return false">
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <label class="control-label" for="Date">Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                            <input type="text" class="form-control" id="dtSocialHxDate" name="SocialHxDate" data-plugin-datepicker>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                        <div class="checkbox-custom">
+                                            <input type="checkbox" id="chkSocialHxUnremarkable" onclick="Clinical_SocialHx.unRemarkableSocialHx(this);" name="SocialHxUnremarkable">
+                                            <label class="control-label">Unremarkable</label>
+                                        </div>
+                                    </div>
+                                    <div class="spacer20"></div>
+                                    <section class="panel" id="removeDiv">
+                                        <ul class="tabs-custom" id="ulSocialHxTabsItems">
+                                            <li id="listTobacco" onclick="Clinical_SocialHx.loadSocialHx('tobacco'); Clinical_SocialHx.selectTabColor('tobacco');" class="active"><a class="" href="#Tobacco" data-toggle="tab">Tobacco</a></li>
+                                            <li id="listAlcohol" onclick="Clinical_SocialHx.loadSocialHx('alcohol'); Clinical_SocialHx.selectTabColor('alcohol');"><a class="" href="#Alcohol" data-toggle="tab">Alcohol</a></li>
+                                            <li id="listDrugAbuse" onclick="Clinical_SocialHx.loadSocialHx('drug'); Clinical_SocialHx.selectTabColor('drug');"><a class="" href="#DrugAbuse" data-toggle="tab">Drug Abuse</a></li>
+                                            <li id="listSexualHx" onclick="Clinical_SocialHx.loadSocialHx('sexual'); Clinical_SocialHx.selectTabColor('sexual');"><a class="" href="#SexualHx" data-toggle="tab">Sexual Hx</a></li>
+                                            <li id="listMiscHx" onclick="Clinical_SocialHx.loadSocialHx('miscellaneous_components'); Clinical_SocialHx.selectTabColor('miscellaneous_components');"><a class="" href="#Miscellaneous" data-toggle="tab">Miscellaneous</a></li>
+                                        </ul>
+                                        <div class="tab-content tabs-custom-body pt-default pl-none pr-none" id="TabsSection">
+                                            <div id="Tobacco" class="tab-pane active">
+                                                <input id="hfTobaccoId" name="TobaccoId" type="hidden" value="-1" />
+                                                <div class="col-sm-4 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Smoking Status</h2>
+                                                        </header>
+                                                        <div class="panel-body p-none">
+                                                            <ul id="ulSmokingStatus" name="SmokingStatus" class="listPrimary own-scroll height-max180">
+                                                                <li id="1" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Current everyday smoker');"><a href="#Tobacco">Current everyday smoker</a></li>
+                                                                <li id="2" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Current some day smoker');"><a href="#Tobacco">Current some day smoker</a></li>
+                                                                <li id="3" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Former smoker');"><a href="#Tobacco">Former Smoker</a></li>
+                                                                <li id="4" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Heavy tobacco smoker');"><a href="#Tobacco">Heavy tobacco smoker</a></li>
+                                                                <li id="5" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Light tobacco smoker');"><a href="#Tobacco">Light tobacco smoker</a></li>
+                                                                <li id="6" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Never smoker');"><a href="#Tobacco">Never smoker</a></li>
+                                                                <li id="7" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Smoker, current status unknown');"><a href="#Tobacco">Smoker, current status unknown</a></li>
+                                                                <li id="8" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Unknown if ever smoked');"><a href="#Tobacco">Unknown if ever smoked</a></li>
+                                                                <li id="9" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Chews Tobacco');"><a href="#Tobacco">Chews Tobacco</a></li>
+                                                                <li id="10" onclick="Clinical_SocialHx.enableDisableTobaccoControls(this,'Does not Chews Tobacco');"><a href="#Tobacco">Does not Chews Tobacco</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-8 col-md-9">
+                                                    <section id="sectionTobacco" class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Detail</h2>
+                                                        </header>
+                                                        <div class="panel-body  height-min180">
+                                                            <div class="col-md-3 ">
+                                                                <label class="control-label">Type</label>
+                                                                <select id="ddlTobaccoType" name="TobaccoType" class="form-control" ddlist="GetTobaccoType"></select>
+                                                                <!--<select id="ddlTobaccoType" name="TobaccoType" class="form-control">
+                                                                    <option selected="selected">- Selected -</option>
+                                                                    <option value="p1">Practice 1</option>
+                                                                    <option value="p2">Practice 2</option>
+                                                                </select>-->
+                                                            </div>
+                                                            <div class="col-md-3 ">
+                                                                <label class="control-label">Usage Period</label>
+                                                                <select id="ddlTobaccoUsagePeriod" name="TobaccoUsagePeriod" class="form-control" ddlist="GetSocialHxUsagePeriod"></select>
+                                                                <!--<select id="ddlTobaccoUsagePeriod" name="TobaccoUsagePeriod" class="form-control">
+                                                                    <option selected="selected">- Selected -</option>
+                                                                    <option value="p1">Practice 1</option>
+                                                                    <option value="p2">Practice 2</option>
+                                                                </select>-->
+                                                            </div>
+                                                            <div class="col-md-6 ">
+                                                                <label class="control-label">Frequency(Per day)</label>
+
+                                                                <select id="ddlTobaccoFrequencyDaily" name="TobaccoFrequencyDaily" class="form-control" ddlist="GetTobaccoFrequency"></select>
+                                                                <!--<select id="ddlTobaccoFrequencyDaily" name="TobaccoFrequencyDaily" class="form-control">
+                                                                    <option selected="selected">- Selected -</option>
+                                                                    <option value="p1">Practice 1</option>
+                                                                    <option value="p2">Practice 2</option>
+                                                                </select>-->
+                                                            </div>
+                                                            <div class="col-md-6 p-none">
+
+                                                                <label class="control-label pl-default">Counselling</label>
+                                                                <div class="clearfix"></div>
+
+                                                                <div class="col-xs-6">
+                                                                    <select id="ddlTobaccoCounsellingPeriod" name="TobaccoCounsellingPeriod" class="form-control" ddlist="GetSocialHxCounsellingPeriod" onchange="Clinical_SocialHx.enableDisableCounsellingTopic('tobacco');"></select>
+                                                                    <!--<select id="ddlTobaccoCounsellingPeriod" name="TobaccoCounsellingPeriod" class="form-control">
+                                                                        <option selected="selected">- Selected -</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>
+                                                                    </select>-->
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <select id="ddlTobaccoCounsellingTopic" name="TobaccoCounsellingTopic" class="form-control disableAll" ddlist="GetTobaccoCounsellingTopic"></select>
+                                                                    <!--<select id="ddlTobaccoCounsellingTopic" name="TobaccoCounsellingTopic" class="form-control">
+                                                                        <option selected="selected">Covered topics</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>
+                                                                    </select>-->
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 p-none">
+
+                                                                <label class="control-label pl-default" id="lblDuration">Length of Cessation</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="col-xs-4">
+                                                                    <input class="form-control" type="text" id="txtTobaccoCessationLength" name="TobaccoCessationLength" maxlength="3" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onblur="Clinical_SocialHx.enableDurationValidation()">
+                                                                </div>
+                                                                <div class="col-xs-8">
+                                                                    <select id="ddlTobaccoCessationPeriod" name="TobaccoCessationPeriod" class="form-control" ddlist="GetSocialHxCessationPeriod" onchange="Clinical_SocialHx.enableDurationValidation()"></select>
+                                                                    <!--<select id="ddlTobaccoCessationPeriod" name="TobaccoCessationPeriod" class="form-control">
+                                                                        <option selected="selected">- Selected -</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>
+                                                                    </select>-->
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            <div class="col-md-3 pr-none">
+                                                                <div class="hidden-xs hidden-sm"><div class="spacer15"></div></div>
+                                                                <div class="pull-left">
+                                                                    <div class="checkbox-custom ">
+                                                                        <input type="checkbox" id="chkTobaccoRecentlyQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkTobaccoWouldQuit', 'tobacco')" name="TobaccoRecentlyQuit">
+                                                                        <label class="control-label">Recently Quit</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="spacer10"></div>
+                                                                <div class="pull-left">
+                                                                    <div class="checkbox-custom">
+                                                                        <input type="checkbox" id="chkTobaccoWouldQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkTobaccoRecentlyQuit', 'tobacco')" name="TobaccoWouldQuit">
+                                                                        <label class="control-label">Would Quit</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtTobaccoComments" name="TobaccoComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="aHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                                <button id="btnTobaccoSave" type="button" onclick="Clinical_SocialHx.socialHxSave('Tobacco');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+
+                                                        </div>
+                                                        <input id="hfTobaccoDataChangeBit" name="TobaccoDataChangeBit" type="hidden" value="0" />
+                                                    </section>
+
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <!--/Tabacco-->
+                                            <div id="Alcohol" class="tab-pane">
+                                                <input id="hfAlcoholId" name="AlcoholId" type="hidden" value="-1" />
+                                                <div class="col-sm-4 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Status</h2>
+                                                        </header>
+                                                        <div class="panel-body p-none">
+                                                            <ul id="ulAlcoholStatus" name="AlcoholStatus" class="listPrimary own-scroll height-max180 height180">
+                                                                <li id="1" class="active" onclick="Clinical_SocialHx.enableDisableAlcoholControls(this, 'Does not drink');"><a href="#Alcohol">Does not drink</a></li>
+                                                                <li id="2" onclick="Clinical_SocialHx.enableDisableAlcoholControls(this, 'Drinks daily');"><a href="#Alcohol">Drinks daily</a></li>
+                                                                <li id="3" onclick="Clinical_SocialHx.enableDisableAlcoholControls(this, 'Frequently drinks');"><a href="#Alcohol">Frequently drinks</a></li>
+                                                                <li id="4" onclick="Clinical_SocialHx.enableDisableAlcoholControls(this, 'Has history of Alcoholism');"><a href="#Alcohol">Has history of Alcoholism</a></li>
+                                                                <li id="5" onclick="Clinical_SocialHx.enableDisableAlcoholControls(this, 'Occasional drinker');"><a href="#Alcohol">Occasional drinker</a></li>
+                                                                <li id="6" onclick="Clinical_SocialHx.enableDisableAlcoholControls(this, 'Social drinker');"><a href="#Alcohol">Social drinker</a></li>
+                                                                <li id="7" onclick="Clinical_SocialHx.enableDisableAlcoholControls(this, 'Drinking status unknown');"><a href="#Alcohol">Drinking status unknown</a></li>
+                                                                <li id="8" onclick="Clinical_SocialHx.enableDisableAlcoholControls(this, 'Denies Usage');"><a href="#Alcohol">Denies Usage</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-8 col-md-9">
+                                                    <section id="sectionAlcohol" class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Detail</h2>
+                                                        </header>
+                                                        <div class="panel-body height180">
+                                                            <div class="col-md-3 col-lg-2">
+                                                                <label class="control-label">Type</label>
+                                                                <select id="ddlAlcoholType" name="AlcoholType" ddlist="GetAlcoholType" class="form-control">
+                                                                    <!--<option selected="selected">- Selected -</option>
+                                                                    <option value="p1">Practice 1</option>
+                                                                    <option value="p2">Practice 2</option>-->
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-3 col-lg-2">
+                                                                <label class="control-label">Usage Period</label>
+                                                                <select id="ddlAlcoholUsagePeriod" name="AlcoholUsagePeriod" ddlist="GetSocialHxUsagePeriod" class="form-control">
+                                                                    <!--<option selected="selected">- Selected -</option>
+                                                                    <option value="p1">Practice 1</option>
+                                                                    <option value="p2">Practice 2</option>-->
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 col-lg-2">
+                                                                <label class="control-label">Frequency(Monthly)</label>
+                                                                <select id="ddlAlcoholFrequencyDays" name="AlcoholFrequencyDays" ddlist="GetAlcoholFrequency" class="form-control">
+                                                                    <!--<option selected="selected">- Selected -</option>
+                                                                    <option value="p1">Practice 1</option>
+                                                                    <option value="p2">Practice 2</option>-->
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 p-none">
+                                                                <div class="col-xs-12">
+                                                                    <label class="control-label">Counselling</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <select id="ddlAlcoholCounsellingPeriod" name="AlcoholCounsellingPeriod" ddlist="GetSocialHxCounsellingPeriod" class="form-control" onchange="Clinical_SocialHx.enableDisableCounsellingTopic('alcohol');">
+                                                                        <!--<option selected=" selected">
+                                                                                                                                        <!--<option selected="selected">- Selected -</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>-->
+                                                                        <option value="p1">
+                                                                            <!--<option selected="selected">- Selected -</option>
+                                                                            <option value="p1">Practice 1</option>
+                                                                            <option value="p2">Practice 2</option>-->
+                                                                        </option>
+                                                                        <!--<option selected="selected">- Selected -</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>-->
+                                                                        <option value="p2">
+                                                                            <!--<option selected="selected">- Selected -</option>
+                                                                            <option value="p1">Practice 1</option>
+                                                                            <option value="p2">Practice 2</option>-->
+                                                                        </option>
+                                                                        <!--<option selected="selected">- Selected -</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>-->
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <select id="ddlAlcoholCounsellingTopic" name="AlcoholCounsellingTopic" ddlist="GetAlcoholCounsellingTopics" class="form-control disableAll">
+                                                                        <!--<option selected="selected">Covered topics</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>-->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 col-lg-4 p-none">
+                                                                <div class="col-xs-12">
+                                                                    <label id="lblAlcoholDuration" class="control-label">Duration</label>
+                                                                </div>
+                                                                <div class="col-xs-4">
+                                                                    <input class="form-control" type="text" id="txtAlcoholCessationLength" name="AlcoholCessationLength" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" onblur="Clinical_SocialHx.enableAlcoholDurationValidation();">
+                                                                </div>
+                                                                <div class="col-xs-8">
+                                                                    <select id="ddlAlcoholCessationPeriod" name="AlcoholCessationPeriod" ddlist="GetSocialHxCessationPeriod" class="form-control" onchange="Clinical_SocialHx.enableAlcoholDurationValidation();">
+                                                                        <!--<option selected="selected">- Selected -</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>-->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-4 col-lg-2 pad-a-labelsize">
+                                                                <div class="clearfix"></div>
+                                                                <div class="checkbox-custom">
+                                                                    <input type="checkbox" id="chkAlcoholRecentlyQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkAlcoholNotReadyToQuit,chkAlcoholWouldQuit', 'alcohol')" name="AlcoholRecentlyQuit">
+                                                                    <label class="control-label">Recently Quit</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-lg-3 pr-none pad-a-labelsize">
+                                                                <div class="clearfix"></div>
+                                                                <div class="checkbox-custom">
+                                                                    <input type="checkbox" id="chkAlcoholNotReadyToQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkAlcoholRecentlyQuit,chkAlcoholWouldQuit', 'alcohol')" name="AlcoholNotReadyToQuit">
+                                                                    <label class="control-label">Not Ready to Quit</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-lg-2 pad-a-labelsize">
+                                                                <div class="clearfix"></div>
+                                                                <div class="checkbox-custom">
+                                                                    <input type="checkbox" id="chkAlcoholWouldQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkAlcoholRecentlyQuit,chkAlcoholNotReadyToQuit', 'alcohol')" name="AlcoholWouldQuit">
+                                                                    <label class="control-label">Would Quit</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-lg-9">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtAlcoholComments" name="AlcoholComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="alcoholHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+
+                                                                <button id="btnAlcoholSave" type="button" onclick="Clinical_SocialHx.socialHxSave('Alcohol');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                        <input id="hfAlcoholDataChangeBit" name="AlcoholDataChangeBit" type="hidden" value="0" />
+                                                    </section>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div id="DrugAbuse" class="tab-pane">
+                                                <input id="hfDrugAbuseId" name="DrugAbuseId" type="hidden" value="-1" />
+                                                <div class="col-sm-4 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Status</h2>
+                                                        </header>
+                                                        <div class="panel-body p-none">
+                                                            <ul id="ulDrugStatus" name="DrugStatus" class="listPrimary own-scroll height-max180 height180">
+                                                                <li id="3" class="active" onclick="Clinical_SocialHx.enableDisableDrugAbuseControls(this, 'Current every day drug user');"><a href="#DrugAbuse">Current every day drug user</a></li>
+                                                                <li id="4" onclick="Clinical_SocialHx.enableDisableDrugAbuseControls(this, 'Current someday drug user');"><a href="#DrugAbuse">Current someday drug user</a></li>
+                                                                <li id="5" onclick="Clinical_SocialHx.enableDisableDrugAbuseControls(this, 'Former drug user');"><a href="#DrugAbuse">Former drug user</a></li>
+                                                                <li id="6" onclick="Clinical_SocialHx.enableDisableDrugAbuseControls(this, 'Never used drugs');"><a href="#DrugAbuse">Never used drugs</a></li>
+                                                                <li id="7" onclick="Clinical_SocialHx.enableDisableDrugAbuseControls(this, 'Unknown if ever used drugs');"><a href="#DrugAbuse">Unknown if ever used drugs</a></li>
+                                                                <li id="8" onclick="Clinical_SocialHx.enableDisableDrugAbuseControls(this, 'Denies Usage');"><a href="#DrugAbuse">Denies Usage</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-8 col-md-9">
+                                                    <section id="sectionDrugAbuse" class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Detail</h2>
+                                                        </header>
+                                                        <div class="panel-body  height180">
+                                                            <div class="col-md-6 col-lg-3">
+                                                                <label class="control-label">Drugs</label>
+                                                                <select id="ddlDrugType" name="DrugType[]" multiple="multiple" ddlmultilist="GetDrugAbuseDrug" class="form-control">
+                                                                    <!--<option selected="selected">- Selected -</option>
+                                                                    <option value="p1">Practice 1</option>
+                                                                    <option value="p2">Practice 2</option>-->
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 col-lg-3">
+                                                                <label class="control-label">Route</label>
+                                                                <select id="ddlDrugRoute" name="DrugRoute" ddlist="GetDrugAbuseRoute" class="form-control">
+                                                                    <!--<option selected="selected">- Selected -</option>
+                                                                    <option value="p1">Practice 1</option>
+                                                                    <option value="p2">Practice 2</option>-->
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 p-none">
+                                                                <div class="col-xs-12">
+                                                                    <label class="control-label">Frequency</label>
+                                                                </div>
+                                                                <div class="col-xs-6 pr-xxs">
+                                                                    <select id="ddlDrugFrequencyDay" name="DrugFrequencyDay" ddlist="GetDrugAbuseFrequencyDaily" class="form-control">
+                                                                        <!--<option selected="selected">- Selected -</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>-->
+                                                                    </select>
+                                                                </div>
+                                                                <!--<div class="col-xs-6 pl-xxs">
+                                                                    <select id="ddlDrugFrequencyMonth" name="DrugFrequencyMonth" ddlist="GetDrugAbuseFrequencyMonthly" class="form-control">-->
+                                                                <!--<option selected="selected">- Selected -</option>
+                                                                <option value="p1">Practice 1</option>
+                                                                <option value="p2">Practice 2</option>-->
+                                                                <!--</select>
+                                                                </div>-->
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                                                <label class="control-label">Usage Period</label>
+                                                                <select id="ddlDrugUsagePeriod" name="DrugUsagePeriod" ddlist="GetSocialHxUsagePeriod" class="form-control">
+                                                                    <!--<option selected="selected">- Selected -</option>
+                                                                    <option value="p1">Practice 1</option>
+                                                                    <option value="p2">Practice 2</option>-->
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-6 col-lg-3 p-none">
+                                                                <div class="col-xs-12" id="lblDrugCessationLength">
+                                                                    <label class="control-label">Length of Cessation</label>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <input class="form-control" type="text" id="txtDrugCessationLength" name="DrugCessationLength" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad">
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <select id="ddlDrugCessationPeriod" onchange="Clinical_SocialHx.enableCessationValidation();" name="DrugCessationPeriod" ddlist="GetSocialHxCessationPeriod" class="form-control">
+                                                                        <!--<option selected="selected">- Selected -</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>-->
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                                                <div class="clearfix"></div>
+                                                                <div class="checkbox-custom">
+                                                                    <input type="checkbox" id="chkDrugRecentlyQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkDrugWouldQuit', 'drug')" name="DrugRecentlyQuit">
+                                                                    <label class="control-label">Recently Quit</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                                                <div class="clearfix"></div>
+                                                                <div class="checkbox-custom">
+                                                                    <input type="checkbox" id="chkDrugWouldQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkDrugRecentlyQuit', 'drug')" name="DrugWouldQuit">
+                                                                    <label class="control-label">Would Quit</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 col-lg-8">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtDrugComments" name="DrugComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="drugHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                                <button id="btnDrugSave" type="button" onclick="Clinical_SocialHx.socialHxSave('Drug');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                        <input id="hfDrugAbuseDataChangeBit" name="DrugAbuseDataChangeBit" type="hidden" value="0" />
+                                                    </section>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div id="SexualHx" class="tab-pane">
+                                                <input id="hfSexualHxId" name="SexualHxId" type="hidden" value="-1" />
+                                                <div class="col-sm-4 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Status</h2>
+                                                        </header>
+                                                        <div class="panel-body p-none">
+                                                            <ul id="ulSexualStatus" name="SexualStatus" class="listPrimary own-scroll height-max200 height200">
+                                                                <li id="1" class="active" onclick="Clinical_SocialHx.enableDisableSexualHxControls(this, 'Sexually Active');"><a href="#SexualHx">Sexually Active</a></li>
+                                                                <li id="2" onclick="Clinical_SocialHx.enableDisableSexualHxControls(this, 'Practices safe sex');"><a href="#SexualHx">Practices safe sex</a></li>
+                                                                <li id="3" onclick="Clinical_SocialHx.enableDisableSexualHxControls(this, 'Not Sexually Active');"><a href="#SexualHx">Not Sexually Active</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-8 col-md-9">
+                                                    <section id="sectionSexualHx" class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Detail</h2>
+                                                        </header>
+                                                        <div class="panel-body height-max200 height200 own-scroll">
+                                                            <div class="col-md-3">
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label">Sexually Abused</label>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="size60 pull-left radio-custom radio-small">
+                                                                        <input type="radio" id="RadSexualYesAbusedSexually" name="RadSexualAbusedSexually">
+                                                                        <label class="control-label" for="">Yes</label>
+                                                                    </div>
+                                                                    <div class="size60 pull-left radio-custom radio-small">
+                                                                        <input type="radio" id="RadSexualNoAbusedSexually" name="RadSexualAbusedSexually" checked="checked">
+                                                                        <label class="control-label" for="">No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label">Pain with Intercourse</label>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="size60 pull-left radio-custom radio-small">
+                                                                        <input type="radio" id="RadSexualYesPainWithIntercourse" name="RadSexualPainWithIntercourse">
+                                                                        <label id="lblSexualYesPainWithIntercourse" class="control-label" for="">Yes</label>
+                                                                    </div>
+                                                                    <div class="size60 pull-left radio-custom radio-small">
+                                                                        <input type="radio" id="RadSexualNoPainWithIntercourse" name="RadSexualPainWithIntercourse" checked="checked">
+                                                                        <label id="lblSexualNoPainWithIntercourse" class="control-label" for="">No</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label">Pregnant</label>
+                                                                    <div class="clearfix"></div>
+                                                                    <div class="size60 pull-left radio-custom radio-small">
+                                                                        <input onclick="Clinical_SocialHx.EnableDurationPregnantSexual(this);" type="radio" id="RadSexualYesPregnant" name="RadSexualPregnant">
+                                                                        <label class="control-label" for="">Yes</label>
+                                                                    </div>
+                                                                    <div class="size60 pull-left radio-custom radio-small">
+                                                                        <input onclick="Clinical_SocialHx.EnableDurationPregnantSexual(this);" type="radio" id="RadSexualNoPregnant" name="RadSexualPregnant">
+                                                                        <label class="control-label" for="">No</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label">Duration</label>
+                                                                    <input type="text" class="form-control" id="txtSexualHxPregnancyDuration" maxlength="50" name="SexualHxPregnancyDuration" disabled />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="col-md-4 col-lg-3">
+                                                                    <label class="control-label">Preferences</label>
+                                                                    <select id="ddlSexualPreferences" name="SexualPreferences" ddlist="GetSocialHxPreferences" class="form-control" onchange="Clinical_SocialHx.enableDisableMenstrualPeriod(this);"></select>
+                                                                </div>
+                                                                <div class="col-lg-9 p-none">
+                                                                    <div class="col-xs-12">
+                                                                        <label class="control-label">Using Protection</label>
+                                                                    </div>
+                                                                    <div class="col-xs-4">
+                                                                        <select id="ddlSexualbUsingProtection" name="SexualbUsingProtection" class="form-control" onchange="Clinical_SocialHx.enableDisableUsingProtection(this);">
+                                                                            <option selected="selected" value="">- Select -</option>
+                                                                            <option value="No">No</option>
+                                                                            <option value="Yes">Yes</option>
+
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-xs-4">
+                                                                        <select id="ddlSexualProtectionMethod" name="SexualProtectionMethod" ddlist="GetSexualHxProtectionMethod" class="form-control">
+                                                                            <!--<option selected="selected">- Selected -</option>
+                                                                            <option value="p1">Practice 1</option>
+                                                                            <option value="p2">Practice 2</option>-->
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-xs-4">
+                                                                        <select id="ddlSexualProtectionPeriod" name="SexualProtectionPeriod" ddlist="GetSexualHxProtectionPeriod" class="form-control">
+                                                                            <!--<option selected="selected">- Selected -</option>
+                                                                            <option value="p1">Practice 1</option>
+                                                                            <option value="p2">Practice 2</option>-->
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="visible-sm visible-xs"><div class="clearfix"></div></div>
+                                                                
+                                                                <div class="col-md-8 col-lg-3">
+                                                                    <label class="control-label">Complaints</label>
+                                                                    <select id="ddlSexualComplaints" name="SexualComplaints" class="form-control">
+                                                                        <!--<option selected="selected">- Selected -</option>
+                                                                        <option value="p1">Practice 1</option>
+                                                                        <option value="p2">Practice 2</option>-->
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-8 col-lg-6 p-none">
+                                                                    <div class="col-xs-12">
+                                                                        <label class="control-label">Exposed to STD</label>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <select id="ddlSexualExposedToSTD" name="SexualExposedToSTD" onchange="Clinical_SocialHx.enableDisableSTDControls(this);" class="form-control">
+                                                                            <option selected="selected" value="">- Select -</option>
+                                                                            <option value="No">No</option>
+                                                                            <option value="Yes">Yes</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <select id="ddlSexualSTD" name="SexualSTD" multiple="multiple" ddlmultilist="GetSexualHxSTD" class="form-control">
+                                                                            <!--<option selected="selected">- Selected -</option>
+                                                                            <option value="p1">Practice 1</option>
+                                                                            <option value="p2">Practice 2</option>-->
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                                <div class="col-md-4 col-lg-3">
+                                                                    <label class="control-label">Last Menstrual Period</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                        <input id="dtpSexualLMP" name="SexualLMP" class="form-control" type="text" data-plugin-datepicker="" maxlength="10">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-8 col-lg-9">
+                                                                    <label class="control-label">Comments</label>
+                                                                    <textarea id="txtSexualComments" name="SexualComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+                                                                <div class="pull-right pt-sm pr-default">
+                                                                    <button id="sexualHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                                    <button id="btnSexualSave" type="button" onclick="Clinical_SocialHx.socialHxSave('Sexual');" class="btn btn-sm btn-success">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div id="Miscellaneous" class="tab-pane">
+                                                <input id="hfMiscHxId" name="SexualHxId" type="hidden" value="-1" />
+                                                <div class="col-sm-6 col-md-2">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 class="panel-title">Miscellaneous</h2>
+                                                        </header>
+                                                        <div id="MiscHxMainStatus" class="panel-body p-none">
+                                                            <ul id="ulMiscStatus" name="MiscStatus" class="listPrimary own-scroll height-max180 height180"></ul>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-6 col-md-3">
+                                                    <section class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 id="headingChildMiscStatus" class="panel-title">Status</h2>
+                                                        </header>
+                                                        <div class="panel-body p-none">
+                                                            <ul id="ulMiscChildStatus" name="MiscChildStatus" class="listPrimary own-scroll height-max180 height180">
+                                                                <!--<li id="1" class="active" onclick="Clinical_SocialHx.markStatusActive('ulMiscChildStatus', '1');"><a href="#Occupation">Occupation</a></li>
+                                                                <li id="2" onclick="Clinical_SocialHx.markStatusActive('ulMiscChildStatus', '2');"><a href="#Sleep">Sleep</a></li>
+                                                                <li id="3" onclick="Clinical_SocialHx.markStatusActive('ulMiscChildStatus', '3');"><a href="#Exercises">Exercises</a></li>
+                                                                <li id="4" onclick="Clinical_SocialHx.markStatusActive('ulMiscChildStatus', '4');"><a href="#Housing">Housing</a></li>
+                                                                <li id="5" onclick="Clinical_SocialHx.markStatusActive('ulMiscChildStatus', '5');"><a href="#CaffeineIntak">Caffeine Intake</a></li>-->
+                                                            </ul>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="col-sm-12 col-md-7">
+                                                    <section id="sectionMiscDetails" class="panel panel-featured">
+                                                        <header class="panel-heading">
+                                                            <h2 id="headingChildDetailMiscStatus" class="panel-title">Details</h2>
+                                                        </header>
+                                                        <div id="OccupationDetails" class="panel-body NoRadiusT" style="display:none">
+                                                            <input id="hfOccupationHxId" name="OccupationHxId" type="hidden" value="-1" />
+                                                            <div class="visible-sm visible-xs"><div class="clearfix"></div></div>
+                                                            <!--<div class="col-md-6">
+                                                                <label class="control-label">Present</label>
+                                                                <textarea id="txtOccupationPresent" name="OccupationPresent" rows="3" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label">Past</label>
+                                                                <textarea id="txtOccupationPast" name="OccupationPast" rows="3" class="form-control" spellcheck="true"></textarea>
+                                                            </div>-->
+                                                            <div class="col-md-3 mt-md">
+                                                                <div class="size70 pull-left radio-custom radio-small">
+                                                                    <input onclick="Clinical_SocialHx.EnableDisableToDateOccupation();" type="radio" id="RadOccupationPresentExperience" name="RadOccupation">
+                                                                    <label class="control-label" for="">Present</label>
+                                                                </div>
+                                                                <div class="size60 pull-left radio-custom radio-small">
+                                                                    <input onclick="Clinical_SocialHx.EnableDisableToDateOccupation();" type="radio" id="RadOccupationPastExperience" name="RadOccupation" checked="checked">
+                                                                    <label class="control-label" for="">Past</label>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <label class="control-label">Details</label>
+
+                                                                <input type="text" class="form-control" name="OccupationHxDetails" id="txtOccupationHxDetails" maxlength="500">
+
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <label class="control-label">From</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                    <input type="text" class="form-control" name="OccupationHxStartDate" id="dtOccupationHxStartDate" data-plugin-datepicker="" maxlength="10">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3" id="divOccupationEndDate">
+                                                                <label class="control-label">To</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                    <input type="text" class="form-control" name="OccupationHxEndDate" id="dtOccupationHxEndDate" data-plugin-datepicker="" maxlength="10">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9 ">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtOccupationComments" name="OccupationComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="col-md-3 pad-a-labelsize">
+                                                                <div class="pt-xs pr-default pull-right ">
+                                                                    <button id="btnOccupationSave" type="button" onclick="Clinical_SocialHx.SaveSocialHxOccupationDetail();" class="btn btn-sm btn-success">Save</button>
+                                                                </div>
+                                                                <div class="pull-right pt-xs pr-default">
+                                                                    <button id="btnOccupationCancel" type="button" onclick="Clinical_SocialHx.AddNewSocialHxOccupationDetail();" class="btn btn-sm btn-success">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+
+
+                                                            <span class="spacer10"></span>
+                                                            <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvSocialHxMiscHxOccupationHx">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="display:none;">OccupationHxid</th>
+                                                                        <th class="size40">Action</th>
+                                                                        <th class="size120">Experience</th>
+                                                                        <th class="size120">Details</th>
+                                                                        <th class="size80">Start Date</th>
+                                                                        <th class="size80">End Date</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+                                                            <div id="divSocialHxMiscHxOccupationHxPaging"></div>
+                                                            <span class="spacer10"></span>
+
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div id="SleepDetails" class="panel-body height180  NoRadiusT" style="display:none">
+                                                            <input id="hfSleepHxId" name="SleepHxId" type="hidden" value="-1" />
+                                                            <div class="visible-sm visible-xs"><div class="clearfix"></div></div>
+                                                            <div class="col-md-3">
+                                                                <label class="control-label">Sleep Hours</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" id="txtSleepHours" name="SleepHours" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" maxlength="5" onblur="Clinical_SocialHx.validateSleepHours(this);"><div class="input-group-addon text-xs p-xxs">/night</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtSleepComments" name="SleepComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="sleepHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                                <button id="btnSleepSave" type="button" onclick="Clinical_SocialHx.socialHxSave('miscellaneous_sleep');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                        <div id="ExercisesDetails" class="panel-body NoRadiusT height-max180 height180 own-scroll" style="display:none">
+                                                            <input id="hfExercisesHxId" name="ExercisesHxId" type="hidden" value="-1" />
+                                                            <div class="visible-sm visible-xs"><div class="clearfix"></div></div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label">Type</label>
+                                                                <select id="ddlExercisesType" name="ExercisesType" ddlist="getExercisesHxType" class="form-control"></select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label">Diet</label>
+                                                                <select id="ddlExercisesDiet" name="ExercisesDiet" ddlist="getExercisesHxDiet" class="form-control"></select>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtExercisesComments" name="ExercisesComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="exercisesHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                                <button id="btnExercisesSave" type="button" onclick="Clinical_SocialHx.socialHxSave('miscellaneous_exercises');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                        <div id="HousingDetails" class="panel-body height-max180 height180 own-scroll NoRadiusT" style="display:none">
+                                                            <input id="hfHousingHxId" name="HousingHxId" type="hidden" value="-1" />
+                                                            <div class="visible-sm visible-xs"><div class="clearfix"></div></div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label">Present</label>
+                                                                <textarea id="txtHousingPresent" name="HousingPresent" rows="3" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label">Past</label>
+                                                                <textarea id="txtHousingPast" name="HousingPast" rows="3" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtHousingComments" name="HousingComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="housingHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                                <button id="btnHousingSave" type="button" onclick="Clinical_SocialHx.socialHxSave('miscellaneous_housing');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                        </div>
+                                                        <div id="CaffeineIntakDetails" class="panel-body height-max180 height180 own-scroll NoRadiusT" style="display:none">
+                                                            <input id="hfCaffeineIntakeHxId" name="CaffeineIntakeHxId" type="hidden" value="-1" />
+                                                            <div class="visible-sm visible-xs"><div class="clearfix"></div></div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label">Frequency</label>
+                                                                <select id="ddlCaffeineIntakFrequency" name="CaffeineIntakFrequency" ddlist="getCaffeineIntakHxFrequency" class="form-control"></select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="control-label">Is caffeine harmful for patient?</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="pull-left pr-default">
+                                                                    <div class="checkbox-custom">
+                                                                        <input type="checkbox" id="RadYesCaffeineharmful" name="RadCaffieneharmful"><label class="control-label">Yes</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="pull-left pl-default pr-default">
+                                                                    <div class="checkbox-custom">
+                                                                        <input type="checkbox" id="RadNoCaffeineharmful" name="RadCaffieneharmful"><label class="control-label">No</label>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <label class="control-label">Comments</label>
+                                                                <textarea id="txtCaffeineComments" name="CaffeineComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                            </div>
+                                                            <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                <button id="caffeineHistory" class="btn btn-sm hidden" onclick=""><i class="fa fa-history"></i> History</button>
+                                                                <button id="btnCaffeineSave" type="button" onclick="Clinical_SocialHx.socialHxSave('miscellaneous_caffeineintake');" class="btn btn-sm btn-success">Save</button>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+
+                                                        <div id="divTravelDetailsHx" class="panel-body height-max180 height180 own-scroll NoRadiusT" style="display:none">
+                                                            <input id="hfTravelDetailHxId" name="TravelHxId" type="hidden" value="-1" />
+                                                            <div class="visible-sm visible-xs"><div class="clearfix"></div></div>
+                                                            <section id="secTravelDetail">
+                                                                <div class="col-md-4">
+                                                                    <label class="control-label">From Date</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input type="text" class="form-control" name="TravelHxFromDate" id="dtTravelHxFromDate" data-plugin-datepicker="" maxlength="10">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="control-label">To Date</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                        <input class="form-control" type="text" name="TravelHxToDate" id="dtTravelHxToDate" data-plugin-datepicker="" maxlength="10">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="control-label">Location</label>
+                                                                    <input type="text" class="form-control" name="TravelHxLocation" maxlength="200" id="txtTravelHxLocation" />
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <label class="control-label">Comments</label>
+                                                                    <textarea id="txtTravelHxComments" name="TravelHxComments" maxlength="500" rows="2" class="form-control" spellcheck="true"></textarea>
+                                                                </div>
+                                                                <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                    <button id="btnTravelDetailSave" type="button" onclick="Clinical_SocialHx.SaveSocialHxTravelDetail();" class="btn btn-sm btn-success">Save</button>
+                                                                </div>
+                                                                <div class="pull-right pad-a-labelsize-btn pr-default">
+                                                                    <button id="btnTravelDetailAdd" type="button" onclick="Clinical_SocialHx.AddNewSocialHxTravelDetail();" class="btn btn-sm btn-success">Cancel</button>
+                                                                </div>
+                                                            </section>
+                                                            <div class="clearfix"></div>
+
+                                                            <div>
+                                                                <span class="spacer10"></span>
+                                                                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvSocialHxMiscHxTravelHx">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th style="display:none;">TravelHxid</th>
+                                                                            <th class="size40">Action</th>
+                                                                            <th class="size120">Location</th>
+                                                                            <th class="size120">Comments</th>
+                                                                            <th class="size80">From Date</th>
+                                                                            <th class="size80">To Date</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody></tbody>
+                                                                </table>
+                                                                <div id="divSocialHxMiscHxTravelHxPaging"></div>
+                                                                <span class="spacer10"></span>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                    <span class="spacer10"></span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <div class="col-md-12">
+                                        <label class="control-label">Overall Comments</label>
+                                        <textarea id="txtSocialComments" name="SocialComments" maxlength="5000" rows="3" class="form-control" spellcheck="true"></textarea>
+                                    </div>
+                                    <div class="pull-right pad-a-labelsize-btn pr-default">
+                                        <button class="btn btn-success btn-sm pull-right mr-sm" style="display:none;" type="button" onclick="Clinical_SocialHx.addSocialHxToNotes();" id="btnAddVitalsOnNote">Add on Note</button>
+                                        <button class="btn btn-success btn-sm pull-right mr-sm" type="button" style="display:none" onclick="Clinical_SocialHx.socialHxSave('');" id="btnSocialHxSave">Save</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <!-- /Social Hx -->
+                                </div>
+                                <input type="hidden" name="PatientId" id="hfPatientId" />
+                                <input type="hidden" name="SocialHxId" id="hfSocialHxId" value="-1" />
+                                <input type="hidden" name="SocialHxType" id="hfSocialHxType" value="tobacco" />
+                                <input type="hidden" name="SocialHxSoapText" id="hfSocialHxSoapText" value="" />
+                                <input type="hidden" name="gridComments" id="hfGridComments" />
+
+                                <input type="hidden" name="CaffeineHarmful" id="hfCaffeineHarmful" />
+
+                            </form>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+            <div id="pnlSocialHx_Result" style="display: inline;">
+                <div class="spacer10"></div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="spacer10"></div>
+                    <div class="col-sm-6" id="divSwitch">
+                        <span class="pr-xs">All</span>
+                        <div id="tglSocialHx" class="btnWidgetSwitch switch switch-xs switch-success">
+                            <input id="switchVisit" type="checkbox" status="1" checked="" name="Switch" data-plugin-ios-switch="" style="display: inline;" onchange="Clinical_SocialHx.ChangeCurrentPast(this);">
+                        </div>
+                        <span class="pl-xs">Current</span>
+                    </div>
+                </div>
+                <section class="panel" id="pnlCurrent">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvSocialHx">
+                            <thead>
+                                <tr>
+                                    <th style="display:none">HxId</th>
+
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvSocialHx_Paging"></div>
+                    </div>
+                </section>
+
+                <section class="panel hidden" id="pnlPast">
+                    <div class="panel-body panel-featured">
+                        <div class="spacer5"></div>
+
+                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPastSocialHx">
+                            <thead>
+                                <tr>
+
+                                    <th style="display:none">HxId</th>
+                                    <th>Action</th>
+                                    <th>SOAP Text</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="dgvPastSocialHx_Paging"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer hidden"></div>
+        </div>
+    </div>
+</div>
+

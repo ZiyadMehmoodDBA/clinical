@@ -1,0 +1,145 @@
+﻿<div class="row" id="pnlClinicalReportHeader" style="display:none;">
+    <div id="actionPanClinicalReportHeader" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+
+
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_ReportHeader.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Header Template</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <section id="removeDiv">
+
+
+                        <div class="tab-content tabs-custom-body pt-default">
+                            <div id="ReportHeader" class="tab-pane active">
+                                <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_ReportHeader.ReportHeaderAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                                <div class="spacer10"></div><div class="clearfix"></div>
+                                <section class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <div class="panel-actions">
+                                            <a href="#" class="closebtn pull-right" onclick="Clinical_ReportHeader.UnLoadTab()"></a>
+                                        </div>
+                                        <h2 class="panel-title">Search Header Template</h2>
+                                    </header>
+                                    <div class="panel-body" id="pnlReportHeader_Search">
+                                        <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalReportHeader">
+
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Name</label>
+                                                    <input class="form-control" name="ReportHeaderName" id="txtReportHeaderName" type="text" maxlength="100" />
+                                                </div>
+                                                <div class="col-sm-3 col-md-3" id="divSpecialty">
+                                                    <label class="control-label">Specialty </label>
+                                                    <select id="ddlSpecialty" multiple="multiple" name="SpecialtyIds" class="form-control"></select>
+                                                </div>
+                                                <div class="col-sm-3 col-md-3" id="divProvider">
+                                                    <select class="form-control" style="display:none;" name="hiddenPhysicalExamTemplateProvider" id="ddlHiddenProvider"></select>
+                                                    <label class="control-label">Provider</label>
+                                                    <select class="form-control" multiple="multiple" name="ProviderIds" id="ddlProvider"></select>
+                                                </div>
+
+                                                <div class="col-sm-4 col-md-2">
+                                                    <label class="control-label">Facility </label>
+                                                    <select id="ddlFacility" name="FacilityIds" multiple="multiple" customval="Facility" customname="FacilityId" class="form-control multiselect" ddlmultilist="GetFacility" data-bv-field="txtFacility"></select>
+                                                </div>
+
+
+                                             
+                                                <div class="mt-md pr-default pull-right">
+                                                    <button class="btn btn-primary btn-sm rightbtn" id="btnLabSearch" type="button" onclick="Clinical_ReportHeader.ReportHeaderSearch();">Search</button>
+                      
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </section>
+                                <input type="hidden" id="hfReportHeaderId" value="-1" />
+
+                                <div id="pnlReportHeader_Result" style="display: inline;">
+                                    <div class="panel-body panel-featured">
+                                        <div class="spacer5"></div>
+                                        <input type="hidden" id="Provider_SelectedDataKeys" />
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvReportHeader">
+                                            <thead>
+
+                                                <tr>
+                                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,Active" coltype="Action" class="size30 size-min80">Action</th>
+                                                    <th class="size30">Name</th>
+                                                    <th class="size30">Specialty</th>
+                                                    <th class="size300 size-min400">Provider</th>
+                                                    <th class="size30">Facility</th>
+                                                    <th class="size30 noWordBreak">Last Updated On</th>
+                                                    <!--<th class="size30">Status</th>
+                                                    <th class="size30">Provider</th>
+                                                    <th class="size30">Assigned To</th>-->
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dgvReportHeader_Paging"></div>
+                                    </div>
+                                    <!--<div class="pull-right mt-sm">
+                                        <button class="btn btn-success btn-sm" type="button" onclick="Clinical_ReportHeader.addOrdersToNotes();" id="btnAddReportHeaderToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                                    </div>-->
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+                       
+                        </div>
+                        <div class="clearfix"></div>
+                    </section>
+
+                </div>
+
+
+            </div>
+            <div id="FaceSheetPager"></div>
+            <div class="modal-footer"></div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

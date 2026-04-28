@@ -1,0 +1,106 @@
+﻿<div id="pnlImmunization_Category">
+    <div id="actionPanImmunization_Category" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Immunization_Category.UnLoadTab()"></a>
+            </div>
+            <h2 class="panel-title">Category</h2>
+        </header>
+        <div class="panel-body">
+            <form class="form-bordered" role="form" id="frmImmunizationCategory">
+                <div class="form-group">
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label" for="Category">Category</label>
+                        <input class="form-control" type="text" id="txtCategory" name="ShortName" />
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label" for="Active">Is Active</label>
+                        <select id="ddlActive" name="IsActive" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <!--<div class="col-sm-4 col-md-3 col-lg-2" id="divEntity" style="display:none">
+                        <label class="control-label">Entity</label>
+                        <select id="ddlEntity" class="form-control" ddlist="GetEntity" name="EntityId"></select>
+                    </div>
+                        -->
+                    <div class="col-sm-1 pull-right mt-md">
+                        <button class="btn btn-success btn-sm rightbtn" type="submit" id="btnAddCategory">Add</button>
+                    </div>
+                </div>
+                <div class="spacer20"></div>
+
+                <header class="panel-heading">
+                    <h2 class="panel-title">Search Category </h2>
+                </header>
+                <div class="panel-body" id="pnlCategory_Search">
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label" for="Category">Category</label>
+                        <select id="ddlCategorySearch" class="form-control"></select>
+                    </div>
+                    <div class="col-sm-4 col-md-3 col-lg-2">
+                        <label class="control-label" for="Active">Is Active</label>
+                        <select id="ddlActiveSearch" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 mt-xs pull-right">
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnCategorySearch" type="button" onclick="Immunization_Category.CategorySearch();">Search</button>
+                    </div>
+                </div>
+            </form>
+            <div class="clearfix"></div>
+            <div id="pnlCategory_Result" style="display: inline;">
+                <section class="panel">
+                    <div class="panel-body">
+                        <input type="hidden" id="Category_SelectedDataKeys" />
+                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvCategory">
+                            <thead>
+                                <tr>
+                                    <th id="ColumnAction" actiontype="Save,Edit,Delete,ActiveImmunizationCategory,Cancel" coltype="Action" class="size100">Action</th>
+                                    <th controlid="txtCategory" controlname="ShortName" controlwidth="custom-width-auto" oninput="utility.ValidateLenght(this, 30);" isoptional="0" coltype="textbox">Category</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div id="divCategorylistPaging">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+    });
+
+</script>

@@ -1,0 +1,62 @@
+﻿<div id="revenuecodeDetail">
+    <div id="actionPanrevenuecodeDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="revenuecodeDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Revenue Code</h4>  
+            </div>
+            <div class="modal-body">
+                <div id="tblrevenuecodeDetail" class="nested-row">
+                    <form method="post" onsubmit="return false" id="frmRevenueCodeDetail">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-5">
+                                <label class="control-label">Code<span class="required">*</span></label>
+                                <input class="form-control" name="RevenueCode" id="txtRevenueCode" maxlength="4" type="text" />
+                            </div>
+                            <div id="divRevenueCode_Entity" class="col-sm-5">
+                                <label class="control-label">Entity<span class="required">*</span></label>
+                                <select id="ddlEntity" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-sm-2 pl-none pad-a-labelsize" id="pnlIsActive">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked>
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-10">
+                                <label class="control-label">Description</label><span class="required">*</span>
+                                <input class="form-control" name="Description" id="txtDescription" maxlength="55" type="text" />
+                            </div>
+                            <div class="col-sm-2 mt-md">
+                                <button class="btn btn-primary btn-sm rightbtn " type="submit">Save</button>
+                                <!--<button id="btnHistoryRevenueCode" class="btn btn-primary btn-sm rightbtn" type="button" onclick="revenuecodeDetail.ShowHistory();">History</button>-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="spacer10"></div>
+                <div id="pnlRevenueCodePlanInfo">
+                    <section class="panel">
+                    <form>
+                        <div class="panel-body">
+                            <table id="dgvRevenueCodePlanInfo" class="table table-bordered table-striped table-condensed table-hover">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size95 custom-width-gd">Action</th>
+                                        <th controlid="txtCodePlan" controlwidth="" isoptional="0" class="size30" hfcontrolid="hfPlan" coltype="AutoComplete" containerctrl="revenuecodeDetail" autocompletemethod="InsurancePlan" customname="Insurance Plan" searchmethod="revenuecodeDetail.OpenInsurancePlan(null)">Plan</th>
+                                        <th controlid="txtCode" controlwidth="custom-width-auto" isoptional="0" class="size60" coltype="textbox">Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <a href="javascript:revenuecodeDetail.rowAdd()">Add Line Item</a>
+                        </div>
+                        </form>
+                    </section></div>
+                
+                </div>
+        </div>
+    </div>
+</div>

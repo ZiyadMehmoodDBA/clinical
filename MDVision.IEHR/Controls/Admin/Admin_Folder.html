@@ -1,0 +1,82 @@
+﻿<div class="row" id="pnlAdminFolder" style="display:none;">
+    <div id="actionPanAdminFolder" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_Folder.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search Folder</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Admin_Folder.FolderAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_Folder.UnLoadTab()"></a>
+                                </div>
+                                <h2 class="panel-title">Search Folder </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlAdminFolder_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Name</label>
+                                        <input class="form-control" id="txtName" type="text" />
+                                    </div>
+                                    <div class="col-sm-4 col-md-6">
+                                        <label class="control-label">Description</label>
+                                        <input class="form-control" id="txtDiscription" type="text" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Type</label>
+                                        <select id="ddlFolderType" class="form-control" ddlist="GetDocumentType"></select>
+                                    </div>
+                                    <div class="col-sm-2 col-md-1">
+                                        <label class="control-label">Active?</label>
+                                        <select id="chkIsActice" class="form-control">
+                                            <option value="" >- All -</option>
+                                            <option value="1" selected="selected">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 col-md-1 pad-a-labelsize-btn">
+                                        <div class="btn-block">
+                                            <button class="btn btn-primary btn-sm" id="btnDocumentSearch" type="submit" onclick="Admin_Folder.FolderSearch();">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="pnlAdminFolder_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="Folder_SelectedDataKeys" />
+                            <table class="table table-bordered table-condensed table-striped table-hover mb-none" id="dgvAdminFolder">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">DocumentId</th>
+                                        <th class="size110">Action</th>
+                                        <th class="size100">Name</th>
+                                        <th class="size200">Description</th>
+                                        <th class="size200">Type</th>
+                                        <th class="size100">Entity</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="DivAdminFolderPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

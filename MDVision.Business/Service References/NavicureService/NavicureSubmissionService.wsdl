@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://www.navicure.com/2009/11/NavicureSubmissionService" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NavicureSubmissionService" targetNamespace="http://www.navicure.com/2009/11/NavicureSubmissionService" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://www.navicure.com/2009/11/NavicureSubmissionService" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="SecurityHeaderElement" nillable="true" type="tns:SecurityHeaderType" />
+      <xs:element name="SubmitAnsiSingleRequestElement" nillable="true" type="tns:SubmitRequestType" />
+      <xs:element name="SubmitAnsiSingleResponseElement" nillable="true" type="tns:ResponseType" />
+      <xs:complexType name="SecurityHeaderType">
+        <xs:sequence>
+          <xs:element name="originatingIdentifier" type="xs:string" />
+          <xs:element name="submitterIdentifier" type="xs:string" />
+          <xs:element name="submitterPassword" type="xs:string" />
+          <xs:element name="submissionId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SubmitRequestType">
+        <xs:sequence>
+          <xs:element name="timeout" type="xs:string" />
+          <xs:element name="transactionType" type="xs:string" />
+          <xs:element name="submittedAnsiVersion" nillable="true" type="xs:string" />
+          <xs:element name="resultAnsiVersion" nillable="true" type="xs:string" />
+          <xs:element name="submitterSubmissionId" nillable="true" type="xs:string" />
+          <xs:element name="processingOption" type="xs:string" />
+          <xs:element name="payload" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResponseType">
+        <xs:sequence>
+          <xs:element name="transactionTyp" nillable="true" type="xs:string" />
+          <xs:element name="submitterSubmissionId" nillable="true" type="xs:string" />
+          <xs:element name="systemSubmissionId" nillable="true" type="xs:string" />
+          <xs:element name="submittedAnsiVersion" nillable="true" type="xs:string" />
+          <xs:element name="resultAnsiVersion" type="xs:string" />
+          <xs:element name="payload" type="xs:string" />
+          <xs:element name="processedRealTime" type="xs:string" />
+          <xs:element name="statusHeader" type="tns:StatusHeaderType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="StatusHeaderType">
+        <xs:sequence>
+          <xs:element name="statusCode" type="xs:string" />
+          <xs:element name="statusMessage" type="xs:string" />
+          <xs:element name="requestProcessed" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="NavicureSubmissionService_submitAnsiSingleResponse">
+    <part name="submitAnsiSingleResponse" element="tns:SubmitAnsiSingleResponseElement" />
+  </message>
+  <message name="NavicureSubmissionService_submitAnsiSingle">
+    <part name="parameters" element="tns:SubmitAnsiSingleRequestElement" />
+    <part name="securityHeader" element="tns:SecurityHeaderElement" />
+  </message>
+  <portType name="NavicureSubmissionService">
+    <operation name="submitAnsiSingle" parameterOrder="securityHeader parameters">
+      <input message="tns:NavicureSubmissionService_submitAnsiSingle" />
+      <output message="tns:NavicureSubmissionService_submitAnsiSingleResponse" />
+    </operation>
+  </portType>
+  <binding name="NavicureSubmissionServiceBinding" type="tns:NavicureSubmissionService">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="submitAnsiSingle">
+      <soap12:operation soapAction="submitAnsiSingle" />
+      <input>
+        <soap12:body use="literal" parts="parameters" />
+        <soap12:header message="tns:NavicureSubmissionService_submitAnsiSingle" part="securityHeader" use="literal" />
+      </input>
+      <output>
+        <soap12:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="NavicureSubmissionService">
+    <port name="NavicureSubmissionService" binding="tns:NavicureSubmissionServiceBinding">
+      <soap12:address location="https://ww3.navicure.com:7000/webservices/NavicureSubmissionService" />
+    </port>
+  </service>
+</definitions>

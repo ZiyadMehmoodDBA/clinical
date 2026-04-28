@@ -1,0 +1,988 @@
+﻿<div class="row" id="pnlBillPaymentPosting" style="display:none;">
+    <div id="actionPanBillPaymentPosting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full" id="modalDialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Bill_PaymentPosting.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Payment Posting</h4>
+            </div>
+            <div class="panel-body tab-content-featured tabs-custome-panel-body mt-xs" id="modalbody">
+                
+                <button type="button" class="btn btn-success btn-sm" onclick="Bill_PaymentPosting.OpenPatientStatement();">Patient Statement</button>
+                <button id="btnEOB" type="button" class="btn btn-success btn-sm disableAll" onclick="Bill_PaymentPosting.OpenElectronicEOB();">ERA</button>
+
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Bill_PaymentPosting.UnLoadTab();"></a>
+
+                                </div>
+                                <h2 class="panel-title">Search Payment Postings </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body">
+                            <form id="frmBillPaymentPosting" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div id="divSearchCharges" class="form-group">
+                                    <div id="divAccount" class="col-sm-3 col-lg-2 ">
+                                        <label class="control-label">Patient Account</label>
+                                        <div class="input-group">
+                                            <!--start -syed zia 04-02-2016, bug# 3669 , remove on blur-->
+                                            <input class="form-control ValidateCriteria" id="txtPatientName" name="PatientAccount" type="text" placeholder="Start typing to search" />
+                                            <!--end -syed zia 04-02-2016, bug# 3669-->
+                                            <div id="divSearchPatient" class="input-group-btn">
+                                                <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Bill_PaymentPosting.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="divPatientName" class="col-sm-3 col-lg-2">
+                                        <label class="control-label">Patient Name</label>
+                                        <input class="form-control ValidateCriteria" id="txtPatientFullName" name="PatientName" type="text">
+                                    </div>
+
+
+
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Case Number">Claim Number</label>
+                                        <input class="form-control ValidateCriteria" id="txtClaimNumber" name="ClaimNumber" type="text">
+                                    </div>
+
+                                    <!--<div class="col-sm-3 col-lg-2">
+                                        <label class="control-label" for="Case Number">Claim Number</label>
+                                        <div class="input-group">
+                                            <!--start -syed zia 04-02-2016, bug# 3669 , remove on blur--
+                                            <input class="form-control ValidateCriteria" id="txtClaimNumber" name="ClaimNumber" type="text" placeholder="Start typing to search" oninput="Bill_PaymentPosting.BindClaimNumber();">
+                                            <!--end -syed zia 04-02-2016, bug# 3669--
+                                            <div id=" divsearchclaim" class="input-group-btn">
+                                                <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="Bill_PaymentPosting.OpenEncounter();"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <!-- include secondary claims -->
+                                    <!--<div class="col-sm-3 col-lg-2 pad-a-labelsize">
+                                        <div class="checkbox-custom">
+                                            <input type="checkbox" id="chkIncludeSecondaryClaim" name="IncludeSecondaryClaim" onclick="">
+                                            <label for="lblIncludeSecondaryClaim" class="control-label">Include Secondary Claim</label>
+                                        </div>
+                                    </div>-->
+                                    <!--  -->
+
+                                    <div class="col-sm-3 col-lg-2">
+                                        <label id="lblCaseNumber" class="control-label">Case Number</label>
+
+                                        <a id="lnkCaseNumberEdit" style="display:none;" href="#" onclick="Bill_PaymentPosting.OpenCaseDetail('hfCaseId');" title="Edit Case">Case Number</a>
+                                        <div class="input-group">
+                                            <!--start -syed zia 04-02-2016, bug# 3669 , remove on blur-->
+                                            <input class="form-control ValidateCriteria" id="txtCaseNumber" type="text" placeholder="Start typing to search" name="CaseNumber" maxlength="35" />
+                                            <!--start -syed zia 04-02-2016, bug# 3669 , remove on blur-->
+                                            <div class="input-group-btn">
+                                                <button id="lnkCaseNumber" class="btn btn-primary btn-xs " type="button" onclick="Bill_PaymentPosting.OpenCase('Search Case', 'txtCaseNumber', 'hfCaseId', 'lblCaseNumber', 'lnkCaseNumberEdit');"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 size-min120">
+                                        <label class="control-label" for="Amount Received">Paid</label>
+                                        <select id="ddlAmountReceived" class="form-control ValidateCriteria" name="AmountReceived">
+                                            <option value="" selected="selected">All</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-3 col-lg-2 size-min120">
+                                        <label class="control-label" for="ClaimType">Claim Type</label>
+                                        <select id="ddlClaimType" class="form-control ValidateCriteria" name="ClaimType">
+                                            <option value="" selected="selected">All</option>
+                                            <option value="1">Professional Medical</option>
+                                            <option value="2">Institutional</option>
+                                            <option value="4">Professional Anesthesia</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-2">
+                                        <label class="control-label" for="ClaimErroredId">Errored Claims</label>
+                                        <select id="ddlClaimErrored" class="form-control ValidateCriteria" name="ClaimErroredId">
+                                            <option selected="selected" value="">All</option>
+                                            <option value="0">Clean Claims</option>
+                                            <option value="1">Errored Claims</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label class="control-label">DOS From</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="DateDOSFrom" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dpDOSFrom">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">DOS To</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" name="DateDOSTo" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dpDOSTo">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-2 pad-a-labelsize">
+                                        <div class="checkbox-custom">
+                                            <input type="checkbox" id="chkIncludeVoidedClaims" name="IncludeVoidedClaims">
+                                            <label for="IncludeVoidedClaims" class="control-label">Include Voided Claims</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-lg-2 pull-right mt-md">
+                                        <button id="btnSearchCharges" class="btn btn-primary btn-sm rightbtn" onclick="Bill_PaymentPosting.ValidateSearchCriteria();" type="button">Search</button>
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnSearchReset" type="button" onclick="Bill_PaymentPosting.BillPaymentPostingReset();">Reset</button>
+                                    </div>
+                                    <input type="hidden" id="hfCaseId" value="" name="CaseId" />
+                                </div>
+                                <div class="spacer20"></div>
+                                <div id="pnlPostingCharge_Result" style="display: none;">
+                                    <section class="panel">
+                                        <div class="panel-body panel-featured">
+
+                                            <!--<div class="col-xs-2 pl-xxs pr-none">
+
+                                                <span class="color-reference-box bg-info"></span>
+                                                <label class="control-label " for="color-reference-box">Primary Charge</label>
+
+                                            </div>-->
+                                            <!--<div  class="col-xs-2 pl-xxs pr-none">
+
+                                                <span class="color-reference-box bg-success"></span>
+                                                <label class="control-label " for="color-reference-box">Secondary Charge</label>
+                                            </div>-->
+
+                                            <input type="hidden" id="PaymentPostingCharge_SelectedDataKeys" />
+                                            <table class="table table-bordered table-condensed table-hover mb-none" id="dgvPostingCharge">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2" style="display:none;">ChargeId</th>
+                                                        <!--<th rowspan="2" id="ColumnAction" class="size-min70 va-middle">Action</throwspan>-->
+                                                        <th rowspan="2" class="size120 va-middle">DOS</th>
+                                                        <th rowspan="2" class="size120 noWordBreak va-middle">Claim No</th>
+                                                        <th rowspan="2" class="size120 va-middle">CPT</th>
+                                                        <!--Bug#5416-->
+                                                        <!--<th rowspan="2" class="size120 va-middle">Plan</th>-->
+                                                        <!--Bug#5416-->
+                                                        <!--<th rowspan="2" class="size-min70  va-middle">Primary Fee</th>-->
+                                                        <th rowspan="2" class="size-min70  va-middle">Billed Amount</th>
+                                                        <th rowspan="2" class="size-min70  va-middle">Expected Fee</th>
+                                                        <th rowspan="2" class="size120 va-middle">Units</th>
+                                                        <!--<th rowspan="2" class="size120 noWordBreak va-middle">Charge Amt</th>-->
+
+                                                        <th colspan="3" class="size120 text-center">Insurance</th>
+                                                        <th colspan="3" class="size120 text-center">Patient</th>
+                                                        <th rowspan="2" class="size120 va-middle">Balance</th>
+                                                        <!--<th colspan="4" class="size120 text-center">Copayment</th>-->
+                                                    </tr>
+                                                    <tr>
+                                                        <!--<th class="size120">Charge</th>-->
+                                                        <th class="size120">Paid</th>
+                                                        <th class="size120 noWordBreak">WriteOff</th>
+                                                        <th class="size120">Balance</th>
+                                                        <!--<th class="size120">Charge</th>-->
+                                                        <th class="size120">Paid</th>
+                                                        <th class="size120">Discount</th>
+                                                        <th class="size120">Balance</th>
+                                                        <!--<th class="size120">Charge</th>
+                                                        <th class="size120">Paid</th>
+                                                        <th class="size120">Discount</th>
+                                                        <th class="size120">Balance</th>-->
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody></tbody>
+                                                <tfoot></tfoot>
+                                            </table>
+                                            <div id="divPostingChargePaging"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div id="ParentDiv" class="disableAll">
+                                    <input type="hidden" id="hfChargeId" value="" name="HiddenFieldChargeId" />
+                                    <input type="hidden" id="hfChargeTotalBalance" value="" name="ChargeTotalBalance" />
+                                    <input type="hidden" id="hfInsCharge" value="" name="InsuranceCharge" />
+                                    <input type="hidden" id="hfPatCharge" value="" name="PatientCharge" />
+                                    <input type="hidden" id="hfCopayCharge" value="" name="CopayCharge" />
+                                    <input type="hidden" id="hfInsBalance" value="" name="InsuranceBalance" />
+                                    <input type="hidden" id="hfPatBalance" value="" name="HiddenFieldPatientBalance" />
+                                    <input type="hidden" id="hfCopayBalance" value="" name="CopayBalance" />
+                                    <input type="hidden" id="hfVisitId" value="" name="HiddenFieldVisitId" />
+                                    <input type="hidden" id="hfTransferLedgerAccountId" value="" name="TransferLedgerAccountId" />
+                                    <input type="hidden" id="hfInsuranceToPatientLedgerAccountId" value="" name="InsuranceToPatientLedgerAccountId" />
+                                    <input type="hidden" id="hfPatientToTransferLedgerAccountId" value="" name="PatienttoTransferLedgerAccountId" />
+                                    <input type="hidden" id="hfChargeFee" value="" name="ChargeFee" />
+                                    <input type="hidden" id="hfPaymentBatch" value="" name="HiddenFieldPaymentBatch" />
+                                    <input type="hidden" id="hfAdvanceBalance" value="" name="AdvanceBalance" />
+                                    <input type="hidden" id="hfPatientInsurancePlanId" value="" name="PatientInsurancePlanId" />
+                                    <input type="hidden" id="hfInsurancePlanPriority" value="" name="InsurancePlanPriority" />
+                                    <input type="hidden" id="hfVisitPlanPriority" value="" name="hfVisitPlanPriority" />
+                                    <input type="hidden" id="hfInsurancePlanId" value="" name="InsurancePlanId" />
+                                    <input type="hidden" id="hfInsurancePlanName" value="" name="InsurancePlanName" />
+                                    <input type="hidden" id="hfIsDenied" value="false" name="IsDenied" />
+                                    <div id="chargeDetailDiv" style="display:inline" class="toggle" data-plugin-toggle="">
+                                        <section id="sectionChargeDetail" class="toggle">
+                                            <label>Payment</label>
+                                            <div class="toggle-content panel-body pt-sm NoRadiusT">
+                                                <div class="form-group">
+
+                                                    <div class="size100 pull-left pl-sm">
+                                                        <div class="radio-custom radio-default">
+                                                            <input type="radio" onclick="Bill_PaymentPosting.ShowHidePaymentDiv(this);" id="radInsurance" name="Payment" value="radInsurance">
+                                                            <label class="control-label" for="Insurance">Insurance</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="size80 pull-left pl-sm">
+                                                        <div class="radio-custom radio-default">
+                                                            <input type="radio" onclick="Bill_PaymentPosting.ShowHidePaymentDiv(this);" id="radPatient" name="Payment" value="radPatient">
+                                                            <label class="control-label" for="Patient">Patient</label>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="size100 pull-left pl-sm">
+                                                        <div class="radio-custom radio-default">
+                                                            <input type="radio" onclick="Bill_PaymentPosting.ShowHidePaymentDiv(this);" id="radCopayment" name="Payment" value="radCopayment">
+                                                            <label class="control-label" for="Copayment">Copayment</label>
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="size100 pull-left pl-sm">
+                                                        <div class="radio-custom radio-default noWordBreak">
+                                                            <input type="radio" onclick="Bill_PaymentPosting.ShowHidePaymentDiv(this);" id="radZeroPayment" name="Payment" value="radZeroPayment">
+                                                            <label class="control-label" for="Copayment">Zero Payment</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- New implemented by Irfan -->
+                                                    <div class="size100 pull-left pl-lg">
+                                                        <div class="radio-custom radio-default noWordBreak">
+                                                            <input type="radio" onclick="Bill_PaymentPosting.ShowHidePaymentDiv(this);" id="radRecoupment" name="Payment" value="radRecoupment">
+                                                            <label class="control-label" for="Copayment">Recoupments</label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- New implemented by Irfan -->
+
+                                                    <div class="pull-right pl-sm" id="divAdvanceBalance" style="display:none;">
+                                                        <span>Advance Balance: </span>
+                                                        <span class="" id="lblAdvanceBalance">00.00</span>
+                                                    </div>
+
+                                                    <div class="spacer10"></div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Facility</label>
+                                                            <input class="form-control" type="text" id="txtFacility" disabled name="Facility">
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Provider</label>
+                                                            <input class="form-control" type="text" id="txtProvider" disabled name="Provider">
+                                                        </div>
+
+                                                        <div id="divPaymentBatch" class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label id="lblPaymentBatch" for="PaymentBatch" class="control-label">Payment Batch</label>
+                                                            <a id="lnkPaymentBatchEdit" style="display:none;" href="#" onclick="Bill_PaymentPosting.OpenPaymentBatchDetail();" title="Edit Payment Batch">Payment Batch<span class="required">*</span></a>
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtPaymentBatch" name="PaymentBatch" placeholder="Start typing to search" type="text" />
+                                                                <div class="input-group-btn">
+                                                                    <button id="lnkPaymentBatch" class="btn btn-primary btn-xs " type="button" onclick="Bill_PaymentPosting.OpenPaymentBatch();"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Date Paid<span class="required">*</span></label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                                <input class="form-control" name="DatePaid" id="dtpDatePaid" type="text" data-plugin-datepicker="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label" for="Payment Type">Payment Type<span class="required">*</span></label>
+                                                            <select id="ddlPaymentType" name="PaymentMode" onchange="Bill_PaymentPosting.ShowHidePaymentTypeDiv(this.value);" class="form-control" ddlist="GetPaymentType"></select>
+                                                        </div>
+                                                        <div id="PaymentTypeCheck">
+                                                            <!--in case of check select set display to inline-->
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label" for="Check Number">Check Number</label>
+                                                                <input class="form-control" name="checkNumber" type="text" id="txtCheckNumber">
+                                                            </div>
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Check Date</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                                    <input class="form-control" name="checkDate" id="dtpCheckDate" type="text" data-plugin-datepicker="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div id="divPatientInsurancePlan">
+                                                            <!--in case of check select set display to inline-->
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label" for="PatientInsurancePlan">Insurance Plan<span class="required">*</span></label>
+                                                                <select id="ddlPatientInsurancePlan" name="PatientInsurancePlan" onchange="Bill_PaymentPosting.SetPatientInsuranceInfo(this)" class="form-control"></select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div id="PaymentTypeCreditCard">
+                                                            <!--in case of Credit Card select set display to inline-->
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Card Type</label>
+                                                                <select name="creditCardType" id="ddlCreditCardType" ddlist="GetCreditCardType" class="form-control"></select>
+                                                            </div>
+
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Card Number</label>
+                                                                <input name="cardNumber" id="txtCardNumber" class="form-control" type="text">
+                                                            </div>
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Expiry Date (mm/yyyy)</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                                    <input name="expiryDate" id="dtpExpiryDate" class="form-control" type="text" data-plugin-datepicker="">
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div id="divAdvancePayment" class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label id="lblAdvancePayment" for="AdvancePayment" class="control-label">Advance Payment<span class="required">*</span></label>
+                                                            <!--<a id="lnkAdvancePaymentEdit" style="display:none;" href="#" onclick="" title="Edit Advance Payment">Advance Payment<span class="required">*</span></a>-->
+                                                            <div class="input-group">
+                                                                <input class="form-control" id="txtAdvancePayment" name="AdvancePayment" placeholder="" type="text" onblur="utility.ValidateAutoComplete(this, 'hfAdvancePaymentId', false); Bill_PaymentPosting.AdvancePaymentValidation();">
+                                                                <div class="input-group-btn">
+                                                                    <button id="lnkAdvancePayment" class="btn btn-primary btn-xs " type="button" onclick="Bill_PaymentPosting.OpenAdvancePayment();"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="solid mb-sm" />
+                                                    <div id="divInsurancePayment">
+                                                        <!--panel body insurance-->
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Allowed</label>
+
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtInsuranceAllowed" name="InsuranceAllowed" onblur="Bill_PaymentPosting.ValidateAllowedAmount('Insurance'); Bill_PaymentPosting.ValidateWriteOff()" onkeypress=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.ValidateWriteOff()" onkeyup=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.ValidateWriteOff()">
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Paid</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtInsurancePaid" name="InsurancePaid" onkeypress=" utility.ValidateDecimal(event, 2)" onkeyup=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.calculateBalance('Insurance');">
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Paid A/C<span class="required">*</span></label>
+                                                            <select id="ddlInsurancePaid" name="InsurancePaidAccount" class="form-control"></select>
+                                                        </div>
+                                                        <div class="visible-sm"><div class="clearfix"></div></div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Write off</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtInsuranceWriteoff" name="InsuranceWriteoff" onkeypress=" utility.ValidateDecimal(event, 2)" onkeyup=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.calculateBalance('Insurance');">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Write off A/C<span class="required">*</span></label>
+                                                            <select id="ddlInsuranceWriteoff" name="InsuranceWriteoffAccount" class="form-control"></select>
+                                                        </div>
+
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Balance</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtInsuranceBalance" name="Balance" disabled>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <!--<div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Copay</label>
+
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtCopay" name="Copay" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup="utility.ValidateDecimal(event, 2)">
+                                                            </div>
+
+                                                        </div>-->
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Remit Code</label>
+                                                            <select id="ddlRemitCode" name="RemittanceCode" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">ICN/DCN</label>
+                                                            <input class="form-control" type="text" id="txtICN_DCN" name="ICN_DCN">
+                                                        </div>
+
+                                                        <div class="clearfix"></div>
+                                                        <div class="panel-body tab-content-featured mt-sm mb-sm">
+
+
+                                                            <!-- copay start -->
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+
+
+                                                                <span class="pull-left pr-xs">
+                                                                    <label class="control-label">Copay</label>
+                                                                </span>
+
+
+                                                                <!--<div class="pull-left pl-xs">
+                                                                    <input type="checkbox" id="chkAdjustedCopay" checked="checked" name="Adj Copay" class="m-none">
+                                                                    <label class="control-label" for="AdjCopay">Adjusted Copay</label>
+                                                                </div>-->
+                                                                <div class="clearfix"></div>
+
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtInsuranceCopay" name="InsuranceCopay" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Insurance');  utility.ValidateDecimal(event, 2)">
+                                                                </div>
+
+                                                            </div>
+                                                            <!-- copay end -->
+                                                            <!--<div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Copay</label>
+
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtInsuranceCopay" name="Copay" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Insurance');  utility.ValidateDecimal(event, 2)">
+                                                                </div>
+
+                                                            </div>-->
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Coinsurance</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtInsuranceCoinsurance" name="InsuranceCoinsurance" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Insurance'); utility.ValidateDecimal(event, 2);" onkeypress="utility.ValidateDecimal(event, 2)">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Deductibles</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtInsuranceDeductables" name="InsuranceDeductables" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Insurance'); utility.ValidateDecimal(event, 2);" onkeypress="utility.ValidateDecimal(event, 2)">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Patient Responsibility</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtInsurancePatientResponsibility" name="InsurancePatientResponsibilityr" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Insurance'); utility.ValidateDecimal(event, 2);" onkeypress="utility.ValidateDecimal(event, 2)">
+                                                                </div>
+                                                            </div>
+                                                            <div divtype="InsuranceTransfer" class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Next Responsibility</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="size70 pull-left radio-custom radio-small">
+                                                                    <input type="radio" id="RadInsuranceNextRespPatient" onclick="Bill_PaymentPosting.ValidateTransferAmount('#frmBillPaymentPosting #txtInsuranceTransfer', 'Insurance'); Bill_PaymentPosting.ShowHideInsurancePlan(this)" name="RadInsuranceNextResponsibility" value="InsNextResPatient">
+                                                                    <label id="lblRadInsuranceNextRespInsurance" class="control-label" for="">Patient</label>
+                                                                </div>
+                                                                <div class="size75 pull-left radio-custom radio-small">
+                                                                    <input type="radio" id="RadInsuranceNextRespInsurance" onclick="Bill_PaymentPosting.ValidateTransferAmount('#frmBillPaymentPosting #txtInsuranceTransfer', 'Insurance'); Bill_PaymentPosting.ShowHideInsurancePlan(this)" name="RadInsuranceNextResponsibility" value="InsNextResInsurance" checked="checked">
+                                                                    <label id="lblRadInsuranceNextRespInsurance" class="control-label" for="">Insurance</label>
+                                                                </div>
+                                                            </div>
+                                                            <div divtype="InsuranceTransfer" class="col-sm-4  col-md-3 col-lg-2 has-feedback">
+                                                                <label class="control-label">Insurance Plan</label>
+                                                                <select id="ddlNextInsuranceInsurancePlan" name="NextInsuranceInsurancePlan" onchange="Bill_PaymentPosting.setInsurancePriority(this);" class="form-control"></select>
+                                                            </div>
+                                                            <div class="hidden-md"><div class="clearfix"></div></div>
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Priority</label>
+                                                                <input class="form-control" id="txtPlanPriority" name="PlanPriority" type="text" disabled="disabled">
+                                                            </div>
+                                                            <div divtype="InsuranceTransfer" class="col-sm-4  col-md-3 col-lg-2 pad-a-labelsize">
+                                                                <div class="checkbox-custom checkbox-default">
+                                                                    <input type="checkbox" id="chkInsuranceCrossOver" name="InsuranceCrossOve">
+                                                                    <label class="control-label" for="Cross Over">Cross Over</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-sm-12">
+                                                            <div class="pull-left mr-md">
+                                                                <label class="control-label">Comments</label>
+                                                            </div>
+                                                            <div class="checkbox checkbox-custom pull-left">
+                                                                <input type="checkbox" id="chkInsPrintOnPatientStatement" name="PrintOnPatientStatement">
+                                                                <label class="control-label pl-none" for="chkPrintOnPatientStatement">Print On Patient Statement</label>
+                                                            </div>
+                                                            <textarea class="form-control" rows="5" maxlength="2500" id="txtInsuranceComments" name="InsuranceComments" spellcheck="true"></textarea>
+                                                        </div>
+
+                                                        <!--<div class="col-sm-12">
+                                                            <label class="control-label" for="Comments">Comments</label>
+                                                            <textarea class="form-control" rows="5" maxlength="2500" id="txtInsuranceComments" name="InsuranceComments"></textarea>
+                                                        </div>-->
+                                                        <div class="clearfix"></div>
+                                                    </div><!--/panel body insurance-->
+
+                                                    <div id="divPatientPayment">
+                                                        <!--panel body Patient-->
+
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Paid</label>
+
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtPatientPaid" name="PatientPaid" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.calculateBalance('Patient');">
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Paid A/C<span class="required">*</span></label>
+                                                            <select id="ddlPatientPaid" name="PatientPaidAccount" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Discount</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtPatientDiscount" name="PatientDiscount" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.calculateBalance('Patient');">
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Discount A/C<span class="required">*</span></label>
+                                                            <select id="ddlPatientDiscount" name="PatientDiscountAccount" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Balance</label>
+
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtPatientBalance" name="PatientBalance" disabled>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="panel-body tab-content-featured mt-sm mb-sm" id="divPatientTransfers">
+                                                            <!--<div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Copay</label>
+
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtCopay" name="CopayAmount" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup="Bill_PaymentPosting.calculateBalance('Copay'); utility.ValidateDecimal(event, 2)">
+                                                                </div>
+
+                                                            </div>-->
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label" for="Transfer">Copay</label>
+
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Patient'); utility.ValidateDecimal(event, 2);" onkeypress=" utility.ValidateDecimal(event, 2)" id="txtCopay" name="CopayAmount">
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label" for="Transfer">Coinsurance</label>
+
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Patient'); utility.ValidateDecimal(event, 2);" onkeypress=" utility.ValidateDecimal(event, 2)" id="txtPatientcoinsurance" name="Patientcoinsurance">
+                                                                </div>
+
+                                                            </div>
+
+
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label" for="Transfer">Deductibles</label>
+
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Patient'); utility.ValidateDecimal(event, 2);" onkeypress=" utility.ValidateDecimal(event, 2)" id="txtPatientdeductables" name="Patientdeductables">
+                                                                </div>
+
+                                                            </div>
+
+
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label" for="Transfer">Patient Responsibility</label>
+
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Patient'); utility.ValidateDecimal(event, 2);" onkeypress=" utility.ValidateDecimal(event, 2)" id="txtPatientPatientResponsibility" name="PatientPatientResponsibility">
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div divtype="PatientTransfer" class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Next Responsibility</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="size70 pull-left radio-custom radio-small">
+                                                                    <input type="radio" id="RadPatNextRespPatient" onclick="Bill_PaymentPosting.ValidateTransferAmount('#frmBillPaymentPosting #txtPatientTransfer', 'Patient');" name="RadPatNextResponsibility" value="PatNextResPatient" disabled>
+                                                                    <label id="lblRadPatNextRespPatient" class="control-label" for="">Patient</label>
+                                                                </div>
+                                                                <div class="size75 pull-left radio-custom radio-small">
+                                                                    <input type="radio" id="RadPatNextRespInsurance" onclick="Bill_PaymentPosting.ValidateTransferAmount('#frmBillPaymentPosting #txtPatientTransfer', 'Patient');" name="RadPatNextResponsibility" value="PatNextResInsurance" checked="checked">
+                                                                    <label id="lblRadPatNextRespInsurance" class="control-label" for="">Insurance</label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div divtype="PatientTransfer" class="col-sm-4  col-md-3 col-lg-2" style="display:none;">
+                                                                <label class="control-label">Insurance Plan</label>
+                                                                <select id="ddlNextPatientInsurancePlan" name="NextPatientInsurancePlan" class="form-control" disabled></select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12">
+                                                            <div class="pull-left mr-md">
+                                                                <label class="control-label">Comments</label>
+                                                            </div>
+                                                            <div class="checkbox checkbox-custom pull-left">
+                                                                <input type="checkbox" id="chkPatPrintOnPatientStatement" name="PatPrintOnPatientStatement">
+                                                                <label class="control-label pl-none" for="chkPatPrintOnPatientStatement">Print On Patient Statement</label>
+                                                            </div>
+                                                            <textarea class="form-control" rows="5" maxlength="2500" id="txtPatientComments" name="PatientComments" spellcheck="true"></textarea>
+                                                        </div>
+
+                                                        <!--<div class="col-sm-12">
+                                                            <label class="control-label">Comments</label>
+                                                            <textarea class="form-control" rows="5" maxlength="2500" id="txtPatientComments" name="PatientComments"></textarea>
+                                                        </div>-->
+
+                                                    </div><!--/panel body Patient-->
+                                                    <!--panel body Copayment-->
+                                                    <!--<div id="divCopaymentPayment">
+
+
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Paid</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtCopaymentPaid" name="CopaymentPaid" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup="    utility.ValidateDecimal(event, 2); Bill_PaymentPosting.calculateBalance('Copay');">
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Paid A/C<span class="required">*</span></label>
+                                                            <select id="ddlCopaymentPaid" name="CopaymentPaidAccount" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Discount</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtCopaymentDiscount" name="CopaymentDiscount" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup="utility.ValidateDecimal(event, 2); Bill_PaymentPosting.calculateBalance('Copay');">
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Discount A/C<span class="required">*</span></label>
+                                                            <select id="ddlCopaymentDiscount" name="CopaymentDiscountAccount" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Balance</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtCopaymentBalance" name="CopaymentBalance" disabled>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="clearfix"></div>
+                                                        <div class="panel-body tab-content-featured mt-sm mb-sm" id="divCopaymentTransfer">
+
+
+
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Copay</label>
+
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtCopay" name="CopayAmount" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup="Bill_PaymentPosting.calculateBalance('Copay'); utility.ValidateDecimal(event, 2)">
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div divtype="PatientTransfer" class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Next Responsibility</label>
+                                                                <div class="clearfix"></div>
+
+                                                                <div class="size75 pull-left radio-custom radio-small">
+                                                                    <input type="radio" id="RadCopayNextRespInsurance" onclick="Bill_PaymentPosting.ValidateTransferAmount('#frmBillPaymentPosting #txtPatientTransfer', 'Copay');" name="RadCopayNextResponsibility" value="CopayNextResInsurance" checked="checked">
+                                                                    <label id="lblRadCopayNextRespInsurance" class="control-label" for="">Insurance</label>
+
+                                                                </div>
+                                                            </div>
+                                                            <div divtype="PatientTransfer" class="col-sm-4  col-md-3 col-lg-2" style="display:none;">
+                                                                <label class="control-label">Insurance Plan</label>
+                                                                <select id="ddlNextPatientInsurancePlan" name="NextPatientInsurancePlan" class="form-control" disabled></select>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="col-sm-12">
+                                                            <div class="pull-left mr-md">
+                                                                <label class="control-label">Comments</label>
+                                                            </div>
+                                                            <div class="checkbox checkbox-custom pull-left">
+                                                                <input type="checkbox" id="chkCopayPrintOnPatientStatement" name="CopayPrintOnPatientStatement">
+                                                                <label class="control-label pl-none" for="chkCopayPrintOnPatientStatement">Print On Patient Statement</label>
+                                                            </div>
+                                                            <textarea class="form-control" rows="5" maxlength="2500" id="txtCopaymentComments" name="CopaymentComments" spellcheck="true"></textarea>
+                                                        </div>
+
+
+                                                    </div>-->
+                                                    <!--/panel body Copayment-->
+                                                    <!-- zero payment section start -->
+                                                    <div id="divZeroPayment">
+                                                        <!--panel body Copayment-->
+
+
+
+                                                        <div class="clearfix"></div>
+
+
+                                                        <div class="col-sm-12">
+                                                            <div class="pull-left mr-md">
+                                                                <label class="control-label">Comments</label>
+                                                            </div>
+                                                            <div class="checkbox checkbox-custom pull-left">
+                                                                <input type="checkbox" id="chkZeroPayPrintOnPatientStatement" name="ZeroPayPrintOnPatientStatement">
+                                                                <label class="control-label pl-none" for="chkZeroPayPrintOnPatientStatement">Print On Patient Statement</label>
+                                                            </div>
+                                                            <textarea class="form-control" rows="5" maxlength="2500" id="txtZeroPaymentComments" name="ZeroPaymentComments" spellcheck="true"></textarea>
+                                                        </div>
+
+                                                    </div><!--/panel body Copayment-->
+                                                    <!-- zero payment section end -->
+                                                    <!-- start Recoupment new by irfan -->
+                                                    <div id="divRecoupmentPayment">
+                                                        <!--panel body insurance-->
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Allowed</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtRecoupmentAllowed" name="RecoupmentAllowed" onblur="Bill_PaymentPosting.ValidateAllowedAmountRecoupment('Recoupment'); Bill_PaymentPosting.ValidateWriteOffRecoupment()" onkeypress=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.ValidateWriteOffRecoupment()" onkeyup=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.ValidateWriteOffRecoupment()">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Paid</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtRecoupmentPaid" name="RecoupmentPaid" onkeypress=" utility.ValidateDecimal(event, 2)" onkeyup=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.calculateBalance('Recoupment');">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Paid A/C<span class="required">*</span></label>
+                                                            <select id="ddlRecoupmentPaid" name="RecoupmentPaidAccount" class="form-control"></select>
+                                                        </div>
+                                                        <div class="visible-sm"><div class="clearfix"></div></div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Write off</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtRecoupmentWriteoff" name="RecoupmentWriteoff" onkeypress=" utility.ValidateDecimal(event, 2)" onkeyup=" utility.ValidateDecimal(event, 2); Bill_PaymentPosting.calculateBalance('Recoupment');">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Write off A/C<span class="required">*</span></label>
+                                                            <select id="ddlRecoupmentWriteoff" name="RecoupmentWriteoffAccount" class="form-control"></select>
+                                                        </div>
+                                                        <!--<div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Balance</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                <input class="form-control" type="text" id="txtRecoupmentBalance" name="Balance" disabled>
+                                                            </div>
+                                                        </div>-->
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">Remit Code</label>
+                                                            <select id="ddlRecoupmentRemitCode" name="RecoupmentRemittanceCode" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-sm-4  col-md-3 col-lg-2">
+                                                            <label class="control-label">ICN/DCN</label>
+                                                            <input class="form-control" type="text" id="txtRecoupmentICN_DCN" name="RecoupmentICN_DCN">
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="panel-body tab-content-featured mt-sm mb-sm">
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <span class="pull-left pr-xs">
+                                                                    <label class="control-label">Copay</label>
+                                                                </span>
+                                                                <div class="clearfix"></div>
+
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtRecoupmentCopay" name="RecoupmentCopay" onkeypress="utility.ValidateDecimal(event, 2)" onkeyup=" Bill_PaymentPosting.ValidateTransferAmount(this, 'Recoupment' ); utility.ValidateDecimal(event, 2)">
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Coinsurance</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtRecoupmentCoinsurance" name="RecoupmentCoinsurance" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Recoupment'); utility.ValidateDecimal(event, 2);" onkeypress=" utility.ValidateDecimal(event, 2)">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Deductibles</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtRecoupmentDeductables" name="RecoupmentDeductables" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Recoupment'); utility.ValidateDecimal(event, 2);" onkeypress=" utility.ValidateDecimal(event, 2)">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Patient Responsibility</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                                                                    <input class="form-control" type="text" id="txtRecoupmentPatientResponsibility" name="RecoupmentPatientResponsibility" onkeyup="Bill_PaymentPosting.ValidateTransferAmount(this, 'Recoupment'); utility.ValidateDecimal(event, 2);" onkeypress=" utility.ValidateDecimal(event, 2)">
+                                                                </div>
+                                                            </div>
+                                                            <div divtype="RecoupmentTransfer" class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Recoup From</label>
+                                                                <div class="clearfix"></div>
+                                                                <div class="size70 pull-left radio-custom radio-small">
+                                                                    <input type="radio" id="RadRecoupmentNextRespPatient" onclick="Bill_PaymentPosting.ValidateTransferAmount('#frmBillPaymentPosting #txtRecoupmentTransfer', 'Recoupment'); Bill_PaymentPosting.ShowHideInsurancePlan(this)" name="RadRecoupmentNextResponsibility" value="RecoupNextResPatient">
+                                                                    <label id="lblRadRecoupmentNextRespInsurance" class="control-label" for="">Patient</label>
+                                                                </div>
+                                                                <div class="size75 pull-left radio-custom radio-small">
+                                                                    <input type="radio" id="RadRecoupmentNextRespInsurance" onclick="Bill_PaymentPosting.ValidateTransferAmount('#frmBillPaymentPosting #txtRecoupmentTransfer', 'Recoupment'); Bill_PaymentPosting.ShowHideInsurancePlan(this)" name="RadRecoupmentNextResponsibility" value="RecoupNextResInsurance" checked="checked">
+                                                                    <label id="lblRadRecoupmentNextRespInsurance" class="control-label" for="">Insurance</label>
+                                                                </div>
+                                                            </div>
+                                                            <!--<div divtype="InsuranceTransfer" class="col-sm-4  col-md-3 col-lg-2 has-feedback">
+                                                                <label class="control-label">Insurance Plan</label>
+                                                                <select id="ddlRecoupmentNextInsuranceInsurancePlan" name="RecoupmentNextInsuranceInsurancePlan" onchange="Bill_PaymentPosting.setInsurancePriority(this);" class="form-control"></select>
+                                                            </div>
+                                                            <div class="hidden-md"><div class="clearfix"></div></div>
+                                                            <div class="col-sm-4  col-md-3 col-lg-2">
+                                                                <label class="control-label">Priority</label>
+                                                                <input class="form-control" id="txtPlanPriority" name="PlanPriority" type="text" disabled="disabled">
+                                                            </div>
+                                                            <div divtype="RecoupmentTransfer" class="col-sm-4  col-md-3 col-lg-2 pad-a-labelsize">
+                                                                <div class="checkbox-custom checkbox-default">
+                                                                    <input type="checkbox" id="chkRecoupmentCrossOver" name="RecoupmentCrossOve">
+                                                                    <label class="control-label" for="Cross Over">Cross Over</label>
+                                                                </div>
+                                                            </div>-->
+                                                        </div>
+
+
+                                                        <div class="col-sm-12">
+                                                            <div class="pull-left mr-md">
+                                                                <label class="control-label">Comments</label>
+                                                            </div>
+                                                            <div class="checkbox checkbox-custom pull-left">
+                                                                <input type="checkbox" id="chkRecoupmentInsPrintOnPatientStatement" name="RecoupmentInsPrintOnPatientStatement">
+                                                                <label class="control-label pl-none" for="chkPrintOnPatientStatement">Print On Patient Statement</label>
+                                                            </div>
+                                                            <textarea class="form-control" rows="5" maxlength="2500" id="txtRecoupmentComments" name="RecoupmentComments" spellcheck="true"></textarea>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <!-- end Recoupment new by irfan -->
+
+
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-sm-2 pull-right mt-sm">
+                                                        <button id="btnDenialPaymentPosting" class="btn btn-primary btn-sm rightbtn" type="button" onclick="Bill_PaymentPosting.DenialPayment();">Denial</button>
+                                                        <button id="btnSavePaymentPosting" class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div id="chargePaidDetailDiv" style="display:inline" class="toggle" data-plugin-toggle="">
+                                        <section id="sectionChargePaidPaymentDetail" class="toggle">
+                                            <label> Paid Payment</label>
+                                            <div class="toggle-content panel-body pt-sm NoRadiusT">
+                                                <div id="pnlPostingChargePaid_Result" style="display: none;">
+                                                    <section class="panel">
+                                                        <div>
+                                                            <input type="hidden" id="PaymentPostingChargePaid_SelectedDataKeys" />
+                                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPostingChargePaid">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="display:none;">PaymentId</th>
+                                                                        <th>Action</th>
+                                                                        <th class=" noWordBreak">Check Date</th>
+                                                                        <th>Amount</th>
+                                                                        <th class=" noWordBreak">Payment Type</th>
+                                                                        <th class=" noWordBreak">Check/Card #</th>
+                                                                        <th id="thAccount" class="size-min255">Account</th>
+                                                                        <th class="size-min130">Entry Date</th>
+                                                                        <th class=" noWordBreak">Entered By</th>
+                                                                        <th class="size120">Comments</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="hfPatientId" name="PatientId" />
+
+                                <input type="hidden" id="hfFacilityId" value="" name="FacilityId" />
+                                <input type="hidden" id="hfProviderId" value="" name="ProviderId" />
+                                <input type="hidden" id="hfAdvancePaymentId" value="" name="AdvancePaymentId" />
+                                <input type="hidden" id="hfRecoupmentNextInsurancePlan" value="" name="RecoupmentNextInsurancePlanId" />
+
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(function () {
+
+            $("div[id^='pnlBillPaymentPosting']").each(function () {
+
+                $($(this).find($('[data-plugin-toggle]'))).each(function () {
+                    var $this = $(this),
+                        opts = {};
+
+                    var pluginOptions = $this.data('plugin-options');
+                    if (pluginOptions)
+                        opts = pluginOptions;
+
+                    $this.themePluginToggle(opts);
+                });
+
+            });
+        });
+
+        $('#frmBillPaymentPosting').bind('keypress', function (e) {
+            if (e.keyCode == 13) {
+                return false;
+            }
+        });
+        //initialization of date-picker.
+        //utility.CreateDatePicker('pnlPatientCaseDetail #dtpAppointmentDate,#dtpSubmittedDate,#dtpDOSFrom,#dtpInjuryDate,#dtpLMPDate,#dtpDOSTo,#dtpCurrentIllnessDate,#dtpAdmissionDated,#tpDischargeDate', function () {
+        //    //on-change callback method
+        //});
+
+
+    });
+</script>

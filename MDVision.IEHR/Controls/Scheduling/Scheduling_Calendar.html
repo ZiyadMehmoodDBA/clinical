@@ -1,0 +1,621 @@
+﻿<div id="pnlScheduleCalendar" style="display:none;">
+    <div id="actionPanScheduleCalendar" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <form class="form-bordered" method="post" id="frmSchedulingCalendar" onsubmit="return false">
+        <div id="wrapper" class="row toggled">
+            <a href="#menu-toggle" class="btn side-btn moveTop " id="menu-toggle"><i class="fa fa-bars"></i></a>
+            <div id="sidebar-wrapper">
+                <div id="sidebarWrapperInner">
+                    <div class="form-group" id="searchpanel">
+                        <div class="col-sm-12" id="fromdate">
+                            <div data-plugin-datepicker data-plugin-skin="primary"> </div>
+                        </div><div class="clearfix"></div>
+                        <div class="col-sm-12">
+                            <div class="spacer10"></div>
+                            <button id="btnblock" type="button" class="btn btn-success btn-xs " style="display:none" onclick="Scheduling_Calendar.BlockSlots();"><i class="fa fa-lock"></i> Block </button>
+                            <button id="btnunblock" type="button" class="btn btn-success btn-xs" style="display:none" onclick="Scheduling_Calendar.UnBlockSlots();"><i class="fa fa-unlock"></i> Unblock </button>
+                            <div class="spacer10"></div>
+                            <input id="txtgoto" name="GoToDate" type="text" class="form-control size35 pull-left mr-sm" maxlength="2" placeholder="99" onkeypress="return utility.ValidateZero(event, this);" />
+                            <select id="agenda" class="form-control size100 pull-left  mr-sm" disabled>
+                                <option value="P1" selected="selected">Days</option>
+                                <option value="P2">Weeks</option>
+                                <option value="P3">Months</option>
+                            </select>
+                            <button id="btngoto" type="submit" class="btn btn-default btn-xs " onclick="Scheduling_Calendar.GoTo();"> Go To </button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="spacer10"></div>
+                        <div class="col-sm-12">
+                            <div class="radio-custom col-xs-6">
+                                <input type="radio" id="rdprovider" name="RadioProvider" checked="checked">
+                                <label for="rdprovider">Provider</label>
+                            </div>
+                            <div class="radio-custom col-xs-6">
+                                <input type="radio" id="rdresource" name="RadioResource">
+                                <label for="rdresource">Resource</label>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div id="providerdiv">
+                                <label for="Provider" class="control-label" id="lblProvider">Provider</label>
+                                <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Scheduling_Calendar.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                                <select id="Provider" class="form-control" ddlist="GetProvider" onchange="Scheduling_Calendar.HideShowProviderLink(); Scheduling_Calendar.ReloadSchedulerOnDDLChange();"></select>
+                            </div>
+                            <div id="resourcediv">
+                                <label for="Resource" class="control-label" id="lblResource">Resource</label>
+                                <a id="lnkResourceEdit" style="display:none;" href="#" onclick="Scheduling_Calendar.OpenResourceDetail();" title="Edit Facility">Resource</a>
+                                <select id="Resource" class="form-control" ddlist="GetResources" onchange="Scheduling_Calendar.HideShowResourceLink(); Scheduling_Calendar.ReloadSchedulerOnDDLChange();"></select>
+                            </div>
+                            <div id="facilitydiv">
+                                <label for="Facility" class="control-label" id="lblFacility">Facility</label>
+                                <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Scheduling_Calendar.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                                <select id="Facility" class="form-control" ddlist="GetFacilitySchedular" onchange="Scheduling_Calendar.HideShowFacilityLink(); Scheduling_Calendar.ReloadSchedulerOnDDLChange();"></select>
+                            </div>
+
+                            <div id="patientTypeDiv">
+                                <label for="ddlPatientTypeSc" class="control-label" id="lblPatientType">Patient Type</label>
+                                <a id="lnkPatientTypeEdit" style="display:none;" href="#" title="Edit Patient Type">Patient Type</a>
+                                <select id="ddlPatientTypeSc" name="PatientType" class="form-control" ddlist="GetPatientType" onchange="Scheduling_Calendar.HideShowAndLoadVisitType(this); Scheduling_Calendar.ReloadSchedulerOnDDLChange();"></select>
+                            </div>
+
+                            <div id="visitTypeDiv">
+                                <label for="ddlVisitTypeSc" class="control-label" id="lblVisitType">Visit Type</label>
+                                <a id="lnkVisitTypeEdit" style="display:none;" href="#" title="Edit Visit Type">Visit Type</a>
+                                <select id="ddlVisitTypeSc" name="PatientVisitType" disabled class="form-control" ddlist="GetPatientVisitType" onchange="Scheduling_Calendar.ReloadSchedulerOnDDLChange();"></select>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="spacer10"></div>
+                            <div class="size110 pull-left" id="monthdiv" style="display:none">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" id="calmonth" placeholder="Month" data-plugin-datepicker="" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="size110 pull-right" id="yeardiv" style="display:none">
+                                <!--<div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" id="calyear" placeholder="Year" data-plugin-datepicker="" class="form-control ">
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer10"></div>
+
+                    <div id="statusColorPanel">
+                    </div>
+                    <div class="spacer10"></div>
+                    <section id="statusColorPanel2">
+                        <div id="eligiblity" class="col-xs-6 pl-xxs pr-none">
+                            <span class="fa fa-check-circle green"></span>
+                            <label class="control-label " for="color-reference-box">Eligibility Active</label>
+                        </div>
+                        <div id="CopayCollected" class="col-xs-6 pl-xxs pr-none">
+                            <span class="text-success"><i class="fa fa-dollar"></i></span>
+                            <label class="control-label " for="color-reference-box">Copay Paid</label>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div id="eligiblity" class="col-xs-6 pl-xxs pr-none">
+                            <span class="fa fa-times-circle red"></span>
+                            <label class="control-label " for="color-reference-box">Eligibility Inactive</label>
+                        </div>
+                        <div id="CopayNotCollected" class="col-xs-6 pl-xxs pr-none">
+                            <span class="text-danger"><i class="fa fa-dollar"></i></span>
+                            <label class="control-label " for="color-reference-box">Copay Unpaid</label>
+                        </div>
+                        <div id="eligiblity" class="col-xs-6 pl-xxs pr-none">
+                            <span class="fa fa-circle black"></span>
+                            <label class="control-label " for="color-reference-box">Eligibility Waiting</label>
+                        </div>
+                        <div id="CopayNotCollected" class="col-xs-6 pl-xxs pr-none">
+                            <span class="text"><i class="fa fa-dollar"></i></span>
+                            <label class="control-label " for="color-reference-box">Copay Partial Paid</label>
+                        </div>
+                        <div id="eligiblity" class="col-xs-6 pl-xxs pr-none">
+                            <span class="fa fa-circle blue"></span>
+                            <label class="control-label " for="color-reference-box">Eligibility N/A</label>
+                        </div>
+
+
+
+                    </section>
+
+                    <div class="hidden-xs  hidden-sm"><div class="spacer10"></div></div>
+                    <div class="hidden-xs hidden-sm"><div class="spacer10"></div></div>
+                    <div class="col-sm-12" id="checkboxpanel" style="display:none">
+                        <div class="col-sm-12 p-none">
+                            <div class="checkbox-custom checkbox-default col-xs-3">
+                                <input id="chkcalMonday" onclick="Scheduling_Calendar.WeekCheckBoxClick();" class="form-control" type="checkbox">
+                                <label class="control-label" for="Monday">Mo</label>
+                            </div>
+                            <div class="checkbox-custom checkbox-default col-xs-3">
+                                <input id="chkcalTuesday" onclick="Scheduling_Calendar.WeekCheckBoxClick();" class="form-control" type="checkbox">
+                                <label class="control-label" for="Tuesday">Tu</label>
+                            </div>
+                            <div class="checkbox-custom checkbox-default col-xs-3">
+                                <input id="chkcalWednesday" onclick="Scheduling_Calendar.WeekCheckBoxClick();" class="form-control" type="checkbox">
+                                <label class="control-label" for="Wednesday">We</label>
+                            </div>
+                            <div class="checkbox-custom checkbox-default col-xs-3">
+                                <input id="chkcalThursday" onclick="Scheduling_Calendar.WeekCheckBoxClick();" class="form-control" type="checkbox">
+                                <label class="control-label" for="Thursday">Th</label>
+                            </div>
+                            <div class="checkbox-custom checkbox-default col-xs-3">
+                                <input id="chkcalFriday" onclick="Scheduling_Calendar.WeekCheckBoxClick();" class="form-control" type="checkbox">
+                                <label class="control-label" for="Friday">Fr</label>
+                            </div>
+                            <div class="checkbox-custom checkbox-default col-xs-3">
+                                <input id="chkcalSaturday" onclick="Scheduling_Calendar.WeekCheckBoxClick();" class="form-control" type="checkbox">
+                                <label class="control-label" for="Saturday">Sa</label>
+                            </div>
+                            <div class="checkbox-custom checkbox-default col-xs-3">
+                                <input id="chkcalSunday" onclick="Scheduling_Calendar.WeekCheckBoxClick();" class="form-control" type="checkbox">
+                                <label class="control-label" for="Sunday">Su</label>
+                            </div>
+                            <input type="hidden" id="hfPasteTimeSlotDtlId" />
+                            <input type="hidden" id="hfCutAppointmentId" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="page-content-wrapper">
+                <div id="StickyCalButton">
+                    <div class="col-sm-12 col-lg-5 text-left btnTextAdj p-none">
+                        <div class="btn-group mt-xs">
+                            <button id="btnback" type="button" onclick="Scheduling_Calendar.BackDate();" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                            <button id="btnnext" type="button" onclick="Scheduling_Calendar.NextDate();" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                        </div>
+                        <button type="button" class="btn btn-default btn-sm on mt-xs" onclick="Scheduling_Calendar.TodayDate();">Today</button>
+                        <button type="button" class="btn btn-default btn-sm on mt-xs" onclick="Scheduling_Calendar.ShowAppointmentSummary();">Summary</button>
+                        <button type="button" class="btn btn-default btn-sm on mt-xs" onclick="Scheduling_Calendar.ShowBlockAppSummary();">Blocked Appointments</button>
+                    </div>
+                    
+                    <div class="col-sm-12 mt-xs col-lg-2 text-center">
+                        <span class="bold inline-block font-xs" id="divDayName" style="display:none;"></span>
+                        <div id="daydate" class="inline-block">
+                            <h4 class="text-bold m-none inline-block text-center btnTextAdj">
+                                <span class="font-xs"></span>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-12  mt-xs col-lg-5 text-right btnTextAdj p-none">
+                       
+                        <div class="btn-group" id="containerScheduleMode">
+                            <button id="btnForceBooking" type="button" class="btn btn-primary btn-default btn-sm"  onclick="Scheduling_Calendar.ForceBookingAppointment()" disabled>Force Booking</button>
+                            <button id="btnProviderPrint" type="button" class="btn btn-primary btn-default btn-sm" style="margin-right:3px;" onclick="Scheduling_Calendar.ProviderAppointmentPrint()">Print</button>
+                            <button id="btnday" type="button" class="btn btn-default btn-sm" onclick="Scheduling_Calendar.DayClick(true);">Day</button>
+                            <button id="btnweek" type="button" class="btn btn-default btn-sm" onclick="Scheduling_Calendar.WeekClick();">Week</button>
+                            <button id="btnmnth" type="button" class="btn btn-default btn-sm" onclick="Scheduling_Calendar.MonthClick();">Month</button>
+                        </div>
+                        
+                    </div>
+                    <div class="spacer10"></div>
+                    <!--<div id="facilityheader" class="col-sm-12 multiple-heading center" style="display:none"></div>-->
+                    <div id="proresheader" class="col-sm-12 multiple-heading center"></div>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div id="tablediv">
+                    <table id="myTable" border="0" cellspacing="0" cellpadding="0" class="table table-responsive table-bordered table-condensed ">
+                        <tbody></tbody>
+                    </table>
+                    <div id="MonthCal" style="display:none;">
+                        <table class="table table-responsive table-bordered monthly-clndr mb-none"><tbody><tr class="th-text-center"><th width="14.28%">Sun</th><th width="14.28%">Mon</th><th width="14.28%">Tue</th><th width="14.28%">Wed</th><th width="14.28%">Thu</th><th width="14.28%">Fri</th><th width="14.28%">Sat</th></tr></tbody></table>
+                    </div>
+                    <div id="WeekCal">
+                        <table id="weektable" class="table table-responsive mb-none mt-xs"><tbody><tr></tr> </tbody></table>
+                    </div>
+                    <table id="monthTable" border="0" cellspacing="0" cellpadding="0" class="table table-responsive table-bordered monthly-clndr mb-none">
+                        <tbody class="monthly-clndr"></tbody>
+                    </table>
+                    <div id="weekcontainer">  </div>
+                </div>
+            </div>
+            <!--<div class="height250 clearBoth"></div>-->
+        </div>
+        <input id="test" class="form-control" type="hidden" value='0' />
+    </form>
+</div>
+
+<script type="text/javascript">
+
+
+    $("#pnlScheduleCalendar #btngoto").addClass('disableAll');
+
+    $("#pnlScheduleCalendar #txtgoto").keyup(function () {
+
+        if ($('#pnlScheduleCalendar #txtgoto').val() == "") {
+
+            $("#pnlScheduleCalendar #btngoto").addClass('disableAll');
+
+        }
+        else if ($('#pnlScheduleCalendar #txtgoto').val() != "") {
+
+            $("#pnlScheduleCalendar #btngoto").removeClass('disableAll');
+        }
+
+    });
+
+
+    $('#pnlScheduleCalendar #rdresource').click(function () {
+        if ($(this).is(':checked')) {
+            $('#pnlScheduleCalendar #resourcediv').show();
+            $('#pnlScheduleCalendar #providerdiv').hide();
+
+
+            $('#pnlScheduleCalendar #Resource').attr('disabled', false);
+            $('#pnlScheduleCalendar #rdprovider').attr('checked', false);
+            $('#pnlScheduleCalendar #Provider').attr('disabled', true);
+            Scheduling_Calendar.LoadSchedulingDetail();
+
+            Scheduling_Calendar.ChangeDate();
+        }
+        else {
+            //$('#rdprovider').attr('checked', true);
+            //$('#Provider').attr('disabled', true);
+        }
+    });
+    $('#pnlScheduleCalendar #rdprovider').click(function () {
+        if ($(this).is(':checked')) {
+
+            $('#pnlScheduleCalendar #resourcediv').hide();
+            $('#pnlScheduleCalendar #providerdiv').show();
+
+
+            $('#pnlScheduleCalendar #Provider').attr('disabled', false);
+            $('#pnlScheduleCalendar #rdresource').attr('checked', false);
+            $('#pnlScheduleCalendar #Resource').attr('disabled', true);
+            Scheduling_Calendar.LoadSchedulingDetail();
+
+            Scheduling_Calendar.ChangeDate();
+
+        }
+        else {
+            //$('#rdresource').attr('checked', true);
+            //$('#Resource').attr('disabled', true);
+        }
+    });
+
+    function tableTopProp() {
+        var topHeaderProp = document.getElementById("StickyCalButton").getBoundingClientRect().bottom;
+        $('#WeekCal.affix').css('top', (topHeaderProp - 4));
+        $('#MonthCal.affix').css('top', (topHeaderProp - 4));
+    }
+    $(document).resize(function () {
+        tableTopProp();
+    });
+
+    $(document).ready(function () {
+        tableTopProp();
+
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+            $("#tablediv").resize(function (e) {
+
+                $('#StickyCalButton').css('width', $("#myTable").css('width'));
+                $('#StickyCalButton').css('width', $("#monthTable").css('width'));
+                $('#MonthCal').css('width', $("#monthTable").css('width'));
+
+                $('#StickyCalButton').css('width', $("#weekcontainer").css('width'));
+                $('#WeekCal').css('width', $("#weekcontainer").css('width'));
+
+            });
+        });
+        $("#tablediv").resize(function (e) {
+
+            $('#StickyCalButton').css('width', $("#myTable").css('width'));
+            $('#StickyCalButton').css('width', $("#monthTable").css('width'));
+            $('#MonthCal').css('width', $("#monthTable").css('width'));
+
+        });
+        $('#menu-toggle').affix();
+        $("#StickyCalButton").affix();
+        $('#MonthCal').affix();
+        $('#WeekCal').affix();
+
+        //$(document).on('click', '.helllo', function () {
+
+        //    var clickid = event.target.id;
+        //    var arr = clickid.split('-');
+        //    var patientid = arr[0];
+        //    var appid = arr[1];
+        //    Scheduling_Calendar.PatientDetail(patientid, appid, clickid);
+
+
+
+
+        //});
+        $('#pnlScheduleCalendar #resourcediv').hide();
+        //$('#pnlScheduleCalendar #fromdate').datepicker({
+        //    defaultDate: true
+        //});
+
+        $('#pnlScheduleCalendar #fromdate').datepicker({
+            format: "mm/dd/yyyy",
+            viewMode: 'days',
+            todayHighlight: true
+        }).on('changeDate', function (ev) {
+            var dayrgx = /(\d{2})\/(\d{2})\/(\d{4})/;
+            //expression for week range
+            var weekrg = /(\d{2})\/(\d{2})\/(\d{4}) - (\d{2})\/(\d{2})\/(\d{4})/;
+            //Month Regular Expression
+            var monthreg = /(\January|February|March|April|May|June|July|August|September|October|November|December)\/(\d{4})/;
+            var criteria = $('#pnlScheduleCalendar #daydate').text().trim();
+            if (criteria.match(dayrgx) && criteria.length < 15) {
+                $('#pnlScheduleCalendar #btnweek').removeClass("active");
+                $('#pnlScheduleCalendar #btnmnth').removeClass("active");
+                $('#pnlScheduleCalendar #btnday').addClass("active");
+                var a = $('#pnlScheduleCalendar #fromdate').datepicker('getDate');
+                if (a != 'Invalid Date') {
+                    Scheduling_Calendar.ChangeDate();
+                }
+                else if (a == 'Invalid Date') {
+
+                    a = new Date();
+                    $('#pnlScheduleCalendar #divDayName').removeAttr('style');
+                    $('#pnlScheduleCalendar #divDayName span').html($.datepicker.formatDate('DD', new Date(a)) + ", ");
+                    $('#pnlScheduleCalendar #daydate span').html($.datepicker.formatDate('mm/dd/yy', new Date(a)));
+                    $('#pnlScheduleCalendar #fromdate').datepicker("setDate", a);
+                }
+
+            }
+
+            else if (criteria.match(weekrg)) {
+                $('#pnlScheduleCalendar #btnday').removeClass("active");
+                $('#pnlScheduleCalendar #btnmnth').removeClass("active");
+                $('#pnlScheduleCalendar #btnweek').addClass("active");
+                var a = $('#pnlScheduleCalendar #fromdate').datepicker('getDate');
+                if (a != 'Invalid Date') {
+                    var formatted_date = function (date) {
+                        var m = ("0" + (date.getMonth() + 1)).slice(-2); // in javascript month start from 0.
+                        var d = ("0" + date.getDate()).slice(-2); // add leading zero
+                        var y = date.getFullYear();
+                        return m + '/' + d + '/' + y;
+                    }
+
+                    var curr_date = new Date(a);
+
+                    var day = curr_date.getDay();
+
+                    var diff = curr_date.getDate() - day + (day == 0 ? -6 : 1); // 0 for sunday
+
+                    var week_start_tstmp = curr_date.setDate(diff);
+
+                    var week_start = new Date(week_start_tstmp);
+
+                    var week_start_date = formatted_date(week_start);
+
+                    var week_end = new Date(week_start_tstmp);  // first day of week
+
+                    week_end = new Date(week_end.setDate(week_end.getDate() + 6));
+
+                    var week_end_date = formatted_date(week_end);
+
+                    var sd = new Date(week_start_date);
+                    var newdatesd = Scheduling_Calendar.AddSubDays(sd, -1);
+                    newdatesd = formatted_date(newdatesd);
+
+                    var ed = new Date(week_end_date);
+                    var newdateed = Scheduling_Calendar.AddSubDays(ed, -1);
+                    newdateed = formatted_date(newdateed);
+
+                    date = newdatesd + ' - ' + newdateed;    // date range for current week    // date range for current week
+
+                    $('#daydate span').html(date);
+                    Scheduling_Calendar.ChangeDate();
+                    $(".active").parent("TR").css("background", "yellow").css("color", "black");
+                    $(".active").parent("TR").css("background", "yellow");
+                }
+            }
+            else if (criteria.match(monthreg)) {
+
+                $('#pnlScheduleCalendar #btnday').removeClass("active");
+                
+                $('#pnlScheduleCalendar #btnweek').removeClass("active");
+                $('#pnlScheduleCalendar #btnmnth').addClass("active");
+                var a = $.datepicker.formatDate('mm/dd/yy', new Date(Scheduling_Calendar.FormatDate(criteria)));
+                var month = $.datepicker.formatDate('mm/yy', new Date(a));
+                Scheduling_Calendar.ClearTable();
+                var statusslots = Scheduling_Calendar.FilterCriteria();
+
+
+                if ($("#pnlScheduleCalendar input:radio[name='RadioProvider']").is(":checked"))
+                    Scheduling_Calendar.MonthCalendar($('#pnlScheduleCalendar #Provider').val(), $('#pnlScheduleCalendar #Facility').val(), 0, month, statusslots, $('#pnlScheduleCalendar #ddlPatientTypeSc').val(), $('#pnlScheduleCalendar #ddlVisitTypeSc').val());
+                else if ($("#pnlScheduleCalendar input:radio[name='RadioResource']").is(":checked"))
+                    Scheduling_Calendar.MonthCalendar(0, $('#pnlScheduleCalendar #Facility').val(), $('#pnlScheduleCalendar #Resource').val(), month, statusslots, $('#pnlScheduleCalendar #ddlPatientTypeSc').val(), $('#pnlScheduleCalendar #ddlVisitTypeSc').val());
+
+
+                $('#pnlScheduleCalendar #daydate span').html($.datepicker.formatDate('MM/yy', new Date(a)));
+                $('#pnlScheduleCalendar #calmonth').val($('#pnlScheduleCalendar #daydate span').html());
+                calvalue = $('#pnlScheduleCalendar #calmonth').val();
+            }
+        });
+
+        $('#appointdiv').on('click', function (event) {
+            event.stopPropagation();
+            alert('clicked div');
+        });
+
+        //$('#pnlScheduleCalendar #Provider').on('change', function () {
+        //    var dayrgx = /(\d{2})\/(\d{2})\/(\d{4})/;
+        //    //expression for week range
+        //    var weekrg = /(\d{2})\/(\d{2})\/(\d{4}) - (\d{2})\/(\d{2})\/(\d{4})/;
+        //    //Month Regular Expression
+        //    var monthreg = /(\January|February|March|April|May|June|July|August|September|October|November|December)\/(\d{4})/;
+        //    var criteria = $('#pnlScheduleCalendar #daydate').text().trim();
+        //    if (criteria.match(dayrgx)) {
+        //        Scheduling_Calendar.ChangeDate();
+        //    }
+        //    else if (criteria.match(monthreg)) {
+        //        Scheduling_Calendar.ClearTable();
+        //        var month = $.datepicker.formatDate('mm/yy', new Date(Scheduling_Calendar.FormatDate(criteria)));
+        //        var statusslots = Scheduling_Calendar.FilterCriteria();
+
+        //        Scheduling_Calendar.MonthCalendar($('#pnlScheduleCalendar #Provider').val(), $('#pnlScheduleCalendar #Facility').val(), null, month, statusslots);
+        //    }
+        //    else if (criteria.match(weekrg)) {
+        //        //var week = Scheduling_Calendar.GetWeek();
+        //        //$('#daydate span').html(week);
+        //        Scheduling_Calendar.ChangeDate();
+        //    }
+        //});
+        //$('#pnlScheduleCalendar #Facility').on('change', function () {
+
+        //    var dayrgx = /(\d{2})\/(\d{2})\/(\d{4})/;
+        //    //expression for week range
+        //    var weekrg = /(\d{2})\/(\d{2})\/(\d{4}) - (\d{2})\/(\d{2})\/(\d{4})/;
+        //    //Month Regular Expression
+        //    var monthreg = /(\January|February|March|April|May|June|July|August|September|October|November|December)\/(\d{4})/;
+        //    var criteria = $('#pnlScheduleCalendar #daydate').text().trim();
+        //    if (criteria.match(dayrgx)) {
+        //        Scheduling_Calendar.ChangeDate();
+        //    }
+        //    else if (criteria.match(monthreg)) {
+        //        Scheduling_Calendar.ClearTable();
+        //        var month = $.datepicker.formatDate('mm/yy', new Date(Scheduling_Calendar.FormatDate(criteria)));
+        //        var statusslots = Scheduling_Calendar.FilterCriteria();
+        //        if ($("#pnlScheduleCalendar input:radio[name='RadioProvider']").is(":checked")) {
+
+        //            Scheduling_Calendar.MonthCalendar($('#pnlScheduleCalendar #Provider').val(), $('#pnlScheduleCalendar #Facility').val(), null, month, statusslots);
+        //        }
+        //        else if ($("#pnlScheduleCalendar input:radio[name='RadioResource']").is(":checked")) {
+
+        //            Scheduling_Calendar.MonthCalendar(null, $('#pnlScheduleCalendar #Facility').val(), $('#pnlScheduleCalendar #Resource').val(), month, statusslots);
+        //        }
+
+        //    }
+        //    else if (criteria.match(weekrg)) {
+        //        //var week = Scheduling_Calendar.GetWeek();
+        //        //$('#daydate span').html(week);
+        //        Scheduling_Calendar.ChangeDate();
+        //    }
+
+        //});
+        //$('#pnlScheduleCalendar #Resource').on('change', function () {
+        //    var dayrgx = /(\d{2})\/(\d{2})\/(\d{4})/;
+        //    //expression for week range
+        //    var weekrg = /(\d{2})\/(\d{2})\/(\d{4}) - (\d{2})\/(\d{2})\/(\d{4})/;
+        //    //Month Regular Expression
+        //    var monthreg = /(\January|February|March|April|May|June|July|August|September|October|November|December)\/(\d{4})/;
+        //    var criteria = $('#pnlScheduleCalendar #daydate').text().trim();
+        //    if (criteria.match(dayrgx)) {
+        //        Scheduling_Calendar.ChangeDate();
+        //    }
+        //    else if (criteria.match(monthreg)) {
+        //        var month = $.datepicker.formatDate('mm/yy', new Date(Scheduling_Calendar.FormatDate(criteria)));
+        //        var statusslots = Scheduling_Calendar.FilterCriteria();
+        //        Scheduling_Calendar.MonthCalendar(null, $('#pnlScheduleCalendar #Facility').val(), $('#pnlScheduleCalendar #Resource').val(), month, statusslots);
+        //    }
+        //    else if (criteria.match(weekrg)) {
+        //        //var week = Scheduling_Calendar.GetWeek();
+        //        //$('#daydate span').html(week);
+        //        Scheduling_Calendar.ChangeDate();
+        //    }
+        //});
+
+        $('#pnlScheduleCalendar #calmonth').datepicker({
+            format: 'MM/yyyy',
+            viewMode: 'months',
+            minViewMode: 'months',
+
+        }).on('changeDate', function (e) {
+            var a = $(this).datepicker('getDate');
+
+            if (a == 'Invalid Date') {
+                a = new Date();
+
+                var monthDatetxt = $.datepicker.formatDate('MM/yy', new Date(a));
+                $('#pnlScheduleCalendar #calmonth').datepicker("setDate", monthDatetxt);
+
+            }
+
+            $('#pnlScheduleCalendar #daydate span').html($.datepicker.formatDate('MM/yy', new Date(a)));
+            Scheduling_Calendar.ChangeDate();
+            $(this).datepicker('hide');
+
+
+
+        });
+
+
+
+        //-----------------------------------------------------------------------
+
+        //-----------------Weekly Checks---------------------
+
+
+        //$('#pnlScheduleCalendar #chkcalSunday').change(function () {
+
+        //    Scheduling_Calendar.ChangeDate(true);
+
+        //});
+
+        //$('#pnlScheduleCalendar #chkcalMonday').change(function () {
+
+        //    Scheduling_Calendar.ChangeDate(true);
+
+        //});
+
+        //$('#pnlScheduleCalendar #chkcalTuesday').change(function () {
+
+        //    Scheduling_Calendar.ChangeDate(true);
+
+        //});
+
+        //$('#pnlScheduleCalendar #chkcalWednesday').change(function () {
+
+        //    Scheduling_Calendar.ChangeDate(true);
+
+        //});
+
+        //$('#pnlScheduleCalendar #chkcalThursday').change(function () {
+
+        //    Scheduling_Calendar.ChangeDate(true);
+
+        //});
+
+        //$('#pnlScheduleCalendar #chkcalFriday').change(function () {
+
+        //    Scheduling_Calendar.ChangeDate(true);
+
+        //});
+
+        //$('#pnlScheduleCalendar #chkcalSaturday').change(function () {
+
+        //    Scheduling_Calendar.ChangeDate(true);
+
+        //});
+
+        $(document).on('click', '#pnlScheduleCalendar #statusColorPanel', function () {
+
+            var dayrgx = /(\d{2})\/(\d{2})\/(\d{4})/;
+            //expression for week range
+            var weekrg = /(\d{2})\/(\d{2})\/(\d{4}) - (\d{2})\/(\d{2})\/(\d{4})/;
+            //Month Regular Expression
+            var monthreg = /(\January|February|March|April|May|June|July|August|September|October|November|December)\/(\d{4})/;
+            var criteria = $('#pnlScheduleCalendar #daydate').text().trim();
+            if (criteria.match(dayrgx) && criteria.length < 15) {
+                Scheduling_Calendar.ChangeDate();
+            }
+            else if (criteria.match(monthreg)) {
+                var month = $.datepicker.formatDate('mm/yy', new Date(Scheduling_Calendar.FormatDate(criteria)));
+                var statusslots = Scheduling_Calendar.FilterCriteria();
+                if ($("#pnlScheduleCalendar input:radio[name='RadioProvider']").is(":checked")) {
+
+                    Scheduling_Calendar.MonthCalendar($('#pnlScheduleCalendar #Provider').val(), $('#pnlScheduleCalendar #Facility').val(), null, month, statusslots);
+                }
+                else if ($("#pnlScheduleCalendar input:radio[name='RadioResource']").is(":checked")) {
+
+                    Scheduling_Calendar.MonthCalendar(null, $('#pnlScheduleCalendar #Facility').val(), $('#pnlScheduleCalendar #Resource').val(), month, statusslots);
+                }
+
+            }
+            else if (criteria.match(weekrg)) {
+                //var week = Scheduling_Calendar.GetWeek();
+                //$('#daydate span').html(week);
+                Scheduling_Calendar.ChangeDate();
+            }
+
+        });
+    });
+</script>

@@ -1,0 +1,1602 @@
+﻿<div id="pnlMobileAppRequest" style="display:none;" class="row">
+    <div id="actionPanMobileAppRequest" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog" class="modal-dialog modal-dialog-lg">
+            <div id="modalcontent" class="modal-content">
+                <div id="modalheader" class="modal-header">
+                    <button type="button" class="close" onclick="MobileAppRequest.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Live Requests </h4>
+                </div>
+
+                <div id="modalbody" class="modal-body">
+
+                    <div class="tab-pane" id="divMainButtons">
+
+                        <div class="col-xs-12 p-none mb-default">
+                            <button type="button" class="btn btn-default btn-sm tab_space active" title="Demogrpahics" id="btnDemographics" name="MobileApp_Button" onclick="MobileAppRequest.ShowSection('Demographics');">Demographics</button>
+                            <button type="button" class="btn btn-default btn-sm tab_space" title="Insurance" id="btnInsurance" name="MobileApp_Button" onclick="MobileAppRequest.ShowSection('Insurance');">Insurance</button>
+                            <button type="button" class="btn btn-default btn-sm tab_space" title="History" id="btnHistory" name="MobileApp_Button" onclick="MobileAppRequest.ShowSection('History');">History</button>
+                            <button type="button" class="btn btn-default btn-sm tab_space" title="History" id="btnPatientAppointments" name="MobileApp_Button" onclick="MobileAppRequest.ShowSection('Appointment');">Scheduler</button>
+                        </div>
+
+
+                    </div>
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="clearfix"></div>
+                        <form method="post" id="frmMobileAppRequest" onsubmit="return false">
+                            <section class="panel-body" id="sectionDemographics" name="MobileApp_Module">
+                                <div class="col-xs-12 p-none mb-default pipe-btn-group">
+                                    <button type="button" class="btn btn-link btn-sm text-bold btn-pipe " name="Demographics" title="Demogrpahics" id="btnPatients" onclick="MobileAppRequest.ShowPanel('Demographics');">Demographics</button>
+                                    <button type="button" class="btn btn-link btn-sm text-bold btn-pipe" name="Demographics" title="Emergency Contact" id="btnEmergencyContacts" onclick="MobileAppRequest.ShowPanel('EmergencyContactList');">Emergency Contact</button>
+                                    <button type="button" class="btn btn-link btn-sm text-bold btn-pipe" name="Demographics" title="Preferences" id="btnPatientPreferences" onclick="MobileAppRequest.ShowPanel('PatientPreferences');">Preferences</button>
+
+                                </div>
+                                <div class="col-xs-12 p-none" id="divDemographics" name="MobileApp_Module">
+
+                                    <div id="patientimage" class="col-md-3 col-xs-12 center  pull-right">
+
+                                        <canvas id="myCanvasUpload" style="display:none;"></canvas>
+                                        <img id="myCanvasUploadImg" style="display:none;" />
+                                        <div class="patientImageWrapper img-thumbnail">
+
+                                            <img id="imgPatient" class="img-responsive img-center" src="Content/Images/default_male_profile.gif" alt="Scaned image...!" />
+
+                                        </div>
+
+                                        <div class="clearfix"></div>
+
+
+
+                                    </div>
+                                    <div class="visible-sm visible-xs"><div class="clearfix"></div><span class="spacer10"></span></div>
+                                    <div class="col-xs-12 col-md-9 p-none">
+
+                                        <div class="form-group">
+
+                                            <div class="col-sm-3 hidden" id="lastname">
+                                                <label for="Last Name" id="txtLastName" class="control-label">Last Name<span class="required">*</span></label>
+                                                <input type="text" class="form-control " name="LastName" maxlength="50" disabled>
+                                            </div>
+
+                                            <div class="col-sm-3 hidden" id="firstname">
+                                                <label for="First Name" id="txtFirstName" class="control-label">First Name<span class="required">*</span></label>
+                                                <input type="text" class="form-control " name="FirstName" maxlength="50" disabled>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="mi">
+                                                <label for="Middle Initial" class="control-label" id="txtMiddleInitial">Middle Initial</label>
+                                                <!--<input type="text" class="form-control " name="MiddleInitial" id="txtMiddleInitial"  data-mask="a">-->
+                                                <input type="text" class="form-control " name="MI" maxlength="1" disabled>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="ssn">
+                                                <label for="SSN" class="control-label" id="txtSSN">SSN</label>
+                                                <input class="form-control " type="text" name="SSN" data-mask="999-99-9999" disabled />
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="dob">
+                                                <label class="control-label" id="lbldtpDOB" for="Date of Birth">Date of Birth<span class="required">*</span></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                    <input class="form-control " type="text" id="dtpDOB" name="DOB" maxlength="10" data-plugin-datepicker="" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="gender">
+                                                <label for="Sex" id="lblSex" class="control-label">Sex<span class="required">*</span></label>
+                                                <select id="ddlSex" class="form-control " name="Gender" ddlist="GetGenderDemographic" disabled></select>
+                                            </div>
+
+                                            <div class="col-sm-3 hidden" id="maritialstatus">
+                                                <label for="Marital Status" id="lblMaritalStatus" class="control-label">Marital Status<span class="required">*</span></label>
+                                                <select id="ddlMaritalStatus" name="MaritialStatus" class="form-control " ddlist="GetMaritalStatusDemographic" disabled></select>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="ethnicityid">
+                                                <label for="Ethnicity" id="lblEthnicity" class="control-label">Ethnicity<span class="required">*</span></label>
+                                                <select id="ddlEthnicity" name="EthnicityId" multiple="multiple" class="form-control " ddlist="GetEthnicityDemographic" disabled></select>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="raceid">
+                                                <label class="control-label" id="lblRace">Race<span class="required">*</span></label>
+                                                <select class="form-control" multiple="multiple" name="PatientRaceIds" id="ddlPatientRace" ddlist="GetRaceDemographic" disabled></select>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="preflanguageid">
+                                                <label for="Preferred Language" id="lblPrefLanaguage" class="control-label">Preferred Language<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="ddlPrefLanguage" name="PrefLanguage" customname="Preferred Language" disabled>
+
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="homephoneno">
+                                                <label class="control-label" id="txtHomeTel" for="Home Tel">Home Tel</label>
+                                                <input type="text" class="form-control" name="HomePhoneNo" data-mask="(999) 999-9999" disabled>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="cellno">
+                                                <label class="control-label" id="txtCell" for="Cell">Cell</label>
+                                                <input type="text" class="form-control" name="CellNo" data-mask="(999) 999-9999" disabled>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="emailaddress">
+                                                <label class="control-label" id="txtEmail">Email</label>
+                                                <input type="text" name="EmailAddress" class="form-control" maxlength="55" disabled>
+                                            </div>
+
+                                            <div class="col-sm-6 hidden" id="address1">
+                                                <label class="control-label" id="txtAddress1" for="Address 1">Address 1<span class="required">*</span></label>
+                                                <input type="text" class="form-control" name="Address1" maxlength="55" disabled>
+                                            </div>
+                                            <div class="col-sm-6 hidden" id="address2">
+                                                <label class="control-label" id="lblAddress2" for="Address 2">Address 2<span class="required">*</span></label>
+                                                <input type="text" class="form-control" name="Address2" maxlength="55" disabled>
+                                            </div>
+
+                                            <div class="col-sm-3 p-none">
+                                                <div class="col-xs-7 hidden" id="city">
+                                                    <label class="control-label" id="txtCity" for="City">City<span class="required">*</span></label>
+                                                    <input class="form-control" name="City" type="text" maxlength="25" disabled>
+                                                </div>
+                                                <div class="col-xs-5 hidden" id="state">
+                                                    <label class="control-label" id="txtState" for="City">State<span class="required">*</span></label>
+                                                    <input class="form-control" name="State" type="text" data-mask="aa" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3  p-none">
+                                                <div class="col-xs-7 hidden" id="zipcode">
+                                                    <label class="control-label" id="txtZip"> Zip<span class="required">*</span> </label>
+                                                    <input class="form-control" name="ZipCode" type="text" data-mask="99999" disabled />
+                                                </div>
+                                                <div class="col-xs-5 pad-a-labelsize hidden" id="zipcodeext">
+                                                    <input name="ZipCodeExt" class="form-control" type="text" data-mask="9999" disabled />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3 pad-a-labelsize hidden" id="selfpay">
+                                                <div class="checkbox-custom checkbox-default">
+                                                    <input type="checkbox" name="SelfPay" id="chkSelfPay" disabled>
+                                                    <label class="control-label" id="lblSelfPay" for="chkSelfPay">Self Pay</label>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="pull-right pt-md pr-default">
+                                            <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                            <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                            <button id="btnDemographicApprove" class="btn btn-primary btn-sm" type="submit" onclick="MobileAppRequest.DemographicUpdate()">Approve</button>
+                                            <button id="btnDemographicDiscard" class="btn btn-primary btn-sm " onclick="MobileAppRequest.DiscardRecord('Patients')" type="submit">Discard</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 p-none" id="divEmergencyContactList">
+
+                                    <div id="ECList" class="col-xs-12 mb-default"></div>
+
+
+                                    <div class="col-xs-12 p-none" id="divEmergencyContact" name="MobileApp_Module">
+                                        <div class="form-group ">
+                                            <div class="col-sm-3 hidden" id="lastname">
+                                                <label class="control-label" id="lblLastName">Last Name <span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="txtLastName" name="LastName" maxlength="50" disabled>
+                                            </div>
+                                            <div class="col-sm-3 p-none hidden" id="firstname">
+                                                <div class="col-xs-7">
+                                                    <label class="control-label" id="lblFirstName">First Name<span class="required">*</span></label>
+                                                    <input type="text" class="form-control" id="txtFirstName" name="FirstName" maxlength="35" disabled>
+                                                </div>
+                                                <div class="col-xs-5 hidden" id="mi">
+                                                    <label class="control-label" id="lblMI">M.I.</label>
+                                                    <input type="text" class="form-control" name="MI" data-mask="a" id="txtMiddleInitial" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="dob">
+                                                <label class="control-label" id="lblDOB" for="Date of Birth">Date of Birth</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input class="form-control" id="dtpDOB" name="DOB" type="text" data-plugin-datepicker="" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="emailaddress">
+                                                <label class="control-label" id="lblEmail">Email</label>
+                                                <input type="text" class="form-control" id="txtEmail" name="EmailAddress" maxlength="55" disabled>
+                                            </div>
+
+                                            <div class="col-sm-6 hidden" id="address1">
+                                                <label class="control-label" id="lblAddress1">Address 1</label>
+                                                <input type="text" class="form-control" id="txtAddress1" name="Address1" maxlength="55" disabled>
+                                            </div>
+                                            <div class="col-sm-6 hidden" id="address2">
+                                                <label class="control-label" id="lblAddress2">Address 2</label>
+                                                <input type="text" class="form-control" id="txtAddress2" name="Address2" maxlength="55" disabled>
+                                            </div>
+
+                                            <div class="col-md-3 hidden" id="relationshipid">
+                                                <label class="control-label" id="lblRelation">Relation</label>
+                                                <select id="ddlRelation" class="form-control " name="RelationShipId" ddlist="GetRelationship" disabled></select>
+                                            </div>
+                                            <div class="col-sm-3 p-none ">
+                                                <div class="col-xs-7 hidden" id="city">
+                                                    <label class="control-label" id="lblCity">City</label>
+                                                    <input class="form-control" id="txtCity" name="City" type="text" maxlength="25" disabled>
+                                                </div>
+                                                <div class="col-xs-5 hidden" id="state">
+                                                    <label class="control-label" id="lblState">State</label>
+                                                    <input class="form-control" id="txtState" name="State" type="text" data-mask="aa" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 p-none">
+                                                <div class="col-xs-7 hidden" id="zipcode">
+                                                    <label class="control-label pull-left " id="lblZipCode"> Zip </label>
+                                                    <input id="txtZip" name="Zip" class="form-control" type="text" data-mask="99999" disabled />
+                                                </div>
+                                                <div class="col-xs-5 pad-a-labelsize hidden" id="zipext">
+                                                    <input id="txtZipExt" name="ZipExt" class="form-control" type="text" data-mask="9999" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 hidden" id="homephone">
+                                                <label class="control-label" id="lblHomePhone">Home Tel</label>
+                                                <input type="text" class="form-control" name="HomePhone" id="txtHomeTel" data-mask="(999) 999-9999" disabled />
+                                            </div>
+                                            <div class="col-sm-3 p-none">
+                                                <div class="col-xs-7 hidden" id="workphone">
+                                                    <label class="control-label" id="lblWorkPhone">Work Tel</label>
+                                                    <input class="form-control" name="WorkPhone" id="txtWorkTel" type="text" data-mask="(999) 999-9999" disabled>
+                                                </div>
+                                                <div class="col-xs-5 hidden" id="workphext">
+                                                    <label class="control-label" id="lblWorkPhExt">Ext</label>
+                                                    <input class="form-control" id="txtExt" name="WorkPhext" type="text" maxlength="5" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 p-none">
+                                                <div class="col-xs-7 hidden" id="cellno">
+                                                    <label class="control-label" id="lblCellNo">Cell</label>
+                                                    <input type="text" class="form-control" id="txtCell" name="CellNo" data-mask="(999) 999-9999" disabled>
+                                                </div>
+                                                <div class="col-xs-5 hidden" id="faxno">
+                                                    <label class="control-label" id="lblFaxNo">Fax</label>
+                                                    <input type="text" class="form-control" id="txtFax" name="FaxNo" data-mask="(999) 999-9999" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3 p-none hidden" id="isprimary">
+                                                <div class="col-xs-7">
+                                                    <label class="control-label" id="lblIsPrimary">IsPrimary</label>
+                                                    <input type="text" class="form-control input_noborder" id="txtIsPrimary" name="IsPrimary" disabled>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="pull-right  pt-md pr-default">
+                                            <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                            <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                            <button id="btnEmergencyContactApprove" class="btn btn-primary btn-sm" type="submit" onclick="MobileAppRequest.InsertUpdateEmergencyContact()">Approve</button>
+                                            <button id="btnEmergencyContactDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('EmergencyContacts')" type="submit">Discard</button>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <input type="hidden" id="hfIsPrimary" value="False" />
+                                        <input type="hidden" id="hfIsActive" value="False" />
+                                        <input type="hidden" id="hfContactId" value="0" />
+                                    </div>
+
+                                </div>
+
+                                <div class="panel-body" id="divPatientPreferences" name="MobileApp_Module">
+
+
+
+                                    <div class="form-group ">
+                                        <div class="col-sm-3 hidden" id="prefcommunicationid">
+                                            <label class="control-label" id="lblPrefCommunicationId">1st Preference</label>
+                                            <select id="ddl1stPreference" name="PrefCommunicationId" class="form-control" ddlist="GetCommunication" disabled></select>
+                                        </div>
+                                        <div class="col-sm-3 hidden" id="scndprefcommunicationid">
+                                            <label class="control-label" id="lblScndPrefCommunicationId">2nd Preference</label>
+                                            <select id="ddl2ndPreference" name="ScndPrefCommunicationId" class="form-control" ddlist="GetCommunication" disabled></select>
+                                        </div>
+
+
+                                        <div class="visible-xs"><div class="clearfix"></div></div>
+
+
+                                        <div class="col-sm-3 hidden" id="communicationoptout">
+                                            <div class="checkbox-custom checkbox-default mt-xs">
+                                                <input type="checkbox" val="true" id="chkcommnoptout" name="CommunicationOptout" disabled>
+                                                <label class="control-label" for="chkcommnoptout" id="lblCommunicationOptout">Communication Opt-out</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 hidden" id="patientstatement">
+                                            <div class="checkbox-custom checkbox-default mt-xs">
+                                                <input type="checkbox" id="chkPatientStatement" name="PatientStatement" checked disabled>
+                                                <label class="control-label" for="chkPatientStatement" id="lblPatientStatement">Patient Statement</label>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="pull-right pad-a-labelsize-btn">
+                                        <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                        <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                        <button id="btnPatPreferencesApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.UpdatePatientPreferences()" type="submit">Approve</button>
+                                        <button id="btnPatPreferencesDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('PatientPreferences')" type="submit">Discard</button>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="panel panel-featured" id="sectionInsurance" name="MobileApp_Module">
+                                <div id="PatientInsurancesList" class="col-xs-12  pipe-btn-group"></div>
+
+                                <div class="panel-body" id="divInsurance" name="MobileApp_Module">
+
+
+
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-md-3 hidden" id="insuranceplanid">
+                                            <label id="lblInsurancePlanName" class="control-label">Insurance Plan<span class="required">*</span></label>
+
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtInsurancePlan" name="InsurancePlanName" customname="Insurance Plan" type="text" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 hidden" id="subscriberid">
+                                            <label id="lblSubscriberId" class="control-label">Subscriber ID<span class="required">*</span></label>
+                                            <!--<input class="form-control" id="txtSubscriberID" name="SubscriberID" type="text" maxlength="35" />-->
+                                            <input class="form-control" id="txtSubscriberID" name="SubscriberId" type="text" maxlength="35" disabled />
+                                        </div>
+
+
+                                        <div class="col-sm-4 col-md-3 hidden" id="relationshipid">
+                                            <label id="lblRelationShipId" class="control-label">Relation<span class="required">*</span></label>
+                                            <select id="ddlRelation" class="form-control " name="RelationShipId" ddlist="GetRelationshipDemographic" disabled></select>
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 hidden" id="lastname">
+                                            <label id="lblSubscriberLastName" class="control-label">Last Name<span class="required">*</span></label>
+                                            <input type="text" class="form-control " id="txtLastName" name="SubscriberLastName" maxlength="60" disabled>
+                                        </div>
+
+                                        <div class="col-sm-4 col-md-3 hidden" id="firstname">
+                                            <div class="size60per pull-left">
+                                                <label id="lblSubscriberFirstName" class="control-label">First Name<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="txtFirstName" name="SubscriberFirstName" maxlength="50" disabled>
+                                            </div>
+                                            <div class="size40per pull-left pl-xxs hidden" id="mi">
+                                                <label id="lblSubscriberMI" class="control-label">M.I.</label>
+                                                <input type="text" class="form-control" maxlength="1" name="SubscriberMI" id="txtMiddleInitial" disabled>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                        <div class="col-sm-4 col-md-3 hidden" id="gender">
+                                            <label id="lblGender" class="control-label">Sex<span class="required">*</span></label>
+                                            <select id="ddlSex" class="form-control " name="Gender" ddlist="GetGenderDemographic" disabled></select>
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 hidden" id="groupid">
+                                            <label id="lblGroupId" class="control-label">Subscriber Group ID</label>
+                                            <input class="form-control" id="txtSubscriberGroupID" name="GroupId" type="text" maxlength="35" disabled />
+                                        </div>
+                                        <div class="col-sm-4 col-md-3 hidden" id="dob">
+                                            <label id="lblSubscriberDOB" class="control-label">Date of Birth<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input class="form-control " type="text" id="dtpDOB" name="SubscriberDOB" data-plugin-datepicker="" maxlength="10" disabled="disabled">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 col-md-3 hidden" id="coverageto">
+                                            <label id="lblCoverageTo" class="control-label">Eligibility Date<span class=""></span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input class="form-control " type="text" id="dtpCoverageTo" name="CoverageTo" data-plugin-datepicker="" maxlength="10" disabled="disabled">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 col-md-3 hidden" id="isactive">
+                                            <label id="lblchkInsuranceActive" class="control-label"><span class="required">*</span></label>
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input class="form-control" type="checkbox" name="IsActive" id="chkInsuranceActive" disabled>
+                                                <label id="lblIsActive" class="control-label" for="chkSelfPay">Is Active</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8 col-md-6 hidden" id="comments">
+                                            <label class="control-label">Comments</label>
+                                            <input class="form-control" name="Comments" spellcheck="true" id="txtComments" type="text" maxlength="100">
+                                        </div>
+
+                                    </div>
+                                    <div class="pull-right pad-a-labelsize-btn">
+                                        <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                        <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                        <button id="btnPatInsuranceApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.InsertUpdatePatientInsurance()" type="submit">Approve</button>
+                                        <button id="btnPatInsuranceDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('PatientInsurance')" type="submit">Discard</button>
+                                    </div>
+                                </div>
+
+                            </section>
+                            <section class="panel panel-featured" id="sectionHistory" name="MobileApp_Module">
+                                <div class="col-xs-12 p-none mb-default pipe-btn-group">
+                                    <button type="button" class="btn btn-link btn-sm text-bold" name="History" title="Social Hx" id="btnSocialHx" onclick="MobileAppRequest.ShowPanel('SocialHxWrapper');">Social Hx  </button>
+                                    <button type="button" class="btn btn-link btn-sm text-bold" name="History" title="Medical HX" id="btnMedicalHx" onclick="MobileAppRequest.ShowPanel('MedicalHx');">Medical Hx</button>
+                                    <button type="button" class="btn btn-link btn-sm text-bold" name="History" title="Family Hx" id="btnFamilyHx" onclick="MobileAppRequest.ShowPanel('FamilyHx');">Family Hx</button>
+                                    <button type="button" class="btn btn-link btn-sm text-bold" name="History" title="Surgical Hx" id="btnSurgicalHx" onclick="MobileAppRequest.ShowPanel('SurgicalHx');">Surgical Hx</button>
+                                    <button type="button" class="btn btn-link btn-sm text-bold" name="History" title="Birth Hx" id="btnBirthHx" onclick="MobileAppRequest.ShowPanel('BirthHx');">Birth Hx</button>
+                                    <button type="button" class="btn btn-link btn-sm text-bold" name="History" title="Hospitalization Hx" id="btnHospitalizationHx" onclick="MobileAppRequest.ShowPanel('HospitalizationHx');">Hospitalization Hx</button>
+                                </div>
+                                <div class="panel-body" id="divSocialHxWrapper" name="MobileApp_Module">
+                                    <div id="DivMainSocialHx">
+                                        <div class="panel-body" id="divSociallHx">
+                                            <label class="text-primary">Tobbaco</label>
+                                            <div class="form-group" id="TababaccoHxDiv">
+                                                <div class="col-md-4 ">
+                                                    <label class="control-label">Status</label>
+                                                    <select id="ddlSmokingStatus" name="SmokingStatus" class="form-control" ddlist="GetTobaccoSmokingStatus" disabled></select>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <label class="control-label">Type</label>
+                                                    <select id="ddlTobaccoType" name="TobaccoType" class="form-control" ddlist="GetTobaccoType" disabled></select>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <label class="control-label">Usage Period</label>
+                                                    <select id="ddlTobaccoUsagePeriod" name="TobaccoUsagePeriod" class="form-control" ddlist="GetSocialHxUsagePeriod" disabled></select>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <label class="control-label">Frequency(Per day)</label>
+                                                    <select id="ddlTobaccoFrequencyDaily" name="TobaccoFrequencyDaily" class="form-control" ddlist="GetTobaccoFrequency" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+
+                                                    <label class="control-label pl-default">Counselling</label>
+                                                    <select id="ddlTobaccoCounsellingPeriod" name="TobaccoCounsellingPeriod" class="form-control" ddlist="GetSocialHxCounsellingPeriod" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label pl-default"></label>
+                                                    <select id="ddlTobaccoCounsellingTopic" name="TobaccoCounsellingTopic" class="form-control disableAll" ddlist="GetTobaccoCounsellingTopic" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+
+                                                    <label class="control-label pl-default" id="lblDuration">Duration</label>
+                                                    <input class="form-control" type="text" id="txtTobaccoCessationLength" name="TobaccoCessationLength" maxlength="3" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" disabled>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label pl-default" id="lblPeriod"></label>
+                                                    <select id="ddlTobaccoCessationPeriod" name="TobaccoCessationPeriod" class="form-control" ddlist="GetSocialHxCessationPeriod" disabled></select>
+                                                </div>
+                                                <div class="col-md-3 pr-none">
+                                                    <div class="hidden-xs hidden-sm"><div class="spacer20"></div></div>
+                                                    <div class="pull-left">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkTobaccoRecentlyQuit" name="TobaccoRecentlyQuit" disabled>
+                                                            <label class="control-label">Recently Quit</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="pull-left ml-default">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkTobaccoWouldQuit" name="TobaccoWouldQuit" disabled>
+                                                            <label class="control-label">Would Quit</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="control-label">Comments</label>
+                                                    <textarea id="txtTobaccoComments" name="TobaccoComments" maxlength="500" rows="2" class="form-control" spellcheck="true" disabled></textarea>
+                                                </div>
+                                                <input type="text" class="hidden" id="hfCreatedbyTabbacco" name="CreatedbyTabbacco">
+                                                <input type="text" class="hidden" id="hfCreatedonTabbacco" name="CreatedonTabbacco">
+                                                <input type="text" class="hidden" id="hfModifiedbyTabbacco" name="ModifiedbyTabbacco">
+                                                <input type="text" class="hidden" id="hfModifiedonTabbacco" name="ModifiedonTabbacco">
+
+                                            </div>
+                                            <label class="text-primary">Alcohol</label>
+                                            <div class="form-group" id="AlcoholHxDiv">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="AlcoholStatusId">Status</label>
+                                                    <select id="ddlAlcoholStatus" name="AlcoholStatus" class="form-control" ddlist="GetAlcoholStatus" disabled></select>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="AlcoholTypeId">Type</label>
+                                                    <select id="ddlAlcoholType" name="AlcoholType" class="form-control" ddlist="GetAlcoholType" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="AlcoholUsagePeriodId">Usage Period</label>
+                                                    <select id="ddlAlcoholUsagePeriod" name="AlcoholUsagePeriod" class="form-control" ddlist="GetSocialHxUsagePeriod" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="AlcoholFrequencyId">Frequency(Per day)</label>
+                                                    <select id="ddlAlcoholFrequencyDays" name="AlcoholFrequencyDays" class="form-control" ddlist="GetAlcoholFrequency" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+
+                                                    <label class="control-label pl-default">Counselling</label>
+                                                    <select id="ddlAlcoholCounsellingPeriod" name="AlcoholCounsellingPeriod" class="form-control" ddlist="GetSocialHxCounsellingPeriod" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label pl-default"></label>
+                                                    <select id="ddlAlcoholCounsellingTopic" name="AlcoholCounsellingTopic" class="form-control disableAll" ddlist="GetAlcoholCounsellingTopics" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+
+                                                    <label class="control-label pl-default" id="lblDuration">Duration</label>
+                                                    <input class="form-control" type="text" id="txtAlcoholCessationLength" name="AlcoholCessationLength" maxlength="3" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" disabled>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label pl-default" id="lblPeriod"></label>
+                                                    <select id="ddlAlcoholCessationPeriod" name="AlcoholCessationPeriod" class="form-control" ddlist="GetSocialHxCessationPeriod" disabled></select>
+                                                </div>
+                                                <div class="col-md-3 pr-none">
+                                                    <div class="hidden-xs hidden-sm"><div class="spacer15"></div></div>
+                                                    <div class="pull-left">
+                                                        <div class="checkbox-custom ">
+                                                            <input type="checkbox" id="chkAlcoholRecentlyQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkAlcohlicWouldQuit', 'tobacco')" name="AlcoholRecentlyQuit" disabled>
+                                                            <label class="control-label">Recently Quit</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="spacer10"></div>
+                                                    <div class="pull-left">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkAlcoholWouldQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkAlcohlicRecentlyQuit', 'tobacco')" name="AlcoholWouldQuit" disabled>
+                                                            <label class="control-label">Would Quit</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="control-label">Comments</label>
+                                                    <textarea id="txtAlcoholComments" name="AlcoholComments" maxlength="500" rows="2" class="form-control" spellcheck="true" disabled></textarea>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="hidden-xs hidden-sm"><div class="spacer20"></div></div>
+                                                    <div class="pull-left">
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkAlcoholNotReadyToQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkAlcohlicRecentlyQuit', 'tobacco')" name="AlcoholNotReadyToQuit" disabled>
+                                                            <label class="control-label">Not Ready Quit</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="hidden" id="hfCreatedbyAlcohol" name="CreatedbyAlcohol">
+                                                <input type="text" class="hidden" id="hfCreatedonAlcohol" name="CreatedonAlcohol">
+                                                <input type="text" class="hidden" id="hfModifiedbyAlcohol" name="ModifiedbyAlcohol">
+                                                <input type="text" class="hidden" id="hfModifiedonAlcohol" name="ModifiedonAlcohol">
+                                            </div>
+                                            <label class="text-primary">Drug Abuse</label>
+                                            <div class="form-group" id="DrugAbuseHxDiv">
+                                                <div class="col-md-4 ">
+                                                    <label class="control-label" name="DrugAbuseStatusId">Status</label>
+                                                    <select id="ddlDrugStatus" name="DrugStatus" class="form-control" ddlist="GetDrugAbuseStatus" disabled></select>
+                                                </div>
+                                                <div class="col-md-4 ">
+                                                    <label class="control-label" name="DrugAbuseDrugId">Drug</label>
+                                                    <select id="ddlDrugType" name="DrugType" class="form-control" multiple="multiple" ddlist="GetDrugAbuseDrug" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Route</label>
+                                                    <select id="ddlDrugRoute" name="DrugRoute" ddlist="GetDrugAbuseRoute" class="form-control" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="DrugAbuseFrequencyDailyId">Frequency(Per day)</label>
+                                                    <select id="ddlDrugFrequencyDaily" name="DrugFrequencyDay" class="form-control" ddlist="GetDrugAbuseFrequencyDaily" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="DrugAbuseUsagePeriodId">Usage Period</label>
+                                                    <select id="ddlDrugUsagePeriod" name="DrugUsagePeriod" class="form-control" ddlist="GetSocialHxUsagePeriod" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="col-xs-12" id="lblDrugCessationLength">
+                                                        <label class="control-label">Length of Cessation</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <input class="form-control" type="text" id="txtDrugCessationLength" name="DrugCessationLength" data-plugin-keyboard-numpad="data-plugin-keyboard-numpad" disabled>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <select id="ddlDrugCessationPeriod" onchange="Clinical_SocialHx.enableCessationValidation();" name="DrugCessationPeriod" ddlist="GetSocialHxCessationPeriod" class="form-control" disabled></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                                        <div class="clearfix"></div>
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkDrugRecentlyQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkDrugWouldQuit', 'drug')" name="DrugRecentlyQuit" disabled>
+                                                            <label class="control-label">Recently Quit</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="pull-left pl-default pr-default pad-a-labelsize">
+                                                        <div class="clearfix"></div>
+                                                        <div class="checkbox-custom">
+                                                            <input type="checkbox" id="chkDrugWouldQuit" onclick="Clinical_SocialHx.unCheck(this, 'chkDrugRecentlyQuit', 'drug')" name="DrugWouldQuit" disabled>
+                                                            <label class="control-label">Would Quit</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-lg-8">
+                                                    <label class="control-label">Comments</label>
+                                                    <textarea id="txtDrugComments" name="DrugComments" maxlength="500" rows="2" class="form-control" spellcheck="true" disabled></textarea>
+                                                </div>
+
+                                                <input type="text" class="hidden" id="hfCreatedbyDrugAbuse" name="CreatedbyDrugAbuse">
+                                                <input type="text" class="hidden" id="hfCreatedonDrugAbuse" name="CreatedonDrugAbuse">
+                                                <input type="text" class="hidden" id="hfModifiedbyDrugAbuse" name="ModifiedbyDrugAbuse">
+                                                <input type="text" class="hidden" id="hfModifiedonDrugAbuse" name="ModifiedonDrugAbuse">
+
+                                            </div>
+
+                                            <label class="text-primary">Sexual Hx</label>
+                                            <div class="form-group" id="SexualHxDiv">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="SexualStatusId">Status</label>
+                                                    <select id="ddlSexualStatus" name="SexualStatus" class="form-control" ddlist="GetSexualHxStatus" disabled></select>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="SexualPreferenceId">Preferences</label>
+                                                    <select id="ddlSexualPreferences" name="SexualPreferences" ddlist="GetSocialHxPreferences" class="form-control" onchange="Clinical_SocialHx.enableDisableMenstrualPeriod(this);" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="SexualComplaintId">Complaints</label>
+                                                    <select id="ddlSexualComplaints" name="SexualComplaints" class="form-control" disabled></select>
+                                                </div>
+
+                                                <!--<div class="col-md-4">
+                                                    <label class="control-label" name="SexualProtectionPeriodId">Protection Usage</label>
+                                                    <select id="ddlSexualbUsingProtection" name="SexualbUsingProtection" class="form-control" onchange="Clinical_SocialHx.enableDisableUsingProtection(this);" ddlist="GetSexualHxProtectionPeriod">
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="SexualProtectionMethodId">Protection Method</label>
+                                                    <select id="ddlSexualProtectionMethod" name="SexualProtectionMethod" ddlist="GetSexualHxProtectionMethod" class="form-control"></select>
+
+
+                                                </div>-->
+
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Using Protection</label>
+                                                    <select id="ddlSexualbUsingProtection" name="SexualbUsingProtection" class="form-control" onchange="Clinical_SocialHx.enableDisableUsingProtection(this);" disabled>
+                                                        <option selected="selected" value="">- Select -</option>
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label"></label>
+                                                    <select id="ddlSexualProtectionMethod" name="SexualProtectionMethod" ddlist="GetSexualHxProtectionMethod" class="form-control" disabled></select>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <label class="control-label"></label>
+                                                    <select id="ddlSexualProtectionPeriod" name="SexualProtectionPeriod" ddlist="GetSexualHxProtectionPeriod" class="form-control" disabled></select>
+                                                </div>
+
+
+
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="SexualbExposedToSTD">Exposed to STD</label>
+                                                    <select id="ddlSexualExposedToSTD" name="SexualExposedToSTD" onchange="Clinical_SocialHx.enableDisableSTDControls(this);" class="form-control" disabled>
+                                                        <option selected="selected" value="">- Select -</option>
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="SexualbExposedToSTD"></label>
+                                                    <select id="ddlSexualSTD" name="SexualSTD" ddlist="GetSexualHxSTD" multiple="multiple" class="form-control" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Last Menstrual Period</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input id="dtpSexualLMP" name="SexualLMP" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-4">
+                                                    <div class="spacer10"></div>
+                                                    <label class="control-label" name="SexualbPainWithIntercourse">Pain with Intercourse</label>
+                                                    <div class="clearfix"></div>
+                                                    <div class="size40 pull-left radio-custom radio-small">
+                                                        <input type="radio" id="RadSexualYesPainWithIntercourse" name="RadSexualPainWithIntercourse" disabled>
+                                                        <label id="lblSexualYesPainWithIntercourse" class="control-label" for="">Yes</label>
+                                                    </div>
+                                                    <div class="size40 pull-left radio-custom radio-small">
+                                                        <input type="radio" id="RadSexualNoPainWithIntercourse" name="RadSexualPainWithIntercourseNo" checked="checked" disabled>
+                                                        <label id="lblSexualNoPainWithIntercourse" class="control-label" for="">No</label>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="spacer10"></div>
+                                                    <label class="control-label" name="SexualbSexuallyAbused">Sexually Abused</label>
+                                                    <div class="clearfix"></div>
+                                                    <div class="size40 pull-left radio-custom radio-small">
+                                                        <input type="radio" id="RadSexualYesAbusedSexually" name="RadSexualYesAbusedSexually" disabled>
+                                                        <label class="control-label" for="">Yes</label>
+                                                    </div>
+                                                    <div class="size40 pull-left radio-custom radio-small">
+                                                        <input type="radio" id="RadSexualNoAbusedSexually" name="RadSexualNoAbusedSexually" checked="checked" disabled>
+                                                        <label class="control-label" for="">No</label>
+                                                    </div>
+                                                    
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="spacer10"></div>
+                                                    <label class="control-label" name="SexualbSexuallyAbused">Pregnant</label>
+                                                    <div class="clearfix"></div>
+                                                    <div class="size40 pull-left radio-custom radio-small">
+                                                        <input type="radio" id="RadSexualYesPregnant" name="RadSexualYesPregnant" disabled>
+                                                        <label class="control-label" for="">Yes</label>
+                                                    </div>
+                                                    <div class="size40 pull-left radio-custom radio-small">
+                                                        <input type="radio" id="RadSexualNoPregnant" name="RadSexualNoPregnant"  disabled>
+                                                        <label class="control-label" for="">No</label>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="col-md-4">
+
+                                                    <label class="control-label">Duration</label>
+                                                    <input id="txtPregnancyDurations" name="PregnancyDuration" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled />
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    
+                                                        <label class="control-label">Comments</label>
+                                                        <input id="txtSocialHxComments" name="SocialHxComments" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled />
+                                                    
+                                                </div>
+                                                <input type="text" class="hidden" id="hfCreatedbySexual" name="CreatedbySexual">
+                                                <input type="text" class="hidden" id="hfCreatedonSexual" name="CreatedonSexual">
+                                                <input type="text" class="hidden" id="hfModifiedbySexual" name="ModifiedbySexual">
+                                                <input type="text" class="hidden" id="hfModifiedonSexual" name="ModifiedonSexual">
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-body" id="divSociallHxMisc">
+                                            <label class="text-primary">Miscellaneous</label><br>
+                                            <label>-Occupation</label>
+                                            <div class="form-group" id="OccupationHxDiv">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label" name="OccupationStatusId">Status</label>
+                                                        <select id="ddlOccupationStatus" name="MiscChildStatus" class="form-control" ddlist="getOccupationStatus" disabled></select>
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="spacer20"></div>
+                                                        <!--<label class="control-label" name="Present">Present</label>-->
+                                                        <!--<div class="clearfix"></div>-->
+                                                        <div class="size40 pull-left radio-custom radio-small">
+                                                            <input type="radio" id="RadPresentYes" name="OccupationPresent" disabled>
+                                                            <label id="lblPresentYes" class="control-label" for="">Present</label>
+                                                        </div>
+                                                        <div class="size40 pull-left radio-custom radio-small ml-xlg">
+                                                            <input type="radio" id="RadPresentNo" name="OccupationPast" disabled>
+                                                            <label id="lblPresentNo" class="control-label" for="">Past</label>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label" name="OccupationStatusId">Detail</label>
+                                                        <input type="text" id="txtOccupationDetail" class="form-control" name="OccupationDetail" disabled />
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label class="control-label">From</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" name="OccupationHxStartDate" id="dtOccupationHxStartDate" data-plugin-datepicker="" maxlength="10" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" id="divOccupationEndDate">
+                                                        <label class="control-label">To</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                            <input type="text" class="form-control" name="OccupationHxEndDate" id="dtOccupationHxEndDate" data-plugin-datepicker="" maxlength="10" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="control-label" name="OccupationComments">Comments</label>
+                                                    <textarea type="text" id="TxtOccupationComments" name="OccupationComments" class="form-control" disabled></textarea>
+                                                </div>
+                                                <input type="text" class="hidden" id="hfCreatedbyOccupation" name="CreatedbyOccupation">
+                                                <input type="text" class="hidden" id="hfCreatedonOccupation" name="CreatedonOccupation">
+                                                <input type="text" class="hidden" id="hfModifiedbyOccupation" name="ModifiedbyOccupation">
+                                                <input type="text" class="hidden" id="hfModifiedonOccupation" name="ModifiedonOccupation">
+                                            </div>
+                                            <label>-Sleep </label>
+                                            <div class="form-group" id="SleepHxDiv">
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="SleepStatusId">Status</label>
+                                                    <select id="ddlSleepStatus" name="MiscChildStatus" class="form-control" ddlist="getSleepHxStatus" disabled></select>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="SleepSleepHours">Sleep Hours</label>
+                                                    <input type="text" id="TxtSleepHours" name="SleepHours" class="form-control" disabled>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="SleepComments">Comments</label>
+                                                    <input type="text" id="TxtSleepComments" name="SleepComments" class="form-control" disabled>
+                                                </div>
+                                                <input type="text" class="hidden" id="hfCreatedbySleep" name="CreatedbySleep">
+                                                <input type="text" class="hidden" id="hfCreatedonSleep" name="CreatedonSleep">
+                                                <input type="text" class="hidden" id="hfModifiedbySleep" name="ModifiedbySleep">
+                                                <input type="text" class="hidden" id="hfModifiedonSleep" name="ModifiedonSleep">
+                                            </div>
+                                            <label>-Exercise </label>
+                                            <div class="form-group" id="ExerciseHxDiv">
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="ExerciseStatusId">Status</label>
+                                                    <select id="ddlExerciseStatus" name="MiscChildStatus" class="form-control" ddlist="getExercisesHxStatus" disabled></select>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="ExerciseTypeId">Type</label>
+                                                    <select id="ddlExerciseType" name="ExercisesType" class="form-control" ddlist="getExercisesHxType" disabled></select>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="ExerciseDietId">Diet</label>
+                                                    <select id="ddlExerciseDiet" name="ExercisesDiet" class="form-control" ddlist="getExercisesHxDiet" disabled></select>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="ExerciseComments">Comments</label>
+                                                    <input type="text" id="TxtExerciseComments" name="ExercisesComments" class="form-control" disabled>
+                                                </div>
+                                                <input type="text" class="hidden" id="hfCreatedbyExercise" name="CreatedbyExercise">
+                                                <input type="text" class="hidden" id="hfCreatedonExercise" name="CreatedonExercise">
+                                                <input type="text" class="hidden" id="hfModifiedbyExercise" name="ModifiedbyExercise">
+                                                <input type="text" class="hidden" id="hfModifiedonExercise" name="ModifiedonExercise">
+
+                                            </div>
+
+                                            <label>-Housing </label>
+                                            <div class="form-group" id="HousingHxDiv">
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="HousingStatusId">Status</label>
+                                                    <select id="ddlHousingStatus" name="MiscChildStatus" class="form-control" ddlist="getHousingHxStatus" disabled></select>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="HousingPresent">Present</label>
+                                                    <input type="text" id="TxtHousingPresent" name="HousingPresent" class="form-control" disabled>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="HousingPast">Past</label>
+                                                    <input type="text" id="TxtHousingPast" name="HousingPast" class="form-control" disabled>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="HousingComments">Comments</label>
+                                                    <input type="text" id="TxtHousingComments" name="HousingComments" class="form-control" disabled>
+                                                </div>
+                                                <input type="text" class="hidden" id="hfCreatedbyHousing" name="CreatedByHousing">
+                                                <input type="text" class="hidden" id="hfCreatedonHousing" name="CreatedonHousing">
+                                                <input type="text" class="hidden" id="hfModifiedbyHousing" name="ModifiedbyHousing">
+                                                <input type="text" class="hidden" id="hfModifiedonHousing" name="ModifiedOnHousing">
+                                            </div>
+                                            <label>-Caffine Intake </label>
+                                            <div class="form-group" id="CaffeineIntakeHxDiv">
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="CaffeineStatusId">Status</label>
+                                                    <select id="ddlCaffineStatus" name="MiscChildStatus" class="form-control" ddlist="getCaffeineIntakeHxStatus" disabled></select>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="CaffeineFrequencyId">Frequency</label>
+                                                    <select id="ddlCaffineFrequency" name="CaffeineIntakFrequency" class="form-control" ddlist="getCaffeineIntakHxFrequency" disabled></select>
+                                                </div>
+                                                <div class="col-md-4 col-lg-3">
+                                                    <label class="control-label" name="CaffeineIsHarmful">Is caffeine harmful for patient?</label>
+                                                    <div class="clearfix"></div>
+                                                    <div class="size60 pull-left radio-custom radio-small">
+                                                        <input type="radio" id="RadIsHarmfulYes" name="RadCaffieneharmful" disabled>
+                                                        <label class="control-label" for="">Yes</label>
+                                                    </div>
+                                                    <div class="size60 pull-left radio-custom radio-small">
+                                                        <input type="radio" id="RadIsHarmfulNo" name="RadCaffieneharmfulNo" checked="checked" disabled>
+                                                        <label class="control-label" for="">No</label>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="col-md-3 ">
+                                                    <label class="control-label" name="CaffeineComments">Comments</label>
+                                                    <input type="text" id="TxtCaffineComments" name="CaffeineComments" class="form-control" disabled>
+                                                </div>
+                                                <input type="text" class="hidden" id="hfCreatedbyCaffeine" name="CreatedByCaffeine">
+                                                <input type="text" class="hidden" id="hfCreatedonCaffeine" name="CreatedonCaffeine">
+                                                <input type="text" class="hidden" id="hfModifiedbyCaffeine" name="ModifiedbyCaffeine">
+                                                <input type="text" class="hidden" id="hfModifiedonCaffeine" name="ModifiedOnCaffeine">
+                                            </div>
+                                            <label>-Travel </label>
+                                            <div class="form-group" id="TravelHxDiv">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" name="CaffeineStatusId">Status</label>
+                                                    <select id="ddlTravelStatus" name="TravelChildStatus" class="form-control" ddlist="getTravelHxStatus" disabled></select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">From Date</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input type="text" class="form-control" name="TravelHxFromDate" id="dtTravelHxFromDate" data-plugin-datepicker="" maxlength="10" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">To Date</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input class="form-control" type="text" name="TravelHxToDate" id="dtTravelHxToDate" data-plugin-datepicker="" maxlength="10" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Location</label>
+                                                    <input type="text" class="form-control" name="TravelHxLocation" maxlength="200" id="txtTravelHxLocation" disabled />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <label class="control-label">Comments</label>
+                                                    <textarea id="txtTravelHxComments" name="TravelHxComments" maxlength="500" rows="2" class="form-control" spellcheck="true" disabled></textarea>
+                                                </div>
+                                                <input type="text" class="hidden" id="hfCreatedbyTravel" name="CreatedByTravel">
+                                                <input type="text" class="hidden" id="hfCreatedonTravel" name="CreatedonTravel">
+                                                <input type="text" class="hidden" id="hfModifiedbyTravel" name="ModifiedbyTravel">
+                                                <input type="text" class="hidden" id="hfModifiedonTravel" name="ModifiedOnTravel">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-right pad-a-labelsize-btn">
+                                        <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                        <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                        <button id="btnSocialHxApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.InsertSocialHxRecord()" type="submit">Approve</button>
+                                        <button id="btnSocialHxDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('SocialHx')" type="submit">Discard</button>
+                                    </div>
+                                </div>
+                                <div class="panel-body" id="divMedicalHx" name="MobileApp_Module">
+                                    <div id="divMedicalHxDiseaseList" class="col-xs-12"></div>
+                                    <div class="col-xs-12 p-none mt-default" id="divMedicalHxDetail" name="MobileApp_Module">
+
+                                        <div class="form-group ">
+                                            <div class="col-md-4">
+                                                <label class="control-label" refname="StatusId">Disease</label>
+                                                
+                                               <input type="text" id="txtMedicalDisease" name="FreeTextICD" class="form-control" disabled />
+                                              </div>
+                                           
+                                            <div class="col-md-4">
+                                                <label class="control-label">From </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input id="dtpMedicalFrom" name="MedicalDiseaseFromDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label">To </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input id="dtpMedicalTo" name="MedicalDiseaseToDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label" refname="StatusId">OnSet</label>
+
+                                                <input type="text" id="txtMedicalOnSet" name="MedicalDiseaseOnset" class="form-control" disabled />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="col-md-6">
+                                                    <label class="control-label" refname="Duration">Duration</label>
+
+                                                    <input type="text" id="txtMedicalDuration" name="MedicalDiseaseDurationLength" class="form-control" disabled />
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="control-label" refname="Duration"></label>
+                                                    <select id="ddlMedicalDiseaseDurationPeriod" class="form-control" ddlist="GetMedicalHxDurationPeriod" name="MedicalDiseaseDurationPeriod" disabled></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                    <label class="control-label" refname="Procedure">Procedure</label>
+                                                    <input type="text" id="txtMedicalProcedure" name="CPTDescription" class="form-control" disabled />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label" refname="TestResult">Test Result</label>
+                                                <select id="ddlMedicalDiseaseTestResult" name="MedicalDiseaseTestResult" ddlist="GetMedicalHxTestResults" class="form-control" disabled></select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label" refname="TestResult">Status</label>
+                                                <select id="ddlMedicalDiseaseStatus" name="MedicalDiseaseStatus" ddlist="GetMedicalHxStatus" class="form-control" disabled></select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label" refname="Location">Location</label>
+                                                <input type="text" id="txtMedicalLocation" name="MedicalDiseaseLocation" class="form-control" disabled />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label" refname="TestResult">Severity</label>
+                                                <select id="ddlMedicalDiseaseSeverity" name="MedicalDiseaseSeverity" ddlist="GetMedicalHxSeverity" class="form-control" disabled></select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label" refname="Pattern">Pattern</label>
+                                                <select id="ddlMedicalDiseasePattern" name="MedicalDiseasePattern" ddlist="GetMedicalHxPattern" class="form-control" disabled></select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label" refname="Aggravated">Aggravated By</label>
+                                                <select id="ddlMedicalDiseaseAgggravatedBy" name="MedicalDiseaseAgggravatedBy" ddlist="GetMedicalHxAggravatedBy" class="form-control" disabled></select>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="clearfix"></div>
+                                                <label class="control-label">Comments</label>
+                                                <textarea id="txtMedicalDiseaseComments" name="MedicalDiseaseComments" maxlength="500" rows="3" class="form-control" spellcheck="true" disabled></textarea>
+                                            </div>
+                                           <input type="hidden" id="hfCreatedBy" name="CreatedBy" />
+                                            <input type="hidden" id="hfCreatedBy" name="CreatedOn" />
+                                            <input type="hidden" id="hfCreatedBy" name="ModifiedBy" />
+                                            <input type="hidden" id="hfCreatedBy" name="ModifiedOn" />
+                                            
+                                        </div>
+                                        <div class="pull-right pad-a-labelsize-btn">
+                                            <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                            <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                            <button id="btnMedicalHxApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.InsertMedicalHxDiseaase()" type="submit">Approve</button>
+                                            <button id="btnMedicalHxDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('MedicalHx_Disease')" type="submit">Discard</button>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="panel-body" id="divFamilyHx" name="MobileApp_Module">
+
+                                    <div id="divFamilyHxMembersList" class="col-xs-12"></div>
+                                    <br>
+                                    <div id="divFamilyHxDiseaseList" class="col-xs-12 pipe-btn-group"></div>
+
+                                    <div class="panel-body" id="divFamilyHxDetail" name="MobileApp_Module">
+                                        <!--<div id="divFamilyMemberList" class="col-xs-12"></div>
+                                        <div id="divFmailMemberDiseaseList" class="col-xs-12"></div>-->
+                                        <div class="form-group ">
+                                            <div class="col-sm-6" style="padding-right:0 !important">
+                                                <label class="control-label">Diagnosis</label>
+                                                <div style="position:relative;">
+                                                    <input type="text" id="txtDiagnosis" class="form-control" name="FreeTextICD" onblur="" data-plugin-keyboard-numpad disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Health Status</label>
+                                                <select id="ddlHealthStatus" name="HealthStatus" ddlist="GetFamilyHxHealthStatus" class="form-control" disabled></select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Year of Birth</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input id="dtpYearofBirth" name="YearofBirth" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Death occurred due to specified Problem?</label>
+                                                <div class="clearfix"></div>
+                                                <div class="pull-left pr-default">
+                                                    <div class="checkbox-custom">
+                                                        <input type="checkbox" id="RadYesRelativeDied" name="RadRelativeDied"><label class="control-label" for="RadYesRelativeDied" disabled>Yes</label>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-left pl-default pr-default">
+                                                    <div class="checkbox-custom">
+                                                        <input type="checkbox" id="RadNoRelativeDied" name="RadRelativeDied"><label class="control-label" for="RadNoRelativeDied" disabled>No</label>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="col-sm-6" style="padding-left:0 !important">
+                                                    <label class="control-label">Age at Death</label>
+                                                    <div style="position:relative;">
+                                                        <input type="text" id="txtAgeAtDeath" class="form-control" name="AgeAtDeath" onblur="" data-plugin-keyboard-numpad disabled>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-sm-6" style="padding-right:0 !important">
+                                                    <label class="control-label">Age at Diagnosis (Approx)</label>
+                                                    <div style="position:relative;">
+                                                        <input type="text" id="txtAgeAtDiagnosis" class="form-control" name="AgeAtDiagnosis" onblur="" data-plugin-keyboard-numpad disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="clearfix"></div>
+                                                <label class="control-label">Comments</label>
+                                                <textarea id="txtFamilyMemberComments" name="FamilyMemberComments" maxlength="500" rows="4" class="form-control" spellcheck="true" disabled></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="pull-right pad-a-labelsize-btn">
+                                            <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                            <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                            <button id="btnFamilyHxApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.InsertFamilyHxDiseaase('')" type="submit">Approve</button>
+                                            <button id="btnFamilyHxDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('FamilyHx_Mobile')" type="submit">Discard</button>
+                                        </div>
+
+                                    </div>
+
+                                    <input type="hidden" name="hfDiseasebtnID" id="hfbtnDiseaseID" />
+
+                                </div>
+                                <div class="panel-body" id="divSurgicalHx" name="MobileApp_Module">
+                                    <div id="divSurgicalHxDiseaseList" class="col-xs-12"></div>
+                                    <div class="panel-body" id="divSurgicalHxDetail" name="MobileApp_Module">
+
+                                        <div class="form-group ">
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Procedure</label>
+                                                <input type="text" id="txtProcedure" class="form-control" name="FreeTextProcedure" disabled>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Status</label>
+                                                <select id="ddlSurgicalStatus" name="SurgicalStatus" ddlist="GetSurgicalHxStatus" class="form-control" disabled></select>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Date of Surgery</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input id="dtpSurgicalSurgeryDate" name="SurgicalSurgeryDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Age at Surgery</label>
+                                                <input type="text" id="txtAgeAtSurgery" class="form-control" name="AgeAtSurgery" disabled>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Location</label>
+
+                                                <input type="text" id="txtSurgicalLocation" class="form-control" name="SurgicalLocation" disabled>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Reason for Surgery</label>
+                                                <input type="text" id="txtSurgicalReason" class="form-control" name="SurgicalReason" disabled>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label id="lblSurgicalOrderingProviderProvider" class="control-label">Ordering Provider</label>
+
+                                                <div class="input-group">
+
+                                                    <input type="text" class="form-control" id="txtSurgicalOrderingProvider" providerid="" name="SurgicalOrderingProvider" disabled>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label id="lblSurgicalPerformingProviderProvider" class="control-label">Performing Provider</label>
+
+                                                <div class="input-group">
+
+                                                    <input type="text" class="forhm-control" id="txtSurgicalPerformingProvider" providerid="" name="SurgicalPerformingProvider" disabled>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <label class="control-label">Comments</label>
+                                                <textarea id="txtSurgicalComments" name="SurgicalDiseaseComments" maxlength="500" rows="4" class="form-control" spellcheck="true" disabled></textarea>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="pull-right pad-a-labelsize-btn">
+                                            <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                            <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                            <button id="btnSurgicalHxApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.InsertSurgicalHxDiseaase()" type="submit">Approve</button>
+                                            <button id="btnSurgicalHxDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('SurgicalHx_Disease')" type="submit">Discard</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="panel-body" id="divBirthHx" name="MobileApp_Module">
+
+                                    <div id="divBirthHxList" class="col-xs-12">
+                                        <button type="button" class="btn btn-default btn-sm tab_space" name="BirthHx" title="Demogrpahics" id="btnBirthHx_General" onclick="MobileAppRequest.ShowPanel('BirthHx_General',this);">General</button>
+                                        <button type="button" class="btn btn-default btn-sm tab_space" name="BirthHx" title="Emergency Contact" id="btnBirthHx_MaternalDelivery" onclick="MobileAppRequest.ShowPanel('BirthHx_MaternalDelivery',this);">Maternal & Delivery</button>
+                                        <button type="button" class="btn btn-default btn-sm tab_space" name="BirthHx" title="Preferences" id="btnBirthHx_Newborn" onclick="MobileAppRequest.ShowPanel('BirthHx_NewBorn',this);">Newborn Information</button>
+
+                                    </div>
+                                    <div class="panel-body" id="divBirthHxGeneral" name="MobileApp_Module">
+
+                                        <div class="form-group">
+
+                                            <input type="hidden" name="GeneralId" id="hfBirthHxGeneralId" value="-1" />
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="HospitalName">Name of Hospital</label>
+                                                <input class="form-control" id="HospitalName" name="HospitalName" type="text" maxlength="100" disabled />
+                                            </div>
+
+
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="PatientDOB">Patient’s Date of Birth</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                    <input type="text" class="form-control" id="PatientDOB" name="PatientDOB" data-plugin-datepicker="" maxlength="10" disabled>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="LengthStayatHospital">Length of Stay at Hospital (in days)</label>
+                                                <div style="position:relative;">
+                                                    <input class="form-control " id="LengthStayatHospital" name="LengthStayatHospital" type="text" maxlength="2" data-plugin-keyboard-numpad-nodecimal disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="DateAdmitted">Date Admitted</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                    <input type="text" class="form-control" id="DateAdmitted" name="DateAdmitted" data-plugin-datepicker="" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="ObstetricianName">Name of Obstetrician</label>
+                                                <input class="form-control" id="ObstetricianName" name="ObstetricianName" type="text" maxlength="100" disabled />
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="PediatricianName">Name of Pediatrician</label>
+                                                <input class="form-control" id="PediatricianName" name="PediatricianName" type="text" maxlength="100" disabled />
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label id="lblProvider" class="control-label" for="ResponsiblePhysicianId">Responsible Physician</label>
+                                                <a id="lnkProviderEdit" style="display:none;" href="#" title="Edit Provider">Responsible Physician</a>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="ResponsiblePhysicianId_text" name="ResponsiblePhysicianId_text" type="text" name="Provider" onblur="utility.ValidateAutoComplete(this, 'pnlClinicalBirthHx #hfProvider', false);" maxlength="35" disabled />
+
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-12 col-lg-8">
+                                                <label class="control-label" for="Comments">Comments</label>
+                                                <textarea id="Comments" name="GeneralComments" rows="3" class="form-control" maxlength="500" spellcheck="true" disabled></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="pull-right pad-a-labelsize-btn">
+                                            <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                            <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                            <button id="btngeneralHxApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.SaveBirthHx('BirthHx_General')" type="submit">Approve</button>
+                                            <button id="btngeneralHxDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('BirthHx_General')" type="submit">Discard</button>
+                                        </div>
+
+                                    </div>
+                                    <div class="panel-body" id="divBirthHxMaternalDelivery" name="MobileApp_Module">
+
+                                        <div class="form-group">
+
+                                            <input type="hidden" name="MaternalDeliveryId" id="hfBirthHxMaternalDeliveryId" value="-1" />
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="Gestation">Gestation (in weeks)</label>
+                                                <div style="position:relative;">
+                                                    <input class="form-control " id="Gestation" name="Gestation" type="text" maxlength="2" data-plugin-keyboard-numpad-nodecimal disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="NumberOfFetuses">Number of Fetuses</label>
+                                                <div style="position:relative;">
+                                                    <input class="form-control" id="NumberOfFetuses" name="NumberOfFetuses" type="text" maxlength="2" data-plugin-keyboard-numpad-nodecimal disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="NumberOfLivingFetuses">Number of Living Fetuses</label>
+                                                <div style="position:relative;">
+                                                    <input class="form-control" id="NumberOfLivingFetuses" name="NumberOfLivingFetuses" type="text" maxlength="2" data-plugin-keyboard-numpad-nodecimal disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="LaborLength">Labor Length (in hours)</label>
+                                                <div style="position:relative;">
+                                                    <input class="form-control " id="LaborLength" name="LaborLength" type="text" maxlength="2" data-plugin-keyboard-numpad-nodecimal disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4" id="divDeliveryMethodId">
+                                                <label class="control-label" for="DeliveryMethodId">Delivery Method</label>
+                                                <select class="form-control" id="DeliveryMethodId" name="DeliveryMethodId" ddlist="getBirthHxDeliveryMethod" disabled>
+                                                    <option selected="selected" value="">-Select-</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-4" id="divDeliveryPresentationId">
+                                                <label class="control-label" for="DeliveryPresentationId">Delivery Presentation</label>
+                                                <select class="form-control" id="DeliveryPresentationId" name="DeliveryPresentationId" ddlist="getBirthHxDeliveryPresentation" disabled>
+                                                    <option selected="selected" value="">-Select-</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4" id="divMaternalHistoryId">
+                                                <label class="control-label" for="MaternalHistoryId">Maternal History</label>
+                                                <select class="form-control" id="MaternalHistoryId" name="MaternalHistoryId" ddlist="getBirthHxMaternalHistory" disabled>
+                                                    <option selected="selected" value="">-Select-</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-12 col-md-8">
+                                                <div class="clearfix"></div>
+                                                <label class="control-label" for="Comments">Comments</label>
+                                                <textarea id="MaternalDeliveryComments" name="MaternalDeliveryComments" rows="3" class="form-control" maxlength="500" spellcheck="true" disabled></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="pull-right pad-a-labelsize-btn">
+                                            <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                            <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                            <button id="btnmaternalHxApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.SaveBirthHx('BirthHx_MaternalDelivery')" type="submit">Approve</button>
+                                            <button id="btnmaternalHxDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('BirthHx_MaternalDelivery')" type="submit">Discard</button>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="panel-body" id="divBirthHxBirthHxNewBornInformation" name="MobileApp_Module">
+
+                                        <div class="form-group ">
+
+                                            <input type="hidden" name="NewbornId" id="hfBirthHxNewbornId" value="-1" />
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="HeadCircumference">Head Circumference</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="HeadCircumference" name="HeadCircumference" maxlength="6" type="text" data-plugin-keyboard-numpad disabled />
+                                                    <div class="input-group-addon tiny-font">
+                                                        in
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="ChestCircumference">Chest Circumference</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="ChestCircumference" name="ChestCircumference" maxlength="6" type="text" data-plugin-keyboard-numpad disabled />
+                                                    <div class="input-group-addon tiny-font">
+                                                        in
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="WeightAtBirth">Weight at Birth</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="WeightAtBirth" name="WeightAtBirth" maxlength="6" type="text" data-plugin-keyboard-numpad disabled />
+                                                    <div class="input-group-addon tiny-font">
+                                                        lbs
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="LengthAtBirth">Length at Birth</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="LengthAtBirth" name="LengthAtBirth" maxlength="6" type="text" data-plugin-keyboard-numpad disabled />
+                                                    <div class="input-group-addon tiny-font">
+                                                        in
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4" id="divVisitReason">
+                                                <label class="control-label" for="ApgarAtBirth">Apgar at Birth</label>
+                                                <select class="form-control" id="ApgarAtBirth" name="ApgarAtBirth" disabled>
+                                                    <option selected="selected" value="">-Select-</option>
+                                                    <option value="00">00</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4" id="divVisitReason">
+                                                <label class="control-label" for="ApgarAt5Minutes">Apgar at 5 Minutes</label>
+                                                <select class="form-control" id="ApgarAt5Minutes" name="ApgarAt5Minutes" disabled>
+                                                    <option selected="selected" value="">-Select-</option>
+                                                    <option value="00">00</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <label class="control-label" for="WeightReleased">Weight Released</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="WeightReleased" name="WeightReleased" maxlength="6" type="text" data-plugin-keyboard-numpad disabled />
+                                                    <div class="input-group-addon tiny-font">
+                                                        lbs
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4" id="divPatientBloodTypeId">
+                                                <label class="control-label" for="PatientBloodTypeId">Patient’s Blood Type</label>
+                                                <select class="form-control" id="PatientBloodTypeId" name="PatientBloodTypeId" ddlist="getBirthHxNewbornPatientBloodType" disabled>
+                                                    <option selected="selected" value="">-Select-</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4" id="divProblemsAtBirthId">
+                                                <label class="control-label" for="ProblemsAtBirthId">Problems at Birth</label>
+                                                <select class="form-control" id="ProblemsAtBirthId" name="ProblemsAtBirthId" ddlist="getBirthHxNewbornProblemsAtBirth" disabled>
+                                                    <option selected="selected" value="">-Select-</option>
+
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-4 pt-xxs">
+                                                <div class="visible-xs visible-sm"><div class="spacer10"></div></div>
+                                                <label class="control-label pull-left" for="bFetalDistress">Fetal Distress</label>
+                                                <div class="pull-left pl-default">
+                                                    <div class="checkbox-custom">
+                                                        <input type="checkbox" id="bFetalDistressYes" name="bFetalDistressYes" disabled>
+                                                        <label class="control-label" for="">Yes</label>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-left pl-default">
+                                                    <div class="checkbox-custom">
+                                                        <input type="checkbox" id="bFetalDistressNo" name="bFetalDistressNo" disabled>
+                                                        <label class="control-label" for="">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-12 col-md-8">
+                                                <label class="control-label" for="Comments">Comments</label>
+                                                <textarea id="Comments" name="NewbornComments" rows="3" class="form-control" maxlength="500" spellcheck="true" disabled></textarea>
+                                            </div>
+
+
+
+
+                                        </div>
+
+
+                                        <div class="pull-right pad-a-labelsize-btn">
+                                            <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                            <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                            <button id="btnNewBornHxApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.SaveBirthHx('BirthHx_Newborn')" type="submit">Approve</button>
+                                            <button id="btnNewBornHxDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('BirthHx_Newborn')" type="submit">Discard</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="panel-body" id="divHospitalizationHx" name="MobileApp_Module">
+                                    <div id="divHospitalizationDiseaseList" class="col-xs-12"></div>
+                                    <div class="panel-body" id="divHospitalizationHxDetail" name="MobileApp_Module">
+
+                                        <div class="form-group">
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Disease</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtHospitalizationCustomICD" type="text" name="FreeTextICD" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Procedure</label>
+                                                <div class="input-group">
+                                                    <input class="form-control" id="txtHospitalizationCPTCode" type="text" name="CPTCode" disabled />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Status</label>
+                                                <select id="ddlHospitalizationStatus" name="HospitalizationDiseaseStatus" ddlist="GetHospitalizationHxStatus" class="form-control" disabled></select>
+                                            </div>
+
+                                            <div class="col-sm-6 col-lg-3 p-none">
+                                                <div class="col-xs-12">
+                                                    <label class="control-label" id="lblDuration">Length of Stay</label>
+                                                </div>
+                                                <div class="col-xs-5">
+                                                    <input class="form-control" type="text" id="txtHospitalizationStayLength" name="HospitalizationDiseaseStayDuration" maxlength="2" disabled>
+                                                </div>
+                                                <div class="col-xs-7">
+                                                    <select id="ddlHospitalizationDiseaseStayId" name="HospitalizationDiseaseStayId" class="form-control" ddlist="GetHospitalizationHxStay" disabled></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Admission Date</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input id="dtpHospitalizationAdmissionDate" name="HospitalizationDiseaseAdmissionDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Discharge Date</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input id="dtpHospitalizationDischargeDate" name="HospitalizationDiseaseDischargeDate" class="form-control" type="text" data-plugin-datepicker="" maxlength="10" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-3">
+                                                <label class="control-label">Name of Hospital</label>
+                                                <input class="form-control" id="txtHospitalizationHospitalName" type="text" name="HospitalizationDiseaseHospital" disabled />
+
+                                            </div>
+                                            <div class="col-md-9">
+                                                <label class="control-label" for="HospitalizationDiseaseComments">Comments</label>
+                                                <textarea id="txtHospitalizationComments" name="HospitalizationDiseaseComments" maxlength="500" rows="4" class="form-control" spellcheck="true" disabled></textarea>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="pull-right pad-a-labelsize-btn">
+
+                                            <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                            <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+
+                                            <button id="btnHospitalizationHxApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.InsertHospitalizationHxDiseaase()" type="submit">Approve</button>
+                                            <button id="btnHospitalizationHxDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('HospitalizationHx_Disease')" type="submit">Discard</button>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </section>
+                            <section class="panel panel-featured" id="sectionAppointment" name="MobileApp_Module">
+                                <div id="PatientAppointmentList" class="col-xs-12  pipe-btn-group"></div>
+
+                                <div class="panel-body" id="divAppointment" name="MobileApp_Module">
+
+
+
+                                    <div class="form-group">
+
+                                        <div class="col-sm-4 col-md-3">
+                                            <label id="lblAppointmentDate" class="control-label">Appointment Date<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input class="form-control " type="text" id="AppointmentDate" name="AppointmentDate" data-plugin-datepicker="" maxlength="10" disabled="disabled">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-4 col-md-3">
+                                            <label id="lblTimeFrom" class="control-label">Appointment Time <span class="required">*</span></label>
+
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtTimeFrom" name="TimeFrom" type="text" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 col-md-3">
+                                            <label id="lblTimeTo" class="control-label">CheckUp Time<span class="required">*</span></label>
+
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtTimeTo" name="TimeTo" type="text" disabled>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-sm-4 col-md-3">
+                                            <label id="lblMRNumber" class="control-label">Paitent Ahead of you<span class="required">*</span></label>
+
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtMRNumber" name="MRNumber" type="text" disabled>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="pull-right pad-a-labelsize-btn">
+                                        <!--<button id="btnApproveAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.ApproveAll()" type="submit">Approve All</button>
+                                        <button id="btnDiscardAll" class="btn btn-primary btn-sm hidden" onclick="MobileAppRequest.DiscardAll()" type="submit">Discard All</button>-->
+                                        <button id="btnAppointmentApprove" class="btn btn-primary btn-sm" onclick="MobileAppRequest.InsertPatientAppointment()" type="submit">Approve</button>
+                                        <button id="btnPatAppointmentDiscard" class="btn btn-primary btn-sm" onclick="MobileAppRequest.DiscardRecord('PatientAppointment')" type="submit">Discard</button>
+                                    </div>
+                                </div>
+
+                            </section>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,80 @@
+﻿<div id="pnlFamily" style="display:none;">
+    <div id="actionPanFamily" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Patient_Family.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Family</h4>
+            </div>
+            <div id="modalbody">
+                <section class="panel panel-featured">
+                    <header class="panel-heading">
+                        <h2 class="panel-title">Search Family </h2>
+                    </header>
+                    <div class="mainScrollPan panel-body" id="mainScrollPan">
+                        <div class="form-group" id="pnl_Search">
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">Last Name</label>
+                                <input type="text" class="form-control" id="txtLastName" customName="Last Name" name="LastName" maxlength="50">
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">First Name</label>
+                                <input type="text" customName="First Name" class="form-control" id="txtFirstName" name="FirstName" maxlength="35">
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">Account Number</label>
+                                <input type="text" customName="Account Number" class="form-control" id="txtAccountNo" name="AccountNumber" maxlength="35">
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <label class="control-label">Phone</label>
+                                <input type="text" customName="Phone" class="form-control" id="txtPhone" name="Phone" placeholder="(999) 999-9999" data-mask="(999) 999-9999" onblur="utility.validateMasking(this);">
+                            </div>
+                            <div class="col-sm-3 col-sm-2 mt-md pull-right">
+                                <button type="button" class="btn btn-primary btn-sm" id="btnSearchFamily" onclick="Patient_Family.LoadFamilies();">Search</button>
+                                <button type="button" class="btn btn-success btn-sm" id="btnAppointmentStatusAdd" onclick="Patient_Family.FamilyDetailAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="spacer10"></div><div class="clearfix"></div>
+                <div id="pnlFamily_Result" style="display: none;">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <input type="hidden" id="Family_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvFamily">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">FamilyId</th>
+                                        <th class="size100">Action</th>
+                                        <th>Name</th>
+                                        <th>Relation</th>
+                                        <th>Address</th>
+                                        <th class="size100">DOB</th>
+                                        <th class="size100">Phone</th>
+                                        <th>Account Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="dgvPatientFamily_Paging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <input type="hidden" name="hfPatientRepresentative" id="hfPatientRepresentativeId" value="" />
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#pnlFamily #dtpDOB,#dtpDOD').datepicker({
+        //    todayHighlight: true
+        //}).on('changeDate', function (e) {
+        //    $(this).datepicker('hide');
+        //});
+        utility.CreateDatePicker('pnlFamily #dtpDOB,#pnlFamily #dtpDOD', function () {
+            //  on-change callback method
+        }, true);
+    });
+</script>

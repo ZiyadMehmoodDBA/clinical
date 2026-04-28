@@ -1,0 +1,152 @@
+﻿<div id="pnlPatientReferral" style="display:none">
+    <div id="actionPanPatientReferral" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader">
+                <button type="button" class="close" onclick="Patient_Referral.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Patient Referrals (Incoming/Outgoing)</h4>
+            </div>
+            <div id="modalbody">
+                <form method="post" id="frmPatientReferral" onsubmit="return false">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <label class="control-label">Referral Type<span class="required">*</span></label>
+                            <select class="form-control" name="ReferralType" id="ddlReferralType" onchange="Patient_Referral.ChangeValues(this)">
+                                <option value="">-Select-</option>
+                                <option selected="selected" value="Incoming">Incoming</option>
+                                <option value="Outgoing">Outgoing</option>
+                            </select>
+                        </div>
+                        <div id="divReferringFromTo">
+                            <div class="col-sm-3">
+                                <label class="control-label">Referring From<span class="required">*</span></label>
+
+                                <div class="input-group">
+                                    <input class="form-control" id="ddlReferringFrom" name="ReferringFrom" customname="Ref Provider" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Referral.OpenRefProvider('ddlReferringFrom', 'hfIncomingRefProviderFrom',false);"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+
+                                <!--<select class="form-control" id="ddlReferringFrom" name="ReferringFrom" ddlist="GetRefProviders"></select>-->
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Referring To<!--<span class="required">*</span>--></label>
+                                <div class="input-group">
+                                    <input class="form-control" id="ddlReferringTo" name="ReferringTo" customname="Ref Provider" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Referral.OpenRefProvider('ddlReferringTo', 'hfIncomingfRefProviderTo',true);"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+
+                                <!--<select class="form-control" id="ddlReferringTo" name="ReferringTo" ddlist="GetProvider"></select>-->
+                            </div>
+                        </div>
+                        <div id="divOutgoingReferringFromTo" style="display:none">
+                            <div class="col-sm-3">
+                                <label class="control-label">Referring From<span class="required">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control" id="ddlOutgoingReferringFrom" name="OutgoingReferringFrom" customname="Ref Provider" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Referral.OpenRefProvider('ddlOutgoingReferringFrom', 'hfOutgoingRefProviderFrom',false);"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+
+                                <!--<select class="form-control" id="ddlOutgoingReferringFrom" name="OutgoingReferringFrom" ddlist=""></select>-->
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Referring To<!--<span class="required">*</span>--></label>
+                                <div class="input-group">
+                                    <input class="form-control" id="ddlOutgoingReferringTo" name="OutgoingReferringTo" customname="Ref Provider" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="Patient_Referral.OpenRefProvider('ddlOutgoingReferringTo', 'hfOutgoingRefProviderTo',true);"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                                <!--<select class="form-control" id="ddlOutgoingReferringTo" name="OutgoingReferringTo" ddlist=""></select>-->
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Insurance Plan<span class="required">*</span></label>
+                            <select class="form-control" id="ddlInsurancePlan" name="InsurancePlan"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Facility From</label>
+                            <!--<select class="form-control" id="ddlFacilityFrom" name="FacilityFrom" ></select>-->
+                            <div class="input-group">
+                                <input class="form-control" id="ddlFacilityFrom" name="FacilityFrom" placeholder="Start typing to search" type="text" />
+                                <div class="input-group-btn">
+                                    <button id="lnkFromFacility" class="btn btn-primary btn-xs " type="button" onclick="Patient_Referral.OpenFacility('ddlFacilityFrom', 'hfFromFacility');"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Facility To</label>
+                            <!--<select class="form-control" id="ddlFacilityTo" name="FacilityTo" ddlist="GetFacility"></select>-->
+                            <div class="input-group">
+                                <input class="form-control" id="ddlFacilityTo" name="FacilityTo" placeholder="Start typing to search" type="text" />
+                                <div class="input-group-btn">
+                                    <button id="lnkToFacility" class="btn btn-primary btn-xs " type="button" onclick="Patient_Referral.OpenFacility('ddlFacilityTo', 'hfToFacility');"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="From Date">From Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input class="form-control" type="text" name="FromDate" id="dtpFromDate" data-plugin-datepicker="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label" for="To Date">To Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input class="form-control" type="text" name="ToDate" id="dtpToDate" data-plugin-datepicker="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Visits Allowed</label>
+                            <input class="form-control" type="text" maxlength="10" name="VisitsAllowed" id="txtVisitsAllowed" onkeyup="utility.allowNumbersOnly(this)">
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="control-label">Visits Used</label>
+                            <input class="form-control" type="text" maxlength="10" name="VisitsUsed" id="txtVisitsUsed" disabled>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="control-label">Referral/Auth#<span class="required">*</span></label>
+                            <input class="form-control" type="text" maxlength="30" name="ReferralAuthNo" id="txtReferralAuthNo">
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="hidden-xs"><span class="spacer20 pad-a-labelsize"></span></div>
+                            <div class="visible-xs"><span class="spacer10"></span></div>
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" name="Active" id="chkActive" checked>
+                                <label class="control-label" for="chkActive">Active</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer5"></div>
+                    <button class="btn btn-primary btn-sm rightbtn" type="submit" id="btnReferral">Save & Exit</button>
+                    <div class="clearfix"></div>
+
+
+                    <input type="hidden" id="hfFromFacility" name="FromFacilityID" />
+                    <input type="hidden" id="hfToFacility" name="ToFacilityID" />
+                    <input type="hidden" id="hfPatientID" name="patientId" />
+                    <input type="hidden" id="hfIncomingRefProviderFrom" name="IncomingRefProviderFromID" />
+                    <input type="hidden" id="hfIncomingfRefProviderTo" name="RefIncomingProviderIDTo" />
+                    <input type="hidden" id="hfOutgoingRefProviderFrom" name="RefOutgoingProviderIDFrom" />
+                    <input type="hidden" id="hfOutgoingRefProviderTo" name="RefOutgoingProviderIDTo" />
+
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        utility.ValidateFromToDate('frmPatientReferral', 'dtpFromDate', 'dtpToDate', true);
+    });
+</script>

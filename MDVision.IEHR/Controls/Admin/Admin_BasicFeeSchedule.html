@@ -1,0 +1,67 @@
+﻿<div class="row" id="pnlAdminBasicFeeSchedule" style="display:none;">
+    <div id="actionPanAdminBasicFeeSchedule" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_BasicFeeSchedule.BasicFeeScheduleAdd();"><i class="fa fa-plus-circle"></i> Add </button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_BasicFeeSchedule.UnLoadTab()"></a>
+                </div>
+                <h2 class="panel-title">Search Basic Fee Schedule </h2>
+            </header>
+            <div class="panel-body" id="pnlBasicFeeSchedule_Search">
+                <form class="form-bordered" method="post" onsubmit="return false">
+                    <!--start - CONTENTS-->
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label class="control-label">Basic Fee Group</label>
+                            <select id="ddlBasicFeeGroup" class="form-control" ddlist="GetBasicFeeGroup" onchange="Admin_BasicFeeSchedule.LoadEntityBasedData()" name="BasicFeeGroup"></select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label">CPT Code</label>
+                            <input class="form-control" id="txtCPTCode" oninput="Admin_BasicFeeSchedule.BindAutoComplete(this)" type="text" />
+                           
+                        </div>
+                        <div class="col-md-2  ">
+                            <label class="control-label">Active?</label>
+                            <select id="ddlActive" class="form-control ">
+                                <option value="">- All -</option>
+                                <option value="1" selected="selected">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 pad-a-labelsize-btn">
+                            <div class="btn-block">
+                                <button class="btn btn-primary btn-sm" id="btnBasicFeeScheduleSearch" type="button" onclick="Admin_BasicFeeSchedule.BasicFeeScheduleSearch();">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div id="pnlBasicFeeSchedule_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="BasicFeeSchedule_SelectedDataKeys" />
+                <table class="table table-bordered table-condensed table-striped table-hover mb-none" id="dgvBasicFeeSchedule">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">BasicFeeScheduleId</th>
+                            <th class="size150">Action</th>
+                            <th>Basic Fee Group</th>
+                            <th>CPT Code</th>
+                            <th class="size90">Fee</th>
+                            <th class="size100">Expected Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="DivBasicFeeSchedulePaging"></div>
+            </div>
+        </section>
+    </div>
+</div>
+

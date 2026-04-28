@@ -1,0 +1,67 @@
+﻿<div class="row" id="pnlAdminBillingProviderSettings" style="display:none;">
+    <div id="actionPanAdminBillingProviderSettings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <button type="button" class="btn btn-success btn-sm" onclick="Admin_BillingProviderSettings.BillingProviderSettingsAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>
+    <section class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Admin_BillingProviderSettings.UnLoadTab();"></a>
+            </div>
+            <h2 class="panel-title">Search Additional Billing Provider </h2>
+        </header>
+        <div class="panel-body" id="pnlBillingProviderSettings_Search">
+            <form class="form-bordered" method="post" onsubmit="return false">
+                <!--start - CONTENTS-->
+                <div class="form-group">
+                    <div class="col-sm-3 col-md-2">
+                        <label class="control-label">Insurance</label>
+                        <select id="ddlInsurance" class="form-control" ddlist="GetInsurance"></select>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <label class="control-label">Facility</label>
+                        <select id="ddlFacility" class="form-control" ddlist="GetFacility"></select>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                        <label class="control-label">Provider</label>
+                        <select id="ddlProvider" class="form-control" ddlist="GetProvider"></select>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="control-label">Active?</label>
+                        <select id="chkIsActice" class="form-control">
+                            <option value="">- All -</option>
+                            <option value="1" selected="selected">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 pad-a-labelsize-btn">
+                        <div class="btn-block">
+                            <button class="btn btn-primary btn-sm" id="btnBillingProviderSettingsSearch" type="button" onclick="Admin_BillingProviderSettings.BillingProviderSettingsSearch();">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id="pnlBillingProviderSettings_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="BillingProviderSettings_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvBillingProviderSettings">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">BillingProviderSettingsId</th>
+                            <th class="size120">Action</th>
+                            <th class="size120">Insurance</th>
+                            <th class="size150">Facility</th>
+                            <th class="size150">Provider</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divBillingProviderPaging"></div>
+            </div>
+        </section>
+    </div>
+</div>

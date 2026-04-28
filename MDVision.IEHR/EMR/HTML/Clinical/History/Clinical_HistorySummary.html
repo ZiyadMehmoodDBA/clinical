@@ -1,0 +1,44 @@
+﻿<!--Author: Muhammad Azhar Shahzad
+    Date: Dec 16,2015
+    This file will handle all views performed for History Summary -->
+<div class="row" id="pnlClinicalHistorySummary">
+    <div id="actionPanClinicalHistorySummary" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" >
+        <div id="modalcontent">
+            <div id="modalheader">
+                <button type="button" class="close" onclick="Clinical_HistorySummary.unLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="titleBlockReason">History Summary</h4>
+            </div>
+            <div id="modalbody">
+
+                <div class="tab-pane hidden" id="mstrDivHistroy1" style="display: block;margin-left: 20px;">
+                    <div id="btnNoteHistoryTabs">
+                        <ul class="list-unstyled">
+                            <li name="SummaryHx"><button type="button" class="btn btn-default btn-sm tab_space active" title="History Summary" id="clinicalMenu_History_HistorySummary" onclick="Clinical_HistorySummary.loadHistorySummarySoap();">History Summary</button></li>
+                            <li name="SocialHx"><button type="button" class="btn btn-default btn-sm tab_space" title="Social Hx" id="clinicalMenu_History_SocialHx" onclick="    EMRUtility.AddHistoryTabOnNote('SocialHx', false, Clinical_HistorySummary.params, this);">Social Hx</button></li>
+                            <li name="MedicalHx"><button type="button" class="btn btn-default btn-sm tab_space" title="Medical Hx" id="clinicalMenu_History_MedicalHx" onclick="    EMRUtility.AddHistoryTabOnNote('MedicalHx', false, Clinical_HistorySummary.params, this);">Medical Hx</button></li>
+                            <li name="FamilyHx"><button type="button" class="btn btn-default btn-sm tab_space" title="Family Hx" id="clinicalMenu_History_FamilyHx" onclick="    EMRUtility.AddHistoryTabOnNote('FamilyHx', false, Clinical_HistorySummary.params, this);">Family Hx</button></li>
+                            <li name="SurgicalHx"><button type="button" class="btn btn-default btn-sm tab_space" title="Surgical Hx" id="clinicalMenu_History_SurgicalHx" onclick="    EMRUtility.AddHistoryTabOnNote('SurgicalHx', false, Clinical_HistorySummary.params, this);">Surgical Hx</button></li>
+                            <li name="BirthHx"><button type="button" class="btn btn-default btn-sm tab_space" title="Birth Hx" id="clinicalMenu_History_BirthHx" onclick="    EMRUtility.AddHistoryTabOnNote('BirthHx', false, Clinical_HistorySummary.params, this);">Birth Hx</button></li>
+                            <li name="HospitalizationHx"><button type="button" class="btn btn-default btn-sm tab_space" title="Hospitalization Hx" id="clinicalMenu_History_HospitalizationHx" onclick="    EMRUtility.AddHistoryTabOnNote('HospitalizationHx', false, Clinical_HistorySummary.params, this);">Hospitalization Hx</button></li>
+                            <li name="SocPsyandBehaviorHx"><button type="button" class="btn btn-default btn-sm tab_space" title="Social, Psychological and Behavior Hx" id="clinicalMenu_History_SocPsyandBehaviorHx" onclick="EMRUtility.AddHistoryTabOnNote('SocPsyandBehaviorHx', false, Clinical_HistorySummary.params, this);">Social, Psychological and Behavior Hx</button></li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-success btn-sm pull-right mr-sm" style="" type="button" onclick="Clinical_HistorySummary.addHistoriesToNote(true);" id="btnAddHistoriesToNote">Add to Note</button>
+                </div>
+
+
+
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <div id="divViewHistorySummary"></div>
+                    <!--<div id="ContainerHistory" class="hidden"></div>-->
+                </div>
+
+                <div id="ctrlPanNote"></div>
+
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

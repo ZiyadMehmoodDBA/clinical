@@ -1,0 +1,66 @@
+﻿<div class="row" id="pnlClinicalImplantable" >
+    <div id="actionPanClinicalImplantable" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+<div id="modaldialog" class="modal-dialog-full">
+    <div id="modalcontent">
+        <div id="modalheader" style="display:none;">
+            <button type="button" class="close" onclick="Clinical_Implantable.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Implantable Devices</h4>
+        </div>
+        <div id="modalbody">
+            <div class="mainScrollPan" id="mainScrollPan">
+                <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_Implantable.ImplantableAdd(-1);"><i class="fa fa-plus-circle"></i> Add Device</button>
+                <div class="spacer10"></div><div class="clearfix"></div>
+                <section class="panel panel-featured">
+                    <div class="panel-body" id="pnlImplantable_Search">
+                        <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalImplantable">
+                            <div class="form-group" id="ActiveInactive">
+                                <div class="col-sm-3" id="divSwitch">
+                                    <span class="pr-xs">Inactive</span>
+                                    <div class="btnWidgetSwitch switch switch-xs switch-success">                                    
+                                    <input id="deviceSwitchActive" isactive="1" type="checkbox" checked="checked" name="switch" data-plugin-ios-switch="" style="display:none;" onchange="Clinical_Implantable.ActiveDeviceSearch(this);">
+                                    </div>
+                                    <span class="pl-xs">Active</span>
+                                </div>
+                            </div>
+                        </form>
+                    
+
+                        <div id="pnlClinicalImplantable_Result" style="display: none;">
+
+                            <div class="panel-body">
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvClinicalImplantable">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">deviceId</th>
+                                            <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size80 size-min80">Action</th>
+                                            <th>Device ID</th>
+                                            <th>Device Name</th>
+                                            <th>Status</th>
+                                            <th>Target Site</th>
+                                            <th>Manufacturer</th>
+                                            <th>Serial No</th>
+                                            <th>Lot No</th>
+                                            <th>Mfg Date</th>
+                                            <th>Exp Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divClinicalImplantablePaging"></div>
+                            </div>
+                            <div class="pull-right mt-sm">
+                                <button class="btn btn-success btn-sm" type="button" onclick="Clinical_Implantable.addDevicesToNotes();" id="btnAddDevicesToNote"><i class="fa fa-plus"></i> Add to Note</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+            <div id="FaceSheetPager"></div>
+        </div>
+        <div class="modal-footer"></div>
+     </div>
+</div>
+</div>

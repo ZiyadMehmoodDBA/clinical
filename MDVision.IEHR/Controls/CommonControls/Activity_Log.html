@@ -1,0 +1,214 @@
+﻿<div id="pnlActivityLog" style="display:none;" class="row">
+    <div id="actionPanActivityLog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog" class="modal-dialog-full">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Activity_Log.UnLoad()"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Activity Log</h4>
+                </div>
+                <div id="modalbody">
+                    <div class="mainScrollPan" id="mainScrollPan">
+                        <div class="clearfix"></div>
+                        <form method="post" id="frmActivityLog" onsubmit="return false">
+                            <section>
+                                <ul id="ulTabs" class="tabs-custom hidden">
+                                    <li class="liClaimHistory active" id="liClaimHistory"><a href="#" onclick="Activity_Log.LoadClaimHistory()" data-toggle="tab">Claim History</a></li>
+                                    <li class="liPatientHistory" id="liPatientHistory"><a href="#" onclick="Activity_Log.LoadPatientHistory()" data-toggle="tab">Patient History</a></li>
+                                    <li class="liChargestHistory" id="liChargesHistory"><a href="#" onclick="Activity_Log.LoadChargesHistory()" data-toggle="tab">Charges History</a></li>
+                                    <li class="liNotesHistory" id="liNotesHistory"><a href="#" onclick="Activity_Log.LoadActivityLogsNotesComments()" data-toggle="tab">Notes Log</a></li>
+                                </ul>
+                                <div id="activityLogpnlBody" class="panel-body">
+
+                                    <div id="divAuditTablesData">
+
+                                        <div class="col-sm-12">
+                                            <h5 class="text-bold">New Entry</h5>
+                                            <div id="pnlActivityLog_NewEntry" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvNewEntry">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th class="size120">Profile</th>
+                                                                    <th class="size120">User</th>
+                                                                    <th class="size120">Entry Date & Time</th>
+                                                                    <!--<th class="size120">Field</th>
+                                                                    <th class="size60 noWordBreak">Original Value</th>
+                                                                    <th class="size120 noWordBreak">Current Value</th>-->
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <hr class="vshort" />
+                                        <div class="col-sm-9 col-md-6">
+                                            <h5 class="text-bold" id="UserHeading" style="display: none;">User/Actions</h5>
+                                            <div id="pnlActivityLog_User" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvUser">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th class="size120">Profile</th>
+                                                                    <th class="size80">Action</th>
+                                                                    <th class="size120">User</th>
+                                                                    <th class="size120">Date & Time</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <!--<div class="clearfix"></div>
+                                        <hr class="vshort" />-->
+                                        <div class="col-sm-9 col-md-6">
+                                            <h5 class="text-bold" id="ChangesHeading" style="display: none;">Changes</h5>
+                                            <div id="pnlActivityLog_Changes" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvChanges">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th class="size120">Field</th>
+                                                                    <th class="size60 noWordBreak">Original Value</th>
+                                                                    <th class="size120 noWordBreak">Current Value</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9 col-md-6">
+
+                                            <h5 class="text-bold" id="DeletedChargesHeading" style="display: none;">Deleted Charges</h5>
+                                            <div id="pnlActivityLog_DeletedCharges" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvDeletedCharges">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th class="size120">Profile</th>
+                                                                    <th class="size60">Action</th>
+                                                                    <th class="size120">User</th>
+                                                                    <th class="size120">Date</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-9 col-md-6">
+                                            <h5 class="text-bold" id="RequireSubmitHeading" style="display: none;">Submit/Re-Submit</h5>
+                                            <div id="pnlActivityLog_RequireSubmit" style="display: none;">
+                                                <section class="panel">
+                                                    <div class="panel-body tab-content-featured">
+                                                        <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvRequireSubmit">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">ActivityLogId</th>
+                                                                    <th class="size120">Profile</th>
+                                                                    <th class="size60 noWordBreak">Display Name</th>
+                                                                    <th class="size60 noWordBreak">Insurance Plan</th>
+                                                                    <th class="size120 noWordBreak">Submitted By</th>
+                                                                    <th class="size120 noWordBreak">Submitted On</th>
+                                                                    <th class="size120 noWordBreak">Submit Type</th>
+                                                                    <th class="size120 noWordBreak">Current Value</th>
+                                                                    <th class="size120 noWordBreak">Crossed Over</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="col-sm-12 col-md-12">
+                                        <h5 class="text-bold" id="NotesLog" style="display: none;">Submit/Re-Submit</h5>
+                                        <div id="pnlActivityLog_NotesLog" style="display: none;">
+                                            <section class="panel">
+                                                <a id="aPatientPaymentPrint" class="btn btn-success btn-xs" onclick="Activity_Log.PrintNotesLog();"><i class="fa fa-print"></i> Print </a>
+                                                <div class="spacer10"></div>
+                                                <div class="panel-body tab-content-featured">
+                                                    <input type="hidden" id="ActivityLog_SelectedDataKeys" />
+                                                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvNotesLog">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="display:none;">ActivityLogId</th>
+                                                                <th class="size120">Date</th>
+                                                                <th class="size60 noWordBreak">User</th>
+                                                                <th class="size60 noWordBreak">Notes</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="PrintNotesLog" class="hidden">
+                                                    <div id="DivPrintHeader">
+                                                        <div id="DivCurrentDate" class="pull-left">03/28/2018</div>
+                                                        <h3 class="text-center">Print Claim Detail-Notes Log</h3>
+                                                    </div>
+                                                    <div id="DivPrintBody">
+                                                        <div class="panel-body tab-content-featured">
+                                                            <div id="DivClaimInfo">
+                                                                <label class="control-label col-xs-3" for="PatientName"><b>Patient Name: </b><span id="SpnPatientName"></span></label>
+                                                                <label class="control-label col-xs-3" for="DOS"><b>DOS: </b><span id="SpnDOS"></span></label>
+                                                                <label class="control-label col-xs-3" for="ClaimDate"><b>Claim Date: </b><span id="SpnClaimDate"></span></label>
+                                                                <label class="control-label col-xs-3" for="ClaimNumber"><b>Claim Number: </b><span id="SpnClaimNumber"></span></label>
+                                                                <label class="control-label col-xs-3" for="Provider"><b>Provider: </b><span id="SpnProvider"></span></label>
+                                                                <label class="control-label col-xs-3" for="Facility"><b>Facility: </b><span id="SpnFacility"></span></label>
+                                                            </div>
+                                                            <input type="hidden" id="ActivityLog_SelectedDataKeysPrint" />
+                                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvNotesLogPrint">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="display:none;">ActivityLogId</th>
+                                                                        <th class="size120" style="background-color: grey;">Date</th>
+                                                                        <th class="size60 noWordBreak" style="background-color: grey;">User</th>
+                                                                        <th class="size60 noWordBreak" style="background-color: grey;">Notes</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

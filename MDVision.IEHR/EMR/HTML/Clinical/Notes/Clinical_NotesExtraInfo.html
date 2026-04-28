@@ -1,0 +1,164 @@
+﻿<div class="row" id="pnlClinicalNotesExtraInfo">
+    <div id="actionPanClinicalNotesExtraInfo" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+
+    <div id="" class="modal-dialog modal-dialog-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--Begin 03/28/16  Edit By M Ahmad Imran Bug # EMR-491-->
+                <button type="button" class="close" onclick="Clinical_NotesExtraInfo.unLoadTab(event, false);"></button>
+                <!--End 03/28/16  Edit By M Ahmad Imran Bug # EMR-491-->
+                <h4 class="modal-title" id="PageTitle">Note Extra Info</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmClinicalNotesExtraInfo" method="post" onsubmit="return false">
+                    <div class="panel-featured panel-body">
+
+
+                        <div class="col-sm-6 mb-xs ForHide">
+                            <label for="ddlMedicalReconciliationId" class="control-label">Medication Reconciliation</label>
+                            <select id="ddlMedicalReconciliationId" name="MedicalReconciliation" class="form-control">
+                                <option value="">-Select-</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 mb-xs ForHide">
+                            <label for="ddlAllergiesReconciliationId" class="control-label">Allergies Reconciliation</label>
+                            <select id="ddlAllergiesReconciliationId" name="AllergiesReconciliation" class="form-control">
+                                <option value="">-Select-</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div><div class="col-sm-6 mb-xs ForHide">
+                            <label for="ddlProblemsReconciliationId" class="control-label">Problems Reconciliation</label>
+                            <select id="ddlProblemsReconciliationId" name="ProblemsReconciliation" class="form-control">
+                                <option value="">-Select-</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 mb-xs ForHide">
+                            <label for="ddlPatientEducationId" class="control-label">Patient Education</label>
+                            <select id="ddlPatientEducationId" name="PatientEducation" class="form-control" ddlist="GetValueSettingTopTwo"></select>
+                        </div>
+                        <div class="col-sm-6 mb-xs">
+                            <label for="ddlLocateCCDA" class="control-label">Locate CCDA</label>
+                            <select id="ddlLocateCCDA" name="LocateCCDA" class="form-control">
+                                <option value="">-Select-</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-6 mb-xs">
+                            <label for="ddlSummaryOfCareCId" class="control-label">Summary Of Care (Requested)</label>
+                            <select id="ddlSummaryOfCareCId" name="SummaryOfCareC" class="form-control">
+                                <option value="">-Select-</option>
+                                <option value="1">Available</option>
+                                <option value="2">Unavailable</option>
+                                <option value="3">N/A</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 mb-xs ForHide">
+                            <label for="ddlSummaryOfCareBId" class="control-label">Summary Of Care (Incorporated)</label>
+                            <select id="ddlSummaryOfCareBId" name="SummaryOfCareB" class="form-control">
+                                <option value="">-Select-</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                                <option value="3">N/A</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 mb-xs">
+                            <label for="ddlSummaryOfCareAId" class="control-label">Summary Of Care (Received)</label>
+                            <select id="ddlSummaryOfCareAId" name="SummaryOfCareA" class="form-control">
+                                <option value="">-Select-</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                                <option value="3">N/A</option>
+                            </select>
+                        </div>
+                        
+
+
+                        <div class="col-sm-6 mb-xs ForHide">
+                            <label for="ddlVDTTimelyAccessId" class="control-label">VDT (Timely Access)</label>
+                            <select id="ddlVDTTimelyAccessId" name="VDTTimelyAccess" class="form-control" ddlist="GetValueSettingTopTwo"></select>
+                        </div>
+
+
+
+                        <div class="col-sm-6 mb-xs ForHide">
+                            <label for="SecureMessageId" class="control-label">Secure Message (Send To Patient)</label>
+                            <select id="SecureMessageId" name="SecureMessage" class="form-control">
+                                <option value="">-Select-</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-6 mb-xs ForHide">
+                            <label for="ddlVDTAPITimelyAccessId" class="control-label">VDT API (Timely Access)</label>
+                            <select id="ddlVDTAPITimelyAccessId" name="VDTAPITimelyAccess" class="form-control" ddlist="GetValueSettingTopTwo"></select>
+                        </div>
+
+                        <div class="col-sm-6 mb-xs ForHide">
+                            <label for="ddlTransitionsOfCareId" class="control-label">Transitions of Care</label>
+                            <select id="ddlTransitionsOfCareId" name="TransitionsOfCare" class="form-control">
+                                <option value="">-Select-</option>
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-6 mb-xs ForHide">
+                            <label for="ddlVDTAPIPatientId" class="control-label">VDT API (Patient)</label>
+                            <select id="ddlVDTAPIPatientId" name="VDTAPIPatient" class="form-control" ddlist="GetValueSettingTopTwo"></select>
+                        </div>
+
+                    </div>
+
+                    <div class="pull-right pt-md">
+                        <!--<button type="button" class="btn btn-sm" onclick="Clinical_NotesExtraInfo.ResetNotesExtraInfo()"><i class="fa fa-refresh"></i> Reset</button>-->
+                        <button type="button" class="btn btn-success btn-sm" onclick="Clinical_NotesExtraInfo.NotesExtraInfoSave()">Save</button>
+                    </div>
+                </form>
+                <div class="spacer15"></div>
+            </div>
+
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

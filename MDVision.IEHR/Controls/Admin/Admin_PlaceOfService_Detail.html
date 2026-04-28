@@ -1,0 +1,60 @@
+﻿<div id="placeOfServiceDetail">
+    <div id="actionplaceOfServiceDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-md">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="placeOfServiceDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Place Of Service</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblplaceOfServiceDetail" >
+                    <form method="post" onsubmit="return false" id="frmPlaceOfServiceDetail">
+                        <div class="form-group" id="POSMainForm">
+                            
+                                <div class="col-sm-3">
+                                    <label class="control-label">Code</label><span class="required">*</span>
+                                    <input class="form-control" id="txtCode" name="Code" type="text" data-mask="ww" placeholder="ww" />
+                                </div>
+                                <div class="col-sm-9">
+                                    <label class="control-label">Description</label>
+                                    <input class="form-control" id="txtDescription" name="Description" type="text" maxlength="55" />
+                                </div>
+                                  <div class="col-xs-2 pad-a-labelsize" id="pnlIsActive">
+                                    <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" id="chkIsActive" checked="checked">
+                                    <label for="chkIsActive">Active</label>
+                                      </div>
+                                  </div>
+                                <div class="col-sm-3 mt-xs pull-right">
+                                    <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                                    <!--<button id="btnHistoryPOS" class="btn btn-primary btn-sm rightbtn" type="button" onclick="placeOfServiceDetail.ShowHistory();">History</button>-->
+                                </div>
+                           
+                        </div>
+                    </form>
+                </div>
+                <div class="spacer10"></div>
+                <div id="pnlPOSPlanInfo">
+                    <section>
+                        <form>
+                        <div class="panel-body">
+                            <table id="dgvPOSPlanInfo" class="table table-bordered table-striped table-condensed table-hover mb-none">
+                                <thead>
+                                    <tr>
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel" coltype="Action" class="size70 custom-width-gd">Action</th>
+                                        <th controlid="txtCodePlan" controlwidth="" isoptional="0" class="size30" hfcontrolid="hfPlan" coltype="AutoComplete" containerctrl="placeOfServiceDetail" autocompletemethod="InsurancePlan" customname="Insurance Plan" searchmethod="placeOfServiceDetail.OpenInsurancePlan(null)">Plan</th>
+                                        <th controlid="txtPOS" controlwidth="custom-width-auto" isoptional="0" class="size30" coltype="textbox">POS</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <a href="javascript:placeOfServiceDetail.rowAdd()">Add Line Item</a>
+                        </div>
+                            </form>
+                    </section>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

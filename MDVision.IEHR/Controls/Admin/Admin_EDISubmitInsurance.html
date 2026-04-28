@@ -1,0 +1,83 @@
+﻿<div class="row" id="pnlAdminEDISubmitInsurance" style="display:none;">
+    <div id="actionPanAdminEDISubmitInsurance" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_EDISubmitInsurance.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Search EDI Submit Insurance</h4>
+            </div>
+            <div id="modalBody" class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button type="button" class="btn btn-success btn-sm" onclick="Admin_EDISubmitInsurance.EDISubmitInsuranceAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_EDISubmitInsurance.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search EDI Submit Insurance</h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlEDISubmitInsurance_Search">
+                            <form class="form-bordered" method="post" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Clearing House</label>
+                                        <select id="ddlClearingHouse" class="form-control" ddlist="GetClearingHouse"></select>
+                                    </div>
+                                    <div class="col-sm-4 col-md-3">
+                                        <label class="control-label">Submit Insurance Name</label>
+                                        <input class="form-control" id="txtEDISubmitInsuranceName" type="text" maxlength="55" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label class="control-label">Payor ID</label>
+                                        <input class="form-control" id="txtPayorId" type="text" maxlength="10" />
+                                    </div>
+                                    <div class="col-sm-2  ">
+                                        <label class="control-label">Active?</label>
+                                        <select id="ddlActive" class="form-control ">
+                                            <option value="">- All -</option>
+                                            <option value="1" selected="selected">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 pt-md">
+                                        <button class="btn btn-primary btn-sm" id="btnEDISubmitInsuranceSearch" type="button" onclick="Admin_EDISubmitInsurance.EDISubmitInsuranceSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="pnlEDISubmitInsurance_Result" style="display: none;">
+                    <section class="panel panel-featured">
+                        <div class="panel-body">
+                            <input type="hidden" id="EDISubmitInsurance_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvEDISubmitInsurance">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">EDISubmitInsuranceId</th>
+                                        <th>Action</th>
+                                        <th>Insurance Name</th>
+                                        <th>Clearing House</th>
+                                        <th>Payor ID</th>
+                                        <th>Telephone</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="divEDISubmitInsurancePaging"></div>
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

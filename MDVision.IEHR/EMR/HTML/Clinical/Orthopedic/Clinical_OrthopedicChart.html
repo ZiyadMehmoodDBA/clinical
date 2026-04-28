@@ -1,0 +1,42 @@
+﻿<div class="row" id="pnlOrthopedicChart">
+    <div id="actionPanOrthopedicChart" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog modal-dialog-md">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_OrthopedicChart.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Orthopedic Chart Documentation</h4>
+            </div>
+            <div id="modalbody" class="modal-body bg-white">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form id="frmOrthopedicChart" method="post" onsubmit="return false">
+                        <div style="text-align:center" class="pull-left">
+                            <canvas id="ChartCanvas" width="200" height="600" style="margin-left: 40px;"></canvas>
+                        </div>
+                        <div class="pull-left ortho-rightpanel">
+                            <h3>Select Affected Joints to Proceed</h3>
+                            <div style="height: 320px;">
+                                <img />
+                            </div>
+                            <div class="pull-left" style="width: 100%;">
+                                <div class="panel panel-featured">
+                                    <header class="panel-heading">
+                                        <h2 class="panel-title pull-left">Affected Joints Complaints</h2>
+                                        <div class="clearfix"></div>
+                                    </header>
+                                    <section class="ortho-section panel-body">
+                                        <ul id="list_Complaints" class="joints-list height-max150 own-scroll">
+                                            <li style='text-align:center'>No Complaint is added.</li>
+                                        </ul>
+                                    </section>
+                                </div>
+                                <button id="btn_loadChart" type="button" class="btn btn-success btn-sm pull-right" disabled="disabled" onclick="Clinical_OrthopedicChart.Open_OrthopedicChart();">Load Chart</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

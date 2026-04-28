@@ -1,0 +1,226 @@
+﻿<div class="row" id="pnlOrderSetPatientReferralsOutgoingDetail">
+    <div id="actionPanOrderSetPatientReferralsOutgoingDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.UnLoadTab();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Add Outgoing Referral</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return false;" id="frmPatientReferralsOutgoingDetail">
+                    <div class="col-sm-12" id="divReferralInfo">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Referral Information</h2>
+                        </header>
+                        <div class="panel-body">
+                            <div class="col-sm-3 col-md-3 p-none hidden">
+                                <div class="col-xs-6">
+                                    <label class="control-label" for="Date">Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                        <input type="text" class="form-control" data-plugin-datepicker name="Date" id="dtDate">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="control-label" for="">Time</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"> <i class="fa fa-clock-o"></i> </span>
+                                        <input type="text" data-plugin-timepicker class="form-control" data-plugin-options='{ "minuteStep": 5 }' id="tmTime" name="Time">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label" name="lblFacilityFrom">Facility From</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtFacilityFrom" name="FacilityFromName" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacilityFrom" class="btn btn-primary btn-xs " type="button" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.OpenFacilityFrom();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <label id="lblRefferingProvider" for="Date" class="control-label">Referral From</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label" name="lblFacilityTo">Facility To</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtFacilityTo" name="FacilityToName" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkFacilityTo" class="btn btn-primary btn-xs " type="button" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.OpenFacilityTo();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <label class="control-label" for="Ref Provider" id="lblRefProvider">Referral To</label>
+                                <div class="input-group">
+                                    <input class="form-control " id="txtRefProvider" type="text" placeholder="Start typing to search" name="RefProvider" maxlength="35" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkRefProvider" class="btn btn-primary btn-xs " type="button" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.OpenRefProvider();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="" class="control-label">Reason</label>
+                                <input id="txtReason" type="text" class="form-control" name="Reason" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Visit Type</label>
+                                <select id="ddlVisits" name="Visits" class="form-control">
+                                    <option value="0">Select</option>
+                                    <option value="1">Follow Up</option>
+                                    <option value="2">New Patient</option>
+                                    <option value="3">Physical</option>
+                                    <option value="4">Surgical Clearance</option>
+                                    <option value="5">Consult</option>
+                                    <option value="6">Office Visit</option>
+                                    <option value="7">Immunization</option>
+                                    <option value="8">Injection</option>
+                                    <option value="9">Blood Work</option>
+                                    <option value="10">Ultrasound</option>
+                                    <option value="11">Procedure</option>
+                                    <option value="12">Surgery</option>
+                                    <option value="13">Infusion</option>
+                                    <option value="14">Test</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label" name="lblAssignee">Assignee</label>
+
+                                <input class="form-control" id="txtAssignee" name="Assignee" placeholder="Start typing to search" type="text" />
+                                <!--<div class="input-group-btn">
+                                    <button id="lnkAssignee" class="btn btn-primary btn-xs " type="button" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.OpenAssignee();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>-->
+
+                            </div>
+                            <div class="col-sm-3 hidden">
+                                <label id="lblStatus" class="control-label" for="Status">Status<span class="required">*</span></label>
+                                <select id="ddlReferralStatus" name="Status" class="form-control">
+                                    <option value="">Select</option>
+                                    <option value="1">Not started</option>
+                                    <option value="2">In progress</option>
+                                    <option value="3">Completed</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3 pull-right mt-sm hidden">
+                                <div class="dropdown" id="attachDiv">
+                                    <a id="btnScanResult" href="#" class="dropdown-toggle btn btn-link btn-xs p-none" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Attach</a>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="dropdown" id="attachmentDiv">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label" name="lblSpecialty">Referral To Specialty</label>
+                                <div class="input-group">
+                                    <input class="form-control" id="txtSpecialtyFrom" name="SpecialtyFromName" placeholder="Start typing to search" type="text" />
+                                    <div class="input-group-btn">
+                                        <button id="lnkSpecialtyFrom" class="btn btn-primary btn-xs " type="button" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.OpenSpecialtyFrom();"><i class="glyphicon glyphicon-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="OrderSetReferralId" id="hfOrderSetReferralId" value="-1" />
+                    <input type="hidden" id="hfAssignee" name="AssigneeId" />
+                    <input type="hidden" id="hfRefProvider" name="RefProviderId" />
+                    <input type="hidden" id="hfProvider" name="ProviderId" />
+                    <input type="hidden" id="hfFacilityTo" name="FacilityTo" />
+                    <input type="hidden" id="hfFacilityFrom" name="FacilityFrom" />
+                    <input type="hidden" id="hfSpecialtyFrom" name="SpecialtyFrom" />
+
+                    <div class="spacer15"></div>
+                    <div class="col-sm-12" id="divProcedures">
+                        <header class="panel-heading panel-blue">
+                            <h2 class="panel-title white">Associated Procedures</h2>
+                        </header>
+                        <div class="panel-body pl-none">
+
+                            <div class="col-sm-12">
+                                <div class="col-sm-12 col-md-8 pl-none">
+                                    <label class="control-label" for="test">Procedure</label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="txtReferralCPTCode" placeholder="Search using test name or test code" type="text" name="ReferralCPTCode" oninput="OrderSet_Patient_Referrals_Outgoing_Detail.bindAutoComplete(this)" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary btn-xs " type="button" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.openCPTCode();"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="spacer15"></div>
+                                <div id="pnlReferralProcedure_Result" class="table-responsive">
+                                    <table class="table table-bordered table-condensed table-striped table-hover" id="dgvProcedureReferral">
+                                        <thead>
+                                            <tr class="">
+                                                <th id="ColumnAction" actiontype="Delete" coltype="Action" class="size90 size-min90">Action</th>
+                                                <th class="size300" hfcontrolid="ProcedureId" hfcontrolname="ProcedureId" controlid="ConsultationProcedure" iscontroldisabled="1" controlname="Procedure" coltype="TextBox" isoptional="0">Procedure</th>
+                                                <th controlid="Urgency" class="size-min130 size130 noWordBreak" controlname="Urgency" coltype="dropdown" ddlist="GetUrgency">Urgency</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <input type="hidden" name="ReferralProcedureIds" id="hfReferralProcedureIds" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spacer15"></div>
+                    <div class="col-sm-12" id="divProblems">
+                        <div class="spacer15"></div>
+                        <div id="comments">
+                            <div id="" class="col-xs-12">
+                                <label class="control-label">Comments</label>
+                                <textarea id="txtReferralComments" name="Comments" rows="3" class="form-control" spellcheck="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="pull-right pt-md pr-default">
+                            <button class="btn btn-sm btn-primary">Save & Exit</button>
+                            <!--<button id="PrintButton" disabled class="btn btn-sm btn-primary disableAll" type="button" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.printReferral()">Print</button>-->
+                            <!--<button class="btn btn-sm" type="button" onclick="OrderSet_Patient_Referrals_Outgoing_Detail.referralReset();">Reset</button>-->
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {};
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });
+
+    $(document).ready(function () {
+
+        (function ($) {
+            'use strict';
+            $(function () {
+                $('[data-plugin-ios-switch]').each(function () {
+                    var $this = $(this);
+
+                    $this.themePluginIOS7Switch();
+                });
+            });
+        }).apply(this, [jQuery]);
+
+
+    });
+
+</script>

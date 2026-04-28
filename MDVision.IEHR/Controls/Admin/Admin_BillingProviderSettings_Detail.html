@@ -1,0 +1,168 @@
+﻿<div id="billingprovidersettingsDetail">
+    <div id="actionPanAdminBillingProviderSettingsDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="billingprovidersettingsDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Additional Billing Provider</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tblbillingprovidersettingsDetail" class="col-sm-12">
+                    <form method="post" id="frmBillingProviderSettingsDetail" onsubmit="return false">
+                        <!--start - CONTENTS-->
+                        <div class="form-group">
+                            <div class="col-sm-3">
+                                <label class="control-label">   Insurance <span class="required">*</span></label>
+                                <select id="lstInsurance" name="Insurance" class="form-control" ddlist="GetInsurance"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">   Facility <span class="required">*</span></label>
+                                <select id="lstFacility" name="Facility" class="form-control" ddlist="GetFacility"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Provider <span class="required">*</span></label>
+                                <select id="lstProvider" name="Provider" class="form-control" ddlist="GetProvider"></select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label">Loop 2310B</label>
+                                <select id="lst2310B" name="lst2310B" class="form-control" ddlist="GetLoop2310B"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 mt-sm  ">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" id="chkBillToEIN" checked="" name="btein" onclick="billingprovidersettingsDetail.EnableEIN_Div();">
+                                    <label for="chkBillToEIN">Bill to EIN</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-sm ">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox"  name="BillToProviderSSN" onclick="billingprovidersettingsDetail.ToggleBill_To_EIN(this);" id="chkBillToProviderSSN">
+                                    <label for="chkBillToProviderSSN">Bill to Provider SSN</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 mt-sm ">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="AcceptAssignment" checked="" id="chkAcceptAssignment">
+                                    <label for="Accept Assignment">Accept Assignment</label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-3 mt-sm ">
+                                <div class="checkbox-custom checkbox-default">
+                                    <input type="checkbox" name="IsActive" checked="" id="chkIsActive">
+                                    <label for="chkIsActive">Active</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="special-block mt-sm pb-md" id="pnlEIN">
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <div class="col-xs-9 col-sm-7 pr-none pl-md">
+                                            <label class="control-label">EIN <span class="required">*</span></label>
+                                            <input class="form-control" id="txtEIN" name="EIN" type="text" placeholder="999999999" data-mask="999999999" />
+                                        </div>
+                                        <div class="col-xs-3 col-sm-5 pr-md pl-xs">
+                                            <label class="control-label">EIN Suffix</label>
+                                            <input class="form-control" maxlength="2" name="EINSuffix" id="txtEINSuffix" placeholder="ww" type="text" data-mask="ww" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="control-label">EIN Name <span class="required">*</span></label>
+                                    <input class="form-control" id="txtEINName" maxlength="30" name="EINName" type="text" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <div class="col-xs-5 pr-none pl-md">
+                                            <label class="control-label">NPI <span class="required">*</span></label>
+                                            <input class="form-control" id="txtNPI" name="NPI" type="text" placeholder="9999999999" data-mask="9999999999" />
+                                        </div>
+                                        <div class="col-xs-7 pr-md pl-xs">
+                                            <label class="control-label ">Taxonomy Code </label>
+                                            <input id="txtTaxonomyCode" name="TaxonomyCode" class="form-control" type="text" maxlength="10" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Address1 <span class="required">*</span></label>
+                                    <input class="form-control" maxlength="55" id="txtAddress1" name="Address1" type="text" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Address2</label>
+                                    <input class="form-control" maxlength="55" id="txtAddress2" name="Address2" type="text" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label class="control-label ">City <span class="required">*</span></label>
+                                    <input id="txtCity" maxlength="30" class="form-control" name="City" type="text" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="control-label "> State <span class="required">*</span></label>
+                                    <input id="lstState" name="State" class="form-control" type="text" data-mask="aa" style="text-transform:uppercase"/>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <div class="col-xs-10 col-sm-8 pl-md pr-xs">
+                                            <label class="control-label">Zip </label><span class="required">*</span>
+                                            <input id="txtZipCode" name="ZipCode" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#billingprovidersettingsDetail #frmBillingProviderSettingsDetail', '#txtZipCode', '#txtCity', '#lstState')" />
+                                        </div>
+                                        <div class="col-xs-2 col-sm-4 pl-none pr-md pad-a-labelsize">
+                                            <input id="txtZipCodeExt" name="ZipCodeExt" class="form-control" type="text" data-mask="9999" placeholder="9999" />
+                                        </div>
+                                    </div>
+                                 </div>
+                            </div>
+                           
+                            <br>
+                            <h5>
+                            <input type="checkbox" id="chkIsPayToAddress" onchange="billingprovidersettingsDetail.PayAddress(this);" />
+                            <label for="chkIsPayToAddress"> Pay to Address </label></h5>
+                            <div class="form-group" id="pay_to_address">
+                                <div class="col-sm-6">
+                                    <label class="control-label">Address1</label><span class="required" style="display:none" >*</span>
+                                    <input class="form-control" maxlength="55" id="txtPayToAddress1" name="PayToAddress1" type="text" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label">Address2</label><span class="required" style="display:none" >*</span>
+                                    <input class="form-control" maxlength="55" id="txtPayToAddress2" name="PayToAddress2" type="text" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="control-label">City </label><span class="required" style="display:none" >*</span>
+                                    <input id="txtPayToCity" name="PayToCity" maxlength="25" class="form-control" type="text" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="control-label"> State </label><span class="required" style="display:none">*</span>
+                                    <input id="txtPayToState" name="PayToState" class="form-control" type="text" style="text-transform:uppercase" data-mask="aa" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <div class="col-xs-10 col-sm-8 pl-md pr-xs">
+                                            <label class="control-label">Zip </label><span class="required" style="display:none">*</span>
+                                            <input id="txtPayToZipCode" name="PayToZipCode" class="form-control" type="text" placeholder="99999" data-mask="99999" onblur="utility.FillCityState('#billingprovidersettingsDetail #frmBillingProviderSettingsDetail', '#txtPayToZipCode', '#txtPayToCity', '#txtPayToState')" />
+                                        </div>
+                                        <div class="col-xs-2 col-sm-4 pl-none pr-md pad-a-labelsize">
+                                            <input id="txtPayToZipCodeExt" name="PayToZipCodeExt" class="form-control" type="text" data-mask="9999" placeholder="9999" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="spacer10"></div>
+                        <div class="btn-block">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                            <!--<button id="btnHistoryAdditionalProv" class="btn btn-primary btn-sm rightbtn" type="button" onclick="billingprovidersettingsDetail.ShowHistory();">History</button>-->
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

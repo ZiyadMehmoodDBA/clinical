@@ -1,0 +1,496 @@
+﻿<div id="questionGroupDetail">
+    <div class="modal-dialog modal-dialog-full">
+        <div id="modalcontent" class="modal-content">
+            <div id="modalheader" class="modal-header" style="">
+                <button type="button" class="close" onclick="questionGroupDetail.UnLoad();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Question Group Details</h4>
+            </div>
+            <div class="modal-body pt-xs" id="aaa">
+                <form method="post" onsubmit="return false" id="frmQuestionGroupDetail">
+                    <input type="hidden" name="QuestionGroupID" id="QuestionGroupID" value="-1" />
+                    <div class="form-group">
+                        <div class="col-md-2 col-sm-3">
+                            <label class="control-label" for="Short Name">Short Name<span class="required">*</span></label>
+                            <input class="form-control" name="ShortName" maxlength="20" id="ShortName" type="text">
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <label class="control-label" for="Description">Description</label>
+                            <input class="form-control" name="Description" maxlength="100" id="Description" type="text">
+                        </div>
+
+                        <div class="col-md-2 col-sm-3">
+                            <label class="control-label" for="Specialty">Specialty</label>
+                            <select class="form-control" name="Specialty" ddlist="GetSpecialty" id="SpecialityID">
+                                SpecialityID: "190"
+                                <option selected="selected" value="">-Select-</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-2 col-sm-3">
+                            <label class="control-label" for="BodySystems">Body Systems</label>
+                            <select class="form-control" name="BodySystems" ddlist="GetBodySystem" id="BodySystemId">
+                                <option selected="selected" value="">-Select-</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-1 col-sm-2">
+                            <label class="control-label" for="Canvas">Canvas Col(s)</label>
+                            <select class="form-control" name="Canvas" id="Canvas">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-1 size-max70 pad-a-labelsize">
+                            <div class="checkbox-custom checkbox-default ">
+                                <input type="checkbox" id="Active" checked="checked" type="text">
+                                <label class="control-label" for="Active">Active</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 pull-right pad-a-labelsize-btn">
+                            <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                        </div>
+                    </div>
+
+                    <div id="pnlQuestionsinfo">
+                        <div class="col-md-3 mt-md pull-right">
+                            <div class="panel-blue NoRadiusT">
+                                <h4 class="panel-title white text-center">Question Properties</h4>
+                            </div>
+                            <div class="panel-body NoRadiusT p-xs">
+                                <!--<a class="btn btn-success btn-xs"><i class="fa fa-plus-circle"></i> Heading</a>-->
+                                <div class="col-xs-12 p-none">
+                                    <div class="col-xs-5 size-min80 p-none pull-left">
+                                        <!--<input type="radio" id="Search Question" name="rq" checked="checked">-->
+                                        <label class="control-label" for="Search Question">Question</label>
+                                    </div>
+                                    <!--<div class="col-xs-4 size-min120 p-none pull-left">
+                                        <input type="radio" id="Search Question Group" name="rq">
+                                        <label class="control-label" for="Search Question Group">Question Group<span class="required">*</span></label>
+                                    </div>-->
+                                    <div class="col-xs-12 input-group">
+                                        <input class="form-control" id="SearchQuestiontxt" type="text" placeholder="Searh Question ">
+                                        <!--<div class="input-group-btn"> <a class="btn btn-primary btn-xs" onclick="questionGroupDetail.QuestionsSearch();"><i class="fa fa-search"></i></a> </div>-->
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 p-none mt-sm">
+                                    <!--Question paging-->
+                                    <div class="col-xs-12 pl-none pr-none pull-left">
+                                        <div class="sortable" id="lstQuestionGroup">
+
+                                        </div>
+                                    </div>
+                                    <input class="form-control" id="txtRowspPageHF" type="hidden" style="display:none;" />
+                                    <input class="form-control" id="txtPageNoHF" type="hidden" style="display:none;" />
+                                    <input class="form-control" id="txtTotalQuestions" type="hidden" style="display:none;" />
+                                    <div id="divQuestionlistPaging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                                        <div class="col-sm-6 col-md-12 col-lg-6 pl-none" id="divShowingEntries">Showing 10 to 6 of 24</div>
+                                        <div id="pagerParent" class="col-sm-6 col-md-12 col-lg-6 p-none">
+                                            <ul class="pagination pull-right m-none">
+                                                <li id="preLink"><a id="lnkPrevPages" class="p-xs pt-none pb-none" href="#null" title="Previous Pages"><i class="fa fa-angle-double-left"></i></a></li>
+                                                <li id="preLink"><a id="lnkPrev" class="p-xs pt-none pb-none" href="#null" title="Previous Page"><i class="fa fa-angle-left"></i></a></li>
+                                                <li class="active"><a class="p-xs pt-none pb-none" href="#">1</a></li>
+                                                <li><a class="p-xs pt-none pb-none" href="#">2</a></li>
+                                                <li id="nextLink"><a class="p-xs pt-none pb-none" id="lnkNext" href="#null" title="Next Page"><i class="fa fa-angle-right"></i></a></li>
+                                                <li id="nextLink"><a class="p-xs pt-none pb-none" id="lnkNextPages" href="#null" title="Next Pages"><i class="fa fa-angle-double-right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/Question paging-->
+                                <div class="col-xs-12 p-none mt-md">
+                                    <div class="tabs">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#AddedQuestions" data-toggle="tab">Added Questions</a></li>
+                                            <li class=""><a href="#Properties" data-toggle="tab">Properties</a></li>
+                                        </ul>
+                                        <div class="tab-content tab-content-featured p-xs pl-none pr-none">
+                                            <div id="AddedQuestions" class="tab-pane active">
+                                                <!--<h4 class="panel-title pt-none pb-none NoRadius">Heading 2</h4-->
+                                                <!--<div class="row">-->
+                                                <!--<div class="col-xs-1 pr-none pl-xs pull-left">
+                                                    <ul class="list-unstyled sortCount " id="SelectedQuestionDivList">
+                                                        <li>1</li>
+                                                        <li>2</li>
+                                                        <li>3</li>
+                                                        <li>4</li>
+                                                        <li>5</li>
+                                                        <li>6</li>
+                                                    </ul>
+                                                </div>-->
+                                                <div class="col-xs-12 pl-xs pr-xs pull-left">
+                                                    <ul class="sortable ui-sortable" id="SelectedQuestionDiv"></ul>
+                                                </div>
+                                                <!--</div>-->
+                                                <div class="spacer10"></div>
+                                                <div class="clearfix"></div>
+                                                <!--<h4 class="panel-title pt-none pb-none NoRadius">Heading 3</h4>
+                                                dsafads-->
+                                            </div>
+                                            <div class="tab-pane" id="Properties">
+                                                <div id="divAnswerTextFieldAnswer" class="form-group disableAll">
+                                                    <div class="col-lg-4">
+                                                        <label class="control-label">Field Type</label>
+                                                    </div>
+                                                    <div class="col-xs-6 col-lg-4 radio-custom radio-small">
+                                                        <input type="radio" id="radSingleLine" name="r1" checked="">
+                                                        <label class="control-label" for="Single Line">Single Line</label>
+                                                    </div>
+                                                    <div class="col-xs-6 col-lg-4 radio-custom radio-small">
+                                                        <input type="radio" id="radMultiLine" name="r1">
+                                                        <label class="control-label" for="Multi Line">Multi Line</label>
+                                                    </div>
+                                                    <span class="spacer10"></span>
+                                                    <div class="col-xs-6">
+                                                        <label class="control-label" for="Text Length">Text Length</label>
+                                                        <input class="form-control" id="TextLength" type="text" value="244">
+                                                    </div>
+                                                    <div class="col-xs-6 pl-xs">
+                                                        <label class="control-label" for="Text Case">Text Case</label>
+                                                        <select class="form-control" id="TextCase">
+                                                            <option selected="" value="">-Select-</option>
+                                                            <option value="P1">Upper</option>
+                                                            <option value="P2">Lower</option>
+                                                            <option value="P3">Sentence</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="checkbox-custom checkbox-default">
+                                                            <input id="chkAutoComplete" type="checkbox">
+                                                            <label class="control-label" for="Auto Complete">Auto Complete</label>
+                                                        </div>
+                                                    </div>
+                                                    <span class="spacer10"></span>
+                                                    <div class="size40per pl-default pull-left">
+                                                        <label class="control-label" for="Sentence">Sentence</label>
+                                                    </div>
+                                                    <div class="size50per pl-md pr-default pull-right">
+                                                        <select class="form-control" id="txtPredefined" onchange="questionDetail.GetLabelText(this, 'sentencetxtField', 'txtPredefined');">
+                                                            <option value="Predefined">Predefined</option>
+                                                            <option value="P1">Practice 1</option>
+                                                            <option value="P2" selected="">Practice 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="p-default pt-xs">
+                                                        <textarea class="form-control" rows="2" id="sentencetxtField" spellcheck="true"> {{Practice 2}}  Has some</textarea>
+                                                    </div>
+
+                                                </div>
+                                                <div id="divAnswerRadioFieldAnswer" class="form-group disableAll">
+
+                                                    <div class="col-xs-4 col-md-12 col-lg-4">
+                                                        <label class="control-label" for="Label 1">Label 1</label>
+                                                        <input type="text" id="questionRadioLabel1" class="form-control" onblur="questionDetail.getRadioLabel1Text();">
+                                                    </div>
+                                                    <div class="col-xs-4 col-md-12 col-lg-3">
+                                                        <label class="control-label" for="Label 2">Label 2</label>
+                                                        <input type="text" id="questionRadioLabel2" class="form-control" onblur="questionDetail.getRadioLabel2Text();">
+                                                    </div>
+                                                    <div class="col-xs-4 col-md-12 col-lg-5">
+                                                        <label class="control-label" for="Default Value">Default Value</label>
+                                                        <select class="form-control" id="radDefaultValue">
+                                                            <option value="">-Select-</option>
+                                                            <option value="P1">Practice 1</option>
+                                                            <option value="P2">Practice 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-12 p-none mt-sm">
+                                                        <div class="col-xs-8 col-md-12 col-lg-7">
+                                                            <label class="control-label" for="Sentence For Label 1">Sentence For Label 1</label>
+                                                        </div>
+                                                        <div class="col-xs-4 col-md-12 col-lg-5">
+                                                            <select class="form-control" id="radPredefinedTrue" onchange="questionDetail.GetLabelText(this, 'radSentenceForLabel1', 'radPredefinedTrue');">
+                                                                <option value="Predefined">Predefined</option>
+                                                                <option value="P1">Practice 1</option>
+                                                                <option value="P2">Practice 2</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-12 pt-xxs">
+                                                            <textarea class="form-control" rows="2" id="radSentenceForLabel1" spellcheck="true"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-xs-12 p-none  mt-sm">
+                                                        <div class="col-xs-8 col-md-12 col-lg-7">
+                                                            <label class="control-label" for="Sentence For Label 2">Sentence For Label 2</label>
+                                                        </div>
+                                                        <div class="col-xs-4 col-md-12 col-lg-5">
+                                                            <select class="form-control" id="radPredefinedFalse" onchange="questionDetail.GetLabelText(this, 'radSentenceForLabel2', 'radPredefinedFalse');">
+                                                                <option selected="selected" value="Predefined">Predefined</option>
+                                                                <option value="P1">Practice 1</option>
+                                                                <option value="P2">Practice 2</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-12 pt-xxs">
+                                                            <textarea class="form-control" rows="2" id="radSentenceForLabel2" spellcheck="true"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divAnswerDropdownFieldAnswer" class="form-group disableAll">
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label" for="Values">Values</label>
+                                                        <textarea id="txtareaElementsDropDown" onblur="questionDetail.ddlElementsFromTextArea();" class="form-control" rows="3" spellcheck="true"></textarea>
+                                                    </div>
+                                                    <div class="col-xs-12 mt-md">
+                                                        <div class="size40per pull-left">
+                                                            <label class="control-label" for="Sentence">Sentence</label>
+                                                        </div>
+                                                        <div class="size50per pl-md pull-right">
+                                                            <select class="form-control" id="drpPredefined" onchange="questionDetail.GetLabelText(this, 'Sentencedrpdwn', 'drpPredefined');">
+                                                                <option value="Predefined">Predefined</option>
+                                                                <option value="P1">Practice 1</option>
+                                                                <option value="P2">Practice 2</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <div class="mt-xs">
+                                                            <textarea class="form-control" rows="2" id="Sentencedrpdwn" spellcheck="true"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divAnswerMultiSelectDropdownFieldAnswer" class="form-group disableAll">
+                                                    <div class="panel-body NoRadiusT ">
+                                                        <div class="col-xs-12 pl-none pr-md">
+                                                            <div class="col-xs-3 p-none">
+                                                                <label class="control-label" for="Values">Values</label>
+                                                            </div>
+                                                            <div class="col-xs-9">
+                                                                <p>(Press Enter key to separate each value )</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-8 p-none">
+                                                            <textarea id="txtareaElementsDropDownMultiSelect" onblur="questionDetail.ddlMultiSelectElementsFromTextArea();" class="form-control" rows="3" spellcheck="true"></textarea>
+                                                        </div>
+                                                        <div class="col-xs-12">
+                                                            <div class="row">
+                                                                <div class="col-xs-3 mt-md">
+                                                                    <label class="control-label" for="Sentence">Sentence</label>
+                                                                </div>
+                                                                <div class="col-xs-9 mt-md pr-xs">
+                                                                    <div class="size90 pull-right">
+                                                                        <select class="form-control" id="Predefined">
+                                                                            <option selected="selected" value="Predefined">Predefined</option>
+                                                                            <option value="P1">Practice 1</option>
+                                                                            <option value="P2">Practice 2</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-xs-12 p-xs">
+                                                                    <textarea class="form-control" rows="2" id="Sentence" spellcheck="true"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divAnswerFractionFieldAnswer" class="form-group disableAll">
+                                                    <div class="col-xs-6">
+                                                        <label class="control-label" for="Label 1">Label 1</label>
+                                                        <input type="text" id="questionFarctionLabel1" class="form-control" onblur="questionDetail.getFractionLabel1Text();">
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <label class="control-label" for="Label 2">Label 2</label>
+                                                        <input type="text" id="questionFarctionLabel2" class="form-control" onblur="questionDetail.getFractionLabel2Text();">
+                                                    </div>
+                                                    <div class="col-xs-12 p-none  mt-sm">
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="Sentence">Sentence</label>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <select class="form-control" id="fractionPredefined" onchange="questionDetail.GetLabelText(this, 'SentenceFraction', 'fractionPredefined');">
+                                                                <option selected="selected" value="Predefined">Predefined</option>
+                                                                <option value="P1">Practice 1</option>
+                                                                <option value="P2">Practice 2</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-12 pt-xxs">
+                                                            <textarea class="form-control" rows="2" id="SentenceFraction" spellcheck="true"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divAnswerDateFieldAnswer" class="form-group disableAll">
+                                                    <div class="col-xs-6">
+                                                        <label class="control-label" for="Format">Format</label>
+                                                        <select class="form-control" id="questionDateFormat">
+                                                            <option selected="selected" value="">MM/DD/YYYY</option>
+                                                            <option value="P1">Practice 1</option>
+                                                            <option value="P2">Practice 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <label class="control-label" for="Default Value">Default Value</label>
+                                                        <select class="form-control" id="questionDateDefaultValue">
+                                                            <option selected="selected" value="">Todate</option>
+                                                            <option value="P1">Practice 1</option>
+                                                            <option value="P2">Practice 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-12 p-none mt-sm">
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="Sentence">Sentence</label>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <select class="form-control" id="datePredefined" onchange="questionDetail.GetLabelText(this, 'SentenceDate', 'datePredefined');">
+                                                                <option selected="selected" value="Predefined">Predefined</option>
+                                                                <option value="P1">Practice 1</option>
+                                                                <option value="P2">Practice 2</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-12 pt-xxs">
+                                                            <textarea class="form-control" rows="2" id="SentenceDate" spellcheck="true"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divAnswerTimeFieldAnswer" class="form-group disableAll">
+                                                    <div class="col-xs-6">
+                                                        <label class="control-label" for="Default">Default</label>
+                                                        <input class="form-control" type="text" id="questionTimeDefaultValue">
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <label class="control-label" for="Format">Format</label>
+                                                        <select class="form-control" id="questionTimeFormat">
+                                                            <option selected="selected" value="">-Select-</option>
+                                                            <option value="P1">Practice 1</option>
+                                                            <option value="P2">Practice 2</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-xs-12 p-none mt-sm">
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="Sentence">Sentence</label>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <select class="form-control" id="timePredefined" onchange="questionDetail.GetLabelText(this, 'SentenceTime', 'timePredefined');">
+                                                                <option selected="selected" value="Predefined">Predefined</option>
+                                                                <option value="P1">Practice 1</option>
+                                                                <option value="P2">Practice 2</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-12 mt-xxs">
+                                                            <textarea class="form-control" rows="2" id="SentenceTime" spellcheck="true"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divAnswerImageFieldAnswer" class="form-group disableAll">
+                                                    <div data-provides="fileinput">
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="uploadFilePH">File(s)<span class="required">*</span></label>
+                                                            <input type="text" class="form-control" name="fileupload" id="uploadFilePH" placeholder="No File Selected" disabled="disabled" />
+                                                        </div>
+                                                        <div class="col-xs-6 pad-a-labelsize-btn">
+                                                            <span class="btn btn-default btn-xs pt-xxs mr-sm btn-file btn-block">
+                                                                <i class="fa fa-folder-open"></i>
+                                                                <span>Browse</span>
+                                                                <input type="file" name="Upload_Import_file" accept="application/pdf,image/jpg,image/bmp,image/png,image/jpeg,image/gif" id="Upload_Import_file" onchange="questionDetail.BufferFile(this);" />
+                                                            </span>
+                                                            <label class="control-label" id="totalFiles">0 file(s) selected</label>
+                                                        </div>
+                                                        <div class="col-xs-12">
+                                                            <img id="imdIDPreview" class="img-responsive img-center img-thumbnail NoRadius p-xs" src="" alt="Image">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 mt-sm p-none">
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="Sentence">Sentence</label>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <select class="form-control" id="imgPredefined" onchange="questionDetail.GetLabelText(this, 'SentenceImage', 'imgPredefined');">
+                                                                <option selected="selected" value="Predefined">Predefined</option>
+                                                                <option value="P1">Practice 1</option>
+                                                                <option value="P2">Practice 2</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-12 pt-xxs">
+                                                            <textarea class="form-control" rows="2" id="SentenceImage" spellcheck="true"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="divAnswerNumberFieldAnswer" class="form-group disableAll">
+                                                    <div class="col-xs-3 col-md-6">
+                                                        <label class="control-label" for="Default">Default</label>
+                                                        <input class="form-control" type="text" id="questionNumberDefaulttxt">
+                                                    </div>
+                                                    <div class="col-xs-3 col-md-6">
+                                                        <label class="control-label" for="Min Length">Min Length</label>
+                                                        <input class="form-control" type="text" id="questionNumberMinLengthtxt">
+                                                    </div>
+                                                    <div class="col-xs-3 col-md-6">
+                                                        <label class="control-label" for="Max Length">Max Length</label>
+                                                        <input class="form-control" type="text" id="questionNumberMaxLengthtxt">
+                                                    </div>
+                                                    <div class="col-xs-3 col-md-6">
+                                                        <label class="control-label" for="Precision">Precision</label>
+                                                        <input class="form-control" type="text" id="questionNumberPrecisiontxt">
+                                                    </div>
+                                                    <div class="col-xs-12 p-none mt-sm">
+                                                        <div class="col-xs-6">
+                                                            <label class="control-label" for="Sentence">Sentence</label>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <select class="form-control" id="numberPredefined" onchange="questionDetail.GetLabelText(this, 'SentenceNumber', 'numberPredefined');">
+                                                                <option selected="selected" value="Predefined">Predefined</option>
+                                                                <option value="P1">Practice 1</option>
+                                                                <option value="P2">Practice 2</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-12 pt-xxs">
+                                                            <textarea class="form-control" rows="2" id="SentenceNumber" spellcheck="true"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="visible-sm visible-xs"><div class="clearfix"></div></div>
+                        <div class="col-md-9">
+                            <div class="panel-blue NoRadiusT  mt-md">
+                                <h4 class="panel-title white text-center">Canvas</h4>
+                            </div>
+                            <div class="panel-body NoRadiusT" id="HTMLTempalteQuestionGroup">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+
+        </div><div class="clearfix"></div>
+    </div>
+</div>
+
+<!--<script>
+    $(document).ready(function () {
+
+        $("#questionGroupDetail #lstQuestionGroup").sortable({
+            out: function (event, ui) {
+                utility.myConfirm('5', function () {
+
+                    //CacheManager.BindCodes('GetInsurancePlan', true);
+                }, function () {
+
+                    $(ui.sender).sortable('cancel');
+                },
+                    '5'
+                );
+            },
+        });
+        $("#lstInsurances").disableSelection();
+    });
+</script>-->
+
+<script type="text/javascript">
+
+    
+
+    $(function () {
+        $("#questionGroupDetail #SelectedQuestionDiv").sortable();
+        $("#questionGroupDetail #SelectedQuestionDiv").disableSelection();
+    });
+</script>

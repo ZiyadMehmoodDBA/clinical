@@ -1,0 +1,359 @@
+﻿<div id="pnlMIPSAdminPreferenceGroupDetail">
+    <div id="actionPanMIPSAdminPreferenceGroupDetail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <div class="modal-dialog modal-dialog-full">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="MIPS_AdminPreferenceGroupDetail.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Edit Group</h4>
+            </div>
+            <div class="modal-body pt-default" id="tblproviderDetail">
+                <form method="post" onsubmit="return false;" id="frmMIPSAdminPreferenceGroupDetail">
+                    <div class="form-group">
+                        <div class="checkbox-custom m-none col-sm-10">
+                            <input type="checkbox" name="Active" checked id="chkIsActive">
+                            <label for="Active">Active</label>
+                        </div>
+                        <div class="col-sm-2 has-feedback">
+                            <a id="lnkVerifyTIN" target="_blank" class="pull-right" style="display: inline;" href="https://npiregistry.cms.hhs.gov" onclick="" title="Verify TIN / NPI">Verify TIN / NPI <i class="fa fa-external-link" aria-hidden="true"></i><span></span></a>
+                        </div>
+                        <div class="spacer10"></div>
+                        <div class="panel-body panel-featured">
+                            <div class="col-sm-2" id="divsubmissionyear">
+                                <label class="control-label">Submission Year <span class="required">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                    <input type="text" class="form-control" id="dtpSubmissionYear" name="SubmissionYear" maxlength="4" data-plugin-datepicker />
+                                </div>
+                            </div>
+                            <div class="col-sm-2" id="DivPractice">
+                                <label class="control-label" for="Practice">Practice <span class="required">*</span></label>
+                                <select class="form-control" id="ddlPractice" name="Practice">
+                                    <option selected="selected" value="">-Select-</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Entity <span class="required">*</span> </label>
+                                <select id="EntityId" name="Entity" class="form-control" ddlist="GetEntity"></select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label"> Group TIN <span class="required">*</span></label>
+                                <input id="txtTIN" name="TIN" class="form-control" type="text" placeholder="999999999" maxlength="9" onkeypress="return utility.ValidateZero(event, this);" onblur="utility.ValidateCtrlMask('frmProviderDetail', this); providerDetail.validateLength(this)" />
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label"> Group Name <span class="required">*</span></label>
+                                <input id="txtGroupName" name="GroupName" class="form-control" type="text" />
+                            </div>
+                        </div>
+
+                        <ul id="ulTabs" class="tabs-custom">
+                            <li class="liMDVision active custom-made-tabs" id="liAllProviders" onclick="MIPS_AdminPreferenceGroupDetail.GridTabChange('All Providers');"><a href=".AllProviders" data-toggle="tab">All Providers </a></li>
+                            <li class="liMDVision  custom-made-tabs" id="liMDVision" onclick="MIPS_AdminPreferenceGroupDetail.GridTabChange('MD Vision');"><a href=".MDVision" data-toggle="tab">MD Vision </a></li>
+                            <li class="liSovereignHealthRegistry  custom-made-tabs" id="liSovereignHealthRegistry" onclick="MIPS_AdminPreferenceGroupDetail.GridTabChange('Sovereign Health Registry');"><a href=".SovereignHealthRegistry " data-toggle="tab">Sovereign Health Registry  </a></li>
+                            <li class="liSovereignQCDR  custom-made-tabs" id="liSovereignQCDRs" onclick="MIPS_AdminPreferenceGroupDetail.GridTabChange('Sovereign QCDR');"><a href=".SovereignQCDR" data-toggle="tab">Sovereign QCDR</a></li>
+                            <li class="liOther  custom-made-tabs" id="liOther" onclick="MIPS_AdminPreferenceGroupDetail.GridTabChange('Other');"><a href=".Other" data-toggle="tab">Other</a></li>
+                            
+                                <a id="lnkCheckElegibility" target="_blank" class="pull-right" style="display: inline;" href="https://qpp.cms.gov/participation-lookup" onclick="" title="Check MIPS Eligibility Status">Check MIPS Eligibility Status <i class="fa fa-external-link"></i><span></span></a>
+                           
+                        </ul>
+                        <div class="tab-content tabs-custom-body">
+
+                            <div class="SignedNotes tab-pane active">
+                                <!--<input type="hidden" id="Notes_SelectedDataKeys" />-->
+                                <!--<div class="col-md-3 has-feedback pull-left">
+                                    <a id="lnkCheckElegibility" target="_blank" class="pull-right" style="display: inline;" href="https://qpp.cms.gov/participation-lookup" onclick="" title="Check MIPS Eligibility Status">Check MIPS Eligibility Status <i class="fa fa-external-link" ></i><span></span></a>
+                                </div>-->
+                                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvMIPSAdminProvider">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">MIPSProviderId</th>
+                                          
+                                            <th class="size120">Last Name</th>
+                                            <th class="size120">First Name</th>
+                                            <th class="size150">Specialty</th>
+                                            <th class="size100">NPI</th>
+                                            <th>Practice</th>
+                                            <th>MIPS Eligibility Status</th>
+                                            <th>Joining Date</th>
+                                            <th>Leaving Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divdgvMIPSAdminProviderPaging"></div>
+                                <span class="spacer10"></span>
+                            </div>
+                        </div>
+                        <div id="divPatientBanner" class="toggle localImage" data-plugin-toggle="">
+                            <section class="toggle">
+                                <label>MIPS Preferences</label>
+                                <div class="toggle-content" style="display: none;">
+
+                                    <div class="">
+                                        <div class="spacer10"></div>
+                                        <fieldset class="fieldset-primary mt-sm">
+                                            <legend>
+                                                <label class="text-uppercase">reporting </label>
+                                                <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                    <input id="switchReporting" isactive="1" type="checkbox" name="Reporting" data-plugin-ios-switch="" style="display: inline;" onchange="MIPS_AdminPreferenceGroupDetail.SelectReportingDiv(this);">
+                                                </span>
+                                                <label class="text-uppercase">not reporting</label>
+                                            </legend>
+                                            <div class="col-xs-12 p-none" id="Reporting">
+
+                                                <table class="table table-col-4 table-up30 table-va-middle mb-none clearfix">
+
+                                                    <tr>
+                                                        <td><div class="spacer10"></div><h5 class="bold text-uppercase">practice type</h5></td>
+                                                        <td><div class="spacer10"></div><h5 class="bold text-uppercase">mips reporting categories</h5></td>
+                                                        <td class="borderY-primary"><div class="spacer10"></div><h5 class="bold text-uppercase">performance period</h5></td>
+                                                        <td><div class="spacer10"></div><h5 class="bold text-uppercase">select period</h5></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="radio-custom">
+                                                                <input id="rdoLarge" type="radio" name="rdoPractice" checked="checked" value="1">
+                                                                <label for="Large Practice">Large Practice</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="checkbox-custom m-none">
+                                                                <input id="chkQuality" type="checkbox" checked class="disableAll">
+                                                                <label class="control-label" for="Quality">Quality</label>
+                                                            </div>
+                                                        </td>
+                                                        <td class="borderY-primary">
+                                                            <label class="text-capitalize">full year </label>
+                                                            <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                                <input id="switchActiveQuality" isactive="1" type="checkbox" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="MIPS_AdminPreferenceGroupDetail.SelectPerriod(this,'Quality');">
+                                                            </span>
+                                                            <label class="text-capitalize">90 days</label>
+                                                        </td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col-xs-6" id="divYearQuality">
+
+                                                                    <select id="ddlQualityYeaR" name="QualityYeaR" class="form-control">
+                                                                        <option selected="selected" value="">-Select-</option>
+                                                                        <option value="2017">2017</option>
+                                                                        <option value="2018">2018</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-xs-12 hidden p-none" id="divPeriodQuality">
+                                                                    <div class="col-xs-6">
+                                                                        <label class="control-label" for="Date of Birth">Date From</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                            <input class="form-control " type="text" id="dtpDateFromQuality" name="DateFromQuality" data-plugin-datepicker="">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <label class="control-label" for="Date of Birth">Date To</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                            <input class="form-control " type="text" id="dtpDateToQuality" name="DateToQuality" data-plugin-datepicker="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="radio-custom">
+                                                                <input id="rdoSmall" type="radio" name="rdoPractice" value="2">
+                                                                <label for="Small Practice">Small Practice(15 or fewer clinicians)</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="checkbox-custom m-none">
+                                                                <input id="chkACI" type="checkbox" checked class="disableAll">
+                                                                <label class="control-label" for="Promoting Interoperability">Promoting Interoperability (Formerly ACI)</label>
+                                                            </div>
+                                                        </td>
+                                                        <td class="borderY-primary">
+                                                            <label class="text-capitalize">full year </label>
+                                                            <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                                <input id="switchActiveACI" isactive="1" type="checkbox" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="MIPS_AdminPreferenceGroupDetail.SelectPerriod(this, 'ACI');">
+                                                            </span>
+                                                            <label class="text-capitalize">90 days</label>
+                                                        </td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col-xs-6 hidden" id="divYearACI">
+
+                                                                    <select id="ddlACIYeaR" name="ACIYeaR" class="form-control">
+                                                                        <option selected="selected" value="">-Select-</option>
+                                                                        <option value="2017">2017</option>
+                                                                        <option value="2018">2018</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-xs-12  p-none" id="divPeriodACI">
+                                                                    <div class="col-xs-6">
+                                                                        <label class="control-label" for="Date of Birth">Date From</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                            <input class="form-control " type="text" id="dtpDateFromACI" name="DateFromACI" data-plugin-datepicker="">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <label class="control-label" for="Date of Birth">Date To</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                            <input class="form-control " type="text" id="dtpDateToACI" name="DateToACI" data-plugin-datepicker="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="radio-custom">
+                                                                <input id="rdoRural" type="radio" name="rdoPractice" value="3">
+                                                                <label for="Rural Practice">Rural Practice</label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="checkbox-custom m-none">
+                                                                <input id="chkIA" type="checkbox" checked class="disableAll">
+                                                                <label class="control-label" for="IA">IA (Improvement Activities)</label>
+                                                            </div>
+                                                        </td>
+                                                        <td class="borderY-primary">
+                                                            <label class="text-capitalize">full year </label>
+                                                            <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                                <input id="switchActiveIA" isactive="1" type="checkbox" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="MIPS_AdminPreferenceGroupDetail.SelectPerriod(this, 'IA');">
+                                                            </span>
+                                                            <label class="text-capitalize">90 days</label>
+                                                        </td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col-xs-6 hidden" id="divYearIA">
+
+                                                                    <select id="ddlIAYeaR" name="IAYeaR" class="form-control">
+                                                                        <option selected="selected" value="">-Select-</option>
+                                                                        <option value="2017">2017</option>
+                                                                        <option value="2018">2018</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-xs-12  p-none" id="divPeriodIA">
+                                                                    <div class="col-xs-6">
+                                                                        <label class="control-label" for="Date of Birth">Date From</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                            <input class="form-control " type="text" id="dtpDateFromIA" name="DateFromIA" data-plugin-datepicker="">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <label class="control-label" for="Date of Birth">Date To</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                            <input class="form-control " type="text" id="dtpDateToIA" name="DateToIA" data-plugin-datepicker="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+
+                                                            <div class="checkbox-custom m-none">
+                                                                <input id="chkCost" type="checkbox" checked class="disableAll">
+                                                                <label class="control-label" for="Cost">Cost</label>
+                                                            </div>
+                                                        </td>
+                                                        <td class="borderY-primary">
+                                                            <label class="text-capitalize">full year </label>
+                                                            <span class="btnWidgetSwitch switch switch-xs switch-primary off-primary togglemips">
+                                                                <input id="switchActiveCost" isactive="1" type="checkbox" name="switch" data-plugin-ios-switch="" style="display: inline;" onchange="MIPS_AdminPreferenceGroupDetail.SelectPerriod(this, 'Cost');">
+                                                            </span>
+                                                            <label class="text-capitalize">90 days</label>
+                                                        </td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col-xs-6" id="divYearCost">
+
+                                                                    <select id="ddlCostYeaR" name="CostYeaR" class="form-control">
+                                                                        <option selected="selected" value="">-Select-</option>
+                                                                        <option value="2017">2017</option>
+                                                                        <option value="2018">2018</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-xs-12 hidden p-none" id="divPeriodCost">
+                                                                    <div class="col-xs-6">
+                                                                        <label class="control-label" for="Date of Birth">Date From</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                            <input class="form-control " type="text" id="dtpDateFromCost" name="DateFromCost" data-plugin-datepicker="">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <label class="control-label" for="Date of Birth">Date To</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                                            <input class="form-control " type="text" id="dtpDateToCost" name="DateToCost" data-plugin-datepicker="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="spacer10"></div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div id="NotReporting" class="hidden">
+                                                <div class="col-sm-12 pb-sm">
+                                                    <label class="control-label">Reason (Please Specify)<span class="required">*</span></label>
+                                                    <textarea id="txtReason" name="Reason" rows="3" class="form-control" spellcheck="true"></textarea>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                   
+                                </div>
+
+                            </section>
+                        </div>
+                        <div class="col-xs-12 p-none pt-sm">
+                            <div class="pull-right">
+                                <button class="btn btn-default btn-sm">Save & Exit</button>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="visible-xs"><div class="clearfix"></div></div>
+
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('[data-plugin-toggle]').each(function () {
+            var $this = $(this),
+                opts = {
+                };
+
+            var pluginOptions = $this.data('plugin-options');
+            if (pluginOptions)
+                opts = pluginOptions;
+
+            $this.themePluginToggle(opts);
+        });
+    });</script>

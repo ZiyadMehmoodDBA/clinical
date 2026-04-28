@@ -1,0 +1,195 @@
+﻿<div class="row" id="pnlClinicalAuditReport" style="display:none;">
+    <div id="actionPanClinicalAuditReport" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_AuditReport.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Audit Report</h4>
+            </div>
+
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <button  type="button" class="btn btn-success btn-sm" id="btn-add" onclick="Clinical_AuditReport.openAuditReportView()"><i class="fa fa-plus-circle"></i> Export</button>
+                    <div class="spacer10"></div>
+                    <div class="clearfix"></div>
+                    <section class="panel panel-featured">
+                        <header class="panel-heading">
+                            <div class="panel-actions">
+                                <a href="#" class="closebtn pull-right" onclick="Clinical_AuditReport.UnLoadTab()"></a>
+                            </div>
+                            <h2 class="panel-title">Audit Report </h2>
+                        </header>
+                        <ul class="tabs-custom">
+                            <li class="active"><a class="custom-made-tabs" id="LiPatient" href="#msgsPat" onclick="Clinical_AuditReport.auditReportSearch();" data-toggle="tab">Patient<span class="badge"></span></a></li>
+                            <li class=""><a class="custom-made-tabs" id="LiUser" href="#msgsUser" onclick="Clinical_AuditReport.auditReportSearch();" data-toggle="tab">User<span class="badge"></span></a></li>
+                        </ul>
+
+                        <div class="tab-content tabs-custom-body pl-xxs pr-xxs">
+                            <div class="panel-body" id="pnlAuditReport_Search">
+                                <form class="form-bordered" method="post" onsubmit="return false" id="frmClinicalAuditReport">
+
+                                    <div class="form-group">
+                                        <div id="PatientTabControl">
+                                            <div class="col-sm-2 col-md-2" id="divAccount">
+                                                <label class="control-label">Patient</label>
+                                                <select id="ddlPatAccount" name="PatientAccount" multiple="multiple" class="form-control height22" />
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-2">
+                                                <label class="control-label">User Role </label>
+                                                <select id="ddlAuditRole" class="form-control" name="AuditRole" ddlist="GetLookRoles"/>   
+                                            </div>
+                                            <div class="col-sm-2 col-md-2" id="divAuditUser">
+                                                <label class="control-label" for="AuditUser">User Name</label>
+                                                <select id="ddlAuditUser" name="AuditUser" multiple="multiple" class="form-control" />
+                                            </div>
+                                            <div class="col-sm-2 col-md-2">
+                                                <div>
+                                                    <label class="control-label" for="Date">From Date</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input type="text" id="dtpFromDate" class="form-control" name="FromDate" data-plugin-datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 col-md-2">
+                                                <div>
+                                                    <label class="control-label" for="Date">To Date</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input type="text" id="dtpToDate" class="form-control" name="ToDate" data-plugin-datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 col-md-2">
+                                                <label class="control-label">Action </label>
+                                                <select id="ddlAuditAction" class="form-control" name="AuditAction">
+                                                    <option value="">-All-</option>
+                                                    <option value="Insert">Insert</option>
+                                                    <option value="Update">Update</option>
+                                                    <option value="Delete">Delete</option>
+                                                    <option value="View">View</option>
+                                                    <option value="Print">Print</option>
+                                                    <option value="Copy">Copy</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div id="UserTabControl">
+                                            <div class="col-sm-2 col-md-2">
+                                                <label class="control-label">User Role </label>
+                                                <select id="ddlUserAuditRole" class="form-control" name="UserAuditRole">
+                                                    <option value="">-Select-</option>
+                                                    <option value="Regular">Regular</option>
+                                                    <option value="EmergencyAccess">Emergency Access</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-2 col-md-2" id="divUserAuditUser">
+                                                <label class="control-label">User Name</label>
+                                                <select id="ddlUserAuditUser" name="UserAuditUser" multiple="multiple" class="form-control" />
+                                            </div>
+                                            <div class="col-sm-2 col-md-2">
+                                                <div>
+                                                    <label class="control-label" for="Date">From Date</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input type="text" id="dtpUserFromDate" class="form-control" name="UserFromDate" data-plugin-datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 col-md-2">
+                                                <div>
+                                                    <label class="control-label" for="Date">To Date</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                        <input type="text" id="dtpUserToDate" class="form-control" name="UserToDate" data-plugin-datepicker>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2 col-md-2">
+                                                <label class="control-label">Action </label>
+                                                <select id="ddlUserAuditAction" class="form-control" name="UserAuditAction">
+                                                    <option value="">-All-</option>
+                                                    <option value="Insert">Insert</option>
+                                                    <option value="Update">Update</option>
+                                                    <option value="Delete">Delete</option>
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mt-md pr-default pull-right">
+                                            <button class="btn btn-primary btn-sm rightbtn" id="btnRadiologySearch" type="button" onclick="Clinical_AuditReport.auditReportSearch();">Search</button>
+                                            <button class="btn btn-primary btn-sm rightbtn hidden" id="btnProcedureReset" type="button" onclick="Clinical_RadiologyOrder.radiologyOrderReset();">Reset</button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="hfPatientId" value="" name="PatientId" />
+
+                                </form>
+                            </div>
+
+                            <div id="msgsPat" class="tab-pane active custom-made-tabs">
+                                <div id="pnlAuditReport_Result" style="display: inline;">
+                                    <section class="panel">
+                                        <div class="panel-body panel-featured">
+                                            <div class="spacer5"></div>
+                                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvAuditReport">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="display:none">AuditReportId</th>
+                                                        <th class="size60 size-min60">Date</th>
+                                                        <th class="size50 size-min50">Time</th>
+                                                        <th class="size100 size-min100">Account No</th>
+                                                        <th class="size100 size-min100">Patient Name</th>
+                                                        <th class="size100 size-min100">User Name</th>
+                                                        <th class="size100 size-min100">Module</th>
+                                                        <th class="size50 size-min50">Action</th>
+                                                        <th class="size60 size-min60">Field</th>
+                                                        <th class="size100 size-min100">Original Value</th>
+                                                        <th class="size100 size-min100">Current Value</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div id="dgvAuditReport_Paging"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                                </div>
+                                <div id="msgsUser" class="tab-pane  custom-made-tabs">
+                                  
+
+                                    <div id="pnlAuditReport_User" style="display: inline;">
+                                        <section class="panel">
+                                            <div class="panel-body panel-featured">
+                                                <div class="spacer5"></div>
+                                                <input type="hidden" id="Provider_SelectedDataKeys" />
+                                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvAuditReportUser">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="display:none">AuditReportId</th>
+                                                            <th class="size60 size-min60">Date</th>
+                                                            <th class="size50 size-min50">Time</th>
+                                                            <th class="size100 size-min100">User Name</th>
+                                                            <th class="size100 size-min100">Admin User</th>
+                                                            <th class="size50 size-min50">Action</th>
+                                                            <th class="size60 size-min60">Field</th>
+                                                            <th class="size100 size-min100">Original Value</th>
+                                                            <th class="size100 size-min100">Current Value</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div id="dgvAuditReportUser_Paging"></div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                    </section>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

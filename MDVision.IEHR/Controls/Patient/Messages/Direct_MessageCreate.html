@@ -1,0 +1,80 @@
+﻿<div id="pnlDirectMessageCreate" style="display:none;" class="row">
+    <div id="actionPanDirectMessageCreate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="row">
+        <div id="modaldialog">
+            <div id="modalcontent">
+                <div id="modalheader" style="display:none;">
+                    <button type="button" class="close" onclick="Direct_MessageCreate.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="titleMessage">Compose Direct Message</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="frmDirectMessageCreate">
+                        <div class="col-sm-12">
+                            <label class="control-label">Message Type</label>
+                            <div class="input-group">
+                                <select class="form-control ValidateCriteria" id="selectmsgType" name="msgType">
+                                    <!--<option value="regular">Regular</option>-->
+                                    <option selected value="direct">Direct</option>
+                                    <option  value="edge">Edge</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 p-none pt-md">
+                            <div id="divProvider" class="col-sm-12 provider">
+                                <div class="" id="txttopractice">
+                                    <label for="" class="control-label" id="lblMessageToProv">To<span class="required">*</span></label>
+                                    <input id="txtTo" type="text" name="EmailTo" customname="To" class="form-control green bold" onblur="Direct_MessageCreate.enabledisablesend(this);" />
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <!--<div class="col-sm-12">
+                            <label for="" class="control-label">Encryption</label>
+                            <input type="password" name="Password" id="password" class="form-control" />
+                        </div>-->
+
+                        <div class="col-sm-12">
+                            <label for="" class="control-label">Subject</label>
+                            <input id="txtSubject" name="Subject" type="text" class="form-control" />
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-8 p-none" id="divAttatchFile">
+                            <div class="col-sm-10" style="display:none">
+                                <label class="control-label" for="uploadFilePH">Attach File</label>
+                                <input type="hidden" class="form-control size100per ellipses" disabled name="fileupload" id="uploadFilePH" placeholder="No File Selected" />
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-2 pt-lg">
+                                <div class="clearfix"></div>
+                                <span class="btn-default btn-xs btn-file">
+                                    <i class="fa fa-folder-open"></i>
+                                    <span>Attach File</span>
+                                    <input type="file" id="Upload_Import_file" name="Upload_Import_file" accept="application/pdf,application/xml,application/zip,application/x-zip-compressed,text/plain,text/html" multiple="multiple" onchange="Direct_MessageCreate.BufferFile(this);" />
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 pt-lg" id="divfilesicons">
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-12">
+                            <label class="control-label" for="comments">Message</label>
+                            <textarea id="txtMessageDtl" name="MessageDetail" class="form-control" rows="15" spellcheck="true"></textarea>
+                        </div>
+
+                        <div class="pull-left col-sm-6 mt-md " id="divButtons">
+                            <button type="button" id="btnSend" class="btn btn-sm btn-success" onclick="Direct_MessageCreate.SaveCreateMessage();">Send</button>
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

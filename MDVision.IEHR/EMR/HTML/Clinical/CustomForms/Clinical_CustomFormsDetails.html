@@ -1,0 +1,109 @@
+﻿<div class="row" id="pnlClinicalCustomFormsDetails">
+    <div id="actionPanAdminCustomForms" class="modal fade" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog size95per">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Clinical_CustomFormsDetails.UnLoadTab();"></button>
+                <h4 class="modal-title">Add Custom Form</h4>
+            </div>
+            <div class="modal-body">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form method="post" id="frmCustomFormsDetails" onsubmit="return false">
+                        <div class="form-group">
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label" for="Form Name">Form Name<span class="required">*</span></label>
+                                <input class="form-control" name="FormName" id="txtFormName" type="text">
+                            </div>
+                            <div class="col-sm-4 col-lg-2">
+                                <label class="control-label" for="Form Heading">Form Heading</label>
+                                <input class="form-control" id="txtFormHeading" name="FormHeading" type="text">
+                            </div>
+                            <div class="col-sm-4 col-lg-2" id="divSpecialty">
+                                <label class="control-label" for="Specialty">Specialty</label>
+                                <select class="form-control" name="Specialty" multiple="multiple" id="ddlSpecialty"></select>
+                            </div>
+                            <div class="col-sm-4 col-lg-2" id="divProvider">
+                                <select class="form-control" style="display:none;" name="hiddenPhysicalExamTemplateProvider" id="ddlHiddenProvider"></select>
+                                <label class="control-label" for="Provider">Provider</label>
+                                <select class="form-control" name="Provider" multiple="multiple" id="ddlProvider"></select>
+                            </div>
+                            <div class="col-sm-4 col-lg-2" id="divAttachCategory">
+                                <label class="control-label" for="Attach Category">Attach Categories</label>
+                                <select class="form-control" name="AttachCategory" multiple="multiple" id="ddlAttachCategory"></select>
+                            </div>
+                            <div class="col-sm-4 col-lg-2 p-none">
+                                <div class="col-xs-4 hidden ">
+                                    <label class="control-label" for="CanvasCol">Canvas Col(s)</label>
+                                    <select class="form-control hidden" name="CanvasCols" id="ddlCanvasCol">
+                                        <option value="6">6</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6 pad-a-labelsize">
+                                    <div class="checkbox-custom checkbox-default ">
+                                        <input type="checkbox" id="chkActive" name="IsActive" checked class="disableAll">
+                                        <label class="control-label" for="Active">Active</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 pull-right mt-sm">
+                                    <button class="btn btn-primary btn-sm rightbtn" type="submit">Save</button>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="spacer10"></div>
+                        <div id="pnlCustomeFormArea" class="col-xs-12 p-none hidden">
+                            <div class="col-md-3 col-lg-2">
+                                <div class="panel-blue NoRadiusT">Template Tools</div>
+                                <ul id="toolbarContainer" class="listPrimary listBordered listDragg panel-body p-xs NoRadiusT">
+                                    <li id="toolQuestionGroup" class="drageme">Question Group <!--<i class="fa fa-check-square-o pull-right"></i>--></li>
+                                    <li id="toolTextField" class="drageme">Text Field <span class="listIcon"><i class="border size40 pull-left mt-tiny">&nbsp;</i></span></li>
+                                    <li id="toolCheckBox" class="drageme">Check Box <span class="listIcon"><i class="fa fa-check-square"></i></span></li>
+                                    <li id="toolYesNo" class="drageme">Yes / No <span class="listIcon pt-xs"><i class="toggleIcoCustom active">Y</i><i class="toggleIcoCustom">N</i></span> </li>
+                                    <li id="toolToggle" class="drageme">Toggle <span class="listIcon"><i class="fa fa-toggle-on"></i></span></li>
+                                    <li id="toolSingleSelectDropdown" class="drageme">Single Select Dropdown <span class="listIcon"><i class="fa fa-check-square-o"></i></span></li>
+                                    <li id="toolMultipleSelectCombo" class="drageme">Multiple Select Combo <span class="listIcon"><i class="fa fa-check-square-o"></i><i class="fa fa-check-square-o"></i></span></li>
+                                    <li id="toolImage" class="drageme">Image <span class="listIcon"><i class="fa fa-image"></i></span></li>
+                                    <li id="toolFractionField" class="drageme">Fraction Field <span class="listIcon"><i class="fa fa-square-o"></i> / <i class="fa fa-square-o"></i></span></li>
+                                    <li id="toolHeader" class="drageme">Header</li>
+                                    <li id="toolTable" class="drageme">Table <span class="listIcon"><i class="fa fa-table"></i></span></li>
+                                    <li id="toolFreeText" class="drageme">Free Text <span class="listIcon"><i class="border border-dash size40 pull-left mt-tiny">&nbsp;</i></span></li>
+                                    <li id="toolDateField" class="drageme">Date Field <span class="listIcon"><i class="fa fa-calendar"></i></span></li>
+                                    <li id="toolTimeField" class="drageme">Time Field <span class="listIcon"><i class="fa fa-clock-o"></i></span></li>
+                                    <li id="toolProcedures" class="drageme">Procedures<span class="listIcon"><i class="fa fa-product-hunt"></i></span></li>
+                                    <li id="toolProblems" class="drageme">Problems<span class="listIcon"><i class="fa fa-stethoscope"></i></span></li>
+                                    <li id="toolTinyMCEditor" class="drageme">TinyMC Editor<span class="listIcon"><i class="fa fa-edit"></i></span></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 col-lg-7">
+                                <div class="panel-blue NoRadiusT">
+                                    <div id="lblCustomFormHeading" class="pull-left">Select Heading</div>
+                                    <a class="btn btn-xs" id="lnkEditFormName" href="#" onclick="Clinical_CustomFormsDetails.editFormName(this, event);" title="Edit Form Name"><i class="fa fa-pencil black"></i></a>
+                                    <input class="form-control customFormHeading" style="display:none" />
+                                </div>
+                                <div id="CustomrFormHTML" class="panel-body NoRadiusT gridster">
+                                    <ul id="customFormDetails" class="list-unstyled dragableCF dragableGrid" style="width:100% !important; min-height:500px !important;"></ul>
+                                </div>
+                            </div>
+                            <div id="divQuestionProperties" class="col-md-3">
+                                <div class="panel-blue NoRadiusT">Question Properties</div>
+                                <div class="panel-body NoRadiusT p-xs">
+                                    <div class="btn-group mb-default">
+                                        <button id="btnQuestion" type="button" class="btn btn-sm btn-gray active" onclick="Clinical_GlobalQuestionGroup.showQuestions(this)">Questions</button>
+                                        <button id="btnQuestionGroups" type="button" class="btn btn-sm btn-gray" onclick="Clinical_GlobalQuestionGroup.showQuestions(this)">Question Groups</button>
+                                    </div>
+                                    <div class="col-lg-12 p-none mb-default">
+                                        <input class="form-control" id="txtSearchQuestion" name="SearchQuestion"
+                                               oninput="Clinical_GlobalQuestionGroup.filterQuestions(this)" placeholder="Search Question" type="text" value="">
+                                    </div>
+                                    <ul class="listPrimary listBordered listNormalFont listHoverBlackColor listDragg own-scroll height-max400" id="ulQuestions"></ul>
+                                    <ul class="listPrimary listBordered listNormalFont listHoverBlackColor listDragg own-scroll height-max400" id="ulQuestionGroups" style="display:none;"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

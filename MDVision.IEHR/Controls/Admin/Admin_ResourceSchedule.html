@@ -1,0 +1,61 @@
+﻿<div class="row" id="pnlAdminResourceSchedule" style="display:none;">
+    <div id="actionPanAdminResourceSchedule" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <button type="button" class=" btn btn-success btn-sm" id="btnResourceScheduleAdd" onclick="Admin_ResourceSchedule.ResourceScheduleAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>
+    <section class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Admin_ResourceSchedule.UnLoadTab();"></a>
+            </div>
+            <h2 class="panel-title">Search Resource Schedule </h2>
+        </header>
+        <div class="panel-body" id="pnlResourceSchedule_Search">
+            <form class="form-bordered" method="post" onsubmit="return false">
+                <!--start - CONTENTS-->
+                <div class="form-group">
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Resource</label>
+                        <select id="ddlresource" name="provider" class="form-control " ddlist="GetResources"></select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2">
+                        <label class="control-label">Facility</label>
+                        <select id="ddlfacility" name="facility" class="form-control " ddlist="GetFacility"></select>
+                    </div>
+                    <div class="col-sm-4 col-lg-2 pad-a-labelsize-btn">
+                        <button class="btn btn-primary btn-sm" id="btnResourceScheduleSearch" type="button" onclick="Admin_ResourceSchedule.ResourceScheduleSearch();">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id="pnlResourceSchedule_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="ResourceSchedule_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvResourceSchedule">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">ResScheduleId</th>
+                            <th class="size120">Action</th>
+                            <th class="size150">Resource</th>
+                            <th class="size150">Facility</th>
+                            <th class="size150">From Date</th>
+                            <th class="size150">To Date</th>
+                            <th class="size150">From Time</th>
+                            <th class="size150">To Time</th>
+                            <!--<th class="size100">Slot Minutes</th>-->
+                            <th class="size100">Created Date</th>
+                            <th>Created By</th>
+                            <!--<th>Total Slots</th>-->
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divResSchedulePaging"></div>
+            </div>
+        </section>
+    </div>
+</div>
+

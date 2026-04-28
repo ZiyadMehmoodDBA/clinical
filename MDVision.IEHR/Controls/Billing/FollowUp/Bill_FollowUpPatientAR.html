@@ -1,0 +1,193 @@
+﻿<div class="row" id="pnlBillFollowUpPatientAR" style="display:none;">
+    <div id="actionPanBillFollowUpPatientAR" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Bill_FollowUpPatientAR.UnLoadTab()"></a>
+                </div>
+                <h2 class="panel-title">Search Patient AR</h2>
+            </header>
+            <div class="panel-body" id="pnlReason_Search">
+                <form method="post" id="frmFollowUpPatientAR" onsubmit="return false">
+                    <div class="form-group">
+
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Entity">Group</label>
+                            <select id="ddlGroup" name="GroupID" class="form-control" ddlist="GetFollowUpARGroup"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Entity">Action</label>
+                            <select id="ddlAction" name="ActionID" class="form-control" ddlist="GetFollowUpAction"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Entity">Reason</label>
+                            <select id="ddlReason" name="Reason" class="form-control" ddlist="GetFollowUpReasons"></select>
+                        </div>
+
+                        <!--<div class="col-sm-2">
+                            <label class="control-label">Insurance Plan</label>
+                            <select id="ddlInsurancePlan" class="form-control" name="InusrancePlan" ddlist="GetInsurancePlan"></select>
+                        </div>-->
+
+                        <div class="col-sm-2" id="DivPatientInsuranceAutoComplete" style="display:inline">
+                            <label id="lblInsurancePlan" class="control-label">Insurance Plan</label>
+                            <a id="lnkInsurancePlanDetail" style="display:none;" href="#" onclick="Bill_FollowUpPatientAR.OpenInsurancePlanDetail();" title="Edit Insurance Plan">Insurance Plan<span class="required">*</span></a>
+                            <div class="input-group">
+                                <input class="form-control" type="text" id="txtInsurancePlan" name="InsurancePlan" placeholder="Start typing to search" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary btn-xs " type="button" onclick="Bill_FollowUpPatientAR.OpenInsurancePlan();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Patient Account">Patient Account</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtPatientName" name="PatientAccount" type="text" />
+                                <div id="divSearchPatient" class="input-group-btn">
+                                    <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="Bill_FollowUpPatientAR.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label id="lblFacility" for="Facility" class="control-label">Facility</label>
+                            <a id="lnkFacilityEdit" style="display:none;" href="#" onclick="Bill_FollowUpPatientAR.OpenFacilityDetail();" title="Edit Facility">Facility</a>
+                            <div class="input-group">
+                                <input class="form-control" id="txtFacility" name="Facility" placeholder="Start typing to search" type="text" />
+                                <div class="input-group-btn">
+                                    <button id="lnkFacility" class="btn btn-primary btn-xs " type="button" onclick="Bill_FollowUpPatientAR.OpenFacility();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label id="lblProvider" class="control-label">Provider</label>
+                            <a id="lnkProviderEdit" style="display:none;" href="#" onclick="Bill_FollowUpPatientAR.OpenProviderDetail();" title="Edit Provider">Provider</a>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtProvider" name="Provider" placeholder="Start typing to search" />
+                                <div class="input-group-btn">
+                                    <button id="lnkProvider" class="btn btn-primary btn-xs " type="button" onclick="Bill_FollowUpPatientAR.OpenProvider();"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Case Number">Claim Number</label>
+                            <div class="input-group">
+                                <input class="form-control" id="txtClaimno" name="ClaimNumber" type="text" />
+                                <div id="divSearchClaim" class="input-group-btn">
+                                    <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="utility.OpenPatientCharges('billTabFollowUpPatientAR');"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">DOS From</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="DatePaidFrom" data-plugin-datepicker="" class="form-control" id="dpDOSFrom" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">DOS To</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="DatePaidTo" data-plugin-datepicker="" class="form-control" id="dpDOSTo" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Last Name</label>
+                            <input class="form-control" id="txtLastName" name="LastName" type="text">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">First Name</label>
+                            <input class="form-control" id="txtFirstName" name="FirstName" type="text">
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Suspend</label>
+                            <select id="ddlSuspended" name="Suspend" class="form-control">
+                                <option value="" selected="selected">All</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="control-label" for="Age"> Age</label>
+                            <select id="ddlAge" name="Age" class="form-control">
+                                <option value="" selected="selected">All</option>
+                                <option value="1">0-30 Days</option>
+                                <option value="2">31-60 Days</option>
+                                <option value="3">61-90 Days</option>
+                                <option value="4">91-120 Days</option>
+                                <option value="5">120+ Days</option>
+
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Last Modified</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="LastModified" data-plugin-datepicker="" class="form-control" id="dpLastModified" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-2 hidden">
+                            <label class="control-label">Last Comment </label>
+                            <input class="form-control" id="txtComment " name="LastComment" type="text">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 mt-xs pull-right">
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnDataFieldsSave" type="button" onclick="Bill_FollowUpPatientAR.ARSearch('Patient');">Search</button>
+                        <button class="btn btn-primary btn-sm rightbtn" id="btnSearchReset" type="button" onclick="Bill_FollowUpPatientAR.BillFollowUpPatientRReset();">Reset</button>
+                    </div>
+                    <input type="hidden" name="FacilityID" id="hfFacility" value="-1" />
+                    <input type="hidden" name="ProviderID" id="hfProvider" value="-1" />
+                    <input type="hidden" name="PatientID" id="hfPatientId" value="-1" />
+                    <input type="hidden" name="VisitID" id="hfVisitId" value="-1" />
+                    <input type="hidden" name="InsurancePlan" id="hfInsurancePlan" value="" />
+                </form>
+            </div>
+        </section>
+    </div>
+    <div id="pnlBillFollowUpPatientAR_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body panel-featured">
+                <input type="hidden" id="FollowUpAction_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvFollowUpPatientAR">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="display:none;">PatARDetailId</th>
+                            <th rowspan="2" class="size-120">Action</th>
+                            <th rowspan="2" class="noWordBreak">Practice</th>
+                            <th rowspan="2" class="size180">Facility</th>
+                            <th rowspan="2" class="noWordBreak">Provider</th>
+                            <th rowspan="2" class="noWordBreak">Ins Plan</th>
+                            <th rowspan="2" class="size120">Account</th>
+                            <th rowspan="2" class="size120 ">DOS</th>
+                            <th rowspan="2" class="size120">Claim</th>
+                            <th rowspan="2" class="size-min120 noWordBreak text-center">Last Name</th>
+                            <th rowspan="2" class="size-min120 noWordBreak text-center">First Name</th>
+                            <th rowspan="2" class="size120">Group</th>
+                            <th rowspan="2" class="size120">Action</th>
+                            <th rowspan="2" class="size120">Reason</th>
+                            <th rowspan="2" class="size120">Suspend</th>
+                            <th rowspan="2" class="size120">Age</th>
+                            <th colspan="2" class="text-center noWordBreak">Patient</th>
+                            <th rowspan="2" class="size120 noWordBreak ">First Statement Date</th>
+                            <th rowspan="2" class="size120 noWordBreak">Statement Date</th>
+                            <th rowspan="2" class="size120 noWordBreak">Modified On</th>
+                            <th rowspan="2" class="size120 noWordBreak">Additional Comments</th>
+                        </tr>
+                        <tr>
+                            <th class="noWordBreak">Charge</th>
+                            <th class="noWordBreak">Balance</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divFollowUpARPatientPaging"></div>
+            </div>
+        </section>
+    </div>
+</div>
+
+

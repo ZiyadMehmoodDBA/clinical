@@ -1,0 +1,66 @@
+﻿<div class="row" id="pnlAdminBasicFeeGroup" style="display:none;">
+    <div id="actionPanAdminBasicFeeGroup" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="mainScrollPan" id="mainScrollPan">
+        <button type="button" class="btn btn-success btn-sm" onclick="Admin_BasicFeeGroup.BasicFeeGroupAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+        <div class="spacer10"></div><div class="clearfix"></div>
+        <section class="panel panel-featured">
+            <header class="panel-heading">
+                <div class="panel-actions">
+                    <a href="#" class="closebtn pull-right" onclick="Admin_BasicFeeGroup.UnLoadTab();"></a>
+
+                </div>
+                <h2 class="panel-title">Search Basic Fee Group </h2>
+            </header>
+            <div class="panel-body" id="pnlBasicFeeGroup_Search">
+                <form class="form-bordered" method="post" onsubmit="return false">
+                    <!--start - CONTENTS-->
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label class="control-label">Name</label>
+                            <input class="form-control" id="txtName" type="text" />
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" id="txtDescription" type="text" />
+                        </div>
+                        <div id="divBasicFeeGroup_Entity" class="col-sm-2">
+                             <label class="control-label">Entity</label>
+                             <select id="ddlEntity" class="form-control" ddlist="GetEntity"></select>
+                        </div>
+                        <div class="col-sm-2  ">
+                            <label class="control-label">Active?</label>
+                            <select id="ddlActive" class="form-control ">
+                                <option value="">- All -</option>
+                                <option value="1" selected="selected">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 col-md-1 mt-md">
+                             <button  class="btn btn-primary btn-sm rightbtn" id="btnBasicFeeGroupSearch" type="button" onclick="Admin_BasicFeeGroup.BasicFeeGroupSearch();">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div id="pnlBasicFeeGroup_Result" style="display: none;">
+            <section class="panel">
+                <div class="panel-body">
+                    <input type="hidden" id="BasicFeeGroup_SelectedDataKeys" />
+                    <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvBasicFeeGroup">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">BasicFeeGroupId</th>
+                                <th class="size120">Action</th>
+                                <th class="size120">Name</th>
+                                <th class="size120">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <div id="divBasicFeeGroupPaging"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

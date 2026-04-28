@@ -1,0 +1,40 @@
+﻿<div class="row" id="pnlPhysicalExamTemplate" style="display:none;">
+    <div id="actionPanPhysicalExamTemplate" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_PhysicalExamTemplate.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Search Physical Exam Template</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <!--<button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="PhysicalExamTemplate.PhysicalExamTemplateAddEdit(-1);"><i class="fa fa-plus-circle"></i> Add</button>-->
+                    <button type="button" class="btn btn-success btn-sm" id="btn-add" onclick="PhysicalExamTemplate.PhysicalExamTemplateAddEditMK(-1);"><i class="fa fa-plus-circle"></i> Add</button>
+                    <div class="spacer10"></div><div class="clearfix"></div>
+                </div>
+
+                <div id="pnlPhysicalExamTemplate_Result" style="display: inline;">
+                    <section class="panel">
+                        <div class="panel-body panel-featured">
+                            <div class="spacer5"></div>
+                            <input type="hidden" id="Provider_SelectedDataKeys" />
+                            <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPhysExamTemplates">
+                                <thead>
+                                    <tr>
+                                        <th class="hidden">Sort By Date</th>
+                                        <th style="display: none;">ID</th>                                       
+                                        <th id="ColumnAction" actiontype="Save,Edit,Delete,Cancel,Active" coltype="Action" class="size80 size-min80">Action</th>
+                                        <th>Template Name</th>
+                                        <th>Last Updated</th>                                        
+                                    </tr>
+                                </thead> 
+                                <tbody></tbody>
+                            </table>
+                            <div id="divProviderPaging"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

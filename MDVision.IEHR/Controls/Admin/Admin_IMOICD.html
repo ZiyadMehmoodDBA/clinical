@@ -1,0 +1,64 @@
+﻿<div class="row" id="pnlAdminIMOICD" style="display:none;">
+    <div id="actionPanAdminIMOICD" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Admin_IMOICD.UnLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">ICD Codes</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+
+                    <section class="panel panel-featured"> 
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="closebtn pull-right" onclick="Admin_IMOICD.UnLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Search ICD </h2>
+                            </header>
+                        </div>
+                        <div class="panel-body" id="pnlIMOICD_Search">
+                            <form method="post" id="frmICDIMO" onsubmit="return false">
+                                <!--start - CONTENTS-->
+                                <div class="form-group"> 
+                                    <div class="col-sm-12">
+                                        <label class="control-label" id="lblICDAndDescription">ICD Code / Description</label><span class="required">*</span>
+                                        <input class="form-control" id="txtICDAndDescription" name="ICDAndDescription" type="text" placeholder="Search ICD Code / Description" value="">
+                                    </div>
+                                    <div class="col-sm-2 mt-md pull-right">
+                                        <button class="btn btn-primary btn-sm rightbtn" id="btnIMOICDSearch" type="button" onclick="Admin_IMOICD.ICDSearch();">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <div id="pnlIMOICD_Result" style="display: none;">
+                        <section class="panel">
+                            <div class="panel-body">
+                                <input type="hidden" id="ICD_SelectedDataKeys" />
+                                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvIMOICD">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">ICDId</th>
+                                            <th id="thICD9">ICD9</th>
+                                            <th id="thICD9Description">ICD9 Description</th>
+                                            <th>ICD10</th>
+                                            <th>ICD10 Description</th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div id="divIMOICDPaging"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,100 @@
+﻿<div id="pnlCCMEnrollmentInfo" style="display:none;">
+    <div id="actionPanCCMEnrollmentInfo" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog" class="modal-dialog modal-dialog-md">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="CCMEnrollmentInfo.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Enrollment Information</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <div class="clearfix"></div>
+                    <form method="post" id="frmCCMEnrollmentInfo" onsubmit="return false">
+
+                        <div class="col-sm-4">
+                            <label class="control-label">Program</label><span class="required">*</span>
+                            <select class="form-control" ddlist="GetEnrollmentInfoProgram" id="ddlProgram" name="Program"></select>
+                        </div>
+                        <div class="col-sm-4 p-none">
+                            <label class="control-label col-xs-12">Duration<span class="required">*</span></label>
+                            <div class="col-xs-5">
+                                <input class="form-control" id="txtDuration" name="Duration" type="number">
+                            </div>
+                            <div class="col-xs-7">
+                                <select class="form-control" id="ddlDurationUnit" name="DurationUnit">
+                                    <option value="days">Day(s)</option>
+                                    <option value="weeks">Week(s)</option>
+                                    <option value="months">Month(s)</option>
+                                    <option value="years">Year(s)</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label">Care Team</label><span class="required">*</span>
+                            <select class="form-control" id="ddlCareTeam" name="CareTeam" ddlist="GetPatientCareTeams"> </select>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="control-label">Starting From</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="dtpStartingFrom" name="StartingFrom" data-plugin-datepicker="" class="form-control ValidateCriteria" maxlength="10" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label">Ending On</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="dtpEndingOn" name="EndingOn" data-plugin-datepicker="" class="form-control ValidateCriteria" maxlength="10" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="control-label"></label>
+                            <div class="checkbox-custom">
+                                <input type="checkbox" id="chkVerbal" name="Verbal">
+                                <label for="chkVerbal" class="control-label" id="lblVerbalConsent">Verbal Consent</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="control-label" for="uploadFilePH">Consent</label>
+                            <input type="text" name="ConsentFileName" id="uploadFilePH" placeholder="No File Selected" data-bv-field="fileupload" hidden>
+                            <a href="#" id="ConsentAnchor" onclick="CCMEnrollmentInfo.OpenConsentView();" class="col-xs-12 p-none"><span id="consentFileName" class="btn btn-link btn-xs ellipses size100per pull-left noWordBreak text-left">Consent.pdf</span></a>
+                        </div>
+                        <div class="col-sm-2 pt-lg">
+                            <span class="btn btn-default btn-xs ml-xxs mr-sm btn-file">
+                                <i class="fa fa-folder-open"></i>
+                                <input type="file" class="btn btn-success btn-xs" name="Upload_Import_consent" accept="application/txt" id="Upload_Import_consent" allowfiles="pdf" onchange="CCMEnrollmentInfo.BufferFile(this);">
+                            </span>
+                            <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" title="e-signature" data-placement="top" onclick="CCMEnrollmentInfo.OpenCCMAgreement();"
+                               data-original-title="Signature"><img class="scan-icon" src="Content/images/scan.svg"></a>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="control-label">Consent Date</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" name="ConsentDate" data-plugin-datepicker="" class="form-control ValidateCriteria" id="dtpConsentDate" maxlength="10" autocomplete="off">
+                            </div>
+                        </div>
+
+
+                        
+                        <div class="col-xs-12">
+                            <label class="control-label">Comments</label>
+                            <textarea class="form-control" rows="3" id="txtComments" name="Comments" spellcheck="true"></textarea>
+                        </div>
+
+                        <span class="spacer10"></span>
+                        <input type="hidden" id="hfPatientId" />
+
+                        <button id="btnEnrollmentSave" class="btn btn-primary btn-sm rightbtn mr-default" type="submit">Save</button>
+                        <div class="clearfix"></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿<div id="pnlPatientDocumentsTag" style="display:none;">
+    <div id="actionPanDocumentTag" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="modal-dialog modal-dialog-sm">
+        <div id="modal-content">
+            <form method="post" id="frmDocumentTags" onsubmit="return false">
+                <div id="modalcontent">
+                    <div id="modalheader" style="display:none;">
+                        <button type="button" class="close" onclick="Patient_DocumentTag.UnLoad();"><span class="red">&nbsp;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Add Tag</h4>
+                    </div>
+
+                    <div class="mainScrollPan" id="mainScrollPan">
+
+                        <div id="modalbody">
+                                <div class="input-group col-lg-8">
+                                    <label for="txtNewTag" id="lblNewTag" class="control-label">Tag Name</label><span class="required">*</span>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input class="form-control" id="txtTagName" type="text" name="TagName" maxlength="100" />
+                                </div>
+                                <div class="col-xs-6">
+                                    <button type="submit" id="btnAddTags" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Add</button>
+                                </div>
+
+                            <div class="spacer10"></div><div class="clearfix col-lg-6"></div>
+
+                            <div id="pnlPatientDocumentsTag_Result">
+                                <section class="panel">
+                                    <div class="panel-body">
+                                        <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPatientDocumentsTag">
+                                            <thead>
+                                                <tr>
+                                                    <th id="ColumnAction" class="col-lg-6">Action</th>
+                                                    <th class="size30">Tags</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <div id="dvgPatientDocumentsTag_Paging"></div>
+                                    </div>
+                                </section>
+                             
+                            </div>
+                        </div>
+
+                       
+                        <div class="spacer10"></div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

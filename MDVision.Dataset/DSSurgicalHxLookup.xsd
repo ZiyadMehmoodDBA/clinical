@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSSurgicalHxLookup" targetNamespace="http://tempuri.org/DSSurgicalHxLookup.xsd" xmlns:mstns="http://tempuri.org/DSSurgicalHxLookup.xsd" xmlns="http://tempuri.org/DSSurgicalHxLookup.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="MDVisionConnectionString3" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="MDVisionConnectionString3 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.MDVision.Datasets.Properties.Settings.GlobalReference.Default.MDVisionConnectionString3" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSSurgicalHxLookup" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSSurgicalHxLookup" msprop:Generator_UserDSName="DSSurgicalHxLookup">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SurgicalHx_Location" msprop:Generator_TableClassName="SurgicalHx_LocationDataTable" msprop:Generator_TableVarName="tableSurgicalHx_Location" msprop:Generator_TablePropName="SurgicalHx_Location" msprop:Generator_RowDeletingName="SurgicalHx_LocationRowDeleting" msprop:Generator_RowChangingName="SurgicalHx_LocationRowChanging" msprop:Generator_RowEvHandlerName="SurgicalHx_LocationRowChangeEventHandler" msprop:Generator_RowDeletedName="SurgicalHx_LocationRowDeleted" msprop:Generator_UserTableName="SurgicalHx_Location" msprop:Generator_RowChangedName="SurgicalHx_LocationRowChanged" msprop:Generator_RowEvArgName="SurgicalHx_LocationRowChangeEvent" msprop:Generator_RowClassName="SurgicalHx_LocationRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LocationId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnLocationId" msprop:Generator_ColumnPropNameInRow="LocationId" msprop:Generator_ColumnPropNameInTable="LocationIdColumn" msprop:Generator_UserColumnName="LocationId" type="xs:int" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SurgicalHx_Status" msprop:Generator_TableClassName="SurgicalHx_StatusDataTable" msprop:Generator_TableVarName="tableSurgicalHx_Status" msprop:Generator_TablePropName="SurgicalHx_Status" msprop:Generator_RowDeletingName="SurgicalHx_StatusRowDeleting" msprop:Generator_RowChangingName="SurgicalHx_StatusRowChanging" msprop:Generator_RowEvHandlerName="SurgicalHx_StatusRowChangeEventHandler" msprop:Generator_RowDeletedName="SurgicalHx_StatusRowDeleted" msprop:Generator_UserTableName="SurgicalHx_Status" msprop:Generator_RowChangedName="SurgicalHx_StatusRowChanged" msprop:Generator_RowEvArgName="SurgicalHx_StatusRowChangeEvent" msprop:Generator_RowClassName="SurgicalHx_StatusRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StatusId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnStatusId" msprop:Generator_ColumnPropNameInRow="StatusId" msprop:Generator_ColumnPropNameInTable="StatusIdColumn" msprop:Generator_UserColumnName="StatusId" type="xs:int" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SurgicalHx_Location" />
+      <xs:field xpath="mstns:LocationId" />
+    </xs:unique>
+    <xs:unique name="SurgicalHx_Status_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SurgicalHx_Status" />
+      <xs:field xpath="mstns:StatusId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

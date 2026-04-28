@@ -1,0 +1,181 @@
+﻿<div id="pnlChargeBatchViewer">
+    <div id="actionPanChargeBatchViewer" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        <div class="modal-dialog-full modal-dialog modal-dialog-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="">
+                    <button type="button" id="btnClose" class="close" onclick="ChargeBatch_Viewer.UnLoad();"><span class=" red" aria-hidden="true">&nbsp;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="titleDocumentViewer"></h4>
+                </div>
+
+                <div class="panel-body">
+                    <form method="post" id="frmChargeBatchViewer" onsubmit="return false">
+                        <div class="form-group">
+                            <div id="toolbarbatchCharge" style="display:none;" class="pull-left">
+                                <a class="btn btn-link btn-sm" id="lnkChargeCapture" onclick="ChargeBatch_Viewer.OpenChargeCapture();"><i class="fa fa-file-text-o"></i> Create New Claim</a>
+                                
+                            </div>
+                            <a class="btn btn-link btn-sm" id="lnkPaymentPosting" style="display:none;" onclick="ChargeBatch_Viewer.OpenPaymentPosting();"><i class="fa fa-file-text-o"></i> Payment Posting</a>
+                            <a class="btn btn-link btn-sm" id="lnkPreviousDocument" onclick="ChargeBatch_Viewer.previousDocument();"><i class="fa fa-file-text-o"></i> Previous</a>
+                            <a class="btn btn-link btn-sm" id="lnkNextDocument" onclick="ChargeBatch_Viewer.nextDocument();"><i class="fa fa-file-text-o"></i> Next</a>
+                            <a class="btn btn-link btn-sm disabled" id="lnkExtensionMode" onclick="ChargeBatch_Viewer.EnableExtendedMode();"><i class="fa fa-file-text-o"></i> Switch to Extended Mode</a>
+                        </div>
+                        <div class="spacer10"></div>
+                        <div class="clearfix"></div>
+                         
+                        <div class="col-sm-12 p-none">
+                            <section class="panel panel-featured">
+                                <div class="panel-body" id="formDocument">
+
+                                    <div class="form-group" id="chargeBatchViewerContainer" style="display:none;">
+                                        <div class="col-sm-4 col-md-2">
+                                            <label class="control-label" for="Patient Account">Patient Account</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtPatientName" name="PatientName" type="text">
+                                                <div id="divSearchPatient" class="input-group-btn">
+                                                    <button id="lnkPatientAccount" type="button" class="btn btn-primary btn-xs" onclick="ChargeBatch_Viewer.OpenPatientSearch();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-2">
+                                            <label class="control-label" for="Biller">Action</label>
+                                            <select class="form-control" id="ddlAction" name="Action" ddlist="GetBatchChargeAction"></select>
+                                        </div>
+                                        <div class="col-sm-4 col-md-2">
+                                            <label class="control-label" for="Biller">Reason</label>
+                                            <select class="form-control" id="ddlReason" name="Reason" ddlist="GetBatchChargeReason"></select>
+                                        </div>
+                                        <div class="col-sm-4 col-md-2">
+                                            <label class="control-label" for="DOSFrom">DOS From</label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                <input class="form-control" type="text" name="DOSFrom" disabled="disabled" id="dpDOSfrm" data-plugin-datepicker="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-2">
+                                            <label class="control-label" for="Case Number">Claim Number</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtClaimNumber" name="ClaimNumber" type="text" oninput="ChargeBatch_Viewer.BindClaimNumber();">
+                                                <div id="divSearchClaim" class="input-group-btn">
+                                                    <button id="lnkClaimNumber" type="button" class="btn btn-primary btn-xs" onclick="ChargeBatch_Viewer.OpenEncounter();"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-2">
+                                            <label id="lblCaseNumber" class="control-label">Case Number</label>
+                                            <a id="lnkCaseNumberEdit" style="display:none;" href="#" onclick="ChargeBatch_Viewer.OpenCaseDetail('hfCaseId');" title="Edit Case">Case Number</a>
+                                            <div class="input-group">
+                                                <input class="form-control " id="txtCaseNumber" type="text" placeholder="Start typing to search" name="CaseNumber" onblur="utility.ValidateAutoComplete(this, 'hfCaseId', false);" maxlength="35" />
+                                                <div class="input-group-btn">
+                                                    <button id="lnkCaseNumber" class="btn btn-primary btn-xs " type="button" onclick="ChargeBatch_Viewer.OpenCase('Search Case', 'txtCaseNumber', 'hfCaseId', 'lblCaseNumber', 'lnkCaseNumberEdit');"><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-2">
+                                            <label id="lblFileName" class="control-label">File Name<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtFileName" name="FileName" type="text" />
+                                                <div class="input-group-btn">
+                                                    <input class="form-control" id="lnkFileNameExt" name="FileNameExt" type="text" style="width: 45px;" readonly="readonly" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8 col-md-4">
+                                            <label class="control-label" for="Comments">Comments</label>
+                                            <textarea class="form-control" name="Comments" id="txtComments" maxlength="150" spellcheck="true"></textarea>
+                                        </div>
+                                        <div class="col-sm-2 pull-right">
+                                            <div class="spacer10"></div>
+                                            <!--<button class="btn btn-primary rightbtn btn-sm" onclick="ChargeBatch_Viewer.BatchChargeDocumentUpdate(true);">Save & Exit</button>-->
+                                            <button id="btnSaveCharge" class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" id="PaymentBatchContainer" style="display:none;">
+                                        <div class="col-sm-3 col-lg-2">
+                                            <label class="control-label" for="Check Number">Check Number</label>
+                                            <input type="text" class="form-control" maxlength="50" name="Check Number" id="txtPaymentCheckNumber"/>
+                                        </div>
+                                        <div class="col-sm-3 col-lg-2">
+                                            <label class="control-label" for="Check Number">Check Date</label>
+                                            <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <input class="form-control" type="text" name="CheckDate" id="dpCheckDate" data-plugin-datepicker="" autocomplete="off">
+                                        </div>
+                                            </div>
+                                        <div class="col-sm-4 col-md-2">
+                                            <label class="control-label" for="Biller">Action</label>
+                                            <select class="form-control" name="Action" id="ddlPaymentAction" ddlist="GetBatchChargeAction"></select>
+                                        </div>
+                                        <div class="col-sm-4 col-md-2">
+                                            <label class="control-label" for="Biller">Reason</label>
+                                            <select class="form-control" id="ddlPaymentReason" name="PaymentReason" ddlist="GetBatchChargeReason"></select>
+                                        </div>
+                                        <div class="col-sm-4 col-md-2">
+                                            <label id="lblFileNamePayment" class="control-label">File Name<span class="required">*</span></label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="txtFileNamePayment" name="FileNamePayment" type="text" />
+                                                <div class="input-group-btn">
+                                                    <input class="form-control" id="lnkFileNameExtPayment" name="FileNameExtPayment" type="text" style="width: 45px;" readonly="readonly" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-4">
+                                            <label class="control-label" for="Comments">Comments</label>
+                                            <textarea class="form-control" name="PaymentComments" id="txtPaymentComments" rows="1" spellcheck="true"></textarea>
+                                        </div>
+                                        <div class="col-sm-2 pull-right">
+                                            <div class="spacer10"></div>
+                                            <!--<button class="btn btn-primary rightbtn btn-sm" onclick="ChargeBatch_Viewer.PaymentBatchDocumentUpdate();">Save & Exit</button>-->
+                                            <button id="btnSavePayment" class="btn btn-primary btn-sm rightbtn" type="submit">Save & Exit</button>
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" id="hfPatientId" value="-1" />
+                                    <input type="hidden" id="hfVisitId" value="-1" />
+                                    <input type="hidden" id="hfCaseId" value="-1" />
+                                </div>
+                            </section>
+                        </div>
+                        <!--<style>
+                            .document-viewer-img {
+                                width: 75%;
+                                margin-left: 12.5% !important;
+                            }
+                        </style>-->
+                        <div class="col-sm-3 col-md-2" id="extraContorls">
+                            <section class="panel panel-featured" id="imagesControls" style="display:none;">
+                                <div class="panel-body panel-body-nopadding">
+                                    <div class="spacer10"></div>
+                                    <div class="col-xs-12 center mb-md">
+                                        <a class="btn btn-link btn-xs" title="Zoom In" onclick="ChargeBatch_Viewer.ZoomIn();"><i class="fa fa-search-plus fa-lg"></i> Zoom In</a>
+                                        <a class="btn btn-link btn-xs p-none" title="Zoom Out" onclick="ChargeBatch_Viewer.ZoomOut();"><i class="fa fa-search-minus fa-lg"></i> Zoom Out</a>
+                                    </div>
+                                    <div class="col-xs-12 center"> <a class="btn btn-link btn-sm" title="Move Up" onclick="ChargeBatch_Viewer.navigateCanvas('up')"><i class="fa fa-arrow-circle-o-up fa-2x"></i></a></div>
+                                    <div class="col-xs-12 center">
+                                        <a class="btn btn-link btn-sm" title="Move Left" onclick="ChargeBatch_Viewer.navigateCanvas('left')"><i class="fa fa-arrow-circle-o-left fa-2x"></i></a>
+                                        <a class="btn btn-primary btn-sm" title="Reset Image" onclick="ChargeBatch_Viewer.navigateCanvas('reset')"><i class="fa fa-refresh fa-lg p-xs"></i></a>
+                                        <a class="btn btn-link btn-sm" title="Move Right" onclick="ChargeBatch_Viewer.navigateCanvas('right')"><i class="fa fa-arrow-circle-o-right fa-2x"></i></a>
+                                    </div>
+                                    <div class="col-xs-12 center mb-md">
+                                        <a class="btn btn-link btn-sm" title="Move Down" onclick="ChargeBatch_Viewer.navigateCanvas('down')"><i class="fa fa-arrow-circle-o-down fa-2x"></i></a>
+                                    </div>
+                                    <div class="col-xs-12 center mb-md">
+                                        <div class="col-xs-12 center mb-md">
+                                            <button id="btnPrint" class="btn btn-primary btn-sm" title="Print Image" type="button" onclick="ChargeBatch_Viewer.PrintDocument();">Print</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <input type="hidden" id="helperPDF" />
+                        <object id="OpenDocumentIF" class="col-sm-12  panel-body panel-featured" data="Scripts/js/pdf/web/viewer.html" style="display:none;height:1000px;"></object>
+                        <div class="col-sm-9 col-md-10 panel-body panel-featured" id="canvasContainer" style="overflow-y:scroll; height:350px;display:none;">
+                           <canvas id="canvas" class="col-xs-12 pb-sm"></canvas>
+                        </div>
+                        <div id="printHelper" class="noprint" style="display:none;"></div>
+                        
+                    </form>
+                </div>
+    </div>
+</div>
+</div>

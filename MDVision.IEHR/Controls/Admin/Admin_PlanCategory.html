@@ -1,0 +1,64 @@
+﻿<div class="row" id="pnlAdminPlanCategory" style="display:none;">
+    <div id="actionPanAdminPlanCategory" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div class="clearfix"></div>
+    <button type="button" class="btn btn-success btn-sm" onclick="Admin_PlanCategory.PlanCategoryAdd();"><i class="fa fa-plus-circle"></i> Add</button>
+    <div class="spacer10"></div><div class="clearfix"></div>
+    <section class="panel panel-featured">
+        <header class="panel-heading">
+            <div class="panel-actions">
+                <a href="#" class="closebtn pull-right" onclick="Admin_PlanCategory.UnLoadTab();"></a>
+            </div>
+            <h2 class="panel-title">Search Plan Category </h2>
+        </header>
+        <div class="panel-body" id="pnlPlanCategory_Search">
+            <form class="form-bordered" method="post" onsubmit="return false">
+                <!--start - CONTENTS-->
+                <div class="form-group">
+                    <div class="col-sm-2 col-md-2">
+                        <label class="control-label">Short Name</label>
+                        <input class="form-control" id="txtShortName" type="text" maxlength="10" />
+                    </div>
+                    <div class="col-sm-4 col-md-5">
+                        <label class="control-label">Description</label>
+                        <input class="form-control" id="txtDescription" type="text" maxlength="55" />
+                    </div>
+                    <div id="divPlanCategory_Entity" class="col-sm-2 col-md-2">
+                        <label class="control-label">Entity</label>
+                        <select id="ddlEntity" class="form-control" ddlist="GetEntity"></select>
+                    </div>
+                    <div class="col-sm-2  col-md-2">
+                        <label class="control-label">Active?</label>
+                        <select id="ddlActive" class="form-control ">
+                            <option value="">- All -</option>
+                            <option value="1" selected="selected">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-md-1 mt-md pull-right">
+                        <button class="btn btn-primary rightbtn btn-sm" id="btnPlanCategorySearch" type="button" onclick="Admin_PlanCategory.PlanCategorySearch();">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id="pnlPlanCategory_Result" style="display: none;">
+        <section class="panel">
+            <div class="panel-body">
+                <input type="hidden" id="PlanCategory_SelectedDataKeys" />
+                <table class="table table-bordered table-striped table-condensed table-hover mb-none" id="dgvPlanCategory">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">PlanCategoryId</th>
+                            <th class="size120">Action</th>
+                            <th class="size150">Short Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="divPlanCategoryPaging"></div>
+            </div>
+        </section>
+    </div>
+</div>

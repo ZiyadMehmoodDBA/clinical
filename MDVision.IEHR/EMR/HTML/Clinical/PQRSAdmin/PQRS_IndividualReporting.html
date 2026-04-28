@@ -1,0 +1,64 @@
+﻿<div id="pnlPQRSIndividualReporting">
+    <div id="actionPanPQRSIndividualReporting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <div id="modaldialog">
+        <div id="modalcontent">
+            <div class="mainScrollPan" id="mainScrollPan">
+                <button type="button" class="btn btn-success btn-sm" onclick="PQRS_IndividualReporting.AddIndividualReporting()"><i class="fa fa-plus-circle"></i> Add</button>
+                <div class="spacer10"></div>
+                <div class="panel panel-featured">
+                    <header class="panel-heading">
+                        <div class="panel-actions"><a class="closebtn pull-right" onclick="PQRS_IndividualReporting.UnLoadTab()"></a></div>
+                        <h2 class="panel-title">Search Individual Reporting </h2>
+                    </header>
+                    <div class="panel-body">
+                        <form id="frmPQRSIndividualReporting" method="post" onsubmit="return false">
+                           
+                           
+                            <div class="col-sm-3 col-md-3" id="divIndividualReportingProvider">
+                                <label class="control-label">Provider</label>
+                                <select id="ddlProviderId" name="ProviderId" class="form-control " ddlist="GetProvider" data-bv-field="ProviderId"></select>
+                            </div>
+                            <div class="col-sm-3 col-md-3" id="divIndividualReportingSpecialty">
+                                <label class="control-label">Specialty </label>
+                                <select id="ddlSpecialtyId" name="SpecialityId" class="form-control" ddlist="GetSpecialty" data-bv-field="SpecialityId" />
+                            </div>
+                            <div class="col-sm-4 col-md-2">
+                                <label class="control-label">Active?</label>
+                                <select id="ddlActive" name="IsActive" class="form-control ValidateCriteria">
+                                    <option value="">- All -</option>
+                                    <option value="1" selected="selected">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="pull-right mt-md pr-default"><button class="btn btn-primary btn-sm" onclick="PQRS_IndividualReporting.measureIndividualSearch();" type="button">Search</button></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="spacer10"></div>
+                <!--<div class="panel-body panel-featured">
+                </div>-->
+            </div>
+
+        </div>
+    </div>
+    <div id="pnlIndividualReporting_Result" style="display: inline;">
+        <form>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvIndividualReporting">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Submission Year</th>
+                            <th>Provider</th>
+                            <th>Specialty</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="dgvIndividualReporting_Paging" class="col-sm-12 p-none mt-xs" style="display: inline;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

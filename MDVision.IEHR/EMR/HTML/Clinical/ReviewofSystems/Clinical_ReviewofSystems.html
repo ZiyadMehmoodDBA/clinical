@@ -1,0 +1,348 @@
+﻿<div class="row" id="pnlClinicalReviewofSystems">
+    <div id="actionPanClinicalReviewofSystems" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+    <!--<div class="clearfix"></div>-->
+    <div id="modaldialog" class="modal-dialog-full">
+        <div id="modalcontent">
+            <div id="modalheader" style="display:none;">
+                <button type="button" class="close" onclick="Clinical_ReviewofSystems.unLoadTab();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 id="headingTitle" class="modal-title">Review of Systems</h4>
+            </div>
+            <div id="modalbody">
+                <div class="mainScrollPan" id="mainScrollPan">
+                    <form id="frmClinicalReviewofSystems" method="post" name="frmClinicalReviewofSystems" onsubmit="return false">
+
+                        <div id="formpanelheading">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="javascript:void(0);" class="closebtn pull-right" onclick="Clinical_ReviewofSystems.unLoadTab();"></a>
+                                </div>
+                                <h2 class="panel-title">Add Review of Systems</h2>
+                            </header>
+                        </div>
+                        <div class="col-xs-12 p-none" id="pnlSection_Search">
+
+                            <div class="spacer10"></div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <ul class="tabBtn" role="tablist">
+                                    <li id="LiROSTemplates" class="active">
+                                        <a onclick="Clinical_ReviewofSystems.showROSTemplatesTab('LiROSTemplates');" data-target="#viewTemplates" role="tab" data-toggle="tab" class="btn btn-default btn-sm">ROS Templates</a>
+                                    </li>
+                                    <li id="LiAddROS" class="hidden">
+                                        <a data-target="#addROSSystem" role="tab" data-toggle="tab" class="btn btn-default btn-sm" onclick="Clinical_ReviewofSystems.showROSTemplatesTab('LiAddROS');">Add</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="spacer20"></div>
+
+                                    <div role="tabpanel" class="tab-pane active" id="viewTemplates">
+                                        <div class="form-group">
+                                            <div class="col-sm-6 col-lg-6">
+                                                <div id="pnlSection_Templates" style="display: inline;">
+                                                    <div class="panel-body panel-featured height345 height-max345 overflowY own-scroll">
+                                                        <input type="hidden" id="Templates_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvClinicalNotesTemplates">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">TemplateId</th>
+                                                                    <th class="size40">Action</th>
+                                                                    <th>Templates</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-lg-6">
+                                                <div id="pnlSection_DataTemplates" style="display: inline;">
+                                                    <div class="panel-body panel-featured height345 height-max345 overflowY own-scroll">
+                                                        <input type="hidden" id="DataTemplates_SelectedDataKeys" />
+                                                        <table class="table table-bordered table-striped table-hover mb-none table-condensed" id="dgvClinicalNotesDataTemplates">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="display:none;">TemplateId</th>
+                                                                    <th class="size40">Action</th>
+                                                                    <th>Data Templates</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Content for Add button-->
+                                    <div role="tabpanel" class="tab-pane" id="addROSSystem">
+                                        <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <label class="control-label" for="Date">Date</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+                                                <input type="text" class="form-control" id="dtReviewofSystemsDate" name="ReviewofSystemsDate" data-plugin-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8 col-md-9 col-lg-10 pull-left pl-default pr-default pad-a-labelsize">
+                                            <div class="checkbox-custom" id="divNormalGlobal">
+                                                <input type="checkbox" id="chkReviewofSystemssNormal" onclick="Clinical_ReviewofSystems.markSectionsAsNormal(this, false);" name="ReviewofSystemssNormal">
+                                                <label class="control-label">Normal</label>
+                                                <a class="btn  mt-xxs btn-xs disabled gray" id="bookIconNormalGlobal" href="#" onclick="Clinical_ReviewofSystems.showTextArea(this);"> <i class="fa fa-book"></i></a>
+                                                <input type=hidden id="hdnDescriptionNormalGlobal" name="ROSDescriptionNormal" />
+                                            </div>
+                                        </div>
+                                        <div class="spacer20"></div>
+                                        <div id="sectionReviewofSystems" class="tab-content-featured panel-body  toggleVertical">
+                                            <div id="ReviewofSystems" class="pull-left" style="width: 1175px !important;">
+                                                <section class="panel panel-featured panel-xs ml-none mr-none">
+
+                                                    <header class="panel-heading">
+                                                        <h2 id="headingSys" class="panel-title pull-left">System</h2>
+                                                        <!--<button class="pull-right btn btn-success btn-xs" id="btn-addSys" type="button" onclick="Clinical_ReviewofSystems.renameSystem(false, this)"><i class="fa fa-plus-circle"></i></button>-->
+                                                        <div class="clearfix"></div>
+                                                    </header>
+                                                    <div id="divReviewofSystemsSystems" class="panel-body height345 height-max345 overflowY own-scroll p-none">
+                                                    </div>
+                                                </section>
+
+                                                <section id="SystemSections" class="panel panel-featured panel-md">
+                                                    <header class="panel-heading">
+                                                        <h2 id="headingSysChar" class="panel-title pull-left">Characteristics </h2>
+                                                        <!--<button class="btn btn-success btn-xs pull-right" id="btn-addChac" type="button" onclick="Clinical_ReviewofSystems.renameCharacteristics(false, this)"><i class="fa fa-plus-circle"></i></button>-->
+                                                        <div class="clearfix"></div>
+                                                    </header>
+                                                    <div id="divReviewofSystemsSystemSection" class="panel-body height345 height-max345 overflowY own-scroll">
+
+                                                    </div>
+                                                </section>
+
+                                                <section class="panel panel-featured panel-md hidden">
+                                                    <header class="panel-heading">
+                                                        <h2 id="headingSysCharDetails" class="panel-title">Detail</h2>
+                                                    </header>
+                                                    <div id="divExamCharacteristics" class="panel-body height345 height-max345 overflowY own-scroll">
+
+                                                        <div class="col-xs-12">
+                                                            <label class="control-label">Previous History</label>
+                                                            <input class="form-control" id="PreviousHistory" name="PreviousHistory" type="text" maxlength="255" />
+                                                        </div>
+
+                                                        <div class="col-xs-4" id="DivDetailStatusId">
+                                                            <label class="control-label" for="DetailStatusId">Status</label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailStatusId" name="DetailStatusId" ddlist="getROSCharacteristicsDetailStatus">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-xs-4">
+                                                            <label class="control-label">Onset</label>
+                                                            <input class="form-control" id="Onset" name="Onset" type="text" maxlength="255" />
+                                                        </div>
+                                                        <div class="col-xs-4 p-none" id="DivDurationId">
+                                                            <div class="col-xs-4">
+                                                                <label class="control-label">Duration</label>
+                                                                <div style="position:relative;">
+                                                                    <input class="form-control" id="Duration" name="Duration" type="text" maxlength="2" onkeydown="utility.ValidateDecimal(event, 0);" onblur="Clinical_ReviewofSystems.validateDurationDetails();" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-8 pad-a-labelsize">
+                                                                <select class="form-control" id="ROSCharacteristicsDetailDurationId" name="DurationId" ddlist="getROSCharacteristicsDetailDuration" disabled>
+                                                                    <option selected="selected" value="">-Select-</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-4" id="DivPatternId">
+                                                            <label class="control-label" for="PatternId">Pattern</label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailPatternId" name="PatternId" ddlist="getROSCharacteristicsDetailPattern">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+
+
+                                                        <div class="col-xs-4" id="DivSeverityId">
+                                                            <label class="control-label" for="SeverityId">Severity</label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailSeverityId" name="SeverityId" ddlist="getROSCharacteristicsDetailSeverity">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+
+
+                                                        <div class="col-xs-4" id="DivCourseId">
+                                                            <label class="control-label" for="CourseId">Course</label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailCourseId" name="CourseId" ddlist="getROSCharacteristicsDetailCourse">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-4" id="DivRadiationId">
+                                                            <label class="control-label" for="RadiationId">Radiation</label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailRadiationId" name="RadiationId" ddlist="getROSCharacteristicsDetailRadiation">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-4" id="DivFrequencyId">
+                                                            <label class="control-label" for="FrequencyId">Frequency</label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailFrequencyId" name="FrequencyId" ddlist="getROSCharacteristicsDetailFrequency">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-4" id="DivContextId">
+                                                            <label class="control-label" for="ContextId">Context</label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailContextId" name="ContextId" ddlist="getROSCharacteristicsDetailContext">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-4" id="DivCharacterCSZId">
+                                                            <label class="control-label" for="CharacterCSZId">Character – Color/shape/size </label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailCharacterCSZId" name="CharacterCSZId" ddlist="getROSCharacteristicsDetailCharacterCSZ">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-4" id="DivAggravatedbyId">
+                                                            <label class="control-label" for="AggravatedbyId">Aggravated by</label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailAggravedById" name="AggravatedbyId" ddlist="getROSCharacteristicsDetailAggravedBy">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-4" id="DivRelievedbyId">
+                                                            <label class="control-label" for="RelievedbyId">Relieved by</label>
+                                                            <select class="form-control" id="ROSCharacteristicsDetailRelievedById" name="RelievedbyId" ddlist="getROSCharacteristicsDetailRelievedBy">
+                                                                <option selected="selected" value="">-Select-</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-xs-4">
+                                                            <label class="control-label">Location</label>
+                                                            <input class="form-control" id="Location" name="Location" type="text" maxlength="255" />
+                                                        </div>
+                                                        <div class="col-xs-4">
+                                                            <label class="control-label">Precipitated by</label>
+                                                            <input class="form-control" id="PrecipitatedBY" name="Precipitatedby" type="text" maxlength="255" />
+                                                        </div>
+                                                        <div class="col-xs-4">
+                                                            <label class="control-label">Associated with</label>
+                                                            <input class="form-control" id="AssociatedWith" name="Associatedwith" type="text" maxlength="255" />
+                                                        </div>
+                                                        <input type="hidden" name="ROSCharacteristicsDetailsId" id="hfROSCharacteristicsDetailsId" value="-1" />
+                                                    </div>
+                                                </section>
+                                                <div class="toggle disableAll" data-plugin-toggle="">
+                                                    <section class="toggle">
+                                                        <label>Detail</label>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="control-label">Comments</label>
+                                            <textarea id="txtROSComments" name="ROSComments" rows="3" maxlength="5000" class="form-control" spellcheck="true"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+
+                        </div>
+
+                        <div class="pull-right pad-a-labelsize-btn pr-default" id="actionButtons">
+                            <button class="btn btn-success btn-sm pull-right mr-sm" style="display:none;" type="button" onclick="Clinical_ReviewofSystems.showRosTemplateSaveAs();" id="btnSaveAsDataTemp">Save as Data Template</button>
+
+                            <!--<button class="btn btn-cancel btn-sm pull-right mr-sm" type="button" onclick="Clinical_ReviewofSystems.resetReviewofSystems(true);" id="btnReviewofSystemsReset"><i class="fa fa-refresh"></i> Reset</button>-->
+                            <button class="btn btn-success btn-sm pull-right mr-sm" type="button" onclick="Clinical_ReviewofSystems.ReviewofSystemsSave(true, false);" id="btnReviewofSystemsSave">Add on Note</button>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- /Review of Systems -->
+                        <input type="hidden" name="PatientId" id="hfPatientId" />
+                        <input type="hidden" name="ROSSystemInfoID" id="hfROSSystemInfoID" value="-1" />
+                        <input type="hidden" name="ROSTemplateId" id="hfROSTemplateId" value="-1" />
+                        <input type="hidden" name="ROSDataTemplateId" id="hfROSDataTemplateId" value="-1" />
+                        <input type="hidden" name="IsFormHasChange" id="hfIsFormHasChange" value="" />
+
+                    </form>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+
+</div>
+
+<!--Panel to show linked ROS Data Template Save as in Notes Forum-->
+<div id="ReviewofSystems_DataTemp_SaveAs" style="display: none;">
+    <div class="modal-dialog modal-dialog-sm">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" id="unload_LinkAppointment_btn" class="close" onclick="Clinical_ReviewofSystems.unloadReviewOfSystemsDataTemplateDetailSaveAs();"><span class=" red">&nbsp;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Enter Template Name</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmROSDataTemplateSaveAs" onsubmit="return false;">
+
+                    <div class="col-sm-12 col-lg-10">
+                        <label class="control-label">Template Name <span class="required">*</span></label>
+                        <input class="form-control" type="text" name="TemplateNameSaveAs" id="txtTemplateNameSaveAs" placeholder="-Template name is required-">
+                    </div>
+                    <div class="pull-right pt-md pr-default">
+                        <button class="btn btn-success btn-sm" type="submit" id="btnSaveAS">Save</button>
+                    </div>
+
+                </form>
+                <div class="spacer15"></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<script type="text/javascript">
+    function countWidth(obj) {
+
+
+        var panelChildrens = null;
+        var currentPanel = null;
+        var applyWidth = null;
+        if (obj != null) {
+            currentPanel = $(obj.delegateTarget).parent();
+            panelChildrens = currentPanel.children("section.panel");
+            applyWidth = currentPanel;
+            countWidthApply(currentPanel, panelChildrens, applyWidth);
+        }
+        else {
+            $('.toggleVertical').each(function (e) {
+                currentPanel = $(this);
+                panelChildrens = currentPanel.children().children("section.panel");
+                applyWidth = currentPanel.children();
+                countWidthApply(currentPanel, panelChildrens, applyWidth);
+            });
+
+
+        }
+    }
+
+    // Apply the calculated width
+    function countWidthApply(currentPanel, panelChildrens, applyWidth) {
+        var totalWidth = 0;
+        var hidden = 0;
+        //find total width of panels
+        panelChildrens.each(function (e) {
+            totalWidth += $(this).outerWidth(true);
+        });
+        //find total width of hidden panel
+        currentPanel.find(":hidden.panel").each(function (e) {
+            hidden += $(this).outerWidth(true);
+        });
+        //apply width to div
+        applyWidth.width((totalWidth - hidden + 50) + "px");
+    }
+
+    countWidth();
+</script>
